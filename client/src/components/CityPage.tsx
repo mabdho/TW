@@ -51,11 +51,26 @@ export const CityPage: React.FC<CityPageProps> = ({
       <div className="container mx-auto px-4 py-6 sm:py-8">
         <Tabs defaultValue="overview" className="w-full">
           <TabsList className={`grid w-full ${mobileGridCols} mb-6 sm:mb-8 bg-card border shadow-sm`}>
-            <TabsTrigger value="overview" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap">Overview</TabsTrigger>
-            <TabsTrigger value="top5" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap">Top 5</TabsTrigger>
-            <TabsTrigger value="all" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap">All</TabsTrigger>
-            {logistics && <TabsTrigger value="plan" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap">Plan</TabsTrigger>}
-            {faqs && <TabsTrigger value="faqs" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap">FAQs</TabsTrigger>}
+            <TabsTrigger value="overview" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap">
+              <span className="hidden sm:inline">Overview</span>
+              <span className="sm:hidden">Info</span>
+            </TabsTrigger>
+            <TabsTrigger value="top5" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap">
+              <span className="hidden sm:inline">Top 5</span>
+              <span className="sm:hidden">Best</span>
+            </TabsTrigger>
+            <TabsTrigger value="all" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap">
+              <span className="hidden sm:inline">All Attractions</span>
+              <span className="sm:hidden">All</span>
+            </TabsTrigger>
+            {logistics && <TabsTrigger value="plan" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap">
+              <span className="hidden sm:inline">Plan Your Trip</span>
+              <span className="sm:hidden">Plan</span>
+            </TabsTrigger>}
+            {faqs && <TabsTrigger value="faqs" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap">
+              <span className="hidden sm:inline">FAQs</span>
+              <span className="sm:hidden">FAQ</span>
+            </TabsTrigger>}
           </TabsList>
 
           {/* Overview Tab */}
