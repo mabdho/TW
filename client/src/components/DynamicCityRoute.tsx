@@ -1,14 +1,34 @@
 import React, { lazy, Suspense } from 'react';
 import { Route } from 'wouter';
 
-// Loading fallback component for city pages
+// Minimal loading fallback component for city pages
 const CityLoadingFallback = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="text-center space-y-4">
-      <div className="loading-skeleton mb-4" style={{ width: '300px', height: '24px', borderRadius: '8px', margin: '0 auto' }}></div>
-      <div className="loading-skeleton mb-3" style={{ width: '200px', height: '16px', borderRadius: '8px', margin: '0 auto' }}></div>
-      <div className="loading-skeleton" style={{ width: '150px', height: '12px', borderRadius: '8px', margin: '0 auto' }}></div>
-      <p className="text-gray-600 mt-4">Loading destination...</p>
+  <div className="min-h-screen">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Header skeleton */}
+      <div className="animate-pulse">
+        <div className="h-8 bg-gray-200 rounded-md w-2/3 mb-4"></div>
+        <div className="h-4 bg-gray-200 rounded-md w-1/2 mb-8"></div>
+      </div>
+      
+      {/* Content skeleton */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2 space-y-6">
+          <div className="animate-pulse">
+            <div className="h-64 bg-gray-200 rounded-lg mb-6"></div>
+            <div className="space-y-3">
+              <div className="h-4 bg-gray-200 rounded w-full"></div>
+              <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+              <div className="h-4 bg-gray-200 rounded w-4/5"></div>
+            </div>
+          </div>
+        </div>
+        <div className="space-y-4">
+          <div className="animate-pulse">
+            <div className="h-32 bg-gray-200 rounded-lg"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 );
