@@ -3,7 +3,7 @@ import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
-import { MapPin, Clock, DollarSign, Globe, Star, Users, Camera, Info } from 'lucide-react';
+import { MapPin, Clock, DollarSign, Globe, Star, Users, Info } from 'lucide-react';
 import { Navigation } from './Navigation';
 import { Footer } from './Footer';
 
@@ -281,11 +281,6 @@ export const CityPage: React.FC<CityPageProps> = ({
                 {attractions.map((attraction, index) => (
                   <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
                     <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0">
-                        <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
-                          <Camera className="w-8 h-8 text-gray-400" />
-                        </div>
-                      </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-4 mb-3">
                           <h3 className="text-lg font-semibold text-gray-900">{attraction.name}</h3>
