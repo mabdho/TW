@@ -8,10 +8,18 @@ import type { Blog } from '@shared/schema';
 export const TravelCategories = () => {
   // Fetch latest 2 blogs from database
   const { data: latestBlogs = [], isLoading, error } = useQuery({
-    queryKey: ['/api/blogs/latest/2'],
-    queryFn: () => apiRequest('GET', '/api/blogs/latest/2') as Promise<Blog[]>,
+    queryKey: ['/api/blogs/latest/2', Date.now()], // Add timestamp to force refresh
+    queryFn: async () => {
+      console.log('Fetching latest 2 blogs from API...');
+      const response = await apiRequest('GET', '/api/blogs/latest/2');
+      const data = await response.json();
+      console.log('Latest blogs API Response:', data);
+      return data as Blog[];
+    },
     staleTime: 0, // Always refetch
     cacheTime: 0, // Don't cache
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   });
 
   return (

@@ -10,10 +10,18 @@ import type { Blog } from '@shared/schema';
 export default function BlogsPage() {
   // Fetch blogs from database
   const { data: blogPosts = [], isLoading, error } = useQuery({
-    queryKey: ['/api/blogs'],
-    queryFn: () => apiRequest('GET', '/api/blogs') as Promise<Blog[]>,
+    queryKey: ['/api/blogs', Date.now()], // Add timestamp to force refresh
+    queryFn: async () => {
+      console.log('Fetching blogs from API...');
+      const response = await apiRequest('GET', '/api/blogs');
+      const data = await response.json();
+      console.log('API Response:', data);
+      return data as Blog[];
+    },
     staleTime: 0, // Always refetch
     cacheTime: 0, // Don't cache
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   });
 
   const categories = ["All", "Travel Tips", "Budget Travel", "Digital Nomad", "Solo Travel", "Sustainable Travel", "Food & Culture"];

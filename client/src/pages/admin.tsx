@@ -105,7 +105,8 @@ export default function AdminPage() {
     queryKey: ['/api/blogs'],
     queryFn: async () => {
       const response = await apiRequest('GET', '/api/blogs');
-      return Array.isArray(response) ? response : [];
+      const data = await response.json();
+      return Array.isArray(data) ? data : [];
     },
     staleTime: 0, // Always refetch
     cacheTime: 0, // Don't cache
