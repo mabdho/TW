@@ -164,6 +164,8 @@ All colors MUST be HSL for consistency and theming.
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', system-ui, sans-serif;
+    /* Prevent any flashing during navigation */
+    transition: none !important;
   }
 }
 

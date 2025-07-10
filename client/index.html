@@ -37,6 +37,8 @@
         line-height: inherit;
         background-color: hsl(0 0% 100%);
         color: hsl(220 15% 15%);
+        /* Prevent any transition effects */
+        transition: none !important;
       }
       
       #root {
@@ -109,13 +111,7 @@
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
   </head>
   <body>
-    <div id="root">
-      <!-- Loading placeholder to prevent layout shift -->
-      <div class="loading-skeleton" style="height: 64px; width: 100%;"></div>
-      <div style="height: calc(100vh - 64px); display: flex; align-items: center; justify-content: center;">
-        <div class="loading-skeleton" style="width: 300px; height: 40px; border-radius: 8px;"></div>
-      </div>
-    </div>
+    <div id="root"></div>
     
     <!-- Main application script with module preload -->
     <script type="module" src="/src/main.tsx"></script>

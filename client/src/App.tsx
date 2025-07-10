@@ -11,15 +11,8 @@ const BlogsPage = lazy(() => import('./pages/blogs'));
 const BlogDetailPage = lazy(() => import('./pages/blog-detail'));
 const DestinationsPage = lazy(() => import('./pages/destinations'));
 
-// Loading fallback component for page transitions
-const PageLoadingFallback = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="text-center">
-      <div className="loading-skeleton mb-4" style={{ width: '300px', height: '24px', borderRadius: '8px', margin: '0 auto' }}></div>
-      <div className="loading-skeleton" style={{ width: '200px', height: '16px', borderRadius: '8px', margin: '0 auto' }}></div>
-    </div>
-  </div>
-);
+// No loading fallback - invisible to eliminate flash
+const PageLoadingFallback = () => null;
 
 
 // Define all valid routes
