@@ -72,6 +72,8 @@ export default function AdminPage() {
     }
   });
 
+  const watchedGenerationMode = form.watch('generationMode');
+
   const generateCityPageMutation = useMutation({
     mutationFn: async (data: CityFormData) => {
       console.log('Submitting form data:', data);
@@ -200,41 +202,48 @@ export default function AdminPage() {
                   />
 
                   {/* Generation Mode Selection */}
-                  <div className="space-y-4">
-                    <div>
-                      <label className="text-sm font-medium">Content Generation Mode</label>
-                      <div className="flex gap-4 mt-2">
-                        <label className="flex items-center gap-2">
-                          <input
-                            type="radio"
-                            name="generationMode"
-                            value="ai"
-                            checked={generationMode === 'ai'}
-                            onChange={(e) => {
-                              setGenerationMode(e.target.value as 'ai' | 'manual');
-                              form.setValue('generationMode', e.target.value as 'ai' | 'manual');
-                            }}
-                            className="w-4 h-4"
-                          />
-                          <span>AI Generation (Gemini)</span>
-                        </label>
-                        <label className="flex items-center gap-2">
-                          <input
-                            type="radio"
-                            name="generationMode"
-                            value="manual"
-                            checked={generationMode === 'manual'}
-                            onChange={(e) => {
-                              setGenerationMode(e.target.value as 'ai' | 'manual');
-                              form.setValue('generationMode', e.target.value as 'ai' | 'manual');
-                            }}
-                            className="w-4 h-4"
-                          />
-                          <span>Manual JSON Input</span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="generationMode"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Content Generation Mode</FormLabel>
+                        <FormControl>
+                          <div className="flex gap-4 mt-2">
+                            <label className="flex items-center gap-2">
+                              <input
+                                type="radio"
+                                name="generationMode"
+                                value="ai"
+                                checked={field.value === 'ai'}
+                                onChange={(e) => {
+                                  field.onChange(e.target.value);
+                                  setGenerationMode(e.target.value as 'ai' | 'manual');
+                                }}
+                                className="w-4 h-4"
+                              />
+                              <span>AI Generation (Gemini)</span>
+                            </label>
+                            <label className="flex items-center gap-2">
+                              <input
+                                type="radio"
+                                name="generationMode"
+                                value="manual"
+                                checked={field.value === 'manual'}
+                                onChange={(e) => {
+                                  field.onChange(e.target.value);
+                                  setGenerationMode(e.target.value as 'ai' | 'manual');
+                                }}
+                                className="w-4 h-4"
+                              />
+                              <span>Manual JSON Input</span>
+                            </label>
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
                   {/* Manual JSON Input */}
                   {generationMode === 'manual' && (
