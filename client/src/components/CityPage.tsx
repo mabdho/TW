@@ -1,9 +1,10 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
-import { MapPin, Clock, DollarSign, Globe, Star, Users, Info, Camera, Image } from 'lucide-react';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { MapPin, Clock, DollarSign, Globe, Star, Users, Info, Camera, Image, X, ChevronLeft, ChevronRight, Expand } from 'lucide-react';
 import { Navigation } from './Navigation';
 import { Footer } from './Footer';
 
@@ -53,6 +54,8 @@ export const CityPage: React.FC<CityPageProps> = ({
   logistics,
   faqs
 }) => {
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const top5Attractions = attractions.slice(0, 5);
   
   // Calculate number of tabs dynamically
@@ -77,6 +80,29 @@ export const CityPage: React.FC<CityPageProps> = ({
       'from-violet-400 via-indigo-500 to-blue-600'
     ];
     return gradients[hash % gradients.length];
+  };
+
+  // Navigation functions for gallery modal
+  const nextImage = () => {
+    if (selectedImageIndex !== null && galleryImages.length > 0) {
+      setSelectedImageIndex((prev) => prev === null ? 0 : (prev + 1) % 6);
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedImageIndex !== null && galleryImages.length > 0) {
+      setSelectedImageIndex((prev) => prev === null ? 0 : prev === 0 ? 5 : prev - 1);
+    }
+  };
+
+  const openGallery = (index: number) => {
+    setSelectedImageIndex(index);
+    setIsGalleryOpen(true);
+  };
+
+  const closeGallery = () => {
+    setIsGalleryOpen(false);
+    setSelectedImageIndex(null);
   };
 
   return (
@@ -161,67 +187,181 @@ export const CityPage: React.FC<CityPageProps> = ({
         </div>
       </div>
 
-      {/* Photo Gallery Section */}
-      <div className="bg-gray-50 border-b border-gray-200">
-        <div className="container mx-auto px-4 py-6 sm:py-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center">
-              <Camera className="w-5 h-5 text-pink-600" />
-            </div>
-            <div>
+      {/* Enhanced Photo Gallery Section */}
+      <div className="bg-gradient-to-br from-gray-50 to-gray-100 border-b border-gray-200">
+        <div className="container mx-auto px-4 py-8 sm:py-12">
+          {/* Gallery Header */}
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200 mb-4">
+              <div className="w-8 h-8 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
+                <Camera className="w-5 h-5 text-white" />
+              </div>
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Photo Gallery</h2>
-              <p className="text-sm text-gray-600">Explore {title} through stunning visuals</p>
             </div>
+            <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
+              Discover the beauty of {title} through our curated collection of stunning photographs
+            </p>
           </div>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+          {/* Gallery Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4 lg:gap-6 max-w-4xl mx-auto">
             {Array.from({ length: 6 }, (_, index) => {
               const galleryImage = galleryImages[index];
+              const isMainImage = index === 0;
+              const gridClass = isMainImage ? "sm:col-span-2 sm:row-span-2" : "";
+              
               return (
-                <div key={index} className="relative group cursor-pointer">
-                  <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                <div 
+                  key={index} 
+                  className={`relative group cursor-pointer transform transition-all duration-300 hover:scale-[1.02] hover:z-10 ${gridClass}`}
+                  onClick={() => openGallery(index)}
+                >
+                  <div className={`relative ${isMainImage ? 'aspect-[4/3]' : 'aspect-square'} bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl lg:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300`}>
                     {galleryImage?.url ? (
-                      <img 
-                        src={galleryImage.url} 
-                        alt={galleryImage.alt || `${title} photo ${index + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center">
-                          <Image className="w-8 h-8 sm:w-10 sm:h-10 text-gray-400 mx-auto mb-1" />
-                          <p className="text-xs sm:text-sm text-gray-500 font-medium">Photo {index + 1}</p>
+                      <>
+                        <img 
+                          src={galleryImage.url} 
+                          alt={galleryImage.alt || `${title} photo ${index + 1}`}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        
+                        {/* Expand icon overlay */}
+                        <div className="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100">
+                          <Expand className="w-4 h-4 text-gray-700" />
                         </div>
+                        
+                        {/* Photo counter for main image */}
+                        {isMainImage && (
+                          <div className="absolute bottom-3 right-3 bg-black/70 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            +{galleryImages.filter(img => img?.url).length || 6} photos
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        {/* Enhanced placeholder design */}
+                        <div className={`absolute inset-0 bg-gradient-to-br ${getGradientClass(title + index)} opacity-20`}></div>
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="text-center p-4">
+                            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-white/90 transition-colors">
+                              <Image className={`${isMainImage ? 'w-8 h-8 sm:w-10 sm:h-10' : 'w-6 h-6 sm:w-8 sm:h-8'} text-gray-600`} />
+                            </div>
+                            <p className={`${isMainImage ? 'text-sm sm:text-base' : 'text-xs sm:text-sm'} text-gray-700 font-medium`}>
+                              {isMainImage ? 'Main Gallery Photo' : `Photo ${index + 1}`}
+                            </p>
+                            {isMainImage && (
+                              <p className="text-xs text-gray-500 mt-1">Click to explore gallery</p>
+                            )}
+                          </div>
+                        </div>
+                        
+                        {/* Decorative elements for placeholders */}
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+                        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+                      </>
+                    )}
+                    
+                    {/* Caption overlay */}
+                    {galleryImage?.caption && (
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p className="text-white text-sm font-medium">{galleryImage.caption}</p>
                       </div>
                     )}
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
                   </div>
-                  {galleryImage?.caption && (
-                    <p className="mt-1 text-xs text-gray-600 text-center">{galleryImage.caption}</p>
-                  )}
-                  <div className="absolute inset-0 border-2 border-transparent group-hover:border-pink-200 rounded-lg transition-colors"></div>
                 </div>
               );
             })}
           </div>
           
-          <div className="mt-4 p-3 bg-white rounded-lg border border-gray-200 shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <Info className="w-3 h-3 text-blue-600" />
-              </div>
-              <div>
-                <p className="text-xs sm:text-sm text-gray-600">
-                  {galleryImages?.length > 0 && galleryImages.some(img => img.url) 
-                    ? `Explore ${title} through these curated photos showcasing the city's best attractions and experiences.`
-                    : `Gallery placeholders for ${title}. Add specific image URLs to each city's .tsx file to display real photos.`
-                  }
-                </p>
+          {/* Gallery Info Card */}
+          <div className="mt-8 max-w-2xl mx-auto">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-white/50 shadow-lg p-6">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Info className="w-5 h-5 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">About This Gallery</h3>
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                    {galleryImages?.length > 0 && galleryImages.some(img => img.url) 
+                      ? `This curated photo collection showcases the most iconic sights and hidden gems of ${title}. Each image captures the unique character and beauty that makes this destination special.`
+                      : `This gallery is ready to showcase the beauty of ${title}. Real photos can be added by updating the city's configuration file with authentic image URLs from the destination.`
+                    }
+                  </p>
+                  {galleryImages?.some(img => img.url) && (
+                    <div className="mt-3 flex items-center gap-2 text-sm text-gray-500">
+                      <Camera className="w-4 h-4" />
+                      <span>Click any photo to view in full-screen gallery mode</span>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Gallery Modal */}
+      {isGalleryOpen && selectedImageIndex !== null && (
+        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="relative w-full max-w-6xl max-h-[90vh] flex items-center justify-center">
+            {/* Close button */}
+            <button
+              onClick={closeGallery}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors"
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
+            
+            {/* Navigation buttons */}
+            <button
+              onClick={prevImage}
+              className="absolute left-4 z-10 w-12 h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors"
+            >
+              <ChevronLeft className="w-6 h-6 text-white" />
+            </button>
+            
+            <button
+              onClick={nextImage}
+              className="absolute right-4 z-10 w-12 h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors"
+            >
+              <ChevronRight className="w-6 h-6 text-white" />
+            </button>
+            
+            {/* Main image */}
+            <div className="relative w-full h-full flex items-center justify-center">
+              {galleryImages[selectedImageIndex]?.url ? (
+                <img
+                  src={galleryImages[selectedImageIndex].url}
+                  alt={galleryImages[selectedImageIndex].alt || `${title} photo ${selectedImageIndex + 1}`}
+                  className="max-w-full max-h-full object-contain rounded-lg"
+                />
+              ) : (
+                <div className="w-96 h-64 bg-gradient-to-br from-gray-600 to-gray-700 rounded-lg flex items-center justify-center">
+                  <div className="text-center text-white">
+                    <Image className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                    <p className="text-lg font-medium">Photo {selectedImageIndex + 1}</p>
+                    <p className="text-sm opacity-75">Placeholder image</p>
+                  </div>
+                </div>
+              )}
+              
+              {/* Image caption */}
+              {galleryImages[selectedImageIndex]?.caption && (
+                <div className="absolute bottom-4 left-4 right-4 bg-black/70 backdrop-blur-sm rounded-lg p-4">
+                  <p className="text-white text-center">{galleryImages[selectedImageIndex].caption}</p>
+                </div>
+              )}
+            </div>
+            
+            {/* Image counter */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm">
+              {selectedImageIndex + 1} / 6
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="container mx-auto px-4 py-6 sm:py-8">
         <Tabs defaultValue="top5" className="w-full">
