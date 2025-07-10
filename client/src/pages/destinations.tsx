@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { MapPin, Search, Globe, ArrowRight } from 'lucide-react';
@@ -172,6 +172,15 @@ const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America
 export default function DestinationsPage() {
   const [selectedContinent, setSelectedContinent] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+
+  // Handle URL search parameters from Hero search functionality
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const searchParam = params.get('search');
+    if (searchParam) {
+      setSearchTerm(searchParam);
+    }
+  }, []);
 
   const filteredCities = cities.filter(city => {
     const matchesContinent = selectedContinent === "All" || city.continent === selectedContinent;
