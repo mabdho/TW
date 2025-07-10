@@ -347,3 +347,187 @@ export function generateBlogListSEOData(baseUrl?: string): SEOData {
   
   return seoData;
 }
+
+/**
+ * Internal linking utilities for cross-page SEO optimization
+ */
+
+export interface InternalLink {
+  url: string;
+  title: string;
+  type: 'city' | 'blog' | 'category';
+  relevanceScore: number;
+}
+
+/**
+ * Generate related city links based on country, continent, or attractions
+ */
+export function generateRelatedCityLinks(currentCity: CityData, allCities: CityData[]): InternalLink[] {
+  const links: InternalLink[] = [];
+  
+  // Find cities in the same country
+  const sameCountryCities = allCities.filter(city => 
+    city.country === currentCity.country && city.name !== currentCity.name
+  );
+  
+  // Add same-country cities with high relevance
+  sameCountryCities.forEach(city => {
+    links.push({
+      url: `/best-things-to-do-in-${generateSlug(city.name)}`,
+      title: `Best Things to Do in ${city.name}`,
+      type: 'city',
+      relevanceScore: 0.9
+    });
+  });
+  
+  // Find cities with similar attractions (based on keywords)
+  const currentAttractions = currentCity.attractions?.map(a => a.name.toLowerCase()) || [];
+  const similarCities = allCities.filter(city => {
+    if (city.name === currentCity.name) return false;
+    const otherAttractions = city.attractions?.map(a => a.name.toLowerCase()) || [];
+    const commonAttractions = currentAttractions.filter(a => 
+      otherAttractions.some(other => other.includes(a.split(' ')[0]) || a.includes(other.split(' ')[0]))
+    );
+    return commonAttractions.length > 0;
+  });
+  
+  // Add similar cities with medium relevance
+  similarCities.slice(0, 3).forEach(city => {
+    links.push({
+      url: `/best-things-to-do-in-${generateSlug(city.name)}`,
+      title: `Best Things to Do in ${city.name}`,
+      type: 'city',
+      relevanceScore: 0.7
+    });
+  });
+  
+  // Sort by relevance and return top 6
+  return links.sort((a, b) => b.relevanceScore - a.relevanceScore).slice(0, 6);
+}
+
+/**
+ * Generate related blog links based on category and keywords
+ */
+export function generateRelatedBlogLinks(currentBlog: BlogData, allBlogs: BlogData[]): InternalLink[] {
+  const links: InternalLink[] = [];
+  
+  // Find blogs in the same category
+  const sameCategoryBlogs = allBlogs.filter(blog => 
+    blog.category === currentBlog.category && blog.title !== currentBlog.title
+  );
+  
+  // Add same-category blogs with high relevance
+  sameCategoryBlogs.slice(0, 3).forEach(blog => {
+    links.push({
+      url: `/blog/${generateSlug(blog.title)}`,
+      title: blog.title,
+      type: 'blog',
+      relevanceScore: 0.9
+    });
+  });
+  
+  // Find blogs with similar keywords
+  const currentKeywords = currentBlog.title.toLowerCase().split(' ');
+  const similarBlogs = allBlogs.filter(blog => {
+    if (blog.title === currentBlog.title) return false;
+    const otherKeywords = blog.title.toLowerCase().split(' ');
+    const commonKeywords = currentKeywords.filter(word => 
+      otherKeywords.includes(word) && word.length > 3
+    );
+    return commonKeywords.length > 0;
+  });
+  
+  // Add similar blogs with medium relevance
+  similarBlogs.slice(0, 3).forEach(blog => {
+    links.push({
+      url: `/blog/${generateSlug(blog.title)}`,
+      title: blog.title,
+      type: 'blog',
+      relevanceScore: 0.7
+    });
+  });
+  
+  // Sort by relevance and return top 5
+  return links.sort((a, b) => b.relevanceScore - a.relevanceScore).slice(0, 5);
+}
+
+/**
+ * Generate contextual links for city pages (related blogs, nearby cities)
+ */
+export function generateContextualLinks(cityData: CityData, allBlogs: BlogData[]): InternalLink[] {
+  const links: InternalLink[] = [];
+  
+  // Find relevant blog posts about this city/country
+  const relevantBlogs = allBlogs.filter(blog => {
+    const content = (blog.title + ' ' + blog.content + ' ' + blog.excerpt).toLowerCase();
+    return content.includes(cityData.name.toLowerCase()) || 
+           content.includes(cityData.country.toLowerCase());
+  });
+  
+  relevantBlogs.slice(0, 3).forEach(blog => {
+    links.push({
+      url: `/blog/${generateSlug(blog.title)}`,
+      title: blog.title,
+      type: 'blog',
+      relevanceScore: 0.8
+    });
+  });
+  
+  // Add general travel category links
+  links.push({
+    url: '/blogs',
+    title: 'All Travel Stories & Tips',
+    type: 'category',
+    relevanceScore: 0.6
+  });
+  
+  return links.sort((a, b) => b.relevanceScore - a.relevanceScore);
+}
+
+/**
+ * Generate contextual links for blog pages (related cities, similar blogs)
+ */
+export function generateBlogContextualLinks(blogData: BlogData, allCities: CityData[]): InternalLink[] {
+  const links: InternalLink[] = [];
+  
+  // Find cities mentioned in the blog content
+  const content = (blogData.title + ' ' + blogData.content + ' ' + blogData.excerpt).toLowerCase();
+  const mentionedCities = allCities.filter(city => 
+    content.includes(city.name.toLowerCase()) || 
+    content.includes(city.country.toLowerCase())
+  );
+  
+  mentionedCities.slice(0, 4).forEach(city => {
+    links.push({
+      url: `/best-things-to-do-in-${generateSlug(city.name)}`,
+      title: `Best Things to Do in ${city.name}`,
+      type: 'city',
+      relevanceScore: 0.9
+    });
+  });
+  
+  // Add destinations page link
+  links.push({
+    url: '/destinations',
+    title: 'Explore All Destinations',
+    type: 'category',
+    relevanceScore: 0.7
+  });
+  
+  return links.sort((a, b) => b.relevanceScore - a.relevanceScore);
+}
+
+/**
+ * Extract internal links from content (for SEO validation)
+ */
+export function extractInternalLinks(content: string): string[] {
+  const linkRegex = /href="([^"]*(?:best-things-to-do-in-[^"]*|\/blog\/[^"]*|\/destinations|\/blogs))"/g;
+  const links: string[] = [];
+  let match;
+  
+  while ((match = linkRegex.exec(content)) !== null) {
+    links.push(match[1]);
+  }
+  
+  return links;
+}

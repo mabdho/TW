@@ -6,7 +6,9 @@
 
 import React from 'react';
 import BasePageTemplate from './BasePageTemplate';
-import { BlogData, generateBlogSEOData, generateBlogStructuredData, generateBreadcrumbStructuredData } from '../../utils/seo';
+import { BlogData, generateBlogSEOData, generateBlogStructuredData, generateBreadcrumbStructuredData, generateRelatedBlogLinks, generateBlogContextualLinks } from '../../utils/seo';
+import { InternalLinks } from '../InternalLinks';
+import { getAllCitiesData, getAllBlogsData } from '../../utils/dataService';
 
 interface BlogPageTemplateProps {
   blogData: BlogData;
@@ -190,6 +192,18 @@ export const BlogPageTemplate: React.FC<BlogPageTemplateProps> = ({
             )}
           </footer>
         </article>
+
+        {/* Internal Links Section */}
+        <section className="bg-gray-50 dark:bg-gray-900">
+          <InternalLinks
+            links={[
+              ...generateRelatedBlogLinks(blogData, getAllBlogsData()),
+              ...generateBlogContextualLinks(blogData, getAllCitiesData())
+            ]}
+            title="Related Articles & Destinations"
+            description={`Discover more ${blogData.category.toLowerCase()} content and explore destinations mentioned in this article`}
+          />
+        </section>
 
         {/* FAQ Schema for blog posts */}
         <script

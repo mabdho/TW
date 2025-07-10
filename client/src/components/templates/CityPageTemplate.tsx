@@ -6,7 +6,9 @@
 
 import React from 'react';
 import BasePageTemplate from './BasePageTemplate';
-import { CityData, generateCitySEOData, generateCityStructuredData, generateBreadcrumbStructuredData } from '../../utils/seo';
+import { CityData, generateCitySEOData, generateCityStructuredData, generateBreadcrumbStructuredData, generateRelatedCityLinks, generateContextualLinks } from '../../utils/seo';
+import { InternalLinks } from '../InternalLinks';
+import { getAllCitiesData, getAllBlogsData } from '../../utils/dataService';
 
 interface CityPageTemplateProps {
   cityData: CityData;
@@ -133,6 +135,18 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
         <main className="max-w-7xl mx-auto px-6 py-8">
           {children}
         </main>
+
+        {/* Internal Links Section */}
+        <section className="bg-gray-50 dark:bg-gray-900">
+          <InternalLinks
+            links={[
+              ...generateRelatedCityLinks(cityData, getAllCitiesData()),
+              ...generateContextualLinks(cityData, getAllBlogsData())
+            ]}
+            title="Explore More Destinations"
+            description={`Discover other amazing cities in ${cityData.country} and read our latest travel guides`}
+          />
+        </section>
 
         {/* Footer schema for local SEO */}
         <script
