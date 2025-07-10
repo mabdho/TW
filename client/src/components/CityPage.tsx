@@ -90,31 +90,37 @@ export const CityPage: React.FC<CityPageProps> = ({
           </svg>
         </div>
         
-        {/* City Title Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center px-4">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Badge variant="secondary" className="bg-white/20 text-white border-white/30 hover:bg-white/30">
-                <MapPin className="w-3 h-3 mr-1" />
-                City Guide
-              </Badge>
-              <Badge variant="outline" className="text-white border-white/30 bg-white/10 hover:bg-white/20">
-                <Users className="w-3 h-3 mr-1" />
-                {attractions.length} Attractions
-              </Badge>
+        {/* City Title Overlay - Bottom Left */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent">
+          <div className="px-4 sm:px-6 md:px-8 pb-6 sm:pb-8 pt-16">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-3">
+                  <Badge variant="secondary" className="bg-white/20 text-white border-white/30 hover:bg-white/30">
+                    <MapPin className="w-3 h-3 mr-1" />
+                    City Guide
+                  </Badge>
+                  <Badge variant="outline" className="text-white border-white/30 bg-white/10 hover:bg-white/20">
+                    <Users className="w-3 h-3 mr-1" />
+                    {attractions.length} Attractions
+                  </Badge>
+                </div>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 drop-shadow-lg">
+                  {title}
+                </h1>
+              </div>
+              <div className="flex-shrink-0">
+                <div className="flex items-center gap-1 mb-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400 drop-shadow-sm" />
+                  ))}
+                  <span className="ml-2 text-sm font-medium text-white drop-shadow-sm">4.8</span>
+                </div>
+                <p className="text-xs sm:text-sm text-white/90 drop-shadow-sm text-right">
+                  Based on traveler reviews
+                </p>
+              </div>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">
-              {title}
-            </h1>
-            <div className="flex items-center justify-center gap-1 mb-4">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400 drop-shadow-sm" />
-              ))}
-              <span className="ml-2 text-sm font-medium text-white drop-shadow-sm">4.8</span>
-            </div>
-            <p className="text-sm text-white/90 drop-shadow-sm">
-              Based on traveler reviews
-            </p>
           </div>
         </div>
       </div>
