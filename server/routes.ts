@@ -225,6 +225,30 @@ Return only the JSON object with no additional text or formatting.`;
         
         await fs.writeFile(travelCategoriesPath, updatedTravelCategoriesContent);
         console.log(`Updated TravelCategories.tsx with new city count: ${newCount}`);
+        
+        // Update FeaturedCities component with the new city
+        const featuredCitiesPath = path.join(process.cwd(), 'client', 'src', 'components', 'FeaturedCities.tsx');
+        const featuredCitiesContent = await fs.readFile(featuredCitiesPath, 'utf-8');
+        
+        // Get current featured cities array
+        const featuredCitiesMatch = featuredCitiesContent.match(/const featuredCities = \[([\s\S]*?)\];/);
+        if (featuredCitiesMatch) {
+          const currentFeaturedCities = featuredCitiesMatch[1];
+          const newCityEntry = `  { "name": "${city}", "country": "${country}", "path": "/${city.toLowerCase().replace(/\s+/g, '-')}", "continent": "${continent}" }`;
+          
+          // Add new city to the beginning and keep only 8 cities
+          const lines = currentFeaturedCities.split('\n').filter(line => line.trim().startsWith('{ "name"'));
+          lines.unshift(newCityEntry);
+          const updatedFeaturedCities = lines.slice(0, 8).join(',\n');
+          
+          const updatedFeaturedCitiesContent = featuredCitiesContent.replace(
+            /const featuredCities = \[([\s\S]*?)\];/,
+            `const featuredCities = [\n${updatedFeaturedCities}\n];`
+          );
+          
+          await fs.writeFile(featuredCitiesPath, updatedFeaturedCitiesContent);
+          console.log(`Updated FeaturedCities.tsx with ${city} at the top`);
+        }
       }
 
       res.json({
