@@ -101,9 +101,12 @@ export default function AdminPage() {
   });
 
   // Fetch blogs
-  const { data: blogs = [], isLoading: blogsLoading } = useQuery({
+  const { data: blogs = [], isLoading: blogsLoading, error: blogsError } = useQuery({
     queryKey: ['/api/blogs'],
-    queryFn: () => apiRequest('GET', '/api/blogs'),
+    queryFn: async () => {
+      const response = await apiRequest('GET', '/api/blogs');
+      return Array.isArray(response) ? response : [];
+    },
   });
 
   // City generation mutation
@@ -514,7 +517,11 @@ export default function AdminPage() {
                     <div className="flex items-center justify-center p-8">
                       <Loader2 className="h-8 w-8 animate-spin" />
                     </div>
-                  ) : blogs.length === 0 ? (
+                  ) : blogsError ? (
+                    <div className="text-center p-8 text-gray-500">
+                      Failed to load blogs. Please try again.
+                    </div>
+                  ) : !Array.isArray(blogs) || blogs.length === 0 ? (
                     <div className="text-center p-8 text-gray-500">
                       No blog posts yet. Create your first one above!
                     </div>
