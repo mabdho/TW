@@ -11,6 +11,14 @@ export const Copenhagen: React.FC = () => {
         "The Little Mermaid",
         "Rosenborg Castle",
         "Strøget"]}
+      galleryImages={[
+        { url: "", alt: "Nyhavn colorful houses", caption: "Nyhavn colorful houses - placeholder" },
+        { url: "", alt: "Tivoli Gardens", caption: "Tivoli Gardens - placeholder" },
+        { url: "", alt: "Little Mermaid statue", caption: "Little Mermaid statue - placeholder" },
+        { url: "", alt: "Rosenborg Castle", caption: "Rosenborg Castle - placeholder" },
+        { url: "", alt: "Strøget shopping street", caption: "Strøget shopping street - placeholder" },
+        { url: "", alt: "Copenhagen canals", caption: "Copenhagen canals - placeholder" }
+      ]}
       attractions={[
         {
         name: "Nyhavn",

@@ -11,6 +11,14 @@ export const Cairo: React.FC = () => {
         "Khan el-Khalili Bazaar",
         "The Citadel of Saladin",
         "Coptic Cairo (Old Cairo)"]}
+      galleryImages={[
+        { url: "", alt: "Pyramids of Giza", caption: "Pyramids of Giza - placeholder" },
+        { url: "", alt: "Egyptian Museum", caption: "Egyptian Museum - placeholder" },
+        { url: "", alt: "Khan el-Khalili Bazaar", caption: "Khan el-Khalili Bazaar - placeholder" },
+        { url: "", alt: "Citadel of Saladin", caption: "Citadel of Saladin - placeholder" },
+        { url: "", alt: "Coptic Cairo", caption: "Coptic Cairo - placeholder" },
+        { url: "", alt: "Nile River", caption: "Nile River - placeholder" }
+      ]}
       attractions={[
         {
         name: "Pyramids of Giza and the Sphinx",

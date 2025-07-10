@@ -18,12 +18,19 @@ interface Attraction {
   };
 }
 
+interface GalleryImage {
+  url?: string;
+  alt?: string;
+  caption?: string;
+}
+
 interface CityPageProps {
   title: string;
   description: string;
   highlights: string[];
   attractions: Attraction[];
   imageUrl?: string;
+  galleryImages?: GalleryImage[];
   logistics?: {
     gettingAround?: string;
     whereToStay?: string;
@@ -42,6 +49,7 @@ export const CityPage: React.FC<CityPageProps> = ({
   highlights,
   attractions,
   imageUrl,
+  galleryImages = [],
   logistics,
   faqs
 }) => {
@@ -166,20 +174,34 @@ export const CityPage: React.FC<CityPageProps> = ({
           </div>
           
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
-            {[1, 2, 3, 4, 5, 6].map((index) => (
-              <div key={index} className="relative group cursor-pointer">
-                <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <Image className="w-8 h-8 sm:w-10 sm:h-10 text-gray-400 mx-auto mb-1" />
-                      <p className="text-xs sm:text-sm text-gray-500 font-medium">Photo {index}</p>
-                    </div>
+            {Array.from({ length: 6 }, (_, index) => {
+              const galleryImage = galleryImages[index];
+              return (
+                <div key={index} className="relative group cursor-pointer">
+                  <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                    {galleryImage?.url ? (
+                      <img 
+                        src={galleryImage.url} 
+                        alt={galleryImage.alt || `${title} photo ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center">
+                          <Image className="w-8 h-8 sm:w-10 sm:h-10 text-gray-400 mx-auto mb-1" />
+                          <p className="text-xs sm:text-sm text-gray-500 font-medium">Photo {index + 1}</p>
+                        </div>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
                   </div>
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                  {galleryImage?.caption && (
+                    <p className="mt-1 text-xs text-gray-600 text-center">{galleryImage.caption}</p>
+                  )}
+                  <div className="absolute inset-0 border-2 border-transparent group-hover:border-pink-200 rounded-lg transition-colors"></div>
                 </div>
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-pink-200 rounded-lg transition-colors"></div>
-              </div>
-            ))}
+              );
+            })}
           </div>
           
           <div className="mt-4 p-3 bg-white rounded-lg border border-gray-200 shadow-sm">
@@ -189,7 +211,10 @@ export const CityPage: React.FC<CityPageProps> = ({
               </div>
               <div>
                 <p className="text-xs sm:text-sm text-gray-600">
-                  These are placeholder images. Real photos of {title} attractions, landmarks, and culture will be displayed here.
+                  {galleryImages?.length > 0 && galleryImages.some(img => img.url) 
+                    ? `Explore ${title} through these curated photos showcasing the city's best attractions and experiences.`
+                    : `Gallery placeholders for ${title}. Add specific image URLs to each city's .tsx file to display real photos.`
+                  }
                 </p>
               </div>
             </div>

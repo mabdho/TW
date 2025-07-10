@@ -14,6 +14,14 @@ export const Tokyo: React.FC = () => {
         "Tsukiji Fish Market",
         "Imperial Palace"
       ]}
+      galleryImages={[
+        { url: "", alt: "Tokyo skyline", caption: "Tokyo skyline - placeholder" },
+        { url: "", alt: "Senso-ji Temple", caption: "Senso-ji Temple - placeholder" },
+        { url: "", alt: "Shibuya Crossing", caption: "Shibuya Crossing - placeholder" },
+        { url: "", alt: "Tokyo Skytree", caption: "Tokyo Skytree - placeholder" },
+        { url: "", alt: "Tsukiji Fish Market", caption: "Tsukiji Fish Market - placeholder" },
+        { url: "", alt: "Cherry blossoms", caption: "Cherry blossoms - placeholder" }
+      ]}
       attractions={[
         {
           name: "Senso-ji Temple",

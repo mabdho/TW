@@ -7,6 +7,14 @@ export const Austin: React.FC = () => {
       title={"15 Best Things to Do in Austin, USA (2025 Guide)"}
       description={"Welcome to Austin, the 'Live Music Capital of the World' and the city that proudly lives by its motto, 'Keep Austin Weird.' This vibrant Texas hub is a whirlwind of creative energy, where a thriving tech scene coexists with a laid-back, artistic spirit. From legendary music venues and world-class barbecue to stunning natural swimming holes and sprawling parks, Austin offers a unique blend of urban excitement and outdoor adventure. Whether you're here to catch a show, paddleboard on Lady Bird Lake, or indulge in the city's famous food truck culture, you'll quickly discover why it's one of America's fastest-growing and most beloved cities. This guide will walk you through all the best things to do in Austin, ensuring you experience the very heart and soul of this eclectic metropolis."}
       imageUrl={"https://images.unsplash.com/photo-1520950237264-dfe336995c34?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+      galleryImages={[
+        { url: "", alt: "Austin skyline", caption: "Austin skyline - placeholder" },
+        { url: "", alt: "Barton Springs Pool", caption: "Barton Springs Pool - placeholder" },
+        { url: "", alt: "Sixth Street nightlife", caption: "Sixth Street nightlife - placeholder" },
+        { url: "", alt: "Congress Avenue Bridge bats", caption: "Congress Avenue Bridge bats - placeholder" },
+        { url: "", alt: "South Congress Avenue", caption: "South Congress Avenue - placeholder" },
+        { url: "", alt: "Austin food scene", caption: "Austin food scene - placeholder" }
+      ]}
       highlights={["Texas State Capitol",
         "Barton Springs Pool",
         "Sixth Street Historic District",
