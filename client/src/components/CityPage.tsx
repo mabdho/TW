@@ -315,29 +315,7 @@ export const CityPage: React.FC<CityPageProps> = ({
             </div>
           </div>
           
-          {/* Gallery Info Card */}
-          <div className="mt-12 max-w-2xl mx-auto">
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-white/50 shadow-lg p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Info className="w-5 h-5 text-white" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">About This Gallery</h3>
-                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                    {galleryImages?.length > 0 && galleryImages.some(img => img.url) 
-                      ? `This curated photo collection showcases the most iconic sights and hidden gems of ${title}. Navigate through images using the arrows, thumbnails, or let it auto-play to discover the beauty of this destination.`
-                      : `This interactive gallery slider is ready to showcase the beauty of ${title}. Real photos can be added by updating the city's configuration file with authentic image URLs from the destination.`
-                    }
-                  </p>
-                  <div className="mt-3 flex items-center gap-2 text-sm text-gray-500">
-                    <Camera className="w-4 h-4" />
-                    <span>Use navigation controls or let the slideshow auto-play every 4 seconds</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
         </div>
       </div>
 
