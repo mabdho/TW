@@ -4,6 +4,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { getAllBlogs, getFeaturedBlogs } from '../blogs';
+import { SEOHead } from '@/components/SEOHead';
+import { generateBlogListSEOData, generateBreadcrumbStructuredData } from '@/utils/seo';
 
 export default function BlogsPage() {
   // Get blogs from file system
@@ -12,8 +14,57 @@ export default function BlogsPage() {
 
   const categories = ["All", "Travel Tips", "Budget Travel", "Digital Nomad", "Solo Travel", "Sustainable Travel", "Food & Culture"];
 
+  // Generate SEO data for blog listing page
+  const seoData = generateBlogListSEOData();
+  
+  // Generate breadcrumb structured data
+  const breadcrumbData = generateBreadcrumbStructuredData([
+    {
+      name: 'Home',
+      url: 'https://travelwanders.com'
+    },
+    {
+      name: 'Travel Blog',
+      url: 'https://travelwanders.com/blogs'
+    }
+  ]);
+
+  // Generate structured data for blog collection
+  const blogListStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "TravelWanders Blog",
+    "description": "Expert travel tips, destination guides, and inspiring stories from around the world",
+    "url": "https://travelwanders.com/blogs",
+    "publisher": {
+      "@type": "Organization",
+      "name": "TravelWanders",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://travelwanders.com/logo.png"
+      }
+    },
+    "blogPost": blogPosts.map(post => ({
+      "@type": "BlogPosting",
+      "headline": post.title,
+      "description": post.excerpt,
+      "datePublished": post.date,
+      "author": {
+        "@type": "Person",
+        "name": post.author || "TravelWanders Team"
+      },
+      "url": `https://travelwanders.com/blog/${post.id}`,
+      "articleSection": post.category
+    }))
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      <SEOHead 
+        seoData={seoData} 
+        structuredData={blogListStructuredData}
+        breadcrumbData={breadcrumbData}
+      />
       <Navigation />
       
       {/* Hero Section */}

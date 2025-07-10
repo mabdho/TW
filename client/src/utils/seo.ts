@@ -325,3 +325,25 @@ export function generateBlogSEOData(blogData: BlogData, baseUrl?: string): SEODa
   
   return seoData;
 }
+
+/**
+ * Generate SEO data for blog listing page
+ */
+export function generateBlogListSEOData(baseUrl?: string): SEOData {
+  const seoData: SEOData = {
+    title: 'Travel Blog - Stories, Tips & Destination Guides | TravelWanders',
+    description: 'Discover expert travel tips, destination guides, and inspiring stories from around the world. Get insider advice for your next adventure with TravelWanders.',
+    keywords: 'travel blog, travel tips, destination guides, travel stories, travel advice, travel inspiration, travel experiences',
+    canonicalUrl: `${baseUrl || 'https://travelwanders.com'}/blogs`,
+    slug: 'blogs',
+    mainKeyword: 'travel blog',
+    keywordDensity: 0,
+    seoScore: 85,
+    lastModified: new Date().toISOString(),
+    ogType: 'website',
+    section: 'Travel Blog',
+    tags: ['travel', 'blog', 'tips', 'destinations', 'guides']
+  };
+  
+  return seoData;
+}
