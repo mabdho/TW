@@ -23,6 +23,7 @@ interface CityPageProps {
   description: string;
   highlights: string[];
   attractions: Attraction[];
+  imageUrl?: string;
   logistics?: {
     gettingAround?: string;
     whereToStay?: string;
@@ -40,6 +41,7 @@ export const CityPage: React.FC<CityPageProps> = ({
   description,
   highlights,
   attractions,
+  imageUrl,
   logistics,
   faqs
 }) => {
@@ -74,21 +76,33 @@ export const CityPage: React.FC<CityPageProps> = ({
       
       {/* Hero Image Section with Overlay */}
       <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden">
-        {/* City Image Placeholder */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${getGradientClass(title)} opacity-90`}>
-          <div className="absolute inset-0 bg-black/20"></div>
-          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id={`cityscape-${title.replace(/\s+/g, '-').toLowerCase()}`} x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
-                <rect width="10" height="30" x="5" y="20" fill="white" opacity="0.1"/>
-                <rect width="8" height="35" x="18" y="15" fill="white" opacity="0.15"/>
-                <rect width="12" height="25" x="30" y="25" fill="white" opacity="0.1"/>
-                <rect width="6" height="40" x="45" y="10" fill="white" opacity="0.2"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill={`url(#cityscape-${title.replace(/\s+/g, '-').toLowerCase()})`}/>
-          </svg>
-        </div>
+        {/* City Image */}
+        {imageUrl ? (
+          <img 
+            src={imageUrl} 
+            alt={title}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ) : (
+          /* Fallback gradient placeholder */
+          <div className={`absolute inset-0 bg-gradient-to-br ${getGradientClass(title)} opacity-90`}>
+            <div className="absolute inset-0 bg-black/20"></div>
+            <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id={`cityscape-${title.replace(/\s+/g, '-').toLowerCase()}`} x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+                  <rect width="10" height="30" x="5" y="20" fill="white" opacity="0.1"/>
+                  <rect width="8" height="35" x="18" y="15" fill="white" opacity="0.15"/>
+                  <rect width="12" height="25" x="30" y="25" fill="white" opacity="0.1"/>
+                  <rect width="6" height="40" x="45" y="10" fill="white" opacity="0.2"/>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill={`url(#cityscape-${title.replace(/\s+/g, '-').toLowerCase()})`}/>
+            </svg>
+          </div>
+        )}
+        
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/20"></div>
         
         {/* City Title Overlay - Bottom Left */}
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent">
