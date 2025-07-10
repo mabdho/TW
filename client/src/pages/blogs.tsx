@@ -10,21 +10,28 @@ import type { Blog } from '@shared/schema';
 export default function BlogsPage() {
   // Fetch blogs from database
   const { data: blogPosts = [], isLoading, error } = useQuery({
-    queryKey: ['/api/blogs', Date.now()], // Add timestamp to force refresh
+    queryKey: ['/api/blogs'],
     queryFn: async () => {
       console.log('Fetching blogs from API...');
       const response = await apiRequest('GET', '/api/blogs');
       const data = await response.json();
       console.log('API Response:', data);
+      console.log('blogPosts length:', data?.length || 0);
       return data as Blog[];
     },
-    staleTime: 0, // Always refetch
-    cacheTime: 0, // Don't cache
-    refetchOnMount: true,
-    refetchOnWindowFocus: true,
+    staleTime: 30000, // Cache for 30 seconds
+    cacheTime: 300000, // Keep in cache for 5 minutes
   });
 
   const categories = ["All", "Travel Tips", "Budget Travel", "Digital Nomad", "Solo Travel", "Sustainable Travel", "Food & Culture"];
+
+  // Debug logging
+  console.log('Blog Page State:', { 
+    isLoading, 
+    error: error?.message,
+    blogPostsLength: blogPosts?.length,
+    blogPosts: blogPosts?.slice(0, 2) // Log first 2 for debugging
+  });
 
   return (
     <div className="min-h-screen bg-white">
@@ -67,6 +74,15 @@ export default function BlogsPage() {
           {!isLoading && !error && blogPosts.length === 0 && (
             <div className="text-center py-12">
               <p className="text-gray-600">No blog posts available. Check back soon for travel stories and tips!</p>
+            </div>
+          )}
+
+          {/* Debug Info */}
+          {process.env.NODE_ENV === 'development' && (
+            <div className="bg-yellow-100 p-4 mb-4 rounded">
+              <p><strong>Debug:</strong> Loading: {isLoading ? 'Yes' : 'No'}, Error: {error ? 'Yes' : 'No'}, Blogs: {blogPosts.length}</p>
+              <p><strong>Featured blogs:</strong> {blogPosts.filter(p => p.featured).length}</p>
+              <p><strong>Regular blogs:</strong> {blogPosts.filter(p => !p.featured).length}</p>
             </div>
           )}
 

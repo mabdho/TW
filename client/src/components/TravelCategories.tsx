@@ -8,18 +8,17 @@ import type { Blog } from '@shared/schema';
 export const TravelCategories = () => {
   // Fetch latest 2 blogs from database
   const { data: latestBlogs = [], isLoading, error } = useQuery({
-    queryKey: ['/api/blogs/latest/2', Date.now()], // Add timestamp to force refresh
+    queryKey: ['/api/blogs/latest/2'],
     queryFn: async () => {
       console.log('Fetching latest 2 blogs from API...');
       const response = await apiRequest('GET', '/api/blogs/latest/2');
       const data = await response.json();
       console.log('Latest blogs API Response:', data);
+      console.log('Latest blogs count:', data?.length || 0);
       return data as Blog[];
     },
-    staleTime: 0, // Always refetch
-    cacheTime: 0, // Don't cache
-    refetchOnMount: true,
-    refetchOnWindowFocus: true,
+    staleTime: 30000, // Cache for 30 seconds
+    cacheTime: 300000, // Keep in cache for 5 minutes
   });
 
   return (
