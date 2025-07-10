@@ -16,7 +16,7 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 
 const galleryImageSchema = z.object({
-  url: z.string().url('Please enter a valid image URL'),
+  url: z.string().url('Please enter a valid image URL').optional().or(z.literal('')),
   alt: z.string().min(1, 'Alt text is required'),
   caption: z.string().min(1, 'Caption is required')
 });
@@ -26,7 +26,7 @@ const cityFormSchema = z.object({
   country: z.string().min(1, 'Country is required'),
   continent: z.string().optional(),
   heroImageUrl: z.string().url('Please enter a valid hero image URL').optional().or(z.literal('')),
-  galleryImages: z.array(galleryImageSchema).min(1, 'At least one gallery image is required'),
+  galleryImages: z.array(galleryImageSchema).optional(),
   msv: z.string().optional(),
   kd: z.string().optional()
 });
@@ -60,6 +60,7 @@ export default function AdminPage() {
 
   const generateCityPageMutation = useMutation({
     mutationFn: async (data: CityFormData) => {
+      console.log('Submitting form data:', data);
       return await apiRequest('/api/admin/generate-city-page', {
         method: 'POST',
         body: JSON.stringify(data)
@@ -73,18 +74,34 @@ export default function AdminPage() {
       });
     },
     onError: (error: any) => {
+      console.error('City generation error:', error);
+      let errorMessage = "Failed to generate city page";
+      
+      if (error.message?.includes("quota") || error.message?.includes("429")) {
+        errorMessage = "API quota exceeded. Please wait a few minutes and try again, or check your Gemini API billing settings.";
+      } else if (error.message?.includes("404")) {
+        errorMessage = "API model not found. Please check your Gemini API configuration.";
+      } else if (error.message?.includes("401")) {
+        errorMessage = "Invalid API key. Please check your Gemini API key settings.";
+      }
+      
       toast({
         title: "Generation failed",
-        description: error.message || "Failed to generate city page",
+        description: errorMessage,
         variant: "destructive"
       });
     }
   });
 
   const onSubmit = async (data: CityFormData) => {
+    console.log('Form submitted with data:', data);
+    console.log('Form errors:', form.formState.errors);
+    
     setIsGenerating(true);
     try {
       await generateCityPageMutation.mutateAsync(data);
+    } catch (error) {
+      console.error('Submission error:', error);
     } finally {
       setIsGenerating(false);
     }
@@ -302,12 +319,12 @@ export default function AdminPage() {
                   <Button 
                     type="submit" 
                     className="w-full" 
-                    disabled={isGenerating}
+                    disabled={isGenerating || generateCityPageMutation.isPending}
                   >
-                    {isGenerating ? (
+                    {isGenerating || generateCityPageMutation.isPending ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Generating City Page...
+                        Generating City Page... (This may take 30-60 seconds)
                       </>
                     ) : (
                       <>
@@ -316,6 +333,18 @@ export default function AdminPage() {
                       </>
                     )}
                   </Button>
+                  
+                  {generateCityPageMutation.isPending && (
+                    <div className="text-sm text-gray-600 mt-2">
+                      Processing with AI... Please wait while we generate your city page.
+                    </div>
+                  )}
+
+                  {generateCityPageMutation.error && (
+                    <div className="text-sm text-red-600 mt-2 p-3 bg-red-50 rounded-lg">
+                      <strong>Error:</strong> {generateCityPageMutation.error.message || "Failed to generate city page"}
+                    </div>
+                  )}
                 </form>
               </Form>
             </CardContent>
