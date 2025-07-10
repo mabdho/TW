@@ -176,43 +176,37 @@ export const CityDirectory = () => {
     : cities.filter(city => city.continent === selectedContinent);
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-white">
+    <section id="destinations" className="py-16 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Star className="w-5 h-5 text-orange-400 fill-current" />
-            <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
-              158+ City Guides
-            </Badge>
-          </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 px-4 sm:px-0">
-            Explore Popular Destinations
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            All destinations
           </h2>
-          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto mb-6 sm:mb-8 px-4 sm:px-0">
-            Discover comprehensive travel guides with expert recommendations, insider tips, and detailed attraction information for destinations worldwide.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+            Browse our complete collection of travel guides and insider tips for destinations worldwide.
           </p>
           
           {/* Search Bar */}
-          <div className="max-w-md mx-auto mb-6 sm:mb-8">
+          <div className="max-w-md mx-auto mb-8">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <Input 
                 placeholder="Search destinations..." 
-                className="pl-10 border-gray-300 focus:border-green-500 focus:ring-green-500 h-10 sm:h-12"
+                className="pl-12 border-gray-300 focus:border-green-500 focus:ring-green-500 h-12 rounded-lg"
               />
             </div>
           </div>
           
           {/* Continent Filter */}
-          <div className="flex flex-wrap justify-center gap-2 mb-6 sm:mb-8 px-4 sm:px-0">
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
             {continents.map((continent) => (
               <Button
                 key={continent}
                 variant={selectedContinent === continent ? "default" : "outline"}
                 size="sm"
                 onClick={() => setSelectedContinent(continent)}
-                className={`transition-all duration-200 text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2 h-8 sm:h-9 ${
+                className={`transition-all duration-200 text-sm px-4 py-2 h-9 rounded-full ${
                   selectedContinent === continent 
                     ? 'bg-green-600 hover:bg-green-700 text-white' 
                     : 'border-gray-300 text-gray-700 hover:bg-gray-50'
@@ -224,39 +218,30 @@ export const CityDirectory = () => {
           </div>
           
           <p className="text-sm text-gray-500">
-            Showing {filteredCities.length} destinations
+            {filteredCities.length} destinations
           </p>
         </div>
 
         {/* Cities Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
           {filteredCities.map((city, index) => (
             <a key={city.path} href={city.path}>
-              <Card 
-                className="group overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white h-full"
-                style={{ animationDelay: `${index * 50}ms` }}
-              >
-                <CardContent className="p-3 sm:p-4">
+              <Card className="group overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 bg-white h-full">
+                <CardContent className="p-4">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-gray-900 group-hover:text-green-600 transition-colors text-xs sm:text-sm leading-tight truncate">
+                      <h3 className="font-medium text-gray-900 group-hover:text-green-600 transition-colors text-sm leading-tight truncate">
                         {city.name}
                       </h3>
-                      <p className="text-xs text-gray-500 truncate">
+                      <p className="text-xs text-gray-500 truncate mt-1">
                         {city.country}
                       </p>
                     </div>
-                    <div className="flex items-center gap-1 flex-shrink-0 ml-1 sm:ml-2">
-                      <Star className="h-3 w-3 fill-orange-400 text-orange-400" />
-                      <span className="text-xs text-gray-600">4.{Math.floor(Math.random() * 5) + 3}</span>
-                    </div>
                   </div>
                   
-                  <div className="flex items-center justify-between">
-                    <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-600 hover:bg-gray-100 truncate max-w-[80px] sm:max-w-none">
-                      {city.continent}
-                    </Badge>
-                    <ArrowRight className="h-3 w-3 text-gray-400 group-hover:text-green-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
+                  <div className="flex items-center justify-between mt-3">
+                    <span className="text-xs text-gray-500">{city.continent}</span>
+                    <ArrowRight className="h-3 w-3 text-gray-400 group-hover:text-green-600 group-hover:translate-x-1 transition-all" />
                   </div>
                 </CardContent>
               </Card>
@@ -264,21 +249,7 @@ export const CityDirectory = () => {
           ))}
         </div>
 
-        {/* Bottom Call to Action */}
-        <div className="text-center mt-12 sm:mt-16">
-          <div className="bg-gray-50 rounded-lg border border-gray-200 p-6 sm:p-8">
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
-              Don't see your destination?
-            </h3>
-            <p className="text-gray-600 mb-4 sm:mb-6 max-w-md mx-auto px-4 sm:px-0">
-              We're constantly adding new destinations. Request a comprehensive city guide for your next adventure.
-            </p>
-            <Button className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 text-sm sm:text-base">
-              Request a City Guide
-              <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-            </Button>
-          </div>
-        </div>
+
       </div>
     </section>
   );
