@@ -11,6 +11,14 @@ export const Havana: React.FC = () => {
         "Ride in a Classic American Car",
         "Visit Fusterlandia",
         "Explore Castillo de los Tres Reyes del Morro"]}
+      galleryImages={[
+        { url: "", alt: "Havana landmark 1", caption: "Havana landmark 1 - placeholder" },
+        { url: "", alt: "Havana landmark 2", caption: "Havana landmark 2 - placeholder" },
+        { url: "", alt: "Havana landmark 3", caption: "Havana landmark 3 - placeholder" },
+        { url: "", alt: "Havana landmark 4", caption: "Havana landmark 4 - placeholder" },
+        { url: "", alt: "Havana landmark 5", caption: "Havana landmark 5 - placeholder" },
+        { url: "", alt: "Havana landmark 6", caption: "Havana landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Wander Through Habana Vieja (Old Havana)",

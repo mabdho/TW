@@ -11,6 +11,14 @@ export const AddisAbaba: React.FC = () => {
         "Merkato (Addis Mercato)",
         "Mount Entoto",
         "Ethnological Museum"]}
+      galleryImages={[
+        { url: "", alt: "AddisAbaba landmark 1", caption: "AddisAbaba landmark 1 - placeholder" },
+        { url: "", alt: "AddisAbaba landmark 2", caption: "AddisAbaba landmark 2 - placeholder" },
+        { url: "", alt: "AddisAbaba landmark 3", caption: "AddisAbaba landmark 3 - placeholder" },
+        { url: "", alt: "AddisAbaba landmark 4", caption: "AddisAbaba landmark 4 - placeholder" },
+        { url: "", alt: "AddisAbaba landmark 5", caption: "AddisAbaba landmark 5 - placeholder" },
+        { url: "", alt: "AddisAbaba landmark 6", caption: "AddisAbaba landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "National Museum of Ethiopia",

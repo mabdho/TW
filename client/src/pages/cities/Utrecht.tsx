@@ -11,6 +11,14 @@ export const Utrecht: React.FC = () => {
         "Visit the Rietveld Schröder House",
         "Discover De Haar Castle (Kasteel de Haar)",
         "Experience the Railway Museum (Spoorwegmuseum)"]}
+      galleryImages={[
+        { url: "", alt: "Utrecht landmark 1", caption: "Utrecht landmark 1 - placeholder" },
+        { url: "", alt: "Utrecht landmark 2", caption: "Utrecht landmark 2 - placeholder" },
+        { url: "", alt: "Utrecht landmark 3", caption: "Utrecht landmark 3 - placeholder" },
+        { url: "", alt: "Utrecht landmark 4", caption: "Utrecht landmark 4 - placeholder" },
+        { url: "", alt: "Utrecht landmark 5", caption: "Utrecht landmark 5 - placeholder" },
+        { url: "", alt: "Utrecht landmark 6", caption: "Utrecht landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Climb the Dom Tower (Domtoren)",

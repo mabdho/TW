@@ -11,6 +11,14 @@ export const BeloHorizonte: React.FC = () => {
         "Praça da Liberdade & Circuito Cultural",
         "Inhotim Institute",
         "Parque da Serra do Curral"]}
+      galleryImages={[
+        { url: "", alt: "BeloHorizonte landmark 1", caption: "BeloHorizonte landmark 1 - placeholder" },
+        { url: "", alt: "BeloHorizonte landmark 2", caption: "BeloHorizonte landmark 2 - placeholder" },
+        { url: "", alt: "BeloHorizonte landmark 3", caption: "BeloHorizonte landmark 3 - placeholder" },
+        { url: "", alt: "BeloHorizonte landmark 4", caption: "BeloHorizonte landmark 4 - placeholder" },
+        { url: "", alt: "BeloHorizonte landmark 5", caption: "BeloHorizonte landmark 5 - placeholder" },
+        { url: "", alt: "BeloHorizonte landmark 6", caption: "BeloHorizonte landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Pampulha Modern Ensemble",

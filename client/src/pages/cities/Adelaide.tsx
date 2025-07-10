@@ -11,6 +11,14 @@ export const Adelaide: React.FC = () => {
         "Kangaroo Island",
         "Art Gallery of South Australia",
         "Adelaide Botanic Garden"]}
+      galleryImages={[
+        { url: "", alt: "Adelaide landmark 1", caption: "Adelaide landmark 1 - placeholder" },
+        { url: "", alt: "Adelaide landmark 2", caption: "Adelaide landmark 2 - placeholder" },
+        { url: "", alt: "Adelaide landmark 3", caption: "Adelaide landmark 3 - placeholder" },
+        { url: "", alt: "Adelaide landmark 4", caption: "Adelaide landmark 4 - placeholder" },
+        { url: "", alt: "Adelaide landmark 5", caption: "Adelaide landmark 5 - placeholder" },
+        { url: "", alt: "Adelaide landmark 6", caption: "Adelaide landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Adelaide Central Market",

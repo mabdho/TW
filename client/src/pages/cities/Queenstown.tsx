@@ -11,6 +11,14 @@ export const Queenstown: React.FC = () => {
         "Shotover Jet Boat Ride",
         "Kawarau Bridge Bungy",
         "Hike the Ben Lomond Track"]}
+      galleryImages={[
+        { url: "", alt: "Queenstown landmark 1", caption: "Queenstown landmark 1 - placeholder" },
+        { url: "", alt: "Queenstown landmark 2", caption: "Queenstown landmark 2 - placeholder" },
+        { url: "", alt: "Queenstown landmark 3", caption: "Queenstown landmark 3 - placeholder" },
+        { url: "", alt: "Queenstown landmark 4", caption: "Queenstown landmark 4 - placeholder" },
+        { url: "", alt: "Queenstown landmark 5", caption: "Queenstown landmark 5 - placeholder" },
+        { url: "", alt: "Queenstown landmark 6", caption: "Queenstown landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Ride the Skyline Gondola",

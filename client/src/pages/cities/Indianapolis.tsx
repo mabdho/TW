@@ -11,6 +11,14 @@ export const Indianapolis: React.FC = () => {
         "White River State Park",
         "Central Canal Walk",
         "Monument Circle"]}
+      galleryImages={[
+        { url: "", alt: "Indianapolis landmark 1", caption: "Indianapolis landmark 1 - placeholder" },
+        { url: "", alt: "Indianapolis landmark 2", caption: "Indianapolis landmark 2 - placeholder" },
+        { url: "", alt: "Indianapolis landmark 3", caption: "Indianapolis landmark 3 - placeholder" },
+        { url: "", alt: "Indianapolis landmark 4", caption: "Indianapolis landmark 4 - placeholder" },
+        { url: "", alt: "Indianapolis landmark 5", caption: "Indianapolis landmark 5 - placeholder" },
+        { url: "", alt: "Indianapolis landmark 6", caption: "Indianapolis landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Indianapolis Motor Speedway Museum",

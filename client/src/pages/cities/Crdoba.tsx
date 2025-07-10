@@ -11,6 +11,14 @@ export const Crdoba: React.FC = () => {
         "Paseo del Buen Pastor",
         "Barrio Güemes & Paseo de las Artes",
         "Parque Sarmiento"]}
+      galleryImages={[
+        { url: "", alt: "Crdoba landmark 1", caption: "Crdoba landmark 1 - placeholder" },
+        { url: "", alt: "Crdoba landmark 2", caption: "Crdoba landmark 2 - placeholder" },
+        { url: "", alt: "Crdoba landmark 3", caption: "Crdoba landmark 3 - placeholder" },
+        { url: "", alt: "Crdoba landmark 4", caption: "Crdoba landmark 4 - placeholder" },
+        { url: "", alt: "Crdoba landmark 5", caption: "Crdoba landmark 5 - placeholder" },
+        { url: "", alt: "Crdoba landmark 6", caption: "Crdoba landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Manzana Jesuítica (Jesuit Block)",

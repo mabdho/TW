@@ -11,6 +11,14 @@ export const Genoa: React.FC = () => {
         "Genoa's Old Port (Porto Antico)",
         "Cattedrale di San Lorenzo",
         "Via Garibaldi"]}
+      galleryImages={[
+        { url: "", alt: "Genoa landmark 1", caption: "Genoa landmark 1 - placeholder" },
+        { url: "", alt: "Genoa landmark 2", caption: "Genoa landmark 2 - placeholder" },
+        { url: "", alt: "Genoa landmark 3", caption: "Genoa landmark 3 - placeholder" },
+        { url: "", alt: "Genoa landmark 4", caption: "Genoa landmark 4 - placeholder" },
+        { url: "", alt: "Genoa landmark 5", caption: "Genoa landmark 5 - placeholder" },
+        { url: "", alt: "Genoa landmark 6", caption: "Genoa landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Aquarium of Genoa (Acquario di Genova)",

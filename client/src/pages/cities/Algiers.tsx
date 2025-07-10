@@ -11,6 +11,14 @@ export const Algiers: React.FC = () => {
         "Jardin d'Essai du Hamma",
         "Martyrs' Memorial (Maqam Echahid)",
         "Bardo National Museum of Prehistory and Ethnography"]}
+      galleryImages={[
+        { url: "", alt: "Algiers landmark 1", caption: "Algiers landmark 1 - placeholder" },
+        { url: "", alt: "Algiers landmark 2", caption: "Algiers landmark 2 - placeholder" },
+        { url: "", alt: "Algiers landmark 3", caption: "Algiers landmark 3 - placeholder" },
+        { url: "", alt: "Algiers landmark 4", caption: "Algiers landmark 4 - placeholder" },
+        { url: "", alt: "Algiers landmark 5", caption: "Algiers landmark 5 - placeholder" },
+        { url: "", alt: "Algiers landmark 6", caption: "Algiers landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "The Casbah of Algiers",

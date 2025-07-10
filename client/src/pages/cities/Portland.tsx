@@ -11,6 +11,14 @@ export const Portland: React.FC = () => {
         "Portland Japanese Garden",
         "Lan Su Chinese Garden",
         "Explore the Food Cart Pods"]}
+      galleryImages={[
+        { url: "", alt: "Portland landmark 1", caption: "Portland landmark 1 - placeholder" },
+        { url: "", alt: "Portland landmark 2", caption: "Portland landmark 2 - placeholder" },
+        { url: "", alt: "Portland landmark 3", caption: "Portland landmark 3 - placeholder" },
+        { url: "", alt: "Portland landmark 4", caption: "Portland landmark 4 - placeholder" },
+        { url: "", alt: "Portland landmark 5", caption: "Portland landmark 5 - placeholder" },
+        { url: "", alt: "Portland landmark 6", caption: "Portland landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Powell's City of Books",

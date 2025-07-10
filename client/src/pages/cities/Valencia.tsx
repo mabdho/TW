@@ -11,6 +11,14 @@ export const Valencia: React.FC = () => {
         "Mercado Central (Central Market)",
         "Turia Gardens (Jardí del Túria)",
         "La Lonja de la Seda (Silk Exchange)"]}
+      galleryImages={[
+        { url: "", alt: "Valencia landmark 1", caption: "Valencia landmark 1 - placeholder" },
+        { url: "", alt: "Valencia landmark 2", caption: "Valencia landmark 2 - placeholder" },
+        { url: "", alt: "Valencia landmark 3", caption: "Valencia landmark 3 - placeholder" },
+        { url: "", alt: "Valencia landmark 4", caption: "Valencia landmark 4 - placeholder" },
+        { url: "", alt: "Valencia landmark 5", caption: "Valencia landmark 5 - placeholder" },
+        { url: "", alt: "Valencia landmark 6", caption: "Valencia landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "City of Arts and Sciences (Ciutat de les Arts i les Ciències)",

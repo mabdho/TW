@@ -11,6 +11,14 @@ export const Kathmandu: React.FC = () => {
         "Swayambhunath Stupa (Monkey Temple)",
         "Kathmandu Durbar Square",
         "Bhaktapur Durbar Square"]}
+      galleryImages={[
+        { url: "", alt: "Kathmandu landmark 1", caption: "Kathmandu landmark 1 - placeholder" },
+        { url: "", alt: "Kathmandu landmark 2", caption: "Kathmandu landmark 2 - placeholder" },
+        { url: "", alt: "Kathmandu landmark 3", caption: "Kathmandu landmark 3 - placeholder" },
+        { url: "", alt: "Kathmandu landmark 4", caption: "Kathmandu landmark 4 - placeholder" },
+        { url: "", alt: "Kathmandu landmark 5", caption: "Kathmandu landmark 5 - placeholder" },
+        { url: "", alt: "Kathmandu landmark 6", caption: "Kathmandu landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Boudhanath Stupa",

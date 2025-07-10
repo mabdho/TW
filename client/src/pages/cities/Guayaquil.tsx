@@ -11,6 +11,14 @@ export const Guayaquil: React.FC = () => {
         "Cerro Santa Ana (Santa Ana Hill)",
         "Parque de las Iguanas (Seminario Park)",
         "Parque Histórico Guayaquil (Historical Park)"]}
+      galleryImages={[
+        { url: "", alt: "Guayaquil landmark 1", caption: "Guayaquil landmark 1 - placeholder" },
+        { url: "", alt: "Guayaquil landmark 2", caption: "Guayaquil landmark 2 - placeholder" },
+        { url: "", alt: "Guayaquil landmark 3", caption: "Guayaquil landmark 3 - placeholder" },
+        { url: "", alt: "Guayaquil landmark 4", caption: "Guayaquil landmark 4 - placeholder" },
+        { url: "", alt: "Guayaquil landmark 5", caption: "Guayaquil landmark 5 - placeholder" },
+        { url: "", alt: "Guayaquil landmark 6", caption: "Guayaquil landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Malecón 2000",

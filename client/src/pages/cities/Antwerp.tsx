@@ -11,6 +11,14 @@ export const Antwerp: React.FC = () => {
         "Grote Markt (Market Square)",
         "Rubenshuis (Rubens' House)",
         "MAS | Museum aan de Stroom"]}
+      galleryImages={[
+        { url: "", alt: "Antwerp landmark 1", caption: "Antwerp landmark 1 - placeholder" },
+        { url: "", alt: "Antwerp landmark 2", caption: "Antwerp landmark 2 - placeholder" },
+        { url: "", alt: "Antwerp landmark 3", caption: "Antwerp landmark 3 - placeholder" },
+        { url: "", alt: "Antwerp landmark 4", caption: "Antwerp landmark 4 - placeholder" },
+        { url: "", alt: "Antwerp landmark 5", caption: "Antwerp landmark 5 - placeholder" },
+        { url: "", alt: "Antwerp landmark 6", caption: "Antwerp landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Antwerp Central Station (Antwerpen-Centraal)",

@@ -11,6 +11,14 @@ export const Harare: React.FC = () => {
         "National Heroes Acre",
         "Balancing Rocks of Epworth",
         "National Gallery of Zimbabwe"]}
+      galleryImages={[
+        { url: "", alt: "Harare landmark 1", caption: "Harare landmark 1 - placeholder" },
+        { url: "", alt: "Harare landmark 2", caption: "Harare landmark 2 - placeholder" },
+        { url: "", alt: "Harare landmark 3", caption: "Harare landmark 3 - placeholder" },
+        { url: "", alt: "Harare landmark 4", caption: "Harare landmark 4 - placeholder" },
+        { url: "", alt: "Harare landmark 5", caption: "Harare landmark 5 - placeholder" },
+        { url: "", alt: "Harare landmark 6", caption: "Harare landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Wild Is Life Grand Zimbabwe",

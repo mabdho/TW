@@ -11,6 +11,14 @@ export const Zaragoza: React.FC = () => {
         "Catedral del Salvador (La Seo)",
         "Museo Goya - Colección Ibercaja",
         "El Tubo Tapas District"]}
+      galleryImages={[
+        { url: "", alt: "Zaragoza landmark 1", caption: "Zaragoza landmark 1 - placeholder" },
+        { url: "", alt: "Zaragoza landmark 2", caption: "Zaragoza landmark 2 - placeholder" },
+        { url: "", alt: "Zaragoza landmark 3", caption: "Zaragoza landmark 3 - placeholder" },
+        { url: "", alt: "Zaragoza landmark 4", caption: "Zaragoza landmark 4 - placeholder" },
+        { url: "", alt: "Zaragoza landmark 5", caption: "Zaragoza landmark 5 - placeholder" },
+        { url: "", alt: "Zaragoza landmark 6", caption: "Zaragoza landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Basílica de Nuestra Señora del Pilar",

@@ -11,6 +11,14 @@ export const Maracaibo: React.FC = () => {
         "Santa Lucía Neighborhood",
         "Baralt Theatre",
         "Vereda del Lago Park"]}
+      galleryImages={[
+        { url: "", alt: "Maracaibo landmark 1", caption: "Maracaibo landmark 1 - placeholder" },
+        { url: "", alt: "Maracaibo landmark 2", caption: "Maracaibo landmark 2 - placeholder" },
+        { url: "", alt: "Maracaibo landmark 3", caption: "Maracaibo landmark 3 - placeholder" },
+        { url: "", alt: "Maracaibo landmark 4", caption: "Maracaibo landmark 4 - placeholder" },
+        { url: "", alt: "Maracaibo landmark 5", caption: "Maracaibo landmark 5 - placeholder" },
+        { url: "", alt: "Maracaibo landmark 6", caption: "Maracaibo landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "General Rafael Urdaneta Bridge",

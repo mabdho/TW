@@ -11,6 +11,14 @@ export const Kingston: React.FC = () => {
         "National Gallery of Jamaica",
         "Port Royal",
         "Trench Town Culture Yard"]}
+      galleryImages={[
+        { url: "", alt: "Kingston landmark 1", caption: "Kingston landmark 1 - placeholder" },
+        { url: "", alt: "Kingston landmark 2", caption: "Kingston landmark 2 - placeholder" },
+        { url: "", alt: "Kingston landmark 3", caption: "Kingston landmark 3 - placeholder" },
+        { url: "", alt: "Kingston landmark 4", caption: "Kingston landmark 4 - placeholder" },
+        { url: "", alt: "Kingston landmark 5", caption: "Kingston landmark 5 - placeholder" },
+        { url: "", alt: "Kingston landmark 6", caption: "Kingston landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Bob Marley Museum",

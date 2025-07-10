@@ -11,6 +11,14 @@ export const SiemReap: React.FC = () => {
         "Ta Prohm",
         "Banteay Srei",
         "Tonlé Sap Lake & Kampong Phluk"]}
+      galleryImages={[
+        { url: "", alt: "SiemReap landmark 1", caption: "SiemReap landmark 1 - placeholder" },
+        { url: "", alt: "SiemReap landmark 2", caption: "SiemReap landmark 2 - placeholder" },
+        { url: "", alt: "SiemReap landmark 3", caption: "SiemReap landmark 3 - placeholder" },
+        { url: "", alt: "SiemReap landmark 4", caption: "SiemReap landmark 4 - placeholder" },
+        { url: "", alt: "SiemReap landmark 5", caption: "SiemReap landmark 5 - placeholder" },
+        { url: "", alt: "SiemReap landmark 6", caption: "SiemReap landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Angkor Wat",

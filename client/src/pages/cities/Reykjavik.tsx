@@ -11,6 +11,14 @@ export const Reykjavik: React.FC = () => {
         "Harpa Concert Hall and Conference Centre",
         "The Sun Voyager (Sólfar)",
         "Chase the Northern Lights"]}
+      galleryImages={[
+        { url: "", alt: "Reykjavik landmark 1", caption: "Reykjavik landmark 1 - placeholder" },
+        { url: "", alt: "Reykjavik landmark 2", caption: "Reykjavik landmark 2 - placeholder" },
+        { url: "", alt: "Reykjavik landmark 3", caption: "Reykjavik landmark 3 - placeholder" },
+        { url: "", alt: "Reykjavik landmark 4", caption: "Reykjavik landmark 4 - placeholder" },
+        { url: "", alt: "Reykjavik landmark 5", caption: "Reykjavik landmark 5 - placeholder" },
+        { url: "", alt: "Reykjavik landmark 6", caption: "Reykjavik landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Hallgrímskirkja",

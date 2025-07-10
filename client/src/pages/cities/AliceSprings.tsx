@@ -11,6 +11,14 @@ export const AliceSprings: React.FC = () => {
         "West MacDonnell Ranges (Tjoritja)",
         "Alice Springs Telegraph Station Historical Reserve",
         "Anzac Hill"]}
+      galleryImages={[
+        { url: "", alt: "AliceSprings landmark 1", caption: "AliceSprings landmark 1 - placeholder" },
+        { url: "", alt: "AliceSprings landmark 2", caption: "AliceSprings landmark 2 - placeholder" },
+        { url: "", alt: "AliceSprings landmark 3", caption: "AliceSprings landmark 3 - placeholder" },
+        { url: "", alt: "AliceSprings landmark 4", caption: "AliceSprings landmark 4 - placeholder" },
+        { url: "", alt: "AliceSprings landmark 5", caption: "AliceSprings landmark 5 - placeholder" },
+        { url: "", alt: "AliceSprings landmark 6", caption: "AliceSprings landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Alice Springs Desert Park",

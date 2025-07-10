@@ -11,6 +11,14 @@ export const Palermo: React.FC = () => {
         "Teatro Massimo",
         "Capuchin Catacombs",
         "Ballarò Market"]}
+      galleryImages={[
+        { url: "", alt: "Palermo landmark 1", caption: "Palermo landmark 1 - placeholder" },
+        { url: "", alt: "Palermo landmark 2", caption: "Palermo landmark 2 - placeholder" },
+        { url: "", alt: "Palermo landmark 3", caption: "Palermo landmark 3 - placeholder" },
+        { url: "", alt: "Palermo landmark 4", caption: "Palermo landmark 4 - placeholder" },
+        { url: "", alt: "Palermo landmark 5", caption: "Palermo landmark 5 - placeholder" },
+        { url: "", alt: "Palermo landmark 6", caption: "Palermo landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Palermo Cathedral (Cattedrale di Palermo)",

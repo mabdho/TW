@@ -11,6 +11,14 @@ export const Papeete: React.FC = () => {
         "Robert Wan Pearl Museum",
         "Jardins de Paofai (Paofai Gardens)",
         "Cathédrale Notre-Dame de Papeete"]}
+      galleryImages={[
+        { url: "", alt: "Papeete landmark 1", caption: "Papeete landmark 1 - placeholder" },
+        { url: "", alt: "Papeete landmark 2", caption: "Papeete landmark 2 - placeholder" },
+        { url: "", alt: "Papeete landmark 3", caption: "Papeete landmark 3 - placeholder" },
+        { url: "", alt: "Papeete landmark 4", caption: "Papeete landmark 4 - placeholder" },
+        { url: "", alt: "Papeete landmark 5", caption: "Papeete landmark 5 - placeholder" },
+        { url: "", alt: "Papeete landmark 6", caption: "Papeete landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Marché de Papeete (Papeete Market)",

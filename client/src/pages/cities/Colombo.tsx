@@ -11,6 +11,14 @@ export const Colombo: React.FC = () => {
         "Pettah Market",
         "National Museum of Colombo",
         "Jami Ul-Alfar Mosque (Red Mosque)"]}
+      galleryImages={[
+        { url: "", alt: "Colombo landmark 1", caption: "Colombo landmark 1 - placeholder" },
+        { url: "", alt: "Colombo landmark 2", caption: "Colombo landmark 2 - placeholder" },
+        { url: "", alt: "Colombo landmark 3", caption: "Colombo landmark 3 - placeholder" },
+        { url: "", alt: "Colombo landmark 4", caption: "Colombo landmark 4 - placeholder" },
+        { url: "", alt: "Colombo landmark 5", caption: "Colombo landmark 5 - placeholder" },
+        { url: "", alt: "Colombo landmark 6", caption: "Colombo landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Gangaramaya Temple",

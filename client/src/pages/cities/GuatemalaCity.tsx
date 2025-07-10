@@ -11,6 +11,14 @@ export const GuatemalaCity: React.FC = () => {
         "Mapa en Relieve",
         "Mercado Central",
         "Paseo Cayalá"]}
+      galleryImages={[
+        { url: "", alt: "GuatemalaCity landmark 1", caption: "GuatemalaCity landmark 1 - placeholder" },
+        { url: "", alt: "GuatemalaCity landmark 2", caption: "GuatemalaCity landmark 2 - placeholder" },
+        { url: "", alt: "GuatemalaCity landmark 3", caption: "GuatemalaCity landmark 3 - placeholder" },
+        { url: "", alt: "GuatemalaCity landmark 4", caption: "GuatemalaCity landmark 4 - placeholder" },
+        { url: "", alt: "GuatemalaCity landmark 5", caption: "GuatemalaCity landmark 5 - placeholder" },
+        { url: "", alt: "GuatemalaCity landmark 6", caption: "GuatemalaCity landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Palacio Nacional de la Cultura",

@@ -11,6 +11,14 @@ export const Zagreb: React.FC = () => {
         "Museum of Broken Relationships",
         "Dolac Market",
         "Upper Town (Gornji Grad)"]}
+      galleryImages={[
+        { url: "", alt: "Zagreb landmark 1", caption: "Zagreb landmark 1 - placeholder" },
+        { url: "", alt: "Zagreb landmark 2", caption: "Zagreb landmark 2 - placeholder" },
+        { url: "", alt: "Zagreb landmark 3", caption: "Zagreb landmark 3 - placeholder" },
+        { url: "", alt: "Zagreb landmark 4", caption: "Zagreb landmark 4 - placeholder" },
+        { url: "", alt: "Zagreb landmark 5", caption: "Zagreb landmark 5 - placeholder" },
+        { url: "", alt: "Zagreb landmark 6", caption: "Zagreb landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Zagreb Cathedral",

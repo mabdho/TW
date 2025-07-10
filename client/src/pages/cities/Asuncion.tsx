@@ -13,6 +13,14 @@ export const Asuncion: React.FC = () => {
       "Museo del Barro",
       "Mercado Cuatro"
 ]}
+      galleryImages={[
+        { url: "", alt: "Asuncion landmark 1", caption: "Asuncion landmark 1 - placeholder" },
+        { url: "", alt: "Asuncion landmark 2", caption: "Asuncion landmark 2 - placeholder" },
+        { url: "", alt: "Asuncion landmark 3", caption: "Asuncion landmark 3 - placeholder" },
+        { url: "", alt: "Asuncion landmark 4", caption: "Asuncion landmark 4 - placeholder" },
+        { url: "", alt: "Asuncion landmark 5", caption: "Asuncion landmark 5 - placeholder" },
+        { url: "", alt: "Asuncion landmark 6", caption: "Asuncion landmark 6 - placeholder" }
+      ]}
       attractions={[
       {
             "name": "Palacio de los López",

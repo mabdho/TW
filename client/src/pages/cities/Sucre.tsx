@@ -11,6 +11,14 @@ export const Sucre: React.FC = () => {
         "Parque Cretácico",
         "Convento de la Recoleta",
         "Mercado Central"]}
+      galleryImages={[
+        { url: "", alt: "Sucre landmark 1", caption: "Sucre landmark 1 - placeholder" },
+        { url: "", alt: "Sucre landmark 2", caption: "Sucre landmark 2 - placeholder" },
+        { url: "", alt: "Sucre landmark 3", caption: "Sucre landmark 3 - placeholder" },
+        { url: "", alt: "Sucre landmark 4", caption: "Sucre landmark 4 - placeholder" },
+        { url: "", alt: "Sucre landmark 5", caption: "Sucre landmark 5 - placeholder" },
+        { url: "", alt: "Sucre landmark 6", caption: "Sucre landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Casa de la Libertad",

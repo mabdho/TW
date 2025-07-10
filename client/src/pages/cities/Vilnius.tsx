@@ -11,6 +11,14 @@ export const Vilnius: React.FC = () => {
         "Vilnius Cathedral and Cathedral Square",
         "Trakai Island Castle",
         "Republic of Užupis"]}
+      galleryImages={[
+        { url: "", alt: "Vilnius landmark 1", caption: "Vilnius landmark 1 - placeholder" },
+        { url: "", alt: "Vilnius landmark 2", caption: "Vilnius landmark 2 - placeholder" },
+        { url: "", alt: "Vilnius landmark 3", caption: "Vilnius landmark 3 - placeholder" },
+        { url: "", alt: "Vilnius landmark 4", caption: "Vilnius landmark 4 - placeholder" },
+        { url: "", alt: "Vilnius landmark 5", caption: "Vilnius landmark 5 - placeholder" },
+        { url: "", alt: "Vilnius landmark 6", caption: "Vilnius landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Vilnius Old Town (Senamiestis)",

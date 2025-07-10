@@ -11,6 +11,14 @@ export const Savannah: React.FC = () => {
         "Wander Bonaventure Cemetery",
         "Experience River Street",
         "Tour the Mercer Williams House Museum"]}
+      galleryImages={[
+        { url: "", alt: "Savannah landmark 1", caption: "Savannah landmark 1 - placeholder" },
+        { url: "", alt: "Savannah landmark 2", caption: "Savannah landmark 2 - placeholder" },
+        { url: "", alt: "Savannah landmark 3", caption: "Savannah landmark 3 - placeholder" },
+        { url: "", alt: "Savannah landmark 4", caption: "Savannah landmark 4 - placeholder" },
+        { url: "", alt: "Savannah landmark 5", caption: "Savannah landmark 5 - placeholder" },
+        { url: "", alt: "Savannah landmark 6", caption: "Savannah landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Explore the Historic District & City Squares",

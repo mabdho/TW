@@ -11,6 +11,14 @@ export const Bandung: React.FC = () => {
         "Saung Angklung Udjo",
         "Jalan Braga",
         "Gedung Sate"]}
+      galleryImages={[
+        { url: "", alt: "Bandung landmark 1", caption: "Bandung landmark 1 - placeholder" },
+        { url: "", alt: "Bandung landmark 2", caption: "Bandung landmark 2 - placeholder" },
+        { url: "", alt: "Bandung landmark 3", caption: "Bandung landmark 3 - placeholder" },
+        { url: "", alt: "Bandung landmark 4", caption: "Bandung landmark 4 - placeholder" },
+        { url: "", alt: "Bandung landmark 5", caption: "Bandung landmark 5 - placeholder" },
+        { url: "", alt: "Bandung landmark 6", caption: "Bandung landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Kawah Putih (The White Crater)",

@@ -11,6 +11,14 @@ export const NewOrleans: React.FC = () => {
         "Visit The National WWII Museum",
         "Ride the St. Charles Streetcar",
         "Wander Through Jackson Square"]}
+      galleryImages={[
+        { url: "", alt: "NewOrleans landmark 1", caption: "NewOrleans landmark 1 - placeholder" },
+        { url: "", alt: "NewOrleans landmark 2", caption: "NewOrleans landmark 2 - placeholder" },
+        { url: "", alt: "NewOrleans landmark 3", caption: "NewOrleans landmark 3 - placeholder" },
+        { url: "", alt: "NewOrleans landmark 4", caption: "NewOrleans landmark 4 - placeholder" },
+        { url: "", alt: "NewOrleans landmark 5", caption: "NewOrleans landmark 5 - placeholder" },
+        { url: "", alt: "NewOrleans landmark 6", caption: "NewOrleans landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Explore the French Quarter",

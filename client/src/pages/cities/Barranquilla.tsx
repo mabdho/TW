@@ -11,6 +11,14 @@ export const Barranquilla: React.FC = () => {
         "Museo del Caribe Gabriel García Márquez",
         "La Ventana al Mundo",
         "Castillo de Salgar"]}
+      galleryImages={[
+        { url: "", alt: "Barranquilla landmark 1", caption: "Barranquilla landmark 1 - placeholder" },
+        { url: "", alt: "Barranquilla landmark 2", caption: "Barranquilla landmark 2 - placeholder" },
+        { url: "", alt: "Barranquilla landmark 3", caption: "Barranquilla landmark 3 - placeholder" },
+        { url: "", alt: "Barranquilla landmark 4", caption: "Barranquilla landmark 4 - placeholder" },
+        { url: "", alt: "Barranquilla landmark 5", caption: "Barranquilla landmark 5 - placeholder" },
+        { url: "", alt: "Barranquilla landmark 6", caption: "Barranquilla landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Carnaval de Barranquilla at Casa del Carnaval",

@@ -11,6 +11,14 @@ export const QuebecCity: React.FC = () => {
         "Plains of Abraham (Battlefields Park)",
         "Montmorency Falls Park",
         "Quartier Petit Champlain"]}
+      galleryImages={[
+        { url: "", alt: "QuebecCity landmark 1", caption: "QuebecCity landmark 1 - placeholder" },
+        { url: "", alt: "QuebecCity landmark 2", caption: "QuebecCity landmark 2 - placeholder" },
+        { url: "", alt: "QuebecCity landmark 3", caption: "QuebecCity landmark 3 - placeholder" },
+        { url: "", alt: "QuebecCity landmark 4", caption: "QuebecCity landmark 4 - placeholder" },
+        { url: "", alt: "QuebecCity landmark 5", caption: "QuebecCity landmark 5 - placeholder" },
+        { url: "", alt: "QuebecCity landmark 6", caption: "QuebecCity landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Old Quebec (Vieux-Québec)",

@@ -11,6 +11,14 @@ export const PortMoresby: React.FC = () => {
         "Varirata National Park",
         "Bomana War Cemetery",
         "Parliament House"]}
+      galleryImages={[
+        { url: "", alt: "PortMoresby landmark 1", caption: "PortMoresby landmark 1 - placeholder" },
+        { url: "", alt: "PortMoresby landmark 2", caption: "PortMoresby landmark 2 - placeholder" },
+        { url: "", alt: "PortMoresby landmark 3", caption: "PortMoresby landmark 3 - placeholder" },
+        { url: "", alt: "PortMoresby landmark 4", caption: "PortMoresby landmark 4 - placeholder" },
+        { url: "", alt: "PortMoresby landmark 5", caption: "PortMoresby landmark 5 - placeholder" },
+        { url: "", alt: "PortMoresby landmark 6", caption: "PortMoresby landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Port Moresby Nature Park",

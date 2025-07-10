@@ -11,6 +11,14 @@ export const SanAntonio: React.FC = () => {
         "San Antonio Missions National Historical Park",
         "Historic Market Square (El Mercado)",
         "Pearl District"]}
+      galleryImages={[
+        { url: "", alt: "SanAntonio landmark 1", caption: "SanAntonio landmark 1 - placeholder" },
+        { url: "", alt: "SanAntonio landmark 2", caption: "SanAntonio landmark 2 - placeholder" },
+        { url: "", alt: "SanAntonio landmark 3", caption: "SanAntonio landmark 3 - placeholder" },
+        { url: "", alt: "SanAntonio landmark 4", caption: "SanAntonio landmark 4 - placeholder" },
+        { url: "", alt: "SanAntonio landmark 5", caption: "SanAntonio landmark 5 - placeholder" },
+        { url: "", alt: "SanAntonio landmark 6", caption: "SanAntonio landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "The Alamo",

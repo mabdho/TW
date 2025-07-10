@@ -11,6 +11,14 @@ export const Oslo: React.FC = () => {
         "Munch Museum (MUNCH)",
         "Akershus Fortress (Akershus Festning)",
         "Museum of the Viking Age (Vikingtidsmuseet)"]}
+      galleryImages={[
+        { url: "", alt: "Oslo landmark 1", caption: "Oslo landmark 1 - placeholder" },
+        { url: "", alt: "Oslo landmark 2", caption: "Oslo landmark 2 - placeholder" },
+        { url: "", alt: "Oslo landmark 3", caption: "Oslo landmark 3 - placeholder" },
+        { url: "", alt: "Oslo landmark 4", caption: "Oslo landmark 4 - placeholder" },
+        { url: "", alt: "Oslo landmark 5", caption: "Oslo landmark 5 - placeholder" },
+        { url: "", alt: "Oslo landmark 6", caption: "Oslo landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Vigeland Sculpture Park (Vigelandsparken)",

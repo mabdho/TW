@@ -11,6 +11,14 @@ export const Gothenburg: React.FC = () => {
         "Haga District",
         "Universeum",
         "Gothenburg Museum of Art"]}
+      galleryImages={[
+        { url: "", alt: "Gothenburg landmark 1", caption: "Gothenburg landmark 1 - placeholder" },
+        { url: "", alt: "Gothenburg landmark 2", caption: "Gothenburg landmark 2 - placeholder" },
+        { url: "", alt: "Gothenburg landmark 3", caption: "Gothenburg landmark 3 - placeholder" },
+        { url: "", alt: "Gothenburg landmark 4", caption: "Gothenburg landmark 4 - placeholder" },
+        { url: "", alt: "Gothenburg landmark 5", caption: "Gothenburg landmark 5 - placeholder" },
+        { url: "", alt: "Gothenburg landmark 6", caption: "Gothenburg landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Gothenburg Archipelago",

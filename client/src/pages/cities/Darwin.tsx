@@ -11,6 +11,14 @@ export const Darwin: React.FC = () => {
         "Day Trip to Litchfield National Park",
         "Museum and Art Gallery of the Northern Territory (MAGNT)",
         "Darwin Waterfront Precinct"]}
+      galleryImages={[
+        { url: "", alt: "Darwin landmark 1", caption: "Darwin landmark 1 - placeholder" },
+        { url: "", alt: "Darwin landmark 2", caption: "Darwin landmark 2 - placeholder" },
+        { url: "", alt: "Darwin landmark 3", caption: "Darwin landmark 3 - placeholder" },
+        { url: "", alt: "Darwin landmark 4", caption: "Darwin landmark 4 - placeholder" },
+        { url: "", alt: "Darwin landmark 5", caption: "Darwin landmark 5 - placeholder" },
+        { url: "", alt: "Darwin landmark 6", caption: "Darwin landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Mindil Beach Sunset Market",

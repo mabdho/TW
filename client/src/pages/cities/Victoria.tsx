@@ -11,6 +11,14 @@ export const Victoria: React.FC = () => {
         "Inner Harbour",
         "Whale Watching Tour",
         "Craigdarroch Castle"]}
+      galleryImages={[
+        { url: "", alt: "Victoria landmark 1", caption: "Victoria landmark 1 - placeholder" },
+        { url: "", alt: "Victoria landmark 2", caption: "Victoria landmark 2 - placeholder" },
+        { url: "", alt: "Victoria landmark 3", caption: "Victoria landmark 3 - placeholder" },
+        { url: "", alt: "Victoria landmark 4", caption: "Victoria landmark 4 - placeholder" },
+        { url: "", alt: "Victoria landmark 5", caption: "Victoria landmark 5 - placeholder" },
+        { url: "", alt: "Victoria landmark 6", caption: "Victoria landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "The Butchart Gardens",

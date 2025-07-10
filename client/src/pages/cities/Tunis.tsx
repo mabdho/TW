@@ -11,6 +11,14 @@ export const Tunis: React.FC = () => {
         "Ruins of Carthage",
         "Sidi Bou Said",
         "Zitouna Mosque"]}
+      galleryImages={[
+        { url: "", alt: "Tunis landmark 1", caption: "Tunis landmark 1 - placeholder" },
+        { url: "", alt: "Tunis landmark 2", caption: "Tunis landmark 2 - placeholder" },
+        { url: "", alt: "Tunis landmark 3", caption: "Tunis landmark 3 - placeholder" },
+        { url: "", alt: "Tunis landmark 4", caption: "Tunis landmark 4 - placeholder" },
+        { url: "", alt: "Tunis landmark 5", caption: "Tunis landmark 5 - placeholder" },
+        { url: "", alt: "Tunis landmark 6", caption: "Tunis landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Medina of Tunis",

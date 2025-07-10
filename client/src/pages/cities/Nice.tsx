@@ -11,6 +11,14 @@ export const Nice: React.FC = () => {
         "Castle Hill (Colline du Château)",
         "Marc Chagall National Museum",
         "Cours Saleya Market"]}
+      galleryImages={[
+        { url: "", alt: "Nice landmark 1", caption: "Nice landmark 1 - placeholder" },
+        { url: "", alt: "Nice landmark 2", caption: "Nice landmark 2 - placeholder" },
+        { url: "", alt: "Nice landmark 3", caption: "Nice landmark 3 - placeholder" },
+        { url: "", alt: "Nice landmark 4", caption: "Nice landmark 4 - placeholder" },
+        { url: "", alt: "Nice landmark 5", caption: "Nice landmark 5 - placeholder" },
+        { url: "", alt: "Nice landmark 6", caption: "Nice landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Promenade des Anglais",

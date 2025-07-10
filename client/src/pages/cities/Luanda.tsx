@@ -11,6 +11,14 @@ export const Luanda: React.FC = () => {
         "Ilha do Cabo (Luanda Island)",
         "National Museum of Slavery",
         "Miradouro da Lua"]}
+      galleryImages={[
+        { url: "", alt: "Luanda landmark 1", caption: "Luanda landmark 1 - placeholder" },
+        { url: "", alt: "Luanda landmark 2", caption: "Luanda landmark 2 - placeholder" },
+        { url: "", alt: "Luanda landmark 3", caption: "Luanda landmark 3 - placeholder" },
+        { url: "", alt: "Luanda landmark 4", caption: "Luanda landmark 4 - placeholder" },
+        { url: "", alt: "Luanda landmark 5", caption: "Luanda landmark 5 - placeholder" },
+        { url: "", alt: "Luanda landmark 6", caption: "Luanda landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Mausoleum of Agostinho Neto",

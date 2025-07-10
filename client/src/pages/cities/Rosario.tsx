@@ -11,6 +11,14 @@ export const Rosario: React.FC = () => {
         "Parque de la Independencia",
         "Museo de Arte Contemporáneo de Rosario (MACRO)",
         "Teatro El Círculo"]}
+      galleryImages={[
+        { url: "", alt: "Rosario landmark 1", caption: "Rosario landmark 1 - placeholder" },
+        { url: "", alt: "Rosario landmark 2", caption: "Rosario landmark 2 - placeholder" },
+        { url: "", alt: "Rosario landmark 3", caption: "Rosario landmark 3 - placeholder" },
+        { url: "", alt: "Rosario landmark 4", caption: "Rosario landmark 4 - placeholder" },
+        { url: "", alt: "Rosario landmark 5", caption: "Rosario landmark 5 - placeholder" },
+        { url: "", alt: "Rosario landmark 6", caption: "Rosario landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Monumento Nacional a la Bandera",

@@ -11,6 +11,14 @@ export const Tallinn: React.FC = () => {
         "Kadriorg Palace and Park",
         "Lennusadam (Seaplane Harbour)",
         "Telliskivi Creative City"]}
+      galleryImages={[
+        { url: "", alt: "Tallinn landmark 1", caption: "Tallinn landmark 1 - placeholder" },
+        { url: "", alt: "Tallinn landmark 2", caption: "Tallinn landmark 2 - placeholder" },
+        { url: "", alt: "Tallinn landmark 3", caption: "Tallinn landmark 3 - placeholder" },
+        { url: "", alt: "Tallinn landmark 4", caption: "Tallinn landmark 4 - placeholder" },
+        { url: "", alt: "Tallinn landmark 5", caption: "Tallinn landmark 5 - placeholder" },
+        { url: "", alt: "Tallinn landmark 6", caption: "Tallinn landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Tallinn Old Town (Vanalinn)",

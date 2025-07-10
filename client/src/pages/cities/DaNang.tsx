@@ -11,6 +11,14 @@ export const DaNang: React.FC = () => {
         "My Khe Beach",
         "Dragon Bridge (Cau Rong)",
         "Hoi An Ancient Town (Day Trip)"]}
+      galleryImages={[
+        { url: "", alt: "DaNang landmark 1", caption: "DaNang landmark 1 - placeholder" },
+        { url: "", alt: "DaNang landmark 2", caption: "DaNang landmark 2 - placeholder" },
+        { url: "", alt: "DaNang landmark 3", caption: "DaNang landmark 3 - placeholder" },
+        { url: "", alt: "DaNang landmark 4", caption: "DaNang landmark 4 - placeholder" },
+        { url: "", alt: "DaNang landmark 5", caption: "DaNang landmark 5 - placeholder" },
+        { url: "", alt: "DaNang landmark 6", caption: "DaNang landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "The Marble Mountains (Ngu Hanh Son)",

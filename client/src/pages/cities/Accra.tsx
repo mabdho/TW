@@ -11,6 +11,14 @@ export const Accra: React.FC = () => {
         "Jamestown Community and Lighthouse",
         "Makola Market",
         "Artists Alliance Gallery"]}
+      galleryImages={[
+        { url: "", alt: "Accra landmark 1", caption: "Accra landmark 1 - placeholder" },
+        { url: "", alt: "Accra landmark 2", caption: "Accra landmark 2 - placeholder" },
+        { url: "", alt: "Accra landmark 3", caption: "Accra landmark 3 - placeholder" },
+        { url: "", alt: "Accra landmark 4", caption: "Accra landmark 4 - placeholder" },
+        { url: "", alt: "Accra landmark 5", caption: "Accra landmark 5 - placeholder" },
+        { url: "", alt: "Accra landmark 6", caption: "Accra landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Kwame Nkrumah Memorial Park & Mausoleum",

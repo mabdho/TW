@@ -11,6 +11,14 @@ export const Penang: React.FC = () => {
         "Kek Lok Si Temple",
         "Street Art in George Town",
         "Cheong Fatt Tze Mansion (The Blue Mansion)"]}
+      galleryImages={[
+        { url: "", alt: "Penang landmark 1", caption: "Penang landmark 1 - placeholder" },
+        { url: "", alt: "Penang landmark 2", caption: "Penang landmark 2 - placeholder" },
+        { url: "", alt: "Penang landmark 3", caption: "Penang landmark 3 - placeholder" },
+        { url: "", alt: "Penang landmark 4", caption: "Penang landmark 4 - placeholder" },
+        { url: "", alt: "Penang landmark 5", caption: "Penang landmark 5 - placeholder" },
+        { url: "", alt: "Penang landmark 6", caption: "Penang landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "George Town UNESCO World Heritage Site",

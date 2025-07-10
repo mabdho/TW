@@ -11,6 +11,14 @@ export const Brno: React.FC = () => {
         "Villa Tugendhat",
         "Brno Ossuary at the Church of St. James",
         "Old Town Hall (Stará radnice)"]}
+      galleryImages={[
+        { url: "", alt: "Brno landmark 1", caption: "Brno landmark 1 - placeholder" },
+        { url: "", alt: "Brno landmark 2", caption: "Brno landmark 2 - placeholder" },
+        { url: "", alt: "Brno landmark 3", caption: "Brno landmark 3 - placeholder" },
+        { url: "", alt: "Brno landmark 4", caption: "Brno landmark 4 - placeholder" },
+        { url: "", alt: "Brno landmark 5", caption: "Brno landmark 5 - placeholder" },
+        { url: "", alt: "Brno landmark 6", caption: "Brno landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Špilberk Castle",

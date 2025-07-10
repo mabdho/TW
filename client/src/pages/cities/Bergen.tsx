@@ -11,6 +11,14 @@ export const Bergen: React.FC = () => {
         "Bergen Fish Market (Fisketorget)",
         "Fjord Cruise from Bergen",
         "KODE Art Museums of Bergen"]}
+      galleryImages={[
+        { url: "", alt: "Bergen landmark 1", caption: "Bergen landmark 1 - placeholder" },
+        { url: "", alt: "Bergen landmark 2", caption: "Bergen landmark 2 - placeholder" },
+        { url: "", alt: "Bergen landmark 3", caption: "Bergen landmark 3 - placeholder" },
+        { url: "", alt: "Bergen landmark 4", caption: "Bergen landmark 4 - placeholder" },
+        { url: "", alt: "Bergen landmark 5", caption: "Bergen landmark 5 - placeholder" },
+        { url: "", alt: "Bergen landmark 6", caption: "Bergen landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Bryggen Hanseatic Wharf",

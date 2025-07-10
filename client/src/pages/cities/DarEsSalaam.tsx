@@ -11,6 +11,14 @@ export const DarEsSalaam: React.FC = () => {
         "Kariakoo Market",
         "National Museum and House of Culture",
         "Mwenge Woodcarvers Market"]}
+      galleryImages={[
+        { url: "", alt: "DarEsSalaam landmark 1", caption: "DarEsSalaam landmark 1 - placeholder" },
+        { url: "", alt: "DarEsSalaam landmark 2", caption: "DarEsSalaam landmark 2 - placeholder" },
+        { url: "", alt: "DarEsSalaam landmark 3", caption: "DarEsSalaam landmark 3 - placeholder" },
+        { url: "", alt: "DarEsSalaam landmark 4", caption: "DarEsSalaam landmark 4 - placeholder" },
+        { url: "", alt: "DarEsSalaam landmark 5", caption: "DarEsSalaam landmark 5 - placeholder" },
+        { url: "", alt: "DarEsSalaam landmark 6", caption: "DarEsSalaam landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Kivukoni Fish Market",

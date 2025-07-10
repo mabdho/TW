@@ -11,6 +11,14 @@ export const SaltLakeCity: React.FC = () => {
         "Natural History Museum of Utah",
         "Utah State Capitol Building",
         "Park City & Utah Olympic Park"]}
+      galleryImages={[
+        { url: "", alt: "SaltLakeCity landmark 1", caption: "SaltLakeCity landmark 1 - placeholder" },
+        { url: "", alt: "SaltLakeCity landmark 2", caption: "SaltLakeCity landmark 2 - placeholder" },
+        { url: "", alt: "SaltLakeCity landmark 3", caption: "SaltLakeCity landmark 3 - placeholder" },
+        { url: "", alt: "SaltLakeCity landmark 4", caption: "SaltLakeCity landmark 4 - placeholder" },
+        { url: "", alt: "SaltLakeCity landmark 5", caption: "SaltLakeCity landmark 5 - placeholder" },
+        { url: "", alt: "SaltLakeCity landmark 6", caption: "SaltLakeCity landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Temple Square",

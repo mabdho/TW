@@ -11,6 +11,14 @@ export const Tampere: React.FC = () => {
         "Vapriikki Museum Centre",
         "Tampere Cathedral",
         "Finlayson Area"]}
+      galleryImages={[
+        { url: "", alt: "Tampere landmark 1", caption: "Tampere landmark 1 - placeholder" },
+        { url: "", alt: "Tampere landmark 2", caption: "Tampere landmark 2 - placeholder" },
+        { url: "", alt: "Tampere landmark 3", caption: "Tampere landmark 3 - placeholder" },
+        { url: "", alt: "Tampere landmark 4", caption: "Tampere landmark 4 - placeholder" },
+        { url: "", alt: "Tampere landmark 5", caption: "Tampere landmark 5 - placeholder" },
+        { url: "", alt: "Tampere landmark 6", caption: "Tampere landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Pyynikki Observation Tower & Café",

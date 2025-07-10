@@ -11,6 +11,14 @@ export const Busan: React.FC = () => {
         "Jagalchi Fish Market",
         "Haedong Yonggungsa Temple",
         "Taejongdae Resort Park"]}
+      galleryImages={[
+        { url: "", alt: "Busan landmark 1", caption: "Busan landmark 1 - placeholder" },
+        { url: "", alt: "Busan landmark 2", caption: "Busan landmark 2 - placeholder" },
+        { url: "", alt: "Busan landmark 3", caption: "Busan landmark 3 - placeholder" },
+        { url: "", alt: "Busan landmark 4", caption: "Busan landmark 4 - placeholder" },
+        { url: "", alt: "Busan landmark 5", caption: "Busan landmark 5 - placeholder" },
+        { url: "", alt: "Busan landmark 6", caption: "Busan landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Gamcheon Culture Village",

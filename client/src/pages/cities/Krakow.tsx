@@ -11,6 +11,14 @@ export const Krakow: React.FC = () => {
         "Auschwitz-Birkenau Memorial and Museum",
         "Wieliczka Salt Mine",
         "Kazimierz (The Old Jewish Quarter)"]}
+      galleryImages={[
+        { url: "", alt: "Krakow landmark 1", caption: "Krakow landmark 1 - placeholder" },
+        { url: "", alt: "Krakow landmark 2", caption: "Krakow landmark 2 - placeholder" },
+        { url: "", alt: "Krakow landmark 3", caption: "Krakow landmark 3 - placeholder" },
+        { url: "", alt: "Krakow landmark 4", caption: "Krakow landmark 4 - placeholder" },
+        { url: "", alt: "Krakow landmark 5", caption: "Krakow landmark 5 - placeholder" },
+        { url: "", alt: "Krakow landmark 6", caption: "Krakow landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Main Market Square (Rynek Główny)",

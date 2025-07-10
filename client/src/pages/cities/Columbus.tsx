@@ -11,6 +11,14 @@ export const Columbus: React.FC = () => {
         "Short North Arts District",
         "COSI (Center of Science and Industry)",
         "Scioto Mile"]}
+      galleryImages={[
+        { url: "", alt: "Columbus landmark 1", caption: "Columbus landmark 1 - placeholder" },
+        { url: "", alt: "Columbus landmark 2", caption: "Columbus landmark 2 - placeholder" },
+        { url: "", alt: "Columbus landmark 3", caption: "Columbus landmark 3 - placeholder" },
+        { url: "", alt: "Columbus landmark 4", caption: "Columbus landmark 4 - placeholder" },
+        { url: "", alt: "Columbus landmark 5", caption: "Columbus landmark 5 - placeholder" },
+        { url: "", alt: "Columbus landmark 6", caption: "Columbus landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "German Village",

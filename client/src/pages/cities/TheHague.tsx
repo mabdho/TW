@@ -11,6 +11,14 @@ export const TheHague: React.FC = () => {
         "Peace Palace (Vredespaleis)",
         "Scheveningen Beach & Pier",
         "Madurodam"]}
+      galleryImages={[
+        { url: "", alt: "TheHague landmark 1", caption: "TheHague landmark 1 - placeholder" },
+        { url: "", alt: "TheHague landmark 2", caption: "TheHague landmark 2 - placeholder" },
+        { url: "", alt: "TheHague landmark 3", caption: "TheHague landmark 3 - placeholder" },
+        { url: "", alt: "TheHague landmark 4", caption: "TheHague landmark 4 - placeholder" },
+        { url: "", alt: "TheHague landmark 5", caption: "TheHague landmark 5 - placeholder" },
+        { url: "", alt: "TheHague landmark 6", caption: "TheHague landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Mauritshuis",

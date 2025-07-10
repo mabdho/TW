@@ -11,6 +11,14 @@ export const Stockholm: React.FC = () => {
         "Skansen",
         "The Royal Palace (Kungliga Slottet)",
         "Djurgården Island"]}
+      galleryImages={[
+        { url: "", alt: "Stockholm landmark 1", caption: "Stockholm landmark 1 - placeholder" },
+        { url: "", alt: "Stockholm landmark 2", caption: "Stockholm landmark 2 - placeholder" },
+        { url: "", alt: "Stockholm landmark 3", caption: "Stockholm landmark 3 - placeholder" },
+        { url: "", alt: "Stockholm landmark 4", caption: "Stockholm landmark 4 - placeholder" },
+        { url: "", alt: "Stockholm landmark 5", caption: "Stockholm landmark 5 - placeholder" },
+        { url: "", alt: "Stockholm landmark 6", caption: "Stockholm landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Gamla Stan (Old Town)",

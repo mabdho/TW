@@ -11,6 +11,14 @@ export const Johannesburg: React.FC = () => {
         "Constitution Hill Human Rights Precinct",
         "Cradle of Humankind",
         "Maboneng Precinct"]}
+      galleryImages={[
+        { url: "", alt: "Johannesburg landmark 1", caption: "Johannesburg landmark 1 - placeholder" },
+        { url: "", alt: "Johannesburg landmark 2", caption: "Johannesburg landmark 2 - placeholder" },
+        { url: "", alt: "Johannesburg landmark 3", caption: "Johannesburg landmark 3 - placeholder" },
+        { url: "", alt: "Johannesburg landmark 4", caption: "Johannesburg landmark 4 - placeholder" },
+        { url: "", alt: "Johannesburg landmark 5", caption: "Johannesburg landmark 5 - placeholder" },
+        { url: "", alt: "Johannesburg landmark 6", caption: "Johannesburg landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Apartheid Museum",

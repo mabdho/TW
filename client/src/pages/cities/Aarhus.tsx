@@ -11,6 +11,14 @@ export const Aarhus: React.FC = () => {
         "Moesgaard Museum (MOMU)",
         "The Latin Quarter (Latinerkvarteret)",
         "The Infinite Bridge (Den Uendelige Bro)"]}
+      galleryImages={[
+        { url: "", alt: "Aarhus landmark 1", caption: "Aarhus landmark 1 - placeholder" },
+        { url: "", alt: "Aarhus landmark 2", caption: "Aarhus landmark 2 - placeholder" },
+        { url: "", alt: "Aarhus landmark 3", caption: "Aarhus landmark 3 - placeholder" },
+        { url: "", alt: "Aarhus landmark 4", caption: "Aarhus landmark 4 - placeholder" },
+        { url: "", alt: "Aarhus landmark 5", caption: "Aarhus landmark 5 - placeholder" },
+        { url: "", alt: "Aarhus landmark 6", caption: "Aarhus landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "ARoS Aarhus Art Museum",

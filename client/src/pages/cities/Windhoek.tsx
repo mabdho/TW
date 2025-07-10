@@ -11,6 +11,14 @@ export const Windhoek: React.FC = () => {
         "Katutura Township Tour",
         "Namibia Craft Centre",
         "Daan Viljoen Game Park"]}
+      galleryImages={[
+        { url: "", alt: "Windhoek landmark 1", caption: "Windhoek landmark 1 - placeholder" },
+        { url: "", alt: "Windhoek landmark 2", caption: "Windhoek landmark 2 - placeholder" },
+        { url: "", alt: "Windhoek landmark 3", caption: "Windhoek landmark 3 - placeholder" },
+        { url: "", alt: "Windhoek landmark 4", caption: "Windhoek landmark 4 - placeholder" },
+        { url: "", alt: "Windhoek landmark 5", caption: "Windhoek landmark 5 - placeholder" },
+        { url: "", alt: "Windhoek landmark 6", caption: "Windhoek landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Christuskirche (Christ Church)",

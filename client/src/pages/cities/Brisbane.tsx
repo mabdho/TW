@@ -11,6 +11,14 @@ export const Brisbane: React.FC = () => {
         "Story Bridge Adventure Climb",
         "Queensland Art Gallery & Gallery of Modern Art (QAGOMA)",
         "Mount Coot-tha Lookout"]}
+      galleryImages={[
+        { url: "", alt: "Brisbane landmark 1", caption: "Brisbane landmark 1 - placeholder" },
+        { url: "", alt: "Brisbane landmark 2", caption: "Brisbane landmark 2 - placeholder" },
+        { url: "", alt: "Brisbane landmark 3", caption: "Brisbane landmark 3 - placeholder" },
+        { url: "", alt: "Brisbane landmark 4", caption: "Brisbane landmark 4 - placeholder" },
+        { url: "", alt: "Brisbane landmark 5", caption: "Brisbane landmark 5 - placeholder" },
+        { url: "", alt: "Brisbane landmark 6", caption: "Brisbane landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "South Bank Parklands",

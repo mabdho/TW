@@ -11,6 +11,14 @@ export const Bilbao: React.FC = () => {
         "Mercado de la Ribera",
         "Vizcaya Bridge (Puente Colgante)",
         "Mount Artxanda Funicular"]}
+      galleryImages={[
+        { url: "", alt: "Bilbao landmark 1", caption: "Bilbao landmark 1 - placeholder" },
+        { url: "", alt: "Bilbao landmark 2", caption: "Bilbao landmark 2 - placeholder" },
+        { url: "", alt: "Bilbao landmark 3", caption: "Bilbao landmark 3 - placeholder" },
+        { url: "", alt: "Bilbao landmark 4", caption: "Bilbao landmark 4 - placeholder" },
+        { url: "", alt: "Bilbao landmark 5", caption: "Bilbao landmark 5 - placeholder" },
+        { url: "", alt: "Bilbao landmark 6", caption: "Bilbao landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Guggenheim Museum Bilbao",

@@ -11,6 +11,14 @@ export const Hanoi: React.FC = () => {
         "Temple of Literature (Văn Miếu - Quốc Tử Giám)",
         "Ho Chi Minh Mausoleum Complex",
         "Vietnam Museum of Ethnology"]}
+      galleryImages={[
+        { url: "", alt: "Hanoi landmark 1", caption: "Hanoi landmark 1 - placeholder" },
+        { url: "", alt: "Hanoi landmark 2", caption: "Hanoi landmark 2 - placeholder" },
+        { url: "", alt: "Hanoi landmark 3", caption: "Hanoi landmark 3 - placeholder" },
+        { url: "", alt: "Hanoi landmark 4", caption: "Hanoi landmark 4 - placeholder" },
+        { url: "", alt: "Hanoi landmark 5", caption: "Hanoi landmark 5 - placeholder" },
+        { url: "", alt: "Hanoi landmark 6", caption: "Hanoi landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Hanoi Old Quarter",

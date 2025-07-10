@@ -11,6 +11,14 @@ export const Halifax: React.FC = () => {
         "Halifax Citadel National Historic Site",
         "Canadian Museum of Immigration at Pier 21",
         "Halifax Public Gardens"]}
+      galleryImages={[
+        { url: "", alt: "Halifax landmark 1", caption: "Halifax landmark 1 - placeholder" },
+        { url: "", alt: "Halifax landmark 2", caption: "Halifax landmark 2 - placeholder" },
+        { url: "", alt: "Halifax landmark 3", caption: "Halifax landmark 3 - placeholder" },
+        { url: "", alt: "Halifax landmark 4", caption: "Halifax landmark 4 - placeholder" },
+        { url: "", alt: "Halifax landmark 5", caption: "Halifax landmark 5 - placeholder" },
+        { url: "", alt: "Halifax landmark 6", caption: "Halifax landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Halifax Waterfront",

@@ -11,6 +11,14 @@ export const Marrakech: React.FC = () => {
         "Bahia Palace",
         "The Souks of Marrakech",
         "Koutoubia Mosque"]}
+      galleryImages={[
+        { url: "", alt: "Marrakech landmark 1", caption: "Marrakech landmark 1 - placeholder" },
+        { url: "", alt: "Marrakech landmark 2", caption: "Marrakech landmark 2 - placeholder" },
+        { url: "", alt: "Marrakech landmark 3", caption: "Marrakech landmark 3 - placeholder" },
+        { url: "", alt: "Marrakech landmark 4", caption: "Marrakech landmark 4 - placeholder" },
+        { url: "", alt: "Marrakech landmark 5", caption: "Marrakech landmark 5 - placeholder" },
+        { url: "", alt: "Marrakech landmark 6", caption: "Marrakech landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Jemaa el-Fnaa Square",

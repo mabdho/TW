@@ -11,6 +11,14 @@ export const ChiangMai: React.FC = () => {
         "Explore the Chiang Mai Old City Temples",
         "Doi Inthanon National Park",
         "Sunday Walking Street Market (Tha Pae Gate)"]}
+      galleryImages={[
+        { url: "", alt: "ChiangMai landmark 1", caption: "ChiangMai landmark 1 - placeholder" },
+        { url: "", alt: "ChiangMai landmark 2", caption: "ChiangMai landmark 2 - placeholder" },
+        { url: "", alt: "ChiangMai landmark 3", caption: "ChiangMai landmark 3 - placeholder" },
+        { url: "", alt: "ChiangMai landmark 4", caption: "ChiangMai landmark 4 - placeholder" },
+        { url: "", alt: "ChiangMai landmark 5", caption: "ChiangMai landmark 5 - placeholder" },
+        { url: "", alt: "ChiangMai landmark 6", caption: "ChiangMai landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Wat Phra That Doi Suthep",

@@ -11,6 +11,14 @@ export const Cartagena: React.FC = () => {
         "Getsemaní Neighborhood",
         "Rosario Islands (Islas del Rosario)",
         "Puerta del Reloj (Clock Tower)"]}
+      galleryImages={[
+        { url: "", alt: "Cartagena landmark 1", caption: "Cartagena landmark 1 - placeholder" },
+        { url: "", alt: "Cartagena landmark 2", caption: "Cartagena landmark 2 - placeholder" },
+        { url: "", alt: "Cartagena landmark 3", caption: "Cartagena landmark 3 - placeholder" },
+        { url: "", alt: "Cartagena landmark 4", caption: "Cartagena landmark 4 - placeholder" },
+        { url: "", alt: "Cartagena landmark 5", caption: "Cartagena landmark 5 - placeholder" },
+        { url: "", alt: "Cartagena landmark 6", caption: "Cartagena landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Walled City (Ciudad Amurallada)",

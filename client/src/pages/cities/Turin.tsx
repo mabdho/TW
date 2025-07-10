@@ -11,6 +11,14 @@ export const Turin: React.FC = () => {
         "Royal Palace of Turin (Palazzo Reale)",
         "Turin Cathedral & Chapel of the Holy Shroud",
         "Quadrilatero Romano"]}
+      galleryImages={[
+        { url: "", alt: "Turin landmark 1", caption: "Turin landmark 1 - placeholder" },
+        { url: "", alt: "Turin landmark 2", caption: "Turin landmark 2 - placeholder" },
+        { url: "", alt: "Turin landmark 3", caption: "Turin landmark 3 - placeholder" },
+        { url: "", alt: "Turin landmark 4", caption: "Turin landmark 4 - placeholder" },
+        { url: "", alt: "Turin landmark 5", caption: "Turin landmark 5 - placeholder" },
+        { url: "", alt: "Turin landmark 6", caption: "Turin landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Mole Antonelliana & National Cinema Museum",

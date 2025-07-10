@@ -11,6 +11,14 @@ export const KansasCity: React.FC = () => {
         "Union Station",
         "Indulge in Kansas City Barbecue",
         "Country Club Plaza"]}
+      galleryImages={[
+        { url: "", alt: "KansasCity landmark 1", caption: "KansasCity landmark 1 - placeholder" },
+        { url: "", alt: "KansasCity landmark 2", caption: "KansasCity landmark 2 - placeholder" },
+        { url: "", alt: "KansasCity landmark 3", caption: "KansasCity landmark 3 - placeholder" },
+        { url: "", alt: "KansasCity landmark 4", caption: "KansasCity landmark 4 - placeholder" },
+        { url: "", alt: "KansasCity landmark 5", caption: "KansasCity landmark 5 - placeholder" },
+        { url: "", alt: "KansasCity landmark 6", caption: "KansasCity landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "National WWI Museum and Memorial",

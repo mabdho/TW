@@ -11,6 +11,14 @@ export const Yogyakarta: React.FC = () => {
         "The Kraton (Sultan's Palace)",
         "Mount Merapi",
         "Taman Sari Water Castle"]}
+      galleryImages={[
+        { url: "", alt: "Yogyakarta landmark 1", caption: "Yogyakarta landmark 1 - placeholder" },
+        { url: "", alt: "Yogyakarta landmark 2", caption: "Yogyakarta landmark 2 - placeholder" },
+        { url: "", alt: "Yogyakarta landmark 3", caption: "Yogyakarta landmark 3 - placeholder" },
+        { url: "", alt: "Yogyakarta landmark 4", caption: "Yogyakarta landmark 4 - placeholder" },
+        { url: "", alt: "Yogyakarta landmark 5", caption: "Yogyakarta landmark 5 - placeholder" },
+        { url: "", alt: "Yogyakarta landmark 6", caption: "Yogyakarta landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Borobudur Temple",

@@ -11,6 +11,14 @@ export const Casablanca: React.FC = () => {
         "Old Medina (Ancienne Medina)",
         "La Corniche",
         "Place Mohammed V"]}
+      galleryImages={[
+        { url: "", alt: "Casablanca landmark 1", caption: "Casablanca landmark 1 - placeholder" },
+        { url: "", alt: "Casablanca landmark 2", caption: "Casablanca landmark 2 - placeholder" },
+        { url: "", alt: "Casablanca landmark 3", caption: "Casablanca landmark 3 - placeholder" },
+        { url: "", alt: "Casablanca landmark 4", caption: "Casablanca landmark 4 - placeholder" },
+        { url: "", alt: "Casablanca landmark 5", caption: "Casablanca landmark 5 - placeholder" },
+        { url: "", alt: "Casablanca landmark 6", caption: "Casablanca landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Hassan II Mosque",

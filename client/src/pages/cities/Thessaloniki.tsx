@@ -11,6 +11,14 @@ export const Thessaloniki: React.FC = () => {
         "Ano Poli (Upper Town)",
         "Archaeological Museum of Thessaloniki",
         "Aristotelous Square"]}
+      galleryImages={[
+        { url: "", alt: "Thessaloniki landmark 1", caption: "Thessaloniki landmark 1 - placeholder" },
+        { url: "", alt: "Thessaloniki landmark 2", caption: "Thessaloniki landmark 2 - placeholder" },
+        { url: "", alt: "Thessaloniki landmark 3", caption: "Thessaloniki landmark 3 - placeholder" },
+        { url: "", alt: "Thessaloniki landmark 4", caption: "Thessaloniki landmark 4 - placeholder" },
+        { url: "", alt: "Thessaloniki landmark 5", caption: "Thessaloniki landmark 5 - placeholder" },
+        { url: "", alt: "Thessaloniki landmark 6", caption: "Thessaloniki landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "The White Tower",

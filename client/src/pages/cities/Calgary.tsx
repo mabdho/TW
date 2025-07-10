@@ -11,6 +11,14 @@ export const Calgary: React.FC = () => {
         "Studio Bell, home of the National Music Centre",
         "Heritage Park Historical Village",
         "Day Trip to Banff National Park"]}
+      galleryImages={[
+        { url: "", alt: "Calgary landmark 1", caption: "Calgary landmark 1 - placeholder" },
+        { url: "", alt: "Calgary landmark 2", caption: "Calgary landmark 2 - placeholder" },
+        { url: "", alt: "Calgary landmark 3", caption: "Calgary landmark 3 - placeholder" },
+        { url: "", alt: "Calgary landmark 4", caption: "Calgary landmark 4 - placeholder" },
+        { url: "", alt: "Calgary landmark 5", caption: "Calgary landmark 5 - placeholder" },
+        { url: "", alt: "Calgary landmark 6", caption: "Calgary landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Calgary Tower",

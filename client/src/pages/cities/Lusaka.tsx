@@ -11,6 +11,14 @@ export const Lusaka: React.FC = () => {
         "Kabwata Cultural Village",
         "Sunday Crafts Market",
         "Kalimba Reptile Park"]}
+      galleryImages={[
+        { url: "", alt: "Lusaka landmark 1", caption: "Lusaka landmark 1 - placeholder" },
+        { url: "", alt: "Lusaka landmark 2", caption: "Lusaka landmark 2 - placeholder" },
+        { url: "", alt: "Lusaka landmark 3", caption: "Lusaka landmark 3 - placeholder" },
+        { url: "", alt: "Lusaka landmark 4", caption: "Lusaka landmark 4 - placeholder" },
+        { url: "", alt: "Lusaka landmark 5", caption: "Lusaka landmark 5 - placeholder" },
+        { url: "", alt: "Lusaka landmark 6", caption: "Lusaka landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Lilayi Elephant Nursery",

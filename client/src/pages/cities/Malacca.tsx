@@ -11,6 +11,14 @@ export const Malacca: React.FC = () => {
         "St. Paul's Hill & Church Ruins",
         "A Famosa Fort",
         "Malacca River Cruise"]}
+      galleryImages={[
+        { url: "", alt: "Malacca landmark 1", caption: "Malacca landmark 1 - placeholder" },
+        { url: "", alt: "Malacca landmark 2", caption: "Malacca landmark 2 - placeholder" },
+        { url: "", alt: "Malacca landmark 3", caption: "Malacca landmark 3 - placeholder" },
+        { url: "", alt: "Malacca landmark 4", caption: "Malacca landmark 4 - placeholder" },
+        { url: "", alt: "Malacca landmark 5", caption: "Malacca landmark 5 - placeholder" },
+        { url: "", alt: "Malacca landmark 6", caption: "Malacca landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Jonker Street Night Market",

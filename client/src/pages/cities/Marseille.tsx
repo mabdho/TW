@@ -11,6 +11,14 @@ export const Marseille: React.FC = () => {
         "Parc National des Calanques",
         "Le Panier (Old Town)",
         "Mucem - Museum of European and Mediterranean Civilisations"]}
+      galleryImages={[
+        { url: "", alt: "Marseille landmark 1", caption: "Marseille landmark 1 - placeholder" },
+        { url: "", alt: "Marseille landmark 2", caption: "Marseille landmark 2 - placeholder" },
+        { url: "", alt: "Marseille landmark 3", caption: "Marseille landmark 3 - placeholder" },
+        { url: "", alt: "Marseille landmark 4", caption: "Marseille landmark 4 - placeholder" },
+        { url: "", alt: "Marseille landmark 5", caption: "Marseille landmark 5 - placeholder" },
+        { url: "", alt: "Marseille landmark 6", caption: "Marseille landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Vieux-Port (Old Port)",

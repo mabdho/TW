@@ -11,6 +11,14 @@ export const SanJuan: React.FC = () => {
         "El Yunque National Forest",
         "Bioluminescent Bay Tour (Laguna Grande)",
         "La Placita de Santurce"]}
+      galleryImages={[
+        { url: "", alt: "SanJuan landmark 1", caption: "SanJuan landmark 1 - placeholder" },
+        { url: "", alt: "SanJuan landmark 2", caption: "SanJuan landmark 2 - placeholder" },
+        { url: "", alt: "SanJuan landmark 3", caption: "SanJuan landmark 3 - placeholder" },
+        { url: "", alt: "SanJuan landmark 4", caption: "SanJuan landmark 4 - placeholder" },
+        { url: "", alt: "SanJuan landmark 5", caption: "SanJuan landmark 5 - placeholder" },
+        { url: "", alt: "SanJuan landmark 6", caption: "SanJuan landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Old San Juan (Viejo San Juan)",

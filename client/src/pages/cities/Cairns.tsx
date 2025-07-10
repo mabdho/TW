@@ -11,6 +11,14 @@ export const Cairns: React.FC = () => {
         "Kuranda Scenic Railway",
         "Skyrail Rainforest Cableway",
         "Cairns Esplanade Lagoon"]}
+      galleryImages={[
+        { url: "", alt: "Cairns landmark 1", caption: "Cairns landmark 1 - placeholder" },
+        { url: "", alt: "Cairns landmark 2", caption: "Cairns landmark 2 - placeholder" },
+        { url: "", alt: "Cairns landmark 3", caption: "Cairns landmark 3 - placeholder" },
+        { url: "", alt: "Cairns landmark 4", caption: "Cairns landmark 4 - placeholder" },
+        { url: "", alt: "Cairns landmark 5", caption: "Cairns landmark 5 - placeholder" },
+        { url: "", alt: "Cairns landmark 6", caption: "Cairns landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Great Barrier Reef Tour",

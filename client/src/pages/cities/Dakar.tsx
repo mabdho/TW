@@ -11,6 +11,14 @@ export const Dakar: React.FC = () => {
         "Museum of Black Civilizations",
         "Lake Retba (Lac Rose)",
         "Medina Market (Marché de la Medina)"]}
+      galleryImages={[
+        { url: "", alt: "Dakar landmark 1", caption: "Dakar landmark 1 - placeholder" },
+        { url: "", alt: "Dakar landmark 2", caption: "Dakar landmark 2 - placeholder" },
+        { url: "", alt: "Dakar landmark 3", caption: "Dakar landmark 3 - placeholder" },
+        { url: "", alt: "Dakar landmark 4", caption: "Dakar landmark 4 - placeholder" },
+        { url: "", alt: "Dakar landmark 5", caption: "Dakar landmark 5 - placeholder" },
+        { url: "", alt: "Dakar landmark 6", caption: "Dakar landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Gorée Island (Île de Gorée)",

@@ -11,6 +11,14 @@ export const Salvador: React.FC = () => {
         "Visit the Igreja e Convento de São Francisco",
         "Watch the Sunset at Farol da Barra",
         "Experience the Balé Folclórico da Bahia"]}
+      galleryImages={[
+        { url: "", alt: "Salvador landmark 1", caption: "Salvador landmark 1 - placeholder" },
+        { url: "", alt: "Salvador landmark 2", caption: "Salvador landmark 2 - placeholder" },
+        { url: "", alt: "Salvador landmark 3", caption: "Salvador landmark 3 - placeholder" },
+        { url: "", alt: "Salvador landmark 4", caption: "Salvador landmark 4 - placeholder" },
+        { url: "", alt: "Salvador landmark 5", caption: "Salvador landmark 5 - placeholder" },
+        { url: "", alt: "Salvador landmark 6", caption: "Salvador landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Wander Through the Pelourinho",

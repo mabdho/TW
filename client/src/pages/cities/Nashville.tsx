@@ -11,6 +11,14 @@ export const Nashville: React.FC = () => {
         "Country Music Hall of Fame and Museum",
         "Honky Tonk Highway (Lower Broadway)",
         "The Parthenon"]}
+      galleryImages={[
+        { url: "", alt: "Nashville landmark 1", caption: "Nashville landmark 1 - placeholder" },
+        { url: "", alt: "Nashville landmark 2", caption: "Nashville landmark 2 - placeholder" },
+        { url: "", alt: "Nashville landmark 3", caption: "Nashville landmark 3 - placeholder" },
+        { url: "", alt: "Nashville landmark 4", caption: "Nashville landmark 4 - placeholder" },
+        { url: "", alt: "Nashville landmark 5", caption: "Nashville landmark 5 - placeholder" },
+        { url: "", alt: "Nashville landmark 6", caption: "Nashville landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Grand Ole Opry",

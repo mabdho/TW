@@ -11,6 +11,14 @@ export const Medellin: React.FC = () => {
         "Medellin Metrocable",
         "Parque Arví",
         "Jardín Botánico de Medellín"]}
+      galleryImages={[
+        { url: "", alt: "Medellin landmark 1", caption: "Medellin landmark 1 - placeholder" },
+        { url: "", alt: "Medellin landmark 2", caption: "Medellin landmark 2 - placeholder" },
+        { url: "", alt: "Medellin landmark 3", caption: "Medellin landmark 3 - placeholder" },
+        { url: "", alt: "Medellin landmark 4", caption: "Medellin landmark 4 - placeholder" },
+        { url: "", alt: "Medellin landmark 5", caption: "Medellin landmark 5 - placeholder" },
+        { url: "", alt: "Medellin landmark 6", caption: "Medellin landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Comuna 13 Tour",

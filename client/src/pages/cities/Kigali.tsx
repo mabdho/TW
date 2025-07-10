@@ -11,6 +11,14 @@ export const Kigali: React.FC = () => {
         "Inema Arts Center",
         "Nyamirambo Women's Center",
         "Campaign Against Genocide Museum"]}
+      galleryImages={[
+        { url: "", alt: "Kigali landmark 1", caption: "Kigali landmark 1 - placeholder" },
+        { url: "", alt: "Kigali landmark 2", caption: "Kigali landmark 2 - placeholder" },
+        { url: "", alt: "Kigali landmark 3", caption: "Kigali landmark 3 - placeholder" },
+        { url: "", alt: "Kigali landmark 4", caption: "Kigali landmark 4 - placeholder" },
+        { url: "", alt: "Kigali landmark 5", caption: "Kigali landmark 5 - placeholder" },
+        { url: "", alt: "Kigali landmark 6", caption: "Kigali landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Kigali Genocide Memorial",

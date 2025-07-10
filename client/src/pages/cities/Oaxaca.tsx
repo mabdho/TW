@@ -11,6 +11,14 @@ export const Oaxaca: React.FC = () => {
         "Templo de Santo Domingo de Guzmán",
         "Explore a Mezcal Distillery",
         "Oaxaca's Zócalo (Plaza de la Constitución)"]}
+      galleryImages={[
+        { url: "", alt: "Oaxaca landmark 1", caption: "Oaxaca landmark 1 - placeholder" },
+        { url: "", alt: "Oaxaca landmark 2", caption: "Oaxaca landmark 2 - placeholder" },
+        { url: "", alt: "Oaxaca landmark 3", caption: "Oaxaca landmark 3 - placeholder" },
+        { url: "", alt: "Oaxaca landmark 4", caption: "Oaxaca landmark 4 - placeholder" },
+        { url: "", alt: "Oaxaca landmark 5", caption: "Oaxaca landmark 5 - placeholder" },
+        { url: "", alt: "Oaxaca landmark 6", caption: "Oaxaca landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Monte Albán Archaeological Site",

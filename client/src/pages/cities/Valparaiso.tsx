@@ -11,6 +11,14 @@ export const Valparaiso: React.FC = () => {
         "Ride the Historic Funiculars (Ascensores)",
         "Valparaiso Street Art Tour",
         "Muelle Prat and the Harbor"]}
+      galleryImages={[
+        { url: "", alt: "Valparaiso landmark 1", caption: "Valparaiso landmark 1 - placeholder" },
+        { url: "", alt: "Valparaiso landmark 2", caption: "Valparaiso landmark 2 - placeholder" },
+        { url: "", alt: "Valparaiso landmark 3", caption: "Valparaiso landmark 3 - placeholder" },
+        { url: "", alt: "Valparaiso landmark 4", caption: "Valparaiso landmark 4 - placeholder" },
+        { url: "", alt: "Valparaiso landmark 5", caption: "Valparaiso landmark 5 - placeholder" },
+        { url: "", alt: "Valparaiso landmark 6", caption: "Valparaiso landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Cerro Concepción & Cerro Alegre",

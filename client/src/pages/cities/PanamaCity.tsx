@@ -11,6 +11,14 @@ export const PanamaCity: React.FC = () => {
         "Amador Causeway (Calzada de Amador)",
         "Parque Natural Metropolitano",
         "Biomuseo"]}
+      galleryImages={[
+        { url: "", alt: "PanamaCity landmark 1", caption: "PanamaCity landmark 1 - placeholder" },
+        { url: "", alt: "PanamaCity landmark 2", caption: "PanamaCity landmark 2 - placeholder" },
+        { url: "", alt: "PanamaCity landmark 3", caption: "PanamaCity landmark 3 - placeholder" },
+        { url: "", alt: "PanamaCity landmark 4", caption: "PanamaCity landmark 4 - placeholder" },
+        { url: "", alt: "PanamaCity landmark 5", caption: "PanamaCity landmark 5 - placeholder" },
+        { url: "", alt: "PanamaCity landmark 6", caption: "PanamaCity landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Panama Canal (Miraflores Visitor Center)",

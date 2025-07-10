@@ -11,6 +11,14 @@ export const Jaipur: React.FC = () => {
         "City Palace",
         "Jantar Mantar",
         "Johari Bazaar"]}
+      galleryImages={[
+        { url: "", alt: "Jaipur landmark 1", caption: "Jaipur landmark 1 - placeholder" },
+        { url: "", alt: "Jaipur landmark 2", caption: "Jaipur landmark 2 - placeholder" },
+        { url: "", alt: "Jaipur landmark 3", caption: "Jaipur landmark 3 - placeholder" },
+        { url: "", alt: "Jaipur landmark 4", caption: "Jaipur landmark 4 - placeholder" },
+        { url: "", alt: "Jaipur landmark 5", caption: "Jaipur landmark 5 - placeholder" },
+        { url: "", alt: "Jaipur landmark 6", caption: "Jaipur landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Amber Fort (Amer Fort)",

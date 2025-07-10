@@ -11,6 +11,14 @@ export const Fukuoka: React.FC = () => {
         "Ohori Park",
         "Canal City Hakata",
         "Fukuoka Castle Ruins (Maizuru Park)"]}
+      galleryImages={[
+        { url: "", alt: "Fukuoka landmark 1", caption: "Fukuoka landmark 1 - placeholder" },
+        { url: "", alt: "Fukuoka landmark 2", caption: "Fukuoka landmark 2 - placeholder" },
+        { url: "", alt: "Fukuoka landmark 3", caption: "Fukuoka landmark 3 - placeholder" },
+        { url: "", alt: "Fukuoka landmark 4", caption: "Fukuoka landmark 4 - placeholder" },
+        { url: "", alt: "Fukuoka landmark 5", caption: "Fukuoka landmark 5 - placeholder" },
+        { url: "", alt: "Fukuoka landmark 6", caption: "Fukuoka landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Dazaifu Tenmangu Shrine",

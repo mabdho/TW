@@ -11,6 +11,14 @@ export const Asuncin: React.FC = () => {
         "Costanera de Asunción",
         "Museo del Barro",
         "Mercado Cuatro"]}
+      galleryImages={[
+        { url: "", alt: "Asuncin landmark 1", caption: "Asuncin landmark 1 - placeholder" },
+        { url: "", alt: "Asuncin landmark 2", caption: "Asuncin landmark 2 - placeholder" },
+        { url: "", alt: "Asuncin landmark 3", caption: "Asuncin landmark 3 - placeholder" },
+        { url: "", alt: "Asuncin landmark 4", caption: "Asuncin landmark 4 - placeholder" },
+        { url: "", alt: "Asuncin landmark 5", caption: "Asuncin landmark 5 - placeholder" },
+        { url: "", alt: "Asuncin landmark 6", caption: "Asuncin landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Palacio de los López",

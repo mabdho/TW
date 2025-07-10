@@ -11,6 +11,14 @@ export const Nairobi: React.FC = () => {
         "Giraffe Centre",
         "Karen Blixen Museum",
         "Bomas of Kenya"]}
+      galleryImages={[
+        { url: "", alt: "Nairobi landmark 1", caption: "Nairobi landmark 1 - placeholder" },
+        { url: "", alt: "Nairobi landmark 2", caption: "Nairobi landmark 2 - placeholder" },
+        { url: "", alt: "Nairobi landmark 3", caption: "Nairobi landmark 3 - placeholder" },
+        { url: "", alt: "Nairobi landmark 4", caption: "Nairobi landmark 4 - placeholder" },
+        { url: "", alt: "Nairobi landmark 5", caption: "Nairobi landmark 5 - placeholder" },
+        { url: "", alt: "Nairobi landmark 6", caption: "Nairobi landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Nairobi National Park",

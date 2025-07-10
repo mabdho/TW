@@ -11,6 +11,14 @@ export const Cali: React.FC = () => {
         "Visit the Cristo Rey Statue",
         "Stroll Along El Gato del Río Park",
         "Experience a World-Class Salsa Show"]}
+      galleryImages={[
+        { url: "", alt: "Cali landmark 1", caption: "Cali landmark 1 - placeholder" },
+        { url: "", alt: "Cali landmark 2", caption: "Cali landmark 2 - placeholder" },
+        { url: "", alt: "Cali landmark 3", caption: "Cali landmark 3 - placeholder" },
+        { url: "", alt: "Cali landmark 4", caption: "Cali landmark 4 - placeholder" },
+        { url: "", alt: "Cali landmark 5", caption: "Cali landmark 5 - placeholder" },
+        { url: "", alt: "Cali landmark 6", caption: "Cali landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Learn Salsa at a Local Dance School",

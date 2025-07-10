@@ -11,6 +11,14 @@ export const Ottawa: React.FC = () => {
         "Canadian Museum of History",
         "National Gallery of Canada",
         "ByWard Market"]}
+      galleryImages={[
+        { url: "", alt: "Ottawa landmark 1", caption: "Ottawa landmark 1 - placeholder" },
+        { url: "", alt: "Ottawa landmark 2", caption: "Ottawa landmark 2 - placeholder" },
+        { url: "", alt: "Ottawa landmark 3", caption: "Ottawa landmark 3 - placeholder" },
+        { url: "", alt: "Ottawa landmark 4", caption: "Ottawa landmark 4 - placeholder" },
+        { url: "", alt: "Ottawa landmark 5", caption: "Ottawa landmark 5 - placeholder" },
+        { url: "", alt: "Ottawa landmark 6", caption: "Ottawa landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Parliament Hill",

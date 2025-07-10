@@ -11,6 +11,14 @@ export const Helsinki: React.FC = () => {
         "Temppeliaukio Church (Rock Church)",
         "Löyly Sauna",
         "Market Square (Kauppatori)"]}
+      galleryImages={[
+        { url: "", alt: "Helsinki landmark 1", caption: "Helsinki landmark 1 - placeholder" },
+        { url: "", alt: "Helsinki landmark 2", caption: "Helsinki landmark 2 - placeholder" },
+        { url: "", alt: "Helsinki landmark 3", caption: "Helsinki landmark 3 - placeholder" },
+        { url: "", alt: "Helsinki landmark 4", caption: "Helsinki landmark 4 - placeholder" },
+        { url: "", alt: "Helsinki landmark 5", caption: "Helsinki landmark 5 - placeholder" },
+        { url: "", alt: "Helsinki landmark 6", caption: "Helsinki landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Suomenlinna Sea Fortress",

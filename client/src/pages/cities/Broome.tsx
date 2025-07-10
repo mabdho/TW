@@ -11,6 +11,14 @@ export const Broome: React.FC = () => {
         "Gantheaume Point",
         "Horizontal Falls Seaplane Adventure",
         "Sun Pictures Cinema"]}
+      galleryImages={[
+        { url: "", alt: "Broome landmark 1", caption: "Broome landmark 1 - placeholder" },
+        { url: "", alt: "Broome landmark 2", caption: "Broome landmark 2 - placeholder" },
+        { url: "", alt: "Broome landmark 3", caption: "Broome landmark 3 - placeholder" },
+        { url: "", alt: "Broome landmark 4", caption: "Broome landmark 4 - placeholder" },
+        { url: "", alt: "Broome landmark 5", caption: "Broome landmark 5 - placeholder" },
+        { url: "", alt: "Broome landmark 6", caption: "Broome landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Cable Beach Camel Ride at Sunset",

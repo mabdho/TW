@@ -11,6 +11,14 @@ export const Kampala: React.FC = () => {
         "Kasubi Tombs",
         "Kabaka's Palace (Lubiri) and Idi Amin's Torture Chambers",
         "Baha'i Temple"]}
+      galleryImages={[
+        { url: "", alt: "Kampala landmark 1", caption: "Kampala landmark 1 - placeholder" },
+        { url: "", alt: "Kampala landmark 2", caption: "Kampala landmark 2 - placeholder" },
+        { url: "", alt: "Kampala landmark 3", caption: "Kampala landmark 3 - placeholder" },
+        { url: "", alt: "Kampala landmark 4", caption: "Kampala landmark 4 - placeholder" },
+        { url: "", alt: "Kampala landmark 5", caption: "Kampala landmark 5 - placeholder" },
+        { url: "", alt: "Kampala landmark 6", caption: "Kampala landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Gaddafi National Mosque",

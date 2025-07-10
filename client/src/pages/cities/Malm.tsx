@@ -11,6 +11,14 @@ export const Malm: React.FC = () => {
         "Öresund Bridge",
         "Lilla Torg",
         "Västra Hamnen (Western Harbour)"]}
+      galleryImages={[
+        { url: "", alt: "Malm landmark 1", caption: "Malm landmark 1 - placeholder" },
+        { url: "", alt: "Malm landmark 2", caption: "Malm landmark 2 - placeholder" },
+        { url: "", alt: "Malm landmark 3", caption: "Malm landmark 3 - placeholder" },
+        { url: "", alt: "Malm landmark 4", caption: "Malm landmark 4 - placeholder" },
+        { url: "", alt: "Malm landmark 5", caption: "Malm landmark 5 - placeholder" },
+        { url: "", alt: "Malm landmark 6", caption: "Malm landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Turning Torso",

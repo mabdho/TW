@@ -11,6 +11,14 @@ export const Seville: React.FC = () => {
         "Plaza de España",
         "Barrio Santa Cruz",
         "Metropol Parasol (Las Setas de Sevilla)"]}
+      galleryImages={[
+        { url: "", alt: "Seville landmark 1", caption: "Seville landmark 1 - placeholder" },
+        { url: "", alt: "Seville landmark 2", caption: "Seville landmark 2 - placeholder" },
+        { url: "", alt: "Seville landmark 3", caption: "Seville landmark 3 - placeholder" },
+        { url: "", alt: "Seville landmark 4", caption: "Seville landmark 4 - placeholder" },
+        { url: "", alt: "Seville landmark 5", caption: "Seville landmark 5 - placeholder" },
+        { url: "", alt: "Seville landmark 6", caption: "Seville landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Real Alcázar de Sevilla",

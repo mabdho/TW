@@ -11,6 +11,14 @@ export const CapeTown: React.FC = () => {
         "Victoria & Alfred (V&A) Waterfront",
         "Kirstenbosch National Botanical Garden",
         "Boulders Beach Penguin Colony"]}
+      galleryImages={[
+        { url: "", alt: "CapeTown landmark 1", caption: "CapeTown landmark 1 - placeholder" },
+        { url: "", alt: "CapeTown landmark 2", caption: "CapeTown landmark 2 - placeholder" },
+        { url: "", alt: "CapeTown landmark 3", caption: "CapeTown landmark 3 - placeholder" },
+        { url: "", alt: "CapeTown landmark 4", caption: "CapeTown landmark 4 - placeholder" },
+        { url: "", alt: "CapeTown landmark 5", caption: "CapeTown landmark 5 - placeholder" },
+        { url: "", alt: "CapeTown landmark 6", caption: "CapeTown landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Table Mountain National Park",

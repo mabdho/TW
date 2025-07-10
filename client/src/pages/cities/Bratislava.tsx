@@ -11,6 +11,14 @@ export const Bratislava: React.FC = () => {
         "Old Town Hall",
         "Devín Castle",
         "The Blue Church (Church of St. Elizabeth)"]}
+      galleryImages={[
+        { url: "", alt: "Bratislava landmark 1", caption: "Bratislava landmark 1 - placeholder" },
+        { url: "", alt: "Bratislava landmark 2", caption: "Bratislava landmark 2 - placeholder" },
+        { url: "", alt: "Bratislava landmark 3", caption: "Bratislava landmark 3 - placeholder" },
+        { url: "", alt: "Bratislava landmark 4", caption: "Bratislava landmark 4 - placeholder" },
+        { url: "", alt: "Bratislava landmark 5", caption: "Bratislava landmark 5 - placeholder" },
+        { url: "", alt: "Bratislava landmark 6", caption: "Bratislava landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Bratislava Castle",

@@ -11,6 +11,14 @@ export const Ahmedabad: React.FC = () => {
         "Jama Masjid",
         "Sidi Saiyyed Mosque",
         "Heritage Walk of Ahmedabad"]}
+      galleryImages={[
+        { url: "", alt: "Ahmedabad landmark 1", caption: "Ahmedabad landmark 1 - placeholder" },
+        { url: "", alt: "Ahmedabad landmark 2", caption: "Ahmedabad landmark 2 - placeholder" },
+        { url: "", alt: "Ahmedabad landmark 3", caption: "Ahmedabad landmark 3 - placeholder" },
+        { url: "", alt: "Ahmedabad landmark 4", caption: "Ahmedabad landmark 4 - placeholder" },
+        { url: "", alt: "Ahmedabad landmark 5", caption: "Ahmedabad landmark 5 - placeholder" },
+        { url: "", alt: "Ahmedabad landmark 6", caption: "Ahmedabad landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Sabarmati Ashram (Gandhi Ashram)",

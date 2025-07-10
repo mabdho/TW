@@ -11,6 +11,14 @@ export const Hobart: React.FC = () => {
         "Salamanca Market",
         "Port Arthur Historic Site",
         "Battery Point"]}
+      galleryImages={[
+        { url: "", alt: "Hobart landmark 1", caption: "Hobart landmark 1 - placeholder" },
+        { url: "", alt: "Hobart landmark 2", caption: "Hobart landmark 2 - placeholder" },
+        { url: "", alt: "Hobart landmark 3", caption: "Hobart landmark 3 - placeholder" },
+        { url: "", alt: "Hobart landmark 4", caption: "Hobart landmark 4 - placeholder" },
+        { url: "", alt: "Hobart landmark 5", caption: "Hobart landmark 5 - placeholder" },
+        { url: "", alt: "Hobart landmark 6", caption: "Hobart landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Museum of Old and New Art (MONA)",

@@ -11,6 +11,14 @@ export const Lahore: React.FC = () => {
         "Wazir Khan Mosque",
         "Shalimar Gardens (Shalamar Bagh)",
         "Wagah Border Ceremony"]}
+      galleryImages={[
+        { url: "", alt: "Lahore landmark 1", caption: "Lahore landmark 1 - placeholder" },
+        { url: "", alt: "Lahore landmark 2", caption: "Lahore landmark 2 - placeholder" },
+        { url: "", alt: "Lahore landmark 3", caption: "Lahore landmark 3 - placeholder" },
+        { url: "", alt: "Lahore landmark 4", caption: "Lahore landmark 4 - placeholder" },
+        { url: "", alt: "Lahore landmark 5", caption: "Lahore landmark 5 - placeholder" },
+        { url: "", alt: "Lahore landmark 6", caption: "Lahore landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Badshahi Mosque",

@@ -11,6 +11,14 @@ export const LuangPrabang: React.FC = () => {
         "Mount Phousi",
         "Royal Palace Museum",
         "Wat Xieng Thong"]}
+      galleryImages={[
+        { url: "", alt: "LuangPrabang landmark 1", caption: "LuangPrabang landmark 1 - placeholder" },
+        { url: "", alt: "LuangPrabang landmark 2", caption: "LuangPrabang landmark 2 - placeholder" },
+        { url: "", alt: "LuangPrabang landmark 3", caption: "LuangPrabang landmark 3 - placeholder" },
+        { url: "", alt: "LuangPrabang landmark 4", caption: "LuangPrabang landmark 4 - placeholder" },
+        { url: "", alt: "LuangPrabang landmark 5", caption: "LuangPrabang landmark 5 - placeholder" },
+        { url: "", alt: "LuangPrabang landmark 6", caption: "LuangPrabang landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Kuang Si Falls",

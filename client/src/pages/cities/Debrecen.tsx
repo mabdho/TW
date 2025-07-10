@@ -11,6 +11,14 @@ export const Debrecen: React.FC = () => {
         "Nagyerdő Park (Great Forest)",
         "Aquaticum Mediterranean Pleasure Baths",
         "Kossuth Square (Kossuth Tér)"]}
+      galleryImages={[
+        { url: "", alt: "Debrecen landmark 1", caption: "Debrecen landmark 1 - placeholder" },
+        { url: "", alt: "Debrecen landmark 2", caption: "Debrecen landmark 2 - placeholder" },
+        { url: "", alt: "Debrecen landmark 3", caption: "Debrecen landmark 3 - placeholder" },
+        { url: "", alt: "Debrecen landmark 4", caption: "Debrecen landmark 4 - placeholder" },
+        { url: "", alt: "Debrecen landmark 5", caption: "Debrecen landmark 5 - placeholder" },
+        { url: "", alt: "Debrecen landmark 6", caption: "Debrecen landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Great Reformed Church (Nagytemplom)",

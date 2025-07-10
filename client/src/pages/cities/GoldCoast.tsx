@@ -11,6 +11,14 @@ export const GoldCoast: React.FC = () => {
         "Burleigh Heads National Park",
         "Q1 SkyPoint Observation Deck",
         "Currumbin Wildlife Sanctuary"]}
+      galleryImages={[
+        { url: "", alt: "GoldCoast landmark 1", caption: "GoldCoast landmark 1 - placeholder" },
+        { url: "", alt: "GoldCoast landmark 2", caption: "GoldCoast landmark 2 - placeholder" },
+        { url: "", alt: "GoldCoast landmark 3", caption: "GoldCoast landmark 3 - placeholder" },
+        { url: "", alt: "GoldCoast landmark 4", caption: "GoldCoast landmark 4 - placeholder" },
+        { url: "", alt: "GoldCoast landmark 5", caption: "GoldCoast landmark 5 - placeholder" },
+        { url: "", alt: "GoldCoast landmark 6", caption: "GoldCoast landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Surfers Paradise Beach",

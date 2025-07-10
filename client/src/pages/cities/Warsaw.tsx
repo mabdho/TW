@@ -11,6 +11,14 @@ export const Warsaw: React.FC = () => {
         "The Royal Castle in Warsaw",
         "Łazienki Park",
         "POLIN Museum of the History of Polish Jews"]}
+      galleryImages={[
+        { url: "", alt: "Warsaw landmark 1", caption: "Warsaw landmark 1 - placeholder" },
+        { url: "", alt: "Warsaw landmark 2", caption: "Warsaw landmark 2 - placeholder" },
+        { url: "", alt: "Warsaw landmark 3", caption: "Warsaw landmark 3 - placeholder" },
+        { url: "", alt: "Warsaw landmark 4", caption: "Warsaw landmark 4 - placeholder" },
+        { url: "", alt: "Warsaw landmark 5", caption: "Warsaw landmark 5 - placeholder" },
+        { url: "", alt: "Warsaw landmark 6", caption: "Warsaw landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Warsaw Old Town Market Square (Rynek Starego Miasta)",

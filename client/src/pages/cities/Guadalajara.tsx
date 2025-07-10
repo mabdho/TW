@@ -11,6 +11,14 @@ export const Guadalajara: React.FC = () => {
         "Teatro Degollado",
         "Explore Tlaquepaque",
         "Mercado San Juan de Dios"]}
+      galleryImages={[
+        { url: "", alt: "Guadalajara landmark 1", caption: "Guadalajara landmark 1 - placeholder" },
+        { url: "", alt: "Guadalajara landmark 2", caption: "Guadalajara landmark 2 - placeholder" },
+        { url: "", alt: "Guadalajara landmark 3", caption: "Guadalajara landmark 3 - placeholder" },
+        { url: "", alt: "Guadalajara landmark 4", caption: "Guadalajara landmark 4 - placeholder" },
+        { url: "", alt: "Guadalajara landmark 5", caption: "Guadalajara landmark 5 - placeholder" },
+        { url: "", alt: "Guadalajara landmark 6", caption: "Guadalajara landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Hospicio Cabañas",

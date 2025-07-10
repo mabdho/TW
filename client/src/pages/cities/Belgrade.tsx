@@ -11,6 +11,14 @@ export const Belgrade: React.FC = () => {
         "Nikola Tesla Museum",
         "Skadarlija",
         "Knez Mihailova Street"]}
+      galleryImages={[
+        { url: "", alt: "Belgrade landmark 1", caption: "Belgrade landmark 1 - placeholder" },
+        { url: "", alt: "Belgrade landmark 2", caption: "Belgrade landmark 2 - placeholder" },
+        { url: "", alt: "Belgrade landmark 3", caption: "Belgrade landmark 3 - placeholder" },
+        { url: "", alt: "Belgrade landmark 4", caption: "Belgrade landmark 4 - placeholder" },
+        { url: "", alt: "Belgrade landmark 5", caption: "Belgrade landmark 5 - placeholder" },
+        { url: "", alt: "Belgrade landmark 6", caption: "Belgrade landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Belgrade Fortress (Kalemegdan)",

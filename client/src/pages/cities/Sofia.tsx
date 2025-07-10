@@ -11,6 +11,14 @@ export const Sofia: React.FC = () => {
         "Ancient Serdica Complex",
         "Boyana Church (UNESCO)",
         "National Palace of Culture (NDK)"]}
+      galleryImages={[
+        { url: "", alt: "Sofia landmark 1", caption: "Sofia landmark 1 - placeholder" },
+        { url: "", alt: "Sofia landmark 2", caption: "Sofia landmark 2 - placeholder" },
+        { url: "", alt: "Sofia landmark 3", caption: "Sofia landmark 3 - placeholder" },
+        { url: "", alt: "Sofia landmark 4", caption: "Sofia landmark 4 - placeholder" },
+        { url: "", alt: "Sofia landmark 5", caption: "Sofia landmark 5 - placeholder" },
+        { url: "", alt: "Sofia landmark 6", caption: "Sofia landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "St. Alexander Nevsky Cathedral",

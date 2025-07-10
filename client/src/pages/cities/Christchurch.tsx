@@ -11,6 +11,14 @@ export const Christchurch: React.FC = () => {
         "Christchurch Gondola",
         "Canterbury Museum",
         "Quake City"]}
+      galleryImages={[
+        { url: "", alt: "Christchurch landmark 1", caption: "Christchurch landmark 1 - placeholder" },
+        { url: "", alt: "Christchurch landmark 2", caption: "Christchurch landmark 2 - placeholder" },
+        { url: "", alt: "Christchurch landmark 3", caption: "Christchurch landmark 3 - placeholder" },
+        { url: "", alt: "Christchurch landmark 4", caption: "Christchurch landmark 4 - placeholder" },
+        { url: "", alt: "Christchurch landmark 5", caption: "Christchurch landmark 5 - placeholder" },
+        { url: "", alt: "Christchurch landmark 6", caption: "Christchurch landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Christchurch Botanic Gardens",

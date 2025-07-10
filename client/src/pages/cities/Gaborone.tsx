@@ -11,6 +11,14 @@ export const Gaborone: React.FC = () => {
         "Three Dikgosi Monument",
         "National Museum and Art Gallery",
         "Kgale Hill"]}
+      galleryImages={[
+        { url: "", alt: "Gaborone landmark 1", caption: "Gaborone landmark 1 - placeholder" },
+        { url: "", alt: "Gaborone landmark 2", caption: "Gaborone landmark 2 - placeholder" },
+        { url: "", alt: "Gaborone landmark 3", caption: "Gaborone landmark 3 - placeholder" },
+        { url: "", alt: "Gaborone landmark 4", caption: "Gaborone landmark 4 - placeholder" },
+        { url: "", alt: "Gaborone landmark 5", caption: "Gaborone landmark 5 - placeholder" },
+        { url: "", alt: "Gaborone landmark 6", caption: "Gaborone landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Mokolodi Nature Reserve",

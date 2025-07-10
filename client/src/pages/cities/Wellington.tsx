@@ -11,6 +11,14 @@ export const Wellington: React.FC = () => {
         "Wētā Workshop",
         "Zealandia Ecosanctuary",
         "Mount Victoria Lookout"]}
+      galleryImages={[
+        { url: "", alt: "Wellington landmark 1", caption: "Wellington landmark 1 - placeholder" },
+        { url: "", alt: "Wellington landmark 2", caption: "Wellington landmark 2 - placeholder" },
+        { url: "", alt: "Wellington landmark 3", caption: "Wellington landmark 3 - placeholder" },
+        { url: "", alt: "Wellington landmark 4", caption: "Wellington landmark 4 - placeholder" },
+        { url: "", alt: "Wellington landmark 5", caption: "Wellington landmark 5 - placeholder" },
+        { url: "", alt: "Wellington landmark 6", caption: "Wellington landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Te Papa Tongarewa Museum",

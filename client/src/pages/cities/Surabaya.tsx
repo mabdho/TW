@@ -11,6 +11,14 @@ export const Surabaya: React.FC = () => {
         "Suramadu National Bridge",
         "Submarine Monument (Monumen Kapal Selam)",
         "Arab Quarter (Kampung Arab) & Ampel Mosque"]}
+      galleryImages={[
+        { url: "", alt: "Surabaya landmark 1", caption: "Surabaya landmark 1 - placeholder" },
+        { url: "", alt: "Surabaya landmark 2", caption: "Surabaya landmark 2 - placeholder" },
+        { url: "", alt: "Surabaya landmark 3", caption: "Surabaya landmark 3 - placeholder" },
+        { url: "", alt: "Surabaya landmark 4", caption: "Surabaya landmark 4 - placeholder" },
+        { url: "", alt: "Surabaya landmark 5", caption: "Surabaya landmark 5 - placeholder" },
+        { url: "", alt: "Surabaya landmark 6", caption: "Surabaya landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Heroes Monument (Tugu Pahlawan) and 10 November Museum",

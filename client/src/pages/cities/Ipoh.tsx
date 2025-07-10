@@ -11,6 +11,14 @@ export const Ipoh: React.FC = () => {
         "Ipoh Old Town Murals",
         "Tasik Cermin (Mirror Lake)",
         "Ipoh Railway Station"]}
+      galleryImages={[
+        { url: "", alt: "Ipoh landmark 1", caption: "Ipoh landmark 1 - placeholder" },
+        { url: "", alt: "Ipoh landmark 2", caption: "Ipoh landmark 2 - placeholder" },
+        { url: "", alt: "Ipoh landmark 3", caption: "Ipoh landmark 3 - placeholder" },
+        { url: "", alt: "Ipoh landmark 4", caption: "Ipoh landmark 4 - placeholder" },
+        { url: "", alt: "Ipoh landmark 5", caption: "Ipoh landmark 5 - placeholder" },
+        { url: "", alt: "Ipoh landmark 6", caption: "Ipoh landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Concubine Lane (Lorong Panglima)",

@@ -11,6 +11,14 @@ export const Albuquerque: React.FC = () => {
         "Petroglyph National Monument",
         "Indian Pueblo Cultural Center",
         "Albuquerque International Balloon Fiesta"]}
+      galleryImages={[
+        { url: "", alt: "Albuquerque landmark 1", caption: "Albuquerque landmark 1 - placeholder" },
+        { url: "", alt: "Albuquerque landmark 2", caption: "Albuquerque landmark 2 - placeholder" },
+        { url: "", alt: "Albuquerque landmark 3", caption: "Albuquerque landmark 3 - placeholder" },
+        { url: "", alt: "Albuquerque landmark 4", caption: "Albuquerque landmark 4 - placeholder" },
+        { url: "", alt: "Albuquerque landmark 5", caption: "Albuquerque landmark 5 - placeholder" },
+        { url: "", alt: "Albuquerque landmark 6", caption: "Albuquerque landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Sandia Peak Tramway",

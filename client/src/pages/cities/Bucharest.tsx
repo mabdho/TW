@@ -11,6 +11,14 @@ export const Bucharest: React.FC = () => {
         "Romanian Athenaeum",
         "\"Dimitrie Gusti\" National Village Museum",
         "Cărturești Carusel"]}
+      galleryImages={[
+        { url: "", alt: "Bucharest landmark 1", caption: "Bucharest landmark 1 - placeholder" },
+        { url: "", alt: "Bucharest landmark 2", caption: "Bucharest landmark 2 - placeholder" },
+        { url: "", alt: "Bucharest landmark 3", caption: "Bucharest landmark 3 - placeholder" },
+        { url: "", alt: "Bucharest landmark 4", caption: "Bucharest landmark 4 - placeholder" },
+        { url: "", alt: "Bucharest landmark 5", caption: "Bucharest landmark 5 - placeholder" },
+        { url: "", alt: "Bucharest landmark 6", caption: "Bucharest landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Palace of the Parliament",

@@ -11,6 +11,14 @@ export const HoiAn: React.FC = () => {
         "Get Custom-Made Clothing",
         "Day Trip to My Son Sanctuary",
         "Release a Lantern on the Thu Bon River"]}
+      galleryImages={[
+        { url: "", alt: "HoiAn landmark 1", caption: "HoiAn landmark 1 - placeholder" },
+        { url: "", alt: "HoiAn landmark 2", caption: "HoiAn landmark 2 - placeholder" },
+        { url: "", alt: "HoiAn landmark 3", caption: "HoiAn landmark 3 - placeholder" },
+        { url: "", alt: "HoiAn landmark 4", caption: "HoiAn landmark 4 - placeholder" },
+        { url: "", alt: "HoiAn landmark 5", caption: "HoiAn landmark 5 - placeholder" },
+        { url: "", alt: "HoiAn landmark 6", caption: "HoiAn landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Explore Hoi An Ancient Town",

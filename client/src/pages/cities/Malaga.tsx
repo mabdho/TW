@@ -11,6 +11,14 @@ export const Malaga: React.FC = () => {
         "Malaga Cathedral",
         "Castillo de Gibralfaro",
         "Roman Theatre (Teatro Romano)"]}
+      galleryImages={[
+        { url: "", alt: "Malaga landmark 1", caption: "Malaga landmark 1 - placeholder" },
+        { url: "", alt: "Malaga landmark 2", caption: "Malaga landmark 2 - placeholder" },
+        { url: "", alt: "Malaga landmark 3", caption: "Malaga landmark 3 - placeholder" },
+        { url: "", alt: "Malaga landmark 4", caption: "Malaga landmark 4 - placeholder" },
+        { url: "", alt: "Malaga landmark 5", caption: "Malaga landmark 5 - placeholder" },
+        { url: "", alt: "Malaga landmark 6", caption: "Malaga landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Alcazaba of Malaga",

@@ -11,6 +11,14 @@ export const Lagos: React.FC = () => {
         "Freedom Park",
         "Kalakuta Republic Museum",
         "The New Afrika Shrine"]}
+      galleryImages={[
+        { url: "", alt: "Lagos landmark 1", caption: "Lagos landmark 1 - placeholder" },
+        { url: "", alt: "Lagos landmark 2", caption: "Lagos landmark 2 - placeholder" },
+        { url: "", alt: "Lagos landmark 3", caption: "Lagos landmark 3 - placeholder" },
+        { url: "", alt: "Lagos landmark 4", caption: "Lagos landmark 4 - placeholder" },
+        { url: "", alt: "Lagos landmark 5", caption: "Lagos landmark 5 - placeholder" },
+        { url: "", alt: "Lagos landmark 6", caption: "Lagos landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Lekki Conservation Centre",

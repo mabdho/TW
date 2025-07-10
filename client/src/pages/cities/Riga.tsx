@@ -11,6 +11,14 @@ export const Riga: React.FC = () => {
         "Riga Central Market",
         "Art Nouveau District (Alberta Iela)",
         "St. Peter's Church"]}
+      galleryImages={[
+        { url: "", alt: "Riga landmark 1", caption: "Riga landmark 1 - placeholder" },
+        { url: "", alt: "Riga landmark 2", caption: "Riga landmark 2 - placeholder" },
+        { url: "", alt: "Riga landmark 3", caption: "Riga landmark 3 - placeholder" },
+        { url: "", alt: "Riga landmark 4", caption: "Riga landmark 4 - placeholder" },
+        { url: "", alt: "Riga landmark 5", caption: "Riga landmark 5 - placeholder" },
+        { url: "", alt: "Riga landmark 6", caption: "Riga landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Riga Old Town (Vecrīga)",

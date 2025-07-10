@@ -11,6 +11,14 @@ export const Manaus: React.FC = () => {
         "Anavilhanas National Park",
         "Mercado Adolpho Lisboa",
         "Ponta Negra Beach"]}
+      galleryImages={[
+        { url: "", alt: "Manaus landmark 1", caption: "Manaus landmark 1 - placeholder" },
+        { url: "", alt: "Manaus landmark 2", caption: "Manaus landmark 2 - placeholder" },
+        { url: "", alt: "Manaus landmark 3", caption: "Manaus landmark 3 - placeholder" },
+        { url: "", alt: "Manaus landmark 4", caption: "Manaus landmark 4 - placeholder" },
+        { url: "", alt: "Manaus landmark 5", caption: "Manaus landmark 5 - placeholder" },
+        { url: "", alt: "Manaus landmark 6", caption: "Manaus landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Teatro Amazonas (Amazon Theatre)",

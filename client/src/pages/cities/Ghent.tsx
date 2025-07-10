@@ -11,6 +11,14 @@ export const Ghent: React.FC = () => {
         "Graslei and Korenlei",
         "The Belfry of Ghent",
         "St. Michael's Bridge"]}
+      galleryImages={[
+        { url: "", alt: "Ghent landmark 1", caption: "Ghent landmark 1 - placeholder" },
+        { url: "", alt: "Ghent landmark 2", caption: "Ghent landmark 2 - placeholder" },
+        { url: "", alt: "Ghent landmark 3", caption: "Ghent landmark 3 - placeholder" },
+        { url: "", alt: "Ghent landmark 4", caption: "Ghent landmark 4 - placeholder" },
+        { url: "", alt: "Ghent landmark 5", caption: "Ghent landmark 5 - placeholder" },
+        { url: "", alt: "Ghent landmark 6", caption: "Ghent landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Gravensteen (Castle of the Counts)",

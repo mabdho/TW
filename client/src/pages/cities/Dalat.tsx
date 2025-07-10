@@ -11,6 +11,14 @@ export const Dalat: React.FC = () => {
         "Lang Biang Mountain",
         "Dalat Flower Gardens",
         "Xuan Huong Lake"]}
+      galleryImages={[
+        { url: "", alt: "Dalat landmark 1", caption: "Dalat landmark 1 - placeholder" },
+        { url: "", alt: "Dalat landmark 2", caption: "Dalat landmark 2 - placeholder" },
+        { url: "", alt: "Dalat landmark 3", caption: "Dalat landmark 3 - placeholder" },
+        { url: "", alt: "Dalat landmark 4", caption: "Dalat landmark 4 - placeholder" },
+        { url: "", alt: "Dalat landmark 5", caption: "Dalat landmark 5 - placeholder" },
+        { url: "", alt: "Dalat landmark 6", caption: "Dalat landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Hang Nga Guesthouse (Crazy House)",

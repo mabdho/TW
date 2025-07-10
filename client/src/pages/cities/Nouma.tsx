@@ -11,6 +11,14 @@ export const Nouma: React.FC = () => {
         "Île aux Canards (Duck Island)",
         "Aquarium des Lagons",
         "Marché de la Moselle (Municipal Market)"]}
+      galleryImages={[
+        { url: "", alt: "Nouma landmark 1", caption: "Nouma landmark 1 - placeholder" },
+        { url: "", alt: "Nouma landmark 2", caption: "Nouma landmark 2 - placeholder" },
+        { url: "", alt: "Nouma landmark 3", caption: "Nouma landmark 3 - placeholder" },
+        { url: "", alt: "Nouma landmark 4", caption: "Nouma landmark 4 - placeholder" },
+        { url: "", alt: "Nouma landmark 5", caption: "Nouma landmark 5 - placeholder" },
+        { url: "", alt: "Nouma landmark 6", caption: "Nouma landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Tjibaou Cultural Centre",

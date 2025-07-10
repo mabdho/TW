@@ -11,6 +11,14 @@ export const Perth: React.FC = () => {
         "Fremantle",
         "Cottesloe Beach",
         "Swan River"]}
+      galleryImages={[
+        { url: "", alt: "Perth landmark 1", caption: "Perth landmark 1 - placeholder" },
+        { url: "", alt: "Perth landmark 2", caption: "Perth landmark 2 - placeholder" },
+        { url: "", alt: "Perth landmark 3", caption: "Perth landmark 3 - placeholder" },
+        { url: "", alt: "Perth landmark 4", caption: "Perth landmark 4 - placeholder" },
+        { url: "", alt: "Perth landmark 5", caption: "Perth landmark 5 - placeholder" },
+        { url: "", alt: "Perth landmark 6", caption: "Perth landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Kings Park and Botanic Garden",

@@ -11,6 +11,14 @@ export const Auckland: React.FC = () => {
         "Auckland War Memorial Museum",
         "Rangitoto Island",
         "Viaduct Harbour & Wynyard Quarter"]}
+      galleryImages={[
+        { url: "", alt: "Auckland landmark 1", caption: "Auckland landmark 1 - placeholder" },
+        { url: "", alt: "Auckland landmark 2", caption: "Auckland landmark 2 - placeholder" },
+        { url: "", alt: "Auckland landmark 3", caption: "Auckland landmark 3 - placeholder" },
+        { url: "", alt: "Auckland landmark 4", caption: "Auckland landmark 4 - placeholder" },
+        { url: "", alt: "Auckland landmark 5", caption: "Auckland landmark 5 - placeholder" },
+        { url: "", alt: "Auckland landmark 6", caption: "Auckland landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Sky Tower",

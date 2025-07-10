@@ -11,6 +11,14 @@ export const Winnipeg: React.FC = () => {
         "Assiniboine Park",
         "The Exchange District National Historic Site",
         "Winnipeg Art Gallery-Qaumajuq"]}
+      galleryImages={[
+        { url: "", alt: "Winnipeg landmark 1", caption: "Winnipeg landmark 1 - placeholder" },
+        { url: "", alt: "Winnipeg landmark 2", caption: "Winnipeg landmark 2 - placeholder" },
+        { url: "", alt: "Winnipeg landmark 3", caption: "Winnipeg landmark 3 - placeholder" },
+        { url: "", alt: "Winnipeg landmark 4", caption: "Winnipeg landmark 4 - placeholder" },
+        { url: "", alt: "Winnipeg landmark 5", caption: "Winnipeg landmark 5 - placeholder" },
+        { url: "", alt: "Winnipeg landmark 6", caption: "Winnipeg landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "The Forks National Historic Site",

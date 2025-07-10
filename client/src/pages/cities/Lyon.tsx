@@ -11,6 +11,14 @@ export const Lyon: React.FC = () => {
         "Les Halles Paul Bocuse",
         "Parc de la Tête d'Or",
         "Musée des Confluences"]}
+      galleryImages={[
+        { url: "", alt: "Lyon landmark 1", caption: "Lyon landmark 1 - placeholder" },
+        { url: "", alt: "Lyon landmark 2", caption: "Lyon landmark 2 - placeholder" },
+        { url: "", alt: "Lyon landmark 3", caption: "Lyon landmark 3 - placeholder" },
+        { url: "", alt: "Lyon landmark 4", caption: "Lyon landmark 4 - placeholder" },
+        { url: "", alt: "Lyon landmark 5", caption: "Lyon landmark 5 - placeholder" },
+        { url: "", alt: "Lyon landmark 6", caption: "Lyon landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Vieux Lyon (Old Lyon)",

@@ -11,6 +11,14 @@ export const Ljubljana: React.FC = () => {
         "Dragon Bridge (Zmajski Most)",
         "Prešeren Square",
         "Tivoli Park"]}
+      galleryImages={[
+        { url: "", alt: "Ljubljana landmark 1", caption: "Ljubljana landmark 1 - placeholder" },
+        { url: "", alt: "Ljubljana landmark 2", caption: "Ljubljana landmark 2 - placeholder" },
+        { url: "", alt: "Ljubljana landmark 3", caption: "Ljubljana landmark 3 - placeholder" },
+        { url: "", alt: "Ljubljana landmark 4", caption: "Ljubljana landmark 4 - placeholder" },
+        { url: "", alt: "Ljubljana landmark 5", caption: "Ljubljana landmark 5 - placeholder" },
+        { url: "", alt: "Ljubljana landmark 6", caption: "Ljubljana landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Ljubljana Castle (Ljubljanski Grad)",

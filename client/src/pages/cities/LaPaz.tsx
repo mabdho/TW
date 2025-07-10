@@ -11,6 +11,14 @@ export const LaPaz: React.FC = () => {
         "Bike the Yungas Road (Death Road)",
         "Visit Valle de la Luna (Moon Valley)",
         "People-Watch in Plaza Murillo"]}
+      galleryImages={[
+        { url: "", alt: "LaPaz landmark 1", caption: "LaPaz landmark 1 - placeholder" },
+        { url: "", alt: "LaPaz landmark 2", caption: "LaPaz landmark 2 - placeholder" },
+        { url: "", alt: "LaPaz landmark 3", caption: "LaPaz landmark 3 - placeholder" },
+        { url: "", alt: "LaPaz landmark 4", caption: "LaPaz landmark 4 - placeholder" },
+        { url: "", alt: "LaPaz landmark 5", caption: "LaPaz landmark 5 - placeholder" },
+        { url: "", alt: "LaPaz landmark 6", caption: "LaPaz landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Ride Mi Teleférico",

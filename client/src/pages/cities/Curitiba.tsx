@@ -11,6 +11,14 @@ export const Curitiba: React.FC = () => {
         "Ópera de Arame",
         "Parque Tanguá",
         "Feira do Largo da Ordem"]}
+      galleryImages={[
+        { url: "", alt: "Curitiba landmark 1", caption: "Curitiba landmark 1 - placeholder" },
+        { url: "", alt: "Curitiba landmark 2", caption: "Curitiba landmark 2 - placeholder" },
+        { url: "", alt: "Curitiba landmark 3", caption: "Curitiba landmark 3 - placeholder" },
+        { url: "", alt: "Curitiba landmark 4", caption: "Curitiba landmark 4 - placeholder" },
+        { url: "", alt: "Curitiba landmark 5", caption: "Curitiba landmark 5 - placeholder" },
+        { url: "", alt: "Curitiba landmark 6", caption: "Curitiba landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Jardim Botânico de Curitiba",

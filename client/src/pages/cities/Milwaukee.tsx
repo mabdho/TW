@@ -11,6 +11,14 @@ export const Milwaukee: React.FC = () => {
         "Historic Third Ward",
         "Lakefront Brewery Tour",
         "Milwaukee Public Market"]}
+      galleryImages={[
+        { url: "", alt: "Milwaukee landmark 1", caption: "Milwaukee landmark 1 - placeholder" },
+        { url: "", alt: "Milwaukee landmark 2", caption: "Milwaukee landmark 2 - placeholder" },
+        { url: "", alt: "Milwaukee landmark 3", caption: "Milwaukee landmark 3 - placeholder" },
+        { url: "", alt: "Milwaukee landmark 4", caption: "Milwaukee landmark 4 - placeholder" },
+        { url: "", alt: "Milwaukee landmark 5", caption: "Milwaukee landmark 5 - placeholder" },
+        { url: "", alt: "Milwaukee landmark 6", caption: "Milwaukee landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Milwaukee Art Museum",

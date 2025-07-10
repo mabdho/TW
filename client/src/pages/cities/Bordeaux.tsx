@@ -11,6 +11,14 @@ export const Bordeaux: React.FC = () => {
         "Cathédrale Saint-André de Bordeaux",
         "A Wine Tour to Saint-Émilion",
         "Grand Théâtre de Bordeaux"]}
+      galleryImages={[
+        { url: "", alt: "Bordeaux landmark 1", caption: "Bordeaux landmark 1 - placeholder" },
+        { url: "", alt: "Bordeaux landmark 2", caption: "Bordeaux landmark 2 - placeholder" },
+        { url: "", alt: "Bordeaux landmark 3", caption: "Bordeaux landmark 3 - placeholder" },
+        { url: "", alt: "Bordeaux landmark 4", caption: "Bordeaux landmark 4 - placeholder" },
+        { url: "", alt: "Bordeaux landmark 5", caption: "Bordeaux landmark 5 - placeholder" },
+        { url: "", alt: "Bordeaux landmark 6", caption: "Bordeaux landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Place de la Bourse & Miroir d'eau",

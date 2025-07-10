@@ -11,6 +11,14 @@ export const Gdansk: React.FC = () => {
         "European Solidarity Centre",
         "Museum of the Second World War",
         "Mariacka Street"]}
+      galleryImages={[
+        { url: "", alt: "Gdansk landmark 1", caption: "Gdansk landmark 1 - placeholder" },
+        { url: "", alt: "Gdansk landmark 2", caption: "Gdansk landmark 2 - placeholder" },
+        { url: "", alt: "Gdansk landmark 3", caption: "Gdansk landmark 3 - placeholder" },
+        { url: "", alt: "Gdansk landmark 4", caption: "Gdansk landmark 4 - placeholder" },
+        { url: "", alt: "Gdansk landmark 5", caption: "Gdansk landmark 5 - placeholder" },
+        { url: "", alt: "Gdansk landmark 6", caption: "Gdansk landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Long Market and Neptune's Fountain",

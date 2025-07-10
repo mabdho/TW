@@ -11,6 +11,14 @@ export const Suva: React.FC = () => {
         "Colo-I-Suva Forest Park",
         "Thurston Gardens",
         "Government Buildings and Albert Park"]}
+      galleryImages={[
+        { url: "", alt: "Suva landmark 1", caption: "Suva landmark 1 - placeholder" },
+        { url: "", alt: "Suva landmark 2", caption: "Suva landmark 2 - placeholder" },
+        { url: "", alt: "Suva landmark 3", caption: "Suva landmark 3 - placeholder" },
+        { url: "", alt: "Suva landmark 4", caption: "Suva landmark 4 - placeholder" },
+        { url: "", alt: "Suva landmark 5", caption: "Suva landmark 5 - placeholder" },
+        { url: "", alt: "Suva landmark 6", caption: "Suva landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Fiji Museum",

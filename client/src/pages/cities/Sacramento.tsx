@@ -11,6 +11,14 @@ export const Sacramento: React.FC = () => {
         "California State Capitol Museum",
         "Crocker Art Museum",
         "American River Parkway"]}
+      galleryImages={[
+        { url: "", alt: "Sacramento landmark 1", caption: "Sacramento landmark 1 - placeholder" },
+        { url: "", alt: "Sacramento landmark 2", caption: "Sacramento landmark 2 - placeholder" },
+        { url: "", alt: "Sacramento landmark 3", caption: "Sacramento landmark 3 - placeholder" },
+        { url: "", alt: "Sacramento landmark 4", caption: "Sacramento landmark 4 - placeholder" },
+        { url: "", alt: "Sacramento landmark 5", caption: "Sacramento landmark 5 - placeholder" },
+        { url: "", alt: "Sacramento landmark 6", caption: "Sacramento landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Old Sacramento Waterfront",

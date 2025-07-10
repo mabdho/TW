@@ -11,6 +11,14 @@ export const Bologna: React.FC = () => {
         "Basilica di San Petronio",
         "Archiginnasio of Bologna and the Anatomical Theatre",
         "Quadrilatero Market"]}
+      galleryImages={[
+        { url: "", alt: "Bologna landmark 1", caption: "Bologna landmark 1 - placeholder" },
+        { url: "", alt: "Bologna landmark 2", caption: "Bologna landmark 2 - placeholder" },
+        { url: "", alt: "Bologna landmark 3", caption: "Bologna landmark 3 - placeholder" },
+        { url: "", alt: "Bologna landmark 4", caption: "Bologna landmark 4 - placeholder" },
+        { url: "", alt: "Bologna landmark 5", caption: "Bologna landmark 5 - placeholder" },
+        { url: "", alt: "Bologna landmark 6", caption: "Bologna landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Piazza Maggiore and Fountain of Neptune",

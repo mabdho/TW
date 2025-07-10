@@ -11,6 +11,14 @@ export const SanJose: React.FC = () => {
         "Museo del Jade",
         "Mercado Central",
         "Museo Nacional de Costa Rica"]}
+      galleryImages={[
+        { url: "", alt: "SanJose landmark 1", caption: "SanJose landmark 1 - placeholder" },
+        { url: "", alt: "SanJose landmark 2", caption: "SanJose landmark 2 - placeholder" },
+        { url: "", alt: "SanJose landmark 3", caption: "SanJose landmark 3 - placeholder" },
+        { url: "", alt: "SanJose landmark 4", caption: "SanJose landmark 4 - placeholder" },
+        { url: "", alt: "SanJose landmark 5", caption: "SanJose landmark 5 - placeholder" },
+        { url: "", alt: "SanJose landmark 6", caption: "SanJose landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Teatro Nacional de Costa Rica (National Theater)",

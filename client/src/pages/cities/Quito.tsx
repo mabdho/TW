@@ -11,6 +11,14 @@ export const Quito: React.FC = () => {
         "Ciudad Mitad del Mundo",
         "Basílica del Voto Nacional",
         "El Panecillo"]}
+      galleryImages={[
+        { url: "", alt: "Quito landmark 1", caption: "Quito landmark 1 - placeholder" },
+        { url: "", alt: "Quito landmark 2", caption: "Quito landmark 2 - placeholder" },
+        { url: "", alt: "Quito landmark 3", caption: "Quito landmark 3 - placeholder" },
+        { url: "", alt: "Quito landmark 4", caption: "Quito landmark 4 - placeholder" },
+        { url: "", alt: "Quito landmark 5", caption: "Quito landmark 5 - placeholder" },
+        { url: "", alt: "Quito landmark 6", caption: "Quito landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Centro Histórico de Quito (Old Town)",

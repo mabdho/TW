@@ -11,6 +11,14 @@ export const Cebu: React.FC = () => {
         "Basilica Minore del Santo Niño",
         "Magellan's Cross",
         "Osmeña Peak"]}
+      galleryImages={[
+        { url: "", alt: "Cebu landmark 1", caption: "Cebu landmark 1 - placeholder" },
+        { url: "", alt: "Cebu landmark 2", caption: "Cebu landmark 2 - placeholder" },
+        { url: "", alt: "Cebu landmark 3", caption: "Cebu landmark 3 - placeholder" },
+        { url: "", alt: "Cebu landmark 4", caption: "Cebu landmark 4 - placeholder" },
+        { url: "", alt: "Cebu landmark 5", caption: "Cebu landmark 5 - placeholder" },
+        { url: "", alt: "Cebu landmark 6", caption: "Cebu landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Kawasan Falls Canyoneering",

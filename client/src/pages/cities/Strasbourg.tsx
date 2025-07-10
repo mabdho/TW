@@ -11,6 +11,14 @@ export const Strasbourg: React.FC = () => {
         "Palais Rohan",
         "European Parliament",
         "Parc de l'Orangerie"]}
+      galleryImages={[
+        { url: "", alt: "Strasbourg landmark 1", caption: "Strasbourg landmark 1 - placeholder" },
+        { url: "", alt: "Strasbourg landmark 2", caption: "Strasbourg landmark 2 - placeholder" },
+        { url: "", alt: "Strasbourg landmark 3", caption: "Strasbourg landmark 3 - placeholder" },
+        { url: "", alt: "Strasbourg landmark 4", caption: "Strasbourg landmark 4 - placeholder" },
+        { url: "", alt: "Strasbourg landmark 5", caption: "Strasbourg landmark 5 - placeholder" },
+        { url: "", alt: "Strasbourg landmark 6", caption: "Strasbourg landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Cathédrale Notre-Dame de Strasbourg",

@@ -11,6 +11,14 @@ export const Charleston: React.FC = () => {
         "Fort Sumter National Monument",
         "The Battery & White Point Garden",
         "Middleton Place"]}
+      galleryImages={[
+        { url: "", alt: "Charleston landmark 1", caption: "Charleston landmark 1 - placeholder" },
+        { url: "", alt: "Charleston landmark 2", caption: "Charleston landmark 2 - placeholder" },
+        { url: "", alt: "Charleston landmark 3", caption: "Charleston landmark 3 - placeholder" },
+        { url: "", alt: "Charleston landmark 4", caption: "Charleston landmark 4 - placeholder" },
+        { url: "", alt: "Charleston landmark 5", caption: "Charleston landmark 5 - placeholder" },
+        { url: "", alt: "Charleston landmark 6", caption: "Charleston landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Historic Charleston City Market",

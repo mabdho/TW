@@ -11,6 +11,14 @@ export const Arequipa: React.FC = () => {
         "Museo Santuarios Andinos (MUSA)",
         "Mirador de Yanahuara",
         "Colca Canyon Tour"]}
+      galleryImages={[
+        { url: "", alt: "Arequipa landmark 1", caption: "Arequipa landmark 1 - placeholder" },
+        { url: "", alt: "Arequipa landmark 2", caption: "Arequipa landmark 2 - placeholder" },
+        { url: "", alt: "Arequipa landmark 3", caption: "Arequipa landmark 3 - placeholder" },
+        { url: "", alt: "Arequipa landmark 4", caption: "Arequipa landmark 4 - placeholder" },
+        { url: "", alt: "Arequipa landmark 5", caption: "Arequipa landmark 5 - placeholder" },
+        { url: "", alt: "Arequipa landmark 6", caption: "Arequipa landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Monasterio de Santa Catalina",

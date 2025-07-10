@@ -11,6 +11,14 @@ export const Maputo: React.FC = () => {
         "Mercado Central (Central Market)",
         "The Iron House (Casa de Ferro)",
         "FEIMA - Feira de Artesanato, Flores e Gastronomia"]}
+      galleryImages={[
+        { url: "", alt: "Maputo landmark 1", caption: "Maputo landmark 1 - placeholder" },
+        { url: "", alt: "Maputo landmark 2", caption: "Maputo landmark 2 - placeholder" },
+        { url: "", alt: "Maputo landmark 3", caption: "Maputo landmark 3 - placeholder" },
+        { url: "", alt: "Maputo landmark 4", caption: "Maputo landmark 4 - placeholder" },
+        { url: "", alt: "Maputo landmark 5", caption: "Maputo landmark 5 - placeholder" },
+        { url: "", alt: "Maputo landmark 6", caption: "Maputo landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Maputo Central Train Station (CFM)",

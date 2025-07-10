@@ -11,6 +11,14 @@ export const Montevideo: React.FC = () => {
         "Rambla de Montevideo",
         "Palacio Salvo",
         "Teatro Solís"]}
+      galleryImages={[
+        { url: "", alt: "Montevideo landmark 1", caption: "Montevideo landmark 1 - placeholder" },
+        { url: "", alt: "Montevideo landmark 2", caption: "Montevideo landmark 2 - placeholder" },
+        { url: "", alt: "Montevideo landmark 3", caption: "Montevideo landmark 3 - placeholder" },
+        { url: "", alt: "Montevideo landmark 4", caption: "Montevideo landmark 4 - placeholder" },
+        { url: "", alt: "Montevideo landmark 5", caption: "Montevideo landmark 5 - placeholder" },
+        { url: "", alt: "Montevideo landmark 6", caption: "Montevideo landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Ciudad Vieja (Old City)",

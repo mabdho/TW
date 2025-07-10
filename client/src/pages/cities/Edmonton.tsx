@@ -11,6 +11,14 @@ export const Edmonton: React.FC = () => {
         "Muttart Conservatory",
         "Fort Edmonton Park",
         "Royal Alberta Museum"]}
+      galleryImages={[
+        { url: "", alt: "Edmonton landmark 1", caption: "Edmonton landmark 1 - placeholder" },
+        { url: "", alt: "Edmonton landmark 2", caption: "Edmonton landmark 2 - placeholder" },
+        { url: "", alt: "Edmonton landmark 3", caption: "Edmonton landmark 3 - placeholder" },
+        { url: "", alt: "Edmonton landmark 4", caption: "Edmonton landmark 4 - placeholder" },
+        { url: "", alt: "Edmonton landmark 5", caption: "Edmonton landmark 5 - placeholder" },
+        { url: "", alt: "Edmonton landmark 6", caption: "Edmonton landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "West Edmonton Mall",

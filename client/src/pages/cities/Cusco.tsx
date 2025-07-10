@@ -11,6 +11,14 @@ export const Cusco: React.FC = () => {
         "Sacsayhuaman",
         "San Blas Neighborhood",
         "San Pedro Market"]}
+      galleryImages={[
+        { url: "", alt: "Cusco landmark 1", caption: "Cusco landmark 1 - placeholder" },
+        { url: "", alt: "Cusco landmark 2", caption: "Cusco landmark 2 - placeholder" },
+        { url: "", alt: "Cusco landmark 3", caption: "Cusco landmark 3 - placeholder" },
+        { url: "", alt: "Cusco landmark 4", caption: "Cusco landmark 4 - placeholder" },
+        { url: "", alt: "Cusco landmark 5", caption: "Cusco landmark 5 - placeholder" },
+        { url: "", alt: "Cusco landmark 6", caption: "Cusco landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Plaza de Armas",

@@ -11,6 +11,14 @@ export const Porto: React.FC = () => {
         "Port Wine Cellars in Vila Nova de Gaia",
         "Livraria Lello",
         "Clérigos Church and Tower"]}
+      galleryImages={[
+        { url: "", alt: "Porto landmark 1", caption: "Porto landmark 1 - placeholder" },
+        { url: "", alt: "Porto landmark 2", caption: "Porto landmark 2 - placeholder" },
+        { url: "", alt: "Porto landmark 3", caption: "Porto landmark 3 - placeholder" },
+        { url: "", alt: "Porto landmark 4", caption: "Porto landmark 4 - placeholder" },
+        { url: "", alt: "Porto landmark 5", caption: "Porto landmark 5 - placeholder" },
+        { url: "", alt: "Porto landmark 6", caption: "Porto landmark 6 - placeholder" }
+      ]}
       attractions={[
         {
         name: "Cais da Ribeira (Ribeira District)",
