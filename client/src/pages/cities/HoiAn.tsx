@@ -4,97 +4,188 @@ import { CityPage } from '../../components/CityPage';
 export const HoiAn: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Hoi An, Vietnam (2025 Guide)"
-      description="Planning a trip to Hoi An? Discover the top 15 things to do, from iconic landmarks to unique local experiences. Our complete 2025 guide covers where to stay, what to eat, and insider tips!"
-      highlights={[
-        "Explore Hoi An Ancient Town",
+      title={"15 Best Things to Do in Hoi An, Vietnam (2025 Guide)"}
+      description={"Stepping into Hoi An is like entering a living museum. This enchanting port city on Vietnam's central coast is a perfectly preserved example of a Southeast Asian trading post from the 15th to the 19th century. Its UNESCO World Heritage-listed Ancient Town is a mesmerizing maze of ochre-yellow shophouses, ornate temples, and traditional wooden homes draped in bougainvillea. By day, explore historic sites and cycle through emerald-green rice paddies. By night, the city transforms as thousands of silk lanterns cast a magical glow over the Thu Bon River. With its world-renowned culinary scene, bespoke tailoring, and laid-back atmosphere, you'll quickly discover why finding the best things to do in Hoi An is a journey of pure delight."}
+      highlights={["Explore Hoi An Ancient Town",
         "Cross the Japanese Covered Bridge",
         "Get Custom-Made Clothing",
         "Day Trip to My Son Sanctuary",
-        "Release a Lantern on the Thu Bon River"
-]}
+        "Release a Lantern on the Thu Bon River"]}
       attractions={[
         {
-                "name": "Explore Hoi An Ancient Town",
-                "description": "The heart and soul of Hoi An is its UNESCO-listed Ancient Town. This remarkably well-preserved area is a car-free, pedestrian-friendly warren of narrow streets lined with mustard-yellow merchant houses, Chinese assembly halls, and ancient temples. The architecture is a captivating fusion of Vietnamese, Chinese, and Japanese influences, reflecting its history as a bustling trading port.\n\nPurchase a single entrance ticket which grants you access to five of the 22 heritage sites, including old houses, assembly halls, and museums. Simply wandering the streets, soaking in the atmosphere, and peeking into art galleries and craft shops is an essential experience. The town is most magical at dawn before the crowds arrive, and after dusk when colorful lanterns illuminate the streets and river.",
-                "practicalInfo": {
-                        "howToGetThere": "Easy to reach by public transport",
-                        "openingHours": "Check official website for hours",
-                        "cost": "Entry fees may apply",
-                        "website": "www.hoianworldheritage.org.vn"
-                }
+        name: "Explore Hoi An Ancient Town",
+        description: "The heart and soul of Hoi An is its UNESCO-listed Ancient Town. This remarkably well-preserved area is a car-free, pedestrian-friendly warren of narrow streets lined with mustard-yellow merchant houses, Chinese assembly halls, and ancient temples. The architecture is a captivating fusion of Vietnamese, Chinese, and Japanese influences, reflecting its history as a bustling trading port.\n\nPurchase a single entrance ticket which grants you access to five of the 22 heritage sites, including old houses, assembly halls, and museums. Simply wandering the streets, soaking in the atmosphere, and peeking into art galleries and craft shops is an essential experience. The town is most magical at dawn before the crowds arrive, and after dusk when colorful lanterns illuminate the streets and river.",
+        practicalInfo: {
+        howToGetThere: "Located in the center of Hoi An. It's best explored on foot or by bicycle.",
+        openingHours: "Pedestrian hours are 9:00 AM - 11:00 AM and 3:00 PM - 9:30 PM. The ticket counters are open 7:00 AM - 9:30 PM.",
+        cost: "120,000 VND for a ticket granting access to 5 heritage sites, valid for the duration of your stay.",
+        website: "www.hoianworldheritage.org.vn"
+      }
+      },
+        {
+        name: "Cross the Japanese Covered Bridge",
+        description: "The iconic symbol of Hoi An, the Japanese Covered Bridge (Chùa Cầu), is a beautiful example of Japanese architecture dating back to the 18th century. It was built by the Japanese community to connect their quarter with the Chinese quarter across a small canal. The bridge is unique in that it has a temple built into its northern side, dedicated to the northern deity Tran Vo Bac De, who is believed to control the weather.\n\nAdorned with intricate carvings, including a pair of monkey statues at one end and dog statues at the other, the bridge is a masterpiece of craftsmanship. It's a must-see landmark and one of the sites included in the Ancient Town ticket. Be sure to visit both during the day to appreciate the details and at night when it's beautifully lit.",
+        practicalInfo: {
+        howToGetThere: "Located on the western end of the Ancient Town, connecting Tran Phu Street with Nguyen Thi Minh Khai Street.",
+        openingHours: "24/7, but access to the temple inside follows Ancient Town ticket hours.",
+        cost: "Included in the Ancient Town ticket (120,000 VND).",
+        website: "N/A"
+      }
+      },
+        {
+        name: "Get Custom-Made Clothing",
+        description: "Hoi An is world-famous for its skilled and incredibly fast tailors. Getting a custom-made outfit, whether it's a suit, a dress, a winter coat, or a pair of leather shoes, is a quintessential Hoi An experience. There are hundreds of tailor shops to choose from, ranging from high-end boutiques to smaller family-run businesses. The process is simple: bring a photo or design, choose your fabric, get measured, and return for a fitting within 24 hours.\n\nMost tailors can complete a garment in one to three days. It's an affordable luxury and a fantastic way to get a perfectly fitting piece of clothing as a unique souvenir. Popular and reputable shops include Yaly Couture, Bebe Tailor, and A Dong Silk.",
+        practicalInfo: {
+        howToGetThere: "Tailor shops are located throughout Hoi An, with a high concentration in the Ancient Town and surrounding streets.",
+        openingHours: "Most shops are open from 8:00 AM to 9:30 PM daily.",
+        cost: "Varies greatly by fabric and complexity. A simple dress can start from $25 USD, a full suit from $100 USD.",
+        website: "N/A"
+      }
+      },
+        {
+        name: "Day Trip to My Son Sanctuary",
+        description: "Take a step back in time with a half-day trip to My Son Sanctuary, another UNESCO World Heritage site located about an hour's drive from Hoi An. This impressive complex of abandoned and partially ruined Hindu temples was constructed between the 4th and 14th centuries by the Champa Kingdom. Nestled in a lush green valley, these brick towers were dedicated to the Hindu god Shiva.\n\nThough heavily damaged by bombing during the Vietnam War, the remaining structures are evocative and atmospheric, often drawing comparisons to a smaller-scale Angkor Wat. It's best to visit early in the morning to avoid the heat and the crowds. You can book a guided tour from Hoi An, which often includes a boat trip back along the Thu Bon River.",
+        practicalInfo: {
+        howToGetThere: "About 40km from Hoi An. Book a group tour, hire a private car, or rent a motorbike.",
+        openingHours: "6:00 AM - 5:00 PM daily.",
+        cost: "Entrance fee is 150,000 VND. Tour prices start from around 200,000 VND.",
+        website: "www.disanmyson.vn"
+      }
+      },
+        {
+        name: "Release a Lantern on the Thu Bon River",
+        description: "Participating in the evening ritual of releasing a paper lantern on the Thu Bon River is a truly magical experience. As darkness falls, the riverfront comes alive with local women and children selling small, colorful lanterns with a candle inside. For a small fee, you can purchase one and set it afloat on the water, making a wish as it drifts away.\n\nFor an even more immersive experience, hire a sampan boat for a short 20-30 minute ride. Paddled by a local, you'll be able to release your lantern from the middle of the river, surrounded by hundreds of other floating lights. It's a peaceful and picturesque activity that perfectly captures the romantic spirit of Hoi An.",
+        practicalInfo: {
+        howToGetThere: "Walk along the banks of the Thu Bon River in the Ancient Town after sunset.",
+        openingHours: "Best from 6:00 PM to 10:00 PM.",
+        cost: "Lanterns cost around 10,000 VND. A 20-minute boat ride for two people is about 150,000 VND.",
+        website: "N/A"
+      }
+      },
+        {
+        name: "Take a Vietnamese Cooking Class",
+        description: "Hoi An's cuisine is a highlight for many visitors, and there's no better way to delve into it than by taking a cooking class. Many classes begin with a guided tour of the bustling Central Market to learn about fresh Vietnamese ingredients like herbs, spices, and local produce. You'll then head to a kitchen, often in a scenic location by the river or amidst rice fields.\n\nUnder the guidance of a local chef, you'll learn to prepare several classic Vietnamese and Hoi An specialty dishes, such as pho, fresh spring rolls (gỏi cuốn), and crispy pancakes (bánh xèo). It's a fun, interactive, and delicious experience that gives you a new skill to take home.",
+        practicalInfo: {
+        howToGetThere: "Many schools offer hotel pick-up. Popular options include Red Bridge Cooking School and Sabirama Cooking School.",
+        openingHours: "Classes are typically offered in the morning and afternoon.",
+        cost: "Approximately $25 - $40 USD per person for a half-day class.",
+        website: "varies by school"
+      }
+      },
+        {
+        name: "Cycle Through the Rice Paddies",
+        description: "Escape the charming but busy Ancient Town and explore the serene countryside surrounding Hoi An by bicycle. Renting a bike is cheap and easy, allowing you to discover a different side of Vietnam at your own pace. The paths are flat and easy to navigate, leading you through vast, vibrant green rice paddies where you can see farmers at work with their water buffalo.\n\nA popular route is towards Cam Kim Island, accessible via a short ferry ride, or cycling through the lanes around Tra Que Vegetable Village. It's a peaceful and rewarding way to spend a few hours, offering fantastic photo opportunities and a glimpse into rural Vietnamese life.",
+        practicalInfo: {
+        howToGetThere: "Rent a bicycle from your hotel or one of the many rental shops in town.",
+        openingHours: "Best done in the early morning or late afternoon to avoid the midday sun.",
+        cost: "Bicycle rental is about 30,000 - 50,000 VND per day.",
+        website: "N/A"
+      }
+      },
+        {
+        name: "Relax at An Bang Beach",
+        description: "Just a short 5km cycle or taxi ride from the Ancient Town lies An Bang Beach, a beautiful stretch of white sand with gentle waves. It's the perfect place to unwind after a few days of sightseeing. The beach has a laid-back, bohemian vibe with numerous beachfront restaurants and bars offering comfortable loungers and umbrellas for their patrons.\n\nSpend the day swimming, sunbathing, and sipping on fresh coconuts. For the more active, there are options for surfing and stand-up paddleboarding when conditions are right. An Bang offers a more relaxed atmosphere than the more developed Cua Dai beach nearby, making it a favorite among expats and tourists alike.",
+        practicalInfo: {
+        howToGetThere: "A 15-minute taxi ride (around 80,000 VND) or a 25-minute bicycle ride from the Ancient Town.",
+        openingHours: "24/7. Restaurants and bars typically open around 8:00 AM.",
+        cost: "Free to access. Loungers are usually free if you purchase food or drinks from the associated restaurant.",
+        website: "N/A"
+      }
+      },
+        {
+        name: "Wander the Hoi An Night Market",
+        description: "Across the An Hoi Bridge from the Ancient Town, the Hoi An Night Market comes alive every evening. The street is lined with over 150 stalls selling a vast array of goods. The main attraction is the countless stalls aglow with colorful silk lanterns of all shapes and sizes, creating a stunning visual spectacle. It's the perfect place to buy souvenirs, from lanterns and lacquerware to clothing and conical hats.\n\nThe market is also a fantastic spot for street food. You can find vendors selling everything from banana pancakes and grilled skewers to local ice cream rolls. The atmosphere is vibrant and bustling, offering a different but equally enchanting experience to the tranquil Ancient Town.",
+        practicalInfo: {
+        howToGetThere: "Located on Nguyen Hoang Street on An Hoi Islet, just across the bridge from the main town.",
+        openingHours: "Approximately 5:00 PM - 10:00 PM daily.",
+        cost: "Free to enter. Bring cash for shopping and food.",
+        website: "N/A"
+      }
+      },
+        {
+        name: "Explore the Fujian Assembly Hall (Phuc Kien)",
+        description: "Of the several Chinese assembly halls in Hoi An, the Fujian (Phuc Kien) Assembly Hall is arguably the most impressive. Originally a traditional pagoda built around 1690, it was later transformed into an assembly hall for the Fujian community, the largest Chinese ethnic group in Hoi An. It served as a gathering place and a temple dedicated to Thien Hau, the goddess of the sea.\n\nThe entrance is a stunning triple-gated archway leading into a courtyard filled with ornate fountains, intricate carvings, and statues of mythical creatures. The main prayer hall is rich with red lacquer, gold detailing, and large incense coils hanging from the ceiling, creating a fragrant, spiritual atmosphere. It is a must-visit site covered by the Ancient Town ticket.",
+        practicalInfo: {
+        howToGetThere: "Located at 46 Tran Phu Street in the Ancient Town.",
+        openingHours: "7:00 AM - 5:30 PM daily.",
+        cost: "Included in the Ancient Town ticket (120,000 VND).",
+        website: "N/A"
+      }
+      },
+        {
+        name: "Visit Tra Que Vegetable Village",
+        description: "Located a few kilometers northeast of the Ancient Town, Tra Que is a charming village famous for its fresh, organic herbs and vegetables. The farmers here use traditional methods passed down through generations, including fertilizing the land with a special type of algae from a local lagoon, which gives the produce a unique flavor.\n\nYou can cycle to the village and wander through the beautifully manicured gardens, observing locals as they tend to their crops. Many tours are available that allow you to get hands-on experience with farming activities like tilling the soil, watering plants, and harvesting vegetables. It's a refreshing and educational escape from the city.",
+        practicalInfo: {
+        howToGetThere: "A 15-minute bicycle ride from the Ancient Town.",
+        openingHours: "Farming activities are most common in the morning and late afternoon.",
+        cost: "An entrance fee of around 35,000 VND may be required. Tour prices vary.",
+        website: "N/A"
+      }
+      },
+        {
+        name: "Discover the Old House of Tan Ky",
+        description: "The Old House of Tan Ky is one of the most visited and best-preserved merchant houses in Hoi An, offering a fascinating look into the life of a wealthy trading family 200 years ago. Built by a Vietnamese family, the house showcases a unique blend of Vietnamese, Chinese, and Japanese architectural styles, designed to withstand the annual floods.\n\nThe house has been lovingly maintained by seven generations of the same family. Inside, you'll find beautiful dark wood furniture inlaid with mother-of-pearl, antique artifacts, and detailed carvings. The rear of the house opens directly onto the riverfront, which was once convenient for loading and unloading goods from boats.",
+        practicalInfo: {
+        howToGetThere: "Located at 101 Nguyen Thai Hoc Street in the Ancient Town.",
+        openingHours: "8:00 AM - 12:00 PM and 2:00 PM - 5:30 PM daily.",
+        cost: "Included in the Ancient Town ticket (120,000 VND).",
+        website: "N/A"
+      }
+      },
+        {
+        name: "Go on a Coconut Boat Tour",
+        description: "For a fun and unique local experience, head to the nearby Cam Thanh Coconut Village for a basket boat tour. These distinctive round boats, woven from bamboo, are traditionally used by local fishermen. You'll be paddled through the tranquil waterways of a vast coconut palm forest by a friendly local.\n\nThe tour is more than just a boat ride; it's an entertainment show. Your guide will likely showcase incredible boat-spinning skills, teach you how to catch small crabs, and make you beautiful woven souvenirs from coconut leaves, like hats and rings. It's a slightly touristy but incredibly joyful activity suitable for all ages.",
+        practicalInfo: {
+        howToGetThere: "Cam Thanh is about 5km from the Ancient Town. You can get there by taxi or bicycle. Many tour operators offer packages.",
+        openingHours: "Tours run throughout the day, usually from 8:00 AM to 5:00 PM.",
+        cost: "Around 150,000 - 200,000 VND per person for a tour.",
+        website: "N/A"
+      }
+      },
+        {
+        name: "Sample Local Street Food",
+        description: "Hoi An is a food lover's paradise, and some of its best dishes are found on the street. Embark on a culinary adventure and sample the city's unique specialties. A must-try is Cao Lầu, a noodle dish with pork and greens that can only be made with water from a specific local well. Another essential is Bánh Mì from one of the famous vendors like Banh Mi Phuong, a Vietnamese sandwich packed with flavor.\n\nDon't miss out on White Rose Dumplings (Banh Vac), delicate steamed rice dumplings with a shrimp filling, or crispy wontons (Hoanh Thanh Chien). The best way to experience it all is to wander, be adventurous, and eat at the small, bustling stalls and eateries frequented by locals. The Central Market is also a fantastic place for a food crawl.",
+        practicalInfo: {
+        howToGetThere: "Street food stalls are found all over Hoi An, with many concentrated in and around the Central Market and the Ancient Town.",
+        openingHours: "Varies by vendor, but most are open from early morning until late at night.",
+        cost: "Very cheap. Most dishes cost between 20,000 and 50,000 VND.",
+        website: "N/A"
+      }
+      },
+        {
+        name: "Visit the Hoi An Museum of History and Culture",
+        description: "For those interested in delving deeper into Hoi An's rich past, a visit to the Museum of History and Culture is a must. Housed in the Quan Am Pagoda, the museum provides a comprehensive overview of the city's development from the Sa Huynh period through the Champa and Dai Viet eras to its heyday as a trading port.\n\nThe collection includes artifacts like ceramics, pottery, maps, and photographs that trace the history of the town and its inhabitants. While the displays are modest, they offer valuable context that will enhance your appreciation for the other historical sites you'll visit in the Ancient Town.",
+        practicalInfo: {
+        howToGetThere: "Located at 10B Tran Hung Dao Street, near the Japanese Covered Bridge.",
+        openingHours: "7:00 AM - 5:30 PM daily.",
+        cost: "Included in the Ancient Town ticket (120,000 VND).",
+        website: "N/A"
+      }
+      }
+      ]}
+      logistics={{
+        gettingAround: "Hoi An's Ancient Town is pedestrian-friendly and best explored on foot. Bicycles are the most popular way to get around the wider area, including to the beaches and through the rice paddies; most hotels offer them for free or for a small daily fee. For longer distances, 'Grab' (the Southeast Asian equivalent of Uber) is widely available and affordable for both cars and motorbikes. Traditional cyclos offer a more leisurely, scenic tour of the town.",
+        whereToStay: "For first-time visitors, staying in or near the Ancient Town provides easy access to major attractions, restaurants, and shops. For a beach holiday, the An Bang beach area offers seaside resorts and laid-back bungalows. For a tranquil escape, consider a homestay or boutique hotel in the Cam Chau or Cam Thanh areas, nestled among the rice fields and waterways between the town and the beach. Recommended hotels include Little Riverside Hoi An (Luxury), La Siesta Hoi An Resort & Spa (Mid-Range), and Anio Boutique Hotel Hoi An (Budget).",
+        bestTimeToVisit: "The best time to visit Hoi An is during the dry season, from February to August, when the weather is warm and sunny with low humidity. February to April offers the most pleasant temperatures. The heat peaks from May to August. The rainy season runs from September to January, characterized by heavy rain and potential flooding, especially in October and November. The 14th day of each lunar month is the Lantern Festival, a particularly beautiful time to visit.",
+        suggestedItinerary: "Day 1: Arrive and settle in. Spend the afternoon exploring the Ancient Town, visiting the Japanese Bridge and a couple of assembly halls. Get measured for custom clothing. In the evening, enjoy a sunset boat ride on the Thu Bon River and release a lantern, followed by dinner in the old town.\nDay 2: Start with a morning cooking class, including a market tour. In the afternoon, cycle out to the rice paddies and Tra Que Vegetable Village. Head to An Bang beach for a swim and to watch the sunset from a beach bar.\nDay 3: Take a half-day trip to the My Son Sanctuary. Return to Hoi An for a final fitting and to pick up your tailored clothes. Spend the evening exploring the Hoi An Night Market for souvenirs and street food."
+      }}
+      faqs={[{
+          question: "Is Hoi An expensive?",
+          answer: "Hoi An is considered very affordable for most international travelers. Street food dishes can be as cheap as $1-2 USD, while a meal in a nice restaurant might cost $10-15 USD. Accommodation is widely available to suit all budgets, from hostels for under $10 USD to luxury resorts for over $150 USD per night. Activities like bicycle rentals and entrance tickets are also very reasonably priced."
         },
         {
-                "name": "Cross the Japanese Covered Bridge",
-                "description": "The iconic symbol of Hoi An, the Japanese Covered Bridge (Chùa Cầu), is a beautiful example of Japanese architecture dating back to the 18th century. It was built by the Japanese community to connect their quarter with the Chinese quarter across a small canal. The bridge is unique in that it has a temple built into its northern side, dedicated to the northern deity Tran Vo Bac De, who is believed to control the weather.\n\nAdorned with intricate carvings, including a pair of monkey statues at one end and dog statues at the other, the bridge is a masterpiece of craftsmanship. It's a must-see landmark and one of the sites included in the Ancient Town ticket. Be sure to visit both during the day to appreciate the details and at night when it's beautifully lit.",
-                "practicalInfo": {
-                        "howToGetThere": "Easy to reach by public transport",
-                        "openingHours": "Check official website for hours",
-                        "cost": "Entry fees may apply",
-                        "website": "N/A"
-                }
+          question: "How many days do you need in Hoi An?",
+          answer: "A stay of 3 to 4 days is ideal for Hoi An. This gives you enough time to thoroughly explore the Ancient Town, get some clothes tailored, relax at the beach, take a cooking class, and go on a day trip to My Son Sanctuary without feeling rushed. If you want a more relaxed pace or more beach time, 5 days would be very comfortable."
         },
         {
-                "name": "Get Custom-Made Clothing",
-                "description": "Hoi An is world-famous for its skilled and incredibly fast tailors. Getting a custom-made outfit, whether it's a suit, a dress, a winter coat, or a pair of leather shoes, is a quintessential Hoi An experience. There are hundreds of tailor shops to choose from, ranging from high-end boutiques to smaller family-run businesses. The process is simple: bring a photo or design, choose your fabric, get measured, and return for a fitting within 24 hours.\n\nMost tailors can complete a garment in one to three days. It's an affordable luxury and a fantastic way to get a perfectly fitting piece of clothing as a unique souvenir. Popular and reputable shops include Yaly Couture, Bebe Tailor, and A Dong Silk.",
-                "practicalInfo": {
-                        "howToGetThere": "Easy to reach by public transport",
-                        "openingHours": "Check official website for hours",
-                        "cost": "Entry fees may apply",
-                        "website": "N/A"
-                }
+          question: "Is Hoi An safe?",
+          answer: "Hoi An is a very safe city for tourists. The crime rate is low. However, like anywhere, it's wise to practice common sense. Be aware of your surroundings, keep your valuables secure to prevent petty theft, and be cautious of minor scams. The biggest safety concern is traffic, so be careful when crossing streets or riding a bicycle or motorbike."
         },
         {
-                "name": "Day Trip to My Son Sanctuary",
-                "description": "Take a step back in time with a half-day trip to My Son Sanctuary, another UNESCO World Heritage site located about an hour's drive from Hoi An. This impressive complex of abandoned and partially ruined Hindu temples was constructed between the 4th and 14th centuries by the Champa Kingdom. Nestled in a lush green valley, these brick towers were dedicated to the Hindu god Shiva.\n\nThough heavily damaged by bombing during the Vietnam War, the remaining structures are evocative and atmospheric, often drawing comparisons to a smaller-scale Angkor Wat. It's best to visit early in the morning to avoid the heat and the crowds. You can book a guided tour from Hoi An, which often includes a boat trip back along the Thu Bon River.",
-                "practicalInfo": {
-                        "howToGetThere": "Easy to reach by public transport",
-                        "openingHours": "Check official website for hours",
-                        "cost": "Entry fees may apply",
-                        "website": "www.disanmyson.vn"
-                }
-        },
-        {
-                "name": "Release a Lantern on the Thu Bon River",
-                "description": "Participating in the evening ritual of releasing a paper lantern on the Thu Bon River is a truly magical experience. As darkness falls, the riverfront comes alive with local women and children selling small, colorful lanterns with a candle inside. For a small fee, you can purchase one and set it afloat on the water, making a wish as it drifts away.\n\nFor an even more immersive experience, hire a sampan boat for a short 20-30 minute ride. Paddled by a local, you'll be able to release your lantern from the middle of the river, surrounded by hundreds of other floating lights. It's a peaceful and picturesque activity that perfectly captures the romantic spirit of Hoi An.",
-                "practicalInfo": {
-                        "howToGetThere": "Easy to reach by public transport",
-                        "openingHours": "Check official website for hours",
-                        "cost": "Entry fees may apply",
-                        "website": "N/A"
-                }
-        },
-        {
-                "name": "Take a Vietnamese Cooking Class",
-                "description": "Hoi An's cuisine is a highlight for many visitors, and there's no better way to delve into it than by taking a cooking class. Many classes begin with a guided tour of the bustling Central Market to learn about fresh Vietnamese ingredients like herbs, spices, and local produce. You'll then head to a kitchen, often in a scenic location by the river or amidst rice fields.\n\nUnder the guidance of a local chef, you'll learn to prepare several classic Vietnamese and Hoi An specialty dishes, such as pho, fresh spring rolls (gỏi cuốn), and crispy pancakes (bánh xèo). It's a fun, interactive, and delicious experience that gives you a new skill to take home.",
-                "practicalInfo": {
-                        "howToGetThere": "Easy to reach by public transport",
-                        "openingHours": "Check official website for hours",
-                        "cost": "Entry fees may apply",
-                        "website": "varies by school"
-                }
-        },
-        {
-                "name": "Cycle Through the Rice Paddies",
-                "description": "Escape the charming but busy Ancient Town and explore the serene countryside surrounding Hoi An by bicycle. Renting a bike is cheap and easy, allowing you to discover a different side of Vietnam at your own pace. The paths are flat and easy to navigate, leading you through vast, vibrant green rice paddies where you can see farmers at work with their water buffalo.\n\nA popular route is towards Cam Kim Island, accessible via a short ferry ride, or cycling through the lanes around Tra Que Vegetable Village. It's a peaceful and rewarding way to spend a few hours, offering fantastic photo opportunities and a glimpse into rural Vietnamese life.",
-                "practicalInfo": {
-                        "howToGetThere": "Easy to reach by public transport",
-                        "openingHours": "Check official website for hours",
-                        "cost": "Entry fees may apply",
-                        "website": "N/A"
-                }
-        },
-        {
-                "name": "Relax at An Bang Beach",
-                "description": "Just a short 5km cycle or taxi ride from the Ancient Town lies An Bang Beach, a beautiful stretch of white sand with gentle waves. It's the perfect place to unwind after a few days of sightseeing. The beach has a laid-back, bohemian vibe with numerous beachfront restaurants and bars offering comfortable loungers and umbrellas for their patrons.\n\nSpend the day swimming, sunbathing, and sipping on fresh coconuts. For the more active, there are options for surfing and stand-up paddleboarding when conditions are right. An Bang offers a more relaxed atmosphere than the more developed Cua Dai beach nearby, making it a favorite among expats and tourists alike.",
-                "practicalInfo": {
-                        "howToGetThere": "Easy to reach by public transport",
-                        "openingHours": "Check official website for hours",
-                        "cost": "Entry fees may apply",
-                        "website": "N/A"
-                }
+          question: "What is Hoi An famous for?",
+          answer: "Hoi An is famous for four main things: its incredibly well-preserved UNESCO World Heritage Ancient Town with its unique architecture; the magical atmosphere created by thousands of colorful silk lanterns, especially during the monthly Full Moon Lantern Festival; its high-quality, fast, and affordable tailor shops; and its delicious and unique regional cuisine, including dishes like Cao Lầu and White Rose Dumplings."
         }
-]}
+      ]}
     />
   );
 };

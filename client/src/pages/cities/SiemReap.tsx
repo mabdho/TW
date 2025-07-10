@@ -4,97 +4,188 @@ import { CityPage } from '../../components/CityPage';
 export const SiemReap: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Siem Reap, Cambodia (2025 Guide)"
-      description="Planning a trip to Siem Reap? Discover the top 15 things to do, from iconic landmarks to unique local experiences. Our complete 2025 guide covers where to stay, what to eat, and insider tips!"
-      highlights={[
-        "Angkor Wat",
+      title={"15 Best Things to Do in Siem Reap, Cambodia (2025 Guide)"}
+      description={"Siem Reap, the captivating gateway to the ancient world, is a city where history breathes through the roots of giant banyan trees and timeless stone faces smile enigmatically. While forever linked to the magnificent temples of Angkor, this Cambodian jewel offers more than just archaeological wonders. It’s a city of vibrant markets, resilient people, and a burgeoning culinary scene. From cruising through floating villages on the vast Tonlé Sap Lake to witnessing the artistry of a modern circus, Siem Reap seamlessly blends its profound past with a dynamic present. Whether you're a history buff, a culture enthusiast, or an adventurous foodie, you'll find an incredible array of experiences. Exploring the ancient Khmer empire and embracing modern Cambodian life are just some of the best things to do in Siem Reap, a destination that promises to enchant and inspire every traveler who walks its dusty, storied streets."}
+      highlights={["Angkor Wat",
         "Angkor Thom & Bayon Temple",
         "Ta Prohm",
         "Banteay Srei",
-        "Tonlé Sap Lake & Kampong Phluk"
-]}
+        "Tonlé Sap Lake & Kampong Phluk"]}
       attractions={[
         {
-                "name": "Angkor Wat",
-                "description": "The crown jewel of Cambodia, Angkor Wat is the largest religious monument in the world and an architectural masterpiece. Originally built in the 12th century as a Hindu temple dedicated to Vishnu, it gradually transformed into a Buddhist temple. Its five iconic lotus-like towers, sprawling galleries, and intricate bas-reliefs depicting Hindu mythology are a testament to the staggering power and artistic vision of the Khmer Empire. \n\nWatching the sunrise over its main spires is a quintessential travel experience, as the sky explodes in color, reflecting beautifully in the surrounding moat. Exploring its vast grounds reveals hidden courtyards, steep stairways to upper levels, and endless details that tell stories of gods, battles, and daily life from a bygone era. It is, without question, the primary reason visitors flock to Siem Reap.",
-                "practicalInfo": {
-                        "howToGetThere": "Easy to reach by public transport",
-                        "openingHours": "Check official website for hours",
-                        "cost": "Entry fees may apply",
-                        "website": "www.angkorenterprise.gov.kh"
-                }
+        name: "Angkor Wat",
+        description: "The crown jewel of Cambodia, Angkor Wat is the largest religious monument in the world and an architectural masterpiece. Originally built in the 12th century as a Hindu temple dedicated to Vishnu, it gradually transformed into a Buddhist temple. Its five iconic lotus-like towers, sprawling galleries, and intricate bas-reliefs depicting Hindu mythology are a testament to the staggering power and artistic vision of the Khmer Empire. \n\nWatching the sunrise over its main spires is a quintessential travel experience, as the sky explodes in color, reflecting beautifully in the surrounding moat. Exploring its vast grounds reveals hidden courtyards, steep stairways to upper levels, and endless details that tell stories of gods, battles, and daily life from a bygone era. It is, without question, the primary reason visitors flock to Siem Reap.",
+        practicalInfo: {
+        howToGetThere: "Located 6km north of Siem Reap. Accessible via tuk-tuk, private car, or bicycle.",
+        openingHours: "5:00 AM – 5:30 PM daily (upper level, Bakan, opens later).",
+        cost: "Included in the Angkor Pass: $37 (1 day), $62 (3 days), $72 (7 days).",
+        website: "www.angkorenterprise.gov.kh"
+      }
+      },
+        {
+        name: "Angkor Thom & Bayon Temple",
+        description: "Angkor Thom, meaning 'Great City,' was the last and most enduring capital of the Khmer Empire. This vast, walled city is a treasure trove of temples, but its heart is the enigmatic Bayon Temple. Famous for its 216 giant, serene smiling faces carved into its stone towers, Bayon is a mesmerizing and slightly surreal experience. Scholars believe the faces are a representation of King Jayavarman VII himself, blended with the image of a bodhisattva.\n\nBeyond Bayon, explore other key sites within Angkor Thom's walls, such as the Terrace of the Elephants, a grand viewing platform for royal ceremonies, and the Terrace of the Leper King, with its deeply carved mythological figures. The sheer scale and ambition of this ancient city complex are breathtaking.",
+        practicalInfo: {
+        howToGetThere: "Located just north of Angkor Wat, part of the 'Small Circuit' tour.",
+        openingHours: "7:30 AM – 5:30 PM daily.",
+        cost: "Included in the Angkor Pass.",
+        website: "www.angkorenterprise.gov.kh"
+      }
+      },
+        {
+        name: "Ta Prohm",
+        description: "Famously known as the 'Tomb Raider' temple after its feature in the film, Ta Prohm is where nature and architecture have merged into a stunning, chaotic embrace. Unlike other major Angkorian temples, it has been largely left to the jungle, with gigantic silk-cotton and strangler fig trees growing out of its walls, their roots prying apart ancient stones. This atmospheric ruin creates an undeniable sense of discovery, as if you've stumbled upon a lost city.\n\nThe temple was built by King Jayavarman VII as a Mahayana Buddhist monastery and university. Walking through its crumbling galleries and courtyards, shadowed by the massive tree roots, feels like stepping into another world. The interplay of light and shadow, combined with the raw power of nature reclaiming the man-made structures, makes Ta Prohm a photographer's dream and a visitor favorite.",
+        practicalInfo: {
+        howToGetThere: "Part of the 'Small Circuit' tour, east of Angkor Thom.",
+        openingHours: "7:30 AM – 5:30 PM daily.",
+        cost: "Included in the Angkor Pass.",
+        website: "www.angkorenterprise.gov.kh"
+      }
+      },
+        {
+        name: "Banteay Srei",
+        description: "Often called the 'Citadel of Women' or the 'Jewel of Khmer Art,' Banteay Srei is renowned for having the most intricate and well-preserved carvings of any temple in Angkor. Built from a hard red sandstone that lends itself to detailed work, the temple is a miniature masterpiece. Its reliefs are so fine that it's believed they must have been carved by women, as the work was too delicate for men's hands.\n\nDedicated to the Hindu god Shiva, the temple's small scale allows for an intimate viewing experience. Every surface is covered in elaborate depictions of mythological scenes and floral motifs. Located further afield than the main temples, the journey to Banteay Srei takes you through charming Cambodian countryside, offering a glimpse into rural life that beautifully complements the artistic splendor of the temple itself.",
+        practicalInfo: {
+        howToGetThere: "About 37km northeast of Siem Reap. Best reached by tuk-tuk (a longer ride) or car.",
+        openingHours: "7:30 AM – 5:30 PM daily.",
+        cost: "Included in the Angkor Pass.",
+        website: "www.angkorenterprise.gov.kh"
+      }
+      },
+        {
+        name: "Tonlé Sap Lake & Kampong Phluk",
+        description: "Experience a different side of Cambodian life with a trip to Tonlé Sap, Southeast Asia's largest freshwater lake. Its most fascinating feature is the dramatic reversal of the Tonlé Sap River's flow, which causes the lake to swell to more than five times its size during the monsoon season. This unique ecosystem supports entire communities living in 'floating villages.'\n\nKampong Phluk is one of the most popular villages to visit. It is a 'flooded forest' community of remarkable houses built on stilts up to 10 meters high. During the dry season, you can walk among the stilts, but in the wet season, a boat tour takes you through the village streets and into the submerged forest, offering a surreal and beautiful glimpse into a way of life perfectly adapted to the rhythms of the water.",
+        practicalInfo: {
+        howToGetThere: "Located about 30km southeast of Siem Reap. Book a boat tour package which includes transport.",
+        openingHours: "Tours typically run all day, best in the morning or late afternoon.",
+        cost: "Around $20-$25 per person for a boat tour, plus transport.",
+        website: "N/A (Book through local tour operators)"
+      }
+      },
+        {
+        name: "Phare, The Cambodian Circus",
+        description: "More than just a circus, Phare is a breathtaking display of modern Cambodian artistry, combining theatre, music, dance, and acrobatics to tell uniquely Cambodian stories. The performers, graduates of the Phare Ponleu Selpak non-profit school in Battambang, use their incredible skills to convey tales of war, folklore, and modern life with energy, emotion, and humor.\n\nThis is not a traditional circus with animals. Instead, it's a high-energy, human-centered performance akin to Cirque du Soleil, but with a distinctly Cambodian heart. The show is inspiring, professionally produced, and supports a fantastic cause, providing education and artistic opportunities to young Cambodians from difficult backgrounds. An evening at Phare is an unforgettable and uplifting experience.",
+        practicalInfo: {
+        howToGetThere: "Located south of the city center. A short tuk-tuk ride from most hotels.",
+        openingHours: "Shows typically start at 8:00 PM nightly.",
+        cost: "From $18 (Open Seating) to $38 (Preferred Seating).",
+        website: "www.pharecircus.org"
+      }
+      },
+        {
+        name: "Pub Street & Old Market (Phsar Chas)",
+        description: "This is the pulsating heart of modern Siem Reap. By day, the Old Market (Phsar Chas) is a bustling traditional market where locals shop for fresh produce, meat, and household goods, while the surrounding stalls sell souvenirs, spices, and clothing to tourists. It's a fantastic place to soak up local life and practice your bargaining skills.\n\nAs evening falls, the area transforms. The neon lights of Pub Street flicker on, and its bars and restaurants spill out onto the street, offering $0.50 beers, lively music, and a huge variety of international and Khmer cuisine. The atmosphere is electric and social, making it the perfect place to unwind, grab a cheap and delicious meal, and people-watch after a long day of temple exploration.",
+        practicalInfo: {
+        howToGetThere: "Centrally located in Siem Reap town, easily walkable from many hotels.",
+        openingHours: "Market: Early morning to evening. Pub Street: Evening until late (2-3 AM).",
+        cost: "Free to wander. Food and drinks are very affordable.",
+        website: "N/A"
+      }
+      },
+        {
+        name: "Cambodian Landmine Museum",
+        description: "For a sobering but essential understanding of Cambodia's recent, tragic history, a visit to the Landmine Museum is a must. Founded by ex-child soldier Aki Ra, who personally defused thousands of mines, the museum tells the story of the decades of conflict that left Cambodia as one of the most heavily mined countries on earth. \n\nThe exhibits display a collection of deactivated mines, UXOs (unexploded ordnance), and weaponry, providing stark context to the dangers Cambodians have faced. More importantly, the museum is an NGO that funds demining efforts and supports a relief facility for at-risk children affected by landmines. It's an educational and deeply moving experience that highlights the country's incredible resilience.",
+        practicalInfo: {
+        howToGetThere: "Located 25km north of Siem Reap, near Banteay Srei. Often combined with a visit to that temple.",
+        openingHours: "7:30 AM – 5:30 PM daily.",
+        cost: "$5 admission (proceeds support the cause).",
+        website: "www.cambodialandminemuseum.org"
+      }
+      },
+        {
+        name: "Preah Khan",
+        description: "Originally a temporary residence for King Jayavarman VII while Angkor Thom was being built, Preah Khan ('Sacred Sword') is a vast and labyrinthine temple complex. It has been left largely unrestored, giving it a similar atmospheric feel to Ta Prohm but on a grander scale and with fewer crowds. Its flat design means you can wander for hours through a maze of vaulted corridors, hidden courtyards, and galleries decorated with carvings.\n\nOne of its most unique features is a two-story structure with round columns, a design not seen elsewhere in Angkor. The combination of intricate carvings, encroaching jungle, and quiet, moss-covered corridors makes Preah Khan a fantastic temple for exploration and feeling like a true adventurer.",
+        practicalInfo: {
+        howToGetThere: "Located on the 'Grand Circuit' tour, north of Angkor Thom.",
+        openingHours: "7:30 AM – 5:30 PM daily.",
+        cost: "Included in the Angkor Pass.",
+        website: "www.angkorenterprise.gov.kh"
+      }
+      },
+        {
+        name: "Kulen Mountain National Park (Phnom Kulen)",
+        description: "Considered the most sacred mountain in Cambodia, Phnom Kulen is where King Jayavarman II declared independence from Java in 802 AD, marking the birth of the Khmer Empire. It is a popular pilgrimage site for Cambodians and a refreshing natural escape from the temple plains for tourists. \n\nThe park's main attractions include a beautiful two-tiered waterfall, perfect for a cool swim, and the River of a Thousand Lingas (Kbal Spean), where sacred Hindu symbols are carved into the riverbed. At the mountain's summit, a pagoda houses a large reclining Buddha carved into a sandstone boulder. A day trip here offers a mix of history, spirituality, and natural beauty.",
+        practicalInfo: {
+        howToGetThere: "About 50km northeast of Siem Reap. A full-day trip, best done by car or van.",
+        openingHours: "7:00 AM – 4:00 PM daily. Note: The road is one-way up before noon and one-way down after noon.",
+        cost: "$20 entrance fee per foreign visitor (not included in the Angkor Pass).",
+        website: "N/A (Book through local tour operators)"
+      }
+      },
+        {
+        name: "Angkor National Museum",
+        description: "To truly appreciate the artistry and history of the temples, a visit to the Angkor National Museum is highly recommended. This modern, state-of-the-art museum provides essential context for the rise and fall of the Khmer Empire. The exhibits are beautifully curated across eight galleries, using multimedia presentations to explain the history, beliefs, and artistic styles of the era.\n\nThe 'Gallery of 1,000 Buddha Images' is a particular highlight. It's best to visit the museum before you begin your temple explorations, as it will enrich your understanding of the sites and help you identify the gods, symbols, and stories carved into the temple walls.",
+        practicalInfo: {
+        howToGetThere: "Located in Siem Reap town, on the road towards the Angkor Park.",
+        openingHours: "8:30 AM – 6:00 PM daily.",
+        cost: "$12 admission fee, plus $3 for an audio guide (recommended).",
+        website: "www.angkornationalmuseum.com"
+      }
+      },
+        {
+        name: "APOPO Visitor Center",
+        description: "Discover one of Cambodia's most unique and inspiring stories at the APOPO Visitor Center. Here you can meet the 'HeroRATs' – giant African pouched rats that have been trained to detect landmines and tuberculosis. Their incredible sense of smell allows them to clear land far faster and more safely than human deminers with metal detectors.\n\nA visit includes a live demonstration where you can see these intelligent creatures in action, sniffing out deactivated mines. The presentation is informative and engaging, providing a positive and hopeful perspective on the ongoing issue of landmines in Cambodia. It's a fascinating, family-friendly activity that supports a life-saving cause.",
+        practicalInfo: {
+        howToGetThere: "Located between Siem Reap and the Angkor Park entrance. A short tuk-tuk ride.",
+        openingHours: "8:30 AM - 5:30 PM (Mon-Sat), demonstrations on the half-hour.",
+        cost: "$5 donation.",
+        website: "www.apopo.org/en/siem-reap"
+      }
+      },
+        {
+        name: "Banteay Kdei",
+        description: "Often overlooked in favor of its more famous neighbors, Banteay Kdei ('A Citadel of Chambers') is a beautiful Buddhist monastic complex built in a style similar to Ta Prohm and Bayon. Its quieter, less-crowded atmosphere makes it a peaceful retreat where you can explore the architecture without the jostling throngs. Its layout is complex and rewarding to wander through.\n\nThe temple has four concentric walls and stunning gopuras (entrance gates) decorated with the same serene Lokesvara faces found at Bayon. While not as grand as Angkor Wat or as wild as Ta Prohm, Banteay Kdei offers a more contemplative and intimate temple experience, allowing you to appreciate the details and serene setting at your own pace.",
+        practicalInfo: {
+        howToGetThere: "Located on the 'Small Circuit', directly opposite the Srah Srang reservoir.",
+        openingHours: "7:30 AM – 5:30 PM daily.",
+        cost: "Included in the Angkor Pass.",
+        website: "www.angkorenterprise.gov.kh"
+      }
+      },
+        {
+        name: "Take a Khmer Cooking Class",
+        description: "Delve into the subtle and fragrant flavors of Cambodian cuisine by taking a Khmer cooking class. This hands-on experience is one of the best ways to connect with the local culture. Most classes begin with a guided tour of a local market to learn about the fresh ingredients, herbs, and spices that form the foundation of Khmer food, such as lemongrass, galangal, kaffir lime, and the famous fermented fish paste, prahok.\n\nUnder the guidance of a local chef, you'll learn to prepare several classic dishes from scratch, such as Fish Amok (a steamed fish curry), Beef Lok Lak (stir-fried beef), and fresh spring rolls. The best part is sitting down at the end to enjoy the delicious meal you've created. It's a fun, educational, and delicious way to spend half a day.",
+        practicalInfo: {
+        howToGetThere: "Numerous cooking schools are located in and around Siem Reap. Many offer hotel pick-up.",
+        openingHours: "Classes are typically offered in the morning and afternoon.",
+        cost: "$20 - $35 per person.",
+        website: "Search for schools like 'Lily's Secret Garden', 'Le Tigre de Papier', or 'Champey Cooking Class'."
+      }
+      },
+        {
+        name: "Wat Damnak",
+        description: "Escape the tourist hustle and find a moment of tranquility at Wat Damnak, a living, breathing pagoda and monastery in the heart of Siem Reap. Unlike the ancient temple ruins, this is a vibrant center of community and Buddhist life. The grounds are a beautiful mix of gardens, stupas, statues, and prayer halls, offering a peaceful atmosphere for a quiet stroll.\n\nWat Damnak is also home to the Center for Khmer Studies, a major library and research institution. Visitors are welcome to wander the grounds respectfully, observe monks going about their daily routines, and admire the colorful, contemporary pagoda art. It provides a fascinating insight into modern Buddhism in Cambodia, serving as a perfect counterpoint to the ancient religious sites of Angkor.",
+        practicalInfo: {
+        howToGetThere: "Located in the Wat Damnak area of Siem Reap, just across the river from the Old Market.",
+        openingHours: "Open daily during daylight hours.",
+        cost: "Free, but donations are welcome.",
+        website: "N/A"
+      }
+      }
+      ]}
+      logistics={{
+        gettingAround: "The primary mode of transport for tourists is the tuk-tuk, a motorized rickshaw that can be hired for single trips or for a full day of temple touring ($15-$25). Ride-hailing apps like Grab and PassApp are widely used and offer fixed, competitive pricing for tuk-tuks and cars. For exploring the town or nearby temples, renting a bicycle or an e-bike is a fantastic and eco-friendly option.",
+        whereToStay: "Siem Reap offers accommodation for every budget. The Old French Quarter is home to luxury hotels and fine dining. The Wat Bo area, just across the river, is popular for its charming boutique hotels and quieter atmosphere. For budget travelers and backpackers, the area surrounding Pub Street offers countless guesthouses and hostels. Recommended Hotels: Jaya House River Park (Luxury), Viroth's Hotel (Boutique), Onederz Hostel (Budget).",
+        bestTimeToVisit: "The best time to visit Siem Reap is during the dry season, from November to April. The weather is sunny and less humid, making temple exploration more comfortable. This is also the peak tourist season, so expect larger crowds and higher prices. The wet season, from May to October, sees more rain but also brings lush, green landscapes, fewer tourists, and more dramatic skies. The downpours are often intense but short, usually in the afternoon.",
+        suggestedItinerary: "A simple 3-day itinerary: \nDay 1: Angkor Small Circuit. Start with sunrise at Angkor Wat, then explore Angkor Thom (Bayon, Terrace of the Elephants) and the jungle-clad Ta Prohm. In the evening, enjoy dinner and the atmosphere of Pub Street. \nDay 2: Further Temples & Culture. Visit the intricately carved Banteay Srei in the morning, followed by the Cambodian Landmine Museum. In the afternoon, explore the grand Preah Khan on the Grand Circuit. End the day with a show at Phare, The Cambodian Circus. \nDay 3: Lake Life & Local Flavors. Take a morning boat trip to the floating village of Kampong Phluk on Tonlé Sap Lake. In the afternoon, take a Khmer cooking class or visit the APOPO HeroRATs center, followed by some souvenir shopping at the Old Market."
+      }}
+      faqs={[{
+          question: "Is Siem Reap expensive?",
+          answer: "Siem Reap is a very affordable destination, particularly by Western standards. Accommodation can be found for under $15 a night in hostels, with comfortable mid-range hotels available for $30-$60. A delicious street food meal or a meal at a local restaurant can cost as little as $2-$5. A draft beer on Pub Street is famously cheap, often just $0.50-$1. The biggest expense is the Angkor Pass, but transport and daily costs remain low."
         },
         {
-                "name": "Angkor Thom & Bayon Temple",
-                "description": "Angkor Thom, meaning 'Great City,' was the last and most enduring capital of the Khmer Empire. This vast, walled city is a treasure trove of temples, but its heart is the enigmatic Bayon Temple. Famous for its 216 giant, serene smiling faces carved into its stone towers, Bayon is a mesmerizing and slightly surreal experience. Scholars believe the faces are a representation of King Jayavarman VII himself, blended with the image of a bodhisattva.\n\nBeyond Bayon, explore other key sites within Angkor Thom's walls, such as the Terrace of the Elephants, a grand viewing platform for royal ceremonies, and the Terrace of the Leper King, with its deeply carved mythological figures. The sheer scale and ambition of this ancient city complex are breathtaking.",
-                "practicalInfo": {
-                        "howToGetThere": "Easy to reach by public transport",
-                        "openingHours": "Check official website for hours",
-                        "cost": "Entry fees may apply",
-                        "website": "www.angkorenterprise.gov.kh"
-                }
+          question: "How many days do you need in Siem Reap?",
+          answer: "A minimum of three full days is recommended. This allows you to purchase a 3-day Angkor Pass and explore the main temples (Small and Grand circuits) without feeling too rushed. It also gives you time for one other major activity, like visiting Tonlé Sap Lake or Phnom Kulen. To explore more remote temples and experience the city's culture more deeply (cooking classes, museums, circus), five to seven days is ideal."
         },
         {
-                "name": "Ta Prohm",
-                "description": "Famously known as the 'Tomb Raider' temple after its feature in the film, Ta Prohm is where nature and architecture have merged into a stunning, chaotic embrace. Unlike other major Angkorian temples, it has been largely left to the jungle, with gigantic silk-cotton and strangler fig trees growing out of its walls, their roots prying apart ancient stones. This atmospheric ruin creates an undeniable sense of discovery, as if you've stumbled upon a lost city.\n\nThe temple was built by King Jayavarman VII as a Mahayana Buddhist monastery and university. Walking through its crumbling galleries and courtyards, shadowed by the massive tree roots, feels like stepping into another world. The interplay of light and shadow, combined with the raw power of nature reclaiming the man-made structures, makes Ta Prohm a photographer's dream and a visitor favorite.",
-                "practicalInfo": {
-                        "howToGetThere": "Easy to reach by public transport",
-                        "openingHours": "Check official website for hours",
-                        "cost": "Entry fees may apply",
-                        "website": "www.angkorenterprise.gov.kh"
-                }
+          question: "Is Siem Reap safe?",
+          answer: "Yes, Siem Reap is generally a very safe city for tourists. The Khmer people are known for being incredibly friendly and welcoming. The main concerns are petty crimes like bag-snatching and pickpocketing, particularly in crowded areas like Pub Street and markets. It's wise to keep your valuables secure and be aware of your surroundings. Tuk-tuk scams are rare but can happen; using ride-hailing apps like Grab helps to avoid this by providing a fixed price upfront."
         },
         {
-                "name": "Banteay Srei",
-                "description": "Often called the 'Citadel of Women' or the 'Jewel of Khmer Art,' Banteay Srei is renowned for having the most intricate and well-preserved carvings of any temple in Angkor. Built from a hard red sandstone that lends itself to detailed work, the temple is a miniature masterpiece. Its reliefs are so fine that it's believed they must have been carved by women, as the work was too delicate for men's hands.\n\nDedicated to the Hindu god Shiva, the temple's small scale allows for an intimate viewing experience. Every surface is covered in elaborate depictions of mythological scenes and floral motifs. Located further afield than the main temples, the journey to Banteay Srei takes you through charming Cambodian countryside, offering a glimpse into rural life that beautifully complements the artistic splendor of the temple itself.",
-                "practicalInfo": {
-                        "howToGetThere": "Easy to reach by public transport",
-                        "openingHours": "Check official website for hours",
-                        "cost": "Entry fees may apply",
-                        "website": "www.angkorenterprise.gov.kh"
-                }
-        },
-        {
-                "name": "Tonlé Sap Lake & Kampong Phluk",
-                "description": "Experience a different side of Cambodian life with a trip to Tonlé Sap, Southeast Asia's largest freshwater lake. Its most fascinating feature is the dramatic reversal of the Tonlé Sap River's flow, which causes the lake to swell to more than five times its size during the monsoon season. This unique ecosystem supports entire communities living in 'floating villages.'\n\nKampong Phluk is one of the most popular villages to visit. It is a 'flooded forest' community of remarkable houses built on stilts up to 10 meters high. During the dry season, you can walk among the stilts, but in the wet season, a boat tour takes you through the village streets and into the submerged forest, offering a surreal and beautiful glimpse into a way of life perfectly adapted to the rhythms of the water.",
-                "practicalInfo": {
-                        "howToGetThere": "Easy to reach by public transport",
-                        "openingHours": "Check official website for hours",
-                        "cost": "Entry fees may apply",
-                        "website": "N/A (Book through local tour operators)"
-                }
-        },
-        {
-                "name": "Phare, The Cambodian Circus",
-                "description": "More than just a circus, Phare is a breathtaking display of modern Cambodian artistry, combining theatre, music, dance, and acrobatics to tell uniquely Cambodian stories. The performers, graduates of the Phare Ponleu Selpak non-profit school in Battambang, use their incredible skills to convey tales of war, folklore, and modern life with energy, emotion, and humor.\n\nThis is not a traditional circus with animals. Instead, it's a high-energy, human-centered performance akin to Cirque du Soleil, but with a distinctly Cambodian heart. The show is inspiring, professionally produced, and supports a fantastic cause, providing education and artistic opportunities to young Cambodians from difficult backgrounds. An evening at Phare is an unforgettable and uplifting experience.",
-                "practicalInfo": {
-                        "howToGetThere": "Easy to reach by public transport",
-                        "openingHours": "Check official website for hours",
-                        "cost": "Entry fees may apply",
-                        "website": "www.pharecircus.org"
-                }
-        },
-        {
-                "name": "Pub Street & Old Market (Phsar Chas)",
-                "description": "This is the pulsating heart of modern Siem Reap. By day, the Old Market (Phsar Chas) is a bustling traditional market where locals shop for fresh produce, meat, and household goods, while the surrounding stalls sell souvenirs, spices, and clothing to tourists. It's a fantastic place to soak up local life and practice your bargaining skills.\n\nAs evening falls, the area transforms. The neon lights of Pub Street flicker on, and its bars and restaurants spill out onto the street, offering $0.50 beers, lively music, and a huge variety of international and Khmer cuisine. The atmosphere is electric and social, making it the perfect place to unwind, grab a cheap and delicious meal, and people-watch after a long day of temple exploration.",
-                "practicalInfo": {
-                        "howToGetThere": "Easy to reach by public transport",
-                        "openingHours": "Check official website for hours",
-                        "cost": "Entry fees may apply",
-                        "website": "N/A"
-                }
-        },
-        {
-                "name": "Cambodian Landmine Museum",
-                "description": "For a sobering but essential understanding of Cambodia's recent, tragic history, a visit to the Landmine Museum is a must. Founded by ex-child soldier Aki Ra, who personally defused thousands of mines, the museum tells the story of the decades of conflict that left Cambodia as one of the most heavily mined countries on earth. \n\nThe exhibits display a collection of deactivated mines, UXOs (unexploded ordnance), and weaponry, providing stark context to the dangers Cambodians have faced. More importantly, the museum is an NGO that funds demining efforts and supports a relief facility for at-risk children affected by landmines. It's an educational and deeply moving experience that highlights the country's incredible resilience.",
-                "practicalInfo": {
-                        "howToGetThere": "Easy to reach by public transport",
-                        "openingHours": "Check official website for hours",
-                        "cost": "Entry fees may apply",
-                        "website": "www.cambodialandminemuseum.org"
-                }
+          question: "What is Siem Reap famous for?",
+          answer: "Siem Reap is world-famous primarily as the gateway to the Angkor Archaeological Park, a UNESCO World Heritage site that includes the magnificent Angkor Wat temple. Beyond the ancient temples, it's also known for the unique floating villages on Tonlé Sap Lake, its vibrant Pub Street nightlife, the resilience of its people, and the inspiring work of NGOs like Phare Circus and the Cambodian Landmine Museum."
         }
-]}
+      ]}
     />
   );
 };
