@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { MapPin, Clock, DollarSign, Globe, Star, Users, Info, Camera, Image, X, ChevronLeft, ChevronRight, Expand } from 'lucide-react';
+import { MapPin, Clock, DollarSign, Globe, Star, Users, Info, Camera, Image, ChevronLeft, ChevronRight, Play, Pause, RotateCcw } from 'lucide-react';
 import { Navigation } from './Navigation';
 import { Footer } from './Footer';
 
@@ -54,8 +54,8 @@ export const CityPage: React.FC<CityPageProps> = ({
   logistics,
   faqs
 }) => {
-  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const top5Attractions = attractions.slice(0, 5);
   
   // Calculate number of tabs dynamically
@@ -82,27 +82,29 @@ export const CityPage: React.FC<CityPageProps> = ({
     return gradients[hash % gradients.length];
   };
 
-  // Navigation functions for gallery modal
-  const nextImage = () => {
-    if (selectedImageIndex !== null && galleryImages.length > 0) {
-      setSelectedImageIndex((prev) => prev === null ? 0 : (prev + 1) % 6);
+  // Slider navigation functions
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % 6);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => prev === 0 ? 5 : prev - 1);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
+
+  // Auto-play functionality
+  React.useEffect(() => {
+    if (isAutoPlaying) {
+      const interval = setInterval(nextSlide, 4000);
+      return () => clearInterval(interval);
     }
-  };
+  }, [isAutoPlaying]);
 
-  const prevImage = () => {
-    if (selectedImageIndex !== null && galleryImages.length > 0) {
-      setSelectedImageIndex((prev) => prev === null ? 0 : prev === 0 ? 5 : prev - 1);
-    }
-  };
-
-  const openGallery = (index: number) => {
-    setSelectedImageIndex(index);
-    setIsGalleryOpen(true);
-  };
-
-  const closeGallery = () => {
-    setIsGalleryOpen(false);
-    setSelectedImageIndex(null);
+  const toggleAutoPlay = () => {
+    setIsAutoPlaying(!isAutoPlaying);
   };
 
   return (
@@ -187,7 +189,7 @@ export const CityPage: React.FC<CityPageProps> = ({
         </div>
       </div>
 
-      {/* Enhanced Photo Gallery Section */}
+      {/* Photo Gallery Slider Section */}
       <div className="bg-gradient-to-br from-gray-50 to-gray-100 border-b border-gray-200">
         <div className="container mx-auto px-4 py-8 sm:py-12">
           {/* Gallery Header */}
@@ -203,79 +205,133 @@ export const CityPage: React.FC<CityPageProps> = ({
             </p>
           </div>
           
-          {/* Gallery Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4 lg:gap-6 max-w-4xl mx-auto">
-            {Array.from({ length: 6 }, (_, index) => {
-              const galleryImage = galleryImages[index];
-              const isMainImage = index === 0;
-              const gridClass = isMainImage ? "sm:col-span-2 sm:row-span-2" : "";
-              
-              return (
-                <div 
-                  key={index} 
-                  className={`relative group cursor-pointer transform transition-all duration-300 hover:scale-[1.02] hover:z-10 ${gridClass}`}
-                  onClick={() => openGallery(index)}
-                >
-                  <div className={`relative ${isMainImage ? 'aspect-[4/3]' : 'aspect-square'} bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl lg:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300`}>
-                    {galleryImage?.url ? (
-                      <>
-                        <img 
-                          src={galleryImage.url} 
-                          alt={galleryImage.alt || `${title} photo ${index + 1}`}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        
-                        {/* Expand icon overlay */}
-                        <div className="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100">
-                          <Expand className="w-4 h-4 text-gray-700" />
+          {/* Main Slider Container */}
+          <div className="max-w-4xl mx-auto">
+            <div className="relative group">
+              {/* Main Image Display */}
+              <div className="relative aspect-[16/10] bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl overflow-hidden shadow-2xl">
+                {galleryImages[currentSlide]?.url ? (
+                  <img 
+                    src={galleryImages[currentSlide].url} 
+                    alt={galleryImages[currentSlide].alt || `${title} photo ${currentSlide + 1}`}
+                    className="w-full h-full object-cover transition-all duration-500"
+                  />
+                ) : (
+                  <>
+                    {/* Enhanced placeholder for current slide */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${getGradientClass(title + currentSlide)} opacity-30`}></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center p-8">
+                        <div className="w-20 h-20 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4">
+                          <Image className="w-12 h-12 text-gray-600" />
                         </div>
-                        
-                        {/* Photo counter for main image */}
-                        {isMainImage && (
-                          <div className="absolute bottom-3 right-3 bg-black/70 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            +{galleryImages.filter(img => img?.url).length || 6} photos
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        {/* Enhanced placeholder design */}
-                        <div className={`absolute inset-0 bg-gradient-to-br ${getGradientClass(title + index)} opacity-20`}></div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="text-center p-4">
-                            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-white/90 transition-colors">
-                              <Image className={`${isMainImage ? 'w-8 h-8 sm:w-10 sm:h-10' : 'w-6 h-6 sm:w-8 sm:h-8'} text-gray-600`} />
-                            </div>
-                            <p className={`${isMainImage ? 'text-sm sm:text-base' : 'text-xs sm:text-sm'} text-gray-700 font-medium`}>
-                              {isMainImage ? 'Main Gallery Photo' : `Photo ${index + 1}`}
-                            </p>
-                            {isMainImage && (
-                              <p className="text-xs text-gray-500 mt-1">Click to explore gallery</p>
-                            )}
-                          </div>
-                        </div>
-                        
-                        {/* Decorative elements for placeholders */}
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-                        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-                      </>
-                    )}
+                        <h3 className="text-xl font-bold text-gray-800 mb-2">{title} Photo {currentSlide + 1}</h3>
+                        <p className="text-gray-600">Stunning view awaits here</p>
+                      </div>
+                    </div>
                     
-                    {/* Caption overlay */}
-                    {galleryImage?.caption && (
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <p className="text-white text-sm font-medium">{galleryImage.caption}</p>
+                    {/* Decorative elements */}
+                    <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
+                  </>
+                )}
+                
+                {/* Navigation Arrows */}
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg hover:scale-110"
+                >
+                  <ChevronLeft className="w-6 h-6 text-gray-700" />
+                </button>
+                
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg hover:scale-110"
+                >
+                  <ChevronRight className="w-6 h-6 text-gray-700" />
+                </button>
+                
+                {/* Image Caption Overlay */}
+                {galleryImages[currentSlide]?.caption && (
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                    <p className="text-white text-lg font-medium text-center">{galleryImages[currentSlide].caption}</p>
+                  </div>
+                )}
+                
+                {/* Slide Counter */}
+                <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium">
+                  {currentSlide + 1} / 6
+                </div>
+              </div>
+              
+              {/* Thumbnail Navigation */}
+              <div className="flex justify-center gap-2 mt-6">
+                {Array.from({ length: 6 }, (_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    className={`relative w-16 h-12 rounded-lg overflow-hidden transition-all duration-300 border-2 ${
+                      currentSlide === index 
+                        ? 'border-pink-500 shadow-lg scale-110' 
+                        : 'border-transparent hover:border-gray-300 hover:scale-105'
+                    }`}
+                  >
+                    {galleryImages[index]?.url ? (
+                      <img 
+                        src={galleryImages[index].url} 
+                        alt={`Thumbnail ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className={`w-full h-full bg-gradient-to-br ${getGradientClass(title + index)} opacity-60 flex items-center justify-center`}>
+                        <span className="text-white text-xs font-bold">{index + 1}</span>
                       </div>
                     )}
-                  </div>
-                </div>
-              );
-            })}
+                    
+                    {/* Active indicator */}
+                    {currentSlide === index && (
+                      <div className="absolute inset-0 bg-pink-500/20 border-2 border-pink-500 rounded-lg"></div>
+                    )}
+                  </button>
+                ))}
+              </div>
+              
+              {/* Controls */}
+              <div className="flex justify-center items-center gap-4 mt-6">
+                <button
+                  onClick={toggleAutoPlay}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 ${
+                    isAutoPlaying 
+                      ? 'bg-pink-500 text-white border-pink-500 hover:bg-pink-600' 
+                      : 'bg-white text-gray-700 border-gray-300 hover:border-pink-300'
+                  }`}
+                >
+                  {isAutoPlaying ? (
+                    <>
+                      <Pause className="w-4 h-4" />
+                      <span className="text-sm font-medium">Pause</span>
+                    </>
+                  ) : (
+                    <>
+                      <Play className="w-4 h-4" />
+                      <span className="text-sm font-medium">Play</span>
+                    </>
+                  )}
+                </button>
+                
+                <button
+                  onClick={() => goToSlide(0)}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-white text-gray-700 border border-gray-300 hover:border-pink-300 transition-all duration-300"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                  <span className="text-sm font-medium">Reset</span>
+                </button>
+              </div>
+            </div>
           </div>
           
           {/* Gallery Info Card */}
-          <div className="mt-8 max-w-2xl mx-auto">
+          <div className="mt-12 max-w-2xl mx-auto">
             <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-white/50 shadow-lg p-6">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center flex-shrink-0">
@@ -285,83 +341,20 @@ export const CityPage: React.FC<CityPageProps> = ({
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">About This Gallery</h3>
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                     {galleryImages?.length > 0 && galleryImages.some(img => img.url) 
-                      ? `This curated photo collection showcases the most iconic sights and hidden gems of ${title}. Each image captures the unique character and beauty that makes this destination special.`
-                      : `This gallery is ready to showcase the beauty of ${title}. Real photos can be added by updating the city's configuration file with authentic image URLs from the destination.`
+                      ? `This curated photo collection showcases the most iconic sights and hidden gems of ${title}. Navigate through images using the arrows, thumbnails, or let it auto-play to discover the beauty of this destination.`
+                      : `This interactive gallery slider is ready to showcase the beauty of ${title}. Real photos can be added by updating the city's configuration file with authentic image URLs from the destination.`
                     }
                   </p>
-                  {galleryImages?.some(img => img.url) && (
-                    <div className="mt-3 flex items-center gap-2 text-sm text-gray-500">
-                      <Camera className="w-4 h-4" />
-                      <span>Click any photo to view in full-screen gallery mode</span>
-                    </div>
-                  )}
+                  <div className="mt-3 flex items-center gap-2 text-sm text-gray-500">
+                    <Camera className="w-4 h-4" />
+                    <span>Use navigation controls or let the slideshow auto-play every 4 seconds</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Gallery Modal */}
-      {isGalleryOpen && selectedImageIndex !== null && (
-        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative w-full max-w-6xl max-h-[90vh] flex items-center justify-center">
-            {/* Close button */}
-            <button
-              onClick={closeGallery}
-              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors"
-            >
-              <X className="w-6 h-6 text-white" />
-            </button>
-            
-            {/* Navigation buttons */}
-            <button
-              onClick={prevImage}
-              className="absolute left-4 z-10 w-12 h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors"
-            >
-              <ChevronLeft className="w-6 h-6 text-white" />
-            </button>
-            
-            <button
-              onClick={nextImage}
-              className="absolute right-4 z-10 w-12 h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors"
-            >
-              <ChevronRight className="w-6 h-6 text-white" />
-            </button>
-            
-            {/* Main image */}
-            <div className="relative w-full h-full flex items-center justify-center">
-              {galleryImages[selectedImageIndex]?.url ? (
-                <img
-                  src={galleryImages[selectedImageIndex].url}
-                  alt={galleryImages[selectedImageIndex].alt || `${title} photo ${selectedImageIndex + 1}`}
-                  className="max-w-full max-h-full object-contain rounded-lg"
-                />
-              ) : (
-                <div className="w-96 h-64 bg-gradient-to-br from-gray-600 to-gray-700 rounded-lg flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <Image className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                    <p className="text-lg font-medium">Photo {selectedImageIndex + 1}</p>
-                    <p className="text-sm opacity-75">Placeholder image</p>
-                  </div>
-                </div>
-              )}
-              
-              {/* Image caption */}
-              {galleryImages[selectedImageIndex]?.caption && (
-                <div className="absolute bottom-4 left-4 right-4 bg-black/70 backdrop-blur-sm rounded-lg p-4">
-                  <p className="text-white text-center">{galleryImages[selectedImageIndex].caption}</p>
-                </div>
-              )}
-            </div>
-            
-            {/* Image counter */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm">
-              {selectedImageIndex + 1} / 6
-            </div>
-          </div>
-        </div>
-      )}
 
       <div className="container mx-auto px-4 py-6 sm:py-8">
         <Tabs defaultValue="top5" className="w-full">
