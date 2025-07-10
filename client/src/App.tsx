@@ -157,6 +157,7 @@ import { Yogyakarta } from "./pages/cities/Yogyakarta";
 import { Zagreb } from "./pages/cities/Zagreb";
 import { Zaragoza } from "./pages/cities/Zaragoza";
 import { Dubai } from "./pages/cities/Dubai";
+import { NewYork } from "./pages/cities/NewYork";
 
 function App() {
   return (
@@ -320,6 +321,7 @@ function App() {
         <Route path="/dubai" element={<Dubai />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/new-york" element={<NewYork />} />
       </Routes>
     </Router>
   );

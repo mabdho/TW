@@ -5,7 +5,7 @@ export const NewYork: React.FC = () => {
   return (
     <CityPage
       title={"15 Best Things to Do in New York, USA (2025 Guide)"}
-      description={`So, you're planning a trip to the Big Apple? Awesome choice! Trying to figure out the best things to do in New York can be, well, a bit overwhelming. There's just so much to see and do, right? But don't worry, I'm here to help. This guide is packed with must-see attractions, hidden gems, and practical tips to make your trip unforgettable. Whether you're a first-timer or a seasoned New York explorer, I've got you covered. We'll cover everything from iconic landmarks to local favorites, ensuring you experience the very best that NYC has to offer in 2025. Get ready to explore world-class museums, indulge in delicious food, and soak up the vibrant energy of this incredible city. Trust me, you won't be disappointed. And, let's be honest, there will probably be a few things you miss, but that's just a good excuse to come back!`}
+      description={`So, you're planning a trip to the Big Apple? Awesome! Deciding on what things to do in New York can feel overwhelming, I get it. There are literally hundreds, maybe thousands, of possibilities. This guide cuts through the noise and highlights the absolute best experiences NYC has to offer in 2025. We're talking iconic landmarks, hidden gems, and unforgettable moments. Forget just ticking boxes; let's create memories. From Broadway shows that'll blow you away to quiet corners where you can escape the city's buzz, New York has something for everyone. It's a city of dreams, and I'm here to help you make yours a reality. Honestly, even living here, I'm still discovering new things. It's that kind of place. And don't worry, we'll cover all the practical stuff too, like getting around and finding the perfect hotel. Let's dive in!`}
       imageUrl={"https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
         { url: "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", alt: "12", caption: "12" },
@@ -15,173 +15,153 @@ export const NewYork: React.FC = () => {
         { url: "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", alt: "12", caption: "12" },
         { url: "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", alt: "12", caption: "12" }
       ]}
-      highlights={["Climb the Empire State Building for breathtaking views.",
-        "Wander through Central Park's tranquil landscapes.",
-        "Experience the magic of a Broadway show.",
-        "Explore the diverse cultures of New York's many neighborhoods.",
-        "Visit the Statue of Liberty and Ellis Island to learn about immigration."]}
+      highlights={["Ascend the Empire State Building for breathtaking panoramic views.",
+        "Wander through Central Park, a green oasis in the heart of Manhattan.",
+        "Experience the dazzling lights and energy of Times Square.",
+        "Visit the Statue of Liberty and Ellis Island, symbols of American freedom.",
+        "Catch a world-class Broadway show for an unforgettable evening."]}
       attractions={[
         {
         name: "Empire State Building",
-        description: `No trip to New York is complete without a visit to the Empire State Building. I mean, it's an icon for a reason! This Art Deco masterpiece offers panoramic views of the city that are simply breathtaking. You can take the elevator to the 86th-floor observatory or, for an even higher vantage point, head up to the 102nd floor. Honestly, the views are worth the price of admission. Try to go early in the morning or later in the evening to avoid the biggest crowds. 
+        description: `Okay, you simply have to visit the Empire State Building. It's an absolute classic. Ascending to the top of this iconic skyscraper is an experience you won't soon forget. The views are, well, indescribable. You can see pretty much the entire city sprawling out before you, and on a clear day, you can see for miles. Try to go early in the morning, or maybe late at night, to avoid the worst of the crowds. Even if you're not a huge fan of heights, I think you'll be captivated by the sheer grandeur of it all. 
 
-While you're up there, take your time to soak it all in. It's pretty amazing to see the entire city stretching out before you. It gives you a real sense of the scale of New York. And don't forget your camera! You'll definitely want to capture some photos to remember the experience. Perhaps grab a snack or coffee nearby afterwards, there are plenty of options.`,
+The building itself is an Art Deco masterpiece, and just being inside is a treat. And if you are a fan of heights, well, you're in for a real thrill. There are two observation decks: one on the 86th floor and another on the 102nd floor. The 86th floor is the most popular, offering incredible 360-degree views. But if you want to splurge a little, the 102nd floor offers even more breathtaking vistas. It's really up to you. Honestly, either way, you'll get amazing photos.`,
         practicalInfo: {
-        howToGetThere: "Subway lines B, D, F, M, N, Q, R, W to 34th Street – Herald Square",
-        openingHours: "8:00 AM to 2:00 AM daily",
-        cost: "From $44 per adult",
+        howToGetThere: "Subway lines B, D, F, M, N, Q, R, W to 34th Street – Herald Square.",
+        openingHours: "8:00 AM to 2:00 AM daily.",
+        cost: "Starting from $44 per adult.",
         website: "https://www.esbnyc.com/"
       }
       },
         {
         name: "Central Park",
-        description: `Ah, Central Park. A true oasis in the heart of Manhattan. This sprawling green space offers a welcome escape from the city's hustle and bustle. You can stroll along its winding paths, rent a rowboat on The Lake, visit the Bethesda Terrace and Fountain, or simply relax on the Great Lawn. It's a fantastic place to people-watch, too!
+        description: `Central Park is so much more than just a park; it's a vital part of New York's identity. Seriously, it's a green oasis in the middle of a concrete jungle, a place where you can escape the hustle and bustle of city life and just breathe. You could easily spend an entire day exploring its many paths, gardens, and hidden corners. From horse-drawn carriage rides to picnics on the Great Lawn, there's something for everyone. Even just people-watching is a worthwhile activity here, I think.
 
-Honestly, there's something for everyone in Central Park. You can visit the Central Park Zoo, check out the Belvedere Castle, or attend a free concert during the summer months. The park is also a popular spot for runners, cyclists, and picnickers. And if you're visiting during the winter, you can even go ice skating at Wollman Rink. I think you could easily spend an entire day exploring this urban paradise and still not see everything.`,
+Take a stroll along The Mall, a beautiful tree-lined promenade, or rent a rowboat on The Lake. Visit Strawberry Fields, a memorial to John Lennon, or catch a performance at the Delacorte Theater during the summer months. And don't forget about the Central Park Zoo, a delightful place for animal lovers of all ages. I think no trip to New York is complete without spending some time in this incredible urban sanctuary. It's a great place to recharge after a long day of sightseeing, or just to soak up the beauty of nature in the heart of the city. You really can't go wrong with a visit.`,
         practicalInfo: {
-        howToGetThere: "Subway lines A, B, C to 81st Street – Museum of Natural History or 59th Street – Columbus Circle",
-        openingHours: "6:00 AM to 1:00 AM daily",
+        howToGetThere: "Subway lines A, B, C to 72nd or 81st Streets, or N, Q, R, W to 59th Street – Columbus Circle.",
+        openingHours: "6:00 AM to 1:00 AM daily.",
         cost: "Free",
         website: "https://www.centralparknyc.org/"
       }
       },
         {
-        name: "Statue of Liberty and Ellis Island",
-        description: `A visit to the Statue of Liberty and Ellis Island is a must for anyone interested in American history. The Statue of Liberty, a symbol of freedom and democracy, is truly awe-inspiring up close. You can take a ferry to Liberty Island and climb to the crown for panoramic views of the harbor (reservations are essential!).
+        name: "Times Square",
+        description: `Okay, Times Square. It's loud, it's crowded, it's touristy... but it's also undeniably iconic. You can't come to New York and not experience the sensory overload of Times Square, at least for a little bit. The dazzling lights, the giant billboards, the costumed characters – it's a spectacle unlike any other. And, despite what some locals might say, I do think there's something kind of magical about it, especially at night. 
 
-Ellis Island, once the gateway for millions of immigrants to the United States, offers a poignant look at the country's immigrant past. The Ellis Island Immigration Museum is incredibly moving, with exhibits detailing the experiences of those who arrived seeking a new life. I find it a very powerful place to visit. The ferry ride itself offers great views of the Manhattan skyline. Just be sure to book your tickets in advance, especially during peak season.`,
+Grab a bite to eat at one of the many restaurants, catch a Broadway show (which is highly recommended, by the way), or simply soak up the atmosphere. And be sure to snap a few photos, because you'll definitely want to remember this experience. Just be prepared for the crowds and the relentless energy. It's not everyone's cup of tea, but it's definitely a New York institution. And I really do think you should see it for yourself. You might even end up loving it. Plus, it's a good starting point to explore nearby areas, if you are done with it quickly.`,
         practicalInfo: {
-        howToGetThere: "Ferry from Battery Park in Manhattan or Liberty State Park in New Jersey",
-        openingHours: "Varies by season, check website",
-        cost: "From $24.50 per adult (ferry ticket)",
+        howToGetThere: "Subway lines 1, 2, 3, 7, N, Q, R, W, S to Times Square – 42nd Street.",
+        openingHours: "Open 24/7 (but best experienced at night).",
+        cost: "Free to visit.",
+        website: "https://www.timessquarenyc.org/"
+      }
+      },
+        {
+        name: "Statue of Liberty and Ellis Island",
+        description: `The Statue of Liberty and Ellis Island are more than just tourist attractions; they're powerful symbols of American freedom and immigration. A visit to these landmarks is a truly moving experience, a chance to connect with the history of the United States and the millions of immigrants who came to this country in search of a better life. Seeing Lady Liberty up close is awe-inspiring, and touring the Ellis Island Immigration Museum is deeply informative and often emotional. 
+
+I really recommend booking your tickets in advance, especially if you want to go inside the Statue of Liberty's crown (the view is amazing!). The ferry ride to and from the islands offers stunning views of the Manhattan skyline, so be sure to have your camera ready. And allow yourself plenty of time to explore both islands; there's a lot to see and learn. I promise you, it's worth the effort. You'll come away with a greater appreciation for the American story. It's a sobering and a wonderful day out at the same time.`,
+        practicalInfo: {
+        howToGetThere: "Ferry from Battery Park in Manhattan or Liberty State Park in New Jersey.",
+        openingHours: "Varies depending on the season, check the official website.",
+        cost: "Ferry tickets start at $24 per adult.",
         website: "https://www.nps.gov/stli/index.htm"
       }
       },
         {
-        name: "Times Square",
-        description: `Okay, Times Square. Some people love it, some people hate it, but there's no denying it's a New York icon. It's bright, it's loud, it's crowded – it's a sensory overload! But it's also undeniably exciting, especially at night when the billboards are ablaze with light. You can catch a Broadway show, grab a bite to eat, or simply soak up the atmosphere. It's a place everyone should see once.
+        name: "Broadway Show",
+        description: `Seeing a Broadway show is an absolute must-do when you're in New York. It's a quintessential New York experience, a chance to witness world-class talent and be swept away by the magic of live theater. From classic musicals to cutting-edge dramas, there's a show for every taste and budget. Seriously, there are so many to choose from, it can be a little overwhelming! 
 
-Just be prepared for the crowds and the cost of things. Times Square is definitely a tourist trap, but it's also a quintessential New York experience. I recommend visiting at night to see it at its most dazzling. Maybe grab a drink at a rooftop bar overlooking the square for a unique perspective.`,
+I recommend doing a little research beforehand to see what's playing and what's getting good reviews. You can often find discounted tickets at the TKTS booth in Times Square, but be prepared to wait in line. Or, if you're feeling adventurous, you can try your luck at the lottery for some of the more popular shows. But honestly, no matter what you see, I think you'll be amazed by the talent and the production value. It's an unforgettable evening, and a real highlight of any trip to New York. Just be prepared for a late night!`,
         practicalInfo: {
-        howToGetThere: "Subway lines 1, 2, 3, N, Q, R, W to Times Square – 42nd Street",
-        openingHours: "Always open",
-        cost: "Free to visit (activities and shows cost extra)",
-        website: ""
+        howToGetThere: "Various theaters in the Theater District, easily accessible by subway.",
+        openingHours: "Varies depending on the show, check the theater's website.",
+        cost: "Tickets range from $50 to $300+.",
+        website: "https://www.broadway.com/"
       }
       },
         {
         name: "Metropolitan Museum of Art",
-        description: `The Metropolitan Museum of Art, or The Met, is one of the world's largest and finest art museums. It's home to an incredible collection spanning over 5,000 years of art from around the globe. You could literally spend days exploring its galleries and still not see everything. From ancient Egyptian artifacts to European paintings to contemporary sculptures, there's something for everyone here.
+        description: `The Metropolitan Museum of Art, affectionately known as The Met, is one of the world's largest and finest art museums. You could literally spend days wandering through its vast collection, which spans over 5,000 years of art from around the globe. From ancient Egyptian artifacts to European masterpieces, there's something to captivate every art lover. And even if you're not a huge art buff, I think you'll still be impressed by the sheer scale and beauty of it all. 
 
-I highly recommend focusing on a few specific sections that interest you most, otherwise you might get overwhelmed. The Egyptian collection is particularly impressive, as is the European Paintings wing. Don't miss the rooftop garden for stunning views of Central Park. Allow yourself at least a few hours to explore, and wear comfortable shoes!`,
+Don't miss the Egyptian collection, the European paintings galleries, and the Costume Institute. And be sure to head up to the rooftop garden for stunning views of Central Park and the city skyline. The Met is a true treasure trove, a place where you can lose yourself in the beauty and wonder of art. It's a little overwhelming, but so worth it. Plan to spend at least a few hours here, and wear comfortable shoes!`,
         practicalInfo: {
-        howToGetThere: "Subway lines 4, 5, 6 to 86th Street",
-        openingHours: "Sunday–Tuesday and Thursday: 10 AM–5 PM, Friday and Saturday: 10 AM–9 PM, Closed Wednesday",
-        cost: "$30 per adult (recommended donation)",
+        howToGetThere: "Subway lines 4, 5, 6 to 86th Street.",
+        openingHours: "Sunday-Tuesday and Thursday: 10 AM–5 PM, Friday and Saturday: 10 AM–9 PM. Closed Wednesday",
+        cost: "Suggested admission: $30 for adults.",
         website: "https://www.metmuseum.org/"
       }
       },
         {
-        name: "9/11 Memorial & Museum",
-        description: `The 9/11 Memorial & Museum is a powerful and moving tribute to the victims of the September 11th attacks. The memorial features two reflecting pools set in the footprints of the former World Trade Center towers, with the names of the victims inscribed around the edges. It's a very somber and respectful space.
-
-The museum offers a comprehensive look at the events of that day, with exhibits including artifacts, photographs, and personal stories. It's a very emotional experience, but also an important one. Be prepared to spend several hours here, and allow yourself time to reflect afterwards. I think it is a profoundly important place to visit.`,
-        practicalInfo: {
-        howToGetThere: "Subway lines A, C, J, Z, 2, 3, 4, 5 to Fulton Street",
-        openingHours: "Sunday-Thursday 9 AM–8 PM, Friday-Saturday 9 AM–9 PM",
-        cost: "$30 per adult",
-        website: "https://www.911memorial.org/"
-      }
-      },
-        {
         name: "Brooklyn Bridge",
-        description: `Walking across the Brooklyn Bridge is another classic New York experience. This iconic suspension bridge offers stunning views of the Manhattan skyline, the Statue of Liberty, and the Brooklyn waterfront. It's a particularly beautiful walk at sunset.
+        description: `Walking or biking across the Brooklyn Bridge is a quintessential New York experience, offering stunning views of the Manhattan skyline and the Statue of Liberty. It's an architectural marvel, a symbol of New York's ingenuity and resilience. And, it's just really pretty! Even if you're not a big walker, I highly recommend making the trek. 
 
-You can start your walk from either the Brooklyn or Manhattan side. I recommend starting in Brooklyn, as the views of Manhattan are directly in front of you. Be prepared for crowds, especially on weekends. Allow yourself at least an hour to walk across, and take your time to soak in the scenery. Bring a bottle of water, especially on a hot day.`,
+Start your walk on the Brooklyn side and make your way towards Manhattan for the best views. Be sure to stay in the pedestrian lane, as the bike lane can get pretty crowded. And allow yourself plenty of time to soak up the atmosphere and snap some photos. You could grab lunch in DUMBO (Down Under the Manhattan Bridge Overpass) before or after. Trust me, the views from the bridge are worth every step. Plus, it's a great way to get some exercise while you're sightseeing. A nice change of pace!`,
         practicalInfo: {
-        howToGetThere: "Subway lines A, C to High Street – Brooklyn Bridge or 4, 5, 6 to Brooklyn Bridge – City Hall",
-        openingHours: "Always open",
+        howToGetThere: "Subway lines A, C to High Street – Brooklyn Bridge or 4, 5, 6 to Brooklyn Bridge – City Hall.",
+        openingHours: "Open 24/7.",
         cost: "Free",
-        website: ""
+        website: "null"
       }
       },
         {
-        name: "Greenwich Village",
-        description: `Greenwich Village, or simply "The Village," is a charming neighborhood known for its bohemian history, independent shops, and vibrant arts scene. It's a great place to wander around, explore the side streets, and soak up the atmosphere. You can visit Washington Square Park, browse the bookstores on Bleecker Street, or catch a live music performance at the Blue Note.
+        name: "9/11 Memorial & Museum",
+        description: `The 9/11 Memorial & Museum is a deeply moving and powerful tribute to the victims of the September 11th attacks. It's a place of remembrance and reflection, a space to honor the lives lost and to learn about the events of that tragic day. Visiting the memorial is a sobering experience, but also an important one. It's a reminder of the resilience of the human spirit and the importance of unity in the face of adversity. 
 
-I really love the relaxed and creative vibe of Greenwich Village. It's a nice contrast to the hustle and bustle of Midtown. You can find some great restaurants and cafes here, too. I recommend grabbing a coffee and people-watching in Washington Square Park. It is a wonderful neighborhood to explore at your own pace.`,
+The museum offers a comprehensive and informative look at the events leading up to, during, and after the attacks. Be prepared for a lot of emotion, and allow yourself plenty of time to process what you see and hear. It's not an easy visit, but it's a worthwhile one. It is, I think, a must see and helps to provide a greater understanding of the city.`,
         practicalInfo: {
-        howToGetThere: "Subway lines A, B, C, D, E, F, M to West 4th Street – Washington Square",
-        openingHours: "Varies by establishment",
-        cost: "Free to visit (activities and purchases cost extra)",
-        website: ""
-      }
-      },
-        {
-        name: "High Line",
-        description: `The High Line is a unique elevated park built on a former railway line. It stretches for 1.45 miles along Manhattan's West Side, offering stunning views of the city and the Hudson River. It's a really cool place to take a stroll, relax, and enjoy the urban landscape.
-
-The park is beautifully landscaped with plants and flowers, and it features several art installations. There are also plenty of benches and seating areas where you can relax and take in the views. It's a popular spot for both locals and tourists. The High Line is a must-see for anyone looking for a unique and modern urban experience. Plus, it's free! And connects to some cool neighborhoods.`,
-        practicalInfo: {
-        howToGetThere: "Various access points along the West Side between Gansevoort Street and 34th Street",
-        openingHours: "Varies by season, check website",
-        cost: "Free",
-        website: "https://www.thehighline.org/"
-      }
-      },
-        {
-        name: "Grand Central Terminal",
-        description: `Grand Central Terminal is not just a transportation hub, it's an architectural masterpiece. The main concourse is stunning, with its celestial ceiling and Beaux-Arts design. Even if you're not catching a train, it's worth a visit just to admire the building's grandeur.
-
-You can grab a bite to eat at the Grand Central Market, which offers a variety of food vendors. Or, visit the Whispering Gallery, where you can whisper into a corner and be heard clearly on the opposite side. It's a fun and quirky experience. Grand Central Terminal is a must-see for anyone interested in architecture and history.`,
-        practicalInfo: {
-        howToGetThere: "Subway lines 4, 5, 6, 7, S to Grand Central – 42nd Street",
-        openingHours: "5:30 AM to 2:00 AM daily",
-        cost: "Free",
-        website: ""
+        howToGetThere: "Subway lines A, C, J, Z, 2, 3, 4, 5 to Fulton Street.",
+        openingHours: "Sunday-Thursday 9 AM–8 PM, Friday-Saturday 9 AM–9 PM",
+        cost: "Adults $30, Seniors and students $24.",
+        website: "https://www.911memorial.org/"
       }
       }
       ]}
       logistics={{
-        gettingAround: `New York City has an extensive public transportation system, making it easy to get around. The subway is the most efficient way to travel, with trains running 24/7. You can purchase a MetroCard for unlimited rides or pay per ride using OMNY. Buses are another option, but they can be slower due to traffic. Taxis and ride-sharing services are readily available, but they can be expensive, especially during peak hours. 
+        gettingAround: `New York City has an extensive public transportation system, making it easy to get around without a car. The subway is the most efficient way to travel, with trains running 24/7 on some lines. You can purchase a MetroCard for unlimited rides or pay per ride using OMNY (One Metro New York), a contactless payment system.
 
-Walking is also a great way to explore the city, especially in Manhattan. Many of the major attractions are within walking distance of each other. Just be sure to wear comfortable shoes! Biking is another option, with bike lanes available in many parts of the city. Citi Bike is a bike-sharing program that allows you to rent bikes for short periods. It really depends on what you are after and where you are going. Plan ahead!
+Taxis and ride-sharing services like Uber and Lyft are also readily available, but can be more expensive, especially during peak hours. Walking is a great way to explore many neighborhoods, so be sure to wear comfortable shoes. Biking is another popular option, with bike lanes throughout the city and bike-sharing programs available.
 
-Consider purchasing a multi-day MetroCard if you plan on using public transportation frequently. This will save you money compared to paying per ride. Also, be aware that the subway can be crowded, especially during rush hour. Be prepared to stand and be patient.`,
-        whereToStay: `New York City offers a wide range of accommodation options, from budget-friendly hostels to luxury hotels. The best area to stay depends on your budget and interests. Midtown Manhattan is a convenient location for first-time visitors, with easy access to many of the major attractions. However, it can be more expensive.
+Consider purchasing a CityPASS or Explorer Pass if you plan to visit multiple attractions. These passes can save you money on admission fees and often include transportation options.`,
+        whereToStay: `New York City offers a wide range of accommodation options to suit every budget and preference. Midtown Manhattan is a popular choice for its central location and proximity to major attractions. Hotels in this area tend to be pricier, but offer convenience and easy access to transportation. 
 
-Downtown Manhattan, including areas like the Financial District and Tribeca, offers a mix of business and residential areas. You can find some great hotels here, often at slightly lower prices than Midtown. Brooklyn is another popular option, with a more laid-back vibe and a growing number of trendy hotels. Consider areas like Williamsburg and DUMBO for stylish accommodations.
+Lower Manhattan, including the Financial District and Tribeca, is a great option for business travelers and those looking for a more upscale experience. Brooklyn offers a more residential feel, with trendy neighborhoods like Williamsburg and DUMBO offering boutique hotels and Airbnb options. For budget-friendly accommodations, consider staying in Queens or the outer boroughs, which are still easily accessible by subway.
 
-Consider using websites like Booking.com or Airbnb to find the best deals on accommodation. Book in advance, especially during peak season, to secure your preferred hotel or apartment. Also, be sure to read reviews from other travelers before making a booking.`,
-        bestTimeToVisit: `The best time to visit New York City depends on your preferences and budget. Spring (April-May) and fall (September-October) offer pleasant weather and fewer crowds than the summer months. The foliage in Central Park during the fall is particularly beautiful.
+Consider your itinerary and preferred neighborhood vibe when choosing your accommodation. Book in advance, especially during peak season, to secure the best deals and availability.`,
+        bestTimeToVisit: `The best time to visit New York City depends on your preferences and tolerance for crowds and weather. Spring (April-May) and fall (September-October) offer mild temperatures and pleasant weather, making it ideal for exploring the city on foot. However, these seasons tend to be more crowded and expensive.
 
-Summer (June-August) is the peak season, with warm weather and plenty of outdoor events. However, it can also be crowded and expensive. Winter (November-March) can be cold and snowy, but it also offers a unique charm. You can enjoy ice skating, holiday markets, and festive decorations. Hotel rates are typically lower during the winter months, except for the holiday season.
+Summer (June-August) can be hot and humid, but it's a great time to enjoy outdoor activities and events. Be prepared for large crowds and higher prices during this time. Winter (November-March) can be cold and snowy, but it's also a magical time to visit, with holiday decorations and festive events. You'll find lower prices and fewer crowds during the winter months, but be sure to pack warm clothing.
 
-Consider your interests when planning your trip. If you're interested in outdoor activities, spring and fall are the best times to visit. If you're interested in holiday events, winter is the time to go. And if you're looking for the warmest weather, summer is your best bet.`,
-        suggestedItinerary: `Here's a suggested 3-day itinerary for exploring New York City:
+Consider your budget and interests when planning your trip. Each season offers a unique experience, so choose the one that best suits your needs.`,
+        suggestedItinerary: `Here's a suggested itinerary for a 5-day trip to New York City:
 
-*Day 1: Start your day with a visit to the Empire State Building for panoramic views of the city. Afterwards, explore Times Square and catch a Broadway show in the evening. Consider a nice dinner in the Theater District too. This will give you that New York experience everyone craves.
+*Day 1: Arrive in New York City and check into your hotel. Start your exploration with a visit to Times Square and catch a Broadway show in the evening. Grab dinner at a local restaurant in the Theater District.
 
-Day 2: Take a ferry to the Statue of Liberty and Ellis Island to learn about American history. In the afternoon, visit the 9/11 Memorial & Museum for a moving tribute. Afterwards, walk across the Brooklyn Bridge for stunning views of the Manhattan skyline. Take time to explore the Brooklyn side a little - Brooklyn Bridge Park is wonderful.
+Day 2: Visit the Statue of Liberty and Ellis Island. Take a ferry from Battery Park and explore these iconic landmarks. In the afternoon, head to the Financial District and visit the 9/11 Memorial & Museum. End the day with a walk across the Brooklyn Bridge.
 
-Day 3:* Explore Central Park and visit the Metropolitan Museum of Art. In the afternoon, wander through Greenwich Village and soak up the bohemian atmosphere. Consider an evening of jazz music. It depends on what interests you, but try to have a bit of free time for unexpected discoveries. That's what makes travel so special!`
+Day 3: Explore Central Park. Rent a bike or take a stroll through this urban oasis. Visit the Metropolitan Museum of Art in the afternoon. In the evening, head to Greenwich Village for dinner and live music.
+
+Day 4: Explore Midtown Manhattan. Visit the Empire State Building for panoramic views of the city. Head to Top of the Rock for similar views. Take the subway to Grand Central Station and explore the terminal. In the afternoon, shop along Fifth Avenue.
+
+Day 5:* Visit the Museum of Modern Art (MoMA). Explore the museum's extensive collection of modern and contemporary art. In the afternoon, head to Chelsea Market for lunch and shopping. Depart from New York City.`
       }}
       faqs={[
         {
         question: "What are the best things to do in New York?",
-        answer: `New York offers a plethora of amazing experiences! Some of the best things to do include visiting iconic landmarks like the Empire State Building and the Statue of Liberty, exploring Central Park, experiencing a Broadway show, visiting world-class museums like the Metropolitan Museum of Art and the 9/11 Memorial & Museum, and walking across the Brooklyn Bridge. Of course, don't forget about Times Square!`
+        answer: `New York offers a wide range of attractions, including iconic landmarks like the Empire State Building, Statue of Liberty, and Central Park. You can also enjoy world-class museums, Broadway shows, diverse culinary experiences, and vibrant neighborhoods.`
       },
         {
         question: "How many days do you need in New York?",
-        answer: `Ideally, you should spend at least 3-5 days in New York to see the major attractions and get a feel for the city. With 3 days, you can hit the highlights. With 5 days, you can explore more neighborhoods and delve deeper into the city's culture. But honestly, you could spend weeks, even months, and still not see everything.`
+        answer: `I recommend spending at least 5 days in New York to experience the city's major attractions and get a feel for its diverse neighborhoods. However, you could easily spend a week or more exploring all that New York has to offer.`
       },
         {
         question: "What is New York famous for?",
-        answer: `New York is famous for its iconic landmarks, including the Empire State Building, the Statue of Liberty, and Times Square. It's also known for its vibrant arts and culture scene, world-class museums, diverse neighborhoods, and delicious food. The city is a global hub for finance, fashion, and entertainment.`
+        answer: `New York is famous for its iconic landmarks, vibrant culture, world-class museums, Broadway shows, diverse culinary scene, and status as a global center for finance, fashion, and entertainment.`
       },
         {
         question: "When is the best time to visit New York?",
-        answer: `The best time to visit New York is during the spring (April-May) or fall (September-October) for pleasant weather and fewer crowds. Summer (June-August) is also a popular time, but it can be hot and crowded. Winter (November-March) can be cold, but it also offers a unique charm with holiday markets and festive decorations.`
+        answer: `The best time to visit New York is during the spring (April-May) or fall (September-October) for mild weather and pleasant temperatures. However, each season offers a unique experience, so choose the one that best suits your interests and budget.`
       }
       ]}
     />
