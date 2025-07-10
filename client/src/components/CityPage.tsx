@@ -3,6 +3,8 @@ import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { MapPin, Clock, DollarSign, Globe } from 'lucide-react';
+import { Navigation } from './Navigation';
+import { Footer } from './Footer';
 
 interface Attraction {
   name: string;
@@ -49,7 +51,8 @@ export const CityPage: React.FC<CityPageProps> = ({
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary/5 via-background to-background">
-      <div className="container mx-auto px-4 py-6 sm:py-8">
+      <Navigation />
+      <div className="container mx-auto px-4 py-6 sm:py-8 pt-20 sm:pt-24">
         <Tabs defaultValue="overview" className="w-full">
           <TabsList className={`grid w-full ${mobileGridCols} mb-6 sm:mb-8 bg-card border shadow-sm`}>
             <TabsTrigger value="overview" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap">
@@ -278,6 +281,7 @@ export const CityPage: React.FC<CityPageProps> = ({
           )}
         </Tabs>
       </div>
+      <Footer />
     </div>
   );
 };
