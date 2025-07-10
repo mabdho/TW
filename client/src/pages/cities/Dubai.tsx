@@ -6,9 +6,9 @@ export const Dubai: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Dubai, UAE (2025 Guide)"}
       description={`So, you're heading to Dubai, eh? Lucky you! Planning what things to do in Dubai can feel a little overwhelming, I know, because there's just so much on offer. From dazzling skyscrapers that pierce the clouds to traditional souks overflowing with spices and gold, Dubai really is a city of contrasts. This guide will help you navigate the best of what Dubai has to offer in 2025, whether you're after adventure, relaxation, or a taste of Arabian culture. I've tried to pack in all the essentials, things that shouldn't be skipped. We'll cover everything from the iconic Burj Khalifa to hidden gems you might otherwise miss. And don't worry, I've included some practical tips to help you make the most of your trip. Let's dive in!`}
-      imageUrl={"https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+      imageUrl={"https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&fm=webp"}
       galleryImages={[
-        { url: "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", alt: "Dubai skyline", caption: "Modern Dubai cityscape" }
+        { url: "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&fm=webp", alt: "Dubai skyline", caption: "Modern Dubai cityscape" }
       ]}
       highlights={["Ascend the Burj Khalifa for unparalleled city views.",
         "Explore the historic Al Fahidi neighborhood.",
