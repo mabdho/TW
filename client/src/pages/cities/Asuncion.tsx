@@ -1,5 +1,5 @@
 import React from 'react';
-import { CityPage } from '../../components/CityPage';
+import { CityPage } from '@/components/CityPage';
 
 export const Asuncion: React.FC = () => {
   return (
