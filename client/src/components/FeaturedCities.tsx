@@ -6,14 +6,14 @@ import { Badge } from '@/components/ui/badge';
 
 // Get the last 8 cities from the cities array (most recently added)
 const featuredCities = [
-  { "name": "Dhaandhoo", "country": "Maldives", "path": "/dhaandhoo", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { "name": "Berlin", "country": "Germany", "path": "/berlin", "continent": "Europe", "imageUrl": "" },,
-  { "name": "TestCity", "country": "TestCountry", "path": "/testcity", "continent": "", "imageUrl": "" },,,
-  { "name": "Male'", "country": "Maldives", "path": "/male'", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1575119427862-c9ea3e37b537?q=80&w=1836&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,
-  { "name": "New York", "country": "USA", "path": "/new-york", "continent": "North America", "imageUrl": "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,
-  { "name": "Dubai", "country": "UAE", "path": "/dubai", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,
+  { "name": "Boston", "country": "USA", "path": "/boston", "continent": "North America", "imageUrl": "https://images.unsplash.com/photo-1720655259605-5b0237f6c512?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { "name": "Dhaandhoo", "country": "Maldives", "path": "/dhaandhoo", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,
+  { "name": "Berlin", "country": "Germany", "path": "/berlin", "continent": "Europe", "imageUrl": "" },,,
+  { "name": "TestCity", "country": "TestCountry", "path": "/testcity", "continent": "", "imageUrl": "" },,,,
+  { "name": "Male'", "country": "Maldives", "path": "/male'", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1575119427862-c9ea3e37b537?q=80&w=1836&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,
+  { "name": "New York", "country": "USA", "path": "/new-york", "continent": "North America", "imageUrl": "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,,
+  { "name": "Dubai", "country": "UAE", "path": "/dubai", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,,
   { "name": "Zaragoza", "country": "Spain", "path": "/zaragoza", "continent": "Europe", "imageUrl": "" },,,,,
-  { "name": "Zagreb", "country": "Croatia", "path": "/zagreb", "continent": "Europe", "imageUrl": "" },,,,
 ];
 
 export const FeaturedCities = () => {
