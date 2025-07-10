@@ -159,7 +159,8 @@ const cities = [
   { "name": "Winnipeg", "country": "Canada", "path": "/winnipeg", "continent": "North America" },
   { "name": "Yogyakarta", "country": "Indonesia", "path": "/yogyakarta", "continent": "Asia" },
   { "name": "Zagreb", "country": "Croatia", "path": "/zagreb", "continent": "Europe" },
-  { "name": "Zaragoza", "country": "Spain", "path": "/zaragoza", "continent": "Europe" }
+  { "name": "Zaragoza", "country": "Spain", "path": "/zaragoza", "continent": "Europe" },
+  { "name": "Dubai", "country": "UAE", "path": "/dubai", "continent": "Asia" }
 ];
 
 const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America", "South America"];

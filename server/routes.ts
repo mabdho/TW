@@ -163,11 +163,55 @@ Return only the JSON object with no additional text or formatting.`;
 
       console.log(`Generated city page: ${cityFileName}.tsx`);
 
+      // Auto-integrate into App.tsx routing
+      const appPath = path.join(process.cwd(), 'client', 'src', 'App.tsx');
+      const appContent = await fs.readFile(appPath, 'utf-8');
+      
+      // Add import if it doesn't exist
+      const importStatement = `import { ${cityFileName} } from "./pages/cities/${cityFileName}";`;
+      if (!appContent.includes(importStatement)) {
+        // Find the last import statement and add after it
+        const lastImportIndex = appContent.lastIndexOf('import {');
+        const afterLastImport = appContent.indexOf(';\n', lastImportIndex) + 2;
+        const updatedAppContent = appContent.slice(0, afterLastImport) + importStatement + '\n' + appContent.slice(afterLastImport);
+        
+        // Add route
+        const routePath = `/${city.toLowerCase().replace(/\s+/g, '-')}`;
+        const routeStatement = `        <Route path="${routePath}" element={<${cityFileName} />} />`;
+        
+        // Find the last route and add after it
+        const lastRouteIndex = updatedAppContent.lastIndexOf('<Route path=');
+        const afterLastRoute = updatedAppContent.indexOf('/>\n', lastRouteIndex) + 3;
+        const finalAppContent = updatedAppContent.slice(0, afterLastRoute) + routeStatement + '\n' + updatedAppContent.slice(afterLastRoute);
+        
+        await fs.writeFile(appPath, finalAppContent);
+        console.log(`Updated App.tsx with ${cityFileName} import and route`);
+      }
+      
+      // Auto-integrate into CityDirectory.tsx
+      const cityDirectoryPath = path.join(process.cwd(), 'client', 'src', 'components', 'CityDirectory.tsx');
+      const cityDirectoryContent = await fs.readFile(cityDirectoryPath, 'utf-8');
+      
+      // Create city entry
+      const cityEntry = `  { "name": "${city}", "country": "${country}", "path": "/${city.toLowerCase().replace(/\s+/g, '-')}", "continent": "${continent}" }`;
+      
+      // Check if city already exists
+      if (!cityDirectoryContent.includes(`"name": "${city}"`)) {
+        // Find the end of the cities array and add the new city
+        const citiesEndIndex = cityDirectoryContent.indexOf('];');
+        const beforeCitiesEnd = cityDirectoryContent.lastIndexOf('\n', citiesEndIndex);
+        const updatedCityContent = cityDirectoryContent.slice(0, beforeCitiesEnd) + ',\n' + cityEntry + cityDirectoryContent.slice(beforeCitiesEnd);
+        
+        await fs.writeFile(cityDirectoryPath, updatedCityContent);
+        console.log(`Updated CityDirectory.tsx with ${city} entry`);
+      }
+
       res.json({
         success: true,
         cityName: cityFileName,
         generatedCode: componentCode,
-        filePath: `client/src/pages/cities/${cityFileName}.tsx`
+        filePath: `client/src/pages/cities/${cityFileName}.tsx`,
+        message: `City page for ${city} created successfully and integrated into navigation`
       });
 
     } catch (error) {
