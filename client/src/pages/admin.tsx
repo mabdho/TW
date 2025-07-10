@@ -21,7 +21,9 @@ import { RichTextEditor } from '@/components/ui/rich-text-editor';
 import type { Blog } from '@shared/schema';
 
 const galleryImageSchema = z.object({
-  url: z.string().url('Please enter a valid image URL').optional().or(z.literal('')),
+  url: z.string().refine((val) => val === '' || z.string().url().safeParse(val).success, {
+    message: 'Please enter a valid image URL or leave empty'
+  }),
   alt: z.string().min(1, 'Alt text is required'),
   caption: z.string().min(1, 'Caption is required')
 });
@@ -30,7 +32,9 @@ const cityFormSchema = z.object({
   city: z.string().min(1, 'City name is required'),
   country: z.string().min(1, 'Country is required'),
   continent: z.string().optional(),
-  heroImageUrl: z.string().url('Please enter a valid hero image URL').optional().or(z.literal('')),
+  heroImageUrl: z.string().refine((val) => val === '' || z.string().url().safeParse(val).success, {
+    message: 'Please enter a valid hero image URL or leave empty'
+  }),
   galleryImages: z.array(galleryImageSchema).optional(),
   msv: z.string().optional(),
   kd: z.string().optional(),
@@ -50,7 +54,9 @@ const blogFormSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   category: z.string().min(1, 'Category is required'),
   author: z.string().optional(),
-  imageUrl: z.string().url('Please enter a valid image URL').optional().or(z.literal('')),
+  imageUrl: z.string().refine((val) => val === '' || z.string().url().safeParse(val).success, {
+    message: 'Please enter a valid image URL or leave empty'
+  }),
   generationMode: z.enum(['ai', 'manual']).default('ai'),
   manualContent: z.object({
     excerpt: z.string().min(1, 'Excerpt is required'),
@@ -81,14 +87,7 @@ export default function AdminPage() {
       country: '',
       continent: '',
       heroImageUrl: '',
-      galleryImages: [
-        { url: '', alt: '', caption: '' },
-        { url: '', alt: '', caption: '' },
-        { url: '', alt: '', caption: '' },
-        { url: '', alt: '', caption: '' },
-        { url: '', alt: '', caption: '' },
-        { url: '', alt: '', caption: '' }
-      ],
+      galleryImages: [],
       msv: '',
       kd: '',
       generationMode: 'ai',
