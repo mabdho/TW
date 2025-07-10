@@ -47,10 +47,10 @@ export const CityPage: React.FC<CityPageProps> = ({
 }) => {
   const top5Attractions = attractions.slice(0, 5);
   
-  // Calculate number of tabs dynamically (including gallery)
-  const tabCount = 4 + (logistics ? 1 : 0) + (faqs ? 1 : 0);
-  const mobileGridCols = tabCount === 4 ? 'grid-cols-4' : 
-                        tabCount === 5 ? 'grid-cols-5' : 'grid-cols-6';
+  // Calculate number of tabs dynamically
+  const tabCount = 3 + (logistics ? 1 : 0) + (faqs ? 1 : 0);
+  const mobileGridCols = tabCount === 3 ? 'grid-cols-3' : 
+                        tabCount === 4 ? 'grid-cols-4' : 'grid-cols-5';
 
   // Generate unique gradient colors based on city name
   const getGradientClass = (cityName: string) => {
@@ -152,6 +152,51 @@ export const CityPage: React.FC<CityPageProps> = ({
         </div>
       </div>
 
+      {/* Photo Gallery Section */}
+      <div className="bg-gray-50 border-b border-gray-200">
+        <div className="container mx-auto px-4 py-6 sm:py-8">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center">
+              <Camera className="w-5 h-5 text-pink-600" />
+            </div>
+            <div>
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Photo Gallery</h2>
+              <p className="text-sm text-gray-600">Explore {title} through stunning visuals</p>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+            {[1, 2, 3, 4, 5, 6].map((index) => (
+              <div key={index} className="relative group cursor-pointer">
+                <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                      <Image className="w-8 h-8 sm:w-10 sm:h-10 text-gray-400 mx-auto mb-1" />
+                      <p className="text-xs sm:text-sm text-gray-500 font-medium">Photo {index}</p>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                </div>
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-pink-200 rounded-lg transition-colors"></div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="mt-4 p-3 bg-white rounded-lg border border-gray-200 shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <Info className="w-3 h-3 text-blue-600" />
+              </div>
+              <div>
+                <p className="text-xs sm:text-sm text-gray-600">
+                  These are placeholder images. Real photos of {title} attractions, landmarks, and culture will be displayed here.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="container mx-auto px-4 py-6 sm:py-8">
         <Tabs defaultValue="overview" className="w-full">
           <TabsList className={`grid w-full ${mobileGridCols} mb-6 sm:mb-8 bg-white border border-gray-200 shadow-sm rounded-lg`}>
@@ -167,10 +212,7 @@ export const CityPage: React.FC<CityPageProps> = ({
               <span className="hidden sm:inline">All Attractions</span>
               <span className="sm:hidden">All</span>
             </TabsTrigger>
-            <TabsTrigger value="gallery" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap data-[state=active]:bg-green-50 data-[state=active]:text-green-700 data-[state=active]:border-green-200">
-              <span className="hidden sm:inline">Gallery</span>
-              <span className="sm:hidden">Pics</span>
-            </TabsTrigger>
+
             {logistics && <TabsTrigger value="plan" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap data-[state=active]:bg-green-50 data-[state=active]:text-green-700 data-[state=active]:border-green-200">
               <span className="hidden sm:inline">Plan Your Trip</span>
               <span className="sm:hidden">Plan</span>
@@ -431,52 +473,6 @@ export const CityPage: React.FC<CityPageProps> = ({
             </div>
           </TabsContent>
 
-          {/* Gallery Tab */}
-          <TabsContent value="gallery" className="space-y-6">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center">
-                  <Camera className="w-5 h-5 text-pink-600" />
-                </div>
-                <div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Photo Gallery</h2>
-                  <p className="text-sm text-gray-600">Explore {title} through stunning visuals</p>
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {[1, 2, 3, 4, 5, 6].map((index) => (
-                  <div key={index} className="relative group cursor-pointer">
-                    <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center">
-                          <Image className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                          <p className="text-sm text-gray-500 font-medium">Photo {index}</p>
-                          <p className="text-xs text-gray-400 mt-1">Click to view</p>
-                        </div>
-                      </div>
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
-                    </div>
-                    <div className="absolute inset-0 border-2 border-transparent group-hover:border-pink-200 rounded-lg transition-colors"></div>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
-                    <Info className="w-4 h-4 text-blue-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-semibold text-gray-900">Photo Guidelines</h3>
-                    <p className="text-xs text-gray-600 mt-1">
-                      These are placeholder images. Real photos of {title} attractions, landmarks, and culture will be displayed here.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </TabsContent>
 
           {/* Plan Your Trip Tab */}
           {logistics && (
