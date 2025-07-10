@@ -90,36 +90,41 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
 
         {/* City page hero section with SEO optimization */}
         <div 
-          className="city-hero-section relative text-white py-16 px-6 bg-gradient-to-r from-green-500 to-blue-500"
+          className="city-hero-section relative text-white h-96 sm:h-[32rem] md:h-[36rem] lg:h-[40rem] bg-gradient-to-r from-green-500 to-blue-500"
           style={cityData.imageUrl ? {
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${cityData.imageUrl})`,
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${cityData.imageUrl})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
           } : {}}
         >
-          <div className="max-w-7xl mx-auto relative z-10">
-            {/* H1 with main keyword */}
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Best Things to Do in {cityData.name}
-            </h1>
-            
-            {/* Subtitle with keyword variations */}
-            <p className="text-xl md:text-2xl mb-6 opacity-90">
-              Discover amazing experiences and top attractions in {cityData.name}, {cityData.country}
-            </p>
-            
-            {/* Quick facts for local SEO */}
-            <div className="flex flex-wrap gap-4 text-sm">
-              <span className="bg-white bg-opacity-20 px-3 py-1 rounded-full">
-                📍 {cityData.name}, {cityData.country}
-              </span>
-              <span className="bg-white bg-opacity-20 px-3 py-1 rounded-full">
-                🎯 {cityData.attractions?.length || 0}+ Top Attractions
-              </span>
-              <span className="bg-white bg-opacity-20 px-3 py-1 rounded-full">
-                ⭐ Complete Travel Guide
-              </span>
+          {/* SEO Header Content - Left Bottom Corner */}
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
+            <div className="max-w-7xl mx-auto px-6 pb-8 pt-16">
+              <div className="max-w-3xl">
+                {/* H1 with main keyword */}
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 drop-shadow-lg">
+                  Best Things to Do in {cityData.name}
+                </h1>
+                
+                {/* Subtitle with keyword variations */}
+                <p className="text-lg sm:text-xl md:text-2xl mb-6 opacity-90 drop-shadow-md">
+                  Discover amazing experiences and top attractions in {cityData.name}, {cityData.country}
+                </p>
+                
+                {/* Quick facts for local SEO */}
+                <div className="flex flex-wrap gap-3 text-sm">
+                  <span className="bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                    📍 {cityData.name}, {cityData.country}
+                  </span>
+                  <span className="bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                    🎯 {cityData.attractions?.length || 0}+ Top Attractions
+                  </span>
+                  <span className="bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                    ⭐ Complete Travel Guide
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
