@@ -6,6 +6,7 @@ export const Gothenburg: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Gothenburg, Sweden (2025 Guide)"}
       description={"Welcome to Gothenburg, Sweden's vibrant second city where a laid-back, friendly atmosphere meets cutting-edge design and a deep connection to the sea. Nestled on the Göta älv river on the west coast, this historic port city has transformed into a hub of culture, gastronomy, and sustainability. Stroll through charming 19th-century neighborhoods, explore a breathtaking archipelago just a tram ride away, and indulge in the cherished Swedish tradition of 'fika' (a coffee and cake break). With world-class museums, one of Scandinavia's top amusement parks, and a thriving culinary scene, Gothenburg offers an unforgettable blend of urban energy and natural beauty. This guide will walk you through all the very best things to do in Gothenburg, ensuring you experience the heart and soul of this captivating Swedish gem."}
+      imageUrl={""}
       highlights={["Gothenburg Archipelago",
         "Liseberg Amusement Park",
         "Haga District",

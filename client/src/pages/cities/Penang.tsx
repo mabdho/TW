@@ -6,6 +6,7 @@ export const Penang: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Penang, Malaysia (2025 Guide)"}
       description={"Known as the 'Pearl of the Orient,' Penang is a captivating island that seamlessly blends East and West, tradition and modernity. Its capital, George Town, a UNESCO World Heritage site, is a living museum of colonial architecture, ancient temples, and vibrant clan houses. But Penang's allure extends beyond history; it's a world-renowned food paradise where sizzling woks in bustling hawker stalls create culinary magic. The island’s cultural tapestry is woven from Malay, Chinese, Indian, and European threads, creating a unique atmosphere you won't find anywhere else. From verdant jungle-clad hills and serene beaches to its iconic, interactive street art, a journey here is an assault on the senses in the best way possible. Exploring the island offers some of the best things to do in Penang, promising an unforgettable adventure for every traveler."}
+      imageUrl={""}
       highlights={["George Town UNESCO World Heritage Site",
         "Penang Hill",
         "Kek Lok Si Temple",

@@ -6,6 +6,7 @@ export const Debrecen: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Debrecen, Hungary (2025 Guide)"}
       description={"Welcome to Debrecen, Hungary's second-largest city and the cultural and intellectual heart of the Great Hungarian Plain. Often called the 'Calvinist Rome,' Debrecen is a city of profound historical significance, peaceful green spaces, and vibrant university life. Far from the bustling crowds of Budapest, it offers a more relaxed yet deeply authentic Hungarian experience. Whether you're drawn to its imposing neoclassical architecture, the lush tranquility of the Great Forest, or its rejuvenating thermal baths, you'll find a wealth of activities to fill your days. This guide will walk you through the very best things to do in Debrecen, showcasing a city that beautifully balances its rich heritage with modern energy. Prepare to be charmed by the capital of the puszta, where history and nature exist in perfect harmony."}
+      imageUrl={""}
       highlights={["Great Reformed Church (Nagytemplom)",
         "Déri Museum",
         "Nagyerdő Park (Great Forest)",

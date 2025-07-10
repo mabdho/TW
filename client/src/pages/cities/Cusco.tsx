@@ -194,7 +194,7 @@ export const Cusco: React.FC = () => {
           answer: "Cusco is world-famous primarily as the historic capital of the Inca Empire and the gateway to Machu Picchu. It's renowned for its unique archaeological heritage, where perfectly engineered Inca stone foundations are seamlessly blended with Spanish colonial architecture. The city is also known for its vibrant indigenous culture, colorful festivals like Inti Raymi, bustling markets, and its location high in the Andes mountains, offering stunning scenery and countless opportunities for adventure travel and trekking."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1595114769626-04941ce1edff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDdXNjbyUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTQwMTU3fDA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

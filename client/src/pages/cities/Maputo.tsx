@@ -6,6 +6,7 @@ export const Maputo: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Maputo, Mozambique (2025 Guide)"}
       description={"Welcome to Maputo, the 'City of Acacias'. This vibrant coastal capital of Mozambique is a captivating blend of African energy and Portuguese colonial charm. With its wide, tree-lined avenues, stunning seaside setting, and a cultural scene pulsating with the rhythms of Marrabenta music, Maputo offers a unique travel experience. The city's architecture tells a story of its past, from grand colonial buildings and Art Deco gems to imposing socialist-era structures. Beyond the history, you'll find bustling markets, a world-class culinary scene famed for its fresh seafood, and the warm, welcoming spirit of its people. Whether you're exploring historical forts, admiring architectural wonders, or soaking up the sun on a nearby island, you'll quickly discover the many incredible and best things to do in Maputo. This guide will walk you through the must-see attractions and hidden gems of this dynamic African metropolis."}
+      imageUrl={""}
       highlights={["Maputo Central Train Station (CFM)",
         "Maputo Fortress (Fortaleza de Maputo)",
         "Mercado Central (Central Market)",

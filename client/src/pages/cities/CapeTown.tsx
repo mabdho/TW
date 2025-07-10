@@ -194,7 +194,7 @@ export const CapeTown: React.FC = () => {
           answer: "Cape Town is famous for its spectacular natural setting, dominated by Table Mountain. It's renowned for its stunning coastline with world-class beaches like Camps Bay and Clifton, and the dramatic scenery of the Cape Peninsula. Historically, it's famous for Robben Island, where Nelson Mandela was imprisoned. The city is also a cultural melting pot, known for the vibrant Bo-Kaap neighbourhood, its world-class wine regions in nearby Constantia, Stellenbosch, and Franschhoek, and its innovative and diverse culinary scene."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1535744288776-15301c1a0676?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDYXBlJTIwVG93biUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTQwMTM1fDA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

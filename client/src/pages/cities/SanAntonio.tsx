@@ -6,6 +6,7 @@ export const SanAntonio: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in San Antonio, USA (2025 Guide)"}
       description={"Welcome to San Antonio, a city where the spirit of Texas is infused with a rich tapestry of Spanish colonial history and vibrant Mexican culture. Nestled in the heart of the Lone Star State, this city is a feast for the senses. Its crown jewel, the romantic River Walk, winds through the downtown core, lined with cypress trees, bustling restaurants, and charming boutiques. Beyond the river, centuries-old missions stand as silent witnesses to its storied past, earning the city a UNESCO World Heritage designation. From the hallowed grounds of the Alamo to the bustling energy of Market Square, San Antonio offers a unique blend of history, art, and culinary delight. Whether you're a history buff, a foodie, or an adventurer, you'll find no shortage of incredible experiences. This guide will walk you through all the best things to do in San Antonio for an unforgettable trip."}
+      imageUrl={""}
       highlights={["The Alamo",
         "San Antonio River Walk",
         "San Antonio Missions National Historical Park",

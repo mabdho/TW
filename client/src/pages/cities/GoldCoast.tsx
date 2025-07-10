@@ -6,6 +6,7 @@ export const GoldCoast: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Gold Coast, Australia (2025 Guide)"}
       description={"Welcome to Australia's playground, a sun-drenched metropolis where glittering skyscrapers meet miles of golden sand. The Gold Coast is a city of contrasts, offering adrenaline-pumping theme park adventures, world-class surf breaks, and a surprisingly serene and ancient rainforest hinterland just a short drive from the coast. Whether you're seeking family fun, a romantic getaway, or a solo adventure, this vibrant city delivers. From the iconic shores of Surfers Paradise to the chic cafes of Burleigh Heads and the breathtaking vistas of the national parks, there's an endless array of experiences waiting. This guide will walk you through all the best things to do in Gold Coast, ensuring your trip is packed with unforgettable moments. It’s a destination that perfectly blends natural beauty with electrifying entertainment, making it one of Australia's most beloved holiday spots."}
+      imageUrl={""}
       highlights={["Surfers Paradise Beach",
         "Warner Bros. Movie World",
         "Burleigh Heads National Park",

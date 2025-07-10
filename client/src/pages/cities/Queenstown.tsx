@@ -6,6 +6,7 @@ export const Queenstown: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Queenstown, New Zealand (2025 Guide)"}
       description={"Nestled on the shores of the crystal-clear Lake Wakatipu and framed by the dramatic Remarkables mountain range, Queenstown is New Zealand's crown jewel of adventure and scenery. Known globally as the 'Adventure Capital of the World,' this vibrant resort town offers an exhilarating mix of adrenaline-fueled activities, serene natural beauty, and world-class hospitality. Whether you're leaping from a bridge, cruising through majestic fiords, hiking epic trails, or sipping pinot noir at a scenic vineyard, you'll find no shortage of excitement. From thrill-seekers to nature lovers and foodies, discovering the best things to do in Queenstown is an unforgettable journey into the heart of the Southern Alps. Prepare for a trip that will quite literally take your breath away."}
+      imageUrl={""}
       highlights={["Milford Sound Day Trip",
         "Ride the Skyline Gondola",
         "Shotover Jet Boat Ride",

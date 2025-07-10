@@ -6,6 +6,7 @@ export const Utrecht: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Utrecht, Netherlands (2025 Guide)"}
       description={"Often described as Amsterdam's more intimate and relaxed sibling, Utrecht is a city of enchanting canals, medieval architecture, and a vibrant, youthful energy fueled by its large student population. The city's heart is a maze of charming streets centered around the iconic Dom Tower, which watches over a landscape of unique, wharf-level canals unlike anywhere else in the world. Its compact, pedestrian-friendly center means that historical treasures, innovative museums, and cozy cafés are all just a short walk or bike ride away. Whether you're exploring ancient Roman ruins beneath a city square or soaking up the atmosphere at a waterside terrace, you'll find that discovering the best things to do in Utrecht is a truly delightful experience. It’s a city that effortlessly blends centuries of history with a modern, creative spirit, making it an essential Dutch destination."}
+      imageUrl={""}
       highlights={["Climb the Dom Tower (Domtoren)",
         "Explore the Oudegracht Canal",
         "Visit the Rietveld Schröder House",

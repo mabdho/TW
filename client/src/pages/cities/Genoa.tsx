@@ -6,6 +6,7 @@ export const Genoa: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Genoa, Italy (2025 Guide)"}
       description={"Genoa, or Genova, the proud capital of Liguria, is a city of captivating contrasts. Known as 'La Superba' (The Superb One), its glorious maritime past echoes through Europe's largest medieval old town, a labyrinth of narrow alleyways called 'caruggi' that unexpectedly open onto grand piazzas. As the birthplace of Christopher Columbus and the heavenly pesto sauce, Genoa offers a gritty authenticity often missed in more polished Italian destinations. It’s a vertical city, clinging to the hillsides that tumble down to the sea, offering stunning views at every turn. From the revitalized Old Port to the opulent palaces of its golden age, exploring the hidden courtyards, historic shops, and vibrant food markets reveals the true soul of the city. This guide will walk you through the very best things to do in Genoa, ensuring a memorable journey into the heart of the Italian Riviera."}
+      imageUrl={""}
       highlights={["Aquarium of Genoa (Acquario di Genova)",
         "Palazzi dei Rolli",
         "Genoa's Old Port (Porto Antico)",

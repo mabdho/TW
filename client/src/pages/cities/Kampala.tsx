@@ -6,6 +6,7 @@ export const Kampala: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Kampala, Uganda (2025 Guide)"}
       description={"Welcome to Kampala, the vibrant, pulsating heart of Uganda. Sprawled across a series of verdant hills, this city is a dynamic blend of bustling markets, modern skyscrapers, and rich cultural heritage. Known as the 'City of Seven Hills,' Kampala offers an infectious energy, fueled by its famously friendly people and the constant hum of its iconic boda-boda motorcycle taxis. It’s a place where you can explore ancient kingdoms, witness profound faith, and dance the night away to electrifying African beats. Whether you’re delving into its complex history, shopping for colorful crafts, or simply soaking in the panoramic views, you'll find an endless list of captivating experiences. This guide will walk you through all the very best things to do in Kampala for an unforgettable journey into the Pearl of Africa."}
+      imageUrl={""}
       highlights={["Gaddafi National Mosque",
         "Ndere Cultural Centre",
         "Kasubi Tombs",

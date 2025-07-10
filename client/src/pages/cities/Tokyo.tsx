@@ -7,6 +7,7 @@ export const Tokyo: React.FC = () => {
     <CityPage
       title="Tokyo Travel Guide"
       description={`Discover the best things to do in Tokyo. From ancient temples to cutting-edge technology, our comprehensive guide covers everything you need to know for an unforgettable visit to Japan's dynamic capital."`}
+      imageUrl={""}
       highlights={[
         "Senso-ji Temple",
         "Shibuya Crossing", 

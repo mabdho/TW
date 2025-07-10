@@ -6,6 +6,7 @@ export const Reykjavik: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Reykjavik, Iceland (2025 Guide)"}
       description={"Welcome to Reykjavik, the world's northernmost capital city, a vibrant hub where colorful rooftops contrast with the raw, dramatic landscapes of Iceland. This city is a unique blend of quirky charm, sophisticated culture, and unparalleled access to nature's wonders. From its geothermal-powered streets to its thriving arts and music scene, Reykjavik serves as the perfect base for exploring volcanoes, glaciers, and geysers. Whether you're chasing the Northern Lights in winter or basking in the midnight sun of summer, you'll find an adventure at every turn. It’s a city that feels both cosmopolitan and deeply connected to ancient sagas. Prepare to be captivated by the energy and beauty of this Icelandic jewel as we explore the very best things to do in Reykjavik."}
+      imageUrl={""}
       highlights={["Hallgrímskirkja",
         "Blue Lagoon",
         "Harpa Concert Hall and Conference Centre",

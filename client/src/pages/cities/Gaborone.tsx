@@ -6,6 +6,7 @@ export const Gaborone: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Gaborone, Botswana (2025 Guide)"}
       description={"Welcome to Gaborone, one of Africa’s fastest-growing and most peaceful capital cities. Far from being just a stopover, 'Gabs' offers a captivating blend of urban modernity and deep-rooted Tswana culture, all while serving as a gentle introduction to Botswana's legendary wilderness. The city is remarkably clean, safe, and easy to navigate, with a warm and welcoming populace. From exploring wildlife reserves right on its doorstep to delving into the nation's history at poignant monuments and vibrant museums, there is a surprising wealth of activities. Whether you're a fan of the famed 'No. 1 Ladies' Detective Agency' or simply an adventurer at heart, this guide will walk you through all the very best things to do in Gaborone for an unforgettable journey into the heart of Botswana."}
+      imageUrl={""}
       highlights={["Mokolodi Nature Reserve",
         "Gaborone Game Reserve",
         "Three Dikgosi Monument",

@@ -194,7 +194,7 @@ export const Bandung: React.FC = () => {
           answer: "Bandung is famous for several things: its cool climate and stunning volcanic landscapes, earning it the nickname 'The Flower City'; its rich colonial Dutch art-deco architecture, leading to the name 'Paris van Java'; its vibrant factory outlet shopping scene; its thriving creative community and trendy coffee shops; and its delicious Sundanese cuisine, known for fresh vegetables, sambal, and grilled fish."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1524655104453-91f9338ecb94?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxCYW5kdW5nJTIwdHJhdmVsfGVufDB8MHx8fDE3NTIxNDAwNzR8MA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

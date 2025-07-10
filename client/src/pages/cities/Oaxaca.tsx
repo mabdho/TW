@@ -6,6 +6,7 @@ export const Oaxaca: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Oaxaca, Mexico (2025 Guide)"}
       description={"Welcome to Oaxaca, the vibrant heart of southern Mexico, where ancient history and rich culinary traditions converge on colorful, cobblestoned streets. A UNESCO World Heritage site, the city is a feast for the senses, bursting with the earthy aroma of mole, the smoky allure of mezcal, and the intricate beauty of indigenous crafts. From the breathtaking Zapotec ruins of Monte Albán perched on a nearby hilltop to the bustling energy of its local markets, Oaxaca offers an authentic and unforgettable cultural immersion. Whether you're exploring baroque churches, learning the art of textile weaving, or simply savoring a tlayuda in the Zócalo, you'll find that the list of the best things to do in Oaxaca is as deep and flavorful as its famous sauce. This guide will navigate you through the must-see sights and hidden gems that make Oaxaca a truly magical destination."}
+      imageUrl={""}
       highlights={["Monte Albán Archaeological Site",
         "Hierve el Agua",
         "Templo de Santo Domingo de Guzmán",

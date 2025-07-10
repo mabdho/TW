@@ -6,6 +6,7 @@ export const SiemReap: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Siem Reap, Cambodia (2025 Guide)"}
       description={"Siem Reap, the captivating gateway to the ancient world, is a city where history breathes through the roots of giant banyan trees and timeless stone faces smile enigmatically. While forever linked to the magnificent temples of Angkor, this Cambodian jewel offers more than just archaeological wonders. It’s a city of vibrant markets, resilient people, and a burgeoning culinary scene. From cruising through floating villages on the vast Tonlé Sap Lake to witnessing the artistry of a modern circus, Siem Reap seamlessly blends its profound past with a dynamic present. Whether you're a history buff, a culture enthusiast, or an adventurous foodie, you'll find an incredible array of experiences. Exploring the ancient Khmer empire and embracing modern Cambodian life are just some of the best things to do in Siem Reap, a destination that promises to enchant and inspire every traveler who walks its dusty, storied streets."}
+      imageUrl={""}
       highlights={["Angkor Wat",
         "Angkor Thom & Bayon Temple",
         "Ta Prohm",

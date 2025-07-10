@@ -6,6 +6,7 @@ export const Havana: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Havana, Cuba (2025 Guide)"}
       description={"Stepping into Havana is like entering a time capsule where vibrant history, revolutionary spirit, and infectious rhythms converge. Faded colonial facades in candy colors line cobblestone streets, while chrome-fendered classic American cars cruise along the iconic Malecón seawall. This is a city that engages all the senses: the scent of Cuban cigars, the taste of aged rum, the sound of salsa spilling from open doorways, and the sight of a community brimming with warmth and resilience. Beyond the postcard images, you'll find a complex and captivating culture waiting to be explored. From grand plazas to hidden art projects, discovering the layers of this Caribbean capital is an unforgettable adventure. This guide will walk you through all the very best things to do in Havana, ensuring your trip is as magical as the city itself."}
+      imageUrl={""}
       highlights={["Wander Through Habana Vieja (Old Havana)",
         "Stroll Along El Malecón",
         "Ride in a Classic American Car",

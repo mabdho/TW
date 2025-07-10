@@ -194,7 +194,7 @@ export const Auckland: React.FC = () => {
           answer: "Auckland is most famous for its nickname, the 'City of Sails,' due to the thousands of yachts on its harbours. It's also renowned for its unique geography, being situated on a volcanic field with 48 dormant volcanic cones, and its location on a narrow isthmus between two major harbours, the Waitematā and the Manukau. It is New Zealand's largest and most multicultural city, serving as the country's main economic hub."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1600208669687-f19af3638cb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxBdWNrbGFuZCUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTM5NzU4fDA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

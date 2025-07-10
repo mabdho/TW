@@ -194,7 +194,7 @@ export const Casablanca: React.FC = () => {
           answer: "Casablanca is most famous for several key things: the spectacular Hassan II Mosque, one of the world's largest; its status as Morocco's economic and business capital; its impressive collection of French colonial and Art Deco architecture; and, of course, the enduring romantic legacy of the 1942 classic film 'Casablanca,' even though it was filmed elsewhere."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1687139165160-0c639a5ed7ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDYXNhYmxhbmNhJTIwdHJhdmVsfGVufDB8MHx8fDE3NTIxNDAxMzl8MA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

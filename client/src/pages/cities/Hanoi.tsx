@@ -6,6 +6,7 @@ export const Hanoi: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Hanoi, Vietnam (2025 Guide)"}
       description={"A city of contrasts, Hanoi is where ancient temples whisper tales next to French colonial villas, and serene lakes offer a respite from the symphony of scooter horns. Vietnam's capital is a sensory overload in the best way possible, a place where history, culture, and cuisine collide on every street corner. The heart of the city, the Old Quarter, is a labyrinth of activity, where artisans ply their trades and vendors serve up world-famous street food. Beyond the chaos, you'll find a city with a deep soul, reflected in its elegant architecture, poignant museums, and the tranquil daily rituals of its residents. Whether you're sipping egg coffee, cruising around West Lake, or exploring centuries-old pagodas, this guide will show you the very best things to do in Hanoi for an unforgettable adventure."}
+      imageUrl={""}
       highlights={["Hanoi Old Quarter",
         "Hoan Kiem Lake & Ngoc Son Temple",
         "Temple of Literature (Văn Miếu - Quốc Tử Giám)",

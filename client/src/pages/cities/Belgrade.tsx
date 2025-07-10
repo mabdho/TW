@@ -194,7 +194,7 @@ export const Belgrade: React.FC = () => {
           answer: "Belgrade is famous for several key things: its strategic location at the confluence of the Sava and Danube rivers; its formidable Belgrade Fortress (Kalemegdan); its legendary and energetic nightlife, particularly the 'splavovi' river clubs; its stark and fascinating brutalist architecture in New Belgrade; and its complex history as the capital of former Yugoslavia. It is also renowned for its warm hospitality, vibrant cafe culture, and delicious, hearty Serbian cuisine."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1717478138654-e6507cccd858?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxCZWxncmFkZSUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTQwMDg4fDA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

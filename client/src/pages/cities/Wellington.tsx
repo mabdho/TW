@@ -6,6 +6,7 @@ export const Wellington: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Wellington, New Zealand (2025 Guide)"}
       description={"Nestled between a sparkling harbour and rolling green hills, Wellington is New Zealand's compact, culture-packed capital. Affectionately known as the 'Coolest Little Capital in the World', it buzzes with a creative energy fueled by world-class coffee, a thriving craft beer scene, and an innovative film industry. Despite its infamous wind, the city's charm is undeniable, with a walkable waterfront, vibrant street art, and a treasure trove of museums and galleries. From the movie magic of 'Wellywood' to the native wildlife thriving just minutes from the city centre, there's a surprising diversity of experiences to uncover. Whether you're a foodie, a film buff, an art lover, or an outdoor enthusiast, this guide will walk you through the very best things to do in Wellington, ensuring an unforgettable visit to this dynamic corner of the world."}
+      imageUrl={""}
       highlights={["Te Papa Tongarewa Museum",
         "Wellington Cable Car",
         "Wētā Workshop",

@@ -194,7 +194,7 @@ export const Albuquerque: React.FC = () => {
           answer: "Albuquerque is most famous for the Albuquerque International Balloon Fiesta, the largest hot air balloon festival in the world. It's also renowned for its unique blend of Native American and Hispanic cultures, its location along historic Route 66, its distinctive Pueblo-style architecture, and its fiery cuisine, particularly its red and green chile. In recent years, it has also gained fame as the primary filming location for the TV shows 'Breaking Bad' and 'Better Call Saul'."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1516546090840-5d8b48110ede?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxBbGJ1cXVlcnF1ZSUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTM5NDY4fDA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

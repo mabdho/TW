@@ -6,6 +6,7 @@ export const Winnipeg: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Winnipeg, Canada (2025 Guide)"}
       description={"Nestled at the confluence of the Red and Assiniboine rivers, Winnipeg is a city of surprising contrasts and deep cultural roots. Known as the 'Gateway to the West,' this prairie capital boasts a rich history, a thriving arts scene, and a resilience forged by its dramatic seasons. From the architectural marvel of the Canadian Museum for Human Rights to the historic charm of the Exchange District, Winnipeg offers a journey through human stories, natural beauty, and innovative design. Whether you're indulging in the diverse culinary landscape, exploring vast urban parks, or relaxing at a world-class Nordic spa, you'll find a warm welcome in this understated Canadian gem. This guide will walk you through all the best things to do in Winnipeg, ensuring a memorable and enriching visit to the heart of the continent."}
+      imageUrl={""}
       highlights={["The Forks National Historic Site",
         "Canadian Museum for Human Rights",
         "Assiniboine Park",

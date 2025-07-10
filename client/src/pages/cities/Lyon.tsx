@@ -6,6 +6,7 @@ export const Lyon: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Lyon, France (2025 Guide)"}
       description={"Nestled at the confluence of the Rhône and Saône rivers, Lyon is France's vibrant third-largest city and its undisputed gastronomic capital. A city of captivating contrasts, it boasts a 2,000-year history, from the Roman ruins on Fourvière Hill to the Renaissance elegance of Vieux Lyon, a UNESCO World Heritage site. Beyond its culinary prowess and historic charm, Lyon is a hub of innovation, art, and a thriving cultural scene. Whether you're navigating the secret 'traboules' passageways, indulging in a traditional bouchon, or relaxing in one of its sprawling parks, you'll find a city that effortlessly blends its rich heritage with a forward-thinking spirit. This guide will walk you through all the very best things to do in Lyon, ensuring an unforgettable journey into the heart of French culture."}
+      imageUrl={""}
       highlights={["Vieux Lyon (Old Lyon)",
         "Basilique Notre-Dame de Fourvière",
         "Les Halles Paul Bocuse",

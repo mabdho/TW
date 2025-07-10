@@ -6,6 +6,7 @@ export const Malm: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Malmö, Sweden (2025 Guide)"}
       description={"Effortlessly cool and refreshingly green, Malmö is a city that has masterfully reinvented itself. Once an industrial powerhouse, Sweden's third-largest city is now a global leader in sustainable urban development, brimming with innovative architecture, verdant parks, and a vibrant, multicultural food scene. Connected to Copenhagen by the magnificent Öresund Bridge, Malmö offers a more laid-back, compact alternative to its Danish neighbor. It’s a city best explored on two wheels, where historic squares meet futuristic design and sandy beaches are just a short cycle from the city center. Whether you're a design aficionado, a foodie, or simply seeking a charming Scandinavian escape, you'll find an incredible array of the best things to do in Malmö. This guide will walk you through the must-see sights and local favorites that make this coastal city so special."}
+      imageUrl={""}
       highlights={["Turning Torso",
         "Malmöhus Castle (Malmö Museer)",
         "Öresund Bridge",

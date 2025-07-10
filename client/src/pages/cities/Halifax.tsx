@@ -6,6 +6,7 @@ export const Halifax: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Halifax, Canada (2025 Guide)"}
       description={"Welcome to Halifax, a city where maritime history sails alongside a vibrant, modern culture. Perched on the edge of the Atlantic, Nova Scotia's capital is a captivating blend of rugged coastal beauty, colonial architecture, and a famously friendly East Coast spirit. Stroll along one of the world's longest urban boardwalks, explore military forts that have guarded the harbor for centuries, and indulge in a culinary scene brimming with fresh seafood and local craft beer. From the poignant stories of immigrants at Pier 21 to the serene beauty of the Public Gardens, the city offers a rich tapestry of experiences. Whether you're a history buff, a foodie, or an outdoor enthusiast, you'll find an incredible array of the best things to do in Halifax. Prepare to be charmed by this historic port city's unique energy and unforgettable scenery."}
+      imageUrl={""}
       highlights={["Halifax Waterfront",
         "Peggy's Cove",
         "Halifax Citadel National Historic Site",

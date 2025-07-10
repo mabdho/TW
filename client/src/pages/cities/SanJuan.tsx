@@ -6,6 +6,7 @@ export const SanJuan: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in San Juan, Puerto Rico (2025 Guide)"}
       description={"Welcome to San Juan, a city where 500 years of history meet the vibrant pulse of modern Caribbean life. Cobblestone streets echo with tales of Spanish galleons, while colorful colonial buildings house chic boutiques and world-class restaurants. The rhythm of salsa spills from open doorways, mixing with the gentle lull of Atlantic waves against ancient fortress walls. Beyond the historic core, golden sand beaches invite relaxation, and lush rainforests promise adventure. Whether you're a history buff, a foodie, a beach lover, or an art enthusiast, you'll find an endless array of activities. This guide will walk you through the very best things to do in San Juan, ensuring your visit is packed with unforgettable moments, rich culture, and the warm spirit of Borikén. Get ready to explore the heart and soul of Puerto Rico."}
+      imageUrl={""}
       highlights={["Old San Juan (Viejo San Juan)",
         "Castillo San Felipe del Morro",
         "El Yunque National Forest",

@@ -6,6 +6,7 @@ export const Malacca: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Malacca, Malaysia (2025 Guide)"}
       description={"Steeped in history and declared a UNESCO World Heritage Site, Malacca (or Melaka) is a captivating tapestry of cultures. Once a bustling trading port coveted by Portuguese, Dutch, and British empires, its colonial past is etched into its architecture, cuisine, and very soul. Stroll along the serene Malacca River, explore vibrant street art, and dive into the unique Peranakan heritage that defines this city. From the crimson-colored buildings of Dutch Square to the lively chaos of the Jonker Street Night Market, every corner tells a story. Whether you're a history buff, a foodie seeking tantalizing Nyonya flavors, or simply a curious traveler, this guide will walk you through the very best things to do in Malacca, ensuring an unforgettable journey through one of Malaysia's most cherished historical gems."}
+      imageUrl={""}
       highlights={["Jonker Street Night Market",
         "Dutch Square (Red Square)",
         "St. Paul's Hill & Church Ruins",

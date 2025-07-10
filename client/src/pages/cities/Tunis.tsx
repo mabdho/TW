@@ -6,6 +6,7 @@ export const Tunis: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Tunis, Tunisia (2025 Guide)"}
       description={"A captivating fusion of ancient history and vibrant modern life, Tunis is a city that enchants every visitor. Its heart beats within the labyrinthine alleys of the UNESCO-listed Medina, a world of bustling souks, hidden courtyards, and architectural marvels. Beyond the old walls, grand French colonial boulevards lead to world-class museums showcasing millennia of history, from Punic Carthage to Roman mosaics. The city serves as a perfect gateway to the iconic blue-and-white village of Sidi Bou Said and the legendary ruins of Carthage. Whether you're a history buff, a culture enthusiast, or simply seeking an authentic North African adventure, this guide will walk you through the very best things to do in Tunis, ensuring a trip filled with discovery and wonder. Prepare to immerse yourself in a city where every corner tells a story."}
+      imageUrl={""}
       highlights={["Medina of Tunis",
         "The Bardo National Museum",
         "Ruins of Carthage",

@@ -20,6 +20,8 @@ Preferred communication style: Simple, everyday language.
 - ✅ Smart info messages that adapt based on whether real images are present
 - ✅ Created gallery_template.md with instructions for manual updates
 - ✅ All cities now have 6 placeholder slots ready for manual image URL updates
+- ✅ Added hero image placeholders to all 154 cities (imageUrl prop)
+- ✅ Each city now has individual control over both hero and gallery images
 
 ### Mobile-First Responsive Design Implementation
 - ✅ Implemented comprehensive mobile-first responsive design across all components

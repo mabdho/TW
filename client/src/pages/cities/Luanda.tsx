@@ -6,6 +6,7 @@ export const Luanda: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Luanda, Angola (2025 Guide)"}
       description={"A vibrant city of stark contrasts, Luanda is where colonial Portuguese architecture meets gleaming modern skyscrapers along a stunning Atlantic coastline. As the capital of Angola, it pulses with a relentless energy, fueled by its oil wealth and a resilient, forward-looking spirit. From the palm-lined promenade of the Marginal to poignant historical sites that tell stories of a complex past, Luanda is a captivating destination for the intrepid traveler. Beyond the urban hustle, you'll find laid-back beach vibes on the Ilha do Cabo and breathtaking natural wonders just a short drive away. Navigating this dynamic metropolis reveals a rich tapestry of culture, art, and music, offering a truly unique African adventure. For those wondering where to start, this guide covers all the best things to do in Luanda for an unforgettable trip."}
+      imageUrl={""}
       highlights={["Mausoleum of Agostinho Neto",
         "Fortaleza de São Miguel",
         "Ilha do Cabo (Luanda Island)",

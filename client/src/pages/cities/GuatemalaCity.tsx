@@ -6,6 +6,7 @@ export const GuatemalaCity: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Guatemala City, Guatemala (2025 Guide)"}
       description={"Often bypassed by travelers heading to Antigua or Lake Atitlán, Guatemala City—or 'Guate' as it's known locally—is a sprawling, energetic metropolis with a surprising depth of culture and history. As the largest city in Central America, it's a vibrant mosaic of colonial architecture, world-class museums, bustling markets, and a burgeoning contemporary arts scene. Navigating its numbered zones reveals distinct neighborhoods, from the historic grandeur of Zona 1 to the trendy, modern vibe of Zona 4 and Zona 10. While it demands a savvy approach to safety, the rewards are immense for those who explore. To truly understand the nation's complex past and dynamic present, discovering the best things to do in Guatemala City is an essential part of any Guatemalan adventure."}
+      imageUrl={""}
       highlights={["Palacio Nacional de la Cultura",
         "Museo Ixchel del Traje Indígena",
         "Mapa en Relieve",

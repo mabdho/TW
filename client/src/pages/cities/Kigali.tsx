@@ -6,6 +6,7 @@ export const Kigali: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Kigali, Rwanda (2025 Guide)"}
       description={"Welcome to Kigali, the vibrant heart of Rwanda. Perched across rolling hills, this city has undergone a remarkable transformation, emerging as one of Africa's cleanest, safest, and most forward-thinking capitals. Its immaculate streets, lush greenery, and thriving arts scene are a testament to the resilience and unity of the Rwandan people. Beyond its poignant history, Kigali offers a dynamic blend of modern innovation and rich cultural heritage. From bustling markets and contemporary art galleries to world-class coffee and serene nature escapes, there's a surprising depth to explore. Whether you're here to reflect on the past or celebrate the present, you'll find that the best things to do in Kigali offer a profound and inspiring journey. Prepare to be charmed by the 'Land of a Thousand Hills' and its welcoming capital."}
+      imageUrl={""}
       highlights={["Kigali Genocide Memorial",
         "Kimironko Market",
         "Inema Arts Center",

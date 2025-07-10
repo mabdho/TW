@@ -6,6 +6,7 @@ export const Riga: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Riga, Latvia (2025 Guide)"}
       description={"Welcome to Riga, the vibrant capital of Latvia and the largest city in the Baltics. A city of stunning contrasts, Riga effortlessly blends its medieval heart with a cosmopolitan buzz. Its UNESCO World Heritage-listed Old Town is a labyrinth of cobblestone streets, Gothic spires, and charming squares, while just a short walk away, the world's most magnificent collection of Art Nouveau architecture awaits. From the bustling energy of its cavernous Central Market to the serene beauty of its parks and canal, Riga offers a rich tapestry of history, culture, and cuisine. Whether you're a history buff, an architecture enthusiast, or a foodie, you'll find an incredible array of experiences. This guide will walk you through all the very best things to do in Riga, ensuring your visit to this Baltic gem is truly unforgettable."}
+      imageUrl={""}
       highlights={["Riga Old Town (Vecrīga)",
         "House of the Black Heads",
         "Riga Central Market",

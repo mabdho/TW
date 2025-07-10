@@ -6,6 +6,7 @@ export const Indianapolis: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Indianapolis, USA (2025 Guide)"}
       description={"Welcome to Indianapolis, the \\\"Crossroads of America\\\" and a city that beautifully blends high-octane thrills with heartfelt Midwestern charm. While world-famous for the Indianapolis 500, the largest single-day sporting event on the globe, Indy offers so much more than just racing. This surprisingly green city boasts sprawling urban parks, a picturesque canal walk, and a thriving cultural scene with world-class museums and vibrant arts districts. From cheering on the Colts at Lucas Oil Stadium to exploring poignant historical monuments, there's a dynamic energy here that captivates visitors. Whether you're a family looking for educational fun, a sports fanatic, or a culture aficionado, you'll find an incredible array of activities. This guide will walk you through all the very best things to do in Indianapolis, ensuring your visit is packed with unforgettable moments in the heart of Hoosier country."}
+      imageUrl={""}
       highlights={["Indianapolis Motor Speedway Museum",
         "The Children's Museum of Indianapolis",
         "White River State Park",

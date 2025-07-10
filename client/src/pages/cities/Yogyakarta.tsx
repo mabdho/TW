@@ -6,6 +6,7 @@ export const Yogyakarta: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Yogyakarta, Indonesia (2025 Guide)"}
       description={"Welcome to Yogyakarta, the undeniable soul of Java and the cultural heart of Indonesia. This vibrant city, often called 'Jogja', is a captivating blend of ancient traditions and youthful energy, where majestic temples stand minutes away from bustling art scenes and university life. It's a place where history is not just in museums but is lived daily in the halls of the Sultan's Palace and through the delicate art of batik making. From witnessing ethereal sunrises over volcanic peaks to exploring subterranean caves, Yogyakarta offers a journey for every type of traveler. Whether you are a history buff, an adventurer, or a culture enthusiast, you will find an incredible array of experiences. This guide will walk you through the very best things to do in Yogyakarta, ensuring your visit is nothing short of magical and unforgettable."}
+      imageUrl={""}
       highlights={["Borobudur Temple",
         "Prambanan Temple",
         "The Kraton (Sultan's Palace)",

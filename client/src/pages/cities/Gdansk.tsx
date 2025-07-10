@@ -6,6 +6,7 @@ export const Gdansk: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Gdansk, Poland (2025 Guide)"}
       description={"Rising from the ashes of World War II, Gdansk is a city of profound resilience and captivating beauty. Its meticulously reconstructed Old Town, with a kaleidoscope of colorful Hanseatic-style buildings, lines the historic Royal Route. As the birthplace of the Solidarity movement, which helped topple communism in Eastern Europe, and the site of the first shots of WWII, Gdansk holds a pivotal place in 20th-century history. This vibrant port city on the Baltic coast, once the world’s amber capital, now enchants visitors with its maritime atmosphere, charming canals, and world-class museums. From wandering cobblestone lanes to exploring poignant historical sites, you'll find an incredible array of experiences. This guide will walk you through the absolute best things to do in Gdansk, ensuring a trip filled with discovery and wonder at every turn."}
+      imageUrl={""}
       highlights={["Long Market and Neptune's Fountain",
         "St. Mary's Basilica",
         "European Solidarity Centre",

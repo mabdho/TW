@@ -6,6 +6,7 @@ export const Papeete: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Papeete, French Polynesia (2025 Guide)"}
       description={"Welcome to Papeete, the vibrant heart of French Polynesia and the gateway to Tahiti's legendary islands. Far more than just a stopover point, this bustling capital offers a captivating blend of urban energy and laid-back island charm. Here, French sophistication meets Polynesian warmth, creating a unique cultural tapestry. You can spend your days exploring colorful markets overflowing with tropical fruits and black pearls, strolling along scenic waterfront parks, and delving into the rich history of the region. As evening falls, the city comes alive with the irresistible aromas of its famous food trucks. Whether you're starting your island-hopping adventure or exploring Tahiti itself, you'll find that discovering the best things to do in Papeete is an essential part of any Tahitian journey, offering a genuine taste of modern Polynesian life."}
+      imageUrl={""}
       highlights={["Marché de Papeete (Papeete Market)",
         "Place Vai'ete for 'Les Roulottes'",
         "Robert Wan Pearl Museum",

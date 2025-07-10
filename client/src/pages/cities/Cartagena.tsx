@@ -194,7 +194,7 @@ export const Cartagena: React.FC = () => {
           answer: "Cartagena is famous for its stunningly preserved, walled colonial old town, which is a UNESCO World Heritage site. It's also renowned for its vibrant Caribbean culture, colorful architecture, rich history involving pirates and Spanish gold, the nearby Rosario Islands with their turquoise waters and coral reefs, and for being an inspiration for the literary works of Nobel laureate Gabriel García Márquez."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1715216013053-60477c7f87fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDYXJ0YWdlbmElMjB0cmF2ZWx8ZW58MHwwfHx8MTc1MjE0MDEzNXww&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

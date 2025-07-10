@@ -6,6 +6,7 @@ export const KansasCity: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Kansas City, USA (2025 Guide)"}
       description={"Welcome to Kansas City, the vibrant heart of the American Midwest. Known as the 'City of Fountains' and the 'Paris of the Plains,' KC offers a surprising blend of rich history, world-class arts, and a culinary scene that sizzles. This is a city where the soulful sounds of jazz spill from historic clubs and the smoky aroma of legendary barbecue hangs in the air. From stunning architectural marvels and poignant national museums to eclectic arts districts and sprawling, beautiful parks, there's a dynamic energy here waiting to be discovered. Whether you're a history buff, a foodie, a sports fanatic, or an art lover, you'll find an incredible array of experiences. Let's explore the very best things to do in Kansas City for an unforgettable trip."}
+      imageUrl={""}
       highlights={["National WWI Museum and Memorial",
         "The Nelson-Atkins Museum of Art",
         "Union Station",

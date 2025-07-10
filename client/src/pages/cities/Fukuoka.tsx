@@ -6,6 +6,7 @@ export const Fukuoka: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Fukuoka, Japan (2025 Guide)"}
       description={"Welcome to Fukuoka, the vibrant gateway to Japan's southern island of Kyushu. This dynamic port city masterfully blends ancient history with modern energy, offering a more relaxed alternative to Tokyo or Kyoto without sacrificing excitement. Renowned for its friendly locals, pristine beaches, and a legendary food scene, Fukuoka is a paradise for gourmands and culture seekers alike. From slurping world-famous tonkotsu ramen at a riverside yatai stall to exploring serene shrines and futuristic art installations, there's an incredible variety of experiences waiting. Whether you're wandering through castle ruins or shopping in sprawling underground malls, you'll quickly discover why this city is a favorite among travelers. Our guide will show you all the best things to do in Fukuoka, ensuring a trip filled with delicious food, rich culture, and unforgettable memories."}
+      imageUrl={""}
       highlights={["Dazaifu Tenmangu Shrine",
         "Yatai Food Stalls",
         "Ohori Park",

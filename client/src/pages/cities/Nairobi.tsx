@@ -6,6 +6,7 @@ export const Nairobi: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Nairobi, Kenya (2025 Guide)"}
       description={"Welcome to Nairobi, the vibrant heart of Kenya, affectionately known as the 'Green City in the Sun.' This is a city of compelling contrasts, where skyscrapers overlook vast grasslands and urban energy blends seamlessly with wild nature. Nairobi is the only capital city in the world with a national park on its doorstep, offering unparalleled wildlife encounters just minutes from the bustling center. Beyond the safaris, you'll discover a thriving cultural scene, rich history, and the warm hospitality of the Kenyan people. Whether you're feeding giraffes, exploring bustling markets, or delving into the nation's past, you'll find an incredible array of experiences. Planning your adventure is easy with our guide to the very best things to do in Nairobi, ensuring a trip filled with unforgettable moments in this dynamic East African hub."}
+      imageUrl={""}
       highlights={["Nairobi National Park",
         "David Sheldrick Wildlife Trust",
         "Giraffe Centre",

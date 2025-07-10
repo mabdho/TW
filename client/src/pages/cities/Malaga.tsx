@@ -6,6 +6,7 @@ export const Malaga: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Malaga, Spain (2025 Guide)"}
       description={"Basking on Spain's sun-drenched Costa del Sol, Malaga is a city where ancient history and vibrant modernity dance under endless blue skies. As one of the world's oldest cities, its streets are a tapestry of Phoenician, Roman, and Moorish influences, crowned by the majestic Alcazaba fortress. Yet, Malaga is also the proud birthplace of Pablo Picasso, a legacy celebrated in world-class museums that inject a dose of avant-garde cool into its historic heart. From sipping sweet local wine and feasting on fresh seafood at a chiringuito to exploring contemporary art districts and relaxing on golden beaches, there is a captivating energy here. This guide will walk you through the very best things to do in Malaga, ensuring you experience the full spectrum of its Andalusian charm. Get ready to discover a city that effortlessly blends culture, cuisine, and coastal bliss, making it an unforgettable Spanish escape."}
+      imageUrl={""}
       highlights={["Alcazaba of Malaga",
         "Museo Picasso Málaga",
         "Malaga Cathedral",

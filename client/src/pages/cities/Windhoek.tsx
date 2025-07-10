@@ -6,6 +6,7 @@ export const Windhoek: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Windhoek, Namibia (2025 Guide)"}
       description={"Windhoek, the capital of Namibia, is a city of surprising contrasts. Nestled in a high-altitude basin, it's a modern, clean city where German colonial-era castles and church spires sit alongside contemporary architecture and bustling African markets. More than just a gateway to the country's epic deserts and wildlife parks, Windhoek offers a unique cultural experience in its own right. It’s the vibrant political, economic, and cultural heart of the nation, offering a gentle introduction to the wonders of Namibia. Whether you're exploring its historical landmarks, savoring its unique culinary scene, or delving into its recent past, you'll find a wide array of fascinating activities. This guide will walk you through the very best things to do in Windhoek, ensuring your visit is both memorable and insightful."}
+      imageUrl={""}
       highlights={["Christuskirche (Christ Church)",
         "Independence Memorial Museum",
         "Katutura Township Tour",

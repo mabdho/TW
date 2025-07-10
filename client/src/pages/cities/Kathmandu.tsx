@@ -6,6 +6,7 @@ export const Kathmandu: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Kathmandu, Nepal (2025 Guide)"}
       description={"Kathmandu is a city of intoxicating chaos and profound serenity, where ancient traditions and modern life collide in a vibrant spectacle. Nestled in a valley ringed by Himalayan peaks, Nepal's capital is a sensory feast of ringing temple bells, fragrant incense, and bustling market streets. The city is a living museum, home to an astonishing seven UNESCO World Heritage Sites, showcasing exquisite Newari architecture and deep spiritual roots. From the sacred hum of stupas to the thrill of exploring medieval city squares, every corner tells a story. Whether you're a spiritual seeker, a cultural enthusiast, or an adventure traveler gearing up for a trek, this guide will help you discover the very best things to do in Kathmandu, a city that captures the heart of every visitor."}
+      imageUrl={""}
       highlights={["Boudhanath Stupa",
         "Pashupatinath Temple",
         "Swayambhunath Stupa (Monkey Temple)",

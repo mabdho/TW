@@ -194,7 +194,7 @@ export const Bergen: React.FC = () => {
           answer: "Bergen is most famous for its iconic Bryggen Hanseatic Wharf, a UNESCO World Heritage site. It is also known as the 'Gateway to the Fjords,' being the primary starting point for exploring the world-renowned fjords of Western Norway. Other claims to fame include its famously rainy weather, being the birthplace of composer Edvard Grieg, its history as a major European trading port, and its stunning setting surrounded by seven mountains."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1645564386021-0db0dd3e2ad7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxCZXJnZW4lMjB0cmF2ZWx8ZW58MHwwfHx8MTc1MjE0MDA5MXww&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

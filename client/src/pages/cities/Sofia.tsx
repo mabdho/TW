@@ -6,6 +6,7 @@ export const Sofia: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Sofia, Bulgaria (2025 Guide)"}
       description={"Beneath the watchful gaze of Vitosha Mountain, Sofia unfolds as a city of compelling contrasts. Bulgaria's capital is a vibrant tapestry where ancient Roman ruins lie beside imposing Soviet-era monuments, and golden-domed Orthodox cathedrals share the skyline with trendy art galleries. It’s a city that doesn't just display its history; it lives and breathes it on every corner. Stroll through its compact, walkable center, and you'll feel the layers of Thracian, Roman, and Ottoman influence. Beyond the landmarks, you'll find a burgeoning culinary scene, leafy parks, and a warm, welcoming spirit. From its rich past to its dynamic present, discovering the best things to do in Sofia is an exploration of a European capital that is both profound and refreshingly unpretentious. This guide will help you navigate its most captivating sights and experiences."}
+      imageUrl={""}
       highlights={["St. Alexander Nevsky Cathedral",
         "Vitosha Mountain",
         "Ancient Serdica Complex",

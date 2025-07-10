@@ -6,6 +6,7 @@ export const Valparaiso: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Valparaiso, Chile (2025 Guide)"}
       description={"Clinging precariously to a series of steep hills overlooking the Pacific, Valparaiso is Chile's chaotic, colorful, and poetic soul. A UNESCO World Heritage city, this vibrant port is a labyrinth of winding alleys, creaking funiculars, and decaying mansions painted in every hue imaginable. Every corner reveals a masterpiece of street art, a hidden café, or a breathtaking viewpoint. Once a bustling hub for global trade before the Panama Canal, it now thrives on a bohemian energy that has inspired artists and writers for generations, most notably the poet Pablo Neruda. Far more than just a city, Valparaíso is an experience, a living museum waiting to be explored. To truly capture its spirit, you must wander its streets, ride its historic lifts, and dive into the creative chaos. This guide will show you all the best things to do in Valparaiso for an unforgettable adventure."}
+      imageUrl={""}
       highlights={["Cerro Concepción & Cerro Alegre",
         "La Sebastiana Museum (Pablo Neruda's House)",
         "Ride the Historic Funiculars (Ascensores)",

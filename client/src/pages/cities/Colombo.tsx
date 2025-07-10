@@ -194,7 +194,7 @@ export const Colombo: React.FC = () => {
           answer: "Colombo is famous for being Sri Lanka's bustling commercial capital and a city of vibrant contrasts. It's known for its rich colonial heritage, visible in the architecture of the Fort district and restored precincts like the Dutch Hospital. It's also famous for its chaotic markets like Pettah, beautiful and eclectic temples like Gangaramaya, its scenic seaside promenade at Galle Face Green, and for being the modern gateway to the rest of Sri Lanka's treasures."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1708574138991-73b6cf07d614?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDb2xvbWJvJTIwdHJhdmVsfGVufDB8MHx8fDE3NTIxNDAxNDN8MA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

@@ -6,6 +6,7 @@ export const Zagreb: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Zagreb, Croatia (2025 Guide)"}
       description={"Welcome to Zagreb, Croatia's vibrant and often-overlooked capital. A city of contrasts, Zagreb seamlessly blends the grandeur of its Austro-Hungarian past with a lively, modern energy. Its historic Upper Town (Gornji Grad) boasts cobblestone streets and gas lamps, while the Lower Town (Donji Grad) is a hub of bustling cafes, green parks, and impressive museums. Unlike its coastal counterparts, Zagreb offers a continental charm, a world-class café culture, and a burgeoning culinary scene. Whether you're exploring quirky museums, strolling through lush parks, or simply sipping coffee like a local, you'll find that the city's heart lies in its everyday rhythm. This guide will walk you through all the very best things to do in Zagreb, ensuring you experience the authentic spirit of this captivating European capital."}
+      imageUrl={""}
       highlights={["Zagreb Cathedral",
         "St. Mark's Church",
         "Museum of Broken Relationships",

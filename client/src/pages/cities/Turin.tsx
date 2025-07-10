@@ -6,6 +6,7 @@ export const Turin: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Turin, Italy (2025 Guide)"}
       description={"Often overlooked for its more famous Italian counterparts, Turin is a city of understated elegance and immense cultural wealth. As Italy's first capital and the cradle of its automotive industry, this northern gem offers a unique blend of Parisian-style boulevards, Baroque splendor, and industrial heritage, all framed by the magnificent backdrop of the Alps. Known for its world-class museums, historic cafés, and culinary innovations like gianduja chocolate and vermouth, Turin captivates visitors with its sophisticated yet unpretentious charm. From ascending its iconic architectural symbol to exploring ancient Egyptian treasures, discovering the best things to do in Turin reveals a city rich in history, art, and flavor, waiting to be explored. It’s a destination that rewards the curious traveler with unforgettable experiences at every turn."}
+      imageUrl={""}
       highlights={["Mole Antonelliana & National Cinema Museum",
         "Egyptian Museum (Museo Egizio)",
         "Royal Palace of Turin (Palazzo Reale)",

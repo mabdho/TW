@@ -6,6 +6,7 @@ export const Zaragoza: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Zaragoza, Spain (2025 Guide)"}
       description={"Straddling the mighty Ebro River, Zaragoza is a city of surprising grandeur and profound history. As Spain's fifth-largest city, it often flies under the radar, offering an authentic Aragonese experience without the overwhelming crowds of Madrid or Barcelona. With over 2,000 years of history, its streets showcase a tapestry of Roman, Moorish, Jewish, and Christian heritage, most famously embodied in its breathtaking basilicas and fortified palaces. The city is also the proud birthplace of the revolutionary artist Francisco de Goya, whose spirit permeates its museums and culture. From marveling at sacred art to indulging in one of Spain's best tapas scenes, exploring the rich legacy of this underrated gem is a rewarding journey. This guide will walk you through all the best things to do in Zaragoza, ensuring you capture the essence of this magnificent city."}
+      imageUrl={""}
       highlights={["Basílica de Nuestra Señora del Pilar",
         "Palacio de la Aljafería",
         "Catedral del Salvador (La Seo)",

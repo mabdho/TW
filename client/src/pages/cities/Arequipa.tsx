@@ -194,7 +194,7 @@ export const Arequipa: React.FC = () => {
           answer: "Arequipa is most famous for its stunning colonial-era architecture built from sillar, a white volcanic rock, which earned it the nickname 'La Ciudad Blanca' (The White City) and a UNESCO World Heritage designation. It's also renowned for its dramatic setting, surrounded by three volcanoes: El Misti, Chachani, and Pichu Pichu. Culturally, it's famous for its unique and celebrated regional cuisine, centered around traditional restaurants called picanterías. Finally, it serves as the main launching point for tours to the spectacular Colca Canyon, one of the deepest canyons in the world."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1722398333793-c6d6d78bdd69?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxBcmVxdWlwYSUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTM5NzUzfDA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

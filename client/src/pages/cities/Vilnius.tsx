@@ -6,6 +6,7 @@ export const Vilnius: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Vilnius, Lithuania (2025 Guide)"}
       description={"Welcome to Vilnius, a city of stunning baroque beauty and resilient spirit. Its UNESCO-listed Old Town is a labyrinth of cobblestone streets, hidden courtyards, and more churches per capita than any other city in Europe. Yet, Vilnius is more than just a historical gem; it’s a vibrant, forward-thinking capital. You can step into a self-declared independent republic of artists, gaze at panoramic views from ancient hilltops, and delve into a complex, poignant history that has shaped the nation. From its thriving culinary scene to its tranquil green spaces, exploring the Lithuanian capital is a journey of constant discovery. This guide will walk you through the very best things to do in Vilnius, ensuring you experience the heart and soul of this enchanting city."}
+      imageUrl={""}
       highlights={["Vilnius Old Town (Senamiestis)",
         "Gediminas' Castle Tower",
         "Vilnius Cathedral and Cathedral Square",

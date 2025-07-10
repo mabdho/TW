@@ -6,6 +6,7 @@ export const Thessaloniki: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Thessaloniki, Greece (2025 Guide)"}
       description={"Welcome to Thessaloniki, Greece's vibrant second city and the cultural capital of Macedonia. A city where 2,300 years of history are written on every corner, from Roman ruins and Byzantine walls to Ottoman monuments and a lively Jewish heritage. Thessaloniki pulses with a youthful energy, fueled by its large student population, bustling cafes, and innovative culinary scene. It’s a place where ancient stories meet modern life along a stunning seafront promenade. Whether you're a history buff, a dedicated foodie, or simply seeking an authentic Greek urban experience, you'll find an endless list of amazing activities. This guide will walk you through the very best things to do in Thessaloniki, ensuring your visit is unforgettable. Prepare to be captivated by its charm, history, and the warm hospitality of its people."}
+      imageUrl={""}
       highlights={["The White Tower",
         "Rotunda of Galerius",
         "Ano Poli (Upper Town)",

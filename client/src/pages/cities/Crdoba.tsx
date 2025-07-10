@@ -194,7 +194,7 @@ export const Crdoba: React.FC = () => {
           answer: "Córdoba is famous for several things. Historically, it's known for its UNESCO World Heritage Jesuit Block and for being home to one of the oldest universities in the Americas, earning it the nickname 'La Docta'. Culturally, it's the birthplace of the upbeat musical genre *cuarteto*. Geographically, it's the gateway to the scenic Sierras de Córdoba mountain range, a popular recreational area."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1669399554927-cc38ca6bc3ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDcmRvYmElMjB0cmF2ZWx8ZW58MHwwfHx8MTc1MjE0MDE1N3ww&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

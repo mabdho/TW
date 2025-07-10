@@ -6,6 +6,7 @@ export const Ipoh: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Ipoh, Malaysia (2025 Guide)"}
       description={"Nestled in the Kinta Valley and framed by dramatic limestone karst hills, Ipoh is a city of captivating charm and rich history. Once a humble tin-mining town, it has blossomed into a vibrant destination renowned for its colonial-era architecture, stunning cave temples, and a culinary scene that rivals any in Malaysia. The city's slower pace offers a refreshing contrast to the bustle of Kuala Lumpur, inviting visitors to wander through streets adorned with creative murals, sip on the world-famous Ipoh white coffee, and explore ancient caves housing serene places of worship. Whether you're a history buff, a foodie, or a nature lover, you'll find an incredible array of experiences. This guide will walk you through the absolute best things to do in Ipoh, ensuring a memorable journey into the heart of Perak."}
+      imageUrl={""}
       highlights={["Concubine Lane (Lorong Panglima)",
         "Kek Lok Tong Cave Temple and Zen Gardens",
         "Ipoh Old Town Murals",

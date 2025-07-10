@@ -6,6 +6,7 @@ export const Salvador: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Salvador, Brazil (2025 Guide)"}
       description={"Welcome to Salvador, the vibrant heart of Afro-Brazilian culture and Brazil's first capital. Perched on the stunning coast of Bahia, this city pulses with an infectious energy, fueled by the rhythms of samba and axé music. Its historic center, the Pelourinho, is a UNESCO World Heritage site, a dazzling maze of pastel-colored colonial buildings, cobblestone streets, and baroque churches. Beyond the architecture, Salvador captivates the senses with the scent of dendê oil from sizzling acarajé stalls and the powerful traditions of Candomblé. From sun-drenched beaches to electrifying cultural performances, Salvador offers a profound journey into the soul of Brazil. Exploring the city reveals a tapestry of history, art, and spirituality, making it essential to discover all the best things to do in Salvador for a truly unforgettable adventure."}
+      imageUrl={""}
       highlights={["Wander Through the Pelourinho",
         "Ride the Elevador Lacerda",
         "Visit the Igreja e Convento de São Francisco",

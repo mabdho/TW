@@ -6,6 +6,7 @@ export const PortMoresby: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Port Moresby, Papua New Guinea (2025 Guide)"}
       description={"As the vibrant capital of Papua New Guinea, Port Moresby is a city of compelling contrasts, where modern development meets ancient traditions on the edge of a stunning natural harbour. Often serving as a gateway to the country's remote islands and untamed jungles, the city itself holds a wealth of cultural treasures and natural beauty. From sprawling nature parks teeming with unique wildlife to poignant war memorials and bustling local markets, there is a surprising array of experiences waiting to be discovered. For any traveler looking to understand the heart of this diverse nation, exploring the rich tapestry of sights, sounds, and stories is essential. This guide will walk you through all the very best things to do in Port Moresby, ensuring a memorable and insightful journey into the Land of the Unexpected."}
+      imageUrl={""}
       highlights={["Port Moresby Nature Park",
         "National Museum and Art Gallery",
         "Varirata National Park",

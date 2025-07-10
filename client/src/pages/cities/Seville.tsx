@@ -6,6 +6,7 @@ export const Seville: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Seville, Spain (2025 Guide)"}
       description={"Drenched in sunshine and history, Seville is the heart of Andalusia, a city where fiery flamenco rhythms echo through ancient cobblestone streets. The air here is fragrant with orange blossoms, and every corner reveals a story, from magnificent Moorish palaces to vibrant tapas bars buzzing with life. As the capital of southern Spain, it effortlessly blends its rich past—seen in its grand cathedral and royal alcázars—with a forward-looking, passionate spirit. Whether you're getting lost in the labyrinthine Jewish Quarter, cruising the Guadalquivir River, or marveling at a modern architectural wonder, you'll quickly fall under its spell. Prepare to be enchanted as we explore the very best things to do in Seville, a city that truly captures the soul of Spain."}
+      imageUrl={""}
       highlights={["Real Alcázar de Sevilla",
         "Seville Cathedral & La Giralda",
         "Plaza de España",

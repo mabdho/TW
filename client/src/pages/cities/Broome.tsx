@@ -194,7 +194,7 @@ export const Broome: React.FC = () => {
           answer: "Broome is famous for several key things: its historic and lucrative pearling industry, which gave the town its multicultural identity; the stunning 22km stretch of white sand at Cable Beach, renowned for its spectacular sunsets and camel rides; and the natural phenomenon known as the Staircase to the Moon. It's also celebrated as the western gateway to the vast and rugged Kimberley wilderness."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1682668731868-8d82c15870aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxCcm9vbWUlMjB0cmF2ZWx8ZW58MHwwfHx8MTc1MjE0MDEwN3ww&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

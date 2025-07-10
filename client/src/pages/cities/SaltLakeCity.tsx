@@ -6,6 +6,7 @@ export const SaltLakeCity: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Salt Lake City, USA (2025 Guide)"}
       description={"Nestled between the dramatic Wasatch Mountains and the shores of a vast inland sea, Salt Lake City offers a unique blend of urban sophistication and outdoor adventure. Founded by pioneers in 1847, the city has evolved from a religious sanctuary into a bustling hub for tech, culture, and recreation. Known for its famously friendly locals and an impeccably clean downtown, SLC provides a launchpad for world-class skiing, hiking, and biking. But the city itself is a destination, boasting historic sites, innovative museums, and a burgeoning food scene. Whether you're here to trace your ancestry, carve fresh powder, or explore a city on the rise, you'll find an incredible array of activities. This guide will walk you through all the very best things to do in Salt Lake City for an unforgettable trip."}
+      imageUrl={""}
       highlights={["Temple Square",
         "Great Salt Lake State Park",
         "Natural History Museum of Utah",

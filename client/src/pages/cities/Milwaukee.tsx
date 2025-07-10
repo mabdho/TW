@@ -6,6 +6,7 @@ export const Milwaukee: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Milwaukee, USA (2025 Guide)"}
       description={"Nestled on the western shore of Lake Michigan, Milwaukee, Wisconsin offers a vibrant blend of old-world charm and modern energy. Once the beer capital of the world, its rich brewing heritage is still palpable in historic breweries and lively beer gardens. But this \\\"Cream City\\\" is much more than its sudsy past. Explore a stunning architectural landscape, from the soaring wings of the Calatrava-designed Art Museum to the Flemish grandeur of the Pabst Mansion. The city boasts a thriving culinary scene, diverse neighborhoods, and a calendar packed with festivals, including the world's largest music festival, Summerfest. Whether you're a history buff, a foodie, an art lover, or just looking for a friendly Midwestern city with a unique character, you'll find an incredible array of the best things to do in Milwaukee waiting to be discovered."}
+      imageUrl={""}
       highlights={["Milwaukee Art Museum",
         "Harley-Davidson Museum",
         "Historic Third Ward",

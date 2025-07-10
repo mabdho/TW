@@ -6,6 +6,7 @@ export const Nouma: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Nouméa, New Caledonia (2025 Guide)"}
       description={"Welcome to Nouméa, the sophisticated capital of New Caledonia, where French Riviera chic meets vibrant Melanesian culture on the shores of the world's largest lagoon. This South Pacific gem offers a unique blend of experiences, from sun-drenched beaches and world-class water sports to poignant cultural centers and bustling colonial-style squares. Whether you're savoring gourmet French cuisine, exploring the incredible biodiversity of its UNESCO-listed waters, or delving into the rich history of the Kanak people, you'll find an unforgettable adventure. Nouméa is more than just a tropical paradise; it's a city with a distinct soul and a cosmopolitan flair. Get ready to discover the very best things to do in Nouméa, a destination that captivates and surprises at every turn. Prepare for a journey filled with stunning landscapes, rich flavors, and warm Pacific hospitality."}
+      imageUrl={""}
       highlights={["Tjibaou Cultural Centre",
         "Anse Vata Beach",
         "Île aux Canards (Duck Island)",

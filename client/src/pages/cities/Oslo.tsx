@@ -6,6 +6,7 @@ export const Oslo: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Oslo, Norway (2025 Guide)"}
       description={"Nestled between the Oslofjord and forested hills, Oslo is a unique European capital where urban life and stunning nature coexist in perfect harmony. The city is a hub of world-class museums, striking modern architecture, and innovative Nordic cuisine. From exploring its rich Viking heritage to walking on the roof of its magnificent Opera House, there's a captivating experience around every corner. Whether you're a history buff, an art aficionado, or an outdoor enthusiast, you'll find an incredible array of activities. This guide will walk you through all the best things to do in Oslo, ensuring your visit to this vibrant Scandinavian city is truly unforgettable. It’s a city that effortlessly blends the historic with the hyper-modern, creating a dynamic and welcoming atmosphere for every traveler."}
+      imageUrl={""}
       highlights={["Vigeland Sculpture Park (Vigelandsparken)",
         "Oslo Opera House (Operahuset)",
         "Munch Museum (MUNCH)",

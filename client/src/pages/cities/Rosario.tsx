@@ -6,6 +6,7 @@ export const Rosario: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Rosario, Argentina (2025 Guide)"}
       description={"Set on the mighty Paraná River, Rosario offers a captivating blend of grand history, vibrant culture, and relaxed riverside living. As Argentina's third-largest city, it stands proud with its own unique identity, distinct from the frenzy of Buenos Aires. Famed as the birthplace of the national flag, revolutionary Che Guevara, and football legend Lionel Messi, Rosario's streets are steeped in significance. Neoclassical buildings line leafy boulevards, leading to a sprawling waterfront perfect for sunset strolls and sipping mate with locals. From world-class museums and historic theaters to passionate football stadiums and bustling food markets, exploring the city is a journey of discovery. Whether you're an art lover, a history buff, or simply seeking an authentic Argentine experience, you'll find countless amazing attractions and the best things to do in Rosario right here."}
+      imageUrl={""}
       highlights={["Monumento Nacional a la Bandera",
         "Paraná River Waterfront (La Costanera)",
         "Parque de la Independencia",

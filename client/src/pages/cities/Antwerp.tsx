@@ -194,7 +194,7 @@ export const Antwerp: React.FC = () => {
           answer: "Antwerp is famous for several things. It is the undisputed diamond capital of the world, handling over 80% of the world's rough diamonds. It is a major fashion hub, known for the avant-garde 'Antwerp Six' designers. Artistically, it is synonymous with the Baroque master Peter Paul Rubens. Its historic port is one of the largest in Europe. And of course, it's famous for Belgian specialties like beer, chocolate, and fries (frites)."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1731514314715-4b2f606ea78c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxBbnR3ZXJwJTIwdHJhdmVsfGVufDB8MHx8fDE3NTIxMzk3NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

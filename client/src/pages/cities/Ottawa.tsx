@@ -6,6 +6,7 @@ export const Ottawa: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Ottawa, Canada (2025 Guide)"}
       description={"Welcome to Ottawa, Canada's captivating capital city! More than just a political hub, Ottawa is a vibrant mosaic of culture, history, and stunning natural beauty. Perched on the banks of the Ottawa River, the city boasts world-class museums, grand Victorian architecture, and sprawling green spaces. Whether you're skating on the world's largest outdoor rink in winter, admiring millions of tulips in spring, or cycling along scenic pathways in summer, you'll find endless charm. It’s a city that effortlessly balances stately grandeur with a friendly, relaxed atmosphere. Planning your visit starts with exploring the very best things to do in Ottawa, from the iconic Parliament Hill to the bustling stalls of ByWard Market. This guide will take you through the must-see sights and hidden gems that make Ottawa an unforgettable destination for any traveler."}
+      imageUrl={""}
       highlights={["Parliament Hill",
         "Rideau Canal National Historic Site",
         "Canadian Museum of History",

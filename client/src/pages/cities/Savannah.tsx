@@ -6,6 +6,7 @@ export const Savannah: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Savannah, USA (2025 Guide)"}
       description={"Dripping with Spanish moss and Southern charm, Savannah is a city suspended in time. Its cobblestone streets, impeccably preserved antebellum architecture, and 22 picturesque public squares create a fairytale-like setting that beckons travelers to slow down and explore. Founded in 1733, Georgia's First City is a living museum, where every corner tells a story of colonial ambition, Civil War turmoil, and ghostly legends. From haunted historic homes to a vibrant riverfront and a world-class art scene, there’s an enchanting experience waiting for everyone. Whether you're a history buff, a foodie, or simply in search of beauty, you'll find no shortage of captivating activities. This guide will walk you through all the very best things to do in Savannah, ensuring your visit is as magical as the city itself."}
+      imageUrl={""}
       highlights={["Explore the Historic District & City Squares",
         "Stroll Through Forsyth Park",
         "Wander Bonaventure Cemetery",

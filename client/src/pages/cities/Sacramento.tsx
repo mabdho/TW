@@ -6,6 +6,7 @@ export const Sacramento: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Sacramento, USA (2025 Guide)"}
       description={"Welcome to Sacramento, California's vibrant state capital where Gold Rush history meets a modern, farm-to-fork culture. Known as the 'City of Trees,' its lush canopy provides a stunning backdrop for exploration. From the wooden sidewalks of the historic Old Sacramento Waterfront to the polished halls of the State Capitol, the city offers a diverse tapestry of experiences. Sacramento proudly claims the title of America's Farm-to-Fork Capital, boasting an incredible culinary scene fueled by the surrounding agricultural abundance. Whether you're a history buff, a foodie, an art lover, or an outdoor enthusiast, you'll find an array of attractions to fill your itinerary. This guide will walk you through all the best things to do in Sacramento, ensuring a memorable and enriching visit to this Northern California gem."}
+      imageUrl={""}
       highlights={["Old Sacramento Waterfront",
         "California State Railroad Museum",
         "California State Capitol Museum",

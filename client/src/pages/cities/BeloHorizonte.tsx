@@ -194,7 +194,7 @@ export const BeloHorizonte: React.FC = () => {
           answer: "Belo Horizonte is famous for several things. It holds the unofficial title of 'Bar Capital of Brazil' for its incredible density of bars and vibrant nightlife. It's a culinary powerhouse, renowned for its 'comida mineira' (Minas Gerais cuisine), especially its world-famous pão de queijo (cheese bread). Architecturally, it's known for the Pampulha Modern Ensemble, a key work by Oscar Niemeyer. Finally, it serves as the gateway to the historic colonial towns of Minas Gerais and the spectacular Inhotim art park."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxCZWxvJTIwSG9yaXpvbnRlJTIwdHJhdmVsfGVufDB8MHx8fDE3NTIxNDAwODh8MA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

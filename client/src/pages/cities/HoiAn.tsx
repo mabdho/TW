@@ -6,6 +6,7 @@ export const HoiAn: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Hoi An, Vietnam (2025 Guide)"}
       description={"Stepping into Hoi An is like entering a living museum. This enchanting port city on Vietnam's central coast is a perfectly preserved example of a Southeast Asian trading post from the 15th to the 19th century. Its UNESCO World Heritage-listed Ancient Town is a mesmerizing maze of ochre-yellow shophouses, ornate temples, and traditional wooden homes draped in bougainvillea. By day, explore historic sites and cycle through emerald-green rice paddies. By night, the city transforms as thousands of silk lanterns cast a magical glow over the Thu Bon River. With its world-renowned culinary scene, bespoke tailoring, and laid-back atmosphere, you'll quickly discover why finding the best things to do in Hoi An is a journey of pure delight."}
+      imageUrl={""}
       highlights={["Explore Hoi An Ancient Town",
         "Cross the Japanese Covered Bridge",
         "Get Custom-Made Clothing",

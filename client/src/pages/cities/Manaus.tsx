@@ -6,6 +6,7 @@ export const Manaus: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Manaus, Brazil (2025 Guide)"}
       description={"Welcome to Manaus, the sprawling metropolis carved out of the heart of the Amazon rainforest. Known as the 'Gateway to the Amazon,' this Brazilian city is a captivating paradox, where the Belle Époque grandeur of its rubber boom past collides with the untamed wilderness at its doorstep. From the gilded dome of its world-famous opera house to the mesmerizing confluence of two mighty rivers, Manaus offers an adventure unlike any other. Exploring the vibrant markets, encountering unique wildlife, and delving into the immense green expanse are just a few of the experiences that await. Whether you're a culture enthusiast, a nature lover, or an intrepid explorer, you'll find an incredible array of the best things to do in Manaus. This guide will navigate you through its most unforgettable sights and experiences, ensuring a journey deep into the soul of the Amazon."}
+      imageUrl={""}
       highlights={["Teatro Amazonas (Amazon Theatre)",
         "Meeting of Waters (Encontro das Águas)",
         "Anavilhanas National Park",

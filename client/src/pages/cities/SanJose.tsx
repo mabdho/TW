@@ -6,6 +6,7 @@ export const SanJose: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in San Jose, Costa Rica (2025 Guide)"}
       description={"Often viewed as a mere gateway to Costa Rica's lush rainforests and pristine beaches, San Jose is a vibrant capital city brimming with its own unique charm and cultural treasures. Nestled in the heart of the Central Valley, 'Chepe,' as it's affectionately known by locals, offers a captivating blend of history, art, and lively urban energy. Beyond the initial hustle, you'll discover magnificent neoclassical architecture, world-class museums showcasing pre-Columbian gold and jade, and bustling markets alive with the colors and flavors of Tico life. This guide will walk you through the very best things to do in San Jose, revealing a city that is not just a stopover, but a destination in its own right. From savoring gourmet coffee to exploring historic neighborhoods, San Jose invites you to dive deep into the soul of Costa Rica before your jungle adventures even begin."}
+      imageUrl={""}
       highlights={["Teatro Nacional de Costa Rica",
         "Museo del Oro Precolombino",
         "Museo del Jade",

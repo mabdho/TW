@@ -6,6 +6,7 @@ export const NewOrleans: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in New Orleans, USA (2025 Guide)"}
       description={"Steeped in a rich tapestry of history, music, and culinary artistry, New Orleans is a city that dances to its own rhythm. The air here is thick with the scent of magnolias and beignets, and the streets echo with the soulful sounds of jazz. From the iron-laced balconies of the French Quarter to the stately mansions of the Garden District, the Crescent City offers an intoxicating blend of French, Spanish, African, and American cultures. It's a place where every corner tells a story, every meal is a celebration, and every night is an invitation to 'laissez les bons temps rouler'—let the good times roll. Whether you're a history buff, a foodie, or a music lover, discovering the best things to do in New Orleans is an unforgettable adventure that engages all the senses and captures the heart."}
+      imageUrl={""}
       highlights={["Explore the French Quarter",
         "Listen to Live Jazz at Preservation Hall",
         "Visit The National WWII Museum",

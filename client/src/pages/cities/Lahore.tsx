@@ -6,6 +6,7 @@ export const Lahore: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Lahore, Pakistan (2025 Guide)"}
       description={"Welcome to Lahore, the vibrant cultural heart of Pakistan. A city where centuries of Mughal grandeur blend seamlessly with bustling modern life, Lahore is a feast for the senses. Its ancient walled city whispers tales of emperors, poets, and saints, while its lush gardens and magnificent mosques stand as testaments to a glorious past. From savoring world-renowned culinary delights on a lively food street to witnessing the patriotic fervor of a border ceremony, Lahore offers an unforgettable journey into the soul of the nation. Known for its rich history, architectural marvels, and the unparalleled hospitality of its people, you'll find no shortage of incredible experiences. This guide will walk you through the very best things to do in Lahore, ensuring your visit is as magical as the city itself."}
+      imageUrl={""}
       highlights={["Badshahi Mosque",
         "Lahore Fort (Shahi Qila)",
         "Wazir Khan Mosque",

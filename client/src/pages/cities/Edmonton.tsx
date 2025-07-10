@@ -6,6 +6,7 @@ export const Edmonton: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Edmonton, Canada (2025 Guide)"}
       description={"Welcome to Edmonton, Alberta's vibrant capital, a city where urban energy and untamed nature coexist beautifully. Known as 'Canada's Festival City,' Edmonton's calendar is packed year-round with celebrations of art, music, food, and winter. It's home to North America's largest shopping mall and the continent's largest stretch of urban parkland, the North Saskatchewan River Valley. This unique blend of indoor spectacle and outdoor adventure means there's something for every traveler. Whether you're exploring historic districts, admiring futuristic architecture, or searching for bison just outside the city limits, you'll find an authentic Canadian spirit here. Get ready to discover the energy, culture, and natural beauty that make up the very best things to do in Edmonton. This guide will help you navigate it all."}
+      imageUrl={""}
       highlights={["West Edmonton Mall",
         "Elk Island National Park",
         "Muttart Conservatory",

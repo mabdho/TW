@@ -6,6 +6,7 @@ export const LuangPrabang: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Luang Prabang, Laos (2025 Guide)"}
       description={"Nestled at the sacred confluence of the Mekong and Nam Khan rivers, Luang Prabang is a city frozen in time. As a UNESCO World Heritage site, its enchanting streets blend traditional Lao wooden houses with shimmering golden-roofed temples and elegant French colonial architecture. The air is thick with the scent of frangipani and freshly brewed coffee, while the gentle rhythm of daily life is dictated by the saffron-robed monks who walk the streets at dawn. This spiritual heart of Laos offers a serene escape, where days are spent exploring cascading waterfalls, ancient caves, and vibrant markets. Whether you're seeking cultural immersion, natural beauty, or simply a moment of peace, you will find an endless list of the best things to do in Luang Prabang. This city doesn’t just charm its visitors; it captivates them, leaving a lasting impression of tranquility and timeless grace."}
+      imageUrl={""}
       highlights={["Kuang Si Falls",
         "Alms Giving Ceremony (Tak Bat)",
         "Mount Phousi",

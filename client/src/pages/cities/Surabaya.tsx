@@ -6,6 +6,7 @@ export const Surabaya: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Surabaya, Indonesia (2025 Guide)"}
       description={"Welcome to Surabaya, Indonesia's vibrant second-largest city and a powerhouse of history, culture, and commerce. Known as Kota Pahlawan, or the 'City of Heroes,' Surabaya played a pivotal role in the nation's struggle for independence, a legacy proudly displayed in its numerous monuments and museums. Beyond its historical significance, the city offers a fascinating blend of Dutch colonial architecture, bustling traditional markets, gleaming modern malls, and a rich culinary landscape waiting to be explored. From the iconic Suramadu Bridge to the aromatic lanes of the Arab Quarter, there's a dynamic energy here that captivates every visitor. This guide will walk you through all the best things to do in Surabaya, ensuring you experience the heart and soul of this East Javanese metropolis."}
+      imageUrl={""}
       highlights={["Heroes Monument (Tugu Pahlawan) and 10 November Museum",
         "House of Sampoerna",
         "Suramadu National Bridge",

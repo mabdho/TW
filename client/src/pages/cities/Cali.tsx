@@ -194,7 +194,7 @@ export const Cali: React.FC = () => {
           answer: "Cali is world-famous for one thing above all: Salsa. It is globally recognized as the 'Salsa Capital of the World,' home to countless dance schools, legendary clubs, and world-champion dancers. Beyond salsa, the city is also known for its warm climate, the beauty of its women ('Caleñas'), its history in the sugar cane industry, and its vibrant, joyful street culture that makes it one of the liveliest cities in Colombia."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1475522003475-eb5f96f1f930?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDYWxpJTIwdHJhdmVsfGVufDB8MHx8fDE3NTIxNDAxMTR8MA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

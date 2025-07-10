@@ -6,6 +6,7 @@ export const LaPaz: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in La Paz, Bolivia (2025 Guide)"}
       description={"Touching the clouds at over 3,650 meters (11,975 feet), La Paz is a city of dizzying heights and vibrant contrasts. As Bolivia's administrative capital, it buzzes with a unique energy where indigenous traditions blend seamlessly with modern urban life. Nestled in a dramatic canyon and surrounded by the snow-capped peaks of the Andes, its landscape is as breathtaking as its altitude. From the otherworldly landscapes of the Moon Valley to the bustling, mystical Witches' Market, every corner offers a new adventure. The city's innovative cable car system provides stunning panoramic views, turning a simple commute into a sightseeing tour. Exploring this chaotic yet charming metropolis is an unforgettable experience. This guide will walk you through the very best things to do in La Paz, ensuring your trip is packed with culture, adventure, and incredible memories."}
+      imageUrl={""}
       highlights={["Ride Mi Teleférico",
         "Explore the Mercado de las Brujas (Witches' Market)",
         "Bike the Yungas Road (Death Road)",

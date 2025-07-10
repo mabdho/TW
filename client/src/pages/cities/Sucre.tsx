@@ -6,6 +6,7 @@ export const Sucre: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Sucre, Bolivia (2025 Guide)"}
       description={"Welcome to Sucre, Bolivia's constitutional capital and the jewel in its colonial crown. Known affectionately as 'La Ciudad Blanca' (The White City), Sucre captivates visitors with its impeccably preserved 16th-century buildings, whitewashed facades, and tranquil courtyards. This UNESCO World Heritage city offers a delightful blend of history, culture, and youthful energy, thanks to its prestigious university. Unlike the frenetic pace of La Paz, Sucre invites you to slow down, wander its charming streets, and soak in the relaxed atmosphere. Whether you're exploring the birthplace of the nation, marveling at prehistoric footprints, or haggling in vibrant markets, you'll find an incredible array of activities. From historic landmarks to stunning viewpoints, this guide will walk you through all the best things to do in Sucre for an unforgettable journey into the heart of Bolivia."}
+      imageUrl={""}
       highlights={["Casa de la Libertad",
         "Plaza 25 de Mayo",
         "Parque Cretácico",

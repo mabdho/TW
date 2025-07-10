@@ -6,6 +6,7 @@ export const Ljubljana: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Ljubljana, Slovenia (2025 Guide)"}
       description={"I'll be honest—I wasn't expecting much from Ljubljana when I first arrived. Slovenia's capital? Never heard of it, to be frank. But here's the thing: sometimes the cities that surprise you end up being the most memorable. \n\nLjubljana feels almost... well, magical isn't too strong a word. There's this dragon-guarded bridge (don't ask, it's a whole legend thing), a castle perched on a hill like something from a fairy tale, and everywhere you look there are these incredible Art Nouveau buildings that make you stop mid-conversation. The whole city center is car-free, which means you can actually hear yourself think—and hear the street musicians who seem to pop up on every corner.\n\nWhat I love most is how walkable everything is. You can see the main sights in a day if you're rushing, but honestly, why would you want to? This is a city made for wandering, for discovering that perfect little café along the river, for getting slightly lost in the market. The Slovenians have figured out something about quality of life that the rest of us are still learning."}
+      imageUrl={""}
       highlights={["Ljubljana Castle",
         "Triple Bridge (Tromostovje)",
         "Dragon Bridge (Zmajski Most)",

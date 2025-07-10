@@ -6,6 +6,7 @@ export const Johannesburg: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Johannesburg, South Africa (2025 Guide)"}
       description={"Welcome to Johannesburg, a city built on gold and reborn through a spirit of resilience and creativity. Often called 'Joburg' or 'Jozi' by locals, South Africa's largest city is a pulsating hub of culture, history, and urban energy. Once a sprawling mining camp, it has transformed into a vibrant metropolis where history-charged landmarks stand alongside trendy art galleries and bustling markets. From confronting the stark realities of apartheid to exploring the ancient origins of humankind, Joburg offers a journey unlike any other. It’s a city of contrasts, where leafy suburbs give way to dynamic inner-city precincts. This guide will walk you through the very best things to do in Johannesburg, revealing a destination that is as complex and compelling as its past. Prepare to be moved, inspired, and thoroughly captivated by the golden heart of South Africa."}
+      imageUrl={""}
       highlights={["Apartheid Museum",
         "Soweto Tour & Vilakazi Street",
         "Constitution Hill Human Rights Precinct",

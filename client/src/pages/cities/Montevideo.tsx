@@ -6,6 +6,7 @@ export const Montevideo: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Montevideo, Uruguay (2025 Guide)"}
       description={"Welcome to Montevideo, Uruguay's wonderfully laid-back and culturally rich capital. Nestled on the shores of the Río de la Plata, this city offers a refreshing blend of grand European architecture, a relaxed beach-town atmosphere, and a vibrant arts scene. Unlike its bustling neighbor Buenos Aires, Montevideo invites you to slow down, wander through historic cobblestone streets, sip mate with locals along the waterfront, and indulge in world-class steak. From the historic heart of the Ciudad Vieja to the sun-drenched sands of Pocitos, there's a unique charm waiting around every corner. It's a city of subtle delights, perfect for travelers seeking authenticity over spectacle. Get ready to explore a place where history, culture, and coastal living merge seamlessly. This guide will walk you through all the very best things to do in Montevideo for an unforgettable trip."}
+      imageUrl={""}
       highlights={["Ciudad Vieja (Old City)",
         "Mercado del Puerto",
         "Rambla de Montevideo",

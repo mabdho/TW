@@ -6,6 +6,7 @@ export const Portland: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Portland, USA (2025 Guide)"}
       description={"Welcome to Portland, Oregon, a city where 'weird' is a compliment and nature is never more than a stone's throw away. Nestled between the Willamette and Columbia rivers, this Pacific Northwest hub thrives on a unique blend of creative energy, craft culture, and outdoor adventure. Known as the 'City of Roses,' Portland offers lush green parks, a world-class culinary scene fueled by innovative chefs and countless food carts, and a vibrant arts community. Whether you're browsing the shelves of the world's largest independent bookstore, sipping a meticulously brewed coffee, or hiking through an urban forest, you'll find that the list of the best things to do in Portland is as eclectic and engaging as the city itself. Prepare to be charmed by its laid-back vibe and fiercely independent spirit."}
+      imageUrl={""}
       highlights={["Powell's City of Books",
         "International Rose Test Garden",
         "Portland Japanese Garden",

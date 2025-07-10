@@ -6,6 +6,7 @@ export const Victoria: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Victoria, Canada (2025 Guide)"}
       description={"Welcome to Victoria, the charming capital of British Columbia, where garden-city vibes meet rugged coastal beauty. Known as Canada's 'most British city,' Victoria boasts stunning Victorian architecture, a picturesque harbour bustling with life, and an abundance of green spaces. Perched on the southern tip of Vancouver Island, it offers a perfect blend of historic sites, outdoor adventure, and a thriving culinary scene. Whether you're sipping afternoon tea at a grand hotel, exploring the world-famous Butchart Gardens, or scanning the horizon for orcas, you'll quickly fall for its laid-back yet sophisticated atmosphere. This guide will walk you through all the very best things to do in Victoria, ensuring a memorable visit to this enchanting seaside city."}
+      imageUrl={""}
       highlights={["The Butchart Gardens",
         "Royal BC Museum",
         "Inner Harbour",

@@ -6,6 +6,7 @@ export const PanamaCity: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Panama City, Panama (2025 Guide)"}
       description={"A vibrant metropolis where shimmering skyscrapers tower over colonial ruins and a lush rainforest thrives within city limits, Panama City is a captivating study in contrasts. This global banking hub and gateway to natural wonders is defined by the monumental Panama Canal, a marvel of human engineering. Yet, beyond this famous waterway lies a city buzzing with Latin energy, culinary delights, and rich history. From the cobblestone streets of its UNESCO-listed Old Quarter to the wild trails of its urban jungles, there's an incredible diversity of experiences waiting to be discovered. Whether you're a history buff, a nature lover, or a foodie, you'll find an abundance of unforgettable adventures. This guide will walk you through the very best things to do in Panama City, ensuring your trip is nothing short of spectacular."}
+      imageUrl={""}
       highlights={["Panama Canal (Miraflores Visitor Center)",
         "Casco Viejo (The Old Quarter)",
         "Amador Causeway (Calzada de Amador)",

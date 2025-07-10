@@ -6,6 +6,7 @@ export const Stockholm: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Stockholm, Sweden (2025 Guide)"}
       description={"Welcome to Stockholm, a city where medieval history and cutting-edge design float together across 14 islands. Known as the 'Venice of the North', Sweden's capital is a breathtaking tapestry of cobblestone streets, grand palaces, and verdant parks, all connected by a network of bridges and ferries. The air here feels crisp, a blend of Baltic sea breeze and the scent of freshly baked cinnamon buns from a cozy café. Whether you're wandering through the colorful facades of the Old Town, exploring world-class museums, or embracing the Swedish tradition of 'fika' (a coffee and cake break), you'll find an effortless sense of cool and a deep connection to nature. This guide will walk you through all the very best things to do in Stockholm, ensuring your visit is as magical as the city itself. Prepare to be enchanted by its beauty and vibrant culture."}
+      imageUrl={""}
       highlights={["Gamla Stan (Old Town)",
         "Vasa Museum",
         "Skansen",

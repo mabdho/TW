@@ -194,7 +194,7 @@ export const Bucharest: React.FC = () => {
           answer: "Bucharest is famous for several things. Architecturally, it's known for the colossal Palace of the Parliament and its eclectic mix of French-inspired Belle Époque buildings which earned it the nickname 'Little Paris'. It is also famous for its vibrant and sprawling Old Town, the heart of its nightlife. Historically, it is inextricably linked with the dramatic 1989 revolution that overthrew the communist regime of Nicolae Ceaușescu."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1613556145515-5e7790f689c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxCdWNoYXJlc3QlMjB0cmF2ZWx8ZW58MHwwfHx8MTc1MjE0MDExMHww&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

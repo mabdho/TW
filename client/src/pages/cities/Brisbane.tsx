@@ -194,7 +194,7 @@ export const Brisbane: React.FC = () => {
           answer: "Brisbane is famous for its winding river, which is central to the city's identity and lifestyle. It's also known for its glorious subtropical climate and laid-back, outdoor-focused culture. Key highlights include the stunning South Bank Parklands with its inner-city beach, the world's largest koala sanctuary (Lone Pine), the iconic Story Bridge, and its thriving cultural and dining precincts like Howard Smith Wharves and James Street."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1750210505999-405a26beb59d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxCcmlzYmFuZSUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTQwMDk1fDA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

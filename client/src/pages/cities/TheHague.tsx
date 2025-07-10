@@ -6,6 +6,7 @@ export const TheHague: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in The Hague, Netherlands (2025 Guide)"}
       description={"More than just the political heart of the Netherlands, The Hague exudes a unique blend of regal elegance and international gravitas. As the home of the Dutch Royal Family and the International Court of Justice, this city on the North Sea coast offers a sophisticated atmosphere distinct from its counterparts. Stroll along grand avenues, discover world-class art collections housed in former palaces, and explore the bustling seaside life at Scheveningen. This guide will walk you through historic government buildings, serene parks, and innovative museums, showcasing a city that is both stately and surprisingly relaxed. From its political significance to its beautiful coastline, you’ll find that the best things to do in The Hague offer a rich and diverse travel experience, cementing its status as a must-visit Dutch destination."}
+      imageUrl={""}
       highlights={["Mauritshuis",
         "Binnenhof & Ridderzaal (Hall of Knights)",
         "Peace Palace (Vredespaleis)",

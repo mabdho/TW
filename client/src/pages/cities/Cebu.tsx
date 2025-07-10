@@ -194,7 +194,7 @@ export const Cebu: React.FC = () => {
           answer: "Cebu is famous for several key things. Historically, it's known as the 'Cradle of Christianity in the Philippines' due to the arrival of Magellan in 1521. Gastronomically, it's world-famous for its 'Lechon,' a whole roasted pig with incredibly crispy skin. For nature and adventure lovers, it's renowned for its world-class diving and snorkeling spots, including the sardine run in Moalboal and the thresher sharks of Malapascua, as well as its beautiful white-sand beaches and stunning waterfalls."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1715884487912-27ec236680e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDZWJ1JTIwdHJhdmVsfGVufDB8MHx8fDE3NTIxNDAxMzl8MA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

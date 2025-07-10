@@ -6,6 +6,7 @@ export const Lusaka: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Lusaka, Zambia (2025 Guide)"}
       description={"Welcome to Lusaka, the vibrant, sprawling heart of Zambia. Far more than just a transit hub for safari-goers, this city pulses with an infectious energy, blending rapid development with deep-rooted traditions. Here, bustling markets and contemporary art galleries sit alongside tranquil wildlife sanctuaries on the city's fringe. It's a city of contrasts, where business suits and colourful chitenge fabrics share the same sidewalk. From the poignant history enshrined in its national monuments to the thrilling sight of a rescued elephant calf, Lusaka offers a surprisingly diverse array of experiences. Exploring the capital provides a fascinating insight into modern Zambian life and reveals some of the most underrated attractions in Southern Africa. For any visitor, discovering the best things to do in Lusaka is an adventure in itself, promising memorable encounters with wildlife, culture, and the warm hospitality of the Zambian people."}
+      imageUrl={""}
       highlights={["Lilayi Elephant Nursery",
         "Lusaka National Park",
         "Kabwata Cultural Village",

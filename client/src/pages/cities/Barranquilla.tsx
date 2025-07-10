@@ -194,7 +194,7 @@ export const Barranquilla: React.FC = () => {
           answer: "Barranquilla is most famous for its spectacular Carnival, a UNESCO-recognized event that is one of the largest in the world. The city is also known as Colombia's 'Golden Gate' ('La Puerta de Oro') for its historic importance as the country's main port. It is affectionately called 'Curramba la Bella' and is the birthplace of global superstars like singer Shakira and actress Sofía Vergara, as well as being a major inspiration for writer Gabriel García Márquez."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1635079552384-dd8adecd8a7c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxCYXJyYW5xdWlsbGElMjB0cmF2ZWx8ZW58MHwwfHx8MTc1MjE0MDA3NHww&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

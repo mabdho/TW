@@ -6,6 +6,7 @@ export const Tallinn: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Tallinn, Estonia (2025 Guide)"}
       description={"Step into a real-life fairytale in Tallinn, Estonia, a city where medieval cobblestone streets meet a vibrant, digital-first future. As one of Northern Europe's best-preserved medieval cities, its UNESCO-listed Old Town is a labyrinth of gothic spires, hidden courtyards, and charming merchant houses. But Tallinn is no museum piece; it's a dynamic capital buzzing with creative energy, from the bohemian Kalamaja district to its world-renowned tech scene. Whether you're climbing ancient towers for panoramic views of the Baltic Sea or exploring contemporary art hubs, you'll find a captivating blend of history and innovation. This guide will walk you through the absolute best things to do in Tallinn, ensuring a memorable journey through this enchanting Baltic gem. Tallinn's unique character offers a perfect European city break, combining centuries of history with a forward-thinking spirit."}
+      imageUrl={""}
       highlights={["Tallinn Old Town (Vanalinn)",
         "Alexander Nevsky Cathedral",
         "Kadriorg Palace and Park",

@@ -6,6 +6,7 @@ export const Jaipur: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Jaipur, India (2025 Guide)"}
       description={"Welcome to Jaipur, the magnificent 'Pink City' of India and the capital of Rajasthan. Founded in 1727 by Maharaja Sawai Jai Singh II, this city is a stunning tapestry of royal history, vibrant culture, and architectural marvels. The entire old city, enclosed by walls and gates, is painted a distinctive terracotta pink, a color associated with hospitality. From sprawling forts perched on arid hills to opulent palaces and bustling bazaars brimming with textiles and gems, Jaipur offers a sensory feast. It forms one corner of the famed Golden Triangle circuit, along with Delhi and Agra. Exploring the grand monuments and chaotic, charming streets reveals a city where ancient traditions and modern life coexist beautifully. This guide will walk you through the absolute best things to do in Jaipur, ensuring an unforgettable journey into the heart of royal Rajasthan."}
+      imageUrl={""}
       highlights={["Amber Fort (Amer Fort)",
         "Hawa Mahal",
         "City Palace",

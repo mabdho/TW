@@ -6,6 +6,7 @@ export const Tampere: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Tampere, Finland (2025 Guide)"}
       description={"Nestled between two vast lakes, Näsijärvi and Pyhäjärvi, Tampere is a vibrant city in the heart of Finland, often hailed as the 'Manchester of Finland' due to its rich industrial past. Today, its historic red-brick factory buildings house trendy museums, chic boutiques, and cozy cafes, creating a unique blend of old and new. This dynamic city is renowned for its thriving arts scene, public saunas, and stunning natural landscapes right on its doorstep. It’s a place where urban energy meets lakeside tranquility, offering visitors a truly Finnish experience. From panoramic ridge views to quirky museums and culinary delights, exploring the best things to do in Tampere reveals a city full of character and charm. Whether you're an adventure seeker, a culture enthusiast, or simply looking to relax, Tampere delivers an unforgettable getaway."}
+      imageUrl={""}
       highlights={["Pyynikki Observation Tower & Café",
         "Särkänniemi Amusement Park",
         "Vapriikki Museum Centre",

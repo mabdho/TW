@@ -194,7 +194,7 @@ export const Calgary: React.FC = () => {
           answer: "Calgary is most famous for the Calgary Stampede, its annual rodeo and festival that celebrates Western heritage. It's also known as the centre of Canada's oil and gas industry, its role as the host of the 1988 Winter Olympics, and its unbeatable proximity to the Canadian Rockies, serving as the primary gateway to Banff and Jasper National Parks."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1725634786911-1342e7c5e655?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDYWxnYXJ5JTIwdHJhdmVsfGVufDB8MHx8fDE3NTIxNDAxMTV8MA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

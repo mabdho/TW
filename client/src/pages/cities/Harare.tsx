@@ -6,6 +6,7 @@ export const Harare: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Harare, Zimbabwe (2025 Guide)"}
       description={"Welcome to Harare, the vibrant heart of Zimbabwe, affectionately known as the 'Sunshine City'. With its wide avenues, often painted purple by blooming jacaranda trees, Harare offers a unique blend of contemporary urban energy and rich cultural heritage. This capital city is a canvas of contrasts, where gleaming modern buildings stand near colonial-era architecture and lush, expansive parks provide tranquil escapes from the urban bustle. The city's thriving arts scene, particularly its world-renowned Shona sculpture, adds another layer to its compelling character. Whether you're exploring bustling markets, encountering wildlife at a world-class sanctuary, or delving into the nation's history, you'll find an array of captivating experiences. This guide will walk you through the absolute best things to do in Harare, ensuring a memorable journey into the soul of Zimbabwe."}
+      imageUrl={""}
       highlights={["Wild Is Life Grand Zimbabwe",
         "Mbare Musika Market",
         "National Heroes Acre",

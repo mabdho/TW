@@ -194,7 +194,7 @@ export const Bordeaux: React.FC = () => {
           answer: "Bordeaux is world-famous for its wine. The Bordeaux wine region is one of the largest and most prestigious in the world. The city is also famous for its stunning 18th-century neoclassical architecture, with its historic center designated as a UNESCO World Heritage site. Gastronomically, it's known for local specialties like canelés (pastries), Arcachon Bay oysters, and Pauillac lamb."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1589117539368-61dd2065b624?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxCb3JkZWF1eCUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTQwMDk1fDA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

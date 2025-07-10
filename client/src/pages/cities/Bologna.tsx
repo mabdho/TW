@@ -194,7 +194,7 @@ export const Bologna: React.FC = () => {
           answer: "Bologna is famous for several key things, earning it three nicknames. It's 'La Dotta' (the Learned) for being home to the University of Bologna, the oldest university in the Western world (founded 1088). It's 'La Grassa' (the Fat) for its rich culinary tradition, being the birthplace of dishes like tagliatelle al ragù (the original bolognese sauce), mortadella, and tortellini. Finally, it's 'La Rossa' (the Red) for its characteristic red terracotta-tiled roofs and its historical association with left-wing politics."
         }
       ]}
-      imageUrl={"https://images.unsplash.com/photo-1646129073241-b37f7229b74e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxCb2xvZ25hJTIwdHJhdmVsfGVufDB8MHx8fDE3NTIxNDAwOTF8MA&ixlib=rb-4.1.0&q=80&w=1080"}
+      imageUrl={""}
     />
   );
 };

@@ -6,6 +6,7 @@ export const Porto: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Porto, Portugal (2025 Guide)"}
       description={"Cascading down a hillside to the banks of the majestic Douro River, Porto is a city of intoxicating charm and rugged beauty. Portugal's second city blends historic grandeur with a vibrant, creative energy. Known worldwide for its fortified Port wine, Porto's attractions go far beyond the cellar door. Here, centuries-old churches adorned with blue azulejo tiles stand beside contemporary architectural marvels, and narrow, cobbled lanes in the UNESCO-listed Ribeira district open onto sweeping river views. Whether you're crossing the iconic Dom Luís I Bridge, tasting local delicacies, or simply getting lost in its atmospheric streets, you'll quickly discover that the city itself is one of its greatest attractions. From world-class museums to sunset viewpoints and historic tram rides, this guide will help you find all the best things to do in Porto for an unforgettable journey."}
+      imageUrl={""}
       highlights={["Cais da Ribeira (Ribeira District)",
         "Dom Luís I Bridge",
         "Port Wine Cellars in Vila Nova de Gaia",

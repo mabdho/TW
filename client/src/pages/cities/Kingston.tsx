@@ -6,6 +6,7 @@ export const Kingston: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Kingston, Jamaica (2025 Guide)"}
       description={"Welcome to Kingston, the vibrant heart and soul of Jamaica. More than just a capital city, Kingston is a pulsating hub of culture, history, and rhythm, nestled between the majestic Blue Mountains and the world's seventh-largest natural harbor. This is the birthplace of reggae music, a city that moves to its own beat, from the historic lanes of Trench Town to the chic cafes of New Kingston. While many visitors flock to Jamaica's resort towns, Kingston offers a raw, authentic experience brimming with world-class museums, lush botanical gardens, and a culinary scene that will tantalize your taste buds. For travelers seeking to connect with the island's true spirit, exploring the complex tapestry of its capital is essential. Get ready to discover the captivating energy and the absolute best things to do in Kingston for an unforgettable Jamaican adventure."}
+      imageUrl={""}
       highlights={["Bob Marley Museum",
         "Devon House",
         "National Gallery of Jamaica",

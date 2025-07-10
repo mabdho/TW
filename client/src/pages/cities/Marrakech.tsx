@@ -6,6 +6,7 @@ export const Marrakech: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Marrakech, Morocco (2025 Guide)"}
       description={"Welcome to Marrakech, Morocco's enchanting 'Red City.' A whirlwind of vibrant colors, exotic scents, and captivating sounds, this city is a sensory masterpiece. Here, ancient traditions blend seamlessly with contemporary life. Lose yourself in the labyrinthine alleys of the historic medina, a UNESCO World Heritage site, where bustling souks overflow with handcrafted treasures. By night, the city's heart, Jemaa el-Fnaa, transforms into a spectacular open-air theater of storytellers, musicians, and food vendors. Beyond the old city walls, chic art galleries, serene gardens, and stylish cafes offer a modern Moroccan experience. From opulent palaces to tranquil riads, navigating the rich tapestry of culture and history is an adventure in itself. This guide will walk you through all the very best things to do in Marrakech, ensuring your visit is unforgettable."}
+      imageUrl={""}
       highlights={["Jemaa el-Fnaa Square",
         "Jardin Majorelle",
         "Bahia Palace",
