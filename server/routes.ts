@@ -12,15 +12,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Admin route to generate city pages
   app.post('/api/admin/generate-city-page', async (req, res) => {
     try {
-      const { city, country, continent, heroImageUrl, galleryImages, msv, kd } = req.body;
+      const { city, country, continent, heroImageUrl, galleryImages, msv, kd, generationMode, manualJson } = req.body;
 
       if (!city || !country) {
         return res.status(400).json({ error: 'City and country are required' });
       }
 
-      // Generate content using Gemini with fallback
-      let model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
-      let modelName = "gemini-2.0-flash-exp";
+      let contentData;
+
+      if (generationMode === 'manual') {
+        // Handle manual JSON input
+        if (!manualJson) {
+          return res.status(400).json({ error: 'Manual JSON content is required when using manual mode' });
+        }
+
+        try {
+          contentData = JSON.parse(manualJson);
+          console.log('Using manual JSON input');
+        } catch (parseError) {
+          return res.status(400).json({ 
+            error: 'Invalid JSON format in manual input', 
+            details: parseError.message 
+          });
+        }
+      } else {
+        // Generate content using Gemini with fallback
+        let model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+        let modelName = "gemini-2.0-flash-exp";
 
       const prompt = `You are a professional travel content writer creating an SEO-optimized city guide.
 
@@ -132,19 +150,19 @@ Return only the JSON object with no additional text or formatting.`;
         .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove markdown bold
         .trim();
 
-      // Parse the JSON response with fallback logging
-      let contentData;
-      try {
-        contentData = JSON.parse(cleaned);
-      } catch (parseError) {
-        console.error('Failed to parse Gemini response:', cleaned.slice(0, 500));
-        console.error('Full response length:', generatedText.length);
-        console.error('Parse error:', parseError.message);
-        return res.status(500).json({ 
-          error: 'Gemini returned malformed JSON', 
-          details: parseError.message,
-          responsePreview: cleaned.substring(0, 500)
-        });
+        // Parse the JSON response with fallback logging
+        try {
+          contentData = JSON.parse(cleaned);
+        } catch (parseError) {
+          console.error('Failed to parse Gemini response:', cleaned.slice(0, 500));
+          console.error('Full response length:', generatedText.length);
+          console.error('Parse error:', parseError.message);
+          return res.status(500).json({ 
+            error: 'Gemini returned malformed JSON', 
+            details: parseError.message,
+            responsePreview: cleaned.substring(0, 500)
+          });
+        }
       }
 
       // Generate the React component file

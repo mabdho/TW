@@ -29,7 +29,17 @@ const cityFormSchema = z.object({
   heroImageUrl: z.string().url('Please enter a valid hero image URL').optional().or(z.literal('')),
   galleryImages: z.array(galleryImageSchema).optional(),
   msv: z.string().optional(),
-  kd: z.string().optional()
+  kd: z.string().optional(),
+  generationMode: z.enum(['ai', 'manual']).default('ai'),
+  manualJson: z.string().optional()
+}).refine((data) => {
+  if (data.generationMode === 'manual' && !data.manualJson) {
+    return false;
+  }
+  return true;
+}, {
+  message: 'Manual JSON content is required when using manual mode',
+  path: ['manualJson']
 });
 
 type CityFormData = z.infer<typeof cityFormSchema>;
@@ -37,6 +47,7 @@ type CityFormData = z.infer<typeof cityFormSchema>;
 export default function AdminPage() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedContent, setGeneratedContent] = useState<string>('');
+  const [generationMode, setGenerationMode] = useState<'ai' | 'manual'>('ai');
   const { toast } = useToast();
 
   const form = useForm<CityFormData>({
@@ -55,7 +66,9 @@ export default function AdminPage() {
         { url: '', alt: '', caption: '' }
       ],
       msv: '',
-      kd: ''
+      kd: '',
+      generationMode: 'ai',
+      manualJson: ''
     }
   });
 
@@ -185,6 +198,94 @@ export default function AdminPage() {
                       </FormItem>
                     )}
                   />
+
+                  {/* Generation Mode Selection */}
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-sm font-medium">Content Generation Mode</label>
+                      <div className="flex gap-4 mt-2">
+                        <label className="flex items-center gap-2">
+                          <input
+                            type="radio"
+                            name="generationMode"
+                            value="ai"
+                            checked={generationMode === 'ai'}
+                            onChange={(e) => {
+                              setGenerationMode(e.target.value as 'ai' | 'manual');
+                              form.setValue('generationMode', e.target.value as 'ai' | 'manual');
+                            }}
+                            className="w-4 h-4"
+                          />
+                          <span>AI Generation (Gemini)</span>
+                        </label>
+                        <label className="flex items-center gap-2">
+                          <input
+                            type="radio"
+                            name="generationMode"
+                            value="manual"
+                            checked={generationMode === 'manual'}
+                            onChange={(e) => {
+                              setGenerationMode(e.target.value as 'ai' | 'manual');
+                              form.setValue('generationMode', e.target.value as 'ai' | 'manual');
+                            }}
+                            className="w-4 h-4"
+                          />
+                          <span>Manual JSON Input</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Manual JSON Input */}
+                  {generationMode === 'manual' && (
+                    <FormField
+                      control={form.control}
+                      name="manualJson"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Manual JSON Content</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder={`{
+  "description": "Your city description here...",
+  "highlights": ["Highlight 1", "Highlight 2", "..."],
+  "attractions": [
+    {
+      "name": "Attraction Name",
+      "description": "Description here...",
+      "practicalInfo": {
+        "howToGetThere": "Directions...",
+        "openingHours": "Hours...",
+        "cost": "Cost...",
+        "website": "URL..."
+      }
+    }
+  ],
+  "logistics": {
+    "gettingAround": "Transportation info...",
+    "whereToStay": "Accommodation info...",
+    "bestTimeToVisit": "Best time info...",
+    "suggestedItinerary": "Itinerary suggestions..."
+  },
+  "faqs": [
+    {
+      "question": "Question?",
+      "answer": "Answer..."
+    }
+  ]
+}`}
+                              className="min-h-[400px] font-mono text-sm"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                          <div className="text-sm text-gray-500">
+                            Provide the complete JSON structure with all required fields for the city page content.
+                          </div>
+                        </FormItem>
+                      )}
+                    />
+                  )}
 
                   <FormField
                     control={form.control}
@@ -322,12 +423,12 @@ export default function AdminPage() {
                     {isGenerating || generateCityPageMutation.isPending ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Generating City Page... (This may take 30-60 seconds)
+                        {generationMode === 'manual' ? 'Creating City Page...' : 'Generating City Page... (This may take 30-60 seconds)'}
                       </>
                     ) : (
                       <>
                         <Download className="mr-2 h-4 w-4" />
-                        Generate City Page
+                        {generationMode === 'manual' ? 'Create City Page from JSON' : 'Generate City Page with AI'}
                       </>
                     )}
                   </Button>
