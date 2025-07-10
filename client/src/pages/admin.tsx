@@ -62,10 +62,7 @@ export default function AdminPage() {
   const generateCityPageMutation = useMutation({
     mutationFn: async (data: CityFormData) => {
       console.log('Submitting form data:', data);
-      return await apiRequest('/api/admin/generate-city-page', {
-        method: 'POST',
-        body: JSON.stringify(data)
-      });
+      return await apiRequest('POST', '/api/admin/generate-city-page', data);
     },
     onSuccess: (data) => {
       setGeneratedContent(data.generatedCode);
