@@ -19,7 +19,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Generate content using Gemini
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
       const prompt = `You are a professional travel content writer creating an SEO-optimized city guide.
 
