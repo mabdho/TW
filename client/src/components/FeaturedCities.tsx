@@ -6,14 +6,14 @@ import { Badge } from '@/components/ui/badge';
 
 // Get the last 8 cities from the cities array (most recently added)
 const featuredCities = [
-  { "name": "New York", "country": "USA", "path": "/new-york", "continent": "North America" },
-  { "name": "Dubai", "country": "UAE", "path": "/dubai", "continent": "Asia" },
-  { "name": "Zaragoza", "country": "Spain", "path": "/zaragoza", "continent": "Europe" },
-  { "name": "Zagreb", "country": "Croatia", "path": "/zagreb", "continent": "Europe" },
-  { "name": "Yogyakarta", "country": "Indonesia", "path": "/yogyakarta", "continent": "Asia" },
-  { "name": "Winnipeg", "country": "Canada", "path": "/winnipeg", "continent": "North America" },
-  { "name": "Windhoek", "country": "Namibia", "path": "/windhoek", "continent": "Africa" },
-  { "name": "Wellington", "country": "New Zealand", "path": "/wellington", "continent": "Oceania" }
+  { "name": "New York", "country": "USA", "path": "/new-york", "continent": "North America", "imageUrl": "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { "name": "Dubai", "country": "UAE", "path": "/dubai", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { "name": "Zaragoza", "country": "Spain", "path": "/zaragoza", "continent": "Europe", "imageUrl": "" },
+  { "name": "Zagreb", "country": "Croatia", "path": "/zagreb", "continent": "Europe", "imageUrl": "" },
+  { "name": "Yogyakarta", "country": "Indonesia", "path": "/yogyakarta", "continent": "Asia", "imageUrl": "" },
+  { "name": "Winnipeg", "country": "Canada", "path": "/winnipeg", "continent": "North America", "imageUrl": "" },
+  { "name": "Windhoek", "country": "Namibia", "path": "/windhoek", "continent": "Africa", "imageUrl": "" },
+  { "name": "Wellington", "country": "New Zealand", "path": "/wellington", "continent": "Oceania", "imageUrl": "" }
 ];
 
 export const FeaturedCities = () => {
@@ -53,9 +53,18 @@ export const FeaturedCities = () => {
                   </div>
                 )}
                 
-                {/* City Image Placeholder */}
-                <div className="h-32 sm:h-40 bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-blue-500/20 group-hover:from-green-500/30 group-hover:to-blue-500/30 transition-all duration-300"></div>
+                {/* City Image */}
+                <div className="h-32 sm:h-40 relative overflow-hidden">
+                  {city.imageUrl ? (
+                    <img 
+                      src={city.imageUrl} 
+                      alt={`${city.name} cityscape`}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300"></div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-black/40 group-hover:from-black/30 group-hover:to-black/50 transition-all duration-300"></div>
                   <div className="absolute bottom-2 left-2">
                     <div className="flex items-center gap-1 text-white">
                       <MapPin className="h-3 w-3" />

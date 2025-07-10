@@ -234,7 +234,7 @@ Return only the JSON object with no additional text or formatting.`;
         const featuredCitiesMatch = featuredCitiesContent.match(/const featuredCities = \[([\s\S]*?)\];/);
         if (featuredCitiesMatch) {
           const currentFeaturedCities = featuredCitiesMatch[1];
-          const newCityEntry = `  { "name": "${city}", "country": "${country}", "path": "/${city.toLowerCase().replace(/\s+/g, '-')}", "continent": "${continent}" }`;
+          const newCityEntry = `  { "name": "${city}", "country": "${country}", "path": "/${city.toLowerCase().replace(/\s+/g, '-')}", "continent": "${continent}", "imageUrl": "${heroImageUrl || ''}" }`;
           
           // Add new city to the beginning and keep only 8 cities
           const lines = currentFeaturedCities.split('\n').filter(line => line.trim().startsWith('{ "name"'));
@@ -247,7 +247,7 @@ Return only the JSON object with no additional text or formatting.`;
           );
           
           await fs.writeFile(featuredCitiesPath, updatedFeaturedCitiesContent);
-          console.log(`Updated FeaturedCities.tsx with ${city} at the top`);
+          console.log(`Updated FeaturedCities.tsx with ${city} at the top (image: ${heroImageUrl ? 'yes' : 'no'})`);
         }
       }
 
