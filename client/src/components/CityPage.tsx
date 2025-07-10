@@ -56,8 +56,9 @@ export const CityPage: React.FC<CityPageProps> = ({
   const top5Attractions = attractions.slice(0, 5);
   
   // Calculate number of tabs dynamically
-  const tabCount = 3 + (logistics ? 1 : 0) + (faqs ? 1 : 0);
-  const mobileGridCols = tabCount === 3 ? 'grid-cols-3' : 
+  const tabCount = 2 + (logistics ? 1 : 0) + (faqs ? 1 : 0);
+  const mobileGridCols = tabCount === 2 ? 'grid-cols-2' : 
+                        tabCount === 3 ? 'grid-cols-3' : 
                         tabCount === 4 ? 'grid-cols-4' : 'grid-cols-5';
 
   // Generate unique gradient colors based on city name
@@ -223,12 +224,8 @@ export const CityPage: React.FC<CityPageProps> = ({
       </div>
 
       <div className="container mx-auto px-4 py-6 sm:py-8">
-        <Tabs defaultValue="overview" className="w-full">
+        <Tabs defaultValue="top5" className="w-full">
           <TabsList className={`grid w-full ${mobileGridCols} mb-6 sm:mb-8 bg-white border border-gray-200 shadow-sm rounded-lg`}>
-            <TabsTrigger value="overview" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap data-[state=active]:bg-green-50 data-[state=active]:text-green-700 data-[state=active]:border-green-200">
-              <span className="hidden sm:inline">Overview</span>
-              <span className="sm:hidden">Info</span>
-            </TabsTrigger>
             <TabsTrigger value="top5" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap data-[state=active]:bg-green-50 data-[state=active]:text-green-700 data-[state=active]:border-green-200">
               <span className="hidden sm:inline">Top Attractions</span>
               <span className="sm:hidden">Top</span>
