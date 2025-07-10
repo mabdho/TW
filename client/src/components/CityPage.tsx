@@ -115,12 +115,24 @@ export const CityPage: React.FC<CityPageProps> = ({
       <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden">
         {/* City Image */}
         {imageUrl ? (
-          <img 
-            src={imageUrl} 
-            alt={title}
-            className="absolute inset-0 w-full h-full object-cover"
-            loading="lazy"
-          />
+          <picture className="absolute inset-0 w-full h-full">
+            <source 
+              srcSet={imageUrl.replace('&fm=webp', '&fm=avif')} 
+              type="image/avif" 
+            />
+            <source 
+              srcSet={imageUrl} 
+              type="image/webp" 
+            />
+            <img 
+              src={imageUrl} 
+              alt={title}
+              className="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+              width="1400"
+              height="800"
+            />
+          </picture>
         ) : (
           /* Fallback gradient placeholder */
           <div className={`absolute inset-0 bg-gradient-to-br ${getGradientClass(title)} opacity-90`}>
@@ -212,12 +224,24 @@ export const CityPage: React.FC<CityPageProps> = ({
               {/* Main Image Display */}
               <div className="relative aspect-[16/10] bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl overflow-hidden shadow-2xl">
                 {galleryImages[currentSlide]?.url ? (
-                  <img 
-                    src={galleryImages[currentSlide].url} 
-                    alt={galleryImages[currentSlide].alt || `${title} photo ${currentSlide + 1}`}
-                    className="w-full h-full object-cover transition-all duration-500"
-                    loading="lazy"
-                  />
+                  <picture className="w-full h-full">
+                    <source 
+                      srcSet={galleryImages[currentSlide].url.replace('&fm=webp', '&fm=avif')} 
+                      type="image/avif" 
+                    />
+                    <source 
+                      srcSet={galleryImages[currentSlide].url} 
+                      type="image/webp" 
+                    />
+                    <img 
+                      src={galleryImages[currentSlide].url} 
+                      alt={galleryImages[currentSlide].alt || `${title} photo ${currentSlide + 1}`}
+                      className="w-full h-full object-cover transition-all duration-500"
+                      loading="lazy"
+                      width="1400"
+                      height="800"
+                    />
+                  </picture>
                 ) : (
                   <>
                     {/* Enhanced placeholder for current slide */}
@@ -279,12 +303,24 @@ export const CityPage: React.FC<CityPageProps> = ({
                     }`}
                   >
                     {galleryImages[index]?.url ? (
-                      <img 
-                        src={galleryImages[index].url} 
-                        alt={`Thumbnail ${index + 1}`}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
+                      <picture className="w-full h-full">
+                        <source 
+                          srcSet={galleryImages[index].url.replace('&fm=webp', '&fm=avif')} 
+                          type="image/avif" 
+                        />
+                        <source 
+                          srcSet={galleryImages[index].url} 
+                          type="image/webp" 
+                        />
+                        <img 
+                          src={galleryImages[index].url} 
+                          alt={`Thumbnail ${index + 1}`}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                          width="64"
+                          height="48"
+                        />
+                      </picture>
                     ) : (
                       <div className={`w-full h-full bg-gradient-to-br ${getGradientClass(title + index)} opacity-60 flex items-center justify-center`}>
                         <span className="text-white text-xs font-bold">{index + 1}</span>

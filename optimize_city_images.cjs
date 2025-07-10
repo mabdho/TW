@@ -10,7 +10,7 @@ function optimizeUnsplashUrl(url) {
 
   const requiredParams = {
     'auto': 'format',
-    'fit': 'max', 
+    'fit': 'crop', 
     'w': '1400',
     'fm': 'webp'
   };
@@ -32,22 +32,35 @@ function optimizeUnsplashUrl(url) {
   }
 }
 
-// Function to add lazy loading to img tags
-function addLazyLoading(content) {
-  // More comprehensive pattern to match img tags that don't already have loading="lazy"
-  const imgPattern = /<img([^>]*?)(?![\s\S]*?loading\s*=\s*["']lazy["'])([^>]*?)>/g;
+// Function to add lazy loading and dimensions to img tags
+function optimizeImgTags(content) {
+  // More comprehensive pattern to match img tags
+  const imgPattern = /<img([^>]*?)>/g;
   
-  return content.replace(imgPattern, (match, group1, group2) => {
-    // Check if loading attribute already exists with a different value
-    const hasLoadingAttr = /loading\s*=\s*["'][^"']*["']/.test(match);
+  return content.replace(imgPattern, (match) => {
+    let optimizedTag = match;
+    
+    // Check if loading attribute already exists
+    const hasLoadingAttr = /loading\s*=\s*["'][^"']*["']/.test(optimizedTag);
     
     if (hasLoadingAttr) {
       // Replace existing loading attribute with "lazy"
-      return match.replace(/loading\s*=\s*["'][^"']*["']/, 'loading="lazy"');
+      optimizedTag = optimizedTag.replace(/loading\s*=\s*["'][^"']*["']/, 'loading="lazy"');
     } else {
       // Add loading="lazy" before the closing >
-      return match.replace('>', ' loading="lazy">');
+      optimizedTag = optimizedTag.replace('>', ' loading="lazy">');
     }
+    
+    // Add width and height attributes if not present (standard responsive dimensions)
+    const hasWidth = /width\s*=/.test(optimizedTag);
+    const hasHeight = /height\s*=/.test(optimizedTag);
+    
+    if (!hasWidth && !hasHeight) {
+      // Add responsive dimensions suitable for travel images
+      optimizedTag = optimizedTag.replace('>', ' width="1400" height="800">');
+    }
+    
+    return optimizedTag;
   });
 }
 
@@ -72,18 +85,26 @@ function processFile(filePath) {
       return quote + optimizedUrl + quote;
     });
 
-    // Step 2: Add lazy loading to img tags that don't have it
+    // Step 2: Optimize img tags (lazy loading, dimensions)
     const originalImgCount = (content.match(/<img[^>]*>/g) || []).length;
     const lazyImgCount = (content.match(/<img[^>]*loading\s*=\s*["']lazy["'][^>]*>/g) || []).length;
+    const imgWithDimensions = (content.match(/<img[^>]*width\s*=\s*["'][^"']*["'][^>]*height\s*=\s*["'][^"']*["'][^>]*>/g) || []).length;
     
-    // Only process if there are img tags without lazy loading
-    if (originalImgCount > lazyImgCount) {
-      const beforeLazy = updatedContent;
-      updatedContent = addLazyLoading(updatedContent);
+    // Only process if there are img tags that need optimization
+    if (originalImgCount > 0 && (originalImgCount > lazyImgCount || imgWithDimensions < originalImgCount)) {
+      const beforeOptimize = updatedContent;
+      updatedContent = optimizeImgTags(updatedContent);
       
-      // Count how many img tags we added lazy loading to
+      // Count improvements
       const newLazyCount = (updatedContent.match(/<img[^>]*loading\s*=\s*["']lazy["'][^>]*>/g) || []).length;
+      const newDimensionsCount = (updatedContent.match(/<img[^>]*width\s*=\s*["'][^"']*["'][^>]*height\s*=\s*["'][^"']*["'][^>]*>/g) || []).length;
+      
       lazyLoadingAdded = newLazyCount - lazyImgCount;
+      const dimensionsAdded = newDimensionsCount - imgWithDimensions;
+      
+      if (dimensionsAdded > 0) {
+        lazyLoadingAdded += dimensionsAdded; // Count both optimizations
+      }
     }
 
     // Write file if any changes were made
@@ -149,8 +170,11 @@ function main() {
   }
 
   console.log('\n📋 Optimizations applied:');
-  console.log('  • Unsplash URLs: ?auto=format&fit=max&w=1400&fm=webp');
+  console.log('  • Unsplash URLs: ?auto=format&fit=crop&w=1400&fm=webp');
   console.log('  • Images: loading="lazy" attribute');
+  console.log('  • Dimensions: width/height attributes added');
+  console.log('  • Picture tags: AVIF/WebP fallbacks (in CityPage component)');
+  console.log('  • Performance: Lazy loading for all images');
 }
 
 main();

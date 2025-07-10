@@ -7,12 +7,30 @@ This document describes the automated image optimization system for the travel w
 ### 1. Unsplash URLs
 All Unsplash image URLs (`images.unsplash.com`) are automatically optimized with:
 - `auto=format` - Automatic format selection
-- `fit=max` - Maximum fit scaling  
+- `fit=crop` - Crop fitting for optimal display
 - `w=1400` - Width optimization to 1400px
 - `fm=webp` - WebP format for better compression
 
 ### 2. Lazy Loading
 All `<img>` tags get the `loading="lazy"` attribute for improved page performance.
+
+### 3. Image Dimensions
+Standard `width` and `height` attributes are added to prevent layout shift:
+- Hero images: `width="1400" height="800"`
+- Thumbnail images: `width="64" height="48"`
+
+### 4. Modern Image Formats (Picture Tags)
+Hero and gallery images in the CityPage component use `<picture>` tags with:
+- AVIF format (first choice)
+- WebP format (fallback)
+- Original format (final fallback)
+
+### 5. Complete Performance Package
+- Lazy loading for all images
+- Optimized Unsplash URLs with performance parameters
+- Proper dimensions to prevent layout shift
+- Modern image format support
+- Future-ready optimization system
 
 ## How to Use
 
@@ -69,10 +87,10 @@ imageUrl: "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1
 
 **After:**
 ```javascript
-imageUrl: "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=max&w=1400&fm=webp"
+imageUrl: "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&w=1400&fm=webp"
 ```
 
-### Lazy Loading
+### Picture Tag with Modern Formats
 **Before:**
 ```jsx
 <img src={imageUrl} alt="City view" className="hero-image" />
@@ -80,7 +98,35 @@ imageUrl: "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1
 
 **After:**
 ```jsx
-<img src={imageUrl} alt="City view" className="hero-image" loading="lazy" />
+<picture className="absolute inset-0 w-full h-full">
+  <source 
+    srcSet={imageUrl.replace('&fm=webp', '&fm=avif')} 
+    type="image/avif" 
+  />
+  <source 
+    srcSet={imageUrl} 
+    type="image/webp" 
+  />
+  <img 
+    src={imageUrl} 
+    alt="City view"
+    className="absolute inset-0 w-full h-full object-cover"
+    loading="lazy"
+    width="1400"
+    height="800"
+  />
+</picture>
+```
+
+### Lazy Loading with Dimensions
+**Before:**
+```jsx
+<img src={imageUrl} alt="City view" className="hero-image" />
+```
+
+**After:**
+```jsx
+<img src={imageUrl} alt="City view" className="hero-image" loading="lazy" width="1400" height="800" />
 ```
 
 ## Performance Benefits
