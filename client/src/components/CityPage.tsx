@@ -193,69 +193,87 @@ export const CityPage: React.FC<CityPageProps> = ({
                 </div>
               </div>
               
-              <div className="space-y-4">
+              <Accordion type="single" collapsible className="w-full space-y-3">
                 {top5Attractions.map((attraction, index) => (
-                  <div key={index} className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
-                    <div className="p-4">
-                      <div className="flex items-start gap-4">
+                  <AccordionItem key={index} value={`item-${index}`} className="border border-gray-200 rounded-lg overflow-hidden">
+                    <AccordionTrigger className="px-4 py-3 hover:no-underline hover:bg-gray-50 transition-colors">
+                      <div className="flex items-center gap-4 w-full">
                         <div className="flex-shrink-0">
-                          <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+                          <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">
                             {index + 1}
                           </div>
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-start justify-between gap-4">
-                            <div className="flex-1">
-                              <h3 className="text-lg font-semibold text-gray-900 mb-2">{attraction.name}</h3>
-                              <p className="text-gray-600 text-sm leading-relaxed mb-3">{attraction.description}</p>
-                            </div>
-                            <div className="flex items-center gap-1 flex-shrink-0">
-                              <Star className="w-4 h-4 fill-orange-400 text-orange-400" />
-                              <span className="text-sm font-medium text-gray-700">4.{9 - index}</span>
-                            </div>
-                          </div>
-                          
-                          {attraction.practicalInfo && (
-                            <div className="bg-gray-50 rounded-lg p-3 space-y-2">
-                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                                {attraction.practicalInfo.openingHours && (
-                                  <div className="flex items-center gap-2">
-                                    <Clock className="h-3 w-3 text-gray-500" />
-                                    <span className="text-gray-700">{attraction.practicalInfo.openingHours}</span>
+                        <div className="flex-1 text-left">
+                          <h3 className="text-base sm:text-lg font-semibold text-gray-900">{attraction.name}</h3>
+                        </div>
+                        <div className="flex items-center gap-1 flex-shrink-0">
+                          <Star className="w-4 h-4 fill-orange-400 text-orange-400" />
+                          <span className="text-sm font-medium text-gray-700">4.{9 - index}</span>
+                        </div>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-4 pb-4">
+                      <div className="space-y-4">
+                        <p className="text-gray-600 text-sm leading-relaxed">
+                          {attraction.description}
+                        </p>
+                        
+                        {attraction.practicalInfo && (
+                          <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                            <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2 text-sm">
+                              <MapPin className="h-4 w-4 text-gray-500" />
+                              Practical Information
+                            </h4>
+                            <div className="grid gap-3 text-sm">
+                              {attraction.practicalInfo.openingHours && (
+                                <div className="flex items-start gap-2">
+                                  <Clock className="h-4 w-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                                  <div>
+                                    <strong className="text-gray-900">Hours:</strong>
+                                    <span className="text-gray-700 ml-2">{attraction.practicalInfo.openingHours}</span>
                                   </div>
-                                )}
-                                {attraction.practicalInfo.cost && (
-                                  <div className="flex items-center gap-2">
-                                    <DollarSign className="h-3 w-3 text-gray-500" />
-                                    <span className="text-gray-700">{attraction.practicalInfo.cost}</span>
+                                </div>
+                              )}
+                              {attraction.practicalInfo.cost && (
+                                <div className="flex items-start gap-2">
+                                  <DollarSign className="h-4 w-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                                  <div>
+                                    <strong className="text-gray-900">Cost:</strong>
+                                    <span className="text-gray-700 ml-2">{attraction.practicalInfo.cost}</span>
                                   </div>
-                                )}
-                                {attraction.practicalInfo.howToGetThere && (
-                                  <div className="flex items-center gap-2 sm:col-span-2">
-                                    <MapPin className="h-3 w-3 text-gray-500" />
-                                    <span className="text-gray-700 text-xs">{attraction.practicalInfo.howToGetThere}</span>
+                                </div>
+                              )}
+                              {attraction.practicalInfo.howToGetThere && (
+                                <div className="flex items-start gap-2">
+                                  <MapPin className="h-4 w-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                                  <div>
+                                    <strong className="text-gray-900">How to Get There:</strong>
+                                    <span className="text-gray-700 ml-2">{attraction.practicalInfo.howToGetThere}</span>
                                   </div>
-                                )}
-                              </div>
+                                </div>
+                              )}
                               {attraction.practicalInfo.website && (
-                                <div className="pt-2 border-t border-gray-200">
-                                  <a href={`https://${attraction.practicalInfo.website}`} 
-                                     className="text-green-600 hover:text-green-700 text-xs font-medium flex items-center gap-1" 
-                                     target="_blank" 
-                                     rel="noopener">
-                                    <Globe className="h-3 w-3" />
-                                    Visit Website
-                                  </a>
+                                <div className="flex items-start gap-2">
+                                  <Globe className="h-4 w-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                                  <div>
+                                    <strong className="text-gray-900">Website:</strong>
+                                    <a href={`https://${attraction.practicalInfo.website}`} 
+                                       className="text-green-600 hover:text-green-700 font-medium ml-2" 
+                                       target="_blank" 
+                                       rel="noopener">
+                                      {attraction.practicalInfo.website}
+                                    </a>
+                                  </div>
                                 </div>
                               )}
                             </div>
-                          )}
-                        </div>
+                          </div>
+                        )}
                       </div>
-                    </div>
-                  </div>
+                    </AccordionContent>
+                  </AccordionItem>
                 ))}
-              </div>
+              </Accordion>
             </div>
           </TabsContent>
 
