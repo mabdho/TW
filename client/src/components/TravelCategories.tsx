@@ -48,6 +48,7 @@ export const TravelCategories = () => {
                           src={blog.imageUrl} 
                           alt={blog.title}
                           className="absolute inset-0 w-full h-full object-cover"
+                          loading="lazy"
                         />
                       ) : (
                         <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-20"></div>

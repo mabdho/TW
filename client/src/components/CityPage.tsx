@@ -119,6 +119,7 @@ export const CityPage: React.FC<CityPageProps> = ({
             src={imageUrl} 
             alt={title}
             className="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
           />
         ) : (
           /* Fallback gradient placeholder */
@@ -215,6 +216,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                     src={galleryImages[currentSlide].url} 
                     alt={galleryImages[currentSlide].alt || `${title} photo ${currentSlide + 1}`}
                     className="w-full h-full object-cover transition-all duration-500"
+                    loading="lazy"
                   />
                 ) : (
                   <>
@@ -281,6 +283,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                         src={galleryImages[index].url} 
                         alt={`Thumbnail ${index + 1}`}
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     ) : (
                       <div className={`w-full h-full bg-gradient-to-br ${getGradientClass(title + index)} opacity-60 flex items-center justify-center`}>

@@ -94,6 +94,7 @@ export default function BlogDetailPage() {
                   src={blog.imageUrl} 
                   alt={blog.title}
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
               </div>
             )}
