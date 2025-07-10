@@ -181,29 +181,25 @@ Return only the JSON object with no additional text or formatting.`;
 
       console.log(`Generated city page: ${cityFileName}.tsx`);
 
-      // Auto-integrate into App.tsx routing
-      const appPath = path.join(process.cwd(), 'client', 'src', 'App.tsx');
-      const appContent = await fs.readFile(appPath, 'utf-8');
+      // Update DynamicCityRoute.tsx with new city mapping
+      const dynamicRoutePath = path.join(process.cwd(), 'client', 'src', 'components', 'DynamicCityRoute.tsx');
+      const dynamicContent = await fs.readFile(dynamicRoutePath, 'utf-8');
       
-      // Add import if it doesn't exist
-      const importStatement = `import { ${cityFileName} } from "./pages/cities/${cityFileName}";`;
-      if (!appContent.includes(importStatement)) {
-        // Find the last import statement and add after it
-        const lastImportIndex = appContent.lastIndexOf('import {');
-        const afterLastImport = appContent.indexOf(';\n', lastImportIndex) + 2;
-        const updatedAppContent = appContent.slice(0, afterLastImport) + importStatement + '\n' + appContent.slice(afterLastImport);
+      const routePath = city.toLowerCase().replace(/\s+/g, '-');
+      const cityMapping = `  '${routePath}': () => import('../pages/cities/${cityFileName}'),`;
+      
+      if (!dynamicContent.includes(`'${routePath}':`)) {
+        // Find the cityMap object and add the new mapping
+        const cityMapStart = dynamicContent.indexOf('const cityMap = {');
+        const cityMapEnd = dynamicContent.indexOf('};', cityMapStart);
         
-        // Add route
-        const routePath = `/${city.toLowerCase().replace(/\s+/g, '-')}`;
-        const routeStatement = `        <Route path="${routePath}" element={<${cityFileName} />} />`;
+        const beforeCityMap = dynamicContent.slice(0, cityMapEnd);
+        const afterCityMap = dynamicContent.slice(cityMapEnd);
         
-        // Find the last route and add after it
-        const lastRouteIndex = updatedAppContent.lastIndexOf('<Route path=');
-        const afterLastRoute = updatedAppContent.indexOf('/>\n', lastRouteIndex) + 3;
-        const finalAppContent = updatedAppContent.slice(0, afterLastRoute) + routeStatement + '\n' + updatedAppContent.slice(afterLastRoute);
+        const updatedDynamicContent = beforeCityMap + '\n' + cityMapping + '\n' + afterCityMap;
         
-        await fs.writeFile(appPath, finalAppContent);
-        console.log(`Updated App.tsx with ${cityFileName} import and route`);
+        await fs.writeFile(dynamicRoutePath, updatedDynamicContent);
+        console.log(`Updated DynamicCityRoute.tsx with ${cityFileName} dynamic import`);
       }
       
       // Auto-integrate into CityDirectory.tsx
