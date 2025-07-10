@@ -141,6 +141,7 @@ export default function AdminPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/blogs'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/blogs/latest/2'] });
       toast({ title: "Blog created successfully!" });
       blogForm.reset();
     },
@@ -159,6 +160,7 @@ export default function AdminPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/blogs'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/blogs/latest/2'] });
       toast({ title: "Blog updated successfully!" });
       setEditingBlog(null);
       blogForm.reset();
@@ -178,6 +180,7 @@ export default function AdminPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/blogs'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/blogs/latest/2'] });
       toast({ title: "Blog deleted successfully!" });
     },
     onError: (error: any) => {
