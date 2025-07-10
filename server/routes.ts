@@ -79,19 +79,50 @@ Generate 8-15 detailed attractions. Write in a natural, human tone with:
 - Avoid overly rigid or textbook-like structure
 - Skip slang but maintain conversational flow
 
+IMPORTANT JSON FORMAT RULES:
+- Return ONLY valid JSON, no markdown formatting or extra text
+- Escape all quotes in text content using backslashes (\")
+- Use \n for line breaks in text content
+- Do not use raw line breaks inside JSON strings
+- Ensure all text fields are properly escaped
+
 Return ONLY the JSON object, no additional text.`;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const generatedText = response.text();
 
+      console.log('AI Response Length:', generatedText.length);
+      console.log('AI Response Preview:', generatedText.substring(0, 500));
+
+      // Extract JSON from the response (might be wrapped in markdown)
+      let jsonText = generatedText;
+      if (generatedText.includes('```json')) {
+        const jsonMatch = generatedText.match(/```json\s*([\s\S]*?)\s*```/);
+        if (jsonMatch) {
+          jsonText = jsonMatch[1];
+        }
+      } else if (generatedText.includes('```')) {
+        const jsonMatch = generatedText.match(/```\s*([\s\S]*?)\s*```/);
+        if (jsonMatch) {
+          jsonText = jsonMatch[1];
+        }
+      }
+
       // Parse the JSON response
       let contentData;
       try {
-        contentData = JSON.parse(generatedText);
+        contentData = JSON.parse(jsonText);
       } catch (parseError) {
-        console.error('Failed to parse Gemini response:', generatedText);
-        return res.status(500).json({ error: 'Failed to parse AI response' });
+        console.error('JSON parsing error:', parseError);
+        console.error('Raw response length:', generatedText.length);
+        console.error('Raw response preview:', generatedText.substring(0, 1000));
+        console.error('Extracted JSON preview:', jsonText.substring(0, 1000));
+        return res.status(500).json({ 
+          error: 'Failed to parse AI response', 
+          details: parseError.message,
+          responsePreview: generatedText.substring(0, 500)
+        });
       }
 
       // Generate the React component file
