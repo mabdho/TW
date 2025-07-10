@@ -6,14 +6,14 @@ import { Badge } from '@/components/ui/badge';
 
 // Get the last 8 cities from the cities array (most recently added)
 const featuredCities = [
-  { "name": "Trivandrum", "country": "India", "path": "/trivandrum", "continent": "Asia", "imageUrl": "" },
-  { "name": "Chicago", "country": "USA", "path": "/chicago", "continent": "North America", "imageUrl": "https://images.unsplash.com/photo-1623607769583-f95269221eaf?q=80&w=1375&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,
-  { "name": "Boston", "country": "USA", "path": "/boston", "continent": "North America", "imageUrl": "https://images.unsplash.com/photo-1720655259605-5b0237f6c512?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,
-  { "name": "Dhaandhoo", "country": "Maldives", "path": "/dhaandhoo", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,
-  { "name": "Berlin", "country": "Germany", "path": "/berlin", "continent": "Europe", "imageUrl": "" },,,,,
-  { "name": "TestCity", "country": "TestCountry", "path": "/testcity", "continent": "", "imageUrl": "" },,,,,,
-  { "name": "Male'", "country": "Maldives", "path": "/male'", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1575119427862-c9ea3e37b537?q=80&w=1836&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,,,
-  { "name": "New York", "country": "USA", "path": "/new-york", "continent": "North America", "imageUrl": "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,,,
+  { "name": "Trivandrum", "country": "India", "path": "/best-things-to-do-in-trivandrum", "continent": "Asia", "imageUrl": "" },
+  { "name": "Chicago", "country": "USA", "path": "/best-things-to-do-in-chicago", "continent": "North America", "imageUrl": "https://images.unsplash.com/photo-1623607769583-f95269221eaf?q=80&w=1375&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { "name": "Boston", "country": "USA", "path": "/best-things-to-do-in-boston", "continent": "North America", "imageUrl": "https://images.unsplash.com/photo-1720655259605-5b0237f6c512?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { "name": "Dhaandhoo", "country": "Maldives", "path": "/best-things-to-do-in-dhaandhoo", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { "name": "Berlin", "country": "Germany", "path": "/best-things-to-do-in-berlin", "continent": "Europe", "imageUrl": "" },
+  { "name": "Dubai", "country": "UAE", "path": "/best-things-to-do-in-dubai", "continent": "Asia", "imageUrl": "" },
+  { "name": "New York", "country": "USA", "path": "/best-things-to-do-in-new-york", "continent": "North America", "imageUrl": "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { "name": "Tokyo", "country": "Japan", "path": "/best-things-to-do-in-tokyo", "continent": "Asia", "imageUrl": "" }
 ];
 
 export const FeaturedCities = () => {

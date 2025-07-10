@@ -217,18 +217,11 @@ export const CityRoutes: React.FC = () => {
   return (
     <>
       {Object.keys(cityMap).map((cityKey) => (
-        <React.Fragment key={cityKey}>
-          {/* SEO-friendly URL structure */}
-          <DynamicCityRoute
-            path={`/best-things-to-do-in-${cityKey}`}
-            cityKey={cityKey}
-          />
-          {/* Legacy URL support for backward compatibility */}
-          <DynamicCityRoute
-            path={`/${cityKey}`}
-            cityKey={cityKey}
-          />
-        </React.Fragment>
+        <DynamicCityRoute
+          key={cityKey}
+          path={`/best-things-to-do-in-${cityKey}`}
+          cityKey={cityKey}
+        />
       ))}
     </>
   );
