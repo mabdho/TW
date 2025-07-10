@@ -13,12 +13,19 @@ if (privateKey) {
   // Replace escaped newlines with actual newlines
   privateKey = privateKey.replace(/\\n/g, '\n');
   
-  // Ensure proper PEM format
-  if (!privateKey.startsWith('-----BEGIN PRIVATE KEY-----')) {
+  // Remove any extra quotes or spaces
+  privateKey = privateKey.trim().replace(/^["']|["']$/g, '');
+  
+  // Ensure proper PEM format - check if it already has headers
+  if (!privateKey.includes('-----BEGIN PRIVATE KEY-----') && !privateKey.includes('-----BEGIN RSA PRIVATE KEY-----')) {
     // If the key doesn't have proper headers, try to add them
     privateKey = `-----BEGIN PRIVATE KEY-----\n${privateKey}\n-----END PRIVATE KEY-----`;
   }
 }
+
+console.log('Firebase Project ID:', process.env.FIREBASE_PROJECT_ID);
+console.log('Firebase Client Email:', process.env.FIREBASE_CLIENT_EMAIL);
+console.log('Private Key starts with:', privateKey?.substring(0, 50) + '...');
 
 const app = getApps().length > 0 ? getApp() : initializeApp({
   credential: cert({
