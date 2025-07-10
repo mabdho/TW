@@ -18,8 +18,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: 'City and country are required' });
       }
 
-      // Generate content using Gemini
-      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+      // Generate content using Gemini with fallback
+      let model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+      let modelName = "gemini-2.0-flash-exp";
 
       const prompt = `You are a professional travel content writer creating an SEO-optimized city guide.
 
@@ -88,10 +89,31 @@ IMPORTANT JSON FORMAT RULES:
 
 Return ONLY the JSON object, no additional text.`;
 
-      const result = await model.generateContent(prompt);
+      let result;
+      try {
+        result = await model.generateContent(prompt);
+      } catch (error: any) {
+        console.log('Primary model error:', error.status, error.message);
+        if (error.status === 503 || error.message.includes('overloaded') || error.message.includes('Service Unavailable')) {
+          console.log('Primary model overloaded, trying fallback model...');
+          try {
+            model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+            modelName = "gemini-1.5-flash";
+            result = await model.generateContent(prompt);
+          } catch (fallbackError: any) {
+            console.log('Fallback model also failed, trying gemini-1.5-pro...');
+            model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+            modelName = "gemini-1.5-pro";
+            result = await model.generateContent(prompt);
+          }
+        } else {
+          throw error;
+        }
+      }
       const response = await result.response;
       const generatedText = response.text();
 
+      console.log(`Used model: ${modelName}`);
       console.log('AI Response Length:', generatedText.length);
       console.log('AI Response Preview:', generatedText.substring(0, 500));
 
@@ -108,6 +130,14 @@ Return ONLY the JSON object, no additional text.`;
           jsonText = jsonMatch[1];
         }
       }
+
+      // Clean up the JSON text to remove control characters and fix common issues
+      jsonText = jsonText
+        .replace(/[\u0000-\u001F\u007F]/g, '') // Remove control characters
+        .replace(/\n/g, '\\n') // Escape line breaks
+        .replace(/\r/g, '\\r') // Escape carriage returns
+        .replace(/\t/g, '\\t') // Escape tabs
+        .trim();
 
       // Parse the JSON response
       let contentData;
