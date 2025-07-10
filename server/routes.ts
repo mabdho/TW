@@ -310,7 +310,7 @@ Return only the JSON object with no additional text or formatting.`;
 
   app.get('/api/blogs/:id', async (req, res) => {
     try {
-      const id = parseInt(req.params.id);
+      const id = req.params.id;
       const blog = await storage.getBlog(id);
       if (!blog) {
         return res.status(404).json({ error: 'Blog not found' });
@@ -339,7 +339,7 @@ Return only the JSON object with no additional text or formatting.`;
 
   app.put('/api/blogs/:id', async (req, res) => {
     try {
-      const id = parseInt(req.params.id);
+      const id = req.params.id;
       const { insertBlogSchema } = await import('@shared/schema');
       const blogData = insertBlogSchema.partial().parse(req.body);
       const blog = await storage.updateBlog(id, blogData);
@@ -355,7 +355,7 @@ Return only the JSON object with no additional text or formatting.`;
 
   app.delete('/api/blogs/:id', async (req, res) => {
     try {
-      const id = parseInt(req.params.id);
+      const id = req.params.id;
       await storage.deleteBlog(id);
       res.json({ success: true });
     } catch (error) {

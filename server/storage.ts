@@ -1,74 +1,82 @@
-import { users, blogs, type User, type InsertUser, type Blog, type InsertBlog } from "@shared/schema";
-import { db } from "./db";
-import { eq, desc } from "drizzle-orm";
+import { type User, type InsertUser, type Blog, type InsertBlog } from "@shared/schema";
+import { db } from "./firebase-config";
 
 export interface IStorage {
-  getUser(id: number): Promise<User | undefined>;
+  getUser(id: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   
   // Blog operations
   getAllBlogs(): Promise<Blog[]>;
-  getBlog(id: number): Promise<Blog | undefined>;
+  getBlog(id: string): Promise<Blog | undefined>;
   createBlog(blog: InsertBlog): Promise<Blog>;
-  updateBlog(id: number, blog: Partial<InsertBlog>): Promise<Blog>;
-  deleteBlog(id: number): Promise<void>;
+  updateBlog(id: string, blog: Partial<InsertBlog>): Promise<Blog>;
+  deleteBlog(id: string): Promise<void>;
   getLatestBlogs(limit?: number): Promise<Blog[]>;
 }
 
-export class DatabaseStorage implements IStorage {
-  async getUser(id: number): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.id, id));
-    return user || undefined;
+export class FirestoreStorage implements IStorage {
+  async getUser(id: string): Promise<User | undefined> {
+    const userDoc = await db.collection('users').doc(id).get();
+    if (!userDoc.exists) return undefined;
+    return { id: userDoc.id, ...userDoc.data() } as User;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.username, username));
-    return user || undefined;
+    const usersQuery = await db.collection('users').where('username', '==', username).limit(1).get();
+    if (usersQuery.empty) return undefined;
+    const userDoc = usersQuery.docs[0];
+    return { id: userDoc.id, ...userDoc.data() } as User;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const [user] = await db
-      .insert(users)
-      .values(insertUser)
-      .returning();
-    return user;
+    const userRef = await db.collection('users').add(insertUser);
+    const userDoc = await userRef.get();
+    return { id: userDoc.id, ...userDoc.data() } as User;
   }
 
   // Blog operations
   async getAllBlogs(): Promise<Blog[]> {
-    return db.select().from(blogs).orderBy(desc(blogs.createdAt));
+    const blogsQuery = await db.collection('blogs').orderBy('createdAt', 'desc').get();
+    return blogsQuery.docs.map(doc => ({ id: doc.id, ...doc.data() } as Blog));
   }
 
-  async getBlog(id: number): Promise<Blog | undefined> {
-    const [blog] = await db.select().from(blogs).where(eq(blogs.id, id));
-    return blog || undefined;
+  async getBlog(id: string): Promise<Blog | undefined> {
+    const blogDoc = await db.collection('blogs').doc(id).get();
+    if (!blogDoc.exists) return undefined;
+    return { id: blogDoc.id, ...blogDoc.data() } as Blog;
   }
 
   async createBlog(insertBlog: InsertBlog): Promise<Blog> {
-    const [blog] = await db
-      .insert(blogs)
-      .values(insertBlog)
-      .returning();
-    return blog;
+    const now = new Date();
+    const blogData = {
+      ...insertBlog,
+      createdAt: now,
+      updatedAt: now
+    };
+    const blogRef = await db.collection('blogs').add(blogData);
+    const blogDoc = await blogRef.get();
+    return { id: blogDoc.id, ...blogDoc.data() } as Blog;
   }
 
-  async updateBlog(id: number, updateData: Partial<InsertBlog>): Promise<Blog> {
-    const [blog] = await db
-      .update(blogs)
-      .set({ ...updateData, updatedAt: new Date() })
-      .where(eq(blogs.id, id))
-      .returning();
-    return blog;
+  async updateBlog(id: string, updateData: Partial<InsertBlog>): Promise<Blog> {
+    const blogRef = db.collection('blogs').doc(id);
+    await blogRef.update({
+      ...updateData,
+      updatedAt: new Date()
+    });
+    const blogDoc = await blogRef.get();
+    return { id: blogDoc.id, ...blogDoc.data() } as Blog;
   }
 
-  async deleteBlog(id: number): Promise<void> {
-    await db.delete(blogs).where(eq(blogs.id, id));
+  async deleteBlog(id: string): Promise<void> {
+    await db.collection('blogs').doc(id).delete();
   }
 
   async getLatestBlogs(limit: number = 10): Promise<Blog[]> {
-    return db.select().from(blogs).orderBy(desc(blogs.createdAt)).limit(limit);
+    const blogsQuery = await db.collection('blogs').orderBy('createdAt', 'desc').limit(limit).get();
+    return blogsQuery.docs.map(doc => ({ id: doc.id, ...doc.data() } as Blog));
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage = new FirestoreStorage();
