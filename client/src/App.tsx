@@ -1,4 +1,4 @@
-import { Route } from 'wouter';
+import { Route, Router } from 'wouter';
 import Home from './pages/home';
 import NotFound from './pages/not-found';
 import AdminPage from './pages/admin';
@@ -160,7 +160,7 @@ import { Male } from "./pages/cities/Male";
 
 function App() {
   return (
-    <>
+    <Router>
       <Route path="/" component={Home} />
       <Route path="/aarhus" component={Aarhus} />
       <Route path="/accra" component={Accra} />
@@ -318,7 +318,7 @@ function App() {
       <Route path="/male" component={Male} />
       <Route path="/admin" component={AdminPage} />
       <Route component={NotFound} />
-    </>
+    </Router>
   );
 }
 
