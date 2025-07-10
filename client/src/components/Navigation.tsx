@@ -27,9 +27,9 @@ export const Navigation = () => {
             <a href="/" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
               Home
             </a>
-            <button onClick={() => scrollToSection('destinations')} className="text-gray-700 hover:text-green-600 transition-colors font-medium">
+            <a href="/destinations" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
               Destinations
-            </button>
+            </a>
             <a href="/blogs" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
               Blogs
             </a>
@@ -67,15 +67,13 @@ export const Navigation = () => {
             >
               Home
             </a>
-            <button 
-              onClick={() => {
-                scrollToSection('destinations');
-                setIsMenuOpen(false);
-              }}
-              className="block w-full text-left px-3 py-3 text-base text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
+            <a 
+              href="/destinations"
+              className="block px-3 py-3 text-base text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
+              onClick={() => setIsMenuOpen(false)}
             >
               Destinations
-            </button>
+            </a>
             <a 
               href="/blogs"
               className="block px-3 py-3 text-base text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
