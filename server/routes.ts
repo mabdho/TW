@@ -224,6 +224,21 @@ Return only the JSON object with no additional text or formatting.`;
         await fs.writeFile(cityDirectoryPath, updatedCityContent);
         console.log(`Updated CityDirectory.tsx with ${city} entry (${newCount} cities total)`);
         
+        // Auto-integrate into Destinations page
+        const destinationsPath = path.join(process.cwd(), 'client', 'src', 'pages', 'destinations.tsx');
+        const destinationsContent = await fs.readFile(destinationsPath, 'utf-8');
+        
+        // Check if city already exists in destinations
+        if (!destinationsContent.includes(`"name": "${city}"`)) {
+          // Find the end of the cities array and add the new city
+          const destinationsCitiesEndIndex = destinationsContent.indexOf('];');
+          const beforeDestinationsCitiesEnd = destinationsContent.lastIndexOf('\n', destinationsCitiesEndIndex);
+          const updatedDestinationsContent = destinationsContent.slice(0, beforeDestinationsCitiesEnd) + ',\n' + cityEntry + destinationsContent.slice(beforeDestinationsCitiesEnd);
+          
+          await fs.writeFile(destinationsPath, updatedDestinationsContent);
+          console.log(`Updated destinations.tsx with ${city} entry`);
+        }
+        
         // Update Hero component city count
         const heroPath = path.join(process.cwd(), 'client', 'src', 'components', 'Hero.tsx');
         const heroContent = await fs.readFile(heroPath, 'utf-8');
