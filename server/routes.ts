@@ -286,86 +286,155 @@ Return only the JSON object with no additional text or formatting.`;
     }
   });
 
-  // Blog API routes
-  app.get('/api/blogs', async (req, res) => {
+  // Blog generation route
+  app.post('/api/admin/generate-blog', async (req, res) => {
     try {
-      const blogs = await storage.getAllBlogs();
-      res.json(blogs);
-    } catch (error) {
-      console.error('Error fetching blogs:', error);
-      res.status(500).json({ error: 'Failed to fetch blogs' });
-    }
-  });
+      const { title, category, imageUrl, author, generationMode, manualContent } = req.body;
 
-  app.get('/api/blogs/latest/:limit?', async (req, res) => {
-    try {
-      const limit = parseInt(req.params.limit || '2');
-      const blogs = await storage.getLatestBlogs(limit);
-      res.json(blogs);
-    } catch (error) {
-      console.error('Error fetching latest blogs:', error);
-      res.status(500).json({ error: 'Failed to fetch latest blogs' });
-    }
-  });
-
-  app.get('/api/blogs/:id', async (req, res) => {
-    try {
-      const id = req.params.id;
-      const blog = await storage.getBlog(id);
-      if (!blog) {
-        return res.status(404).json({ error: 'Blog not found' });
+      if (!title || !category) {
+        return res.status(400).json({ error: 'Title and category are required' });
       }
-      res.json(blog);
-    } catch (error) {
-      console.error('Error fetching blog:', error);
-      res.status(500).json({ error: 'Failed to fetch blog' });
-    }
-  });
 
-  app.post('/api/blogs', async (req, res) => {
-    try {
-      const { insertBlogSchema } = await import('@shared/schema');
-      const blogData = insertBlogSchema.parse(req.body);
-      const blog = await storage.createBlog(blogData);
-      res.json(blog);
+      let content, excerpt;
+
+      if (generationMode === 'manual') {
+        if (!manualContent || !manualContent.content || !manualContent.excerpt) {
+          return res.status(400).json({ error: 'Manual content and excerpt are required' });
+        }
+        content = manualContent.content;
+        excerpt = manualContent.excerpt;
+      } else {
+        // Generate content using Gemini AI
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+        
+        const prompt = `Write a comprehensive travel blog post with the title: "${title}"
+        
+        Category: ${category}
+        
+        Generate content in this JSON format:
+        {
+          "excerpt": "A compelling 2-3 sentence excerpt (150-200 characters) that summarizes the post and entices readers",
+          "content": "A full blog post (800-1500 words) written in engaging, informative style. Use markdown formatting for headers, lists, and emphasis. Include practical tips, personal insights, and actionable advice for travelers."
+        }
+        
+        Write in a conversational, engaging tone that inspires travel while providing practical value.`;
+
+        const result = await model.generateContent(prompt);
+        const generatedText = result.response.text();
+        
+        // Clean and parse JSON
+        const cleaned = generatedText
+          .replace(/```json\s*/g, '')
+          .replace(/```\s*/g, '')
+          .replace(/[\u0000-\u001F\u007F-\u009F]/g, '')
+          .trim();
+
+        try {
+          const parsedContent = JSON.parse(cleaned);
+          content = parsedContent.content;
+          excerpt = parsedContent.excerpt;
+        } catch (parseError) {
+          return res.status(500).json({ 
+            error: 'Failed to parse AI-generated content', 
+            details: parseError.message 
+          });
+        }
+      }
+
+      // Generate blog file
+      const blogId = title.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-');
+      const readTime = Math.ceil(content.split(' ').length / 200) + ' min read';
+      
+      const blogData = {
+        id: blogId,
+        title,
+        excerpt,
+        content,
+        category,
+        imageUrl: imageUrl || '',
+        featured: false,
+        readTime,
+        date: new Date().toISOString().split('T')[0],
+        author: author || 'TravelWanders Team'
+      };
+
+      // Create blog component file
+      const blogFileName = `${blogId}.tsx`;
+      const blogComponentCode = generateBlogComponent(blogData);
+      
+      // Write blog file
+      const blogDirPath = path.join(process.cwd(), 'client', 'src', 'blogs');
+      await fs.mkdir(blogDirPath, { recursive: true });
+      const blogFilePath = path.join(blogDirPath, blogFileName);
+      await fs.writeFile(blogFilePath, blogComponentCode, 'utf8');
+
+      // Update blogs index file
+      const indexPath = path.join(blogDirPath, 'index.ts');
+      const indexContent = await fs.readFile(indexPath, 'utf-8');
+      
+      // Add import
+      const importStatement = `import { ${blogId.replace(/-/g, '')}Blog } from './${blogId}';`;
+      const blogEntry = `  ${blogId.replace(/-/g, '')}Blog,`;
+      
+      // Update the file
+      let updatedContent = indexContent;
+      if (!updatedContent.includes(importStatement)) {
+        // Add import after existing imports
+        const lastImportIndex = updatedContent.lastIndexOf("import");
+        if (lastImportIndex === -1) {
+          updatedContent = `${importStatement}\n${updatedContent}`;
+        } else {
+          const afterLastImport = updatedContent.indexOf('\n', lastImportIndex) + 1;
+          updatedContent = updatedContent.slice(0, afterLastImport) + importStatement + '\n' + updatedContent.slice(afterLastImport);
+        }
+        
+        // Add to allBlogs array
+        const arrayStart = updatedContent.indexOf('export const allBlogs: Blog[] = [');
+        const arrayEnd = updatedContent.indexOf('];', arrayStart);
+        updatedContent = updatedContent.slice(0, arrayEnd) + blogEntry + '\n' + updatedContent.slice(arrayEnd);
+        
+        await fs.writeFile(indexPath, updatedContent);
+      }
+
+      res.json({
+        success: true,
+        blogId,
+        fileName: blogFileName,
+        filePath: `client/src/blogs/${blogFileName}`,
+        message: `Blog "${title}" created successfully`
+      });
+
     } catch (error) {
-      console.error('Error creating blog:', error);
+      console.error('Error generating blog:', error);
       res.status(500).json({ 
-        error: 'Failed to create blog',
+        error: 'Failed to generate blog',
         details: error instanceof Error ? error.message : 'Unknown error'
       });
-    }
-  });
-
-  app.put('/api/blogs/:id', async (req, res) => {
-    try {
-      const id = req.params.id;
-      const { insertBlogSchema } = await import('@shared/schema');
-      const blogData = insertBlogSchema.partial().parse(req.body);
-      const blog = await storage.updateBlog(id, blogData);
-      res.json(blog);
-    } catch (error) {
-      console.error('Error updating blog:', error);
-      res.status(500).json({ 
-        error: 'Failed to update blog',
-        details: error instanceof Error ? error.message : 'Unknown error'
-      });
-    }
-  });
-
-  app.delete('/api/blogs/:id', async (req, res) => {
-    try {
-      const id = req.params.id;
-      await storage.deleteBlog(id);
-      res.json({ success: true });
-    } catch (error) {
-      console.error('Error deleting blog:', error);
-      res.status(500).json({ error: 'Failed to delete blog' });
     }
   });
 
   const httpServer = createServer(app);
   return httpServer;
+}
+
+function generateBlogComponent(blogData: any): string {
+  const componentName = blogData.id.replace(/-/g, '');
+  
+  return `import React from 'react';
+import { Blog } from '@shared/schema';
+
+export const ${componentName}Blog: Blog = {
+  id: "${blogData.id}",
+  title: "${blogData.title}",
+  excerpt: "${blogData.excerpt}",
+  content: \`${blogData.content.replace(/`/g, '\\`')}\`,
+  category: "${blogData.category}",
+  imageUrl: "${blogData.imageUrl}",
+  featured: ${blogData.featured},
+  readTime: "${blogData.readTime}",
+  date: "${blogData.date}",
+  author: "${blogData.author}"
+};`;
 }
 
 function generateReactComponent(

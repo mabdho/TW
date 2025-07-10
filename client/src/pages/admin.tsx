@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
-import { Loader2, Plus, Trash2, Edit, Save, X, FileText, BookOpen } from 'lucide-react';
+import { Loader2, Plus, FileText, BookOpen } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Toaster } from '@/components/ui/toaster';
 import { apiRequest } from '@/lib/queryClient';
@@ -47,19 +47,28 @@ const cityFormSchema = z.object({
 
 const blogFormSchema = z.object({
   title: z.string().min(1, 'Title is required'),
-  excerpt: z.string().min(1, 'Excerpt is required'),
-  content: z.string().min(1, 'Content is required'),
   category: z.string().min(1, 'Category is required'),
+  author: z.string().optional(),
   imageUrl: z.string().url('Please enter a valid image URL').optional().or(z.literal('')),
-  featured: z.boolean().default(false),
-  readTime: z.string().min(1, 'Read time is required')
+  generationMode: z.enum(['ai', 'manual']).default('ai'),
+  manualContent: z.object({
+    excerpt: z.string().min(1, 'Excerpt is required'),
+    content: z.string().min(1, 'Content is required')
+  }).optional()
+}).refine((data) => {
+  if (data.generationMode === 'manual' && (!data.manualContent?.excerpt || !data.manualContent?.content)) {
+    return false;
+  }
+  return true;
+}, {
+  message: 'Excerpt and content are required when using manual mode',
+  path: ['manualContent']
 });
 
 type CityFormData = z.infer<typeof cityFormSchema>;
 type BlogFormData = z.infer<typeof blogFormSchema>;
 
 export default function AdminPage() {
-  const [editingBlog, setEditingBlog] = useState<Blog | null>(null);
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -86,31 +95,25 @@ export default function AdminPage() {
     }
   });
 
+
+
   // Blog form
   const blogForm = useForm<BlogFormData>({
     resolver: zodResolver(blogFormSchema),
     defaultValues: {
       title: '',
-      excerpt: '',
-      content: '',
-      category: 'Travel Tips',
+      category: '',
+      author: '',
       imageUrl: '',
-      featured: false,
-      readTime: '5 min read'
+      generationMode: 'ai',
+      manualContent: {
+        excerpt: '',
+        content: ''
+      }
     }
   });
 
-  // Fetch blogs
-  const { data: blogs = [], isLoading: blogsLoading, error: blogsError, refetch: refetchBlogs } = useQuery({
-    queryKey: ['/api/blogs'],
-    queryFn: async () => {
-      const response = await apiRequest('GET', '/api/blogs');
-      const data = await response.json();
-      return Array.isArray(data) ? data : [];
-    },
-    staleTime: 0, // Always refetch
-    cacheTime: 0, // Don't cache
-  });
+  // Remove blog fetching since blogs are now file-based
 
   // City generation mutation
   const generateCityPageMutation = useMutation({
@@ -137,61 +140,26 @@ export default function AdminPage() {
     }
   });
 
-  // Blog mutations
-  const createBlogMutation = useMutation({
+  // Blog generation mutation
+  const generateBlogMutation = useMutation({
     mutationFn: async (data: BlogFormData) => {
-      return await apiRequest('POST', '/api/blogs', data);
+      return await apiRequest('POST', '/api/admin/generate-blog', data);
     },
-    onSuccess: async () => {
-      // Force immediate refresh of all blog-related queries
-      await queryClient.invalidateQueries({ queryKey: ['/api/blogs'] });
-      await queryClient.invalidateQueries({ queryKey: ['/api/blogs/latest/2'] });
-      await refetchBlogs();
-      toast({ title: "Blog created successfully!" });
+    onSuccess: (data) => {
+      toast({
+        title: "Blog generated successfully!",
+        description: `Blog "${data.blogId}" has been created as a file.`
+      });
       blogForm.reset();
     },
     onError: (error: any) => {
+      let errorMessage = "Failed to generate blog";
+      if (error.message?.includes("quota") || error.message?.includes("429")) {
+        errorMessage = "API quota exceeded. Please wait a few minutes and try again.";
+      }
       toast({
-        title: "Failed to create blog",
-        description: error.message,
-        variant: "destructive"
-      });
-    }
-  });
-
-  const updateBlogMutation = useMutation({
-    mutationFn: async ({ id, data }: { id: number; data: BlogFormData }) => {
-      return await apiRequest('PUT', `/api/blogs/${id}`, data);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/blogs'] });
-      queryClient.invalidateQueries({ queryKey: ['/api/blogs/latest/2'] });
-      toast({ title: "Blog updated successfully!" });
-      setEditingBlog(null);
-      blogForm.reset();
-    },
-    onError: (error: any) => {
-      toast({
-        title: "Failed to update blog",
-        description: error.message,
-        variant: "destructive"
-      });
-    }
-  });
-
-  const deleteBlogMutation = useMutation({
-    mutationFn: async (id: number) => {
-      return await apiRequest('DELETE', `/api/blogs/${id}`);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/blogs'] });
-      queryClient.invalidateQueries({ queryKey: ['/api/blogs/latest/2'] });
-      toast({ title: "Blog deleted successfully!" });
-    },
-    onError: (error: any) => {
-      toast({
-        title: "Failed to delete blog",
-        description: error.message,
+        title: "Generation failed",
+        description: errorMessage,
         variant: "destructive"
       });
     }
@@ -202,29 +170,7 @@ export default function AdminPage() {
   };
 
   const onBlogSubmit = async (data: BlogFormData) => {
-    if (editingBlog) {
-      await updateBlogMutation.mutateAsync({ id: editingBlog.id, data });
-    } else {
-      await createBlogMutation.mutateAsync(data);
-    }
-  };
-
-  const startEditBlog = (blog: Blog) => {
-    setEditingBlog(blog);
-    blogForm.reset({
-      title: blog.title,
-      excerpt: blog.excerpt,
-      content: blog.content,
-      category: blog.category,
-      imageUrl: blog.imageUrl || '',
-      featured: blog.featured || false,
-      readTime: blog.readTime
-    });
-  };
-
-  const cancelEdit = () => {
-    setEditingBlog(null);
-    blogForm.reset();
+    await generateBlogMutation.mutateAsync(data);
   };
 
   const addGalleryImage = () => {
@@ -354,11 +300,9 @@ export default function AdminPage() {
               {/* Blog Form */}
               <Card>
                 <CardHeader>
-                  <CardTitle>
-                    {editingBlog ? 'Edit Blog Post' : 'Create New Blog Post'}
-                  </CardTitle>
+                  <CardTitle>Generate Blog Post</CardTitle>
                   <CardDescription>
-                    {editingBlog ? 'Update the blog post details' : 'Write a new travel blog post'}
+                    Create travel blog posts with AI generation or manual content
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -372,42 +316,6 @@ export default function AdminPage() {
                             <FormLabel>Title *</FormLabel>
                             <FormControl>
                               <Input placeholder="e.g., Hidden Gems of Southeast Asia" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={blogForm.control}
-                        name="excerpt"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Excerpt *</FormLabel>
-                            <FormControl>
-                              <Textarea 
-                                placeholder="Brief description of the blog post..." 
-                                rows={3}
-                                {...field} 
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={blogForm.control}
-                        name="content"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Content *</FormLabel>
-                            <FormControl>
-                              <Textarea 
-                                placeholder="Write your blog post content here..." 
-                                rows={10}
-                                {...field} 
-                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -430,12 +338,12 @@ export default function AdminPage() {
                         />
                         <FormField
                           control={blogForm.control}
-                          name="readTime"
+                          name="author"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Read Time *</FormLabel>
+                              <FormLabel>Author</FormLabel>
                               <FormControl>
-                                <Input placeholder="e.g., 5 min read" {...field} />
+                                <Input placeholder="e.g., TravelWanders Team" {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -459,135 +367,104 @@ export default function AdminPage() {
 
                       <FormField
                         control={blogForm.control}
-                        name="featured"
+                        name="generationMode"
                         render={({ field }) => (
                           <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                             <div className="space-y-0.5">
-                              <FormLabel className="text-base">Featured Post</FormLabel>
+                              <FormLabel className="text-base">Generation Mode</FormLabel>
                               <div className="text-sm text-gray-500">
-                                Mark this post as featured on the homepage
+                                Use AI to generate content or provide manual content
                               </div>
                             </div>
                             <FormControl>
                               <Switch
-                                checked={field.value}
-                                onCheckedChange={field.onChange}
+                                checked={field.value === 'manual'}
+                                onCheckedChange={(checked) => field.onChange(checked ? 'manual' : 'ai')}
                               />
                             </FormControl>
                           </FormItem>
                         )}
                       />
 
+                      {blogForm.watch('generationMode') === 'manual' && (
+                        <>
+                          <FormField
+                            control={blogForm.control}
+                            name="manualContent.excerpt"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Excerpt *</FormLabel>
+                                <FormControl>
+                                  <Textarea 
+                                    placeholder="Brief description of the blog post..." 
+                                    rows={3}
+                                    {...field} 
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+
+                          <FormField
+                            control={blogForm.control}
+                            name="manualContent.content"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Content *</FormLabel>
+                                <FormControl>
+                                  <Textarea 
+                                    placeholder="Write your blog post content here..." 
+                                    rows={10}
+                                    {...field} 
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </>
+                      )}
+
                       <div className="flex gap-4">
                         <Button 
                           type="submit" 
-                          disabled={createBlogMutation.isPending || updateBlogMutation.isPending}
-                          className="flex-1"
+                          disabled={generateBlogMutation.isPending}
+                          className="w-full"
                         >
-                          {createBlogMutation.isPending || updateBlogMutation.isPending ? (
+                          {generateBlogMutation.isPending ? (
                             <>
                               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                              {editingBlog ? 'Updating...' : 'Creating...'}
+                              Generating Blog...
                             </>
                           ) : (
                             <>
-                              <Save className="mr-2 h-4 w-4" />
-                              {editingBlog ? 'Update Blog' : 'Create Blog'}
+                              <Plus className="mr-2 h-4 w-4" />
+                              Generate Blog Post
                             </>
                           )}
                         </Button>
-                        {editingBlog && (
-                          <Button 
-                            type="button" 
-                            variant="outline" 
-                            onClick={cancelEdit}
-                          >
-                            <X className="mr-2 h-4 w-4" />
-                            Cancel
-                          </Button>
-                        )}
                       </div>
                     </form>
                   </Form>
                 </CardContent>
               </Card>
 
-              {/* Blog List */}
+              {/* Info Card */}
               <Card>
                 <CardHeader>
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <CardTitle>Published Blog Posts</CardTitle>
-                      <CardDescription>
-                        Manage your existing blog posts
-                      </CardDescription>
-                    </div>
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      onClick={() => refetchBlogs()}
-                      disabled={blogsLoading}
-                    >
-                      {blogsLoading ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      ) : (
-                        'Refresh'
-                      )}
-                    </Button>
-                  </div>
+                  <CardTitle>File-Based Blog System</CardTitle>
+                  <CardDescription>
+                    Blogs are now generated as individual TSX files in the src/blogs/ directory
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  {blogsLoading ? (
-                    <div className="flex items-center justify-center p-8">
-                      <Loader2 className="h-8 w-8 animate-spin" />
-                    </div>
-                  ) : blogsError ? (
-                    <div className="text-center p-8 text-gray-500">
-                      Failed to load blogs. Please try again.
-                    </div>
-                  ) : !Array.isArray(blogs) || blogs.length === 0 ? (
-                    <div className="text-center p-8 text-gray-500">
-                      No blog posts yet. Create your first one above!
-                    </div>
-                  ) : (
-                    <div className="space-y-4">
-                      {blogs.map((blog: Blog) => (
-                        <div key={blog.id} className="flex items-center justify-between p-4 border rounded-lg">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <h3 className="font-semibold">{blog.title}</h3>
-                              {blog.featured && (
-                                <Badge className="bg-orange-500">Featured</Badge>
-                              )}
-                            </div>
-                            <p className="text-sm text-gray-600 mb-2">{blog.excerpt}</p>
-                            <div className="flex items-center gap-4 text-xs text-gray-500">
-                              <Badge variant="outline">{blog.category}</Badge>
-                              <span>{blog.readTime}</span>
-                              <span>{new Date(blog.createdAt!).toLocaleDateString()}</span>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => startEditBlog(blog)}
-                            >
-                              <Edit className="h-4 w-4" />
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => deleteBlogMutation.mutate(blog.id)}
-                              disabled={deleteBlogMutation.isPending}
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
+                  <div className="text-sm text-gray-600 space-y-2">
+                    <p>✅ Generated blogs are automatically added to the blogs index</p>
+                    <p>✅ New blogs appear immediately on the website</p>
+                    <p>✅ SEO optimized with proper metadata and structure</p>
+                    <p>✅ Fully responsive design matching the website theme</p>
+                  </div>
                 </CardContent>
               </Card>
             </div>

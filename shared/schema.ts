@@ -7,6 +7,7 @@ export interface User {
   password: string;
 }
 
+// File-based blog interface for static blog files
 export interface Blog {
   id: string;
   title: string;
@@ -16,8 +17,8 @@ export interface Blog {
   imageUrl?: string;
   featured: boolean;
   readTime: string;
-  createdAt: Date;
-  updatedAt: Date;
+  date: string;
+  author?: string;
 }
 
 // Insert schemas for validation
@@ -34,6 +35,7 @@ export const insertBlogSchema = z.object({
   imageUrl: z.string().optional(),
   featured: z.boolean().default(false),
   readTime: z.string().min(1, "Read time is required"),
+  author: z.string().optional(),
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;

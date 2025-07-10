@@ -2,36 +2,15 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, Clock, ArrowRight, Loader2 } from 'lucide-react';
-import { useQuery } from '@tanstack/react-query';
-import { apiRequest } from '@/lib/queryClient';
-import type { Blog } from '@shared/schema';
+import { Calendar, Clock, ArrowRight } from 'lucide-react';
+import { getAllBlogs, getFeaturedBlogs } from '../blogs';
 
 export default function BlogsPage() {
-  // Fetch blogs from database
-  const { data: blogPosts = [], isLoading, error } = useQuery({
-    queryKey: ['/api/blogs'],
-    queryFn: async () => {
-      console.log('Fetching blogs from API...');
-      const response = await apiRequest('GET', '/api/blogs');
-      const data = await response.json();
-      console.log('API Response:', data);
-      console.log('blogPosts length:', data?.length || 0);
-      return data as Blog[];
-    },
-    staleTime: 30000, // Cache for 30 seconds
-    cacheTime: 300000, // Keep in cache for 5 minutes
-  });
+  // Get blogs from file system
+  const blogPosts = getAllBlogs();
+  const featuredBlogs = getFeaturedBlogs();
 
   const categories = ["All", "Travel Tips", "Budget Travel", "Digital Nomad", "Solo Travel", "Sustainable Travel", "Food & Culture"];
-
-  // Debug logging
-  console.log('Blog Page State:', { 
-    isLoading, 
-    error: error?.message,
-    blogPostsLength: blogPosts?.length,
-    blogPosts: blogPosts?.slice(0, 2) // Log first 2 for debugging
-  });
 
   return (
     <div className="min-h-screen bg-white">
@@ -55,32 +34,15 @@ export default function BlogsPage() {
       <section className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           
-          {/* Loading State */}
-          {isLoading && (
-            <div className="flex items-center justify-center py-12">
-              <Loader2 className="h-8 w-8 animate-spin text-green-600" />
-              <span className="ml-2 text-gray-600">Loading blogs...</span>
-            </div>
-          )}
-
-          {/* Error State */}
-          {error && (
-            <div className="text-center py-12">
-              <p className="text-gray-600">Failed to load blog posts. Please try again later.</p>
-            </div>
-          )}
-
           {/* Empty State */}
-          {!isLoading && !error && blogPosts.length === 0 && (
+          {blogPosts.length === 0 && (
             <div className="text-center py-12">
               <p className="text-gray-600">No blog posts available. Check back soon for travel stories and tips!</p>
             </div>
           )}
 
-
-
           {/* Blog Content - Only show if we have blogs */}
-          {!isLoading && !error && blogPosts.length > 0 && (
+          {blogPosts.length > 0 && (
             <>
               {/* Category Filter */}
               <div className="flex flex-wrap justify-center gap-2 mb-12">
@@ -96,7 +58,7 @@ export default function BlogsPage() {
               </div>
 
           {/* Featured Post */}
-          {blogPosts.filter(post => post.featured).map((post) => (
+          {featuredBlogs.map((post) => (
             <a href={`/blog/${post.id}`} key={post.id} className="block">
               <Card className="mb-12 overflow-hidden border-gray-200 hover:shadow-lg transition-all duration-300 cursor-pointer">
                 <div className="grid md:grid-cols-2 gap-0">
@@ -113,7 +75,7 @@ export default function BlogsPage() {
                       </Badge>
                       <div className="flex items-center text-gray-500 text-sm">
                         <Calendar className="h-4 w-4 mr-1" />
-                        {new Date(post.createdAt || post.date).toLocaleDateString()}
+                        {new Date(post.date).toLocaleDateString()}
                       </div>
                       <div className="flex items-center text-gray-500 text-sm">
                         <Clock className="h-4 w-4 mr-1" />
@@ -163,7 +125,7 @@ export default function BlogsPage() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center text-gray-500 text-sm">
                         <Calendar className="h-3 w-3 mr-1" />
-                        {new Date(post.createdAt || post.date).toLocaleDateString()}
+                        {new Date(post.date).toLocaleDateString()}
                       </div>
                       <span className="text-green-600 hover:text-green-700 text-sm font-medium transition-colors">
                         Read More

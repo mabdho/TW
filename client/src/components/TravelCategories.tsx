@@ -1,22 +1,11 @@
-import { Calendar, Clock, ArrowRight, Loader2 } from 'lucide-react';
+import { Clock, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useQuery } from '@tanstack/react-query';
-import { apiRequest } from '@/lib/queryClient';
-import type { Blog } from '@shared/schema';
+import { getLatestBlogs } from '../blogs';
 
 export const TravelCategories = () => {
-  // Fetch latest 2 blogs from database
-  const { data: latestBlogs = [], isLoading, error } = useQuery({
-    queryKey: ['/api/blogs/latest/2'],
-    queryFn: async () => {
-      const response = await apiRequest('GET', '/api/blogs/latest/2');
-      const data = await response.json();
-      return data as Blog[];
-    },
-    staleTime: 30000, // Cache for 30 seconds
-    cacheTime: 300000, // Keep in cache for 5 minutes
-  });
+  // Get latest 2 blogs from file system
+  const latestBlogs = getLatestBlogs(2);
 
   return (
     <section id="experiences" className="py-16 bg-gray-50">
@@ -31,23 +20,8 @@ export const TravelCategories = () => {
           </p>
         </div>
 
-        {/* Loading State */}
-        {isLoading && (
-          <div className="flex items-center justify-center py-12">
-            <Loader2 className="h-8 w-8 animate-spin text-green-600" />
-            <span className="ml-2 text-gray-600">Loading latest stories...</span>
-          </div>
-        )}
-
-        {/* Error State */}
-        {error && (
-          <div className="text-center py-12">
-            <p className="text-gray-600">Failed to load latest stories. Please try again later.</p>
-          </div>
-        )}
-
         {/* Empty State */}
-        {!isLoading && !error && latestBlogs.length === 0 && (
+        {latestBlogs.length === 0 && (
           <div className="text-center py-12">
             <p className="text-gray-600 mb-4">No blog posts available yet.</p>
             <a 
@@ -61,7 +35,7 @@ export const TravelCategories = () => {
         )}
 
         {/* Latest Blogs Grid - Only show if we have blogs */}
-        {!isLoading && !error && latestBlogs.length > 0 && (
+        {latestBlogs.length > 0 && (
           <>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {latestBlogs.map((blog) => (
@@ -87,6 +61,9 @@ export const TravelCategories = () => {
                         <div className="flex items-center text-gray-500 text-sm">
                           <Clock className="h-4 w-4 mr-1" />
                           {blog.readTime}
+                        </div>
+                        <div className="flex items-center text-gray-500 text-sm">
+                          📅 {new Date(blog.date).toLocaleDateString()}
                         </div>
                       </div>
                       

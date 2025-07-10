@@ -1,44 +1,17 @@
 import { useParams } from 'wouter';
-import { useQuery } from '@tanstack/react-query';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, Clock, ArrowLeft, Loader2 } from 'lucide-react';
-import { apiRequest } from '@/lib/queryClient';
-import type { Blog } from '@shared/schema';
+import { Calendar, Clock, ArrowLeft } from 'lucide-react';
+import { getBlogById } from '../blogs';
 
 export default function BlogDetailPage() {
   const { id } = useParams();
   
-  // Fetch single blog post
-  const { data: blog, isLoading, error } = useQuery({
-    queryKey: ['/api/blogs', id],
-    queryFn: async () => {
-      const response = await apiRequest('GET', `/api/blogs/${id}`);
-      const data = await response.json();
-      return data as Blog;
-    },
-    enabled: !!id,
-  });
+  // Get single blog post from file system
+  const blog = getBlogById(id || '');
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-white">
-        <Navigation />
-        <div className="pt-24 pb-16">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-center py-12">
-              <Loader2 className="h-8 w-8 animate-spin text-green-600" />
-              <span className="ml-2 text-gray-600">Loading blog post...</span>
-            </div>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
-  if (error || !blog) {
+  if (!blog) {
     return (
       <div className="min-h-screen bg-white">
         <Navigation />
@@ -92,7 +65,7 @@ export default function BlogDetailPage() {
               )}
               <div className="flex items-center text-gray-500 text-sm">
                 <Calendar className="h-4 w-4 mr-1" />
-                {new Date(blog.createdAt).toLocaleDateString('en-US', {
+                {new Date(blog.date).toLocaleDateString('en-US', {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric'
