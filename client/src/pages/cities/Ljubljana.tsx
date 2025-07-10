@@ -167,7 +167,7 @@ export const Ljubljana: React.FC = () => {
         gettingAround: "Ljubljana is incredibly walkable, with a large pedestrian-only city center. For longer distances, the public bus system is efficient. You'll need an 'Urbana' card, which can be purchased and topped up at kiosks. The 'BicikeLJ' bike-sharing system is cheap and convenient for short rides. For a free, eco-friendly lift within the pedestrian zone, flag down one of the 'Kavalir' electric vehicles.",
         whereToStay: "For first-time visitors, staying in the Old Town or right near Prešeren Square is ideal for atmosphere and convenience. For a quieter stay, look for hotels near Tivoli Park. For budget travelers, the area around the train station has several good hostels. Recommended hotels include Grand Hotel Union (luxury), Hotel Cubo (boutique), and City Hotel Ljubljana (mid-range).",
         bestTimeToVisit: "Late spring (May-June) and early autumn (September) are perfect, offering pleasant weather and fewer crowds than peak summer. Summer (July-August) is warm and vibrant with many festivals, but also the busiest. Winter brings a magical atmosphere with charming Christmas markets in December, though it can be quite cold.",
-        suggestedItinerary: "[object Object]"
+        suggestedItinerary: "Day 1: Explore the historic city center and main attractions\nDay 2: Visit museums and cultural sites\nDay 3: Experience local markets and neighborhoods\nDay 4: Day trips to nearby attractions or relaxation"
       }}
       faqs={[{
           question: "Is Ljubljana expensive?",

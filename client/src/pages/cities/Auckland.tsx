@@ -167,7 +167,7 @@ export const Auckland: React.FC = () => {
         gettingAround: "Auckland's CBD is very walkable. For wider travel, the AT HOP card is essential for discounted fares on buses, trains, and some ferries. The Link bus services (City, Inner, Outer) are frequent and cover key areas. Ferries from the Downtown Ferry Terminal are perfect for visiting places like Devonport and Waiheke Island. Ride-sharing services like Uber and Ola are also widely available.",
         whereToStay: "For first-time visitors, the CBD or Viaduct Harbour offers ultimate convenience and proximity to attractions. Ponsonby is ideal for those seeking a trendy, boutique vibe with excellent dining. Parnell provides a charming, more upscale village atmosphere. For budget travellers, hostels are concentrated around the CBD and Queen Street. Recommended hotels include The Hotel Britomart (luxury), Hotel DeBrett (boutique), and M Social (modern).",
         bestTimeToVisit: "The best time to visit Auckland is during the summer months (December to February) for warm, sunny weather perfect for beaches and island hopping. However, this is also peak season. The shoulder seasons of Autumn (March to May) and Spring (September to November) offer pleasant weather, fewer crowds, and often lower prices. Winter (June to August) is cooler and wetter, but still mild compared to many places.",
-        suggestedItinerary: "[object Object]"
+        suggestedItinerary: "Day 1: Explore the historic city center and main attractions\nDay 2: Visit museums and cultural sites\nDay 3: Experience local markets and neighborhoods\nDay 4: Day trips to nearby attractions or relaxation"
       }}
       faqs={[{
           question: "Is Auckland expensive?",

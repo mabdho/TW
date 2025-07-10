@@ -167,7 +167,7 @@ export const Indianapolis: React.FC = () => {
         gettingAround: "Downtown Indianapolis is very walkable, with many key attractions clustered together. For longer distances, the IndyGo bus system provides extensive coverage. Ride-sharing services like Uber and Lyft are readily available. The Indiana Pacers Bikeshare program offers a fun and easy way to explore the city center and cultural trails, with numerous stations available.",
         whereToStay: "For first-time visitors, Downtown is the most convenient area, putting you within walking distance of Monument Circle, White River State Park, and Lucas Oil Stadium. For a trendier vibe with great restaurants and boutiques, stay near the Mass Ave Arts District. Broad Ripple Village, further north, is known for its vibrant nightlife and more residential feel. Hotels range from luxury options like the Conrad Indianapolis to reliable mid-range chains and budget-friendly choices.",
         bestTimeToVisit: "The best times to visit Indianapolis are spring (April-May) and fall (September-October). The weather is pleasant, perfect for walking the Canal and exploring the parks. May is an exciting but busy month due to the Indy 500 festivities. Summer (June-August) is warm and humid but hosts many outdoor concerts and events. Winter (November-March) is cold and can be snowy, but the holiday 'Circle of Lights' is a magical sight.",
-        suggestedItinerary: "[object Object]"
+        suggestedItinerary: "Day 1: Explore the historic city center and main attractions\nDay 2: Visit museums and cultural sites\nDay 3: Experience local markets and neighborhoods\nDay 4: Day trips to nearby attractions or relaxation"
       }}
       faqs={[{
           question: "Is Indianapolis expensive?",

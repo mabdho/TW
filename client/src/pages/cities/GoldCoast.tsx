@@ -167,7 +167,7 @@ export const GoldCoast: React.FC = () => {
         gettingAround: "The Gold Coast is well-connected. The G:link tram is the easiest way to travel along the coast from Broadbeach to Helensvale. The TransLink bus network covers the rest of the city, including theme parks and the airport. Ride-sharing services like Uber and Didi are widely available. Renting a car is the best option for exploring the hinterland national parks like Springbrook and Lamington.",
         whereToStay: "Surfers Paradise is the vibrant heart, ideal for nightlife, action, and first-time visitors (e.g., Peppers Soul, QT Gold Coast). Broadbeach offers a more sophisticated, food-focused vibe with easy access to the casino and shopping (e.g., The Star Grand, Meriton Suites). Burleigh Heads provides a trendy, laid-back atmosphere with a boutique feel (e.g., The Burleigh Mediterranean Resort). Coolangatta is perfect for a classic, relaxed family beach holiday (e.g., The Pink Hotel, Mantra Coolangatta Beach).",
         bestTimeToVisit: "The Gold Coast has a pleasant subtropical climate year-round. The best times to visit are autumn (April-May) and spring (September-October) when the weather is warm and sunny with lower humidity and fewer crowds. Summer (December-February) is hot, humid, and the peak tourist season. Winter (June-August) is mild and dry with sunny days, making it ideal for outdoor activities and whale watching.",
-        suggestedItinerary: "[object Object]"
+        suggestedItinerary: "Day 1: Explore the historic city center and main attractions\nDay 2: Visit museums and cultural sites\nDay 3: Experience local markets and neighborhoods\nDay 4: Day trips to nearby attractions or relaxation"
       }}
       faqs={[{
           question: "Is Gold Coast expensive?",

@@ -167,7 +167,7 @@ export const Cali: React.FC = () => {
         gettingAround: "Taxis are plentiful and affordable; always ask them to use the meter ('el taxímetro'). Ride-sharing apps like Uber, Didi, and Cabify are widely used and often preferred for safety and fixed pricing. For public transport, the MIO (Masivo Integrado de Occidente) is a bus rapid transit system with dedicated lanes, which can be efficient for longer distances once you understand the routes.",
         whereToStay: "For a bohemian and historic vibe, stay in San Antonio, which is full of boutique hotels and hostels. For upscale dining and nightlife, choose Granada or the adjacent El Peñón neighborhood. These areas are considered the safest and most convenient for tourists. Recommended hotels include Hotel Boutique San Antonio, El Peñón Hotel, and the InterContinental Cali.",
         bestTimeToVisit: "Cali has a tropical savanna climate, meaning it's warm to hot year-round, with average temperatures around 25°C (77°F). The driest seasons are December-March and July-August, making them ideal for exploring. The absolute best time to visit is in December for the 'Feria de Cali' (Cali Fair), a week-long city-wide festival of salsa, parades, and concerts from December 25th to 30th.",
-        suggestedItinerary: "[object Object]"
+        suggestedItinerary: "Day 1: Explore the historic city center and main attractions\nDay 2: Visit museums and cultural sites\nDay 3: Experience local markets and neighborhoods\nDay 4: Day trips to nearby attractions or relaxation"
       }}
       faqs={[{
           question: "Is Cali expensive?",

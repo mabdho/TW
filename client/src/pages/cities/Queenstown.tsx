@@ -167,7 +167,7 @@ export const Queenstown: React.FC = () => {
         gettingAround: "Central Queenstown is compact and easily walkable. For destinations further afield, the Orbus public bus network is efficient and affordable. Water taxis offer a scenic way to cross Lake Wakatipu. For maximum flexibility, especially for visiting places like Glenorchy or wineries, renting a car is highly recommended. Ride-sharing services like Uber are also available.",
         whereToStay: "The Town Centre is ideal for those who want to be in the heart of the action, with easy access to restaurants, bars, and tour departures. Fernhill offers great lake views and is slightly quieter but still close. Arthurs Point is great for spa-lovers and those wanting a retreat feel. Recommendations: QT Queenstown (Luxury), Mgallery Sofitel Queenstown (Mid-Range), Nomads Queenstown (Budget/Hostel).",
         bestTimeToVisit: "Queenstown is a year-round destination. Summer (December-February) is warm and perfect for hiking, biking, and water sports, but it's also the busiest season. Winter (June-August) is a skier's paradise with several world-class ski fields. Autumn (March-May) offers stable weather, fewer crowds, and stunning fall colours, especially in Arrowtown. Spring (September-November) is great for adventure sports and seeing the mountains still dusted with snow.",
-        suggestedItinerary: "[object Object]"
+        suggestedItinerary: "Day 1: Explore the historic city center and main attractions\nDay 2: Visit museums and cultural sites\nDay 3: Experience local markets and neighborhoods\nDay 4: Day trips to nearby attractions or relaxation"
       }}
       faqs={[{
           question: "Is Queenstown expensive?",

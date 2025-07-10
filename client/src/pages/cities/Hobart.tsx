@@ -167,7 +167,7 @@ export const Hobart: React.FC = () => {
         gettingAround: "Hobart's CBD, waterfront, and Salamanca areas are very walkable. For destinations like MONA, ferries are a scenic option. The Metro bus network covers the greater Hobart area. To explore further afield, such as Port Arthur or Freycinet National Park, renting a car is highly recommended and provides the most flexibility.",
         whereToStay: "For first-time visitors, the Waterfront and Salamanca areas are ideal, putting you in the heart of the action with easy access to markets, ferries, and restaurants. Battery Point offers charming, historic accommodation. North Hobart is great for a more local, bohemian vibe with excellent cafes and an independent cinema. Top hotels include The Henry Jones Art Hotel (Luxury), MACq 01 Hotel (Story-telling luxury), and Salamanca Terraces (Apartment-style).",
         bestTimeToVisit: "Summer (December-February) is the most popular time with warm weather and numerous festivals, including the Taste of Summer and the finish of the Sydney to Hobart Yacht Race. Autumn (March-May) offers mild weather, beautiful fall colours, and fewer crowds. Winter (June-August) is cool and cosy, perfect for log fires, whisky tasting, and the Dark Mofo festival. Spring (September-November) sees the gardens bloom and is a great time for hiking.",
-        suggestedItinerary: "[object Object]"
+        suggestedItinerary: "Day 1: Explore the historic city center and main attractions\nDay 2: Visit museums and cultural sites\nDay 3: Experience local markets and neighborhoods\nDay 4: Day trips to nearby attractions or relaxation"
       }}
       faqs={[{
           question: "Is Hobart expensive?",

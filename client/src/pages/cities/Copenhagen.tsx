@@ -167,7 +167,7 @@ export const Copenhagen: React.FC = () => {
         gettingAround: "Copenhagen is incredibly bike-friendly, with dedicated bike lanes on almost every street. Renting a bike is the most authentic and efficient way to explore. The public transport system is also excellent, consisting of the Metro, S-trains, and buses, all integrated into a single ticket system. The Copenhagen Card includes unlimited public transport. For a scenic route, the harbor buses (water buses) are a great option.",
         whereToStay: "Indre By (City Center) is perfect for first-time visitors, with easy access to major sights. Vesterbro, once a gritty neighborhood, is now a hip area with trendy bars, restaurants, and boutiques. Nørrebro is a vibrant, multicultural district known for its diverse food scene and independent shops. Christianshavn offers picturesque canals and a charming, village-like atmosphere.",
         bestTimeToVisit: "The best time to visit Copenhagen is from May to September when the weather is warm, the days are long, and the city is alive with outdoor cafes and festivals. Spring (April-May) and autumn (September-October) are also lovely, with fewer crowds and pleasant weather. Winter (November-March) is cold and dark, but the city becomes incredibly cozy ('hyggelig') with Christmas markets and candlelit cafes.",
-        suggestedItinerary: "[object Object]"
+        suggestedItinerary: "Day 1: Explore the historic city center and main attractions\nDay 2: Visit museums and cultural sites\nDay 3: Experience local markets and neighborhoods\nDay 4: Day trips to nearby attractions or relaxation"
       }}
       faqs={[{
           question: "Is Copenhagen expensive?",

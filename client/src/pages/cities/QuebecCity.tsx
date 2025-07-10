@@ -167,7 +167,7 @@ export const QuebecCity: React.FC = () => {
         gettingAround: "Old Quebec is best explored on foot. The Upper and Lower Towns are connected by the Funicular and several staircases. For longer distances, the RTC bus network is efficient and reliable. Taxis and ride-sharing services like Uber are also widely available. To visit Île d'Orléans or Montmorency Falls, renting a car is a convenient option, though city buses also serve the falls.",
         whereToStay: "For the ultimate historic experience, stay within the walls of Old Quebec (Vieux-Québec), but be prepared for higher prices. Fairmont Le Château Frontenac is the luxury icon, while Auberge Saint-Antoine is a top-tier boutique hotel. The Saint-Roch and Saint-Jean-Baptiste neighborhoods offer a more local, bohemian vibe with trendy restaurants, shops, and more affordable hotels and Airbnbs.",
         bestTimeToVisit: "Quebec City is a year-round destination. Summer (June-August) is warm and bustling with festivals, but also has the largest crowds. Fall (September-October) is spectacular with stunning foliage and comfortable temperatures. Winter (December-February) is magical, with snow-covered streets, the German Christmas Market, and the famous Quebec Winter Carnival, but it is very cold. Spring (April-May) is the quietest season, offering lower prices as the city thaws.",
-        suggestedItinerary: "[object Object]"
+        suggestedItinerary: "Day 1: Explore the historic city center and main attractions\nDay 2: Visit museums and cultural sites\nDay 3: Experience local markets and neighborhoods\nDay 4: Day trips to nearby attractions or relaxation"
       }}
       faqs={[{
           question: "Is Quebec City expensive?",
