@@ -33,7 +33,7 @@ export const Hero = () => {
           </p>
 
           {/* Clean search bar */}
-          <div className="bg-white rounded-2xl p-3 shadow-lg border border-gray-200 max-w-3xl mx-auto mb-16">
+          <div id="search-section" className="bg-white rounded-2xl p-3 shadow-lg border border-gray-200 max-w-3xl mx-auto mb-16">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="relative">
                 <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />

@@ -10,6 +10,16 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (July 2025)
 
+### Site Rebranding and Functional Navigation - COMPLETED ✅
+- ✅ Site renamed from "WanderGuide" to "TravelWanders" throughout application
+- ✅ Streamlined header navigation to include only Home, Destinations, and Search
+- ✅ Made navigation fully functional with smooth scrolling behavior
+- ✅ Added scroll-to-section functionality for Destinations and Search navigation
+- ✅ Updated footer copyright to reflect new branding and 2025 date
+- ✅ Implemented responsive mobile navigation with functional smooth scrolling
+- ✅ Added proper IDs to sections for navigation targeting (destinations, search-section)
+- ✅ Maintained Admin link access in simplified navigation structure
+
 ### AI-Powered City Page Generator Implementation - COMPLETED ✅
 - ✅ Built comprehensive admin form system at `/admin` for city data input
 - ✅ Integrated Google Gemini API (gemini-2.0-flash-exp with fallback models) for AI-powered content generation

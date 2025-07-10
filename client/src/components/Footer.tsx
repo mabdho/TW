@@ -11,10 +11,10 @@ export const Footer = () => {
             {/* Brand Section */}
             <div className="sm:col-span-2 lg:col-span-2">
               <div className="flex items-center gap-2 mb-4">
-                <Globe className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
-                <span className="text-lg sm:text-xl font-bold text-foreground">WanderGuide</span>
+                <Globe className="h-6 w-6 sm:h-8 sm:w-8 text-green-600" />
+                <span className="text-lg sm:text-xl font-bold text-gray-900">TravelWanders</span>
               </div>
-              <p className="text-sm sm:text-base text-muted-foreground mb-6 max-w-md">
+              <p className="text-sm sm:text-base text-gray-600 mb-6 max-w-md">
                 Your trusted companion for discovering amazing destinations around the world. 
                 We curate the best travel experiences to make your journey unforgettable.
               </p>
@@ -103,8 +103,8 @@ export const Footer = () => {
         {/* Bottom Footer */}
         <div className="border-t border-border py-6">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-muted-foreground text-xs sm:text-sm text-center sm:text-left">
-              © 2024 WanderGuide. All rights reserved. Made with ❤️ for travelers worldwide.
+            <p className="text-gray-500 text-xs sm:text-sm text-center sm:text-left">
+              © 2025 TravelWanders. All rights reserved. Made with ❤️ for travelers worldwide.
             </p>
             <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm">
               <a href="#privacy" className="text-muted-foreground hover:text-primary transition-colors">

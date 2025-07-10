@@ -2,6 +2,13 @@ import { useState } from 'react';
 import { Menu, X, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -12,36 +19,27 @@ export const Navigation = () => {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <Globe className="h-8 w-8 text-green-600" />
-            <span className="text-xl font-bold text-gray-900">WanderGuide</span>
+            <a href="/" className="text-xl font-bold text-gray-900 hover:text-green-600 transition-colors">TravelWanders</a>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#destinations" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
+            <a href="/" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
+              Home
+            </a>
+            <button onClick={() => scrollToSection('destinations')} className="text-gray-700 hover:text-green-600 transition-colors font-medium">
               Destinations
-            </a>
-            <a href="#experiences" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
-              Things to Do
-            </a>
-            <a href="#about" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
-              Travel Stories
-            </a>
-            <a href="#contact" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
-              Help
-            </a>
-            <a href="/admin" className="text-orange-600 hover:text-orange-700 transition-colors font-medium">
-              Admin
-            </a>
+            </button>
+            <button onClick={() => scrollToSection('search-section')} className="text-gray-700 hover:text-green-600 transition-colors font-medium">
+              Search
+            </button>
           </div>
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost" className="text-gray-700 hover:text-green-600 font-medium">
-              Sign In
-            </Button>
-            <Button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 font-medium">
-              Join
-            </Button>
+            <a href="/admin" className="text-orange-600 hover:text-orange-700 transition-colors font-medium text-sm">
+              Admin
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -63,48 +61,39 @@ export const Navigation = () => {
         <div className="md:hidden bg-white border-b border-gray-200">
           <div className="px-4 pt-2 pb-3 space-y-1">
             <a 
-              href="#destinations" 
+              href="/" 
               className="block px-3 py-3 text-base text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
               onClick={() => setIsMenuOpen(false)}
+            >
+              Home
+            </a>
+            <button 
+              onClick={() => {
+                scrollToSection('destinations');
+                setIsMenuOpen(false);
+              }}
+              className="block w-full text-left px-3 py-3 text-base text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
             >
               Destinations
-            </a>
-            <a 
-              href="#experiences" 
-              className="block px-3 py-3 text-base text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
-              onClick={() => setIsMenuOpen(false)}
+            </button>
+            <button 
+              onClick={() => {
+                scrollToSection('search-section');
+                setIsMenuOpen(false);
+              }}
+              className="block w-full text-left px-3 py-3 text-base text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
             >
-              Things to Do
-            </a>
-            <a 
-              href="#about" 
-              className="block px-3 py-3 text-base text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Travel Stories
-            </a>
-            <a 
-              href="#contact" 
-              className="block px-3 py-3 text-base text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Help
-            </a>
-            <a 
-              href="/admin" 
-              className="block px-3 py-3 text-base text-orange-600 hover:text-orange-700 hover:bg-orange-50 rounded-lg transition-colors font-medium"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Admin
-            </a>
+              Search
+            </button>
             <div className="pt-4 pb-2 border-t border-gray-200 mt-4">
-              <div className="flex flex-col gap-3 px-3">
-                <Button variant="ghost" className="w-full justify-start h-12 text-base text-gray-700">
-                  Sign In
-                </Button>
-                <Button className="w-full h-12 text-base bg-green-600 hover:bg-green-700 text-white">
-                  Join
-                </Button>
+              <div className="px-3">
+                <a 
+                  href="/admin" 
+                  className="block py-3 text-base text-orange-600 hover:text-orange-700 transition-colors font-medium"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Admin
+                </a>
               </div>
             </div>
           </div>
