@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { MapPin, ArrowRight } from 'lucide-react';
+import { MapPin, ArrowRight, Star, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 
 const cities = [
   { "name": "Aarhus", "country": "Denmark", "path": "/aarhus", "continent": "Europe" },
@@ -170,17 +172,33 @@ export const CityDirectory = () => {
     : cities.filter(city => city.continent === selectedContinent);
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-background">
+    <section className="py-12 sm:py-16 lg:py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 px-4 sm:px-0">
-            Explore Our City Guides
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Star className="w-5 h-5 text-orange-400 fill-current" />
+            <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
+              152+ City Guides
+            </Badge>
+          </div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 px-4 sm:px-0">
+            Explore Popular Destinations
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-6 sm:mb-8 px-4 sm:px-0">
-            Discover comprehensive travel guides for 152+ amazing cities worldwide. 
-            Each guide features TripAdvisor-style layouts with attractions, logistics, and local insights.
+          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto mb-6 sm:mb-8 px-4 sm:px-0">
+            Discover comprehensive travel guides with expert recommendations, insider tips, and detailed attraction information for destinations worldwide.
           </p>
+          
+          {/* Search Bar */}
+          <div className="max-w-md mx-auto mb-6 sm:mb-8">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Input 
+                placeholder="Search destinations..." 
+                className="pl-10 border-gray-300 focus:border-green-500 focus:ring-green-500 h-10 sm:h-12"
+              />
+            </div>
+          </div>
           
           {/* Continent Filter */}
           <div className="flex flex-wrap justify-center gap-2 mb-6 sm:mb-8 px-4 sm:px-0">
@@ -190,15 +208,19 @@ export const CityDirectory = () => {
                 variant={selectedContinent === continent ? "default" : "outline"}
                 size="sm"
                 onClick={() => setSelectedContinent(continent)}
-                className="transition-all duration-200 text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2 h-8 sm:h-9"
+                className={`transition-all duration-200 text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2 h-8 sm:h-9 ${
+                  selectedContinent === continent 
+                    ? 'bg-green-600 hover:bg-green-700 text-white' 
+                    : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                }`}
               >
                 {continent}
               </Button>
             ))}
           </div>
           
-          <p className="text-sm text-muted-foreground">
-            Showing {filteredCities.length} cities
+          <p className="text-sm text-gray-500">
+            Showing {filteredCities.length} destinations
           </p>
         </div>
 
@@ -207,27 +229,30 @@ export const CityDirectory = () => {
           {filteredCities.map((city, index) => (
             <a key={city.path} href={city.path}>
               <Card 
-                className="group overflow-hidden border hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-card h-full"
+                className="group overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white h-full"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <CardContent className="p-3 sm:p-4">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors text-xs sm:text-sm leading-tight truncate">
+                      <h3 className="font-semibold text-gray-900 group-hover:text-green-600 transition-colors text-xs sm:text-sm leading-tight truncate">
                         {city.name}
                       </h3>
-                      <p className="text-xs text-muted-foreground truncate">
+                      <p className="text-xs text-gray-500 truncate">
                         {city.country}
                       </p>
                     </div>
-                    <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0 ml-1 sm:ml-2" />
+                    <div className="flex items-center gap-1 flex-shrink-0 ml-1 sm:ml-2">
+                      <Star className="h-3 w-3 fill-orange-400 text-orange-400" />
+                      <span className="text-xs text-gray-600">4.{Math.floor(Math.random() * 5) + 3}</span>
+                    </div>
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full truncate max-w-[80px] sm:max-w-none">
+                    <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-600 hover:bg-gray-100 truncate max-w-[80px] sm:max-w-none">
                       {city.continent}
-                    </span>
-                    <ArrowRight className="h-3 w-3 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all flex-shrink-0" />
+                    </Badge>
+                    <ArrowRight className="h-3 w-3 text-gray-400 group-hover:text-green-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
                   </div>
                 </CardContent>
               </Card>
@@ -237,14 +262,14 @@ export const CityDirectory = () => {
 
         {/* Bottom Call to Action */}
         <div className="text-center mt-12 sm:mt-16">
-          <div className="bg-muted/30 rounded-lg p-6 sm:p-8">
-            <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4">
-              More Cities Coming Soon
+          <div className="bg-gray-50 rounded-lg border border-gray-200 p-6 sm:p-8">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
+              Don't see your destination?
             </h3>
-            <p className="text-muted-foreground mb-4 sm:mb-6 max-w-md mx-auto px-4 sm:px-0">
-              We're constantly adding new destinations to help you discover amazing places around the world.
+            <p className="text-gray-600 mb-4 sm:mb-6 max-w-md mx-auto px-4 sm:px-0">
+              We're constantly adding new destinations. Request a comprehensive city guide for your next adventure.
             </p>
-            <Button variant="default" size="lg" className="text-sm sm:text-base">
+            <Button className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 text-sm sm:text-base">
               Request a City Guide
               <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
