@@ -29,17 +29,7 @@ root.render(
   </QueryClientProvider>
 );
 
-// Remove the initial loader once React has rendered
-setTimeout(() => {
-  const loader = document.getElementById('initial-loader');
-  if (loader) {
-    loader.style.opacity = '0';
-    loader.style.transition = 'opacity 0.3s ease-out';
-    setTimeout(() => {
-      loader.remove();
-    }, 300);
-  }
-}, 100);
+// No loader removal needed since there's no loader
 
 // Schedule non-critical performance optimizations
 scheduleNonCriticalWork(() => {
