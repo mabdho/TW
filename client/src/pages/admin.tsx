@@ -11,6 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Loader2, Plus, Trash2, Download, FileText } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { Toaster } from '@/components/ui/toaster';
 import { apiRequest } from '@/lib/queryClient';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
@@ -345,6 +346,33 @@ export default function AdminPage() {
                       <strong>Error:</strong> {generateCityPageMutation.error.message || "Failed to generate city page"}
                     </div>
                   )}
+
+                  {/* Debug button for testing */}
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    className="w-full mt-2" 
+                    onClick={() => {
+                      console.log('Debug: Form state:', form.getValues());
+                      console.log('Debug: Form errors:', form.formState.errors);
+                      console.log('Debug: Form valid:', form.formState.isValid);
+                      const testData = {
+                        city: "TestCity",
+                        country: "TestCountry",
+                        continent: "",
+                        heroImageUrl: "",
+                        galleryImages: [
+                          { url: "", alt: "Test alt", caption: "Test caption" }
+                        ],
+                        msv: "",
+                        kd: ""
+                      };
+                      console.log('Debug: Attempting manual submission with:', testData);
+                      generateCityPageMutation.mutate(testData);
+                    }}
+                  >
+                    🔧 Debug Test (Check Browser Console)
+                  </Button>
                 </form>
               </Form>
             </CardContent>
@@ -382,6 +410,7 @@ export default function AdminPage() {
       </div>
       
       <Footer />
+      <Toaster />
     </div>
   );
 }
