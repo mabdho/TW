@@ -317,7 +317,7 @@ function App() {
       <Route path="/new-york" component={NewYork} />
       <Route path="/male" component={Male} />
       <Route path="/admin" component={AdminPage} />
-      <Route component={NotFound} />
+      <Route path="*" component={NotFound} />
     </Router>
   );
 }
