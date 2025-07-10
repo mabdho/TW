@@ -83,10 +83,7 @@ export const TravelCategories = () => {
                         <Badge variant="outline" className="border-green-300 text-green-700 bg-green-50">
                           {blog.category}
                         </Badge>
-                        <div className="flex items-center text-gray-500 text-sm">
-                          <Calendar className="h-4 w-4 mr-1" />
-                          {new Date(blog.createdAt || blog.date).toLocaleDateString()}
-                        </div>
+                        
                         <div className="flex items-center text-gray-500 text-sm">
                           <Clock className="h-4 w-4 mr-1" />
                           {blog.readTime}
