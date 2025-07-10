@@ -275,6 +275,156 @@ export default function AdminPage() {
                       )}
                     />
 
+                    {/* Gallery Images Section */}
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <FormLabel>Gallery Images (up to 6)</FormLabel>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={addGalleryImage}
+                          disabled={(cityForm.watch('galleryImages')?.length || 0) >= 6}
+                          className="flex items-center gap-2"
+                        >
+                          <Plus className="h-4 w-4" />
+                          Add Image
+                        </Button>
+                      </div>
+                      
+                      {cityForm.watch('galleryImages')?.map((_, index) => (
+                        <div key={index} className="border rounded-lg p-4 space-y-3">
+                          <div className="flex items-center justify-between">
+                            <h4 className="text-sm font-medium">Gallery Image {index + 1}</h4>
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              onClick={() => removeGalleryImage(index)}
+                              className="text-red-600 hover:text-red-700"
+                            >
+                              Remove
+                            </Button>
+                          </div>
+                          
+                          <FormField
+                            control={cityForm.control}
+                            name={`galleryImages.${index}.url`}
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Image URL</FormLabel>
+                                <FormControl>
+                                  <Input placeholder="https://..." {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          
+                          <div className="grid grid-cols-2 gap-3">
+                            <FormField
+                              control={cityForm.control}
+                              name={`galleryImages.${index}.alt`}
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Alt Text</FormLabel>
+                                  <FormControl>
+                                    <Input placeholder="Image description" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            
+                            <FormField
+                              control={cityForm.control}
+                              name={`galleryImages.${index}.caption`}
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Caption</FormLabel>
+                                  <FormControl>
+                                    <Input placeholder="Image caption" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Generation Mode Selection */}
+                    <FormField
+                      control={cityForm.control}
+                      name="generationMode"
+                      render={({ field }) => (
+                        <FormItem className="space-y-3">
+                          <FormLabel>Generation Mode</FormLabel>
+                          <FormControl>
+                            <div className="flex items-center space-x-6">
+                              <div className="flex items-center space-x-2">
+                                <input
+                                  type="radio"
+                                  id="ai-mode"
+                                  value="ai"
+                                  checked={field.value === 'ai'}
+                                  onChange={() => field.onChange('ai')}
+                                  className="focus:ring-2 focus:ring-blue-500"
+                                />
+                                <label htmlFor="ai-mode" className="text-sm font-medium">
+                                  AI Mode (Gemini-powered)
+                                </label>
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                <input
+                                  type="radio"
+                                  id="manual-mode"
+                                  value="manual"
+                                  checked={field.value === 'manual'}
+                                  onChange={() => field.onChange('manual')}
+                                  className="focus:ring-2 focus:ring-blue-500"
+                                />
+                                <label htmlFor="manual-mode" className="text-sm font-medium">
+                                  Manual Mode (JSON input)
+                                </label>
+                              </div>
+                            </div>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Manual JSON Input - only show when manual mode is selected */}
+                    {cityForm.watch('generationMode') === 'manual' && (
+                      <FormField
+                        control={cityForm.control}
+                        name="manualJson"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Manual JSON Content</FormLabel>
+                            <FormControl>
+                              <Textarea
+                                placeholder='{"description": "Your description here...", "highlights": [...], "attractions": [...], "logistics": {...}, "faqs": [...]}'
+                                className="min-h-[200px] font-mono text-sm"
+                                {...field}
+                              />
+                            </FormControl>
+                            <div className="text-xs text-gray-500 space-y-1">
+                              <p>Provide the city content as JSON with the following structure:</p>
+                              <p>• description (string): Main city description</p>
+                              <p>• highlights (array): Key attractions list</p>
+                              <p>• attractions (array): Detailed attraction objects</p>
+                              <p>• logistics (object): Getting around, where to stay, etc.</p>
+                              <p>• faqs (array): Frequently asked questions</p>
+                            </div>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    )}
+
                     <Button 
                       type="submit" 
                       disabled={generateCityPageMutation.isPending}
@@ -283,10 +433,10 @@ export default function AdminPage() {
                       {generateCityPageMutation.isPending ? (
                         <>
                           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Generating...
+                          {cityForm.watch('generationMode') === 'ai' ? 'Generating with AI...' : 'Generating from JSON...'}
                         </>
                       ) : (
-                        'Generate City Page'
+                        `Generate City Page ${cityForm.watch('generationMode') === 'ai' ? '(AI Mode)' : '(Manual Mode)'}`
                       )}
                     </Button>
                   </form>
