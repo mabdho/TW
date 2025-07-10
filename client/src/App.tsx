@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Route } from 'wouter';
 import Home from './pages/home';
 import NotFound from './pages/not-found';
 import AdminPage from './pages/admin';
@@ -78,12 +78,9 @@ import { Johannesburg } from "./pages/cities/Johannesburg";
 import { Kampala } from "./pages/cities/Kampala";
 import { KansasCity } from "./pages/cities/KansasCity";
 import { Kathmandu } from "./pages/cities/Kathmandu";
-import { Kigali } from "./pages/cities/Kigali";
 import { Kingston } from "./pages/cities/Kingston";
 import { Krakow } from "./pages/cities/Krakow";
 import { LaPaz } from "./pages/cities/LaPaz";
-import { Lagos } from "./pages/cities/Lagos";
-import { Lahore } from "./pages/cities/Lahore";
 import { Ljubljana } from "./pages/cities/Ljubljana";
 import { Luanda } from "./pages/cities/Luanda";
 import { LuangPrabang } from "./pages/cities/LuangPrabang";
@@ -158,174 +155,169 @@ import { Zagreb } from "./pages/cities/Zagreb";
 import { Zaragoza } from "./pages/cities/Zaragoza";
 import { Dubai } from "./pages/cities/Dubai";
 import { NewYork } from "./pages/cities/NewYork";
-import { Male' } from "./pages/cities/Male'";
+import { Male } from "./pages/cities/Male";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/aarhus" element={<Aarhus />} />
-        <Route path="/accra" element={<Accra />} />
-        <Route path="/addis-ababa" element={<AddisAbaba />} />
-        <Route path="/adelaide" element={<Adelaide />} />
-        <Route path="/ahmedabad" element={<Ahmedabad />} />
-        <Route path="/albuquerque" element={<Albuquerque />} />
-        <Route path="/algiers" element={<Algiers />} />
-        <Route path="/alice-springs" element={<AliceSprings />} />
-        <Route path="/antwerp" element={<Antwerp />} />
-        <Route path="/arequipa" element={<Arequipa />} />
-        <Route path="/asuncin" element={<Asuncin />} />
-        <Route path="/asuncion" element={<Asuncion />} />
-        <Route path="/auckland" element={<Auckland />} />
-        <Route path="/austin" element={<Austin />} />
-        <Route path="/bandung" element={<Bandung />} />
-        <Route path="/barranquilla" element={<Barranquilla />} />
-        <Route path="/belgrade" element={<Belgrade />} />
-        <Route path="/belo-horizonte" element={<BeloHorizonte />} />
-        <Route path="/bergen" element={<Bergen />} />
-        <Route path="/bilbao" element={<Bilbao />} />
-        <Route path="/bologna" element={<Bologna />} />
-        <Route path="/bordeaux" element={<Bordeaux />} />
-        <Route path="/bratislava" element={<Bratislava />} />
-        <Route path="/brisbane" element={<Brisbane />} />
-        <Route path="/brno" element={<Brno />} />
-        <Route path="/broome" element={<Broome />} />
-        <Route path="/bucharest" element={<Bucharest />} />
-        <Route path="/busan" element={<Busan />} />
-        <Route path="/cairns" element={<Cairns />} />
-        <Route path="/cairo" element={<Cairo />} />
-        <Route path="/calgary" element={<Calgary />} />
-        <Route path="/cali" element={<Cali />} />
-        <Route path="/cape-town" element={<CapeTown />} />
-        <Route path="/cartagena" element={<Cartagena />} />
-        <Route path="/casablanca" element={<Casablanca />} />
-        <Route path="/cebu" element={<Cebu />} />
-        <Route path="/charleston" element={<Charleston />} />
-        <Route path="/chiang-mai" element={<ChiangMai />} />
-        <Route path="/christchurch" element={<Christchurch />} />
-        <Route path="/colombo" element={<Colombo />} />
-        <Route path="/columbus" element={<Columbus />} />
-        <Route path="/copenhagen" element={<Copenhagen />} />
-        <Route path="/crdoba" element={<Crdoba />} />
-        <Route path="/curitiba" element={<Curitiba />} />
-        <Route path="/cusco" element={<Cusco />} />
-        <Route path="/da-nang" element={<DaNang />} />
-        <Route path="/dakar" element={<Dakar />} />
-        <Route path="/dalat" element={<Dalat />} />
-        <Route path="/dar-es-salaam" element={<DarEsSalaam />} />
-        <Route path="/darwin" element={<Darwin />} />
-        <Route path="/debrecen" element={<Debrecen />} />
-        <Route path="/edmonton" element={<Edmonton />} />
-        <Route path="/fukuoka" element={<Fukuoka />} />
-        <Route path="/gaborone" element={<Gaborone />} />
-        <Route path="/gdansk" element={<Gdansk />} />
-        <Route path="/genoa" element={<Genoa />} />
-        <Route path="/ghent" element={<Ghent />} />
-        <Route path="/gold-coast" element={<GoldCoast />} />
-        <Route path="/gothenburg" element={<Gothenburg />} />
-        <Route path="/guadalajara" element={<Guadalajara />} />
-        <Route path="/guatemala-city" element={<GuatemalaCity />} />
-        <Route path="/guayaquil" element={<Guayaquil />} />
-        <Route path="/halifax" element={<Halifax />} />
-        <Route path="/hanoi" element={<Hanoi />} />
-        <Route path="/harare" element={<Harare />} />
-        <Route path="/havana" element={<Havana />} />
-        <Route path="/helsinki" element={<Helsinki />} />
-        <Route path="/hobart" element={<Hobart />} />
-        <Route path="/hoi-an" element={<HoiAn />} />
-        <Route path="/indianapolis" element={<Indianapolis />} />
-        <Route path="/ipoh" element={<Ipoh />} />
-        <Route path="/jaipur" element={<Jaipur />} />
-        <Route path="/johannesburg" element={<Johannesburg />} />
-        <Route path="/kampala" element={<Kampala />} />
-        <Route path="/kansas-city" element={<KansasCity />} />
-        <Route path="/kathmandu" element={<Kathmandu />} />
-        <Route path="/kigali" element={<Kigali />} />
-        <Route path="/kingston" element={<Kingston />} />
-        <Route path="/krakow" element={<Krakow />} />
-        <Route path="/la-paz" element={<LaPaz />} />
-        <Route path="/lagos" element={<Lagos />} />
-        <Route path="/lahore" element={<Lahore />} />
-        <Route path="/ljubljana" element={<Ljubljana />} />
-        <Route path="/luanda" element={<Luanda />} />
-        <Route path="/luang-prabang" element={<LuangPrabang />} />
-        <Route path="/lusaka" element={<Lusaka />} />
-        <Route path="/lyon" element={<Lyon />} />
-        <Route path="/malacca" element={<Malacca />} />
-        <Route path="/malaga" element={<Malaga />} />
-        <Route path="/malm" element={<Malm />} />
-        <Route path="/manaus" element={<Manaus />} />
-        <Route path="/maputo" element={<Maputo />} />
-        <Route path="/maracaibo" element={<Maracaibo />} />
-        <Route path="/marrakech" element={<Marrakech />} />
-        <Route path="/marseille" element={<Marseille />} />
-        <Route path="/medellin" element={<Medellin />} />
-        <Route path="/milwaukee" element={<Milwaukee />} />
-        <Route path="/montevideo" element={<Montevideo />} />
-        <Route path="/nairobi" element={<Nairobi />} />
-        <Route path="/nashville" element={<Nashville />} />
-        <Route path="/new-orleans" element={<NewOrleans />} />
-        <Route path="/nice" element={<Nice />} />
-        <Route path="/nouma" element={<Nouma />} />
-        <Route path="/oaxaca" element={<Oaxaca />} />
-        <Route path="/oslo" element={<Oslo />} />
-        <Route path="/ottawa" element={<Ottawa />} />
-        <Route path="/palermo" element={<Palermo />} />
-        <Route path="/panama-city" element={<PanamaCity />} />
-        <Route path="/papeete" element={<Papeete />} />
-        <Route path="/penang" element={<Penang />} />
-        <Route path="/perth" element={<Perth />} />
-        <Route path="/port-moresby" element={<PortMoresby />} />
-        <Route path="/portland" element={<Portland />} />
-        <Route path="/porto" element={<Porto />} />
-        <Route path="/quebec-city" element={<QuebecCity />} />
-        <Route path="/queenstown" element={<Queenstown />} />
-        <Route path="/quito" element={<Quito />} />
-        <Route path="/reykjavik" element={<Reykjavik />} />
-        <Route path="/riga" element={<Riga />} />
-        <Route path="/rosario" element={<Rosario />} />
-        <Route path="/sacramento" element={<Sacramento />} />
-        <Route path="/salt-lake-city" element={<SaltLakeCity />} />
-        <Route path="/salvador" element={<Salvador />} />
-        <Route path="/san-antonio" element={<SanAntonio />} />
-        <Route path="/san-jose" element={<SanJose />} />
-        <Route path="/san-juan" element={<SanJuan />} />
-        <Route path="/savannah" element={<Savannah />} />
-        <Route path="/seville" element={<Seville />} />
-        <Route path="/siem-reap" element={<SiemReap />} />
-        <Route path="/sofia" element={<Sofia />} />
-        <Route path="/stockholm" element={<Stockholm />} />
-        <Route path="/strasbourg" element={<Strasbourg />} />
-        <Route path="/sucre" element={<Sucre />} />
-        <Route path="/surabaya" element={<Surabaya />} />
-        <Route path="/suva" element={<Suva />} />
-        <Route path="/tallinn" element={<Tallinn />} />
-        <Route path="/tampere" element={<Tampere />} />
-        <Route path="/the-hague" element={<TheHague />} />
-        <Route path="/thessaloniki" element={<Thessaloniki />} />
-        <Route path="/tokyo" element={<Tokyo />} />
-        <Route path="/tunis" element={<Tunis />} />
-        <Route path="/turin" element={<Turin />} />
-        <Route path="/utrecht" element={<Utrecht />} />
-        <Route path="/valencia" element={<Valencia />} />
-        <Route path="/valparaiso" element={<Valparaiso />} />
-        <Route path="/victoria" element={<Victoria />} />
-        <Route path="/vilnius" element={<Vilnius />} />
-        <Route path="/warsaw" element={<Warsaw />} />
-        <Route path="/wellington" element={<Wellington />} />
-        <Route path="/windhoek" element={<Windhoek />} />
-        <Route path="/winnipeg" element={<Winnipeg />} />
-        <Route path="/yogyakarta" element={<Yogyakarta />} />
-        <Route path="/zagreb" element={<Zagreb />} />
-        <Route path="/zaragoza" element={<Zaragoza />} />
-        <Route path="/dubai" element={<Dubai />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/new-york" element={<NewYork />} />
-        <Route path="/male'" element={<Male' />} />
-      </Routes>
-    </Router>
+    <>
+      <Route path="/" component={Home} />
+      <Route path="/aarhus" component={Aarhus} />
+      <Route path="/accra" component={Accra} />
+      <Route path="/addis-ababa" component={AddisAbaba} />
+      <Route path="/adelaide" component={Adelaide} />
+      <Route path="/ahmedabad" component={Ahmedabad} />
+      <Route path="/albuquerque" component={Albuquerque} />
+      <Route path="/algiers" component={Algiers} />
+      <Route path="/alice-springs" component={AliceSprings} />
+      <Route path="/antwerp" component={Antwerp} />
+      <Route path="/arequipa" component={Arequipa} />
+      <Route path="/asuncin" component={Asuncin} />
+      <Route path="/asuncion" component={Asuncion} />
+      <Route path="/auckland" component={Auckland} />
+      <Route path="/austin" component={Austin} />
+      <Route path="/bandung" component={Bandung} />
+      <Route path="/barranquilla" component={Barranquilla} />
+      <Route path="/belgrade" component={Belgrade} />
+      <Route path="/belo-horizonte" component={BeloHorizonte} />
+      <Route path="/bergen" component={Bergen} />
+      <Route path="/bilbao" component={Bilbao} />
+      <Route path="/bologna" component={Bologna} />
+      <Route path="/bordeaux" component={Bordeaux} />
+      <Route path="/bratislava" component={Bratislava} />
+      <Route path="/brisbane" component={Brisbane} />
+      <Route path="/brno" component={Brno} />
+      <Route path="/broome" component={Broome} />
+      <Route path="/bucharest" component={Bucharest} />
+      <Route path="/busan" component={Busan} />
+      <Route path="/cairns" component={Cairns} />
+      <Route path="/cairo" component={Cairo} />
+      <Route path="/calgary" component={Calgary} />
+      <Route path="/cali" component={Cali} />
+      <Route path="/cape-town" component={CapeTown} />
+      <Route path="/cartagena" component={Cartagena} />
+      <Route path="/casablanca" component={Casablanca} />
+      <Route path="/cebu" component={Cebu} />
+      <Route path="/charleston" component={Charleston} />
+      <Route path="/chiang-mai" component={ChiangMai} />
+      <Route path="/christchurch" component={Christchurch} />
+      <Route path="/colombo" component={Colombo} />
+      <Route path="/columbus" component={Columbus} />
+      <Route path="/copenhagen" component={Copenhagen} />
+      <Route path="/crdoba" component={Crdoba} />
+      <Route path="/curitiba" component={Curitiba} />
+      <Route path="/cusco" component={Cusco} />
+      <Route path="/da-nang" component={DaNang} />
+      <Route path="/dakar" component={Dakar} />
+      <Route path="/dalat" component={Dalat} />
+      <Route path="/dar-es-salaam" component={DarEsSalaam} />
+      <Route path="/darwin" component={Darwin} />
+      <Route path="/debrecen" component={Debrecen} />
+      <Route path="/edmonton" component={Edmonton} />
+      <Route path="/fukuoka" component={Fukuoka} />
+      <Route path="/gaborone" component={Gaborone} />
+      <Route path="/gdansk" component={Gdansk} />
+      <Route path="/genoa" component={Genoa} />
+      <Route path="/ghent" component={Ghent} />
+      <Route path="/gold-coast" component={GoldCoast} />
+      <Route path="/gothenburg" component={Gothenburg} />
+      <Route path="/guadalajara" component={Guadalajara} />
+      <Route path="/guatemala-city" component={GuatemalaCity} />
+      <Route path="/guayaquil" component={Guayaquil} />
+      <Route path="/halifax" component={Halifax} />
+      <Route path="/hanoi" component={Hanoi} />
+      <Route path="/harare" component={Harare} />
+      <Route path="/havana" component={Havana} />
+      <Route path="/helsinki" component={Helsinki} />
+      <Route path="/hobart" component={Hobart} />
+      <Route path="/hoi-an" component={HoiAn} />
+      <Route path="/indianapolis" component={Indianapolis} />
+      <Route path="/ipoh" component={Ipoh} />
+      <Route path="/jaipur" component={Jaipur} />
+      <Route path="/johannesburg" component={Johannesburg} />
+      <Route path="/kampala" component={Kampala} />
+      <Route path="/kansas-city" component={KansasCity} />
+      <Route path="/kathmandu" component={Kathmandu} />
+      <Route path="/kingston" component={Kingston} />
+      <Route path="/krakow" component={Krakow} />
+      <Route path="/la-paz" component={LaPaz} />
+      <Route path="/ljubljana" component={Ljubljana} />
+      <Route path="/luanda" component={Luanda} />
+      <Route path="/luang-prabang" component={LuangPrabang} />
+      <Route path="/lusaka" component={Lusaka} />
+      <Route path="/lyon" component={Lyon} />
+      <Route path="/malacca" component={Malacca} />
+      <Route path="/malaga" component={Malaga} />
+      <Route path="/malm" component={Malm} />
+      <Route path="/manaus" component={Manaus} />
+      <Route path="/maputo" component={Maputo} />
+      <Route path="/maracaibo" component={Maracaibo} />
+      <Route path="/marrakech" component={Marrakech} />
+      <Route path="/marseille" component={Marseille} />
+      <Route path="/medellin" component={Medellin} />
+      <Route path="/milwaukee" component={Milwaukee} />
+      <Route path="/montevideo" component={Montevideo} />
+      <Route path="/nairobi" component={Nairobi} />
+      <Route path="/nashville" component={Nashville} />
+      <Route path="/new-orleans" component={NewOrleans} />
+      <Route path="/nice" component={Nice} />
+      <Route path="/nouma" component={Nouma} />
+      <Route path="/oaxaca" component={Oaxaca} />
+      <Route path="/oslo" component={Oslo} />
+      <Route path="/ottawa" component={Ottawa} />
+      <Route path="/palermo" component={Palermo} />
+      <Route path="/panama-city" component={PanamaCity} />
+      <Route path="/papeete" component={Papeete} />
+      <Route path="/penang" component={Penang} />
+      <Route path="/perth" component={Perth} />
+      <Route path="/port-moresby" component={PortMoresby} />
+      <Route path="/portland" component={Portland} />
+      <Route path="/porto" component={Porto} />
+      <Route path="/quebec-city" component={QuebecCity} />
+      <Route path="/queenstown" component={Queenstown} />
+      <Route path="/quito" component={Quito} />
+      <Route path="/reykjavik" component={Reykjavik} />
+      <Route path="/riga" component={Riga} />
+      <Route path="/rosario" component={Rosario} />
+      <Route path="/sacramento" component={Sacramento} />
+      <Route path="/salt-lake-city" component={SaltLakeCity} />
+      <Route path="/salvador" component={Salvador} />
+      <Route path="/san-antonio" component={SanAntonio} />
+      <Route path="/san-jose" component={SanJose} />
+      <Route path="/san-juan" component={SanJuan} />
+      <Route path="/savannah" component={Savannah} />
+      <Route path="/seville" component={Seville} />
+      <Route path="/siem-reap" component={SiemReap} />
+      <Route path="/sofia" component={Sofia} />
+      <Route path="/stockholm" component={Stockholm} />
+      <Route path="/strasbourg" component={Strasbourg} />
+      <Route path="/sucre" component={Sucre} />
+      <Route path="/surabaya" component={Surabaya} />
+      <Route path="/suva" component={Suva} />
+      <Route path="/tallinn" component={Tallinn} />
+      <Route path="/tampere" component={Tampere} />
+      <Route path="/the-hague" component={TheHague} />
+      <Route path="/thessaloniki" component={Thessaloniki} />
+      <Route path="/tokyo" component={Tokyo} />
+      <Route path="/tunis" component={Tunis} />
+      <Route path="/turin" component={Turin} />
+      <Route path="/utrecht" component={Utrecht} />
+      <Route path="/valencia" component={Valencia} />
+      <Route path="/valparaiso" component={Valparaiso} />
+      <Route path="/victoria" component={Victoria} />
+      <Route path="/vilnius" component={Vilnius} />
+      <Route path="/warsaw" component={Warsaw} />
+      <Route path="/wellington" component={Wellington} />
+      <Route path="/windhoek" component={Windhoek} />
+      <Route path="/winnipeg" component={Winnipeg} />
+      <Route path="/yogyakarta" component={Yogyakarta} />
+      <Route path="/zagreb" component={Zagreb} />
+      <Route path="/zaragoza" component={Zaragoza} />
+      <Route path="/dubai" component={Dubai} />
+      <Route path="/new-york" component={NewYork} />
+      <Route path="/male" component={Male} />
+      <Route path="/admin" component={AdminPage} />
+      <Route component={NotFound} />
+    </>
   );
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { CityPage } from '../../components/CityPage';
 
-export const Male': React.FC = () => {
+export const Male: React.FC = () => {
   return (
     <CityPage
       title={"15 Best Things to Do in Male', Maldives (2025 Guide)"}
