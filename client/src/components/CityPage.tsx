@@ -123,6 +123,7 @@ export const CityPage: React.FC<CityPageProps> = ({
     name: extractedCityName,
     country: extractedCountry,
     content: description,
+    imageUrl: imageUrl,
     attractions: attractions.map(att => ({
       name: att.name,
       description: att.description

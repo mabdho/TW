@@ -6,7 +6,7 @@ export const Tokyo: React.FC = () => {
     <CityPage
       title={"15 Best Things to Do in Tokyo, Japan (2025 Guide)"}
       description={`So, you're heading to Tokyo? Awesome choice! Honestly, trying to narrow down the *best* things to do in Tokyo feels almost impossible. It's a city that bombards you with amazing experiences at every turn. But, I've put together a guide to help you navigate the sheer awesomeness of it all. From serene temples to neon-drenched streets, Tokyo offers something for every kind of traveler. This 2025 guide aims to give you a balanced mix of the classic must-sees and a few hidden gems that I think you'll absolutely love. We'll cover everything from historical sites to cutting-edge technology, ensuring your trip is unforgettable. Prepare to be amazed, maybe a little overwhelmed, but definitely captivated by the magic of Tokyo. It’s a city that stays with you long after you've left. One thing I always tell everyone is that there is something for everyone, regardless of interests.`}
-      imageUrl={""}
+      imageUrl={"https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
         { url: "", alt: "Tokyo skyline", caption: "Beautiful Tokyo cityscape" }
       ]}

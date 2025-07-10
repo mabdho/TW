@@ -89,8 +89,16 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
         </nav>
 
         {/* City page hero section with SEO optimization */}
-        <div className="city-hero-section bg-gradient-to-r from-green-500 to-blue-500 text-white py-16 px-6">
-          <div className="max-w-7xl mx-auto">
+        <div 
+          className="city-hero-section relative text-white py-16 px-6 bg-gradient-to-r from-green-500 to-blue-500"
+          style={cityData.imageUrl ? {
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${cityData.imageUrl})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          } : {}}
+        >
+          <div className="max-w-7xl mx-auto relative z-10">
             {/* H1 with main keyword */}
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Best Things to Do in {cityData.name}
