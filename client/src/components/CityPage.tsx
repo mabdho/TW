@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { MapPin, Clock, DollarSign, Globe } from 'lucide-react';
 
 interface Attraction {
@@ -88,14 +89,75 @@ export const CityPage: React.FC<CityPageProps> = ({
                 Top 5 Must-Visit Attractions
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">Don't miss these incredible experiences</p>
-              <div className="grid gap-3 sm:gap-4">
-                {highlights.map((highlight, index) => (
-                  <div key={index} className="flex items-center gap-3 p-3 sm:p-4 bg-card/80 rounded-lg border">
-                    <span className="text-xl sm:text-2xl">✨</span>
-                    <span className="text-sm sm:text-base md:text-lg font-medium text-foreground">{highlight}</span>
-                  </div>
+              
+              <Accordion type="single" collapsible className="w-full space-y-2">
+                {top5Attractions.map((attraction, index) => (
+                  <AccordionItem key={index} value={`item-${index}`} className="bg-card/80 rounded-lg border">
+                    <AccordionTrigger className="px-3 sm:px-4 py-3 sm:py-4 hover:no-underline">
+                      <div className="flex items-center gap-3 text-left">
+                        <span className="text-xl sm:text-2xl">✨</span>
+                        <span className="text-sm sm:text-base md:text-lg font-medium text-foreground">{attraction.name}</span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-3 sm:px-4 pb-3 sm:pb-4">
+                      <div className="space-y-4">
+                        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                          {attraction.description}
+                        </p>
+                        
+                        {attraction.practicalInfo && (
+                          <div className="bg-muted/40 rounded-lg p-3 sm:p-4 space-y-3">
+                            <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2 text-sm sm:text-base">
+                              <MapPin className="h-4 w-4" />
+                              Practical Information
+                            </h4>
+                            <div className="grid gap-3 text-xs sm:text-sm">
+                              {attraction.practicalInfo.howToGetThere && (
+                                <div>
+                                  <strong className="text-foreground">How to Get There:</strong>
+                                  <span className="text-muted-foreground ml-2">{attraction.practicalInfo.howToGetThere}</span>
+                                </div>
+                              )}
+                              {attraction.practicalInfo.openingHours && (
+                                <div className="flex items-start gap-2">
+                                  <Clock className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                                  <div>
+                                    <strong className="text-foreground">Hours:</strong>
+                                    <span className="text-muted-foreground ml-2">{attraction.practicalInfo.openingHours}</span>
+                                  </div>
+                                </div>
+                              )}
+                              {attraction.practicalInfo.cost && (
+                                <div className="flex items-start gap-2">
+                                  <DollarSign className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                                  <div>
+                                    <strong className="text-foreground">Cost:</strong>
+                                    <span className="text-muted-foreground ml-2">{attraction.practicalInfo.cost}</span>
+                                  </div>
+                                </div>
+                              )}
+                              {attraction.practicalInfo.website && (
+                                <div className="flex items-start gap-2">
+                                  <Globe className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                                  <div>
+                                    <strong className="text-foreground">Website:</strong>
+                                    <a href={`https://${attraction.practicalInfo.website}`} 
+                                       className="text-primary hover:underline break-all ml-2" 
+                                       target="_blank" 
+                                       rel="noopener">
+                                      {attraction.practicalInfo.website}
+                                    </a>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
                 ))}
-              </div>
+              </Accordion>
             </div>
           </TabsContent>
 
