@@ -158,6 +158,7 @@ import { Zagreb } from "./pages/cities/Zagreb";
 import { Zaragoza } from "./pages/cities/Zaragoza";
 import { Dubai } from "./pages/cities/Dubai";
 import { NewYork } from "./pages/cities/NewYork";
+import { Male' } from "./pages/cities/Male'";
 
 function App() {
   return (
@@ -322,6 +323,7 @@ function App() {
         <Route path="/admin" element={<AdminPage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/new-york" element={<NewYork />} />
+        <Route path="/male'" element={<Male' />} />
       </Routes>
     </Router>
   );

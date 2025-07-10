@@ -6,14 +6,14 @@ import { Badge } from '@/components/ui/badge';
 
 // Get the last 8 cities from the cities array (most recently added)
 const featuredCities = [
-  { "name": "New York", "country": "USA", "path": "/new-york", "continent": "North America", "imageUrl": "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { "name": "Dubai", "country": "UAE", "path": "/dubai", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { "name": "Zaragoza", "country": "Spain", "path": "/zaragoza", "continent": "Europe", "imageUrl": "" },
-  { "name": "Zagreb", "country": "Croatia", "path": "/zagreb", "continent": "Europe", "imageUrl": "" },
-  { "name": "Yogyakarta", "country": "Indonesia", "path": "/yogyakarta", "continent": "Asia", "imageUrl": "" },
-  { "name": "Winnipeg", "country": "Canada", "path": "/winnipeg", "continent": "North America", "imageUrl": "" },
+  { "name": "Male'", "country": "Maldives", "path": "/male'", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1575119427862-c9ea3e37b537?q=80&w=1836&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { "name": "New York", "country": "USA", "path": "/new-york", "continent": "North America", "imageUrl": "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,
+  { "name": "Dubai", "country": "UAE", "path": "/dubai", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,
+  { "name": "Zaragoza", "country": "Spain", "path": "/zaragoza", "continent": "Europe", "imageUrl": "" },,
+  { "name": "Zagreb", "country": "Croatia", "path": "/zagreb", "continent": "Europe", "imageUrl": "" },,
+  { "name": "Yogyakarta", "country": "Indonesia", "path": "/yogyakarta", "continent": "Asia", "imageUrl": "" },,
+  { "name": "Winnipeg", "country": "Canada", "path": "/winnipeg", "continent": "North America", "imageUrl": "" },,
   { "name": "Windhoek", "country": "Namibia", "path": "/windhoek", "continent": "Africa", "imageUrl": "" },
-  { "name": "Wellington", "country": "New Zealand", "path": "/wellington", "continent": "Oceania", "imageUrl": "" }
 ];
 
 export const FeaturedCities = () => {
