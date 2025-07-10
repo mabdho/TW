@@ -186,6 +186,7 @@ export const Accra: React.FC = () => {
           answer: "Accra is famous for its vibrant culture, rich history, and welcoming atmosphere. Key highlights include its role in the Pan-African movement and being the first sub-Saharan African country to gain independence. It's renowned for its energetic music scene, especially Highlife and the modern Afrobeats genre. The city is also a hub for contemporary art, colorful textiles (Kente), and unique crafts like fantasy coffins. And, of course, it's famous for the legendary Ghana Jollof rice!"
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1711653304353-cace9654b6a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxBY2NyYSUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTM5NDYxfDA&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

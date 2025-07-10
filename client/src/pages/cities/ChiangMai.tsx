@@ -186,6 +186,7 @@ export const ChiangMai: React.FC = () => {
           answer: "Chiang Mai is famous for its rich Lanna culture, hundreds of ancient temples, ethical elephant sanctuaries, and stunning natural scenery including mountains and waterfalls. It's also a major hub for digital nomads and is renowned for its incredible food scene, particularly the unique Northern Thai cuisine with dishes like Khao Soi. Additionally, its vibrant night markets, traditional crafts, and relaxed, friendly atmosphere make it a world-famous travel destination."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1745131710626-e9ce62944723?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDaGlhbmclMjBNYWklMjB0cmF2ZWx8ZW58MHwwfHx8MTc1MjE0MDE0M3ww&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

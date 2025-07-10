@@ -186,6 +186,7 @@ export const Cairns: React.FC = () => {
           answer: "Cairns is world-famous for being the primary gateway to two UNESCO World Heritage sites: the Great Barrier Reef and the Daintree Rainforest. Its identity is inextricably linked to these natural wonders. The city is also known for its vibrant, tropical, and laid-back atmosphere, its adventure tourism (bungee jumping, white water rafting), and its role as a major hub for backpackers and international travelers exploring Australia's east coast."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1676164615834-2df7ac5fca20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDYWlybnMlMjB0cmF2ZWx8ZW58MHwwfHx8MTc1MjE0MDExMHww&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

@@ -186,6 +186,7 @@ export const DaNang: React.FC = () => {
           answer: "Da Nang is famous for its stunning coastline, particularly My Khe Beach. It's also known for its iconic modern landmarks like the fire-breathing Dragon Bridge and the awe-inspiring Golden Bridge held by giant hands. Furthermore, it's renowned for its natural beauty, including the Marble Mountains and Son Tra Peninsula, and its strategic location as a gateway to the historical treasures of Hoi An and the My Son Sanctuary."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1569814927688-ef5cb56b6233?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxEYSUyME5hbmclMjB0cmF2ZWx8ZW58MHwwfHx8MTc1MjE0MDE2MXww&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

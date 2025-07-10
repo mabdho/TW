@@ -18,7 +18,7 @@ export const Albuquerque: React.FC = () => {
         practicalInfo: {
         howToGetThere: "Located at 30 Tramway Rd NE, on the far eastern edge of Albuquerque. Driving and using a rental car or rideshare is the most practical way to get here.",
         openingHours: "Daily from 9:00 AM to 9:00 PM, with seasonal variations. Check the website for the latest schedule.",
-        cost: "$$$ (Adult round-trip tickets are around $30-$35).",
+        cost: "$$ (Adult round-trip tickets are around $30-$35).",
         website: "https://sandiapeak.com/"
       }
       },
@@ -48,7 +48,7 @@ export const Albuquerque: React.FC = () => {
         practicalInfo: {
         howToGetThere: "Located at 2401 12th St NW, just north of I-40. Easily accessible by car.",
         openingHours: "Daily from 9:00 AM to 4:00 PM.",
-        cost: "$$ (Adult admission is around $20).",
+        cost: "$ (Adult admission is around $20).",
         website: "https://indianpueblo.org/"
       }
       },
@@ -58,7 +58,7 @@ export const Albuquerque: React.FC = () => {
         practicalInfo: {
         howToGetThere: "Held at Balloon Fiesta Park, 5000 Balloon Fiesta Pkwy NE. Park & Ride services are highly recommended due to heavy traffic.",
         openingHours: "Events are held in the early morning and evening. Occurs annually for nine days in early October.",
-        cost: "$$ (General admission is around $15 per session; book flights, parking, and tickets well in advance).",
+        cost: "$ (General admission is around $15 per session; book flights, parking, and tickets well in advance).",
         website: "https://balloonfiesta.com/"
       }
       },
@@ -68,7 +68,7 @@ export const Albuquerque: React.FC = () => {
         practicalInfo: {
         howToGetThere: "Located at 1801 Mountain Rd NW, near Old Town. Accessible by car or bus.",
         openingHours: "Wednesday - Monday, 10:00 AM - 5:00 PM. Closed Tuesdays.",
-        cost: "$$ (Adult admission is around $8, with extra fees for the planetarium and theater).",
+        cost: "$ (Adult admission is around $8, with extra fees for the planetarium and theater).",
         website: "https://www.nmnaturalhistory.org/"
       }
       },
@@ -78,7 +78,7 @@ export const Albuquerque: React.FC = () => {
         practicalInfo: {
         howToGetThere: "The main campus (Aquarium/Garden) is at 2601 Central Ave NW. The Zoo is nearby at 903 10th St SW. A narrow-gauge railroad connects the facilities.",
         openingHours: "Daily from 9:00 AM to 5:00 PM.",
-        cost: "$$ (Combo tickets are around $22 for adults).",
+        cost: "$ (Combo tickets are around $22 for adults).",
         website: "https://www.cabq.gov/artsculture/biopark"
       }
       },
@@ -88,7 +88,7 @@ export const Albuquerque: React.FC = () => {
         practicalInfo: {
         howToGetThere: "Located at 601 Eubank Blvd SE in southeast Albuquerque. A car is recommended.",
         openingHours: "Daily from 9:00 AM to 5:00 PM.",
-        cost: "$$ (Adult admission is around $17).",
+        cost: "$ (Adult admission is around $17).",
         website: "https://www.nuclearmuseum.org/"
       }
       },
@@ -98,7 +98,7 @@ export const Albuquerque: React.FC = () => {
         practicalInfo: {
         howToGetThere: "Located at 1701 Mountain Rd NW, near Old Town and the Museum of Natural History.",
         openingHours: "Monday - Saturday 10:00 AM - 5:00 PM; Sunday 12:00 PM - 5:00 PM.",
-        cost: "$$ (General admission is around $11).",
+        cost: "$ (General admission is around $11).",
         website: "https://www.explora.us/"
       }
       },
@@ -128,7 +128,7 @@ export const Albuquerque: React.FC = () => {
         practicalInfo: {
         howToGetThere: "Located at 733 Chavez Rd NW in Los Ranchos de Albuquerque. A car or rideshare is required.",
         openingHours: "Daily from 12:00 PM to 7:00 PM.",
-        cost: "$$ (Tastings and glasses of wine vary in price).",
+        cost: "$ (Tastings and glasses of wine vary in price).",
         website: "https://www.casarondena.com/"
       }
       },
@@ -138,7 +138,7 @@ export const Albuquerque: React.FC = () => {
         practicalInfo: {
         howToGetThere: "Located at 400 2nd St SW, near downtown. Parking is available.",
         openingHours: "Monday - Saturday, 10:00 AM - 5:00 PM.",
-        cost: "$$ (Adult admission is around $21).",
+        cost: "$ (Adult admission is around $21).",
         website: "https://www.turquoisemuseum.com/"
       }
       },
@@ -148,7 +148,7 @@ export const Albuquerque: React.FC = () => {
         practicalInfo: {
         howToGetThere: "Tours typically depart from a central location in Old Town. Check with the specific tour company.",
         openingHours: "Tours run on a set schedule, usually daily. Booking in advance is essential.",
-        cost: "$$$ (Tours are typically $75+ per person).",
+        cost: "$$ (Tours are typically $75+ per person).",
         website: "https://www.breakingbadrvtours.com/"
       }
       },
@@ -186,6 +186,7 @@ export const Albuquerque: React.FC = () => {
           answer: "Albuquerque is most famous for the Albuquerque International Balloon Fiesta, the largest hot air balloon festival in the world. It's also renowned for its unique blend of Native American and Hispanic cultures, its location along historic Route 66, its distinctive Pueblo-style architecture, and its fiery cuisine, particularly its red and green chile. In recent years, it has also gained fame as the primary filming location for the TV shows 'Breaking Bad' and 'Better Call Saul'."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1516546090840-5d8b48110ede?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxBbGJ1cXVlcnF1ZSUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTM5NDY4fDA&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

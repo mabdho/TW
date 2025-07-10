@@ -186,6 +186,7 @@ export const Dakar: React.FC = () => {
           answer: "Dakar is famous for several things. It is historically known as the finishing point of the iconic Dakar Rally. It's a major hub for West African music, particularly the Mbalax genre popularized by Youssou N'Dour. The city is also renowned for its powerful history related to the slave trade, centered on Gorée Island, and its vibrant arts scene, showcased in the Village des Arts and various galleries. Lastly, its position on the Cap-Vert Peninsula makes it famous for its surfing culture and lively coastal atmosphere."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1569103470331-cc6bb58edb73?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxEYWthciUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTQwMTYxfDA&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

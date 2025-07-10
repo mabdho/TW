@@ -186,6 +186,7 @@ export const Aarhus: React.FC = () => {
           answer: "Aarhus is famous for being a major European Capital of Culture (2017) and a vibrant university city. Its most iconic landmarks are the ARoS Art Museum with its 'Your rainbow panorama' roof, the immersive open-air museum Den Gamle By (The Old Town), and the architecturally stunning Moesgaard Museum. It's also known for its rich Viking history, its charming Latin Quarter, and its innovative modern architecture along the harborfront."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1549553443-de5431c604ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxBYXJodXMlMjB0cmF2ZWx8ZW58MHwwfHx8MTc1MjEzOTQ1OXww&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

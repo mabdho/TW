@@ -189,6 +189,7 @@ export const Asuncion: React.FC = () => {
             "answer": "Asunción is famous for being one of the oldest cities in South America, earning it the nickname 'Mother of Cities' as many colonial expeditions departed from here. It's known for its unique blend of colonial and modern architecture, its location on the scenic Paraguay River, and its deeply ingrained Guaraní culture. Above all, it's famous for the national beverage, tereré, a cold-brewed yerba mate that is a symbol of Paraguayan hospitality and daily life."
       }
 ]}
+      imageUrl={""}
     />
   );
 };

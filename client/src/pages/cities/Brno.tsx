@@ -186,6 +186,7 @@ export const Brno: React.FC = () => {
           answer: "Brno is famous for several key things. It's a major hub of Czech Modernist and Functionalist architecture, epitomized by the UNESCO-listed Villa Tugendhat. It's known for its massive student population, which fuels a vibrant, creative, and liberal atmosphere with a legendary bar and café scene. Historically, it's known for Špilberk Castle and its legends, like the Brno Dragon and the 11 o'clock noon bells at the cathedral."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1665603627677-ee31baf6b1a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxCcm5vJTIwdHJhdmVsfGVufDB8MHx8fDE3NTIxNDAxMDd8MA&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

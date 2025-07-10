@@ -186,6 +186,7 @@ export const Adelaide: React.FC = () => {
           answer: "Adelaide is most famous for its world-class wine regions that are incredibly accessible from the city, particularly the Barossa Valley (Shiraz), McLaren Vale, and the Adelaide Hills. It's also known as the 'Festival City' for hosting a vibrant calendar of international arts and music events, especially during 'Mad March'. Furthermore, it's celebrated for its incredible food scene, centered around the Adelaide Central Market, and its well-planned city design, which is completely surrounded by green parklands."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1597679712719-793071321a0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxBZGVsYWlkZSUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTM5NDY0fDA&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

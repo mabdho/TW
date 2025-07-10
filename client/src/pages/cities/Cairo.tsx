@@ -186,6 +186,7 @@ export const Cairo: React.FC = () => {
           answer: "Cairo is world-famous for being the gateway to Ancient Egypt's wonders, most notably the Pyramids of Giza and the Sphinx. It's also renowned for its rich Islamic heritage, earning it the nickname 'The City of a Thousand Minarets,' with stunning mosques and monuments. The city is famous for the vibrant Khan el-Khalili bazaar, the treasures of Tutankhamun in its museums, the lifeblood Nile River, and its unique, energetic, and often chaotic atmosphere that blends ancient history with bustling modern life."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1597534397241-ab0ede0878df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDYWlybyUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTQwMTE0fDA&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

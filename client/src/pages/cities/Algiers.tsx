@@ -186,6 +186,7 @@ export const Algiers: React.FC = () => {
           answer: "Algiers is famous for several key things. Primarily, its UNESCO World Heritage-listed Casbah, a historic Islamic citadel with maze-like streets. It's also renowned for its stunning French colonial architecture, earning it the nickname 'Algiers the White'. The city is known for its dramatic setting on the Mediterranean coast and for powerful landmarks like the Martyrs' Memorial, which symbolizes the country's fight for independence."
         }
       ]}
+      imageUrl={""}
     />
   );
 };

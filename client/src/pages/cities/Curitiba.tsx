@@ -186,6 +186,7 @@ export const Curitiba: React.FC = () => {
           answer: "Curitiba is famous globally for its innovative urban planning, which has made it a benchmark for sustainability and quality of life. It's known as Brazil's 'Green Capital' due to its vast network of interconnected parks. Key icons include the glass and steel Jardim Botânico, the unique Ópera de Arame (Wire Opera House), and the striking Museu Oscar Niemeyer."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1700826952602-19bb5aa4ab70?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDdXJpdGliYSUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTQwMTU3fDA&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

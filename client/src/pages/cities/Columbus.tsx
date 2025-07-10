@@ -186,6 +186,7 @@ export const Columbus: React.FC = () => {
           answer: "Columbus is famous for several things. It's home to The Ohio State University, one of the largest universities in the country, which brings a youthful energy to the city. It's a major foodie destination, known as the birthplace of Jeni's Splendid Ice Creams and Wendy's. The city is also a 'test market' for new products, reflecting its innovative spirit. Finally, it's celebrated for its distinct, vibrant neighborhoods like the Short North Arts District and historic German Village."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1721033827857-da4bf72c5a3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDb2x1bWJ1cyUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTQwMTUzfDA&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

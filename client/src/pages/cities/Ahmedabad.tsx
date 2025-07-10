@@ -186,6 +186,7 @@ export const Ahmedabad: React.FC = () => {
           answer: "Ahmedabad is famous for being India's first UNESCO World Heritage City, recognized for its rich architectural heritage from the Sultanate period. It is renowned for its connection to Mahatma Gandhi, with the Sabarmati Ashram being a key landmark. The city is also a textile hub, known for its Calico Museum and vibrant markets. Architecturally, it's famous for intricate stepwells (vavs) and stunning mosques with unique 'jali' work, like the Sidi Saiyyed Mosque. Lastly, its incredible vegetarian street food, especially at Manek Chowk, is legendary."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1662101840896-144ec83a1788?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxBaG1lZGFiYWQlMjB0cmF2ZWx8ZW58MHwwfHx8MTc1MjEzOTQ2Nnww&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

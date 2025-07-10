@@ -1,0 +1,80 @@
+
+
+You are going to update 152 .tsx files in the website (city pages). Each file corresponds to a city and contains a hero section with a placeholder for a hero image.
+🔍 Objective:
+For each city, use the Unsplash API to fetch 1 high-quality landscape image related to travel, landmarks, or tourist attractions, and inject the image URL into the .tsx file.
+✅ Requirements:
+1. Unsplash API:
+    * Use the Unsplash Search API: https://api.unsplash.com/search/photos
+    * Query format: "${city name} travel"
+    * Parameters:
+        * orientation=landscape
+        * per_page=1
+        * order_by=relevant
+    * Use 4 API keys, and rotate after every 50 requests.
+2. Image Injection:
+    * Each .tsx file contains a placeholder: 
+    * Replace the placeholder with the returned urls.regular image link from Unsplash
+3. Tracking:
+    * Maintain a local JSON file called updated_pages.json: json CopyEdit   {
+    *   “aarhus”: "done",
+    *   “accra”: "done",
+    *   “Colombo”: "pending"
+    * }
+    *   
+    * Before updating a page, check if it’s already marked "done" and skip if so.
+    * After updating, mark it as "done" in the JSON.
+4. Rate Limiting:
+    * Unsplash allows 50 requests per hour per key
+    * Rotate keys every 50 requests, retry failed ones in the next round
+    * Add a 1-second delay between requests to avoid hitting limits aggressively
+5. File Naming Convention:
+    * .tsx files are in src/pages/{city}.tsx
+    * Extract city name from filename and capitalize as needed for query
+6. Output:
+    * Modify and save each file in place
+    * Log updates to console and to update_log.txt
+
+
+🔐 API Keys (rotate after 50):
+
+API 1
+Application ID
+775763
+Access Key
+gOqR3P2G6Wc4yxvkivWWbUQNkFKOrpR5GNs7oEYWtG4
+
+Secret key
+4pes22RgShqqw0NZt9a64kjGuYbj7oWDqBpAnVBbc-g  API 2
+Application ID
+775766
+Access Key
+8JRPhiFSZAwUPBn2ocQYLytRytotkFImfRZPdG0rEi4
+
+Secret key
+WK3V1i2wtNulLOEx4xEb29_oD-SVlD2Pqbnt1n9na7c
+
+API 3 Application ID
+775770
+Access Key
+xz6uzRw7eihmPQLJVv06lZT_Jeg56WfSwDG5_EGVkUw
+
+Secret key
+_ZlB6SxLjnTGyItAC_4tu-2TEmO25DjVoTltgNSJQ1E  API 4 Application ID
+775771
+Access Key
+WZ5SJhHMYqEL01hDysFQQ8kRe_-rWyHUlMnU2zTxuO4
+
+Secret key
+Tj3KH7dBKn-HjwhGYRSQgyw0dfuXaQ4PDeLRMm2E6Pc
+
+Write clean, maintainable code. All changes should be idempotent — running the script multiple times should not cause duplicate injections or unnecessary API calls.
+
+
+
+
+
+
+
+
+

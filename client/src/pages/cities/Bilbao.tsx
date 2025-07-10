@@ -186,6 +186,7 @@ export const Bilbao: React.FC = () => {
           answer: "Bilbao is most famous for the Guggenheim Museum, an architectural icon that sparked the city's revitalization. It's also renowned for its world-class Basque cuisine, particularly pintxos, which are a culinary art form here. The city is also known for its incredible transformation from a gritty industrial port to a polished cultural hub, its historic Casco Viejo, and its passionate football club, Athletic Club Bilbao."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1742332107630-4b7780c582c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxCaWxiYW8lMjB0cmF2ZWx8ZW58MHwwfHx8MTc1MjE0MDA5MXww&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

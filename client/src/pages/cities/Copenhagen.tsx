@@ -186,6 +186,7 @@ export const Copenhagen: React.FC = () => {
           answer: "Copenhagen is famous for many things: its connection to author Hans Christian Andersen and fairy tales like 'The Little Mermaid'; the Danish concept of 'hygge' (coziness and contentment); its world-renowned minimalist design and architecture; a deeply ingrained cycling culture; the historic Tivoli Gardens amusement park; and its revolutionary New Nordic Cuisine, which has made it a global culinary destination."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1571198248721-4f7ba5f6149b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDb3BlbmhhZ2VuJTIwdHJhdmVsfGVufDB8MHx8fDE3NTIxNDAxNTN8MA&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

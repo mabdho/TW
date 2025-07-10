@@ -186,6 +186,7 @@ export const Darwin: React.FC = () => {
           answer: "Darwin is famous for several key things: its tropical 'Top End' lifestyle, its strategic importance during World War II and the Bombing of Darwin, and its proximity to world-renowned national parks like Kakadu and Litchfield. It's also known for its massive saltwater crocodiles, the vibrant Mindil Beach Sunset Market, a rich Indigenous culture, and its laid-back, multicultural atmosphere where the Australian Outback meets Southeast Asia."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1510270929919-b5d0a448ac5c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxEYXJ3aW4lMjB0cmF2ZWx8ZW58MHwwfHx8MTc1MjE0MDE3OXww&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

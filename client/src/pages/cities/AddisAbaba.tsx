@@ -186,6 +186,7 @@ export const AddisAbaba: React.FC = () => {
           answer: "Addis Ababa is famous for several key things. It's known as the 'political capital of Africa' for hosting the African Union headquarters. It is globally recognized as the cradle of humankind due to the discovery of 'Lucy,' whose fossil is in the National Museum. The city is also the legendary birthplace of coffee, and its coffee ceremonies are a world-renowned cultural tradition. Finally, it's famous for its vast and chaotic Merkato, one of the largest markets on the continent."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1568105758995-c6db858cd541?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxBZGRpcyUyMEFiYWJhJTIwdHJhdmVsfGVufDB8MHx8fDE3NTIxMzk0NjN8MA&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

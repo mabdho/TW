@@ -186,6 +186,7 @@ export const AliceSprings: React.FC = () => {
           answer: "Alice Springs is famous for being the heart of the Australian Outback and the 'capital' of the Red Centre. It's renowned for its stunning natural landscapes, particularly the MacDonnell Ranges, its rich and vibrant Aboriginal art and culture, and its unique pioneering history embodied by the Overland Telegraph Line and the Royal Flying Doctor Service. It also serves as the primary gateway for travelers heading to the iconic Uluṟu-Kata Tjuṯa National Park."
         }
       ]}
+      imageUrl={""}
     />
   );
 };

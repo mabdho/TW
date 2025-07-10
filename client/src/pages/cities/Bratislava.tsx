@@ -186,6 +186,7 @@ export const Bratislava: React.FC = () => {
           answer: "Bratislava is famous for its beautifully restored Old Town, its iconic four-turreted castle overlooking the Danube River, and its history as the coronation city for Hungarian monarchs. It's also known for its quirky bronze statues, like Čumil, and its unique blend of medieval, Baroque, and socialist-era architecture, exemplified by the UFO Bridge. Its strategic location, being the only capital to border two other countries (Austria and Hungary), also makes it famous as a convenient hub for Central European travel."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1713918942472-2c8304f21caf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxCcmF0aXNsYXZhJTIwdHJhdmVsfGVufDB8MHx8fDE3NTIxNDAwOTV8MA&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

@@ -186,6 +186,7 @@ export const DarEsSalaam: React.FC = () => {
           answer: "Dar es Salaam is famous for several things. It's Tanzania's largest city and most important commercial port. It's known for its vibrant blend of Swahili, Arab, Indian, and European cultures, reflected in its architecture and cuisine. The city is the birthplace of the colorful and unique Tingatinga art style. It's also renowned for its bustling markets like Kariakoo and Kivukoni, and as the primary gateway for travelers heading to the exotic island of Zanzibar and the world-class safari destinations in Tanzania's southern circuit."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1626678173385-f9ed3edb391f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxEYXIlMjBlcyUyMFNhbGFhbSUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTQwMTc5fDA&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

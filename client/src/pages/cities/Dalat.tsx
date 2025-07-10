@@ -186,6 +186,7 @@ export const Dalat: React.FC = () => {
           answer: "Dalat is famous for its cool, spring-like climate, earning it the nickname 'City of Eternal Spring'. It's renowned for its French colonial architecture, vast flower gardens and farms (especially hydrangeas and roses), high-quality coffee plantations, and locally produced wine. Its unique attractions, like the Crazy House and numerous scenic waterfalls, also make it a standout destination in Vietnam."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1693862536132-4ac1f99f72ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxEYWxhdCUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTQwMTYxfDA&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

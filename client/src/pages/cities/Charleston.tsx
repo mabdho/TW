@@ -186,6 +186,7 @@ export const Charleston: React.FC = () => {
           answer: "Charleston is famous for its rich American history, particularly its role in the Civil War. It's also renowned for its exceptionally well-preserved architecture, including historic mansions and cobblestone streets. The city is celebrated for its 'Southern charm' and hospitality, its vibrant culinary scene featuring Lowcountry cuisine (like shrimp and grits), and its beautiful coastal setting with stunning parks, gardens, and nearby beaches."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1619892127776-08a763bfe34c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDaGFybGVzdG9uJTIwdHJhdmVsfGVufDB8MHx8fDE3NTIxNDAxMzl8MA&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

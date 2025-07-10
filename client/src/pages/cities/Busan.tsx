@@ -186,6 +186,7 @@ export const Busan: React.FC = () => {
           answer: "Busan is famous for its unique blend of city and nature. Its key highlights include its beautiful beaches like Haeundae and Gwangalli, the enormous and lively Jagalchi Fish Market, the iconic Gamcheon Culture Village, and the stunning seaside Haedong Yonggungsa Temple. It is also renowned for hosting the prestigious Busan International Film Festival (BIFF) and for its delicious, fresh seafood and signature dishes like dwaeji gukbap (pork rice soup)."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1698484657816-b44063f94b86?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxCdXNhbiUyMHRyYXZlbHxlbnwwfDB8fHwxNzUyMTQwMTEwfDA&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };

@@ -186,6 +186,7 @@ export const Christchurch: React.FC = () => {
           answer: "Christchurch is famous for several key things. It is known as the 'Garden City' for its many beautiful parks and gardens, especially the expansive Botanic Gardens. It is also known for its English heritage, visible in its neo-Gothic architecture and activities like punting on the Avon River. Most significantly in recent times, it is famous for its incredible resilience, creativity, and community spirit in rebuilding and reimagining the city after the devastating 2011 earthquake. Finally, it serves as the primary gateway to the stunning landscapes and adventures of the South Island."
         }
       ]}
+      imageUrl={"https://images.unsplash.com/photo-1587469850144-5a9154a46de8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NzU3NjN8MHwxfHNlYXJjaHwxfHxDaHJpc3RjaHVyY2glMjB0cmF2ZWx8ZW58MHwwfHx8MTc1MjE0MDE0M3ww&ixlib=rb-4.1.0&q=80&w=1080"}
     />
   );
 };
