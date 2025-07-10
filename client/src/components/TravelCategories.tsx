@@ -10,6 +10,8 @@ export const TravelCategories = () => {
   const { data: latestBlogs = [], isLoading, error } = useQuery({
     queryKey: ['/api/blogs/latest/2'],
     queryFn: () => apiRequest('GET', '/api/blogs/latest/2') as Promise<Blog[]>,
+    staleTime: 0, // Always refetch
+    cacheTime: 0, // Don't cache
   });
 
   return (

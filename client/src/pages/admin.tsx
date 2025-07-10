@@ -101,12 +101,14 @@ export default function AdminPage() {
   });
 
   // Fetch blogs
-  const { data: blogs = [], isLoading: blogsLoading, error: blogsError } = useQuery({
+  const { data: blogs = [], isLoading: blogsLoading, error: blogsError, refetch: refetchBlogs } = useQuery({
     queryKey: ['/api/blogs'],
     queryFn: async () => {
       const response = await apiRequest('GET', '/api/blogs');
       return Array.isArray(response) ? response : [];
     },
+    staleTime: 0, // Always refetch
+    cacheTime: 0, // Don't cache
   });
 
   // City generation mutation
@@ -139,9 +141,11 @@ export default function AdminPage() {
     mutationFn: async (data: BlogFormData) => {
       return await apiRequest('POST', '/api/blogs', data);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/blogs'] });
-      queryClient.invalidateQueries({ queryKey: ['/api/blogs/latest/2'] });
+    onSuccess: async () => {
+      // Force immediate refresh of all blog-related queries
+      await queryClient.invalidateQueries({ queryKey: ['/api/blogs'] });
+      await queryClient.invalidateQueries({ queryKey: ['/api/blogs/latest/2'] });
+      await refetchBlogs();
       toast({ title: "Blog created successfully!" });
       blogForm.reset();
     },
@@ -510,10 +514,26 @@ export default function AdminPage() {
               {/* Blog List */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Published Blog Posts</CardTitle>
-                  <CardDescription>
-                    Manage your existing blog posts
-                  </CardDescription>
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <CardTitle>Published Blog Posts</CardTitle>
+                      <CardDescription>
+                        Manage your existing blog posts
+                      </CardDescription>
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={() => refetchBlogs()}
+                      disabled={blogsLoading}
+                    >
+                      {blogsLoading ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        'Refresh'
+                      )}
+                    </Button>
+                  </div>
                 </CardHeader>
                 <CardContent>
                   {blogsLoading ? (

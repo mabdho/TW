@@ -12,6 +12,8 @@ export default function BlogsPage() {
   const { data: blogPosts = [], isLoading, error } = useQuery({
     queryKey: ['/api/blogs'],
     queryFn: () => apiRequest('GET', '/api/blogs') as Promise<Blog[]>,
+    staleTime: 0, // Always refetch
+    cacheTime: 0, // Don't cache
   });
 
   const categories = ["All", "Travel Tips", "Budget Travel", "Digital Nomad", "Solo Travel", "Sustainable Travel", "Food & Culture"];
