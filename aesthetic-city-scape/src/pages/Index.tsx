@@ -1,7 +1,7 @@
 import { Navigation } from '@/components/Navigation';
 import { Hero } from '@/components/Hero';
 import { FeaturedDestinations } from '@/components/FeaturedDestinations';
-import { CityDirectory } from '@/components/CityDirectory';
+import { SimpleCityList } from '@/components/SimpleCityList';
 import { TravelCategories } from '@/components/TravelCategories';
 import { Footer } from '@/components/Footer';
 
@@ -11,7 +11,7 @@ const Index = () => {
       <Navigation />
       <Hero />
       <FeaturedDestinations />
-      <CityDirectory />
+      <SimpleCityList />
       <TravelCategories />
       <Footer />
     </div>
