@@ -80,15 +80,15 @@ Generate 8-15 detailed attractions. Write in a natural, human tone with:
 - Avoid overly rigid or textbook-like structure
 - Skip slang but maintain conversational flow
 
+Respond ONLY with valid JSON. Do NOT wrap the output in markdown code blocks (like \`\`\`json or \`\`\`). Do not include any commentary. Return only the JSON object.
+
 CRITICAL JSON FORMATTING REQUIREMENTS:
-- Return ONLY a valid JSON object, no markdown, no extra text
-- Keep all text on single lines - NO line breaks within strings
 - Use only basic punctuation: periods, commas, apostrophes, hyphens
 - NO special characters like smart quotes, em dashes, or ellipsis
-- Keep descriptions under 200 words each to avoid parsing issues
-- Use simple, clean sentences without complex punctuation
+- Escape all quotes in text content properly
+- Keep descriptions concise to avoid parsing issues
 
-Return the complete JSON object with no formatting or extra text.`;
+Return only the JSON object with no additional text or formatting.`;
 
       let result;
       try {
@@ -118,53 +118,32 @@ Return the complete JSON object with no formatting or extra text.`;
       console.log('AI Response Length:', generatedText.length);
       console.log('AI Response Preview:', generatedText.substring(0, 500));
 
-      // Extract JSON from the response (might be wrapped in markdown)
-      let jsonText = generatedText;
-      if (generatedText.includes('```json')) {
-        const jsonMatch = generatedText.match(/```json\s*([\s\S]*?)\s*```/);
-        if (jsonMatch) {
-          jsonText = jsonMatch[1];
-        }
-      } else if (generatedText.includes('```')) {
-        const jsonMatch = generatedText.match(/```\s*([\s\S]*?)\s*```/);
-        if (jsonMatch) {
-          jsonText = jsonMatch[1];
-        }
-      }
-
-      // Clean up the JSON text to remove control characters and fix common issues
-      jsonText = jsonText
+      // Fix known bad formatting from Gemini
+      const cleaned = generatedText
+        .replace(/```json/g, '')
+        .replace(/```/g, '')
         .replace(/[\u0000-\u001F\u007F]/g, '') // Remove control characters
-        .replace(/\n/g, ' ') // Replace line breaks with spaces
-        .replace(/\r/g, ' ') // Replace carriage returns with spaces  
-        .replace(/\t/g, ' ') // Replace tabs with spaces
-        .replace(/\s+/g, ' ') // Collapse multiple spaces
         .replace(/"/g, '"') // Replace smart quotes with regular quotes
         .replace(/"/g, '"') // Replace smart quotes with regular quotes
         .replace(/'/g, "'") // Replace smart quotes with regular quotes
         .replace(/'/g, "'") // Replace smart quotes with regular quotes
         .replace(/…/g, '...') // Replace ellipsis character
+        .replace(/\*([^*]+)\*/g, '$1') // Remove markdown italics
+        .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove markdown bold
         .trim();
 
-      // Try to fix common JSON issues
-      jsonText = jsonText
-        .replace(/,(\s*[}\]])/g, '$1') // Remove trailing commas
-        .replace(/([{,]\s*)(\w+):/g, '$1"$2":') // Quote unquoted keys
-        .replace(/:\s*([^",{\[\]}\s]+)(\s*[,}\]])/g, ':"$1"$2'); // Quote unquoted string values
-
-      // Parse the JSON response
+      // Parse the JSON response with fallback logging
       let contentData;
       try {
-        contentData = JSON.parse(jsonText);
+        contentData = JSON.parse(cleaned);
       } catch (parseError) {
-        console.error('JSON parsing error:', parseError);
-        console.error('Raw response length:', generatedText.length);
-        console.error('Raw response preview:', generatedText.substring(0, 1000));
-        console.error('Extracted JSON preview:', jsonText.substring(0, 1000));
+        console.error('Failed to parse Gemini response:', cleaned.slice(0, 500));
+        console.error('Full response length:', generatedText.length);
+        console.error('Parse error:', parseError.message);
         return res.status(500).json({ 
-          error: 'Failed to parse AI response', 
+          error: 'Gemini returned malformed JSON', 
           details: parseError.message,
-          responsePreview: generatedText.substring(0, 500)
+          responsePreview: cleaned.substring(0, 500)
         });
       }
 
