@@ -29,6 +29,9 @@ export const Navigation = () => {
             <a href="#contact" className="text-sm lg:text-base text-foreground hover:text-primary transition-colors">
               Contact
             </a>
+            <a href="/admin" className="text-sm lg:text-base text-orange-600 hover:text-orange-700 transition-colors font-medium">
+              Admin
+            </a>
           </div>
 
           {/* Desktop CTA */}
@@ -86,6 +89,13 @@ export const Navigation = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Contact
+            </a>
+            <a 
+              href="/admin" 
+              className="block px-3 py-3 text-base text-orange-600 hover:text-orange-700 hover:bg-orange-50 rounded-lg transition-colors font-medium"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Admin
             </a>
             <div className="pt-4 pb-2 border-t border-border mt-4">
               <div className="flex flex-col gap-3 px-3">

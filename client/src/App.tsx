@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/home';
 import NotFound from './pages/not-found';
+import AdminPage from './pages/admin';
 import { Aarhus } from "./pages/cities/Aarhus";
 import { Accra } from "./pages/cities/Accra";
 import { AddisAbaba } from "./pages/cities/AddisAbaba";
@@ -315,6 +316,7 @@ function App() {
         <Route path="/yogyakarta" element={<Yogyakarta />} />
         <Route path="/zagreb" element={<Zagreb />} />
         <Route path="/zaragoza" element={<Zaragoza />} />
+        <Route path="/admin" element={<AdminPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
