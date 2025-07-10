@@ -80,14 +80,15 @@ Generate 8-15 detailed attractions. Write in a natural, human tone with:
 - Avoid overly rigid or textbook-like structure
 - Skip slang but maintain conversational flow
 
-IMPORTANT JSON FORMAT RULES:
-- Return ONLY valid JSON, no markdown formatting or extra text
-- Escape all quotes in text content using backslashes (\")
-- Use \n for line breaks in text content
-- Do not use raw line breaks inside JSON strings
-- Ensure all text fields are properly escaped
+CRITICAL JSON FORMATTING REQUIREMENTS:
+- Return ONLY a valid JSON object, no markdown, no extra text
+- Keep all text on single lines - NO line breaks within strings
+- Use only basic punctuation: periods, commas, apostrophes, hyphens
+- NO special characters like smart quotes, em dashes, or ellipsis
+- Keep descriptions under 200 words each to avoid parsing issues
+- Use simple, clean sentences without complex punctuation
 
-Return ONLY the JSON object, no additional text.`;
+Return the complete JSON object with no formatting or extra text.`;
 
       let result;
       try {
@@ -134,10 +135,22 @@ Return ONLY the JSON object, no additional text.`;
       // Clean up the JSON text to remove control characters and fix common issues
       jsonText = jsonText
         .replace(/[\u0000-\u001F\u007F]/g, '') // Remove control characters
-        .replace(/\n/g, '\\n') // Escape line breaks
-        .replace(/\r/g, '\\r') // Escape carriage returns
-        .replace(/\t/g, '\\t') // Escape tabs
+        .replace(/\n/g, ' ') // Replace line breaks with spaces
+        .replace(/\r/g, ' ') // Replace carriage returns with spaces  
+        .replace(/\t/g, ' ') // Replace tabs with spaces
+        .replace(/\s+/g, ' ') // Collapse multiple spaces
+        .replace(/"/g, '"') // Replace smart quotes with regular quotes
+        .replace(/"/g, '"') // Replace smart quotes with regular quotes
+        .replace(/'/g, "'") // Replace smart quotes with regular quotes
+        .replace(/'/g, "'") // Replace smart quotes with regular quotes
+        .replace(/…/g, '...') // Replace ellipsis character
         .trim();
+
+      // Try to fix common JSON issues
+      jsonText = jsonText
+        .replace(/,(\s*[}\]])/g, '$1') // Remove trailing commas
+        .replace(/([{,]\s*)(\w+):/g, '$1"$2":') // Quote unquoted keys
+        .replace(/:\s*([^",{\[\]}\s]+)(\s*[,}\]])/g, ':"$1"$2'); // Quote unquoted string values
 
       // Parse the JSON response
       let contentData;
