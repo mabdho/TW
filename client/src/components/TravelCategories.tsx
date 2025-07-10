@@ -10,11 +10,8 @@ export const TravelCategories = () => {
   const { data: latestBlogs = [], isLoading, error } = useQuery({
     queryKey: ['/api/blogs/latest/2'],
     queryFn: async () => {
-      console.log('Fetching latest 2 blogs from API...');
       const response = await apiRequest('GET', '/api/blogs/latest/2');
       const data = await response.json();
-      console.log('Latest blogs API Response:', data);
-      console.log('Latest blogs count:', data?.length || 0);
       return data as Blog[];
     },
     staleTime: 30000, // Cache for 30 seconds
@@ -68,56 +65,55 @@ export const TravelCategories = () => {
           <>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {latestBlogs.map((blog) => (
-            <Card 
-              key={blog.id}
-              className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-300 overflow-hidden"
-            >
-              {/* Blog Image */}
-              <div className="relative h-48 bg-gray-100">
-                <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-20"></div>
-                {blog.featured && (
-                  <div className="absolute top-4 left-4">
-                    <Badge className="bg-orange-500 hover:bg-orange-600 text-white">Featured</Badge>
-                  </div>
-                )}
-              </div>
-              
-              <CardContent className="p-6">
-                {/* Blog Meta */}
-                <div className="flex items-center gap-4 mb-4">
-                  <Badge variant="outline" className="border-green-300 text-green-700 bg-green-50">
-                    {blog.category}
-                  </Badge>
-                  <div className="flex items-center text-gray-500 text-sm">
-                    <Calendar className="h-4 w-4 mr-1" />
-                    {new Date(blog.createdAt || blog.date).toLocaleDateString()}
-                  </div>
-                  <div className="flex items-center text-gray-500 text-sm">
-                    <Clock className="h-4 w-4 mr-1" />
-                    {blog.readTime}
-                  </div>
-                </div>
-                
-                {/* Blog Title */}
-                <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2">
-                  {blog.title}
-                </h3>
-                
-                {/* Blog Excerpt */}
-                <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-                  {blog.excerpt}
-                </p>
-                
-                {/* Read More Link */}
-                <div className="flex items-center justify-between">
-                  <button className="inline-flex items-center text-green-600 hover:text-green-700 font-medium transition-colors text-sm">
-                    Read Full Article
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-all duration-200" />
-                  </button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                <a href={`/blog/${blog.id}`} key={blog.id}>
+                  <Card className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-300 overflow-hidden">
+                    {/* Blog Image */}
+                    <div className="relative h-48 bg-gray-100">
+                      <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-20"></div>
+                      {blog.featured && (
+                        <div className="absolute top-4 left-4">
+                          <Badge className="bg-orange-500 hover:bg-orange-600 text-white">Featured</Badge>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <CardContent className="p-6">
+                      {/* Blog Meta */}
+                      <div className="flex items-center gap-4 mb-4">
+                        <Badge variant="outline" className="border-green-300 text-green-700 bg-green-50">
+                          {blog.category}
+                        </Badge>
+                        <div className="flex items-center text-gray-500 text-sm">
+                          <Calendar className="h-4 w-4 mr-1" />
+                          {new Date(blog.createdAt || blog.date).toLocaleDateString()}
+                        </div>
+                        <div className="flex items-center text-gray-500 text-sm">
+                          <Clock className="h-4 w-4 mr-1" />
+                          {blog.readTime}
+                        </div>
+                      </div>
+                      
+                      {/* Blog Title */}
+                      <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2">
+                        {blog.title}
+                      </h3>
+                      
+                      {/* Blog Excerpt */}
+                      <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                        {blog.excerpt}
+                      </p>
+                      
+                      {/* Read More Link */}
+                      <div className="flex items-center justify-between">
+                        <span className="inline-flex items-center text-green-600 hover:text-green-700 font-medium transition-colors text-sm">
+                          Read Full Article
+                          <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-all duration-200" />
+                        </span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </a>
+              ))}
         </div>
 
             {/* View All Blogs Link */}

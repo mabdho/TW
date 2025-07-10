@@ -77,14 +77,7 @@ export default function BlogsPage() {
             </div>
           )}
 
-          {/* Debug Info */}
-          {process.env.NODE_ENV === 'development' && (
-            <div className="bg-yellow-100 p-4 mb-4 rounded">
-              <p><strong>Debug:</strong> Loading: {isLoading ? 'Yes' : 'No'}, Error: {error ? 'Yes' : 'No'}, Blogs: {blogPosts.length}</p>
-              <p><strong>Featured blogs:</strong> {blogPosts.filter(p => p.featured).length}</p>
-              <p><strong>Regular blogs:</strong> {blogPosts.filter(p => !p.featured).length}</p>
-            </div>
-          )}
+
 
           {/* Blog Content - Only show if we have blogs */}
           {!isLoading && !error && blogPosts.length > 0 && (
@@ -104,77 +97,81 @@ export default function BlogsPage() {
 
           {/* Featured Post */}
           {blogPosts.filter(post => post.featured).map((post) => (
-            <Card key={post.id} className="mb-12 overflow-hidden border-gray-200 hover:shadow-lg transition-all duration-300">
-              <div className="grid md:grid-cols-2 gap-0">
-                <div className="relative h-64 md:h-full bg-gray-100">
-                  <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-20"></div>
-                  <div className="absolute top-4 left-4">
-                    <Badge className="bg-orange-500 hover:bg-orange-600 text-white">Featured</Badge>
+            <a href={`/blog/${post.id}`} key={post.id} className="block">
+              <Card className="mb-12 overflow-hidden border-gray-200 hover:shadow-lg transition-all duration-300 cursor-pointer">
+                <div className="grid md:grid-cols-2 gap-0">
+                  <div className="relative h-64 md:h-full bg-gray-100">
+                    <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-20"></div>
+                    <div className="absolute top-4 left-4">
+                      <Badge className="bg-orange-500 hover:bg-orange-600 text-white">Featured</Badge>
+                    </div>
                   </div>
+                  <CardContent className="p-8">
+                    <div className="flex items-center gap-4 mb-4">
+                      <Badge variant="outline" className="border-green-300 text-green-700 bg-green-50">
+                        {post.category}
+                      </Badge>
+                      <div className="flex items-center text-gray-500 text-sm">
+                        <Calendar className="h-4 w-4 mr-1" />
+                        {new Date(post.createdAt || post.date).toLocaleDateString()}
+                      </div>
+                      <div className="flex items-center text-gray-500 text-sm">
+                        <Clock className="h-4 w-4 mr-1" />
+                        {post.readTime}
+                      </div>
+                    </div>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-4 hover:text-green-600 transition-colors">
+                      {post.title}
+                    </h2>
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                      {post.excerpt}
+                    </p>
+                    <span className="inline-flex items-center text-green-600 hover:text-green-700 font-medium transition-colors">
+                      Read Full Article
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </span>
+                  </CardContent>
                 </div>
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-4 mb-4">
-                    <Badge variant="outline" className="border-green-300 text-green-700 bg-green-50">
-                      {post.category}
-                    </Badge>
-                    <div className="flex items-center text-gray-500 text-sm">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      {new Date(post.createdAt || post.date).toLocaleDateString()}
-                    </div>
-                    <div className="flex items-center text-gray-500 text-sm">
-                      <Clock className="h-4 w-4 mr-1" />
-                      {post.readTime}
-                    </div>
-                  </div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4 hover:text-green-600 transition-colors">
-                    {post.title}
-                  </h2>
-                  <p className="text-gray-600 mb-6 leading-relaxed">
-                    {post.excerpt}
-                  </p>
-                  <button className="inline-flex items-center text-green-600 hover:text-green-700 font-medium transition-colors">
-                    Read Full Article
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </button>
-                </CardContent>
-              </div>
-            </Card>
+              </Card>
+            </a>
           ))}
 
           {/* Regular Posts Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.filter(post => !post.featured).map((post) => (
-              <Card key={post.id} className="overflow-hidden border-gray-200 hover:shadow-lg transition-all duration-300 cursor-pointer">
-                <div className="relative h-48 bg-gray-100">
-                  <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-20"></div>
-                </div>
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <Badge variant="outline" className="border-green-300 text-green-700 bg-green-50 text-xs">
-                      {post.category}
-                    </Badge>
-                    <div className="flex items-center text-gray-500 text-sm">
-                      <Clock className="h-3 w-3 mr-1" />
-                      {post.readTime}
-                    </div>
+              <a href={`/blog/${post.id}`} key={post.id} className="block">
+                <Card className="overflow-hidden border-gray-200 hover:shadow-lg transition-all duration-300 cursor-pointer">
+                  <div className="relative h-48 bg-gray-100">
+                    <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-20"></div>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3 hover:text-green-600 transition-colors line-clamp-2">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                    {post.excerpt}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center text-gray-500 text-sm">
-                      <Calendar className="h-3 w-3 mr-1" />
-                      {new Date(post.createdAt || post.date).toLocaleDateString()}
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <Badge variant="outline" className="border-green-300 text-green-700 bg-green-50 text-xs">
+                        {post.category}
+                      </Badge>
+                      <div className="flex items-center text-gray-500 text-sm">
+                        <Clock className="h-3 w-3 mr-1" />
+                        {post.readTime}
+                      </div>
                     </div>
-                    <button className="text-green-600 hover:text-green-700 text-sm font-medium transition-colors">
-                      Read More
-                    </button>
-                  </div>
-                </CardContent>
-              </Card>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3 hover:text-green-600 transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                      {post.excerpt}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center text-gray-500 text-sm">
+                        <Calendar className="h-3 w-3 mr-1" />
+                        {new Date(post.createdAt || post.date).toLocaleDateString()}
+                      </div>
+                      <span className="text-green-600 hover:text-green-700 text-sm font-medium transition-colors">
+                        Read More
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </a>
             ))}
           </div>
 

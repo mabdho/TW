@@ -4,6 +4,7 @@ import Home from './pages/home';
 import NotFound from './pages/not-found';
 import AdminPage from './pages/admin';
 import BlogsPage from './pages/blogs';
+import BlogDetailPage from './pages/blog-detail';
 import DestinationsPage from './pages/destinations';
 import { Aarhus } from "./pages/cities/Aarhus";
 import { Accra } from "./pages/cities/Accra";
@@ -182,6 +183,7 @@ function App() {
     <Router>
       <Route path="/" component={Home} />
       <Route path="/blogs" component={BlogsPage} />
+      <Route path="/blog/:id" component={BlogDetailPage} />
       <Route path="/destinations" component={DestinationsPage} />
       <Route path="/aarhus" component={Aarhus} />
       <Route path="/accra" component={Accra} />
