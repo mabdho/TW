@@ -30,9 +30,9 @@ export const Navigation = () => {
             <button onClick={() => scrollToSection('destinations')} className="text-gray-700 hover:text-green-600 transition-colors font-medium">
               Destinations
             </button>
-            <button onClick={() => scrollToSection('search-section')} className="text-gray-700 hover:text-green-600 transition-colors font-medium">
-              Search
-            </button>
+            <a href="/blogs" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
+              Blogs
+            </a>
           </div>
 
           {/* Desktop CTA */}
@@ -76,15 +76,13 @@ export const Navigation = () => {
             >
               Destinations
             </button>
-            <button 
-              onClick={() => {
-                scrollToSection('search-section');
-                setIsMenuOpen(false);
-              }}
-              className="block w-full text-left px-3 py-3 text-base text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
+            <a 
+              href="/blogs"
+              className="block px-3 py-3 text-base text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-lg transition-colors font-medium"
+              onClick={() => setIsMenuOpen(false)}
             >
-              Search
-            </button>
+              Blogs
+            </a>
             <div className="pt-4 pb-2 border-t border-gray-200 mt-4">
               <div className="px-3">
                 <a 
