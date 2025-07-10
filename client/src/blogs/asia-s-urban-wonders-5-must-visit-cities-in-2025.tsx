@@ -4,9 +4,7 @@ import { Blog } from '@shared/schema';
 export const asiasurbanwonders5mustvisitcitiesin2025Blog: Blog = {
   id: "asia-s-urban-wonders-5-must-visit-cities-in-2025",
   title: "Asia's Urban Wonders: 5 Must-Visit Cities in 2025",
-  excerpt: "A brief dive into Asia's most captivating cities that promise unforgettable experiences for travelers in the coming year.
-
-",
+  excerpt: "A brief dive into Asia's most captivating cities that promise unforgettable experiences for travelers in the coming year.",
   content: `Asia, a continent of incredible diversity, continues to captivate travelers with its vibrant cultures, futuristic skylines, ancient traditions, and delectable cuisines. As we look ahead to 2025, several cities are poised to offer particularly enriching and exciting experiences. Whether you're a history buff, a foodie, an adventure seeker, or simply looking for a relaxing escape, these five Asian metropolises should be at the top of your travel list.
 
 1. Tokyo, Japan: Where Tradition Meets Tomorrow
