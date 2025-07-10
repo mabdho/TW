@@ -50,42 +50,83 @@ export const CityPage: React.FC<CityPageProps> = ({
   const mobileGridCols = tabCount === 3 ? 'grid-cols-3' : 
                         tabCount === 4 ? 'grid-cols-4' : 'grid-cols-5';
 
+  // Generate unique gradient colors based on city name
+  const getGradientClass = (cityName: string) => {
+    const hash = cityName.split('').reduce((acc, char) => char.charCodeAt(0) + acc, 0);
+    const gradients = [
+      'from-blue-400 via-purple-500 to-pink-500',
+      'from-green-400 via-blue-500 to-purple-600',
+      'from-yellow-400 via-orange-500 to-red-500',
+      'from-pink-400 via-red-500 to-orange-500',
+      'from-indigo-400 via-purple-500 to-pink-500',
+      'from-cyan-400 via-blue-500 to-indigo-600',
+      'from-emerald-400 via-teal-500 to-cyan-600',
+      'from-amber-400 via-orange-500 to-red-600',
+      'from-rose-400 via-pink-500 to-purple-600',
+      'from-violet-400 via-indigo-500 to-blue-600'
+    ];
+    return gradients[hash % gradients.length];
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
       
-      {/* TripAdvisor-style Hero Header */}
-      <div className="bg-white border-b border-gray-200 pt-16 sm:pt-20">
+      {/* Hero Image Section with Overlay */}
+      <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden">
+        {/* City Image Placeholder */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${getGradientClass(title)} opacity-90`}>
+          <div className="absolute inset-0 bg-black/20"></div>
+          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id={`cityscape-${title.replace(/\s+/g, '-').toLowerCase()}`} x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+                <rect width="10" height="30" x="5" y="20" fill="white" opacity="0.1"/>
+                <rect width="8" height="35" x="18" y="15" fill="white" opacity="0.15"/>
+                <rect width="12" height="25" x="30" y="25" fill="white" opacity="0.1"/>
+                <rect width="6" height="40" x="45" y="10" fill="white" opacity="0.2"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill={`url(#cityscape-${title.replace(/\s+/g, '-').toLowerCase()})`}/>
+          </svg>
+        </div>
+        
+        {/* City Title Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-4">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Badge variant="secondary" className="bg-white/20 text-white border-white/30 hover:bg-white/30">
+                <MapPin className="w-3 h-3 mr-1" />
+                City Guide
+              </Badge>
+              <Badge variant="outline" className="text-white border-white/30 bg-white/10 hover:bg-white/20">
+                <Users className="w-3 h-3 mr-1" />
+                {attractions.length} Attractions
+              </Badge>
+            </div>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+              {title}
+            </h1>
+            <div className="flex items-center justify-center gap-1 mb-4">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400 drop-shadow-sm" />
+              ))}
+              <span className="ml-2 text-sm font-medium text-white drop-shadow-sm">4.8</span>
+            </div>
+            <p className="text-sm text-white/90 drop-shadow-sm">
+              Based on traveler reviews
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      {/* TripAdvisor-style Info Header */}
+      <div className="bg-white border-b border-gray-200">
         <div className="container mx-auto px-4 py-6 sm:py-8">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
             <div className="flex-1">
-              <div className="flex items-center gap-3 mb-4">
-                <Badge variant="secondary" className="bg-green-100 text-green-800 hover:bg-green-100">
-                  <MapPin className="w-3 h-3 mr-1" />
-                  City Guide
-                </Badge>
-                <Badge variant="outline" className="text-gray-600">
-                  <Users className="w-3 h-3 mr-1" />
-                  {attractions.length} Attractions
-                </Badge>
-              </div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                {title}
-              </h1>
               <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-3xl">
                 {description}
               </p>
-            </div>
-            <div className="flex items-center gap-4 lg:flex-col lg:items-end">
-              <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-orange-400 text-orange-400" />
-                ))}
-                <span className="ml-2 text-sm font-medium text-gray-700">4.8</span>
-              </div>
-              <div className="text-xs text-gray-500">
-                Based on traveler reviews
-              </div>
             </div>
           </div>
         </div>
