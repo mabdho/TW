@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -9,12 +9,15 @@ import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, Plus, Trash2, Download, FileText } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Switch } from '@/components/ui/switch';
+import { Loader2, Plus, Trash2, Edit, Save, X, FileText, BookOpen } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Toaster } from '@/components/ui/toaster';
 import { apiRequest } from '@/lib/queryClient';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
+import type { Blog } from '@shared/schema';
 
 const galleryImageSchema = z.object({
   url: z.string().url('Please enter a valid image URL').optional().or(z.literal('')),
@@ -42,15 +45,26 @@ const cityFormSchema = z.object({
   path: ['manualJson']
 });
 
+const blogFormSchema = z.object({
+  title: z.string().min(1, 'Title is required'),
+  excerpt: z.string().min(1, 'Excerpt is required'),
+  content: z.string().min(1, 'Content is required'),
+  category: z.string().min(1, 'Category is required'),
+  imageUrl: z.string().url('Please enter a valid image URL').optional().or(z.literal('')),
+  featured: z.boolean().default(false),
+  readTime: z.string().min(1, 'Read time is required')
+});
+
 type CityFormData = z.infer<typeof cityFormSchema>;
+type BlogFormData = z.infer<typeof blogFormSchema>;
 
 export default function AdminPage() {
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [generatedContent, setGeneratedContent] = useState<string>('');
-  const [generationMode, setGenerationMode] = useState<'ai' | 'manual'>('ai');
+  const [editingBlog, setEditingBlog] = useState<Blog | null>(null);
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
-  const form = useForm<CityFormData>({
+  // City form
+  const cityForm = useForm<CityFormData>({
     resolver: zodResolver(cityFormSchema),
     defaultValues: {
       city: '',
@@ -72,32 +86,43 @@ export default function AdminPage() {
     }
   });
 
-  const watchedGenerationMode = form.watch('generationMode');
+  // Blog form
+  const blogForm = useForm<BlogFormData>({
+    resolver: zodResolver(blogFormSchema),
+    defaultValues: {
+      title: '',
+      excerpt: '',
+      content: '',
+      category: 'Travel Tips',
+      imageUrl: '',
+      featured: false,
+      readTime: '5 min read'
+    }
+  });
 
+  // Fetch blogs
+  const { data: blogs = [], isLoading: blogsLoading } = useQuery({
+    queryKey: ['/api/blogs'],
+    queryFn: () => apiRequest('GET', '/api/blogs'),
+  });
+
+  // City generation mutation
   const generateCityPageMutation = useMutation({
     mutationFn: async (data: CityFormData) => {
-      console.log('Submitting form data:', data);
       return await apiRequest('POST', '/api/admin/generate-city-page', data);
     },
     onSuccess: (data) => {
-      setGeneratedContent(data.generatedCode);
       toast({
         title: "City page generated successfully!",
         description: `The ${data.cityName}.tsx file has been created/updated.`
       });
+      cityForm.reset();
     },
     onError: (error: any) => {
-      console.error('City generation error:', error);
       let errorMessage = "Failed to generate city page";
-      
       if (error.message?.includes("quota") || error.message?.includes("429")) {
-        errorMessage = "API quota exceeded. Please wait a few minutes and try again, or check your Gemini API billing settings.";
-      } else if (error.message?.includes("404")) {
-        errorMessage = "API model not found. Please check your Gemini API configuration.";
-      } else if (error.message?.includes("401")) {
-        errorMessage = "Invalid API key. Please check your Gemini API key settings.";
+        errorMessage = "API quota exceeded. Please wait a few minutes and try again.";
       }
-      
       toast({
         title: "Generation failed",
         description: errorMessage,
@@ -106,29 +131,100 @@ export default function AdminPage() {
     }
   });
 
-  const onSubmit = async (data: CityFormData) => {
-    console.log('Form submitted with data:', data);
-    console.log('Form errors:', form.formState.errors);
-    
-    setIsGenerating(true);
-    try {
-      await generateCityPageMutation.mutateAsync(data);
-    } catch (error) {
-      console.error('Submission error:', error);
-    } finally {
-      setIsGenerating(false);
+  // Blog mutations
+  const createBlogMutation = useMutation({
+    mutationFn: async (data: BlogFormData) => {
+      return await apiRequest('POST', '/api/blogs', data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/blogs'] });
+      toast({ title: "Blog created successfully!" });
+      blogForm.reset();
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Failed to create blog",
+        description: error.message,
+        variant: "destructive"
+      });
+    }
+  });
+
+  const updateBlogMutation = useMutation({
+    mutationFn: async ({ id, data }: { id: number; data: BlogFormData }) => {
+      return await apiRequest('PUT', `/api/blogs/${id}`, data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/blogs'] });
+      toast({ title: "Blog updated successfully!" });
+      setEditingBlog(null);
+      blogForm.reset();
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Failed to update blog",
+        description: error.message,
+        variant: "destructive"
+      });
+    }
+  });
+
+  const deleteBlogMutation = useMutation({
+    mutationFn: async (id: number) => {
+      return await apiRequest('DELETE', `/api/blogs/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/blogs'] });
+      toast({ title: "Blog deleted successfully!" });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Failed to delete blog",
+        description: error.message,
+        variant: "destructive"
+      });
+    }
+  });
+
+  const onCitySubmit = async (data: CityFormData) => {
+    await generateCityPageMutation.mutateAsync(data);
+  };
+
+  const onBlogSubmit = async (data: BlogFormData) => {
+    if (editingBlog) {
+      await updateBlogMutation.mutateAsync({ id: editingBlog.id, data });
+    } else {
+      await createBlogMutation.mutateAsync(data);
     }
   };
 
+  const startEditBlog = (blog: Blog) => {
+    setEditingBlog(blog);
+    blogForm.reset({
+      title: blog.title,
+      excerpt: blog.excerpt,
+      content: blog.content,
+      category: blog.category,
+      imageUrl: blog.imageUrl || '',
+      featured: blog.featured || false,
+      readTime: blog.readTime
+    });
+  };
+
+  const cancelEdit = () => {
+    setEditingBlog(null);
+    blogForm.reset();
+  };
+
   const addGalleryImage = () => {
-    const currentImages = form.getValues('galleryImages');
-    form.setValue('galleryImages', [...currentImages, { url: '', alt: '', caption: '' }]);
+    const currentImages = cityForm.getValues('galleryImages');
+    cityForm.setValue('galleryImages', [...(currentImages || []), { url: '', alt: '', caption: '' }]);
   };
 
   const removeGalleryImage = (index: number) => {
-    const currentImages = form.getValues('galleryImages');
-    if (currentImages.length > 1) {
-      form.setValue('galleryImages', currentImages.filter((_, i) => i !== index));
+    const currentImages = cityForm.getValues('galleryImages');
+    if (currentImages && currentImages.length > 1) {
+      cityForm.setValue('galleryImages', currentImages.filter((_, i) => i !== index));
     }
   };
 
@@ -136,386 +232,338 @@ export default function AdminPage() {
     <div className="min-h-screen bg-gray-50">
       <Navigation />
       
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">City Page Generator</h1>
-          <p className="text-gray-600">Generate SEO-optimized city pages with AI-powered content using Gemini</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
+          <p className="text-gray-600">Manage your travel website content</p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-2">
-          {/* Form Section */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <FileText className="h-5 w-5" />
-                City Information
-              </CardTitle>
-              <CardDescription>
-                Enter city details and images to generate an SEO-optimized travel guide
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  {/* Basic Info */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="city"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>City Name *</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g., Austin" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="country"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Country *</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g., USA" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+        <Tabs defaultValue="cities" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="cities" className="flex items-center gap-2">
+              <FileText className="h-4 w-4" />
+              City Pages
+            </TabsTrigger>
+            <TabsTrigger value="blogs" className="flex items-center gap-2">
+              <BookOpen className="h-4 w-4" />
+              Blog Posts
+            </TabsTrigger>
+          </TabsList>
 
-                  <FormField
-                    control={form.control}
-                    name="continent"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Continent (Optional)</FormLabel>
-                        <FormControl>
-                          <Input placeholder="e.g., North America" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* Generation Mode Selection */}
-                  <FormField
-                    control={form.control}
-                    name="generationMode"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Content Generation Mode</FormLabel>
-                        <FormControl>
-                          <div className="flex gap-4 mt-2">
-                            <label className="flex items-center gap-2">
-                              <input
-                                type="radio"
-                                name="generationMode"
-                                value="ai"
-                                checked={field.value === 'ai'}
-                                onChange={(e) => {
-                                  field.onChange(e.target.value);
-                                  setGenerationMode(e.target.value as 'ai' | 'manual');
-                                }}
-                                className="w-4 h-4"
-                              />
-                              <span>AI Generation (Gemini)</span>
-                            </label>
-                            <label className="flex items-center gap-2">
-                              <input
-                                type="radio"
-                                name="generationMode"
-                                value="manual"
-                                checked={field.value === 'manual'}
-                                onChange={(e) => {
-                                  field.onChange(e.target.value);
-                                  setGenerationMode(e.target.value as 'ai' | 'manual');
-                                }}
-                                className="w-4 h-4"
-                              />
-                              <span>Manual JSON Input</span>
-                            </label>
-                          </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* Manual JSON Input */}
-                  {watchedGenerationMode === 'manual' && (
-                    <FormField
-                      control={form.control}
-                      name="manualJson"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Manual JSON Content</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder={`{
-  "description": "Your city description here...",
-  "highlights": ["Highlight 1", "Highlight 2", "..."],
-  "attractions": [
-    {
-      "name": "Attraction Name",
-      "description": "Description here...",
-      "practicalInfo": {
-        "howToGetThere": "Directions...",
-        "openingHours": "Hours...",
-        "cost": "Cost...",
-        "website": "URL..."
-      }
-    }
-  ],
-  "logistics": {
-    "gettingAround": "Transportation info...",
-    "whereToStay": "Accommodation info...",
-    "bestTimeToVisit": "Best time info...",
-    "suggestedItinerary": "Itinerary suggestions..."
-  },
-  "faqs": [
-    {
-      "question": "Question?",
-      "answer": "Answer..."
-    }
-  ]
-}`}
-                              className="min-h-[400px] font-mono text-sm"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                          <div className="text-sm text-gray-500">
-                            Provide the complete JSON structure with all required fields for the city page content.
-                          </div>
-                        </FormItem>
-                      )}
-                    />
-                  )}
-
-                  <FormField
-                    control={form.control}
-                    name="heroImageUrl"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Hero Image URL</FormLabel>
-                        <FormControl>
-                          <Input placeholder="https://images.unsplash.com/..." {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* SEO Metadata */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="msv"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Monthly Search Volume</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g., 2,400" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="kd"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Keyword Difficulty</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g., 25" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  {/* Gallery Images */}
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <FormLabel>Gallery Images *</FormLabel>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        onClick={addGalleryImage}
-                        className="flex items-center gap-2"
-                      >
-                        <Plus className="h-4 w-4" />
-                        Add Image
-                      </Button>
+          <TabsContent value="cities">
+            <Card>
+              <CardHeader>
+                <CardTitle>Generate City Page</CardTitle>
+                <CardDescription>
+                  Create SEO-optimized city pages with AI-powered content
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Form {...cityForm}>
+                  <form onSubmit={cityForm.handleSubmit(onCitySubmit)} className="space-y-6">
+                    <div className="grid grid-cols-2 gap-4">
+                      <FormField
+                        control={cityForm.control}
+                        name="city"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>City Name *</FormLabel>
+                            <FormControl>
+                              <Input placeholder="e.g., Austin" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={cityForm.control}
+                        name="country"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Country *</FormLabel>
+                            <FormControl>
+                              <Input placeholder="e.g., USA" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
                     </div>
-                    
+
+                    <FormField
+                      control={cityForm.control}
+                      name="continent"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Continent</FormLabel>
+                          <FormControl>
+                            <Input placeholder="e.g., North America" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={cityForm.control}
+                      name="heroImageUrl"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Hero Image URL</FormLabel>
+                          <FormControl>
+                            <Input placeholder="https://..." {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <Button 
+                      type="submit" 
+                      disabled={generateCityPageMutation.isPending}
+                      className="w-full"
+                    >
+                      {generateCityPageMutation.isPending ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Generating...
+                        </>
+                      ) : (
+                        'Generate City Page'
+                      )}
+                    </Button>
+                  </form>
+                </Form>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="blogs">
+            <div className="space-y-6">
+              {/* Blog Form */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>
+                    {editingBlog ? 'Edit Blog Post' : 'Create New Blog Post'}
+                  </CardTitle>
+                  <CardDescription>
+                    {editingBlog ? 'Update the blog post details' : 'Write a new travel blog post'}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Form {...blogForm}>
+                    <form onSubmit={blogForm.handleSubmit(onBlogSubmit)} className="space-y-6">
+                      <FormField
+                        control={blogForm.control}
+                        name="title"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Title *</FormLabel>
+                            <FormControl>
+                              <Input placeholder="e.g., Hidden Gems of Southeast Asia" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={blogForm.control}
+                        name="excerpt"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Excerpt *</FormLabel>
+                            <FormControl>
+                              <Textarea 
+                                placeholder="Brief description of the blog post..." 
+                                rows={3}
+                                {...field} 
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={blogForm.control}
+                        name="content"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Content *</FormLabel>
+                            <FormControl>
+                              <Textarea 
+                                placeholder="Write your blog post content here..." 
+                                rows={10}
+                                {...field} 
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <FormField
+                          control={blogForm.control}
+                          name="category"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Category *</FormLabel>
+                              <FormControl>
+                                <Input placeholder="e.g., Travel Tips" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={blogForm.control}
+                          name="readTime"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Read Time *</FormLabel>
+                              <FormControl>
+                                <Input placeholder="e.g., 5 min read" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <FormField
+                        control={blogForm.control}
+                        name="imageUrl"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Image URL</FormLabel>
+                            <FormControl>
+                              <Input placeholder="https://..." {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={blogForm.control}
+                        name="featured"
+                        render={({ field }) => (
+                          <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                            <div className="space-y-0.5">
+                              <FormLabel className="text-base">Featured Post</FormLabel>
+                              <div className="text-sm text-gray-500">
+                                Mark this post as featured on the homepage
+                              </div>
+                            </div>
+                            <FormControl>
+                              <Switch
+                                checked={field.value}
+                                onCheckedChange={field.onChange}
+                              />
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+
+                      <div className="flex gap-4">
+                        <Button 
+                          type="submit" 
+                          disabled={createBlogMutation.isPending || updateBlogMutation.isPending}
+                          className="flex-1"
+                        >
+                          {createBlogMutation.isPending || updateBlogMutation.isPending ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              {editingBlog ? 'Updating...' : 'Creating...'}
+                            </>
+                          ) : (
+                            <>
+                              <Save className="mr-2 h-4 w-4" />
+                              {editingBlog ? 'Update Blog' : 'Create Blog'}
+                            </>
+                          )}
+                        </Button>
+                        {editingBlog && (
+                          <Button 
+                            type="button" 
+                            variant="outline" 
+                            onClick={cancelEdit}
+                          >
+                            <X className="mr-2 h-4 w-4" />
+                            Cancel
+                          </Button>
+                        )}
+                      </div>
+                    </form>
+                  </Form>
+                </CardContent>
+              </Card>
+
+              {/* Blog List */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Published Blog Posts</CardTitle>
+                  <CardDescription>
+                    Manage your existing blog posts
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {blogsLoading ? (
+                    <div className="flex items-center justify-center p-8">
+                      <Loader2 className="h-8 w-8 animate-spin" />
+                    </div>
+                  ) : blogs.length === 0 ? (
+                    <div className="text-center p-8 text-gray-500">
+                      No blog posts yet. Create your first one above!
+                    </div>
+                  ) : (
                     <div className="space-y-4">
-                      {form.watch('galleryImages').map((_, index) => (
-                        <Card key={index} className="p-4">
-                          <div className="flex items-center justify-between mb-3">
-                            <Badge variant="secondary">Image {index + 1}</Badge>
-                            {form.watch('galleryImages').length > 1 && (
-                              <Button
-                                type="button"
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => removeGalleryImage(index)}
-                                className="text-red-600 hover:text-red-700"
-                              >
-                                <Trash2 className="h-4 w-4" />
-                              </Button>
-                            )}
-                          </div>
-                          
-                          <div className="space-y-3">
-                            <FormField
-                              control={form.control}
-                              name={`galleryImages.${index}.url`}
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormLabel>Image URL</FormLabel>
-                                  <FormControl>
-                                    <Input placeholder="https://images.unsplash.com/..." {...field} />
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
+                      {blogs.map((blog: Blog) => (
+                        <div key={blog.id} className="flex items-center justify-between p-4 border rounded-lg">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <h3 className="font-semibold">{blog.title}</h3>
+                              {blog.featured && (
+                                <Badge className="bg-orange-500">Featured</Badge>
                               )}
-                            />
-                            
-                            <div className="grid grid-cols-2 gap-3">
-                              <FormField
-                                control={form.control}
-                                name={`galleryImages.${index}.alt`}
-                                render={({ field }) => (
-                                  <FormItem>
-                                    <FormLabel>Alt Text</FormLabel>
-                                    <FormControl>
-                                      <Input placeholder="Descriptive alt text" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                  </FormItem>
-                                )}
-                              />
-                              
-                              <FormField
-                                control={form.control}
-                                name={`galleryImages.${index}.caption`}
-                                render={({ field }) => (
-                                  <FormItem>
-                                    <FormLabel>Caption</FormLabel>
-                                    <FormControl>
-                                      <Input placeholder="Image caption" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                  </FormItem>
-                                )}
-                              />
+                            </div>
+                            <p className="text-sm text-gray-600 mb-2">{blog.excerpt}</p>
+                            <div className="flex items-center gap-4 text-xs text-gray-500">
+                              <Badge variant="outline">{blog.category}</Badge>
+                              <span>{blog.readTime}</span>
+                              <span>{new Date(blog.createdAt!).toLocaleDateString()}</span>
                             </div>
                           </div>
-                        </Card>
+                          <div className="flex items-center gap-2">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => startEditBlog(blog)}
+                            >
+                              <Edit className="h-4 w-4" />
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => deleteBlogMutation.mutate(blog.id)}
+                              disabled={deleteBlogMutation.isPending}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
                       ))}
                     </div>
-                  </div>
-
-                  <Button 
-                    type="submit" 
-                    className="w-full" 
-                    disabled={isGenerating || generateCityPageMutation.isPending}
-                  >
-                    {isGenerating || generateCityPageMutation.isPending ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        {watchedGenerationMode === 'manual' ? 'Creating City Page...' : 'Generating City Page... (This may take 30-60 seconds)'}
-                      </>
-                    ) : (
-                      <>
-                        <Download className="mr-2 h-4 w-4" />
-                        {watchedGenerationMode === 'manual' ? 'Create City Page from JSON' : 'Generate City Page with AI'}
-                      </>
-                    )}
-                  </Button>
-                  
-                  {generateCityPageMutation.isPending && (
-                    <div className="text-sm text-gray-600 mt-2">
-                      Processing with AI... Please wait while we generate your city page.
-                    </div>
                   )}
-
-                  {generateCityPageMutation.error && (
-                    <div className="text-sm text-red-600 mt-2 p-3 bg-red-50 rounded-lg">
-                      <strong>Error:</strong> {generateCityPageMutation.error.message || "Failed to generate city page"}
-                    </div>
-                  )}
-
-                  {/* Debug button for testing */}
-                  <Button 
-                    type="button" 
-                    variant="outline" 
-                    className="w-full mt-2" 
-                    onClick={() => {
-                      console.log('Debug: Form state:', form.getValues());
-                      console.log('Debug: Form errors:', form.formState.errors);
-                      console.log('Debug: Form valid:', form.formState.isValid);
-                      const testData = {
-                        city: "TestCity",
-                        country: "TestCountry",
-                        continent: "",
-                        heroImageUrl: "",
-                        galleryImages: [
-                          { url: "", alt: "Test alt", caption: "Test caption" }
-                        ],
-                        msv: "",
-                        kd: ""
-                      };
-                      console.log('Debug: Attempting manual submission with:', testData);
-                      generateCityPageMutation.mutate(testData);
-                    }}
-                  >
-                    🔧 Debug Test (Check Browser Console)
-                  </Button>
-                </form>
-              </Form>
-            </CardContent>
-          </Card>
-
-          {/* Preview Section */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Generated Code Preview</CardTitle>
-              <CardDescription>
-                The generated React component will appear here after generation
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              {generatedContent ? (
-                <div className="space-y-4">
-                  <div className="bg-gray-100 rounded-lg p-4 max-h-96 overflow-auto">
-                    <pre className="text-sm text-gray-800 whitespace-pre-wrap">
-                      {generatedContent}
-                    </pre>
-                  </div>
-                  <p className="text-sm text-green-600 font-medium">
-                    ✅ City page file has been generated and saved successfully!
-                  </p>
-                </div>
-              ) : (
-                <div className="text-center py-12 text-gray-500">
-                  <FileText className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                  <p>Fill out the form and click "Generate City Page" to see the generated code here.</p>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
-      
+
       <Footer />
       <Toaster />
     </div>

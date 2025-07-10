@@ -286,6 +286,84 @@ Return only the JSON object with no additional text or formatting.`;
     }
   });
 
+  // Blog API routes
+  app.get('/api/blogs', async (req, res) => {
+    try {
+      const blogs = await storage.getAllBlogs();
+      res.json(blogs);
+    } catch (error) {
+      console.error('Error fetching blogs:', error);
+      res.status(500).json({ error: 'Failed to fetch blogs' });
+    }
+  });
+
+  app.get('/api/blogs/latest/:limit?', async (req, res) => {
+    try {
+      const limit = parseInt(req.params.limit || '2');
+      const blogs = await storage.getLatestBlogs(limit);
+      res.json(blogs);
+    } catch (error) {
+      console.error('Error fetching latest blogs:', error);
+      res.status(500).json({ error: 'Failed to fetch latest blogs' });
+    }
+  });
+
+  app.get('/api/blogs/:id', async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const blog = await storage.getBlog(id);
+      if (!blog) {
+        return res.status(404).json({ error: 'Blog not found' });
+      }
+      res.json(blog);
+    } catch (error) {
+      console.error('Error fetching blog:', error);
+      res.status(500).json({ error: 'Failed to fetch blog' });
+    }
+  });
+
+  app.post('/api/blogs', async (req, res) => {
+    try {
+      const { insertBlogSchema } = await import('@shared/schema');
+      const blogData = insertBlogSchema.parse(req.body);
+      const blog = await storage.createBlog(blogData);
+      res.json(blog);
+    } catch (error) {
+      console.error('Error creating blog:', error);
+      res.status(500).json({ 
+        error: 'Failed to create blog',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  app.put('/api/blogs/:id', async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const { insertBlogSchema } = await import('@shared/schema');
+      const blogData = insertBlogSchema.partial().parse(req.body);
+      const blog = await storage.updateBlog(id, blogData);
+      res.json(blog);
+    } catch (error) {
+      console.error('Error updating blog:', error);
+      res.status(500).json({ 
+        error: 'Failed to update blog',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  app.delete('/api/blogs/:id', async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteBlog(id);
+      res.json({ success: true });
+    } catch (error) {
+      console.error('Error deleting blog:', error);
+      res.status(500).json({ error: 'Failed to delete blog' });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

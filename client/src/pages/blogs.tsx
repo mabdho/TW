@@ -2,72 +2,17 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, Clock, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, Loader2 } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { apiRequest } from '@/lib/queryClient';
+import type { Blog } from '@shared/schema';
 
 export default function BlogsPage() {
-  // Placeholder blog posts - these would come from your CMS or API
-  const blogPosts = [
-    {
-      id: 1,
-      title: "Hidden Gems of Southeast Asia: Beyond the Tourist Trail",
-      excerpt: "Discover lesser-known destinations that offer authentic cultural experiences away from the crowds.",
-      category: "Travel Tips",
-      date: "2025-01-08",
-      readTime: "5 min read",
-      image: "/api/placeholder/400/250",
-      featured: true
-    },
-    {
-      id: 2,
-      title: "Budget Travel Guide: How to See Europe for Under $50 a Day",
-      excerpt: "Practical tips and strategies for exploring European cities without breaking the bank.",
-      category: "Budget Travel",
-      date: "2025-01-05",
-      readTime: "8 min read",
-      image: "/api/placeholder/400/250",
-      featured: false
-    },
-    {
-      id: 3,
-      title: "Digital Nomad Destinations: The Best Cities for Remote Work",
-      excerpt: "A comprehensive guide to cities with great wifi, affordable living, and vibrant communities.",
-      category: "Digital Nomad",
-      date: "2025-01-02",
-      readTime: "12 min read",
-      image: "/api/placeholder/400/250",
-      featured: false
-    },
-    {
-      id: 4,
-      title: "Solo Female Travel: Safety Tips and Empowering Destinations",
-      excerpt: "Essential advice and destination recommendations for women traveling alone.",
-      category: "Solo Travel",
-      date: "2024-12-28",
-      readTime: "6 min read",
-      image: "/api/placeholder/400/250",
-      featured: false
-    },
-    {
-      id: 5,
-      title: "Sustainable Tourism: How to Travel Responsibly",
-      excerpt: "Learn how to minimize your environmental impact while exploring the world.",
-      category: "Sustainable Travel",
-      date: "2024-12-25",
-      readTime: "7 min read",
-      image: "/api/placeholder/400/250",
-      featured: false
-    },
-    {
-      id: 6,
-      title: "Food Adventures: Street Food Guide to Asian Markets",
-      excerpt: "Navigate the vibrant street food scenes across Asia with confidence and appetite.",
-      category: "Food & Culture",
-      date: "2024-12-20",
-      readTime: "10 min read",
-      image: "/api/placeholder/400/250",
-      featured: false
-    }
-  ];
+  // Fetch blogs from database
+  const { data: blogPosts = [], isLoading, error } = useQuery({
+    queryKey: ['/api/blogs'],
+    queryFn: () => apiRequest('GET', '/api/blogs') as Promise<Blog[]>,
+  });
 
   const categories = ["All", "Travel Tips", "Budget Travel", "Digital Nomad", "Solo Travel", "Sustainable Travel", "Food & Culture"];
 
@@ -93,18 +38,43 @@ export default function BlogsPage() {
       <section className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {categories.map((category) => (
-              <Badge
-                key={category}
-                variant="outline"
-                className="cursor-pointer hover:bg-green-50 hover:border-green-300 px-4 py-2 text-sm"
-              >
-                {category}
-              </Badge>
-            ))}
-          </div>
+          {/* Loading State */}
+          {isLoading && (
+            <div className="flex items-center justify-center py-12">
+              <Loader2 className="h-8 w-8 animate-spin text-green-600" />
+              <span className="ml-2 text-gray-600">Loading blogs...</span>
+            </div>
+          )}
+
+          {/* Error State */}
+          {error && (
+            <div className="text-center py-12">
+              <p className="text-gray-600">Failed to load blog posts. Please try again later.</p>
+            </div>
+          )}
+
+          {/* Empty State */}
+          {!isLoading && !error && blogPosts.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-gray-600">No blog posts available. Check back soon for travel stories and tips!</p>
+            </div>
+          )}
+
+          {/* Blog Content - Only show if we have blogs */}
+          {!isLoading && !error && blogPosts.length > 0 && (
+            <>
+              {/* Category Filter */}
+              <div className="flex flex-wrap justify-center gap-2 mb-12">
+                {categories.map((category) => (
+                  <Badge
+                    key={category}
+                    variant="outline"
+                    className="cursor-pointer hover:bg-green-50 hover:border-green-300 px-4 py-2 text-sm"
+                  >
+                    {category}
+                  </Badge>
+                ))}
+              </div>
 
           {/* Featured Post */}
           {blogPosts.filter(post => post.featured).map((post) => (
@@ -123,7 +93,7 @@ export default function BlogsPage() {
                     </Badge>
                     <div className="flex items-center text-gray-500 text-sm">
                       <Calendar className="h-4 w-4 mr-1" />
-                      {new Date(post.date).toLocaleDateString()}
+                      {new Date(post.createdAt || post.date).toLocaleDateString()}
                     </div>
                     <div className="flex items-center text-gray-500 text-sm">
                       <Clock className="h-4 w-4 mr-1" />
@@ -171,7 +141,7 @@ export default function BlogsPage() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-gray-500 text-sm">
                       <Calendar className="h-3 w-3 mr-1" />
-                      {new Date(post.date).toLocaleDateString()}
+                      {new Date(post.createdAt || post.date).toLocaleDateString()}
                     </div>
                     <button className="text-green-600 hover:text-green-700 text-sm font-medium transition-colors">
                       Read More
@@ -188,6 +158,8 @@ export default function BlogsPage() {
               Load More Articles
             </button>
           </div>
+          </>
+          )}
         </div>
       </section>
 

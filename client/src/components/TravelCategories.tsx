@@ -1,32 +1,17 @@
-import { Calendar, Clock, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, Loader2 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-
-// Latest blog posts data - same structure as in blogs.tsx
-const latestBlogs = [
-  {
-    id: 1,
-    title: "Hidden Gems of Southeast Asia: Beyond the Tourist Trail",
-    excerpt: "Discover lesser-known destinations that offer authentic cultural experiences away from the crowds.",
-    category: "Travel Tips",
-    date: "2025-01-08",
-    readTime: "5 min read",
-    image: "/api/placeholder/400/250",
-    featured: true
-  },
-  {
-    id: 2,
-    title: "Budget Travel Guide: How to See Europe for Under $50 a Day",
-    excerpt: "Practical tips and strategies for exploring European cities without breaking the bank.",
-    category: "Budget Travel",
-    date: "2025-01-05",
-    readTime: "8 min read",
-    image: "/api/placeholder/400/250",
-    featured: false
-  }
-];
+import { useQuery } from '@tanstack/react-query';
+import { apiRequest } from '@/lib/queryClient';
+import type { Blog } from '@shared/schema';
 
 export const TravelCategories = () => {
+  // Fetch latest 2 blogs from database
+  const { data: latestBlogs = [], isLoading, error } = useQuery({
+    queryKey: ['/api/blogs/latest/2'],
+    queryFn: () => apiRequest('GET', '/api/blogs/latest/2') as Promise<Blog[]>,
+  });
+
   return (
     <section id="experiences" className="py-16 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,9 +25,40 @@ export const TravelCategories = () => {
           </p>
         </div>
 
-        {/* Latest Blogs Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {latestBlogs.map((blog) => (
+        {/* Loading State */}
+        {isLoading && (
+          <div className="flex items-center justify-center py-12">
+            <Loader2 className="h-8 w-8 animate-spin text-green-600" />
+            <span className="ml-2 text-gray-600">Loading latest stories...</span>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
+          <div className="text-center py-12">
+            <p className="text-gray-600">Failed to load latest stories. Please try again later.</p>
+          </div>
+        )}
+
+        {/* Empty State */}
+        {!isLoading && !error && latestBlogs.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-gray-600 mb-4">No blog posts available yet.</p>
+            <a 
+              href="/blogs" 
+              className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
+            >
+              Visit Blog Page
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
+          </div>
+        )}
+
+        {/* Latest Blogs Grid - Only show if we have blogs */}
+        {!isLoading && !error && latestBlogs.length > 0 && (
+          <>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {latestBlogs.map((blog) => (
             <Card 
               key={blog.id}
               className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-300 overflow-hidden"
@@ -65,7 +81,7 @@ export const TravelCategories = () => {
                   </Badge>
                   <div className="flex items-center text-gray-500 text-sm">
                     <Calendar className="h-4 w-4 mr-1" />
-                    {new Date(blog.date).toLocaleDateString()}
+                    {new Date(blog.createdAt || blog.date).toLocaleDateString()}
                   </div>
                   <div className="flex items-center text-gray-500 text-sm">
                     <Clock className="h-4 w-4 mr-1" />
@@ -95,16 +111,18 @@ export const TravelCategories = () => {
           ))}
         </div>
 
-        {/* View All Blogs Link */}
-        <div className="text-center mt-8">
-          <a 
-            href="/blogs" 
-            className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
-          >
-            View All Travel Stories
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </a>
-        </div>
+            {/* View All Blogs Link */}
+            <div className="text-center mt-8">
+              <a 
+                href="/blogs" 
+                className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
+              >
+                View All Travel Stories
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </div>
+          </>
+        )}
       </div>
     </section>
   );
