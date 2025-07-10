@@ -1,61 +1,28 @@
-import { Mountain, Waves, Building2, TreePine, Camera, Heart, Star, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
-const categories = [
+// Latest blog posts data - same structure as in blogs.tsx
+const latestBlogs = [
   {
     id: 1,
-    name: "Adventure",
-    description: "Thrilling experiences for adrenaline seekers",
-    icon: Mountain,
-    color: "bg-orange-500",
-    count: "120+ experiences",
-    rating: "4.8"
+    title: "Hidden Gems of Southeast Asia: Beyond the Tourist Trail",
+    excerpt: "Discover lesser-known destinations that offer authentic cultural experiences away from the crowds.",
+    category: "Travel Tips",
+    date: "2025-01-08",
+    readTime: "5 min read",
+    image: "/api/placeholder/400/250",
+    featured: true
   },
   {
     id: 2,
-    name: "Beach & Coast",
-    description: "Relaxing getaways by pristine waters",
-    icon: Waves,
-    color: "bg-blue-500",
-    count: "158+ destinations",
-    rating: "4.9"
-  },
-  {
-    id: 3,
-    name: "City Escapes",
-    description: "Urban adventures in vibrant metropolises",
-    icon: Building2,
-    color: "bg-purple-500",
-    count: "200+ cities",
-    rating: "4.7"
-  },
-  {
-    id: 4,
-    name: "Nature & Wildlife",
-    description: "Connect with nature in its purest form",
-    icon: TreePine,
-    color: "bg-green-500",
-    count: "95+ parks",
-    rating: "4.8"
-  },
-  {
-    id: 5,
-    name: "Photography",
-    description: "Picture-perfect spots for memorable shots",
-    icon: Camera,
-    color: "bg-pink-500",
-    count: "150+ locations",
-    rating: "4.6"
-  },
-  {
-    id: 6,
-    name: "Romance",
-    description: "Intimate destinations for couples",
-    icon: Heart,
-    color: "bg-red-500",
-    count: "60+ getaways",
-    rating: "4.9"
+    title: "Budget Travel Guide: How to See Europe for Under $50 a Day",
+    excerpt: "Practical tips and strategies for exploring European cities without breaking the bank.",
+    category: "Budget Travel",
+    date: "2025-01-05",
+    readTime: "8 min read",
+    image: "/api/placeholder/400/250",
+    featured: false
   }
 ];
 
@@ -66,49 +33,78 @@ export const TravelCategories = () => {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Plan your trip by interest
+            Latest Travel <span className="text-green-600">Stories</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Find destinations perfectly suited to your travel style and interests.
+            Get inspired by our latest travel insights, tips, and destination guides.
           </p>
         </div>
 
-        {/* Categories Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categories.map((category, index) => {
-            const IconComponent = category.icon;
-            return (
-              <Card 
-                key={category.id}
-                className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-300 overflow-hidden"
-              >
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-12 h-12 ${category.color} rounded-lg flex items-center justify-center`}>
-                      <IconComponent className="h-6 w-6 text-white" />
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 fill-orange-400 text-orange-400" />
-                      <span className="text-sm font-medium text-gray-700">{category.rating}</span>
-                    </div>
+        {/* Latest Blogs Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {latestBlogs.map((blog) => (
+            <Card 
+              key={blog.id}
+              className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-300 overflow-hidden"
+            >
+              {/* Blog Image */}
+              <div className="relative h-48 bg-gray-100">
+                <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-20"></div>
+                {blog.featured && (
+                  <div className="absolute top-4 left-4">
+                    <Badge className="bg-orange-500 hover:bg-orange-600 text-white">Featured</Badge>
                   </div>
-                  
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">{category.name}</h3>
-                  <p className="text-sm text-gray-600 mb-4">
-                    {category.description}
-                  </p>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-500">{category.count}</span>
-                    <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-green-600 group-hover:translate-x-1 transition-all duration-200" />
+                )}
+              </div>
+              
+              <CardContent className="p-6">
+                {/* Blog Meta */}
+                <div className="flex items-center gap-4 mb-4">
+                  <Badge variant="outline" className="border-green-300 text-green-700 bg-green-50">
+                    {blog.category}
+                  </Badge>
+                  <div className="flex items-center text-gray-500 text-sm">
+                    <Calendar className="h-4 w-4 mr-1" />
+                    {new Date(blog.date).toLocaleDateString()}
+                  </div>
+                  <div className="flex items-center text-gray-500 text-sm">
+                    <Clock className="h-4 w-4 mr-1" />
+                    {blog.readTime}
                   </div>
                 </div>
-              </Card>
-            );
-          })}
+                
+                {/* Blog Title */}
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2">
+                  {blog.title}
+                </h3>
+                
+                {/* Blog Excerpt */}
+                <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                  {blog.excerpt}
+                </p>
+                
+                {/* Read More Link */}
+                <div className="flex items-center justify-between">
+                  <button className="inline-flex items-center text-green-600 hover:text-green-700 font-medium transition-colors text-sm">
+                    Read Full Article
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-all duration-200" />
+                  </button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
 
-
+        {/* View All Blogs Link */}
+        <div className="text-center mt-8">
+          <a 
+            href="/blogs" 
+            className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
+          >
+            View All Travel Stories
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </a>
+        </div>
       </div>
     </section>
   );
