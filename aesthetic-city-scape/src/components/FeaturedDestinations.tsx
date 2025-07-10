@@ -1,6 +1,7 @@
 import { Star, MapPin, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Link } from 'react-router-dom';
 import cityEurope from '@/assets/city-europe.jpg';
 import mountainsAdventure from '@/assets/mountains-adventure.jpg';
 import templeCulture from '@/assets/temple-culture.jpg';
@@ -8,30 +9,30 @@ import templeCulture from '@/assets/temple-culture.jpg';
 const destinations = [
   {
     id: 1,
-    name: "Prague, Czech Republic",
-    description: "Medieval charm meets vibrant culture in this fairy-tale city",
+    name: "Auckland, New Zealand",
+    description: "City of Sails with stunning harbours, volcanoes, and islands",
     image: cityEurope,
     rating: 4.8,
-    price: "From $89/night",
-    category: "Culture & History"
+    link: "/auckland",
+    category: "Adventure & Culture"
   },
   {
     id: 2,
-    name: "Swiss Alps, Switzerland", 
-    description: "Breathtaking mountain peaks perfect for adventure seekers",
+    name: "Copenhagen, Denmark", 
+    description: "Nordic charm with world-class design and cozy hygge culture",
     image: mountainsAdventure,
     rating: 4.9,
-    price: "From $159/night",
-    category: "Adventure"
+    link: "/copenhagen",
+    category: "Design & Culture"
   },
   {
     id: 3,
-    name: "Kyoto, Japan",
-    description: "Ancient temples and serene gardens in Japan's cultural heart",
+    name: "Tokyo, Japan",
+    description: "Ultra-modern metropolis blending tradition with innovation",
     image: templeCulture,
     rating: 4.7,
-    price: "From $99/night",
-    category: "Culture & Zen"
+    link: "/tokyo",
+    category: "Culture & Technology"
   }
 ];
 
@@ -89,12 +90,14 @@ export const FeaturedDestinations = () => {
 
                 <div className="flex items-center justify-between">
                   <span className="text-lg font-semibold text-primary">
-                    {destination.price}
+                    Travel Guide
                   </span>
-                  <Button variant="ghost" size="sm" className="group-hover:text-primary">
-                    Explore
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                  <Link to={destination.link}>
+                    <Button variant="ghost" size="sm" className="group-hover:text-primary">
+                      Explore
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
