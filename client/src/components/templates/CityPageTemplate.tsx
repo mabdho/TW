@@ -56,37 +56,7 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
     >
       {/* City-specific components */}
       <div className="city-page-container">
-        {/* SEO-optimized breadcrumb navigation */}
-        <nav className="breadcrumb-nav py-4 px-6 bg-gray-50 dark:bg-gray-800" aria-label="Breadcrumb">
-          <ol className="flex flex-wrap items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-            <li>
-              <a href="/" className="hover:text-green-600 dark:hover:text-green-400">
-                Home
-              </a>
-            </li>
-            <li className="flex items-center">
-              <span className="mx-2">/</span>
-              <a href="/destinations" className="hover:text-green-600 dark:hover:text-green-400">
-                Destinations
-              </a>
-            </li>
-            <li className="flex items-center">
-              <span className="mx-2">/</span>
-              <a 
-                href={`/destinations/${cityData.country.toLowerCase()}`} 
-                className="hover:text-green-600 dark:hover:text-green-400"
-              >
-                {cityData.country}
-              </a>
-            </li>
-            <li className="flex items-center">
-              <span className="mx-2">/</span>
-              <span className="text-gray-900 dark:text-gray-100 font-medium">
-                Best Things to Do in {cityData.name}
-              </span>
-            </li>
-          </ol>
-        </nav>
+
 
         {/* City page hero section with SEO optimization */}
         <div 
