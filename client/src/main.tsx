@@ -2,6 +2,7 @@ import { createRoot } from "react-dom/client";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
 import { lazy, Suspense } from "react";
+import { HelmetProvider } from "react-helmet-async";
 import "./index.css";
 
 // Lazy load the main App component for code splitting
@@ -23,9 +24,11 @@ const scheduleNonCriticalWork = (callback: () => void) => {
 const root = createRoot(document.getElementById("root")!);
 root.render(
   <QueryClientProvider client={queryClient}>
-    <Suspense fallback={<AppLoadingFallback />}>
-      <App />
-    </Suspense>
+    <HelmetProvider>
+      <Suspense fallback={<AppLoadingFallback />}>
+        <App />
+      </Suspense>
+    </HelmetProvider>
   </QueryClientProvider>
 );
 

@@ -169,6 +169,8 @@ const cityMap = {
   'boston': createCityImport('Boston', '../pages/cities/Boston'),
 
   'chicago': createCityImport('Chicago', '../pages/cities/Chicago'),
+
+  'trivandrum': createCityImport('Trivandrum', '../pages/cities/Trivandrum'),
 };
 
 interface DynamicCityRouteProps {
