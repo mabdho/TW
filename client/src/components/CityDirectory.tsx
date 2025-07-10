@@ -162,7 +162,8 @@ const cities = [
   { "name": "Zaragoza", "country": "Spain", "path": "/zaragoza", "continent": "Europe" },
   { "name": "Dubai", "country": "UAE", "path": "/dubai", "continent": "Asia" },
   { "name": "New York", "country": "USA", "path": "/new-york", "continent": "North America" },
-  { "name": "Male'", "country": "Maldives", "path": "/male'", "continent": "Asia" }
+  { "name": "Male'", "country": "Maldives", "path": "/male'", "continent": "Asia" },
+  { "name": "TestCity", "country": "TestCountry", "path": "/testcity", "continent": "" }
 ];
 
 const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America", "South America"];
@@ -182,7 +183,7 @@ export const CityDirectory = () => {
           <div className="flex items-center justify-center gap-2 mb-4">
             <Star className="w-5 h-5 text-orange-400 fill-current" />
             <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
-              157+ City Guides
+              158+ City Guides
             </Badge>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 px-4 sm:px-0">

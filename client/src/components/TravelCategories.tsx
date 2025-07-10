@@ -18,7 +18,7 @@ const categories = [
     description: "Relaxing getaways by pristine waters",
     icon: Waves,
     color: "bg-blue-500",
-    count: "157+ destinations",
+    count: "158+ destinations",
     rating: "4.9"
   },
   {
@@ -126,7 +126,7 @@ export const TravelCategories = () => {
               Can't find your perfect category?
             </h3>
             <p className="text-gray-600 mb-6">
-              Browse our complete directory of 157+ destinations to find exactly what you're looking for.
+              Browse our complete directory of 158+ destinations to find exactly what you're looking for.
             </p>
             <button className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
               View All Destinations

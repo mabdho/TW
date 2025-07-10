@@ -156,6 +156,7 @@ import { Zaragoza } from "./pages/cities/Zaragoza";
 import { Dubai } from "./pages/cities/Dubai";
 import { NewYork } from "./pages/cities/NewYork";
 import { Male } from "./pages/cities/Male";
+import { TestCity } from "./pages/cities/TestCity";
 
 function App() {
   return (
@@ -316,6 +317,7 @@ function App() {
       <Route path="/new-york" component={NewYork} />
       <Route path="/male" component={Male} />
       <Route path="/admin" component={AdminPage} />
+        <Route path="/testcity" element={<TestCity />} />
       <Route component={NotFound} />
     </>
   );
