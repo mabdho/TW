@@ -200,10 +200,31 @@ Return only the JSON object with no additional text or formatting.`;
         // Find the end of the cities array and add the new city
         const citiesEndIndex = cityDirectoryContent.indexOf('];');
         const beforeCitiesEnd = cityDirectoryContent.lastIndexOf('\n', citiesEndIndex);
-        const updatedCityContent = cityDirectoryContent.slice(0, beforeCitiesEnd) + ',\n' + cityEntry + cityDirectoryContent.slice(beforeCitiesEnd);
+        let updatedCityContent = cityDirectoryContent.slice(0, beforeCitiesEnd) + ',\n' + cityEntry + cityDirectoryContent.slice(beforeCitiesEnd);
+        
+        // Update the city count in the badge
+        const currentCount = (cityDirectoryContent.match(/\{ "name":/g) || []).length;
+        const newCount = currentCount + 1;
+        updatedCityContent = updatedCityContent.replace(/\d+\+ City Guides/, `${newCount}+ City Guides`);
         
         await fs.writeFile(cityDirectoryPath, updatedCityContent);
-        console.log(`Updated CityDirectory.tsx with ${city} entry`);
+        console.log(`Updated CityDirectory.tsx with ${city} entry (${newCount} cities total)`);
+        
+        // Update Hero component city count
+        const heroPath = path.join(process.cwd(), 'client', 'src', 'components', 'Hero.tsx');
+        const heroContent = await fs.readFile(heroPath, 'utf-8');
+        const updatedHeroContent = heroContent.replace(/\d+\+<\/div>\s*<div[^>]*>Cities<\/div>/, `${newCount}+</div>\n              <div className="text-sm sm:text-base text-white/80">Cities</div>`);
+        
+        await fs.writeFile(heroPath, updatedHeroContent);
+        console.log(`Updated Hero.tsx with new city count: ${newCount}`);
+        
+        // Update TravelCategories component city count
+        const travelCategoriesPath = path.join(process.cwd(), 'client', 'src', 'components', 'TravelCategories.tsx');
+        const travelCategoriesContent = await fs.readFile(travelCategoriesPath, 'utf-8');
+        const updatedTravelCategoriesContent = travelCategoriesContent.replace(/\d+\+ destinations/g, `${newCount}+ destinations`);
+        
+        await fs.writeFile(travelCategoriesPath, updatedTravelCategoriesContent);
+        console.log(`Updated TravelCategories.tsx with new city count: ${newCount}`);
       }
 
       res.json({
