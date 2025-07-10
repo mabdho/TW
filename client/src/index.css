@@ -4,6 +4,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Mobile-first responsive utilities */
+@layer utilities {
+  .text-responsive {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+  
+  .heading-responsive {
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl;
+  }
+  
+  .container-responsive {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+  
+  .section-spacing {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+  
+  .card-spacing {
+    @apply p-4 sm:p-6 lg:p-8;
+  }
+  
+  .grid-responsive {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+  }
+  
+  .touch-friendly {
+    @apply min-h-[44px] min-w-[44px];
+  }
+}
+
 /* Travel Guide Design System - Inspired by wanderlust and adventure
 All colors MUST be HSL for consistency and theming.
 */

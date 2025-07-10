@@ -43,36 +43,36 @@ export const CityPage: React.FC<CityPageProps> = ({
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary/5 via-background to-background">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6 sm:py-8">
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-5 mb-8 bg-card border shadow-sm">
-            <TabsTrigger value="overview" className="text-sm font-medium">Overview</TabsTrigger>
-            <TabsTrigger value="top5" className="text-sm font-medium">Top 5 Attractions</TabsTrigger>
-            <TabsTrigger value="all" className="text-sm font-medium">All Attractions</TabsTrigger>
-            {logistics && <TabsTrigger value="plan" className="text-sm font-medium">Plan Your Trip</TabsTrigger>}
-            {faqs && <TabsTrigger value="faqs" className="text-sm font-medium">FAQs</TabsTrigger>}
+          <TabsList className="grid w-full grid-cols-3 sm:grid-cols-5 mb-6 sm:mb-8 bg-card border shadow-sm">
+            <TabsTrigger value="overview" className="text-xs sm:text-sm font-medium px-2 sm:px-4">Overview</TabsTrigger>
+            <TabsTrigger value="top5" className="text-xs sm:text-sm font-medium px-2 sm:px-4">Top 5</TabsTrigger>
+            <TabsTrigger value="all" className="text-xs sm:text-sm font-medium px-2 sm:px-4">All</TabsTrigger>
+            {logistics && <TabsTrigger value="plan" className="text-xs sm:text-sm font-medium px-2 sm:px-4 hidden sm:block">Plan Your Trip</TabsTrigger>}
+            {faqs && <TabsTrigger value="faqs" className="text-xs sm:text-sm font-medium px-2 sm:px-4 hidden sm:block">FAQs</TabsTrigger>}
           </TabsList>
 
           {/* Overview Tab */}
-          <TabsContent value="overview" className="space-y-6">
-            <div className="bg-card rounded-xl shadow-sm border p-8">
-              <h1 className="text-4xl font-bold text-foreground mb-6">{title}</h1>
-              <p className="text-lg text-muted-foreground leading-relaxed">{description}</p>
+          <TabsContent value="overview" className="space-y-4 sm:space-y-6">
+            <div className="bg-card rounded-xl shadow-sm border p-4 sm:p-6 md:p-8">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 sm:mb-6">{title}</h1>
+              <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">{description}</p>
             </div>
           </TabsContent>
 
           {/* Top 5 Attractions Tab */}
-          <TabsContent value="top5" className="space-y-6">
-            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl p-8 border">
-              <h2 className="text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
+          <TabsContent value="top5" className="space-y-4 sm:space-y-6">
+            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl p-4 sm:p-6 md:p-8 border">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
                 Top 5 Must-Visit Attractions
               </h2>
-              <p className="text-muted-foreground mb-6">Don't miss these incredible experiences</p>
-              <div className="grid gap-4">
+              <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">Don't miss these incredible experiences</p>
+              <div className="grid gap-3 sm:gap-4">
                 {highlights.map((highlight, index) => (
-                  <div key={index} className="flex items-center gap-3 p-4 bg-card/80 rounded-lg border">
-                    <span className="text-2xl">✨</span>
-                    <span className="text-lg font-medium text-foreground">{highlight}</span>
+                  <div key={index} className="flex items-center gap-3 p-3 sm:p-4 bg-card/80 rounded-lg border">
+                    <span className="text-xl sm:text-2xl">✨</span>
+                    <span className="text-sm sm:text-base md:text-lg font-medium text-foreground">{highlight}</span>
                   </div>
                 ))}
               </div>
@@ -80,22 +80,22 @@ export const CityPage: React.FC<CityPageProps> = ({
           </TabsContent>
 
           {/* All Attractions Tab */}
-          <TabsContent value="all" className="space-y-6">
-            <div className="space-y-6">
-              <h2 className="text-3xl font-bold text-foreground mb-6">Complete Guide to All Attractions</h2>
+          <TabsContent value="all" className="space-y-4 sm:space-y-6">
+            <div className="space-y-4 sm:space-y-6">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-4 sm:mb-6">Complete Guide to All Attractions</h2>
               {attractions.map((attraction, index) => (
                 <div key={index} className="bg-card rounded-xl shadow-sm border overflow-hidden">
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-foreground mb-4">{attraction.name}</h3>
-                    <p className="text-muted-foreground leading-relaxed mb-6">{attraction.description}</p>
+                  <div className="p-4 sm:p-6">
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-3 sm:mb-4">{attraction.name}</h3>
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4 sm:mb-6">{attraction.description}</p>
                     
                     {attraction.practicalInfo && (
-                      <div className="bg-muted/30 rounded-lg p-4 space-y-3">
-                        <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                      <div className="bg-muted/30 rounded-lg p-3 sm:p-4 space-y-3">
+                        <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2 text-sm sm:text-base">
                           <MapPin className="h-4 w-4" />
                           Practical Information
                         </h4>
-                        <div className="grid gap-3 text-sm">
+                        <div className="grid gap-3 text-xs sm:text-sm">
                           {attraction.practicalInfo.howToGetThere && (
                             <div>
                               <strong className="text-foreground">How to Get There:</strong>
@@ -103,29 +103,35 @@ export const CityPage: React.FC<CityPageProps> = ({
                             </div>
                           )}
                           {attraction.practicalInfo.openingHours && (
-                            <div className="flex items-center gap-2">
-                              <Clock className="h-4 w-4 text-muted-foreground" />
-                              <strong className="text-foreground">Hours:</strong>
-                              <span className="text-muted-foreground">{attraction.practicalInfo.openingHours}</span>
+                            <div className="flex items-start gap-2">
+                              <Clock className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                              <div>
+                                <strong className="text-foreground">Hours:</strong>
+                                <span className="text-muted-foreground ml-2">{attraction.practicalInfo.openingHours}</span>
+                              </div>
                             </div>
                           )}
                           {attraction.practicalInfo.cost && (
-                            <div className="flex items-center gap-2">
-                              <DollarSign className="h-4 w-4 text-muted-foreground" />
-                              <strong className="text-foreground">Cost:</strong>
-                              <span className="text-muted-foreground">{attraction.practicalInfo.cost}</span>
+                            <div className="flex items-start gap-2">
+                              <DollarSign className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                              <div>
+                                <strong className="text-foreground">Cost:</strong>
+                                <span className="text-muted-foreground ml-2">{attraction.practicalInfo.cost}</span>
+                              </div>
                             </div>
                           )}
                           {attraction.practicalInfo.website && (
-                            <div className="flex items-center gap-2">
-                              <Globe className="h-4 w-4 text-muted-foreground" />
-                              <strong className="text-foreground">Website:</strong>
-                              <a href={`https://${attraction.practicalInfo.website}`} 
-                                 className="text-primary hover:underline" 
-                                 target="_blank" 
-                                 rel="noopener">
-                                {attraction.practicalInfo.website}
-                              </a>
+                            <div className="flex items-start gap-2">
+                              <Globe className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                              <div>
+                                <strong className="text-foreground">Website:</strong>
+                                <a href={`https://${attraction.practicalInfo.website}`} 
+                                   className="text-primary hover:underline break-all ml-2" 
+                                   target="_blank" 
+                                   rel="noopener">
+                                  {attraction.practicalInfo.website}
+                                </a>
+                              </div>
                             </div>
                           )}
                         </div>

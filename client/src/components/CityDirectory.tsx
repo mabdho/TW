@@ -170,27 +170,27 @@ export const CityDirectory = () => {
     : cities.filter(city => city.continent === selectedContinent);
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-12 sm:py-16 lg:py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 px-4 sm:px-0">
             Explore Our City Guides
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-6 sm:mb-8 px-4 sm:px-0">
             Discover comprehensive travel guides for 152+ amazing cities worldwide. 
             Each guide features TripAdvisor-style layouts with attractions, logistics, and local insights.
           </p>
           
           {/* Continent Filter */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
+          <div className="flex flex-wrap justify-center gap-2 mb-6 sm:mb-8 px-4 sm:px-0">
             {continents.map((continent) => (
               <Button
                 key={continent}
                 variant={selectedContinent === continent ? "default" : "outline"}
                 size="sm"
                 onClick={() => setSelectedContinent(continent)}
-                className="transition-all duration-200"
+                className="transition-all duration-200 text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2 h-8 sm:h-9"
               >
                 {continent}
               </Button>
@@ -203,31 +203,31 @@ export const CityDirectory = () => {
         </div>
 
         {/* Cities Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
           {filteredCities.map((city, index) => (
             <a key={city.path} href={city.path}>
               <Card 
                 className="group overflow-hidden border hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-card h-full"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
-                <CardContent className="p-4">
+                <CardContent className="p-3 sm:p-4">
                   <div className="flex items-start justify-between mb-2">
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-1">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors text-xs sm:text-sm leading-tight truncate">
                         {city.name}
                       </h3>
-                      <p className="text-sm text-muted-foreground line-clamp-1">
+                      <p className="text-xs text-muted-foreground truncate">
                         {city.country}
                       </p>
                     </div>
-                    <MapPin className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0 ml-2" />
+                    <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0 ml-1 sm:ml-2" />
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full">
+                    <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full truncate max-w-[80px] sm:max-w-none">
                       {city.continent}
                     </span>
-                    <ArrowRight className="h-3 w-3 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="h-3 w-3 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all flex-shrink-0" />
                   </div>
                 </CardContent>
               </Card>
@@ -236,17 +236,17 @@ export const CityDirectory = () => {
         </div>
 
         {/* Bottom Call to Action */}
-        <div className="text-center mt-16">
-          <div className="bg-muted/30 rounded-lg p-8">
-            <h3 className="text-2xl font-bold text-foreground mb-4">
+        <div className="text-center mt-12 sm:mt-16">
+          <div className="bg-muted/30 rounded-lg p-6 sm:p-8">
+            <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4">
               More Cities Coming Soon
             </h3>
-            <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+            <p className="text-muted-foreground mb-4 sm:mb-6 max-w-md mx-auto px-4 sm:px-0">
               We're constantly adding new destinations to help you discover amazing places around the world.
             </p>
-            <Button variant="default" size="lg">
+            <Button variant="default" size="lg" className="text-sm sm:text-base">
               Request a City Guide
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
           </div>
         </div>

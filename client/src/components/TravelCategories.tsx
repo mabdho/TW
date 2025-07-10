@@ -54,21 +54,21 @@ const categories = [
 
 export const TravelCategories = () => {
   return (
-    <section id="experiences" className="py-20 bg-background">
+    <section id="experiences" className="py-12 sm:py-16 lg:py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 px-4 sm:px-0">
             Travel by Experience
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4 sm:px-0">
             Find your perfect adventure based on what you love to do. 
             From heart-pumping adventures to peaceful retreats.
           </p>
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {categories.map((category, index) => {
             const IconComponent = category.icon;
             return (
@@ -77,19 +77,19 @@ export const TravelCategories = () => {
                 className="group cursor-pointer border-0 shadow-soft hover:shadow-strong transition-all duration-300 hover:-translate-y-1 overflow-hidden"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className={`h-32 ${category.gradient} relative overflow-hidden`}>
+                <div className={`h-28 sm:h-32 ${category.gradient} relative overflow-hidden`}>
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors duration-300" />
-                  <div className="absolute bottom-4 left-4 text-white">
-                    <IconComponent className="h-8 w-8 mb-2" />
-                    <h3 className="text-lg font-semibold">{category.name}</h3>
+                  <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-white">
+                    <IconComponent className="h-6 w-6 sm:h-8 sm:w-8 mb-2" />
+                    <h3 className="text-base sm:text-lg font-semibold">{category.name}</h3>
                   </div>
-                  <div className="absolute top-4 right-4 text-white/80 text-sm font-medium">
+                  <div className="absolute top-3 sm:top-4 right-3 sm:right-4 text-white/80 text-xs sm:text-sm font-medium">
                     {category.count}
                   </div>
                 </div>
                 
-                <CardContent className="p-6">
-                  <p className="text-muted-foreground group-hover:text-foreground transition-colors">
+                <CardContent className="p-4 sm:p-6">
+                  <p className="text-sm sm:text-base text-muted-foreground group-hover:text-foreground transition-colors">
                     {category.description}
                   </p>
                 </CardContent>
