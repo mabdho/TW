@@ -1,8 +1,8 @@
-# Full-Stack React Express Application
+# WanderGuide - Travel Website Application
 
 ## Overview
 
-This is a modern full-stack web application built with React frontend and Express backend. The application uses a monorepo structure with shared TypeScript schemas, Drizzle ORM for database operations, and shadcn/ui components for the user interface. It's configured for PostgreSQL database connectivity and includes comprehensive UI components and development tools.
+This is a modern travel website called "WanderGuide" built with React frontend and Express backend. The application showcases beautiful destinations, travel experiences, and curated travel guides. It features a stunning visual design with travel-themed components, responsive layouts, and modern animations. The website includes hero sections, featured destinations, travel categories, and comprehensive travel information.
 
 ## User Preferences
 
