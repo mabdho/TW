@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Bandung: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Bandung, Indonesia (2025 Guide)"
-      description="Nestled amidst volcanic mountains and lush tea plantations, Bandung is Indonesia's cool and creative heart. Fondly nicknamed 'Paris van Java' for its colonial-era European ambiance and vibrant fashion scene, this West Java capital offers a refreshing escape from the tropical heat. Its unique appeal lies in the seamless blend of natural wonders, from ethereal crater lakes to steaming volcanoes, with a bustling urban life filled with art-deco architecture, trendy cafes, and endless shopping opportunities. Whether you're an adventure seeker, a culture enthusiast, or a foodie eager to sample Sundanese cuisine, you'll find an incredible array of activities. This guide will walk you through the very best things to do in Bandung, ensuring a memorable and multifaceted journey into one of Indonesia's most beloved cities."
+      title="15 Best Things to Do in Bandung, Guide"
+      description={`Nestled amidst volcanic mountains and lush tea plantations, Bandung is Indonesia's cool and creative heart. Fondly nicknamed 'Paris van Java' for its colonial-era European ambiance and vibrant fashion scene, this West Java capital offers a refreshing escape from the tropical heat. Its unique appeal lies in the seamless blend of natural wonders, from ethereal crater lakes to steaming volcanoes, with a bustling urban life filled with art-deco architecture, trendy cafes, and endless shopping opportunities. Whether you're an adventure seeker, a culture enthusiast, or a foodie eager to sample Sundanese cuisine, you'll find an incredible array of activities. This guide will walk you through the very best things to do in Bandung, ensuring a memorable and multifaceted journey into one of Indonesia's most beloved cities."`}
       highlights={[
       "Kawah Putih (The White Crater)",
       "Tangkuban Perahu Volcano",

@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Asuncion: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Asunción, Paraguay (2025 Guide)"
-      description="Welcome to Asunción, the resilient 'Mother of Cities' and the heart of Paraguay. This often-overlooked South American capital offers a captivating blend of grand colonial architecture, lush green spaces, and a burgeoning modern energy. Life here moves at a more relaxed pace, inviting you to wander through historic plazas, sip tereré by the river, and connect with some of the continent's warmest people. While it may not have the towering monuments of its neighbors, Asunción's charm lies in its authenticity and quiet confidence. From exploring poignant museums to getting lost in vibrant markets, there's a surprising wealth of culture and history to uncover. This guide will walk you through all the best things to do in Asunción, revealing a city that is as intriguing as it is welcoming."
+      title="15 Best Things to Do in Asuncion, Guide"
+      description={`Welcome to Asunción, the resilient 'Mother of Cities' and the heart of Paraguay. This often-overlooked South American capital offers a captivating blend of grand colonial architecture, lush green spaces, and a burgeoning modern energy. Life here moves at a more relaxed pace, inviting you to wander through historic plazas, sip tereré by the river, and connect with some of the continent's warmest people. While it may not have the towering monuments of its neighbors, Asunción's charm lies in its authenticity and quiet confidence. From exploring poignant museums to getting lost in vibrant markets, there's a surprising wealth of culture and history to uncover. This guide will walk you through all the best things to do in Asunción, revealing a city that is as intriguing as it is welcoming."`}
       highlights={[
       "Palacio de los López",
       "Panteón Nacional de los Héroes",

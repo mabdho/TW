@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Valencia: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Valencia, Spain (2025 Guide)"
-      description="Valencia, Spain's vibrant third-largest city, effortlessly blends futuristic innovation with rich history on the sun-drenched Mediterranean coast. It's a city of contrasts, where the Gothic spires of the old town stand in dialogue with the sweeping, space-age curves of the City of Arts and Sciences. A former riverbed has been transformed into a sunken green park that meanders through the city, connecting diverse neighborhoods. Famous as the birthplace of paella and home to the raucous Las Fallas festival, Valencia offers a feast for the senses. Whether you're exploring ancient markets, relaxing on golden beaches, or cycling through lush gardens, you'll find an incredible array of experiences. This guide will walk you through all the best things to do in Valencia, ensuring an unforgettable Spanish adventure."
+      title="15 Best Things to Do in Valencia, Guide"
+      description={`Valencia, Spain's vibrant third-largest city, effortlessly blends futuristic innovation with rich history on the sun-drenched Mediterranean coast. It's a city of contrasts, where the Gothic spires of the old town stand in dialogue with the sweeping, space-age curves of the City of Arts and Sciences. A former riverbed has been transformed into a sunken green park that meanders through the city, connecting diverse neighborhoods. Famous as the birthplace of paella and home to the raucous Las Fallas festival, Valencia offers a feast for the senses. Whether you're exploring ancient markets, relaxing on golden beaches, or cycling through lush gardens, you'll find an incredible array of experiences. This guide will walk you through all the best things to do in Valencia, ensuring an unforgettable Spanish adventure."`}
       highlights={[
       "City of Arts and Sciences (Ciutat de les Arts i les Ciències)",
       "Valencia Cathedral (Catedral de València)",

@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const AliceSprings: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Alice Springs, Australia (2025 Guide)"
-      description="Nestled between the East and West MacDonnell Ranges, Alice Springs is the vibrant, beating heart of the Australian Outback. More than just a stopover on the way to Uluru, this iconic town, known locally as 'Alice', offers a profound connection to Australia's ancient landscapes and rich Aboriginal culture. It’s a place of stark beauty, where fiery red earth meets brilliant blue skies and pioneering history is etched into every corner. From exploring dramatic gorges and spotting unique wildlife to immersing yourself in the world's oldest living culture through incredible art, there are countless adventures waiting to be discovered. This guide will walk you through all the very best things to do in Alice Springs, ensuring your trip to the Red Centre is an unforgettable one."
+      title="15 Best Things to Do in AliceSprings, Guide"
+      description={`Nestled between the East and West MacDonnell Ranges, Alice Springs is the vibrant, beating heart of the Australian Outback. More than just a stopover on the way to Uluru, this iconic town, known locally as 'Alice', offers a profound connection to Australia's ancient landscapes and rich Aboriginal culture. It’s a place of stark beauty, where fiery red earth meets brilliant blue skies and pioneering history is etched into every corner. From exploring dramatic gorges and spotting unique wildlife to immersing yourself in the world's oldest living culture through incredible art, there are countless adventures waiting to be discovered. This guide will walk you through all the very best things to do in Alice Springs, ensuring your trip to the Red Centre is an unforgettable one."`}
       highlights={[
       "Alice Springs Desert Park",
       "Royal Flying Doctor Service Tourist Facility",

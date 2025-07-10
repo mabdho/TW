@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Nice: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Nice, France (2025 Guide)"
-      description="Nestled on the sun-drenched shores of the French Riviera, Nice is a dazzling blend of old-world opulence, vibrant street life, and stunning Mediterranean beauty. The capital of the Côte d'Azur captivates visitors with its azure waters, palm-fringed promenades, and a charming old town (Vieux Nice) bursting with pastel-hued buildings and bustling markets. Beyond the beach, the city is a haven for art lovers, home to world-class museums dedicated to masters like Matisse and Chagall. Whether you're strolling along the iconic Baie des Anges (Bay of Angels), savoring local culinary delights like socca, or exploring lush hilltop parks with panoramic views, you'll find no shortage of enchanting experiences. This guide will walk you through all the very best things to do in Nice, ensuring an unforgettable journey into the heart of Riviera glamour and culture."
+      title="15 Best Things to Do in Nice, Guide"
+      description={`Nestled on the sun-drenched shores of the French Riviera, Nice is a dazzling blend of old-world opulence, vibrant street life, and stunning Mediterranean beauty. The capital of the Côte d'Azur captivates visitors with its azure waters, palm-fringed promenades, and a charming old town (Vieux Nice) bursting with pastel-hued buildings and bustling markets. Beyond the beach, the city is a haven for art lovers, home to world-class museums dedicated to masters like Matisse and Chagall. Whether you're strolling along the iconic Baie des Anges (Bay of Angels), savoring local culinary delights like socca, or exploring lush hilltop parks with panoramic views, you'll find no shortage of enchanting experiences. This guide will walk you through all the very best things to do in Nice, ensuring an unforgettable journey into the heart of Riviera glamour and culture."`}
       highlights={[
       "Promenade des Anglais",
       "Vieux Nice (Old Town)",

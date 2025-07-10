@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Busan: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Busan, South Korea (2025 Guide)"
-      description="Welcome to Busan, South Korea's vibrant coastal gem where the mountains meet the sea. This bustling port city offers a captivating blend of stunning natural scenery, rich cultural heritage, and modern urban energy. From sprawling sandy beaches and ancient temples perched on cliffs to the world's largest fish market, Busan is a feast for the senses. You can wander through colorful, art-filled villages, indulge in some of the freshest seafood imaginable, or hike along breathtaking coastal trails. Whether you're a beach lover, a foodie, a culture enthusiast, or an adventure seeker, you'll find an incredible array of experiences. Get ready to explore this dynamic city and discover the very best things to do in Busan."
+      title="15 Best Things to Do in Busan, Guide"
+      description={`Welcome to Busan, South Korea's vibrant coastal gem where the mountains meet the sea. This bustling port city offers a captivating blend of stunning natural scenery, rich cultural heritage, and modern urban energy. From sprawling sandy beaches and ancient temples perched on cliffs to the world's largest fish market, Busan is a feast for the senses. You can wander through colorful, art-filled villages, indulge in some of the freshest seafood imaginable, or hike along breathtaking coastal trails. Whether you're a beach lover, a foodie, a culture enthusiast, or an adventure seeker, you'll find an incredible array of experiences. Get ready to explore this dynamic city and discover the very best things to do in Busan."`}
       highlights={[
       "Gamcheon Culture Village",
       "Haeundae Beach",

@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Casablanca: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Casablanca, Morocco (2025 Guide)"
-      description="Welcome to Casablanca, Morocco's vibrant economic heart and largest city. Often seen as a mere entry point, 'Casa' offers a fascinating blend of modern ambition and deep-rooted tradition. Here, French colonial legacy is etched into grand boulevards and Mauresque architecture, while the pulse of contemporary Moroccan life thrums in its bustling markets and chic coastal districts. Beyond the cinematic romance, you'll find a city of striking contrasts, from the architectural marvel of the Hassan II Mosque standing defiant against the Atlantic to the labyrinthine alleys of the ancient medina. It's a place of commerce, art, and coastal charm, waiting to be explored. Whether you have one day or several, this guide will walk you through all the very best things to do in Casablanca, revealing a destination rich with authentic experiences and hidden gems."
+      title="15 Best Things to Do in Casablanca, Guide"
+      description={`Welcome to Casablanca, Morocco's vibrant economic heart and largest city. Often seen as a mere entry point, 'Casa' offers a fascinating blend of modern ambition and deep-rooted tradition. Here, French colonial legacy is etched into grand boulevards and Mauresque architecture, while the pulse of contemporary Moroccan life thrums in its bustling markets and chic coastal districts. Beyond the cinematic romance, you'll find a city of striking contrasts, from the architectural marvel of the Hassan II Mosque standing defiant against the Atlantic to the labyrinthine alleys of the ancient medina. It's a place of commerce, art, and coastal charm, waiting to be explored. Whether you have one day or several, this guide will walk you through all the very best things to do in Casablanca, revealing a destination rich with authentic experiences and hidden gems."`}
       highlights={[
       "Hassan II Mosque",
       "Quartier Habous (New Medina)",

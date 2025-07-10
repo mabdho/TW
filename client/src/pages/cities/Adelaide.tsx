@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Adelaide: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Adelaide, Australia (2025 Guide)"
-      description="Effortlessly blending urban sophistication with a relaxed, small-town charm, Adelaide is a gem of a city nestled between rolling hills and the sparkling Gulf St Vincent. Renowned as one of Australia’s Great Wine Capitals, its cellar doors are as accessible as its vibrant cultural institutions and pristine beaches. The city’s genius grid layout, encircled by lush parklands, makes it exceptionally walkable and easy to explore. From the sensory overload of the bustling Central Market to the tranquil beauty of its Botanic Garden, Adelaide offers a diverse and enriching experience. Whether you're a foodie, a wine connoisseur, an art lover, or an outdoor enthusiast, you'll find an incredible array of the best things to do in Adelaide. This guide will help you uncover the captivating spirit of South Australia’s capital, a city that delights at every turn."
+      title="15 Best Things to Do in Adelaide, Guide"
+      description={`Effortlessly blending urban sophistication with a relaxed, small-town charm, Adelaide is a gem of a city nestled between rolling hills and the sparkling Gulf St Vincent. Renowned as one of Australia’s Great Wine Capitals, its cellar doors are as accessible as its vibrant cultural institutions and pristine beaches. The city’s genius grid layout, encircled by lush parklands, makes it exceptionally walkable and easy to explore. From the sensory overload of the bustling Central Market to the tranquil beauty of its Botanic Garden, Adelaide offers a diverse and enriching experience. Whether you're a foodie, a wine connoisseur, an art lover, or an outdoor enthusiast, you'll find an incredible array of the best things to do in Adelaide. This guide will help you uncover the captivating spirit of South Australia’s capital, a city that delights at every turn."`}
       highlights={[
       "Adelaide Central Market",
       "Barossa Valley Wine Region",

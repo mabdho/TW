@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Calgary: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Calgary, Canada (2025 Guide)"
-      description="Nestled where the prairies meet the majestic Canadian Rockies, Calgary is a dynamic city that perfectly blends western heritage with modern sophistication. Once a humble outpost of the North-West Mounted Police, it has blossomed into Canada's energy capital, known for its entrepreneurial spirit and warm, welcoming locals. While the world-famous Calgary Stampede showcases its cowboy roots, the city's gleaming skyscrapers, vibrant arts scene, and burgeoning culinary landscape prove there's much more to explore. From sprawling urban parks along the Bow River to world-class museums, discovering the best things to do in Calgary offers an unforgettable Canadian adventure. Whether you're seeking urban excitement or a gateway to breathtaking natural wonders, Calgary delivers in spades."
+      title="15 Best Things to Do in Calgary, Guide"
+      description={`Nestled where the prairies meet the majestic Canadian Rockies, Calgary is a dynamic city that perfectly blends western heritage with modern sophistication. Once a humble outpost of the North-West Mounted Police, it has blossomed into Canada's energy capital, known for its entrepreneurial spirit and warm, welcoming locals. While the world-famous Calgary Stampede showcases its cowboy roots, the city's gleaming skyscrapers, vibrant arts scene, and burgeoning culinary landscape prove there's much more to explore. From sprawling urban parks along the Bow River to world-class museums, discovering the best things to do in Calgary offers an unforgettable Canadian adventure. Whether you're seeking urban excitement or a gateway to breathtaking natural wonders, Calgary delivers in spades."`}
       highlights={[
       "Calgary Tower",
       "Calgary Stampede",

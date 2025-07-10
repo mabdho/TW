@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Auckland: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Auckland, New Zealand (2025 Guide)"
-      description="Nestled on a narrow isthmus between two sparkling harbours, Waitematā and Manukau, Auckland is a unique blend of urban sophistication and stunning natural beauty. Known as the 'City of Sails', its skyline is defined by towering skyscrapers and countless yachts, while its landscape is dotted with 48 dormant volcanic cones. This vibrant multicultural hub offers a dynamic food scene, world-class shopping, and easy access to lush rainforests, idyllic islands, and black-sand beaches. Whether you're seeking adrenaline-pumping adventures or serene cultural experiences, discovering the best things to do in Auckland promises an unforgettable journey. From its bustling waterfront to its tranquil green spaces, New Zealand's largest city is a playground for every type of traveller, offering a perfect gateway to the wonders of the North Island."
+      title="15 Best Things to Do in Auckland, Guide"
+      description={`Nestled on a narrow isthmus between two sparkling harbours, Waitematā and Manukau, Auckland is a unique blend of urban sophistication and stunning natural beauty. Known as the 'City of Sails', its skyline is defined by towering skyscrapers and countless yachts, while its landscape is dotted with 48 dormant volcanic cones. This vibrant multicultural hub offers a dynamic food scene, world-class shopping, and easy access to lush rainforests, idyllic islands, and black-sand beaches. Whether you're seeking adrenaline-pumping adventures or serene cultural experiences, discovering the best things to do in Auckland promises an unforgettable journey. From its bustling waterfront to its tranquil green spaces, New Zealand's largest city is a playground for every type of traveller, offering a perfect gateway to the wonders of the North Island."`}
       highlights={[
       "Sky Tower",
       "Waiheke Island",

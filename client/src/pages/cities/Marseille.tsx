@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Marseille: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Marseille, France (2025 Guide)"
-      description="As France's oldest city, Marseille is a vibrant tapestry of history, culture, and coastal grit. This sun-drenched Mediterranean port pulses with a unique energy, where ancient Greek foundations meet bold modern architecture. From the bustling quays of the Old Port to the labyrinthine streets of Le Panier, the city offers a sensory feast. Its stunning natural landscapes, like the dramatic Calanques, provide a breathtaking escape just moments from the urban core. Whether you're savoring a traditional bouillabaisse, exploring a world-class museum, or simply soaking up the atmosphere in a lively square, you'll find that the best things to do in Marseille reveal a city with a fierce and captivating soul. This guide will navigate you through its most unforgettable experiences, ensuring a trip you won't soon forget."
+      title="15 Best Things to Do in Marseille, Guide"
+      description={`As France's oldest city, Marseille is a vibrant tapestry of history, culture, and coastal grit. This sun-drenched Mediterranean port pulses with a unique energy, where ancient Greek foundations meet bold modern architecture. From the bustling quays of the Old Port to the labyrinthine streets of Le Panier, the city offers a sensory feast. Its stunning natural landscapes, like the dramatic Calanques, provide a breathtaking escape just moments from the urban core. Whether you're savoring a traditional bouillabaisse, exploring a world-class museum, or simply soaking up the atmosphere in a lively square, you'll find that the best things to do in Marseille reveal a city with a fierce and captivating soul. This guide will navigate you through its most unforgettable experiences, ensuring a trip you won't soon forget."`}
       highlights={[
       "Vieux-Port (Old Port)",
       "Basilique Notre-Dame de la Garde",

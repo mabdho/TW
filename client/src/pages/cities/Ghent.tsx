@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Ghent: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Ghent, Belgium (2025 Guide)"
-      description="Often described as Europe's best-kept secret, Ghent is a captivating city where medieval history and vibrant, youthful energy collide. Less crowded than nearby Bruges, it offers a more authentic Flemish experience. Picture-perfect canals are lined with ornate guildhalls, a formidable castle looms over the city center, and cobblestone streets lead to cozy pubs and world-class museums. This is a city that lives and breathes its history without being trapped by it, thanks to a large student population that fuels a dynamic cultural and culinary scene. Whether you're climbing a medieval belfry for panoramic views or exploring a street dedicated to urban art, you'll find an incredible array of the best things to do in Ghent. It’s a city that invites you to wander, discover, and fall in love with its unique charm."
+      title="15 Best Things to Do in Ghent, Guide"
+      description={`Often described as Europe's best-kept secret, Ghent is a captivating city where medieval history and vibrant, youthful energy collide. Less crowded than nearby Bruges, it offers a more authentic Flemish experience. Picture-perfect canals are lined with ornate guildhalls, a formidable castle looms over the city center, and cobblestone streets lead to cozy pubs and world-class museums. This is a city that lives and breathes its history without being trapped by it, thanks to a large student population that fuels a dynamic cultural and culinary scene. Whether you're climbing a medieval belfry for panoramic views or exploring a street dedicated to urban art, you'll find an incredible array of the best things to do in Ghent. It’s a city that invites you to wander, discover, and fall in love with its unique charm."`}
       highlights={[
       "Gravensteen (Castle of the Counts)",
       "St. Bavo's Cathedral & The Mystic Lamb",

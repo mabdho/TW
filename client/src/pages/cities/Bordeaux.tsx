@@ -4,8 +4,12 @@ import { CityPage } from '@/components/CityPage';
 export const Bordeaux: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Bordeaux, France (2025 Guide)"
-      description="Here's what I didn't expect about Bordeaux: it's not just about wine. I mean, yes, the wine is exceptional—this is the Bordeaux we're talking about. But the city itself is this gorgeous, golden-stone beauty that somehow manages to feel both grand and approachable at the same time. They used to call it 'Sleeping Beauty,' which seems a bit unfair now because this place is anything but sleepy. The entire historic center is a UNESCO site, which usually makes me nervous about tourist traps, but Bordeaux has managed to stay authentic while still showing off. The 18th-century buildings along the river are stunning, especially when they're reflected in that massive water mirror—yes, the world's largest reflecting pool, because of course the French would do something like that. What really gets me about Bordeaux is how it doesn't take itself too seriously despite being, objectively, quite serious indeed. You can spend the morning touring world-famous vineyards and the afternoon wandering through neighborhoods that feel lived-in and real. The food scene is incredible, the architecture is Instagram-worthy without trying, and everyone seems genuinely pleased that you've come to visit."
+      title="15 Best Things to Do in Bordeaux, Guide"
+      description={`Here's what I didn't expect about Bordeaux: it's not just about wine. I mean, yes, the wine is exceptional—this is the Bordeaux we're talking about. But the city itself is this gorgeous, golden-stone beauty that somehow manages to feel both grand and approachable at the same time.
+
+They used to call it "Sleeping Beauty," which seems a bit unfair now because this place is anything but sleepy. The entire historic center is a UNESCO site, which usually makes me nervous about tourist traps, but Bordeaux has managed to stay authentic while still showing off. The 18th-century buildings along the river are stunning, especially when they're reflected in that massive water mirror—yes, the world's largest reflecting pool, because of course the French would do something like that.
+
+What really gets me about Bordeaux is how it doesn't take itself too seriously despite being, objectively, quite serious indeed. You can spend the morning touring world-famous vineyards and the afternoon wandering through neighborhoods that feel lived-in and real. The food scene is incredible, the architecture is Instagram-worthy without trying, and everyone seems genuinely pleased that you've come to visit."`}
       highlights={[
       "Place de la Bourse & Miroir d'eau",
       "La Cité du Vin",

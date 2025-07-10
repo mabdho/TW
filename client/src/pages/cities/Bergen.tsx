@@ -4,12 +4,12 @@ import { CityPage } from '@/components/CityPage';
 export const Bergen: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Bergen, Norway (2025 Guide)"
-      description="Bergen is the kind of city that makes you understand why people fall in love with Norway. It's perched between seven mountains (yes, they actually count them), and everywhere you look there's either a fjord or a mountain or some impossibly picturesque wooden building that looks like it's been painted by someone with very good taste in colors.
+      title="15 Best Things to Do in Bergen, Guide"
+      description={`Bergen is the kind of city that makes you understand why people fall in love with Norway. It's perched between seven mountains (yes, they actually count them), and everywhere you look there's either a fjord or a mountain or some impossibly picturesque wooden building that looks like it's been painted by someone with very good taste in colors.
 
 The thing is, Bergen doesn't just rest on its natural beauty—though it has plenty of that. This is a city with serious character. Those colorful wooden houses lined up along the harbor? They're not just pretty; they're where medieval merchants once controlled the fish trade across Northern Europe. The fish market is still there, by the way, and it's still excellent.
 
-What I love about Bergen is how it manages to be both ruggedly Norwegian and surprisingly cosmopolitan. You can take a funicular up a mountain in the morning for views that will ruin other cities for you, then spend the afternoon in world-class art museums. Plus, if you're into rain—and let's be honest, you should probably get into rain if you're visiting Norway—Bergen has some of the best."
+What I love about Bergen is how it manages to be both ruggedly Norwegian and surprisingly cosmopolitan. You can take a funicular up a mountain in the morning for views that will ruin other cities for you, then spend the afternoon in world-class art museums. Plus, if you're into rain—and let's be honest, you should probably get into rain if you're visiting Norway—Bergen has some of the best."`}
       highlights={[
       "Bryggen Hanseatic Wharf",
       "Fløyen Mountain and the Fløibanen Funicular",

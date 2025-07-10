@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Darwin: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Darwin, Australia (2025 Guide)"
-      description="Welcome to Australia's tropical capital, a laid-back city where Asia meets the Outback. Darwin is a melting pot of cultures, defined by its resilient history, vibrant Indigenous art, and balmy outdoor lifestyle. Perched on the Timor Sea, it serves as the gateway to colossal national parks like Kakadu and Litchfield. Here, you can encounter saltwater crocodiles, savor diverse flavors at bustling sunset markets, and delve into poignant WWII history. Whether you're cooling off in a waterfront lagoon, exploring lush botanic gardens, or watching a movie under the stars, you'll quickly fall for the city's unique charm. This guide will walk you through all the very best things to do in Darwin, ensuring a truly unforgettable Top End adventure."
+      title="15 Best Things to Do in Darwin, Guide"
+      description={`Welcome to Australia's tropical capital, a laid-back city where Asia meets the Outback. Darwin is a melting pot of cultures, defined by its resilient history, vibrant Indigenous art, and balmy outdoor lifestyle. Perched on the Timor Sea, it serves as the gateway to colossal national parks like Kakadu and Litchfield. Here, you can encounter saltwater crocodiles, savor diverse flavors at bustling sunset markets, and delve into poignant WWII history. Whether you're cooling off in a waterfront lagoon, exploring lush botanic gardens, or watching a movie under the stars, you'll quickly fall for the city's unique charm. This guide will walk you through all the very best things to do in Darwin, ensuring a truly unforgettable Top End adventure."`}
       highlights={[
       "Mindil Beach Sunset Market",
       "Crocosaurus Cove",

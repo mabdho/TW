@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Lagos: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Lagos, Nigeria (2025 Guide)"
-      description="Welcome to Lagos, the pulsating heart of Nigeria and Africa's most populous city. A sprawling metropolis of relentless energy, Lagos is a captivating blend of chaos and charm, where vibrant culture, booming commerce, and creative expression collide. From the historic avenues of Lagos Island to the trendy shores of Victoria Island, the city is a sensory overload in the best way possible. It's the birthplace of Afrobeats, the engine of Nollywood, and a hub for fashion and art. Navigating its infamous traffic is part of the adventure, leading you to serene nature reserves, bustling markets, and world-class art galleries. Whether you're here to dance the night away or delve into rich history, exploring the best things to do in Lagos promises an unforgettable journey into the spirit of modern Africa."
+      title="15 Best Things to Do in Lagos, Guide"
+      description={`Welcome to Lagos, the pulsating heart of Nigeria and Africa's most populous city. A sprawling metropolis of relentless energy, Lagos is a captivating blend of chaos and charm, where vibrant culture, booming commerce, and creative expression collide. From the historic avenues of Lagos Island to the trendy shores of Victoria Island, the city is a sensory overload in the best way possible. It's the birthplace of Afrobeats, the engine of Nollywood, and a hub for fashion and art. Navigating its infamous traffic is part of the adventure, leading you to serene nature reserves, bustling markets, and world-class art galleries. Whether you're here to dance the night away or delve into rich history, exploring the best things to do in Lagos promises an unforgettable journey into the spirit of modern Africa."`}
       highlights={[
       "Lekki Conservation Centre",
       "Nike Art Gallery",

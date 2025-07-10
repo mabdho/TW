@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const CapeTown: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Cape Town, South Africa (2025 Guide)"
-      description="Affectionately known as the 'Mother City', Cape Town is a breathtaking fusion of dramatic natural landscapes and vibrant urban life. Cradled by the iconic Table Mountain and flanked by the Atlantic and Indian Oceans, this South African gem offers a sensory feast. From its poignant history encapsulated on Robben Island to the colourful facades of Bo-Kaap and world-class vineyards just a short drive away, the city’s culture is as diverse as its scenery. Whether you're hiking a mountain at sunrise, watching penguins on a pristine beach, or indulging in its innovative culinary scene, you’ll find no shortage of unforgettable moments. This guide will walk you through the very best things to do in Cape Town, ensuring your visit is nothing short of spectacular. Prepare to be captivated by its charm, energy, and unparalleled beauty."
+      title="15 Best Things to Do in CapeTown, Guide"
+      description={`Affectionately known as the 'Mother City', Cape Town is a breathtaking fusion of dramatic natural landscapes and vibrant urban life. Cradled by the iconic Table Mountain and flanked by the Atlantic and Indian Oceans, this South African gem offers a sensory feast. From its poignant history encapsulated on Robben Island to the colourful facades of Bo-Kaap and world-class vineyards just a short drive away, the city’s culture is as diverse as its scenery. Whether you're hiking a mountain at sunrise, watching penguins on a pristine beach, or indulging in its innovative culinary scene, you’ll find no shortage of unforgettable moments. This guide will walk you through the very best things to do in Cape Town, ensuring your visit is nothing short of spectacular. Prepare to be captivated by its charm, energy, and unparalleled beauty."`}
       highlights={[
       "Table Mountain National Park",
       "Robben Island Museum",

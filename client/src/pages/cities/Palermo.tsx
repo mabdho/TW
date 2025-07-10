@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Palermo: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Palermo, Italy (2025 Guide)"
-      description="A vibrant crossroads of Mediterranean culture for millennia, Palermo is a city of beautiful, chaotic contradictions. Layers of history peel back on every corner, revealing Arabesque domes, Byzantine mosaics, and opulent Baroque facades. The capital of Sicily pulses with an untamed energy, its streets a symphony of shouting vendors, clattering Vespas, and the tantalizing aroma of world-class street food. From grand opera houses to macabre catacombs and sun-drenched markets, Palermo offers an intoxicating sensory feast that rewards the curious traveler. Navigating its ancient streets and discovering its hidden treasures is an unforgettable adventure. This guide will take you through the very best things to do in Palermo, ensuring you experience the true, unfiltered soul of this magnificent city."
+      title="15 Best Things to Do in Palermo, Guide"
+      description={`A vibrant crossroads of Mediterranean culture for millennia, Palermo is a city of beautiful, chaotic contradictions. Layers of history peel back on every corner, revealing Arabesque domes, Byzantine mosaics, and opulent Baroque facades. The capital of Sicily pulses with an untamed energy, its streets a symphony of shouting vendors, clattering Vespas, and the tantalizing aroma of world-class street food. From grand opera houses to macabre catacombs and sun-drenched markets, Palermo offers an intoxicating sensory feast that rewards the curious traveler. Navigating its ancient streets and discovering its hidden treasures is an unforgettable adventure. This guide will take you through the very best things to do in Palermo, ensuring you experience the true, unfiltered soul of this magnificent city."`}
       highlights={[
       "Palermo Cathedral",
       "Palazzo dei Normanni & Cappella Palatina",

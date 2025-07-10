@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Bologna: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Bologna, Italy (2025 Guide)"
-      description="Welcome to Bologna, the vibrant heart of Italy's Emilia-Romagna region. Known by its three nicknames—La Dotta (the learned), La Grassa (the fat), and La Rossa (the red)—this city offers a captivating blend of intellectual history, culinary excellence, and striking medieval architecture. Home to the oldest university in the Western world, Bologna buzzes with youthful energy yet proudly preserves its rich heritage under miles of stunning terracotta-hued porticoes. It's a city made for walking, where every corner reveals a hidden treasure, from bustling food markets to serene ancient churches. Whether you're here to climb medieval towers, indulge in world-famous cuisine, or simply soak up the authentic Italian atmosphere, our guide will show you the very best things to do in Bologna for an unforgettable trip."
+      title="15 Best Things to Do in Bologna, Guide"
+      description={`Welcome to Bologna, the vibrant heart of Italy's Emilia-Romagna region. Known by its three nicknames—La Dotta (the learned), La Grassa (the fat), and La Rossa (the red)—this city offers a captivating blend of intellectual history, culinary excellence, and striking medieval architecture. Home to the oldest university in the Western world, Bologna buzzes with youthful energy yet proudly preserves its rich heritage under miles of stunning terracotta-hued porticoes. It's a city made for walking, where every corner reveals a hidden treasure, from bustling food markets to serene ancient churches. Whether you're here to climb medieval towers, indulge in world-famous cuisine, or simply soak up the authentic Italian atmosphere, our guide will show you the very best things to do in Bologna for an unforgettable trip."`}
       highlights={[
       "Piazza Maggiore and Fountain of Neptune",
       "Le Due Torri (The Two Towers)",

@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Helsinki: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Helsinki, Finland (2025 Guide)"
-      description="Welcome to Helsinki, the vibrant 'Daughter of the Baltic.' This seaside capital effortlessly blends sleek, modern design with rich history, creating a unique urban landscape where neoclassical architecture sits beside avant-garde structures. A city of islands and green spaces, Helsinki offers a breath of fresh air, both literally and figuratively. Its compact size makes it perfect for exploring on foot, revealing a world of innovative cuisine, thriving sauna culture, and a relaxed, creative atmosphere. Whether you're island-hopping to a historic fortress or sipping coffee in a trendy design district cafe, you'll find that the best things to do in Helsinki are a perfect mix of cultural discovery and serene natural beauty. Get ready to explore a city that is as cool as it is charming."
+      title="15 Best Things to Do in Helsinki, Guide"
+      description={`Welcome to Helsinki, the vibrant 'Daughter of the Baltic.' This seaside capital effortlessly blends sleek, modern design with rich history, creating a unique urban landscape where neoclassical architecture sits beside avant-garde structures. A city of islands and green spaces, Helsinki offers a breath of fresh air, both literally and figuratively. Its compact size makes it perfect for exploring on foot, revealing a world of innovative cuisine, thriving sauna culture, and a relaxed, creative atmosphere. Whether you're island-hopping to a historic fortress or sipping coffee in a trendy design district cafe, you'll find that the best things to do in Helsinki are a perfect mix of cultural discovery and serene natural beauty. Get ready to explore a city that is as cool as it is charming."`}
       highlights={[
       "Suomenlinna Sea Fortress",
       "Helsinki Cathedral",

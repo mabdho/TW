@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Perth: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Perth, Australia (2025 Guide)"
-      description="Welcome to Perth, the sun-drenched capital of Western Australia, a city where urban sophistication meets raw natural beauty. As one of the most isolated major cities in the world, Perth has cultivated a unique and laid-back identity. It boasts more sunny days than any other Australian capital, making it an outdoor lover's paradise. From the vast green expanse of Kings Park overlooking the city skyline to the turquoise waters of the Indian Ocean lapping at pristine beaches, there's an adventure around every corner. Explore the vibrant port city of Fremantle, meet the world-famous quokkas on Rottnest Island, or indulge in the world-class wineries of the Swan Valley. Whether you're seeking relaxation or adventure, our guide to the best things to do in Perth will help you uncover the endless charms of this remarkable city on the edge of the continent."
+      title="15 Best Things to Do in Perth, Guide"
+      description={`Welcome to Perth, the sun-drenched capital of Western Australia, a city where urban sophistication meets raw natural beauty. As one of the most isolated major cities in the world, Perth has cultivated a unique and laid-back identity. It boasts more sunny days than any other Australian capital, making it an outdoor lover's paradise. From the vast green expanse of Kings Park overlooking the city skyline to the turquoise waters of the Indian Ocean lapping at pristine beaches, there's an adventure around every corner. Explore the vibrant port city of Fremantle, meet the world-famous quokkas on Rottnest Island, or indulge in the world-class wineries of the Swan Valley. Whether you're seeking relaxation or adventure, our guide to the best things to do in Perth will help you uncover the endless charms of this remarkable city on the edge of the continent."`}
       highlights={[
       "Kings Park and Botanic Garden",
       "Rottnest Island",

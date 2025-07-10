@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Guadalajara: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Guadalajara, Mexico (2025 Guide)"
-      description="Welcome to Guadalajara, the vibrant heart of Jalisco and the cultural soul of Mexico. As the birthplace of both mariachi music and tequila, this city pulses with an energy that is both traditional and refreshingly modern. Stroll through its magnificent colonial plazas, marvel at powerful murals by José Clemente Orozco, and get lost in sprawling markets overflowing with local crafts and culinary delights. Beyond the historic center, trendy neighborhoods buzz with art galleries, innovative restaurants, and stylish boutiques. Known as the 'Pearl of the West,' Guadalajara offers a rich tapestry of experiences for every traveler. Whether you're here for the history, the food, or the fiestas, this guide will walk you through all the very best things to do in Guadalajara, ensuring an unforgettable journey into the essence of Mexico."
+      title="15 Best Things to Do in Guadalajara, Guide"
+      description={`Welcome to Guadalajara, the vibrant heart of Jalisco and the cultural soul of Mexico. As the birthplace of both mariachi music and tequila, this city pulses with an energy that is both traditional and refreshingly modern. Stroll through its magnificent colonial plazas, marvel at powerful murals by José Clemente Orozco, and get lost in sprawling markets overflowing with local crafts and culinary delights. Beyond the historic center, trendy neighborhoods buzz with art galleries, innovative restaurants, and stylish boutiques. Known as the 'Pearl of the West,' Guadalajara offers a rich tapestry of experiences for every traveler. Whether you're here for the history, the food, or the fiestas, this guide will walk you through all the very best things to do in Guadalajara, ensuring an unforgettable journey into the essence of Mexico."`}
       highlights={[
       "Hospicio Cabañas",
       "Guadalajara Cathedral",

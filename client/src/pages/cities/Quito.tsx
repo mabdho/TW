@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Quito: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Quito, Ecuador (2025 Guide)"
-      description="Perched high in the Andean foothills at an altitude of 2,850m (9,350ft), Quito is a city of stunning contrasts. As the first-ever UNESCO World Heritage site, its historic center is a beautifully preserved labyrinth of colonial architecture, bustling plazas, and magnificent churches. Beyond the cobblestone streets, Ecuador's capital pulsates with a vibrant, modern energy, surrounded by breathtaking volcanic peaks. From standing on the equator to soaring above the city on a cable car, the diversity of experiences makes it a captivating destination for any traveler. Whether you're an art lover, a history buff, or an outdoor enthusiast, exploring the city reveals a rich tapestry of culture and natural beauty. This guide will walk you through all the very best things to do in Quito, ensuring your adventure in the 'City in the Middle of the World' is unforgettable."
+      title="15 Best Things to Do in Quito, Guide"
+      description={`Perched high in the Andean foothills at an altitude of 2,850m (9,350ft), Quito is a city of stunning contrasts. As the first-ever UNESCO World Heritage site, its historic center is a beautifully preserved labyrinth of colonial architecture, bustling plazas, and magnificent churches. Beyond the cobblestone streets, Ecuador's capital pulsates with a vibrant, modern energy, surrounded by breathtaking volcanic peaks. From standing on the equator to soaring above the city on a cable car, the diversity of experiences makes it a captivating destination for any traveler. Whether you're an art lover, a history buff, or an outdoor enthusiast, exploring the city reveals a rich tapestry of culture and natural beauty. This guide will walk you through all the very best things to do in Quito, ensuring your adventure in the 'City in the Middle of the World' is unforgettable."`}
       highlights={[
       "Centro Histórico de Quito",
       "TelefériQo",

@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const BeloHorizonte: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Belo Horizonte, Brazil (2025 Guide)"
-      description="Welcome to Belo Horizonte, Brazil's vibrant 'bar capital' and a hidden gem nestled in the mountains of Minas Gerais. As one of Brazil's first planned modern cities, its organized grid is an urban explorer's dream, framed by the stunning Serra do Curral mountain range. Famous for its world-class gastronomy, particularly its heavenly pão de queijo, and a legendary nightlife with a bar on almost every corner, BH offers a truly authentic Brazilian experience. Beyond the culinary delights, you'll find a thriving cultural scene, anchored by the architectural wonders of Oscar Niemeyer and a circuit of impressive museums. For travelers seeking a destination that beautifully blends urban energy with rich cultural heritage, exploring the best things to do in Belo Horizonte is an unforgettable adventure waiting to happen. It's a city that captures the heart of Brazil."
+      title="15 Best Things to Do in BeloHorizonte, Guide"
+      description={`Welcome to Belo Horizonte, Brazil's vibrant 'bar capital' and a hidden gem nestled in the mountains of Minas Gerais. As one of Brazil's first planned modern cities, its organized grid is an urban explorer's dream, framed by the stunning Serra do Curral mountain range. Famous for its world-class gastronomy, particularly its heavenly pão de queijo, and a legendary nightlife with a bar on almost every corner, BH offers a truly authentic Brazilian experience. Beyond the culinary delights, you'll find a thriving cultural scene, anchored by the architectural wonders of Oscar Niemeyer and a circuit of impressive museums. For travelers seeking a destination that beautifully blends urban energy with rich cultural heritage, exploring the best things to do in Belo Horizonte is an unforgettable adventure waiting to happen. It's a city that captures the heart of Brazil."`}
       highlights={[
       "Pampulha Modern Ensemble",
       "Mercado Central",

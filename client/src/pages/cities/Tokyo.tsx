@@ -6,7 +6,7 @@ export const Tokyo: React.FC = () => {
   return (
     <CityPage
       title="Tokyo Travel Guide"
-      description="Discover the best things to do in Tokyo. From ancient temples to cutting-edge technology, our comprehensive guide covers everything you need to know for an unforgettable visit to Japan's dynamic capital."
+      description={`Discover the best things to do in Tokyo. From ancient temples to cutting-edge technology, our comprehensive guide covers everything you need to know for an unforgettable visit to Japan's dynamic capital."`}
       highlights={[
         "Senso-ji Temple",
         "Shibuya Crossing", 
@@ -35,7 +35,7 @@ export const Tokyo: React.FC = () => {
             website: "shibuya-sky.com"
           }
         }
-      ]}
+]}
       logistics={{
         gettingAround: "Tokyo has the world's largest urban railway system. Get a JR Pass for tourists. The subway system is extensive and efficient.",
         whereToStay: "Shinjuku for nightlife and transport links, Shibuya for youth culture, Asakusa for traditional atmosphere, Ginza for luxury.",

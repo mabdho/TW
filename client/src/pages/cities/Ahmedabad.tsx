@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Ahmedabad: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Ahmedabad, India (2025 Guide)"
-      description="Welcome to Ahmedabad, a captivating metropolis where centuries of history seamlessly blend with bustling modernity. As India's first UNESCO World Heritage City, Ahmedabad offers a rich tapestry of Indo-Islamic architecture, intricate Jain temples, and the living legacy of Mahatma Gandhi. Known as the 'Manchester of India' for its thriving textile industry, the city is a treasure trove for culture vultures, history buffs, and food lovers alike. From wandering through the ancient 'pols' (gated neighborhoods) to marveling at contemporary design, exploring this Gujarati gem is an unforgettable experience. Whether you're seeking spiritual solace at a serene ashram or indulging in the vibrant street food scene, this guide will walk you through all the best things to do in Ahmedabad for an incredible journey."
+      title="15 Best Things to Do in Ahmedabad, Guide"
+      description={`Welcome to Ahmedabad, a captivating metropolis where centuries of history seamlessly blend with bustling modernity. As India's first UNESCO World Heritage City, Ahmedabad offers a rich tapestry of Indo-Islamic architecture, intricate Jain temples, and the living legacy of Mahatma Gandhi. Known as the 'Manchester of India' for its thriving textile industry, the city is a treasure trove for culture vultures, history buffs, and food lovers alike. From wandering through the ancient 'pols' (gated neighborhoods) to marveling at contemporary design, exploring this Gujarati gem is an unforgettable experience. Whether you're seeking spiritual solace at a serene ashram or indulging in the vibrant street food scene, this guide will walk you through all the best things to do in Ahmedabad for an incredible journey."`}
       highlights={[
       "Sabarmati Ashram",
       "Adalaj Stepwell (Adalaj ni Vav)",

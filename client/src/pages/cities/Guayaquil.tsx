@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Guayaquil: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Guayaquil, Ecuador (2025 Guide)"
-      description="Welcome to Guayaquil, Ecuador's vibrant and bustling port city, where tropical heat meets urban energy. As the country's largest city, Guayaquil pulsates with commercial life along the Guayas River, but it's the successful urban renewal projects that have transformed it into a captivating tourist destination. The city charms visitors with its colorful colonial neighborhoods, sprawling riverfront promenades, and unexpected wildlife encounters right in the heart of downtown. From climbing historic hills for panoramic views to sampling exquisite coastal cuisine, you'll find a dynamic blend of history, nature, and modern culture. Whether you're en route to the Galápagos or exploring mainland Ecuador, discovering the best things to do in Guayaquil reveals a city that is proud, resilient, and full of surprises. This guide will help you navigate its must-see attractions and hidden gems."
+      title="15 Best Things to Do in Guayaquil, Guide"
+      description={`Welcome to Guayaquil, Ecuador's vibrant and bustling port city, where tropical heat meets urban energy. As the country's largest city, Guayaquil pulsates with commercial life along the Guayas River, but it's the successful urban renewal projects that have transformed it into a captivating tourist destination. The city charms visitors with its colorful colonial neighborhoods, sprawling riverfront promenades, and unexpected wildlife encounters right in the heart of downtown. From climbing historic hills for panoramic views to sampling exquisite coastal cuisine, you'll find a dynamic blend of history, nature, and modern culture. Whether you're en route to the Galápagos or exploring mainland Ecuador, discovering the best things to do in Guayaquil reveals a city that is proud, resilient, and full of surprises. This guide will help you navigate its must-see attractions and hidden gems."`}
       highlights={[
       "Malecón 2000",
       "Las Peñas Neighborhood",

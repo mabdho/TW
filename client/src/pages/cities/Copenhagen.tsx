@@ -4,12 +4,12 @@ import { CityPage } from '@/components/CityPage';
 export const Copenhagen: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Copenhagen, Denmark (2025 Guide)"
-      description="Copenhagen has this way of making you feel instantly at home, even when you're clearly a tourist with a map and a confused expression. Maybe it's the impossibly photogenic colored houses lining the canals, or maybe it's how everyone seems to be effortlessly riding bikes everywhere (seriously, they make it look so easy). 
+      title="15 Best Things to Do in Copenhagen, Guide"
+      description={`Copenhagen has this way of making you feel instantly at home, even when you're clearly a tourist with a map and a confused expression. Maybe it's the impossibly photogenic colored houses lining the canals, or maybe it's how everyone seems to be effortlessly riding bikes everywhere (seriously, they make it look so easy). 
 
 The Danes have figured out something the rest of us are still learning: how to live well without making it look like hard work. You'll notice it in the way they've turned an old amusement park into a cultural institution, or how their idea of fast food involves organic vegetables and sustainably sourced fish. There's this concept called 'hygge'—which basically means the art of being cozy and content—and you can feel it everywhere.
 
-What strikes me most about Copenhagen is how it manages to be both laid-back and incredibly sophisticated at the same time. You might start your day admiring 17th-century architecture, spend your afternoon in a cutting-edge design museum, and end up at a restaurant that's redefining what food can be. The city doesn't try to impress you; it just quietly goes about being wonderful."
+What strikes me most about Copenhagen is how it manages to be both laid-back and incredibly sophisticated at the same time. You might start your day admiring 17th-century architecture, spend your afternoon in a cutting-edge design museum, and end up at a restaurant that's redefining what food can be. The city doesn't try to impress you; it just quietly goes about being wonderful."`}
       highlights={[
       "Nyhavn",
       "Tivoli Gardens",

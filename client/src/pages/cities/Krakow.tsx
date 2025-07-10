@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Krakow: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Krakow, Poland (2025 Guide)"
-      description="Steeped in legend and history, Krakow is Poland's cultural heart, a city that miraculously escaped the ravages of WWII. Its UNESCO-listed Old Town is a fairytale tapestry of Gothic spires, cobblestone lanes, and Europe's largest medieval market square. From the regal Wawel Castle, echoing with tales of kings and dragons, to the poignant history of the Kazimierz district, Krakow offers a journey through time. But this is no city stuck in the past; it pulses with a vibrant energy, fueled by its student population, quirky cellar bars, and innovative art scenes. Whether you're here to delve into somber history, marvel at architectural wonders, or simply soak up the bohemian atmosphere, you'll find an incredible array of the best things to do in Krakow. Prepare to be enchanted by this city of resilience, beauty, and unforgettable stories."
+      title="15 Best Things to Do in Krakow, Guide"
+      description={`Steeped in legend and history, Krakow is Poland's cultural heart, a city that miraculously escaped the ravages of WWII. Its UNESCO-listed Old Town is a fairytale tapestry of Gothic spires, cobblestone lanes, and Europe's largest medieval market square. From the regal Wawel Castle, echoing with tales of kings and dragons, to the poignant history of the Kazimierz district, Krakow offers a journey through time. But this is no city stuck in the past; it pulses with a vibrant energy, fueled by its student population, quirky cellar bars, and innovative art scenes. Whether you're here to delve into somber history, marvel at architectural wonders, or simply soak up the bohemian atmosphere, you'll find an incredible array of the best things to do in Krakow. Prepare to be enchanted by this city of resilience, beauty, and unforgettable stories."`}
       highlights={[
       "Main Market Square (Rynek Główny)",
       "Wawel Royal Castle",

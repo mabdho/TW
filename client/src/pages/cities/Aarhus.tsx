@@ -5,11 +5,11 @@ export const Aarhus: React.FC = () => {
   return (
     <CityPage
       title="15 Best Things to Do in Aarhus, Denmark (2025 Guide)"
-      description="So here's what nobody tells you about Aarhus: it's Copenhagen's cooler, more relaxed younger sibling. While everyone rushes off to see the capital, this Danish city is quietly doing its own thing—and doing it really, really well.
+      description={`So here's what nobody tells you about Aarhus: it's Copenhagen's cooler, more relaxed younger sibling. While everyone rushes off to see the capital, this Danish city is quietly doing its own thing—and doing it really, really well.
 
 The first thing that hits you is how young and energetic it feels. That's the student population, probably. But there's also this incredible mix of old and new that somehow just works. You'll be walking down cobblestone streets that look like they haven't changed in centuries, then suddenly there's this striking modern art museum with a rainbow on top. Yes, a rainbow. I thought it was weird too until I saw it.
 
-What I appreciate about Aarhus is that it doesn't try too hard. The Danes have this concept called 'hygge'—basically the art of being cozy and content—and you can feel it everywhere here. People actually seem to enjoy their lives, which sounds simple but is surprisingly rare in cities. Maybe it's the bike culture, maybe it's the excellent coffee, or maybe they're just onto something we haven't figured out yet."
+What I appreciate about Aarhus is that it doesn't try too hard. The Danes have this concept called 'hygge'—basically the art of being cozy and content—and you can feel it everywhere here. People actually seem to enjoy their lives, which sounds simple but is surprisingly rare in cities. Maybe it's the bike culture, maybe it's the excellent coffee, or maybe they're just onto something we haven't figured out yet.`}
       highlights={[
       "ARoS Aarhus Art Museum",
       "Den Gamle By (The Old Town)",

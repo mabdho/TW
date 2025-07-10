@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Warsaw: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Warsaw, Poland (2025 Guide)"
-      description="Rising like a phoenix from the ashes of World War II, Warsaw is a city of incredible resilience, complex history, and dynamic energy. Once a grey landscape under communist rule, Poland's capital has blossomed into a vibrant European hub where meticulously reconstructed Gothic architecture shares the skyline with soaring modern skyscrapers. This contrast is the heart of its charm. Exploring Warsaw means walking through centuries of turbulent history, from its royal past to the heroic tragedy of the 1944 Uprising, before diving into its thriving arts, culinary, and nightlife scenes. Whether you're a history buff, a foodie, or an art lover, you'll find an abundance of captivating experiences. This guide will walk you through all the very best things to do in Warsaw, ensuring a trip you'll never forget."
+      title="15 Best Things to Do in Warsaw, Guide"
+      description={`Rising like a phoenix from the ashes of World War II, Warsaw is a city of incredible resilience, complex history, and dynamic energy. Once a grey landscape under communist rule, Poland's capital has blossomed into a vibrant European hub where meticulously reconstructed Gothic architecture shares the skyline with soaring modern skyscrapers. This contrast is the heart of its charm. Exploring Warsaw means walking through centuries of turbulent history, from its royal past to the heroic tragedy of the 1944 Uprising, before diving into its thriving arts, culinary, and nightlife scenes. Whether you're a history buff, a foodie, or an art lover, you'll find an abundance of captivating experiences. This guide will walk you through all the very best things to do in Warsaw, ensuring a trip you'll never forget."`}
       highlights={[
       "Warsaw Old Town Market Square",
       "Warsaw Uprising Museum",

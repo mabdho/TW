@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Dakar: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Dakar, Senegal (2025 Guide)"
-      description="Perched on the westernmost tip of Africa, Dakar is a whirlwind of color, sound, and energy. This sprawling Senegalese capital is a city of contrasts, where gleaming modern buildings stand beside bustling traditional markets and serene Atlantic coastlines meet a vibrant urban pulse. A cultural powerhouse, Dakar's legendary music scene, dynamic arts community, and profound history captivate every visitor. From the poignant history of Gorée Island to the panoramic views from the African Renaissance Monument, the city offers a rich tapestry of experiences. Whether you're surfing the waves at Plage de Virage, haggling for crafts in the Medina, or savoring fresh seafood by the shore, you'll find an endless list of the best things to do in Dakar. This guide will help you navigate its exhilarating and unforgettable landscape."
+      title="15 Best Things to Do in Dakar, Guide"
+      description={`Perched on the westernmost tip of Africa, Dakar is a whirlwind of color, sound, and energy. This sprawling Senegalese capital is a city of contrasts, where gleaming modern buildings stand beside bustling traditional markets and serene Atlantic coastlines meet a vibrant urban pulse. A cultural powerhouse, Dakar's legendary music scene, dynamic arts community, and profound history captivate every visitor. From the poignant history of Gorée Island to the panoramic views from the African Renaissance Monument, the city offers a rich tapestry of experiences. Whether you're surfing the waves at Plage de Virage, haggling for crafts in the Medina, or savoring fresh seafood by the shore, you'll find an endless list of the best things to do in Dakar. This guide will help you navigate its exhilarating and unforgettable landscape."`}
       highlights={[
       "Gorée Island (Île de Gorée)",
       "African Renaissance Monument",

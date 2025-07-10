@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Bilbao: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Bilbao, Spain (2025 Guide)"
-      description="Once an industrial powerhouse, Bilbao has undergone a breathtaking transformation into a global hub for art, architecture, and gastronomy. Nestled in the heart of Basque Country, this vibrant city captivates visitors with its seamless blend of avant-garde design and old-world charm. The shimmering titanium curves of the Guggenheim Museum are just the beginning; beyond it lies a city teeming with life. Explore the labyrinthine streets of the Casco Viejo, savor world-renowned pintxos in bustling bars, and ride a historic funicular for sweeping views of the green hills that cradle the city. Whether you're an art aficionado, a dedicated foodie, or simply seeking a unique urban escape, you'll find an incredible array of experiences. This guide will walk you through the very best things to do in Bilbao, ensuring your visit is nothing short of unforgettable."
+      title="15 Best Things to Do in Bilbao, Guide"
+      description={`Once an industrial powerhouse, Bilbao has undergone a breathtaking transformation into a global hub for art, architecture, and gastronomy. Nestled in the heart of Basque Country, this vibrant city captivates visitors with its seamless blend of avant-garde design and old-world charm. The shimmering titanium curves of the Guggenheim Museum are just the beginning; beyond it lies a city teeming with life. Explore the labyrinthine streets of the Casco Viejo, savor world-renowned pintxos in bustling bars, and ride a historic funicular for sweeping views of the green hills that cradle the city. Whether you're an art aficionado, a dedicated foodie, or simply seeking a unique urban escape, you'll find an incredible array of experiences. This guide will walk you through the very best things to do in Bilbao, ensuring your visit is nothing short of unforgettable."`}
       highlights={[
       "Guggenheim Museum Bilbao",
       "Casco Viejo (Old Town)",

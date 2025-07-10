@@ -4,12 +4,12 @@ import { CityPage } from '@/components/CityPage';
 export const Antwerp: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Antwerp, Belgium (2025 Guide)"
-      description="Antwerp caught me completely off guard. I mean, I knew it was supposed to be important—something about diamonds and old paintings—but I wasn't prepared for how much character this place has.
+      title="15 Best Things to Do in Antwerp, Guide"
+      description={`Antwerp caught me completely off guard. I mean, I knew it was supposed to be important—something about diamonds and old paintings—but I wasn't prepared for how much character this place has.
 
 First off, the train station. Seriously. I've never had strong feelings about train stations before, but this one is basically a cathedral made for trains. It's ridiculous in the best possible way. Then you step outside and realize the whole city is like this: outrageously beautiful buildings that shouldn't still exist but somehow do.
 
-The thing about Antwerp is that it's managed to keep one foot firmly planted in its golden age while somehow becoming this incredibly hip, modern city. You'll find yourself admiring a 500-year-old cathedral in the morning and browsing cutting-edge fashion boutiques in the afternoon. The Belgians, it turns out, are quite good at this balancing act. Plus, the beer is excellent and the chocolate is... well, it's Belgian chocolate. Some clichés exist for good reasons."
+The thing about Antwerp is that it's managed to keep one foot firmly planted in its golden age while somehow becoming this incredibly hip, modern city. You'll find yourself admiring a 500-year-old cathedral in the morning and browsing cutting-edge fashion boutiques in the afternoon. The Belgians, it turns out, are quite good at this balancing act. Plus, the beer is excellent and the chocolate is... well, it's Belgian chocolate. Some clichés exist for good reasons."`}
       highlights={[
       "Antwerp Central Station (Antwerpen-Centraal)",
       "Cathedral of Our Lady",

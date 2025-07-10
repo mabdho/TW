@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Barranquilla: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Barranquilla, Colombia (2025 Guide)"
-      description="Welcome to Barranquilla, Colombia's 'Golden Gate'! This vibrant Caribbean port city, affectionately known as 'La Arenosa' (The Sandy One), pulses with an energy unlike anywhere else. While it may not have the colonial walls of Cartagena or the mountain backdrop of Medellín, Barranquilla captivates with its rich cultural tapestry, infectious music, and the world-renowned Carnival. It's a city of friendly faces, spontaneous cumbia dancing, and culinary delights, where the Magdalena River meets the Caribbean Sea. Home to icons like Shakira and Gabriel García Márquez, this industrial hub has a soulful, creative side waiting to be explored. Whether you're here for the party of a lifetime or to soak in the authentic coastal atmosphere, you'll find that the best things to do in Barranquilla revolve around its joyous celebration of life, music, and heritage."
+      title="15 Best Things to Do in Barranquilla, Guide"
+      description={`Welcome to Barranquilla, Colombia's 'Golden Gate'! This vibrant Caribbean port city, affectionately known as 'La Arenosa' (The Sandy One), pulses with an energy unlike anywhere else. While it may not have the colonial walls of Cartagena or the mountain backdrop of Medellín, Barranquilla captivates with its rich cultural tapestry, infectious music, and the world-renowned Carnival. It's a city of friendly faces, spontaneous cumbia dancing, and culinary delights, where the Magdalena River meets the Caribbean Sea. Home to icons like Shakira and Gabriel García Márquez, this industrial hub has a soulful, creative side waiting to be explored. Whether you're here for the party of a lifetime or to soak in the authentic coastal atmosphere, you'll find that the best things to do in Barranquilla revolve around its joyous celebration of life, music, and heritage."`}
       highlights={[
       "Carnaval de Barranquilla at Casa del Carnaval",
       "Gran Malecón del Río",

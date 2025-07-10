@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Nashville: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Nashville, USA (2025 Guide)"
-      description="Welcome to Nashville, the undisputed 'Music City' of the USA! This vibrant Tennessee capital pulses with the energy of live music pouring from every honky-tonk, the rich history of country music legends, and a burgeoning culinary scene that goes far beyond its famous hot chicken. From the hallowed halls of the Grand Ole Opry to the creative buzz of East Nashville's boutiques, the city offers a unique blend of down-home Southern charm and contemporary cool. Whether you're here to trace the footsteps of Johnny Cash, discover emerging artists, or simply soak in the electric atmosphere of Lower Broadway, you'll find no shortage of excitement. This guide will walk you through all the very best things to do in Nashville, ensuring your trip is as unforgettable as the city's iconic soundtrack. So, grab your boots and get ready to explore!"
+      title="15 Best Things to Do in Nashville, Guide"
+      description={`Welcome to Nashville, the undisputed 'Music City' of the USA! This vibrant Tennessee capital pulses with the energy of live music pouring from every honky-tonk, the rich history of country music legends, and a burgeoning culinary scene that goes far beyond its famous hot chicken. From the hallowed halls of the Grand Ole Opry to the creative buzz of East Nashville's boutiques, the city offers a unique blend of down-home Southern charm and contemporary cool. Whether you're here to trace the footsteps of Johnny Cash, discover emerging artists, or simply soak in the electric atmosphere of Lower Broadway, you'll find no shortage of excitement. This guide will walk you through all the very best things to do in Nashville, ensuring your trip is as unforgettable as the city's iconic soundtrack. So, grab your boots and get ready to explore!"`}
       highlights={[
       "Grand Ole Opry",
       "Ryman Auditorium",

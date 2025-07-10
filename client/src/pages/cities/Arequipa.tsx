@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Arequipa: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Arequipa, Peru (2025 Guide)"
-      description="Framed by three dramatic volcanoes, Arequipa is Peru's elegant 'White City,' a UNESCO World Heritage site built almost entirely from a pearly white volcanic stone called sillar. This unique architecture gives the city a luminous, almost ethereal glow under the Andean sun. Beyond its stunning colonial buildings and cobblestone streets, Arequipa boasts a fiercely proud local culture, a world-renowned culinary scene, and serves as the primary gateway to the majestic Colca Canyon. It’s a city that effortlessly blends historical grandeur with vibrant, modern life, offering a wealth of cultural and natural wonders. Whether you're exploring a centuries-old convent or savoring a traditional meal, you'll quickly discover why a visit here is one of the best things to do in Peru. This guide will walk you through all the best things to do in Arequipa."
+      title="15 Best Things to Do in Arequipa, Guide"
+      description={`Framed by three dramatic volcanoes, Arequipa is Peru's elegant 'White City,' a UNESCO World Heritage site built almost entirely from a pearly white volcanic stone called sillar. This unique architecture gives the city a luminous, almost ethereal glow under the Andean sun. Beyond its stunning colonial buildings and cobblestone streets, Arequipa boasts a fiercely proud local culture, a world-renowned culinary scene, and serves as the primary gateway to the majestic Colca Canyon. It’s a city that effortlessly blends historical grandeur with vibrant, modern life, offering a wealth of cultural and natural wonders. Whether you're exploring a centuries-old convent or savoring a traditional meal, you'll quickly discover why a visit here is one of the best things to do in Peru. This guide will walk you through all the best things to do in Arequipa."`}
       highlights={[
       "Monasterio de Santa Catalina",
       "Plaza de Armas & Basilica Cathedral",

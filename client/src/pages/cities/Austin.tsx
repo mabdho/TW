@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Austin: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Austin, USA (2025 Guide)"
-      description="Welcome to Austin, the 'Live Music Capital of the World' and the city that proudly lives by its motto, 'Keep Austin Weird.' This vibrant Texas hub is a whirlwind of creative energy, where a thriving tech scene coexists with a laid-back, artistic spirit. From legendary music venues and world-class barbecue to stunning natural swimming holes and sprawling parks, Austin offers a unique blend of urban excitement and outdoor adventure. Whether you're here to catch a show, paddleboard on Lady Bird Lake, or indulge in the city's famous food truck culture, you'll quickly discover why it's one of America's fastest-growing and most beloved cities. This guide will walk you through all the best things to do in Austin, ensuring you experience the very heart and soul of this eclectic metropolis."
+      title="15 Best Things to Do in Austin, Guide"
+      description={`Welcome to Austin, the 'Live Music Capital of the World' and the city that proudly lives by its motto, 'Keep Austin Weird.' This vibrant Texas hub is a whirlwind of creative energy, where a thriving tech scene coexists with a laid-back, artistic spirit. From legendary music venues and world-class barbecue to stunning natural swimming holes and sprawling parks, Austin offers a unique blend of urban excitement and outdoor adventure. Whether you're here to catch a show, paddleboard on Lady Bird Lake, or indulge in the city's famous food truck culture, you'll quickly discover why it's one of America's fastest-growing and most beloved cities. This guide will walk you through all the best things to do in Austin, ensuring you experience the very heart and soul of this eclectic metropolis."`}
       highlights={[
       "Texas State Capitol",
       "Barton Springs Pool",

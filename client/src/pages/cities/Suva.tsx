@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Suva: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Suva, Fiji (2025 Guide)"
-      description="Welcome to Suva, the bustling heart and political capital of Fiji. A world away from the tranquil island resorts, Suva offers a vibrant slice of authentic Fijian urban life. This cosmopolitan port city is a melting pot of cultures, reflected in its diverse cuisine, colonial-era architecture, and lively markets. Home to the University of the South Pacific, it has a youthful, energetic vibe that pulses through its streets. While it may not have white sand beaches, its lush rainforest parks, fascinating historical sites, and rich cultural institutions provide a different, equally compelling Fijian experience. From exploring archaeological treasures to hiking to hidden waterfalls, there are countless adventures to be had. This guide will walk you through all the very best things to do in Suva for an unforgettable trip."
+      title="15 Best Things to Do in Suva, Guide"
+      description={`Welcome to Suva, the bustling heart and political capital of Fiji. A world away from the tranquil island resorts, Suva offers a vibrant slice of authentic Fijian urban life. This cosmopolitan port city is a melting pot of cultures, reflected in its diverse cuisine, colonial-era architecture, and lively markets. Home to the University of the South Pacific, it has a youthful, energetic vibe that pulses through its streets. While it may not have white sand beaches, its lush rainforest parks, fascinating historical sites, and rich cultural institutions provide a different, equally compelling Fijian experience. From exploring archaeological treasures to hiking to hidden waterfalls, there are countless adventures to be had. This guide will walk you through all the very best things to do in Suva for an unforgettable trip."`}
       highlights={[
       "Fiji Museum",
       "Suva Municipal Market",

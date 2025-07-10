@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Brisbane: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Brisbane, Australia (2025 Guide)"
-      description="Welcome to Brisbane, Australia's sun-drenched river city where a laid-back attitude meets vibrant urban energy. Cradled by the winding Brisbane River, this city is a playground of lush parklands, a world-class cultural precinct, and a burgeoning culinary scene. Whether you're cuddling a koala, climbing the iconic Story Bridge, or simply soaking up the subtropical sunshine at a riverside brewery, Brisbane offers an effortless blend of adventure and relaxation. Its year-round warm climate makes outdoor activities a central part of life here, inviting visitors to explore its green spaces and lively neighborhoods. From gallery hopping to market shopping, discovering the best things to do in Brisbane is an experience filled with warmth and genuine Aussie charm. Get ready to explore the capital of the Sunshine State."
+      title="15 Best Things to Do in Brisbane, Guide"
+      description={`Welcome to Brisbane, Australia's sun-drenched river city where a laid-back attitude meets vibrant urban energy. Cradled by the winding Brisbane River, this city is a playground of lush parklands, a world-class cultural precinct, and a burgeoning culinary scene. Whether you're cuddling a koala, climbing the iconic Story Bridge, or simply soaking up the subtropical sunshine at a riverside brewery, Brisbane offers an effortless blend of adventure and relaxation. Its year-round warm climate makes outdoor activities a central part of life here, inviting visitors to explore its green spaces and lively neighborhoods. From gallery hopping to market shopping, discovering the best things to do in Brisbane is an experience filled with warmth and genuine Aussie charm. Get ready to explore the capital of the Sunshine State."`}
       highlights={[
       "South Bank Parklands",
       "Lone Pine Koala Sanctuary",

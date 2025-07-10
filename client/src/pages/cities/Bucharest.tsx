@@ -4,13 +4,13 @@ import { CityPage } from '@/components/CityPage';
 export const Bucharest: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Bucharest, Romania (2025 Guide)"
-      description="Once known as the 'Little Paris of the East,' Bucharest is a city of fascinating contrasts, where Belle Époque grandeur sits alongside stark communist-era structures and vibrant modern energy. Romania's capital is a dynamic hub of history, art, and nightlife, offering a complex and compelling story at every turn. From the world's heaviest building to serene parks and hidden monastery courtyards, the city reveals its layers to those willing to explore beyond the surface. Whether you're a history buff, a foodie, or simply seeking an affordable European city break, you'll find an incredible array of experiences. This guide will walk you through the very best things to do in Bucharest, ensuring you capture the unique spirit of this resilient and captivating city."
+      title="15 Best Things to Do in Bucharest, Guide"
+      description={`Once known as the 'Little Paris of the East,' Bucharest is a city of fascinating contrasts, where Belle Époque grandeur sits alongside stark communist-era structures and vibrant modern energy. Romania's capital is a dynamic hub of history, art, and nightlife, offering a complex and compelling story at every turn. From the world's heaviest building to serene parks and hidden monastery courtyards, the city reveals its layers to those willing to explore beyond the surface. Whether you're a history buff, a foodie, or simply seeking an affordable European city break, you'll find an incredible array of experiences. This guide will walk you through the very best things to do in Bucharest, ensuring you capture the unique spirit of this resilient and captivating city."`}
       highlights={[
       "Palace of the Parliament",
       "Bucharest Old Town (Centrul Vechi)",
       "Romanian Athenaeum",
-      "\"Dimitrie Gusti\" National Village Museum",
+      "Dimitrie Gusti National Village Museum",
       "Cărturești Carusel"
 ]}
       attractions={[
@@ -45,7 +45,7 @@ export const Bucharest: React.FC = () => {
             }
       },
       {
-            "name": "\"Dimitrie Gusti\" National Village Museum",
+            "name": "Dimitrie Gusti National Village Museum",
             "description": "Escape the urban hustle and step into rural Romania at the National Village Museum. Located on the shores of Lake Herăstrău, this magnificent open-air museum showcases traditional Romanian village life. It features over 300 authentic peasant houses, farms, windmills, and wooden churches, relocated from different ethnographic regions of Romania.\n\nWalking through the museum is like traveling back in time and across the country. Each building is furnished with authentic objects, offering a glimpse into the customs, crafts, and daily routines of rural communities. It's a peaceful and fascinating experience, providing deep insight into the country's soul and heritage. It's especially beautiful in spring and autumn.",
             "practicalInfo": {
                   "howToGetThere": "Located in King Michael I Park at Șoseaua Pavel D. Kiseleff 28-30. Nearest metro is Aviatorilor.",

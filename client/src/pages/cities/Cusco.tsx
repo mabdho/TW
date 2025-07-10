@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Cusco: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Cusco, Peru (2025 Guide)"
-      description="Once the sacred capital of the formidable Inca Empire, Cusco is a city where history breathes from ancient stone walls and vibrant colonial plazas. Perched high in the Andes Mountains, this UNESCO World Heritage site is a captivating blend of indigenous culture and Spanish influence. Its cobblestone streets lead to architectural marvels, bustling markets, and world-class cuisine, all set against a backdrop of dramatic mountain scenery. Serving as the essential gateway to Machu Picchu and the Sacred Valley, Cusco is a destination in its own right, demanding time for acclimatization and exploration. Whether you're a history buff, an adventure seeker, or a cultural enthusiast, discovering the best things to do in Cusco promises an unforgettable journey into the heart of the Andean world. Prepare to be enchanted by its mystical atmosphere and the warmth of its people."
+      title="15 Best Things to Do in Cusco, Guide"
+      description={`Once the sacred capital of the formidable Inca Empire, Cusco is a city where history breathes from ancient stone walls and vibrant colonial plazas. Perched high in the Andes Mountains, this UNESCO World Heritage site is a captivating blend of indigenous culture and Spanish influence. Its cobblestone streets lead to architectural marvels, bustling markets, and world-class cuisine, all set against a backdrop of dramatic mountain scenery. Serving as the essential gateway to Machu Picchu and the Sacred Valley, Cusco is a destination in its own right, demanding time for acclimatization and exploration. Whether you're a history buff, an adventure seeker, or a cultural enthusiast, discovering the best things to do in Cusco promises an unforgettable journey into the heart of the Andean world. Prepare to be enchanted by its mystical atmosphere and the warmth of its people."`}
       highlights={[
       "Plaza de Armas",
       "Qorikancha (Temple of the Sun)",

@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Cartagena: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Cartagena, Colombia (2025 Guide)"
-      description="Steeped in history and sizzling with Caribbean energy, Cartagena de Indias is a city that captures the imagination. Encased within centuries-old stone walls, its vibrant colonial streets are a kaleidoscope of candy-colored buildings, overflowing bougainvillea, and horse-drawn carriages. This UNESCO World Heritage site is where tales of pirates and treasure meet the rhythm of cumbia and the flavors of the coast. Beyond the historic center, you'll find bohemian neighborhoods pulsating with street art and nearby islands with turquoise waters and white-sand beaches. Whether you're a history buff, a sun-seeker, or a foodie, you'll find an unforgettable adventure. From grand fortresses to hidden plazas, discovering the best things to do in Cartagena is a journey into the heart of Colombian magic."
+      title="15 Best Things to Do in Cartagena, Guide"
+      description={`Steeped in history and sizzling with Caribbean energy, Cartagena de Indias is a city that captures the imagination. Encased within centuries-old stone walls, its vibrant colonial streets are a kaleidoscope of candy-colored buildings, overflowing bougainvillea, and horse-drawn carriages. This UNESCO World Heritage site is where tales of pirates and treasure meet the rhythm of cumbia and the flavors of the coast. Beyond the historic center, you'll find bohemian neighborhoods pulsating with street art and nearby islands with turquoise waters and white-sand beaches. Whether you're a history buff, a sun-seeker, or a foodie, you'll find an unforgettable adventure. From grand fortresses to hidden plazas, discovering the best things to do in Cartagena is a journey into the heart of Colombian magic."`}
       highlights={[
       "Walled City (Ciudad Amurallada)",
       "Castillo de San Felipe de Barajas",

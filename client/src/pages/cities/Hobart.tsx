@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Hobart: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Hobart, Australia (2025 Guide)"
-      description="Nestled between the towering peak of kunanyi/Mount Wellington and the deep waters of the River Derwent, Hobart is a captivating blend of heritage charm, modern culture, and untamed wilderness. As Australia's second-oldest capital, its colonial-era sandstone warehouses now house vibrant galleries, boutiques, and bars, creating a dynamic waterfront scene. This compact city serves as the perfect gateway to Tasmania's legendary landscapes, from historic penal colonies to breathtaking national parks. Whether you're indulging in farm-to-table dining, exploring a world-class subversive art museum, or hiking to panoramic lookouts, you'll find no shortage of incredible experiences. This guide will walk you through all the very best things to do in Hobart, ensuring your Tasmanian adventure is truly unforgettable."
+      title="15 Best Things to Do in Hobart, Guide"
+      description={`Nestled between the towering peak of kunanyi/Mount Wellington and the deep waters of the River Derwent, Hobart is a captivating blend of heritage charm, modern culture, and untamed wilderness. As Australia's second-oldest capital, its colonial-era sandstone warehouses now house vibrant galleries, boutiques, and bars, creating a dynamic waterfront scene. This compact city serves as the perfect gateway to Tasmania's legendary landscapes, from historic penal colonies to breathtaking national parks. Whether you're indulging in farm-to-table dining, exploring a world-class subversive art museum, or hiking to panoramic lookouts, you'll find no shortage of incredible experiences. This guide will walk you through all the very best things to do in Hobart, ensuring your Tasmanian adventure is truly unforgettable."`}
       highlights={[
       "Museum of Old and New Art (MONA)",
       "kunanyi / Mount Wellington",

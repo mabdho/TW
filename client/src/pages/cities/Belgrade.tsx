@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Belgrade: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Belgrade, Serbia (2025 Guide)"
-      description="Welcome to Belgrade, the 'White City' at the confluence of the Sava and Danube rivers. A city of contrasts, Belgrade wears its tumultuous history on its sleeve, with ancient fortresses standing beside socialist-era blocks and modern skyscrapers. It's a place where gritty energy meets warm, unpretentious hospitality. Famous for its electrifying nightlife, burgeoning creative scene, and soul-stirring 'kafana' culture, Belgrade offers an experience that is both raw and refined. Whether you're exploring centuries of history within Kalemegdan Park or dancing until dawn on a river barge, you'll quickly discover that the best things to do in Belgrade are as diverse and dynamic as the city itself. Prepare to be captivated by its spirit and charm."
+      title="15 Best Things to Do in Belgrade, Guide"
+      description={`Welcome to Belgrade, the 'White City' at the confluence of the Sava and Danube rivers. A city of contrasts, Belgrade wears its tumultuous history on its sleeve, with ancient fortresses standing beside socialist-era blocks and modern skyscrapers. It's a place where gritty energy meets warm, unpretentious hospitality. Famous for its electrifying nightlife, burgeoning creative scene, and soul-stirring 'kafana' culture, Belgrade offers an experience that is both raw and refined. Whether you're exploring centuries of history within Kalemegdan Park or dancing until dawn on a river barge, you'll quickly discover that the best things to do in Belgrade are as diverse and dynamic as the city itself. Prepare to be captivated by its spirit and charm."`}
       highlights={[
       "Belgrade Fortress (Kalemegdan)",
       "Temple of Saint Sava",

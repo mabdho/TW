@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Accra: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Accra, Ghana (2025 Guide)"
-      description="Welcome to Accra, the vibrant, beating heart of Ghana! This dynamic coastal capital is a thrilling blend of rich history, modern energy, and infectious highlife music. From the solemn grounds commemorating its path to independence to the bustling chaos of its sprawling markets, Accra offers a sensory feast. You can spend your days exploring colonial-era architecture, delving into powerful Pan-African history, and discovering a world-class contemporary art scene. As the sun sets, the city comes alive with sizzling street food and lively beachside bars. Whether you're a history buff, an art aficionado, or a culinary adventurer, our guide will show you the very best things to do in Accra for an unforgettable West African journey."
+      title="15 Best Things to Do in Accra, Guide"
+      description={`Welcome to Accra, the vibrant, beating heart of Ghana! This dynamic coastal capital is a thrilling blend of rich history, modern energy, and infectious highlife music. From the solemn grounds commemorating its path to independence to the bustling chaos of its sprawling markets, Accra offers a sensory feast. You can spend your days exploring colonial-era architecture, delving into powerful Pan-African history, and discovering a world-class contemporary art scene. As the sun sets, the city comes alive with sizzling street food and lively beachside bars. Whether you're a history buff, an art aficionado, or a culinary adventurer, our guide will show you the very best things to do in Accra for an unforgettable West African journey."`}
       highlights={[
       "Kwame Nkrumah Memorial Park & Mausoleum",
       "Independence Square (Black Star Square)",

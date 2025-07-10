@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Albuquerque: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Albuquerque, USA (2025 Guide)"
-      description="Nestled in the high desert, Albuquerque is a city where vibrant cultures, rich history, and stunning natural landscapes converge. Framed by the majestic Sandia Mountains and bisected by the legendary Rio Grande, the Duke City boasts over 310 days of sunshine a year. Its roots run deep, with a captivating blend of Native American, Hispanic, and Anglo influences visible in its adobe architecture, spicy cuisine, and thriving arts scene. World-famous for the International Balloon Fiesta, Albuquerque offers an adventure for every traveler, from soaring above the city at dawn to exploring ancient petroglyphs carved into volcanic rock. Whether you're seeking outdoor thrills, cultural immersion, or a taste of the iconic Southwest, you'll find an incredible array of the best things to do in Albuquerque. This guide will help you navigate it all."
+      title="15 Best Things to Do in Albuquerque, Guide"
+      description={`Nestled in the high desert, Albuquerque is a city where vibrant cultures, rich history, and stunning natural landscapes converge. Framed by the majestic Sandia Mountains and bisected by the legendary Rio Grande, the Duke City boasts over 310 days of sunshine a year. Its roots run deep, with a captivating blend of Native American, Hispanic, and Anglo influences visible in its adobe architecture, spicy cuisine, and thriving arts scene. World-famous for the International Balloon Fiesta, Albuquerque offers an adventure for every traveler, from soaring above the city at dawn to exploring ancient petroglyphs carved into volcanic rock. Whether you're seeking outdoor thrills, cultural immersion, or a taste of the iconic Southwest, you'll find an incredible array of the best things to do in Albuquerque. This guide will help you navigate it all."`}
       highlights={[
       "Sandia Peak Tramway",
       "Old Town Albuquerque",

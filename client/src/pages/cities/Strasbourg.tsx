@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Strasbourg: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Strasbourg, France (2025 Guide)"
-      description="Nestled in the heart of the Alsace region, Strasbourg is a city where centuries of French and Germanic cultures intertwine, creating a uniquely captivating atmosphere. Its UNESCO-listed Grande Île is a fairytale world of winding cobblestone streets, canals, and whimsical half-timbered houses. From the soaring Gothic cathedral to its powerful role as a European capital, the city offers a rich tapestry of experiences. Whether you're indulging in hearty Alsatian cuisine, cruising along the River Ill, or getting lost in the magical Christmas markets, you'll find no shortage of enchanting activities. This guide will walk you through all the very best things to do in Strasbourg, ensuring your visit is as memorable as the city itself. Prepare to be charmed by its history, beauty, and vibrant spirit."
+      title="15 Best Things to Do in Strasbourg, Guide"
+      description={`Nestled in the heart of the Alsace region, Strasbourg is a city where centuries of French and Germanic cultures intertwine, creating a uniquely captivating atmosphere. Its UNESCO-listed Grande Île is a fairytale world of winding cobblestone streets, canals, and whimsical half-timbered houses. From the soaring Gothic cathedral to its powerful role as a European capital, the city offers a rich tapestry of experiences. Whether you're indulging in hearty Alsatian cuisine, cruising along the River Ill, or getting lost in the magical Christmas markets, you'll find no shortage of enchanting activities. This guide will walk you through all the very best things to do in Strasbourg, ensuring your visit is as memorable as the city itself. Prepare to be charmed by its history, beauty, and vibrant spirit."`}
       highlights={[
       "Cathédrale Notre-Dame de Strasbourg",
       "La Petite France",

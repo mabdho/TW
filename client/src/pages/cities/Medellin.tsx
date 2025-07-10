@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Medellin: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Medellin, Colombia (2025 Guide)"
-      description="Once infamous, now innovative, Medellin has undergone one of the most remarkable urban transformations in modern history. Nestled in a lush Andean valley, Colombia's second-largest city is affectionately known as the 'City of Eternal Spring' for its perfect year-round climate. This vibrant metropolis captivates visitors with its groundbreaking public transport, thriving arts scene, and the incredible warmth of its people, the Paisas. From the colorful streets of Comuna 13 to the serene heights of Parque Arví, Medellin offers a compelling blend of resilient history and forward-thinking culture. It’s a city that invites you to explore, learn, and be inspired. Whether you're an art lover, a nature enthusiast, or a foodie, you'll find an endless list of the best things to do in Medellin that will leave a lasting impression on your heart."
+      title="15 Best Things to Do in Medellin, Guide"
+      description={`Once infamous, now innovative, Medellin has undergone one of the most remarkable urban transformations in modern history. Nestled in a lush Andean valley, Colombia's second-largest city is affectionately known as the 'City of Eternal Spring' for its perfect year-round climate. This vibrant metropolis captivates visitors with its groundbreaking public transport, thriving arts scene, and the incredible warmth of its people, the Paisas. From the colorful streets of Comuna 13 to the serene heights of Parque Arví, Medellin offers a compelling blend of resilient history and forward-thinking culture. It’s a city that invites you to explore, learn, and be inspired. Whether you're an art lover, a nature enthusiast, or a foodie, you'll find an endless list of the best things to do in Medellin that will leave a lasting impression on your heart."`}
       highlights={[
       "Comuna 13 Tour",
       "Plaza Botero",

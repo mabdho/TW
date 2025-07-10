@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const AddisAbaba: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Addis Ababa, Ethiopia (2025 Guide)"
-      description="Welcome to Addis Ababa, Ethiopia's sprawling capital and the vibrant diplomatic heart of Africa. Known as the 'New Flower' in Amharic, this city is a captivating blend of ancient traditions and dynamic growth. Perched high in the Entoto Mountains, its cool climate is a pleasant surprise. Addis is where humanity's story begins, with the fossil of 'Lucy' housed in its national museum, and where the world's finest coffee is not just a drink but a cherished ceremony. From the chaotic energy of the vast Merkato to the solemn grandeur of Holy Trinity Cathedral, the city pulses with life. Exploring the rich history, diverse cultures, and incredible culinary scene are some of the best things to do in Addis Ababa, offering a journey unlike any other."
+      title="15 Best Things to Do in AddisAbaba, Guide"
+      description={`Welcome to Addis Ababa, Ethiopia's sprawling capital and the vibrant diplomatic heart of Africa. Known as the 'New Flower' in Amharic, this city is a captivating blend of ancient traditions and dynamic growth. Perched high in the Entoto Mountains, its cool climate is a pleasant surprise. Addis is where humanity's story begins, with the fossil of 'Lucy' housed in its national museum, and where the world's finest coffee is not just a drink but a cherished ceremony. From the chaotic energy of the vast Merkato to the solemn grandeur of Holy Trinity Cathedral, the city pulses with life. Exploring the rich history, diverse cultures, and incredible culinary scene are some of the best things to do in Addis Ababa, offering a journey unlike any other."`}
       highlights={[
       "National Museum of Ethiopia",
       "Holy Trinity Cathedral",

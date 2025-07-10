@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const QuebecCity: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Quebec City, Canada (2025 Guide)"
-      description="Step into a fairytale in Quebec City, the heart of French Canada and a UNESCO World Heritage treasure. As the only fortified city north of Mexico, its cobblestone streets, 17th-century architecture, and commanding position over the St. Lawrence River evoke a timeless European charm. From the iconic silhouette of the Château Frontenac to the vibrant culture found in its artisan boutiques and cozy bistros, the city offers a unique blend of history, romance, and adventure. Whether you're exploring historic battlefields, indulging in decadent poutine, or simply soaking in the atmosphere of a 400-year-old city, you'll find no shortage of captivating experiences. This guide will walk you through all the best things to do in Quebec City, ensuring your visit is truly unforgettable."
+      title="15 Best Things to Do in QuebecCity, Guide"
+      description={`Step into a fairytale in Quebec City, the heart of French Canada and a UNESCO World Heritage treasure. As the only fortified city north of Mexico, its cobblestone streets, 17th-century architecture, and commanding position over the St. Lawrence River evoke a timeless European charm. From the iconic silhouette of the Château Frontenac to the vibrant culture found in its artisan boutiques and cozy bistros, the city offers a unique blend of history, romance, and adventure. Whether you're exploring historic battlefields, indulging in decadent poutine, or simply soaking in the atmosphere of a 400-year-old city, you'll find no shortage of captivating experiences. This guide will walk you through all the best things to do in Quebec City, ensuring your visit is truly unforgettable."`}
       highlights={[
       "Old Quebec (Vieux-Québec)",
       "Fairmont Le Château Frontenac",

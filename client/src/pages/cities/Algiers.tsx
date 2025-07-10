@@ -4,8 +4,8 @@ import { CityPage } from '@/components/CityPage';
 export const Algiers: React.FC = () => {
   return (
     <CityPage
-      title="15 Best Things to Do in Algiers, Algeria (2025 Guide)"
-      description="Clinging to the hillsides above the Mediterranean, Algiers is a city of captivating contrasts. Known as 'Algiers the White' (El-Behdja) for its gleaming white buildings, this historic capital blends a labyrinthine Ottoman-era Casbah with grand French colonial boulevards. Its rich history unfolds at every turn, from ancient mosques to revolutionary monuments. The sea breeze whispers tales of pirates, colonizers, and freedom fighters, while the aroma of strong coffee fills the air. A journey here is a deep dive into North African culture, art, and resilience. To truly experience its soul, you must explore its winding alleys, grand museums, and vibrant public spaces. This guide will navigate you through the very best things to do in Algiers, revealing a city that is as complex as it is beautiful."
+      title="15 Best Things to Do in Algiers, Guide"
+      description={`Clinging to the hillsides above the Mediterranean, Algiers is a city of captivating contrasts. Known as 'Algiers the White' (El-Behdja) for its gleaming white buildings, this historic capital blends a labyrinthine Ottoman-era Casbah with grand French colonial boulevards. Its rich history unfolds at every turn, from ancient mosques to revolutionary monuments. The sea breeze whispers tales of pirates, colonizers, and freedom fighters, while the aroma of strong coffee fills the air. A journey here is a deep dive into North African culture, art, and resilience. To truly experience its soul, you must explore its winding alleys, grand museums, and vibrant public spaces. This guide will navigate you through the very best things to do in Algiers, revealing a city that is as complex as it is beautiful."`}
       highlights={[
       "The Casbah of Algiers",
       "Notre Dame d'Afrique",
