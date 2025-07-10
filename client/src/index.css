@@ -40,45 +40,7 @@
     pointer-events: none;
   }
   
-  /* Enhanced loading skeleton for code splitting */
-  .loading-skeleton {
-    background: linear-gradient(90deg, hsl(220 15% 96%) 25%, hsl(220 15% 90%) 50%, hsl(220 15% 96%) 75%);
-    background-size: 200% 100%;
-    animation: loading-shimmer 1.5s infinite;
-    border-radius: 0.375rem;
-  }
-  
-  @keyframes loading-shimmer {
-    0% {
-      background-position: 200% 0;
-    }
-    100% {
-      background-position: -200% 0;
-    }
-  }
-  
-  /* Dark mode loading skeleton */
-  .dark .loading-skeleton {
-    background: linear-gradient(90deg, hsl(220 15% 15%) 25%, hsl(220 15% 20%) 50%, hsl(220 15% 15%) 75%);
-    background-size: 200% 100%;
-  }
-  
-  /* Loading states for different component types */
-  .loading-city-card {
-    @apply loading-skeleton h-64 w-full;
-  }
-  
-  .loading-text-line {
-    @apply loading-skeleton h-4 w-full mb-2;
-  }
-  
-  .loading-text-short {
-    @apply loading-skeleton h-4 w-3/4;
-  }
-  
-  .loading-button {
-    @apply loading-skeleton h-10 w-32;
-  }
+  /* Minimal loading states - no visible loading indicators */
 }
 
 /* Travel Guide Design System - Inspired by wanderlust and adventure
