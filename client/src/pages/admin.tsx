@@ -246,7 +246,7 @@ export default function AdminPage() {
                   />
 
                   {/* Manual JSON Input */}
-                  {generationMode === 'manual' && (
+                  {watchedGenerationMode === 'manual' && (
                     <FormField
                       control={form.control}
                       name="manualJson"
@@ -432,12 +432,12 @@ export default function AdminPage() {
                     {isGenerating || generateCityPageMutation.isPending ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        {generationMode === 'manual' ? 'Creating City Page...' : 'Generating City Page... (This may take 30-60 seconds)'}
+                        {watchedGenerationMode === 'manual' ? 'Creating City Page...' : 'Generating City Page... (This may take 30-60 seconds)'}
                       </>
                     ) : (
                       <>
                         <Download className="mr-2 h-4 w-4" />
-                        {generationMode === 'manual' ? 'Create City Page from JSON' : 'Generate City Page with AI'}
+                        {watchedGenerationMode === 'manual' ? 'Create City Page from JSON' : 'Generate City Page with AI'}
                       </>
                     )}
                   </Button>
