@@ -167,6 +167,8 @@ const cityMap = {
   'berlin': createCityImport('Berlin', '../pages/cities/Berlin'),
   'dhaandhoo': createCityImport('Dhaandhoo', '../pages/cities/Dhaandhoo'),
   'boston': createCityImport('Boston', '../pages/cities/Boston'),
+
+  'chicago': createCityImport('Chicago', '../pages/cities/Chicago'),
 };
 
 interface DynamicCityRouteProps {

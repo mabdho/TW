@@ -166,7 +166,8 @@ const cities = [
   { "name": "TestCity", "country": "TestCountry", "path": "/testcity", "continent": "" },
   { "name": "Berlin", "country": "Germany", "path": "/berlin", "continent": "Europe" },
   { "name": "Dhaandhoo", "country": "Maldives", "path": "/dhaandhoo", "continent": "Asia" },
-  { "name": "Boston", "country": "USA", "path": "/boston", "continent": "North America" }
+  { "name": "Boston", "country": "USA", "path": "/boston", "continent": "North America" },
+  { "name": "Chicago", "country": "USA", "path": "/chicago", "continent": "North America" }
 ];
 
 const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America", "South America"];
