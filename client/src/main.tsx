@@ -7,15 +7,8 @@ import "./index.css";
 // Lazy load the main App component for code splitting
 const App = lazy(() => import("./App"));
 
-// Performance optimized loading component
-const AppLoadingFallback = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-orange-500">
-    <div className="text-center text-white">
-      <div className="loading-skeleton mb-4" style={{ width: '200px', height: '32px', borderRadius: '8px', margin: '0 auto' }}></div>
-      <div className="loading-skeleton" style={{ width: '150px', height: '20px', borderRadius: '8px', margin: '0 auto' }}></div>
-    </div>
-  </div>
-);
+// No loading fallback - let the static HTML loader handle it
+const AppLoadingFallback = () => null;
 
 // Use requestIdleCallback for non-critical initialization
 const scheduleNonCriticalWork = (callback: () => void) => {
@@ -26,13 +19,27 @@ const scheduleNonCriticalWork = (callback: () => void) => {
   }
 };
 
-createRoot(document.getElementById("root")!).render(
+// Hide the initial loader and render React app
+const root = createRoot(document.getElementById("root")!);
+root.render(
   <QueryClientProvider client={queryClient}>
     <Suspense fallback={<AppLoadingFallback />}>
       <App />
     </Suspense>
   </QueryClientProvider>
 );
+
+// Remove the initial loader once React has rendered
+setTimeout(() => {
+  const loader = document.getElementById('initial-loader');
+  if (loader) {
+    loader.style.opacity = '0';
+    loader.style.transition = 'opacity 0.3s ease-out';
+    setTimeout(() => {
+      loader.remove();
+    }, 300);
+  }
+}, 100);
 
 // Schedule non-critical performance optimizations
 scheduleNonCriticalWork(() => {
