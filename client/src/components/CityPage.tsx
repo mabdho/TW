@@ -40,17 +40,22 @@ export const CityPage: React.FC<CityPageProps> = ({
   faqs
 }) => {
   const top5Attractions = attractions.slice(0, 5);
+  
+  // Calculate number of tabs dynamically
+  const tabCount = 3 + (logistics ? 1 : 0) + (faqs ? 1 : 0);
+  const mobileGridCols = tabCount === 3 ? 'grid-cols-3' : 
+                        tabCount === 4 ? 'grid-cols-4' : 'grid-cols-5';
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary/5 via-background to-background">
       <div className="container mx-auto px-4 py-6 sm:py-8">
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 sm:grid-cols-5 mb-6 sm:mb-8 bg-card border shadow-sm overflow-x-auto">
-            <TabsTrigger value="overview" className="text-xs sm:text-sm font-medium px-2 sm:px-4 whitespace-nowrap">Overview</TabsTrigger>
-            <TabsTrigger value="top5" className="text-xs sm:text-sm font-medium px-2 sm:px-4 whitespace-nowrap">Top 5</TabsTrigger>
-            <TabsTrigger value="all" className="text-xs sm:text-sm font-medium px-2 sm:px-4 whitespace-nowrap">All</TabsTrigger>
-            {logistics && <TabsTrigger value="plan" className="text-xs sm:text-sm font-medium px-2 sm:px-4 whitespace-nowrap">Plan</TabsTrigger>}
-            {faqs && <TabsTrigger value="faqs" className="text-xs sm:text-sm font-medium px-2 sm:px-4 whitespace-nowrap">FAQs</TabsTrigger>}
+          <TabsList className={`grid w-full ${mobileGridCols} mb-6 sm:mb-8 bg-card border shadow-sm`}>
+            <TabsTrigger value="overview" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap">Overview</TabsTrigger>
+            <TabsTrigger value="top5" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap">Top 5</TabsTrigger>
+            <TabsTrigger value="all" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap">All</TabsTrigger>
+            {logistics && <TabsTrigger value="plan" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap">Plan</TabsTrigger>}
+            {faqs && <TabsTrigger value="faqs" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap">FAQs</TabsTrigger>}
           </TabsList>
 
           {/* Overview Tab */}
