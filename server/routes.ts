@@ -186,7 +186,7 @@ Return only the JSON object with no additional text or formatting.`;
       const dynamicContent = await fs.readFile(dynamicRoutePath, 'utf-8');
       
       const routePath = city.toLowerCase().replace(/\s+/g, '-');
-      const cityMapping = `  '${routePath}': () => import('../pages/cities/${cityFileName}'),`;
+      const cityMapping = `  '${routePath}': createCityImport('${cityFileName}', '../pages/cities/${cityFileName}'),`;
       
       if (!dynamicContent.includes(`'${routePath}':`)) {
         // Find the cityMap object and add the new mapping
