@@ -1,11 +1,24 @@
 import { Route, Router } from 'wouter';
 import { useLocation } from 'wouter';
-import Home from './pages/home';
-import NotFound from './pages/not-found';
-import AdminPage from './pages/admin';
-import BlogsPage from './pages/blogs';
-import BlogDetailPage from './pages/blog-detail';
-import DestinationsPage from './pages/destinations';
+import { lazy, Suspense } from 'react';
+
+// Lazy load major page components for code splitting
+const Home = lazy(() => import('./pages/home'));
+const NotFound = lazy(() => import('./pages/not-found'));
+const AdminPage = lazy(() => import('./pages/admin'));
+const BlogsPage = lazy(() => import('./pages/blogs'));
+const BlogDetailPage = lazy(() => import('./pages/blog-detail'));
+const DestinationsPage = lazy(() => import('./pages/destinations'));
+
+// Loading fallback component for page transitions
+const PageLoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-center">
+      <div className="loading-skeleton mb-4" style={{ width: '300px', height: '24px', borderRadius: '8px', margin: '0 auto' }}></div>
+      <div className="loading-skeleton" style={{ width: '200px', height: '16px', borderRadius: '8px', margin: '0 auto' }}></div>
+    </div>
+  </div>
+);
 import { Aarhus } from "./pages/cities/Aarhus";
 import { Accra } from "./pages/cities/Accra";
 import { AddisAbaba } from "./pages/cities/AddisAbaba";
@@ -181,29 +194,30 @@ function ConditionalNotFound() {
 function App() {
   return (
     <Router>
-      <Route path="/" component={Home} />
-      <Route path="/blogs" component={BlogsPage} />
-      <Route path="/blog/:id" component={BlogDetailPage} />
-      <Route path="/destinations" component={DestinationsPage} />
-      <Route path="/aarhus" component={Aarhus} />
-      <Route path="/accra" component={Accra} />
-      <Route path="/addis-ababa" component={AddisAbaba} />
-      <Route path="/adelaide" component={Adelaide} />
-      <Route path="/ahmedabad" component={Ahmedabad} />
-      <Route path="/albuquerque" component={Albuquerque} />
-      <Route path="/algiers" component={Algiers} />
-      <Route path="/alice-springs" component={AliceSprings} />
-      <Route path="/antwerp" component={Antwerp} />
-      <Route path="/arequipa" component={Arequipa} />
-      <Route path="/asuncin" component={Asuncin} />
-      <Route path="/asuncion" component={Asuncion} />
-      <Route path="/auckland" component={Auckland} />
-      <Route path="/austin" component={Austin} />
-      <Route path="/bandung" component={Bandung} />
-      <Route path="/barranquilla" component={Barranquilla} />
-      <Route path="/belgrade" component={Belgrade} />
-      <Route path="/belo-horizonte" component={BeloHorizonte} />
-      <Route path="/bergen" component={Bergen} />
+      <Suspense fallback={<PageLoadingFallback />}>
+        <Route path="/" component={Home} />
+        <Route path="/blogs" component={BlogsPage} />
+        <Route path="/blog/:id" component={BlogDetailPage} />
+        <Route path="/destinations" component={DestinationsPage} />
+        <Route path="/aarhus" component={Aarhus} />
+        <Route path="/accra" component={Accra} />
+        <Route path="/addis-ababa" component={AddisAbaba} />
+        <Route path="/adelaide" component={Adelaide} />
+        <Route path="/ahmedabad" component={Ahmedabad} />
+        <Route path="/albuquerque" component={Albuquerque} />
+        <Route path="/algiers" component={Algiers} />
+        <Route path="/alice-springs" component={AliceSprings} />
+        <Route path="/antwerp" component={Antwerp} />
+        <Route path="/arequipa" component={Arequipa} />
+        <Route path="/asuncin" component={Asuncin} />
+        <Route path="/asuncion" component={Asuncion} />
+        <Route path="/auckland" component={Auckland} />
+        <Route path="/austin" component={Austin} />
+        <Route path="/bandung" component={Bandung} />
+        <Route path="/barranquilla" component={Barranquilla} />
+        <Route path="/belgrade" component={Belgrade} />
+        <Route path="/belo-horizonte" component={BeloHorizonte} />
+        <Route path="/bergen" component={Bergen} />
       <Route path="/bilbao" component={Bilbao} />
       <Route path="/bologna" component={Bologna} />
       <Route path="/bordeaux" component={Bordeaux} />
@@ -336,11 +350,12 @@ function App() {
       <Route path="/yogyakarta" component={Yogyakarta} />
       <Route path="/zagreb" component={Zagreb} />
       <Route path="/zaragoza" component={Zaragoza} />
-      <Route path="/dubai" component={Dubai} />
-      <Route path="/new-york" component={NewYork} />
-      <Route path="/male" component={Male} />
-      <Route path="/admin" component={AdminPage} />
-      <ConditionalNotFound />
+        <Route path="/dubai" component={Dubai} />
+        <Route path="/new-york" component={NewYork} />
+        <Route path="/male" component={Male} />
+        <Route path="/admin" component={AdminPage} />
+        <ConditionalNotFound />
+      </Suspense>
     </Router>
   );
 }

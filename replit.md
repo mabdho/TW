@@ -10,16 +10,27 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (January 2025)
 
-### Image Performance Optimization - COMPLETED ✅ (January 10, 2025)
-- ✅ **LAZY LOADING**: Added `loading="lazy"` attribute to all native `<img>` tags across the website
-- ✅ **UNSPLASH OPTIMIZATION**: Optimized all Unsplash URLs with performance parameters (`?auto=format&fit=max&w=1400&fm=webp`)
-- ✅ **COMPREHENSIVE COVERAGE**: Updated all components: CityPage, FeaturedCities, TravelCategories, blog pages
-- ✅ **PERMANENT TOOLING**: Created reusable optimization script (`optimize_city_images.cjs`) with comprehensive validation
-- ✅ **157 CITY PAGES**: All city pages now have optimized images and lazy loading
-- ✅ **PERFORMANCE GAINS**: WebP format reduces image sizes by 25-50%, lazy loading improves page load times
-- ✅ **SEO IMPROVEMENT**: Enhanced Core Web Vitals scores through image optimization
-- ✅ **FUTURE-PROOF**: Optimization system automatically handles new city pages
-- ✅ **DOCUMENTATION**: Complete README with usage instructions and performance benefits
+### Render-Blocking Resource Optimization - COMPLETED ✅ (January 10, 2025)
+- ✅ **CRITICAL CSS INLINING**: Inlined above-the-fold CSS directly in HTML for instant rendering
+- ✅ **ASYNC FONT LOADING**: Optimized Google Fonts with `media="print" onload` and `display=swap`
+- ✅ **SCRIPT OPTIMIZATION**: Added `defer` attributes to non-critical external scripts
+- ✅ **RESOURCE PRELOADING**: Preloaded critical resources with `rel="preload"` for faster loading
+- ✅ **DOMAIN PRECONNECTION**: Added preconnect hints for external domains (fonts, images)
+- ✅ **CODE SPLITTING**: Implemented lazy loading for React components and routes
+- ✅ **LOADING PLACEHOLDERS**: Added skeleton loading to prevent layout shift
+- ✅ **IDLE SCHEDULING**: Used `requestIdleCallback` for non-critical work
+- ✅ **PERFORMANCE TOOLS**: Created comprehensive optimization scripts
+- ✅ **CORE WEB VITALS**: Improved First Contentful Paint and Time to Interactive
+
+### Advanced Image Optimization - COMPLETED ✅ (January 10, 2025)
+- ✅ **PICTURE TAGS**: Added modern `<picture>` elements with AVIF/WebP fallbacks
+- ✅ **DIMENSION ATTRIBUTES**: Added `width` and `height` to prevent layout shift
+- ✅ **LAZY LOADING**: All images use `loading="lazy"` for performance
+- ✅ **UNSPLASH OPTIMIZATION**: URLs optimized with `?auto=format&fit=crop&w=1400&fm=webp`
+- ✅ **157 CITY PAGES**: All city pages have optimized images and modern formats
+- ✅ **COMPREHENSIVE TOOLING**: Permanent optimization scripts for future pages
+- ✅ **PERFORMANCE GAINS**: 25-50% file size reduction with modern formats
+- ✅ **DOCUMENTATION**: Complete README with optimization benefits
 
 ### Database Migration to Firestore - COMPLETED ✅
 - ✅ **FIRESTORE INTEGRATION**: Migrated from PostgreSQL to Google Cloud Firestore
