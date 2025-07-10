@@ -7,6 +7,8 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { MapPin, Clock, DollarSign, Globe, Star, Users, Info, Camera, Image, ChevronLeft, ChevronRight, Play, Pause, RotateCcw } from 'lucide-react';
 import { Navigation } from './Navigation';
 import { Footer } from './Footer';
+import { CityPageTemplate } from './templates/CityPageTemplate';
+import { CityData } from '../utils/seo';
 
 interface Attraction {
   name: string;
@@ -42,6 +44,9 @@ interface CityPageProps {
     question: string;
     answer: string;
   }>;
+  // SEO enhancement props
+  cityName?: string;
+  country?: string;
 }
 
 export const CityPage: React.FC<CityPageProps> = ({
@@ -52,7 +57,9 @@ export const CityPage: React.FC<CityPageProps> = ({
   imageUrl,
   galleryImages = [],
   logistics,
-  faqs
+  faqs,
+  cityName,
+  country
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
@@ -107,9 +114,25 @@ export const CityPage: React.FC<CityPageProps> = ({
     setIsAutoPlaying(!isAutoPlaying);
   };
 
+  // Extract city name and country from title if not provided
+  const extractedCityName = cityName || title.match(/Best Things to Do in ([^,]+)/)?.[1] || title.split(' ')[0];
+  const extractedCountry = country || title.match(/([^,]+)$/)?.[1]?.trim() || 'Unknown';
+
+  // Convert city data for SEO
+  const cityData: CityData = {
+    name: extractedCityName,
+    country: extractedCountry,
+    content: description,
+    attractions: attractions.map(att => ({
+      name: att.name,
+      description: att.description
+    }))
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navigation />
+    <CityPageTemplate cityData={cityData}>
+      <div className="min-h-screen bg-gray-50">
+        <Navigation />
       
       {/* Hero Image Section with Overlay */}
       <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden">
@@ -771,5 +794,6 @@ export const CityPage: React.FC<CityPageProps> = ({
       </div>
       <Footer />
     </div>
+    </CityPageTemplate>
   );
 };

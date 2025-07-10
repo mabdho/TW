@@ -4,6 +4,17 @@ import { storage } from "./storage";
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import fs from 'fs/promises';
 import path from 'path';
+import { 
+  validateSEOData, 
+  getSitemap, 
+  generateCitySEO, 
+  generateBlogSEO, 
+  updateSitemapManually, 
+  getSEOAnalyticsData, 
+  batchUpdateCitiesSEO, 
+  batchUpdateBlogsSEO, 
+  getRobotsTxt 
+} from "./routes/seo";
 
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
@@ -423,6 +434,18 @@ Return only the JSON object with no additional text or formatting.`;
       });
     }
   });
+
+  // SEO API routes
+  app.post('/api/seo/validate', validateSEOData);
+  app.get('/api/seo/sitemap.xml', getSitemap);
+  app.get('/sitemap.xml', getSitemap); // Alternative route for sitemap
+  app.post('/api/seo/generate/city/:cityId', generateCitySEO);
+  app.post('/api/seo/generate/blog/:blogId', generateBlogSEO);
+  app.post('/api/seo/update/sitemap', updateSitemapManually);
+  app.get('/api/seo/analytics', getSEOAnalyticsData);
+  app.post('/api/seo/batch/cities', batchUpdateCitiesSEO);
+  app.post('/api/seo/batch/blogs', batchUpdateBlogsSEO);
+  app.get('/robots.txt', getRobotsTxt);
 
   const httpServer = createServer(app);
   return httpServer;

@@ -15,9 +15,24 @@ const DestinationsPage = lazy(() => import('./pages/destinations'));
 const PageLoadingFallback = () => null;
 
 
-// Define all valid routes
+// Define all valid routes - using dynamic generation for maintainability
+const getCityRoutes = () => {
+  const cityKeys = [
+    "aarhus", "accra", "addis-ababa", "adelaide", "ahmedabad", "albuquerque", "algiers", "alice-springs", "antwerp", "arequipa", "asuncin", "asuncion", "auckland", "austin", "bandung", "barranquilla", "belgrade", "belo-horizonte", "bergen", "bilbao", "bologna", "bordeaux", "bratislava", "brisbane", "brno", "broome", "bucharest", "busan", "cairns", "cairo", "calgary", "cali", "cape-town", "cartagena", "casablanca", "cebu", "charleston", "chiang-mai", "christchurch", "colombo", "columbus", "copenhagen", "crdoba", "curitiba", "cusco", "da-nang", "dakar", "dalat", "dar-es-salaam", "darwin", "debrecen", "edmonton", "fukuoka", "gaborone", "gdansk", "genoa", "ghent", "gold-coast", "gothenburg", "guadalajara", "guatemala-city", "guayaquil", "halifax", "hanoi", "harare", "havana", "helsinki", "hobart", "hoi-an", "indianapolis", "ipoh", "jaipur", "johannesburg", "kampala", "kansas-city", "kathmandu", "kingston", "krakow", "la-paz", "ljubljana", "luanda", "luang-prabang", "lusaka", "lyon", "malacca", "malaga", "male", "malm", "manaus", "maputo", "maracaibo", "marrakech", "marseille", "medellin", "milwaukee", "montevideo", "nairobi", "nashville", "new-orleans", "new-york", "nice", "nouma", "oaxaca", "oslo", "ottawa", "palermo", "panama-city", "papeete", "penang", "perth", "port-moresby", "portland", "porto", "quebec-city", "queenstown", "quito", "reykjavik", "riga", "rosario", "sacramento", "salt-lake-city", "salvador", "san-antonio", "san-jose", "san-juan", "savannah", "seville", "siem-reap", "sofia", "stockholm", "strasbourg", "sucre", "surabaya", "suva", "tallinn", "tampere", "the-hague", "thessaloniki", "tokyo", "tunis", "turin", "utrecht", "valencia", "valparaiso", "victoria", "vilnius", "warsaw", "wellington", "windhoek", "winnipeg", "yogyakarta", "zagreb", "zaragoza", "dubai", "berlin", "dhaandhoo", "boston", "chicago"
+  ];
+  
+  const routes = [];
+  cityKeys.forEach(cityKey => {
+    routes.push(`/${cityKey}`); // Legacy route
+    routes.push(`/best-things-to-do-in-${cityKey}`); // SEO-friendly route
+  });
+  
+  return routes;
+};
+
 const validRoutes = [
-  "/", "/blogs", "/destinations", "/aarhus", "/accra", "/addis-ababa", "/adelaide", "/ahmedabad", "/albuquerque", "/algiers", "/alice-springs", "/antwerp", "/arequipa", "/asuncin", "/asuncion", "/auckland", "/austin", "/bandung", "/barranquilla", "/belgrade", "/belo-horizonte", "/bergen", "/bilbao", "/bologna", "/bordeaux", "/bratislava", "/brisbane", "/brno", "/broome", "/bucharest", "/busan", "/cairns", "/cairo", "/calgary", "/cali", "/cape-town", "/cartagena", "/casablanca", "/cebu", "/charleston", "/chiang-mai", "/christchurch", "/colombo", "/columbus", "/copenhagen", "/crdoba", "/curitiba", "/cusco", "/da-nang", "/dakar", "/dalat", "/dar-es-salaam", "/darwin", "/debrecen", "/edmonton", "/fukuoka", "/gaborone", "/gdansk", "/genoa", "/ghent", "/gold-coast", "/gothenburg", "/guadalajara", "/guatemala-city", "/guayaquil", "/halifax", "/hanoi", "/harare", "/havana", "/helsinki", "/hobart", "/hoi-an", "/indianapolis", "/ipoh", "/jaipur", "/johannesburg", "/kampala", "/kansas-city", "/kathmandu", "/kigali", "/kingston", "/krakow", "/la-paz", "/lagos", "/lahore", "/ljubljana", "/luanda", "/luang-prabang", "/lusaka", "/lyon", "/malacca", "/malaga", "/male", "/malm", "/manaus", "/maputo", "/maracaibo", "/marrakech", "/marseille", "/medellin", "/milwaukee", "/montevideo", "/nairobi", "/nashville", "/new-orleans", "/new-york", "/norfolk", "/oporto", "/oslo", "/ottawa", "/palma", "/panama-city", "/papeete", "/penang", "/perth", "/port-moresby", "/portland", "/porto", "/quebec-city", "/queenstown", "/quito", "/reykjavik", "/riga", "/rosario", "/sacramento", "/salt-lake-city", "/salvador", "/san-antonio", "/san-jose", "/san-juan", "/savannah", "/seville", "/siem-reap", "/sofia", "/stockholm", "/strasbourg", "/sucre", "/surabaya", "/suva", "/tallinn", "/tampere", "/the-hague", "/thessaloniki", "/tokyo", "/tunis", "/turin", "/utrecht", "/valencia", "/valparaiso", "/victoria", "/vilnius", "/warsaw", "/wellington", "/windhoek", "/winnipeg", "/yogyakarta", "/zagreb", "/zaragoza", "/dubai", "/admin"
+  "/", "/blogs", "/destinations", "/admin", 
+  ...getCityRoutes()
 ];
 
 function ConditionalNotFound() {

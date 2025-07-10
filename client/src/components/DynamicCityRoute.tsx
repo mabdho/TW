@@ -210,16 +210,23 @@ export const DynamicCityRoute: React.FC<DynamicCityRouteProps> = ({ path, cityKe
   );
 };
 
-// Generate all city routes dynamically
+// Generate all city routes dynamically with SEO-friendly URLs
 export const CityRoutes: React.FC = () => {
   return (
     <>
       {Object.keys(cityMap).map((cityKey) => (
-        <DynamicCityRoute
-          key={cityKey}
-          path={`/${cityKey}`}
-          cityKey={cityKey}
-        />
+        <React.Fragment key={cityKey}>
+          {/* SEO-friendly URL structure */}
+          <DynamicCityRoute
+            path={`/best-things-to-do-in-${cityKey}`}
+            cityKey={cityKey}
+          />
+          {/* Legacy URL support for backward compatibility */}
+          <DynamicCityRoute
+            path={`/${cityKey}`}
+            cityKey={cityKey}
+          />
+        </React.Fragment>
       ))}
     </>
   );
