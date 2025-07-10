@@ -100,9 +100,10 @@ export default function BlogDetailPage() {
 
             {/* Blog Content */}
             <div className="prose prose-lg max-w-none">
-              <div className="text-gray-700 leading-relaxed whitespace-pre-line">
-                {blog.content}
-              </div>
+              <div 
+                className="text-gray-700 leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: blog.content }}
+              />
             </div>
 
             {/* Share & Back Navigation */}

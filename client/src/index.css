@@ -33,6 +33,13 @@
   .touch-friendly {
     @apply min-h-[44px] min-w-[44px];
   }
+  
+  /* Rich Text Editor Placeholder */
+  [contenteditable]:empty:before {
+    content: attr(data-placeholder);
+    color: #9ca3af;
+    pointer-events: none;
+  }
 }
 
 /* Travel Guide Design System - Inspired by wanderlust and adventure

@@ -43,7 +43,15 @@ export const TravelCategories = () => {
                   <Card className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-300 overflow-hidden">
                     {/* Blog Image */}
                     <div className="relative h-48 bg-gray-100">
-                      <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-20"></div>
+                      {blog.imageUrl ? (
+                        <img 
+                          src={blog.imageUrl} 
+                          alt={blog.title}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-20"></div>
+                      )}
                       {blog.featured && (
                         <div className="absolute top-4 left-4">
                           <Badge className="bg-orange-500 hover:bg-orange-600 text-white">Featured</Badge>

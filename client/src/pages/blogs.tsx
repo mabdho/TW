@@ -63,7 +63,15 @@ export default function BlogsPage() {
               <Card className="mb-12 overflow-hidden border-gray-200 hover:shadow-lg transition-all duration-300 cursor-pointer">
                 <div className="grid md:grid-cols-2 gap-0">
                   <div className="relative h-64 md:h-full bg-gray-100">
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-20"></div>
+                    {post.imageUrl ? (
+                      <img 
+                        src={post.imageUrl} 
+                        alt={post.title}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-20"></div>
+                    )}
                     <div className="absolute top-4 left-4">
                       <Badge className="bg-orange-500 hover:bg-orange-600 text-white">Featured</Badge>
                     </div>
@@ -104,7 +112,15 @@ export default function BlogsPage() {
               <a href={`/blog/${post.id}`} key={post.id} className="block">
                 <Card className="overflow-hidden border-gray-200 hover:shadow-lg transition-all duration-300 cursor-pointer">
                   <div className="relative h-48 bg-gray-100">
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-20"></div>
+                    {post.imageUrl ? (
+                      <img 
+                        src={post.imageUrl} 
+                        alt={post.title}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-20"></div>
+                    )}
                   </div>
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-3">

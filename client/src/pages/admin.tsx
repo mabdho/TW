@@ -17,6 +17,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { apiRequest } from '@/lib/queryClient';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
+import { RichTextEditor } from '@/components/ui/rich-text-editor';
 import type { Blog } from '@shared/schema';
 
 const galleryImageSchema = z.object({
@@ -411,12 +412,13 @@ export default function AdminPage() {
                             name="manualContent.content"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel>Content *</FormLabel>
+                                <FormLabel>Content * (Rich Text Editor)</FormLabel>
                                 <FormControl>
-                                  <Textarea 
-                                    placeholder="Write your blog post content here..." 
-                                    rows={10}
-                                    {...field} 
+                                  <RichTextEditor 
+                                    value={field.value || ''}
+                                    onChange={field.onChange}
+                                    placeholder="Write your blog post content here. Use the toolbar above to format text with bold, italic, underline, different font sizes, headings, and more..."
+                                    className="min-h-[300px]"
                                   />
                                 </FormControl>
                                 <FormMessage />
