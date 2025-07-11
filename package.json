@@ -89,6 +89,7 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "vite-plugin-purgecss": "^0.2.13",
+    "vite-plugin-ssr": "^0.4.142",
     "wouter": "^3.3.5",
     "zod": "^3.24.2",
     "zod-validation-error": "^3.4.0"

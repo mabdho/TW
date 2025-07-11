@@ -3,6 +3,7 @@ import session from "express-session";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { initializeSitemapIndexing } from "./utils/sitemapIndexing";
+import { handleSSRRequest } from "./ssr-handler";
 
 const app = express();
 app.use(express.json());
@@ -59,6 +60,23 @@ app.use((req, res, next) => {
 
     res.status(status).json({ message });
     throw err;
+  });
+
+  // Add SSR middleware for better SEO
+  app.get('*', (req, res, next) => {
+    // Check if this is a page route that should use SSR
+    const isPageRoute = req.path === '/' || 
+                       req.path.startsWith('/best-things-to-do-in-') ||
+                       req.path === '/blogs' ||
+                       req.path === '/destinations' ||
+                       req.path === '/admin' ||
+                       req.path === '/login';
+    
+    if (isPageRoute && req.accepts('html')) {
+      return handleSSRRequest(req, res);
+    }
+    
+    next();
   });
 
   // importantly only setup vite in development and after
