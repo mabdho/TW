@@ -26,7 +26,6 @@ export interface CityData {
   name: string;
   country: string;
   content: string;
-  imageUrl?: string;
   attractions?: Array<{
     name: string;
     description: string;

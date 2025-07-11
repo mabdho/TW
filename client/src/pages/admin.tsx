@@ -32,9 +32,6 @@ const cityFormSchema = z.object({
   city: z.string().min(1, 'City name is required'),
   country: z.string().min(1, 'Country is required'),
   continent: z.string().optional(),
-  heroImageUrl: z.string().refine((val) => val === '' || z.string().url().safeParse(val).success, {
-    message: 'Please enter a valid hero image URL or leave empty'
-  }),
   galleryImages: z.array(galleryImageSchema).optional(),
   msv: z.string().optional(),
   kd: z.string().optional(),
@@ -261,19 +258,13 @@ export default function AdminPage() {
                       )}
                     />
 
-                    <FormField
-                      control={cityForm.control}
-                      name="heroImageUrl"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Hero Image URL</FormLabel>
-                          <FormControl>
-                            <Input placeholder="https://..." {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                      <h3 className="text-sm font-medium text-blue-900 mb-2">🎨 Beautiful Gradients</h3>
+                      <p className="text-sm text-blue-700">
+                        Your city will automatically get a beautiful gradient background that matches its personality. 
+                        No images needed!
+                      </p>
+                    </div>
 
                     {/* Gallery Images Section */}
                     <div className="space-y-4">

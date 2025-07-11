@@ -25,7 +25,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Admin route to generate city pages
   app.post('/api/admin/generate-city-page', async (req, res) => {
     try {
-      const { city, country, continent, heroImageUrl, galleryImages, msv, kd, generationMode, manualJson } = req.body;
+      const { city, country, continent, galleryImages, msv, kd, generationMode, manualJson } = req.body;
 
       if (!city || !country) {
         return res.status(400).json({ error: 'City and country are required' });
@@ -339,7 +339,7 @@ Return only the JSON object with no additional text or formatting.`;
         const featuredCitiesMatch = featuredCitiesContent.match(/const featuredCities = \[([\s\S]*?)\];/);
         if (featuredCitiesMatch) {
           const currentFeaturedCities = featuredCitiesMatch[1];
-          const newCityEntry = `  { "name": "${city}", "country": "${country}", "path": "/${city.toLowerCase().replace(/\s+/g, '-')}", "continent": "${continent}", "imageUrl": "${heroImageUrl || ''}" }`;
+          const newCityEntry = `  { "name": "${city}", "country": "${country}", "path": "/${city.toLowerCase().replace(/\s+/g, '-')}", "continent": "${continent}", "imageUrl": "" }`;
           
           // Add new city to the beginning and keep only 8 cities
           const lines = currentFeaturedCities.split('\n').filter(line => line.trim().startsWith('{ "name"'));
@@ -612,7 +612,6 @@ export const ${cityName}: React.FC = () => {
     <CityPage
       title={"${title}"}
       description={\`${contentData.description.replace(/`/g, '\\`')}\`}
-      imageUrl={"${heroImageUrl || ''}"}
       galleryImages={[${formattedGalleryImages}
       ]}
       highlights={[${formattedHighlights}]}

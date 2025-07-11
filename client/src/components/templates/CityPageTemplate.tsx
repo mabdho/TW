@@ -10,6 +10,7 @@ import { CityData, generateCitySEOData, generateCityStructuredData, generateBrea
 import { InternalLinks } from '../InternalLinks';
 import { getAllCitiesData, getAllBlogsData } from '../../utils/dataService';
 import { generatePlaceSchema } from '../../utils/geoData';
+import { getCityGradientClass } from '../../utils/cityGradients';
 
 interface CityPageTemplateProps {
   cityData: CityData;
@@ -91,15 +92,9 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
           </ol>
         </nav>
 
-        {/* City page hero section with SEO optimization */}
+        {/* City page hero section with beautiful gradient */}
         <div 
-          className="city-hero-section relative text-white h-96 sm:h-[32rem] md:h-[36rem] lg:h-[40rem] bg-gradient-to-r from-green-500 to-blue-500"
-          style={cityData.imageUrl ? {
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${cityData.imageUrl})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          } : {}}
+          className={`city-hero-section relative text-white h-96 sm:h-[32rem] md:h-[36rem] lg:h-[40rem] ${getCityGradientClass(cityData.name, cityData.country)}`}
         >
           {/* SEO Header Content - Left Bottom Corner */}
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
