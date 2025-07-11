@@ -8,6 +8,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { renderComponentToHTML } from './ssr-renderer.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,7 +38,7 @@ async function generateCityStaticPage(cityKey, cityName) {
   };
   
   // Generate SEO-optimized HTML
-  const routeHTML = generateHTMLForRoute(route, baseHTML, cityName, cityKey);
+  const routeHTML = await generateHTMLForRoute(route, baseHTML, cityName, cityKey);
   
   // Create output directory
   const routeDir = path.join(DIST_DIR, `best-things-to-do-in-${cityKey}`);
@@ -60,7 +61,7 @@ async function generateCityStaticPage(cityKey, cityName) {
 /**
  * Generate SEO-optimized HTML for city route
  */
-function generateHTMLForRoute(route, baseHTML, cityName, cityKey) {
+async function generateHTMLForRoute(route, baseHTML, cityName, cityKey) {
   let html = baseHTML;
   
   // Generate SEO data
@@ -152,6 +153,23 @@ function generateHTMLForRoute(route, baseHTML, cityName, cityKey) {
     '</head>',
     `  <script type="application/ld+json">${JSON.stringify(structuredData, null, 0)}</script>\n</head>`
   );
+  
+  // 🚀 SSR: Pre-render React content
+  try {
+    console.log(`🔄 Rendering React content for ${route.path}...`);
+    const renderedContent = await renderComponentToHTML(route);
+    
+    // Replace empty root div with pre-rendered content
+    html = html.replace(
+      '<div id="root"></div>',
+      `<div id="root">${renderedContent}</div>`
+    );
+    
+    console.log(`✅ SSR complete for ${route.path}`);
+  } catch (ssrError) {
+    console.warn(`⚠️  SSR failed for ${route.path}:`, ssrError.message);
+    // Keep original empty root div - client-side rendering will take over
+  }
   
   return html;
 }

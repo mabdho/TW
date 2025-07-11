@@ -8,6 +8,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { renderComponentToHTML } from './ssr-renderer.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -56,7 +57,7 @@ const BASE_ROUTES = [
 /**
  * Generate SEO-optimized HTML for a specific route
  */
-function generateHTMLForRoute(route, baseHTML) {
+async function generateHTMLForRoute(route, baseHTML) {
   let html = baseHTML;
   
   // Extract city name from route path
@@ -125,6 +126,23 @@ function generateHTMLForRoute(route, baseHTML) {
     '</head>',
     `  <script type="application/ld+json">${JSON.stringify(structuredData, null, 0)}</script>\n</head>`
   );
+  
+  // 🚀 SSR: Pre-render React content
+  try {
+    console.log(`🔄 Rendering React content for ${route.path}...`);
+    const renderedContent = await renderComponentToHTML(route);
+    
+    // Replace empty root div with pre-rendered content
+    html = html.replace(
+      '<div id="root"></div>',
+      `<div id="root">${renderedContent}</div>`
+    );
+    
+    console.log(`✅ SSR complete for ${route.path}`);
+  } catch (ssrError) {
+    console.warn(`⚠️  SSR failed for ${route.path}:`, ssrError.message);
+    // Keep original empty root div - client-side rendering will take over
+  }
   
   return html;
 }
@@ -284,7 +302,7 @@ async function generateStaticFiles() {
   for (const route of allRoutes) {
     try {
       // Generate HTML for this route
-      const routeHTML = generateHTMLForRoute(route, baseHTML);
+      const routeHTML = await generateHTMLForRoute(route, baseHTML);
       
       // Determine output path
       let outputPath;
