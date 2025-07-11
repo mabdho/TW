@@ -10,6 +10,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (January 2025)
 
+### Enhanced SEO Metadata Generation - COMPLETED ✅ (January 11, 2025)
+- ✅ **IMPROVED META DESCRIPTIONS**: Updated Gemini prompt to ensure metaDescription includes both primary and secondary keywords
+- ✅ **CHARACTER LIMIT ENFORCEMENT**: Added strict 160-character limit instruction for meta descriptions
+- ✅ **KEYWORD INTEGRATION**: Meta descriptions must naturally include "best things to do in [city]" AND "things to do in [city]"
+- ✅ **SCHEMA SUGGESTIONS**: Added new schemaSuggestions field to JSON output for structured data markup
+- ✅ **STRUCTURED DATA SUPPORT**: Provides relevant schema.org types (FAQPage, Article, TouristAttraction, BreadcrumbList, LocalBusiness)
+- ✅ **SEO OPTIMIZATION**: Enhanced prompt maintains all existing JSON structure while improving search engine visibility
+- ✅ **BACKWARD COMPATIBILITY**: All current formatting rules and validation remain intact
+
 ### Complete Firestore Removal & File System Migration - COMPLETED ✅ (January 11, 2025)
 - ✅ **ZERO FIRESTORE DEPENDENCIES**: Removed all Firestore references from sitemap and SEO systems
 - ✅ **FILE SYSTEM ONLY**: Sitemap generation now reads directly from file system (cities and blogs)

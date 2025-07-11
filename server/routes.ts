@@ -228,8 +228,8 @@ WRITING STYLE REQUIREMENTS:
 Generate content with this EXACT structure in valid JSON format:
 
 {
-  "metaTitle": "15 Best Things to Do in ${city}, ${country} (2025 Guide)",
-  "metaDescription": "Your complete 2025 ${city} travel guide with top attractions, insider tips, dining spots, and hidden gems.",
+  "metaTitle": "Best Things to Do in ${city}, ${country} (2025 Guide)",
+  "metaDescription": "Discover the best things to do in ${city} — top attractions, hidden gems, and food spots. Complete ${city} travel guide. (MUST naturally include 'best things to do in ${city}' AND 'things to do in ${city}', stay under 160 characters)",
   "slug": "things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}",
   "description": "A meta-style introduction (150–200 words) that uses the exact phrase 'Best Things to Do in ${city}' and 'Things to do in ${city}' naturally in the first 1–2 sentences. Write in a human, engaging tone with varied sentence structure and subtle imperfections that feel authentic.",
   "highlights": ["5–6 one-line must-see places"],
@@ -316,7 +316,8 @@ Generate content with this EXACT structure in valid JSON format:
       "walkingFriendly": true/false,
       "publicTransportQuality": "Excellent, Good, Fair, or Limited"
     }
-  }
+  },
+  "schemaSuggestions": ["FAQPage", "Article", "TouristAttraction", "BreadcrumbList", "LocalBusiness"]
 }
 
 Generate 8-12 detailed attractions. MANDATORY: Include 2-3 dining-related attractions (restaurants, cafes, food markets, street food, local cuisine spots). Write in a natural, human tone with:
@@ -358,6 +359,15 @@ Fill out the complete discoveryData section with:
 - diningHighlights: Complete section with local dishes, best cafes, top restaurants, food markets, and dining tips
 - seasonalHighlights: What makes each season special
 - quickFacts: Accurate statistics about the attractions
+
+The schemaSuggestions field should contain relevant schema.org types for structured data markup. Common options include:
+- "FAQPage" (for the FAQ section)
+- "Article" (for the travel guide content)
+- "TouristAttraction" (for individual attractions)
+- "BreadcrumbList" (for navigation)
+- "LocalBusiness" (for restaurants/cafes mentioned)
+- "Place" (for geographic location)
+- "TravelAction" (for travel-related activities)
 
 ✅ JSON RULES (STRICT)
 Ensure the Gemini model follows these rules:
