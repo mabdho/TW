@@ -626,18 +626,100 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
         await fs.writeFile(indexPath, updatedContent);
       }
 
+      // Auto-update sitemap after blog creation
+      try {
+        const { updateSitemap } = await import('./functions/autoSEO');
+        await updateSitemap();
+        console.log('Sitemap updated after blog creation');
+      } catch (sitemapError) {
+        console.warn('Failed to update sitemap after blog creation:', sitemapError);
+      }
+
       res.json({
         success: true,
         blogId,
         fileName: blogFileName,
         filePath: `client/src/blogs/${blogFileName}`,
-        message: `Blog "${title}" created successfully`
+        message: `Blog "${title}" created successfully and sitemap updated`
       });
 
     } catch (error) {
       console.error('Error generating blog:', error);
       res.status(500).json({ 
         error: 'Failed to generate blog',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  // Blog deletion route
+  app.delete('/api/admin/delete-blog/:blogId', async (req, res) => {
+    try {
+      const { blogId } = req.params;
+      
+      if (!blogId) {
+        return res.status(400).json({ error: 'Blog ID is required' });
+      }
+
+      // Delete blog file
+      const blogFileName = `${blogId}.tsx`;
+      const blogDirPath = path.join(process.cwd(), 'client', 'src', 'blogs');
+      const blogFilePath = path.join(blogDirPath, blogFileName);
+      
+      // Check if blog file exists
+      try {
+        await fs.access(blogFilePath);
+      } catch (error) {
+        return res.status(404).json({ error: 'Blog not found' });
+      }
+
+      // Delete the blog file
+      await fs.unlink(blogFilePath);
+
+      // Update blogs index file to remove the blog
+      const indexPath = path.join(blogDirPath, 'index.ts');
+      const indexContent = await fs.readFile(indexPath, 'utf-8');
+      
+      // Remove import statement
+      const componentName = blogId.replace(/-/g, '');
+      const importStatement = `import { ${componentName}Blog } from './${blogId}';`;
+      const blogEntry = `  ${componentName}Blog,`;
+      
+      let updatedContent = indexContent;
+      
+      // Remove import
+      updatedContent = updatedContent.replace(importStatement + '\n', '');
+      updatedContent = updatedContent.replace(importStatement, '');
+      
+      // Remove from allBlogs array
+      updatedContent = updatedContent.replace(blogEntry + '\n', '');
+      updatedContent = updatedContent.replace(blogEntry, '');
+      
+      // Clean up any double newlines
+      updatedContent = updatedContent.replace(/\n\n\n/g, '\n\n');
+      
+      await fs.writeFile(indexPath, updatedContent);
+
+      // Auto-update sitemap after blog deletion
+      try {
+        const { updateSitemap } = await import('./functions/autoSEO');
+        await updateSitemap();
+        console.log('Sitemap updated after blog deletion');
+      } catch (sitemapError) {
+        console.warn('Failed to update sitemap after blog deletion:', sitemapError);
+      }
+
+      res.json({
+        success: true,
+        message: `Blog "${blogId}" deleted successfully and sitemap updated`,
+        blogId,
+        deletedFile: blogFileName
+      });
+
+    } catch (error) {
+      console.error('Error deleting blog:', error);
+      res.status(500).json({ 
+        error: 'Failed to delete blog',
         details: error instanceof Error ? error.message : 'Unknown error'
       });
     }

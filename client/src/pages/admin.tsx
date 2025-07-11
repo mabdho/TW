@@ -11,7 +11,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
-import { Loader2, FileText, BookOpen } from 'lucide-react';
+import { Loader2, FileText, BookOpen, Trash2, AlertTriangle } from 'lucide-react';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { useToast } from '@/hooks/use-toast';
 import { Toaster } from '@/components/ui/toaster';
 import { apiRequest } from '@/lib/queryClient';
@@ -139,6 +140,7 @@ export default function AdminPage() {
         description: `Blog "${data.blogId}" has been created as a file.`
       });
       blogForm.reset();
+      queryClient.invalidateQueries({ queryKey: ['/api/blogs'] });
     },
     onError: (error: any) => {
       let errorMessage = "Failed to generate blog";
@@ -151,6 +153,36 @@ export default function AdminPage() {
         variant: "destructive"
       });
     }
+  });
+
+  // Get all blogs for the listing
+  const { data: blogs = [], isLoading: blogsLoading } = useQuery({
+    queryKey: ['/api/blogs'],
+    queryFn: async () => {
+      const response = await apiRequest('GET', '/api/blogs');
+      return response || [];
+    },
+  });
+
+  // Delete blog mutation
+  const deleteBlogMutation = useMutation({
+    mutationFn: async (blogId: string) => {
+      return await apiRequest('DELETE', `/api/admin/delete-blog/${blogId}`);
+    },
+    onSuccess: (response) => {
+      toast({
+        title: 'Blog Deleted!',
+        description: response.message,
+      });
+      queryClient.invalidateQueries({ queryKey: ['/api/blogs'] });
+    },
+    onError: (error: any) => {
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to delete blog',
+        variant: 'destructive',
+      });
+    },
   });
 
   const onCitySubmit = async (data: CityFormData) => {
@@ -433,6 +465,82 @@ export default function AdminPage() {
                 </CardContent>
               </Card>
 
+              {/* Blog Listing */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Manage Existing Blogs</CardTitle>
+                  <CardDescription>
+                    View and manage all blog posts. Deleting blogs will automatically update the sitemap.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {blogsLoading ? (
+                    <div className="flex items-center justify-center py-8">
+                      <Loader2 className="h-8 w-8 animate-spin" />
+                    </div>
+                  ) : blogs.length === 0 ? (
+                    <div className="text-center py-8 text-gray-500">
+                      <BookOpen className="h-16 w-16 mx-auto mb-4 text-gray-300" />
+                      <p>No blogs created yet. Generate your first blog post above!</p>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      {blogs.map((blog: Blog) => (
+                        <div key={blog.id} className="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <h3 className="font-semibold text-lg mb-1">{blog.title}</h3>
+                              <p className="text-sm text-gray-600 mb-2">{blog.excerpt}</p>
+                              <div className="flex items-center gap-4 text-sm text-gray-500">
+                                <Badge variant="outline">{blog.category}</Badge>
+                                <span>{blog.readTime}</span>
+                                <span>{blog.date}</span>
+                                <span>by {blog.author}</span>
+                                {blog.featured && <Badge variant="secondary">Featured</Badge>}
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2 ml-4">
+                              <AlertDialog>
+                                <AlertDialogTrigger asChild>
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                                    disabled={deleteBlogMutation.isPending}
+                                  >
+                                    <Trash2 className="h-4 w-4" />
+                                  </Button>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                  <AlertDialogHeader>
+                                    <AlertDialogTitle className="flex items-center gap-2">
+                                      <AlertTriangle className="h-5 w-5 text-red-500" />
+                                      Delete Blog Post
+                                    </AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                      Are you sure you want to delete "{blog.title}"? This action cannot be undone. The blog file will be permanently removed and the sitemap will be automatically updated.
+                                    </AlertDialogDescription>
+                                  </AlertDialogHeader>
+                                  <AlertDialogFooter>
+                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                    <AlertDialogAction
+                                      onClick={() => deleteBlogMutation.mutate(blog.id)}
+                                      className="bg-red-600 hover:bg-red-700"
+                                    >
+                                      Delete Blog
+                                    </AlertDialogAction>
+                                  </AlertDialogFooter>
+                                </AlertDialogContent>
+                              </AlertDialog>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+
               {/* Info Card */}
               <Card>
                 <CardHeader>
@@ -447,6 +555,7 @@ export default function AdminPage() {
                     <p>✅ New blogs appear immediately on the website</p>
                     <p>✅ SEO optimized with proper metadata and structure</p>
                     <p>✅ Fully responsive design matching the website theme</p>
+                    <p>✅ Sitemap automatically updates when blogs are deleted</p>
                   </div>
                 </CardContent>
               </Card>
