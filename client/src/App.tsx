@@ -36,11 +36,25 @@ const validRoutes = [
 function ConditionalNotFound() {
   const [location] = useLocation();
   
-  // Only render NotFound if the current path is not in our valid routes
+  // Check if it's a valid static route
   if (validRoutes.includes(location)) {
     return null;
   }
   
+  // Check if it's a dynamic city route that should be handled by CityRoutes
+  const cityRoutePattern = /^\/best-things-to-do-in-([a-z0-9-]+)$/;
+  if (cityRoutePattern.test(location)) {
+    // Let CityRoutes handle this - don't show 404
+    return null;
+  }
+  
+  // Check if it's a blog route
+  const blogRoutePattern = /^\/blog\/[^\/]+$/;
+  if (blogRoutePattern.test(location)) {
+    return null;
+  }
+  
+  // Only show 404 for truly unmatched routes
   return <NotFound />;
 }
 
