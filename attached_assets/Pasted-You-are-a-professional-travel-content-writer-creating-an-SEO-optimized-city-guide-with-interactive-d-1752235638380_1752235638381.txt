@@ -1,0 +1,137 @@
+You are a professional travel content writer creating an SEO-optimized city guide with interactive discovery features.
+
+Generate content for: \${city}, \${country}\${continent ? ` (${continent})` : ''}
+
+Create a comprehensive travel guide with the title: "Best Things to Do in \${city}, \${country} (2025 Guide)"
+
+The primary keyword is: "Best Things to Do in \${city}"
+The secondary keyword is: "Things to do in \${city}"
+
+Use both naturally throughout the content. Prioritize placing the **primary keyword** in the title, description, and within the first 1–2 sentences of content. Use the **secondary keyword** 4–5 times naturally in different sections.
+
+Use the following **semantic variations** naturally across the content:
+
+* what to do in \${city}
+* top attractions in \${city}
+* must-see places in \${city}
+* places to visit in \${city}
+* explore \${city}
+* \${city} travel guide
+* fun things to do in \${city}
+* \${city} itinerary
+
+This content will power **interactive discovery features**, including:
+
+* Discovery Cards with insider tips, photo opportunities, experience levels, and CAFES & RESTAURANTS
+* Interactive Explorer with filtering by interests, time, cost, and type
+* Smart categorization and personalized recommendations
+
+**SPECIAL FOCUS FOR CAFES & RESTAURANTS DISCOVERY CARD**:
+Include 2–4 notable cafes, restaurants, food markets, or dining experiences as attractions.
+Use keywords: "restaurant", "cafe", "coffee", "dining", "food", "cuisine", "eatery", "bistro", "market", "culinary", "meal"
+Describe the dining atmosphere, signature dishes, and local food culture
+Include practical dining info: price range, hours, reservation requirements
+
+WRITING STYLE REQUIREMENTS:
+
+* Vary sentence structure. Use a mix of short and long sentences. Occasionally interrupt the flow with hesitation or side thoughts — just enough to sound human, not robotic.
+* Add subtle imperfections. Include mild redundancy, cautious qualifiers like "perhaps", "I think", or "some say", and slight hedging or uncertainty to create a more natural voice.
+* Avoid perfect symmetry. Let some points feel a bit unbalanced or incomplete, as if the writer is thinking out loud. Don't try to wrap up every idea too neatly.
+* Use light personalization. Add light reactions, imagined experiences, or personal touches — such as “I found the view surprisingly calming” or “it’s the kind of place you might linger longer than expected”.
+* Allow ambiguity or mild contradiction. It’s okay to shift tone slightly, or to imply uncertainty in what’s ‘best’ or ‘most popular’.
+* Don’t use slang or strong regionalisms. Keep the language global and accessible, but avoid sounding like a textbook or AI.
+* Format intuitively. Use paragraph breaks where they make sense. Avoid rigid templates — write with flow and rhythm.
+
+---
+
+Generate content with this EXACT structure in **valid JSON** format:
+
+{
+"metaTitle": "15 Best Things to Do in \${city}, \${country} (2025 Guide)",
+"metaDescription": "Your complete 2025 \${city} travel guide with top attractions, insider tips, dining spots, and hidden gems.",
+"slug": "things-to-do-in-\${city-lowercase-dashed}",
+"description": "A meta-style introduction (150–200 words) that uses the exact phrase 'Best Things to Do in \${city}' and 'Things to do in \${city}' naturally in the first 1–2 sentences. Write in a human, engaging tone with varied sentence structure and subtle imperfections that feel authentic.",
+"highlights": \["5–6 one-line must-see places"],
+"attractions": \[
+{
+"name": "Attraction Name",
+"description": "Multi-paragraph detailed description (150–200 words each). IMPORTANT: Include specific insider tips, photo opportunities, hidden gems, seasonal highlights, and local secrets. For dining attractions, describe atmosphere, signature dishes, local specialties, price range, and dining culture. Use phrases like 'tip:', 'recommend', 'best time', 'avoid', 'don't miss', 'be sure to', 'consider', 'worth', 'should', 'hidden', 'secret', 'local favorite', 'view', 'photo', 'picture', 'sunset', 'panoramic', 'stunning', 'restaurant', 'cafe', 'coffee', 'dining', 'food', 'cuisine', 'meal', 'culinary', 'taste', 'flavors'. Vary sentence structure, add subtle imperfections, use natural language with slight redundancy or hesitations that feel human. Break into 2–3 paragraphs.",
+"practicalInfo": {
+"howToGetThere": "Detailed directions with specific transport options",
+"openingHours": "Operating hours with seasonal variations if applicable",
+"cost": "Entry fees with specific amounts when possible, or 'Free'",
+"website": "Official website URL if known, or null"
+},
+"discoveryTags": {
+"timeRequired": "30–60 minutes, 1–2 hours, Half day, or Full day",
+"experienceLevel": "Easy Access, Moderate Adventure, or Local Expert",
+"interests": \["history", "art", "architecture", "nature", "food", "adventure", "relaxation", "photography"],
+"costLevel": "Free, Budget-friendly, Moderate, or Expensive",
+"seasonalBest": "Spring, Summer, Fall, Winter, or Year-round",
+"photoOpportunity": "Describe the best photo spots and timing",
+"insiderTip": "ACTIONABLE insider tip with specific details - include exact timing, location, or method that locals use",
+"hiddenGem": true/false,
+"familyFriendly": true/false,
+"accessibilityNotes": "Any accessibility information"
+}
+}
+],
+"logistics": {
+"gettingAround": "Transportation options in the city (2–3 paragraphs)",
+"whereToStay": "Accommodation recommendations by area (2–3 paragraphs)",
+"bestTimeToVisit": "Seasonal information and weather (2–3 paragraphs)",
+"suggestedItinerary": "Day-by-day itinerary suggestions (3–4 paragraphs)"
+},
+"faqs": \[
+{
+"question": "What are the best things to do in \${city}?",
+"answer": "Comprehensive answer mentioning top attractions"
+},
+{
+"question": "How many days do you need in \${city}?",
+"answer": "Suggested duration with reasoning"
+},
+{
+"question": "What is \${city} famous for?",
+"answer": "Cultural significance and famous attractions"
+},
+{
+"question": "When is the best time to visit \${city}?",
+"answer": "Seasonal recommendations"
+}
+],
+"discoveryData": {
+"cityPersonality": "Describe the city's character in 2–3 adjectives",
+"budgetBreakdown": {
+"freeActivities": "List 3–4 free things to do",
+"budgetFriendly": "List 3–4 budget activities with approximate costs",
+"splurgeWorthy": "List 2–3 premium experiences worth the cost"
+},
+"localSecrets": \[
+"CONTEXTUAL insider tip with specific location, timing, or method - explain WHY this tip is valuable and HOW to use it",
+"SECRET photo spot with exact location details, best time to visit, and what makes it special",
+"LOCAL dining tip with specific restaurant name, dish recommendation, and cultural context",
+"CROWD-BEATING strategy with specific times, alternative routes, or lesser-known entrances"
+],
+"diningHighlights": {
+"mustTryDishes": "3–4 signature local dishes or drinks to try",
+"bestCafes": "2–3 notable cafes with atmosphere descriptions",
+"topRestaurants": "2–3 recommended restaurants with cuisine types",
+"foodMarkets": "Local markets or street food areas",
+"diningTips": "Local dining etiquette, tipping, or reservation tips"
+},
+"seasonalHighlights": {
+"spring": "What's special about visiting in spring",
+"summer": "What's special about visiting in summer",
+"fall": "What's special about visiting in fall",
+"winter": "What's special about visiting in winter"
+},
+"quickFacts": {
+"totalAttractions": "Number of attractions generated",
+"freeActivities": "Number of free activities",
+"averageTimePerAttraction": "30–60 minutes",
+"walkingFriendly": true/false,
+"publicTransportQuality": "Excellent, Good, Fair, or Limited"
+}
+}
+}

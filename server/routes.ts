@@ -41,29 +41,57 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
 Generate content for: ${city}, ${country}${continent ? ` (${continent})` : ''}
 
-Create a comprehensive travel guide with the title: "15 Best Things to Do in ${city}, ${country} (2025 Guide)"
+Create a comprehensive travel guide with the title: "Best Things to Do in ${city}, ${country} (2025 Guide)"
 
-The focus keyword is "Things to do in ${city}" - use this naturally throughout the content.
+The primary keyword is: "Best Things to Do in ${city}"
+The secondary keyword is: "Things to do in ${city}"
 
-IMPORTANT: This content will power interactive discovery features including:
-- Discovery Cards with insider tips, photo opportunities, experience levels, and CAFES & RESTAURANTS
-- Interactive Explorer with filtering by interests, time, cost, and type
-- Smart categorization and personalized recommendations
+Use both naturally throughout the content. Prioritize placing the **primary keyword** in the title, description, and within the first 1–2 sentences of content. Use the **secondary keyword** 4–5 times naturally in different sections.
 
-SPECIAL FOCUS FOR CAFES & RESTAURANTS DISCOVERY CARD:
-- Include 2-4 notable cafes, restaurants, food markets, or dining experiences as attractions
-- Use keywords: "restaurant", "cafe", "coffee", "dining", "food", "cuisine", "eatery", "bistro", "market", "culinary", "meal"
-- Describe the dining atmosphere, signature dishes, and local food culture
-- Include practical dining info: price range, hours, reservation requirements
+Use the following **semantic variations** naturally across the content:
+* what to do in ${city}
+* top attractions in ${city}
+* must-see places in ${city}
+* places to visit in ${city}
+* explore ${city}
+* ${city} travel guide
+* fun things to do in ${city}
+* ${city} itinerary
 
-Generate content with this EXACT structure in JSON format:
+This content will power **interactive discovery features**, including:
+* Discovery Cards with insider tips, photo opportunities, experience levels, and CAFES & RESTAURANTS
+* Interactive Explorer with filtering by interests, time, cost, and type
+* Smart categorization and personalized recommendations
+
+**SPECIAL FOCUS FOR CAFES & RESTAURANTS DISCOVERY CARD**:
+Include 2–4 notable cafes, restaurants, food markets, or dining experiences as attractions.
+Use keywords: "restaurant", "cafe", "coffee", "dining", "food", "cuisine", "eatery", "bistro", "market", "culinary", "meal"
+Describe the dining atmosphere, signature dishes, and local food culture
+Include practical dining info: price range, hours, reservation requirements
+
+WRITING STYLE REQUIREMENTS:
+* Vary sentence structure. Use a mix of short and long sentences. Occasionally interrupt the flow with hesitation or side thoughts — just enough to sound human, not robotic.
+* Add subtle imperfections. Include mild redundancy, cautious qualifiers like "perhaps", "I think", or "some say", and slight hedging or uncertainty to create a more natural voice.
+* Avoid perfect symmetry. Let some points feel a bit unbalanced or incomplete, as if the writer is thinking out loud. Don't try to wrap up every idea too neatly.
+* Use light personalization. Add light reactions, imagined experiences, or personal touches — such as "I found the view surprisingly calming" or "it's the kind of place you might linger longer than expected".
+* Allow ambiguity or mild contradiction. It's okay to shift tone slightly, or to imply uncertainty in what's 'best' or 'most popular'.
+* Don't use slang or strong regionalisms. Keep the language global and accessible, but avoid sounding like a textbook or AI.
+* Format intuitively. Use paragraph breaks where they make sense. Avoid rigid templates — write with flow and rhythm.
+
+---
+
+Generate content with this EXACT structure in **valid JSON** format:
+
 {
-  "description": "A meta-style introduction (150-200 words) that uses 'things to do in ${city}' within the first 1-2 lines naturally. Write in a human, engaging tone with varied sentence structure and subtle imperfections that feel authentic.",
-  "highlights": ["5-6 one-line must-see places"],
+  "metaTitle": "15 Best Things to Do in ${city}, ${country} (2025 Guide)",
+  "metaDescription": "Your complete 2025 ${city} travel guide with top attractions, insider tips, dining spots, and hidden gems.",
+  "slug": "things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}",
+  "description": "A meta-style introduction (150–200 words) that uses the exact phrase 'Best Things to Do in ${city}' and 'Things to do in ${city}' naturally in the first 1–2 sentences. Write in a human, engaging tone with varied sentence structure and subtle imperfections that feel authentic.",
+  "highlights": ["5–6 one-line must-see places"],
   "attractions": [
     {
       "name": "Attraction Name",
-      "description": "Multi-paragraph detailed description (200-300 words each). IMPORTANT: Include specific insider tips, photo opportunities, hidden gems, seasonal highlights, and local secrets. For DINING attractions, describe atmosphere, signature dishes, local specialties, price range, and dining culture. Use phrases like 'tip:', 'recommend', 'best time', 'avoid', 'don't miss', 'be sure to', 'consider', 'worth', 'should', 'hidden', 'secret', 'local favorite', 'view', 'photo', 'picture', 'sunset', 'panoramic', 'stunning', 'restaurant', 'cafe', 'coffee', 'dining', 'food', 'cuisine', 'meal', 'culinary', 'taste', 'flavors'. Vary sentence structure, add subtle imperfections, use natural language with slight redundancy or hesitations that feel human. Break into 2-3 paragraphs.",
+      "description": "Multi-paragraph detailed description (150–200 words each). IMPORTANT: Include specific insider tips, photo opportunities, hidden gems, seasonal highlights, and local secrets. For dining attractions, describe atmosphere, signature dishes, local specialties, price range, and dining culture. Use phrases like 'tip:', 'recommend', 'best time', 'avoid', 'don't miss', 'be sure to', 'consider', 'worth', 'should', 'hidden', 'secret', 'local favorite', 'view', 'photo', 'picture', 'sunset', 'panoramic', 'stunning', 'restaurant', 'cafe', 'coffee', 'dining', 'food', 'cuisine', 'meal', 'culinary', 'taste', 'flavors'. Vary sentence structure, add subtle imperfections, use natural language with slight redundancy or hesitations that feel human. Break into 2-3 paragraphs.",
       "practicalInfo": {
         "howToGetThere": "Detailed directions with specific transport options",
         "openingHours": "Operating hours with seasonal variations if applicable",
@@ -71,7 +99,7 @@ Generate content with this EXACT structure in JSON format:
         "website": "Official website URL if known, or null"
       },
       "discoveryTags": {
-        "timeRequired": "30-60 minutes, 1-2 hours, Half day, or Full day",
+        "timeRequired": "30–60 minutes, 1–2 hours, Half day, or Full day",
         "experienceLevel": "Easy Access, Moderate Adventure, or Local Expert",
         "interests": ["history", "art", "architecture", "nature", "food", "adventure", "relaxation", "photography"],
         "costLevel": "Free, Budget-friendly, Moderate, or Expensive",
@@ -85,10 +113,10 @@ Generate content with this EXACT structure in JSON format:
     }
   ],
   "logistics": {
-    "gettingAround": "Transportation options in the city (2-3 paragraphs)",
-    "whereToStay": "Accommodation recommendations by area (2-3 paragraphs)", 
-    "bestTimeToVisit": "Seasonal information and weather (2-3 paragraphs)",
-    "suggestedItinerary": "Day-by-day itinerary suggestions (3-4 paragraphs)"
+    "gettingAround": "Transportation options in the city (2–3 paragraphs)",
+    "whereToStay": "Accommodation recommendations by area (2–3 paragraphs)",
+    "bestTimeToVisit": "Seasonal information and weather (2–3 paragraphs)",
+    "suggestedItinerary": "Day-by-day itinerary suggestions (3–4 paragraphs)"
   },
   "faqs": [
     {
@@ -109,11 +137,11 @@ Generate content with this EXACT structure in JSON format:
     }
   ],
   "discoveryData": {
-    "cityPersonality": "Describe the city's character in 2-3 adjectives",
+    "cityPersonality": "Describe the city's character in 2–3 adjectives",
     "budgetBreakdown": {
-      "freeActivities": "List 3-4 free things to do",
-      "budgetFriendly": "List 3-4 budget activities with approximate costs",
-      "splurgeWorthy": "List 2-3 premium experiences worth the cost"
+      "freeActivities": "List 3–4 free things to do",
+      "budgetFriendly": "List 3–4 budget activities with approximate costs",
+      "splurgeWorthy": "List 2–3 premium experiences worth the cost"
     },
     "localSecrets": [
       "CONTEXTUAL insider tip with specific location, timing, or method - explain WHY this tip is valuable and HOW to use it",
@@ -122,22 +150,22 @@ Generate content with this EXACT structure in JSON format:
       "CROWD-BEATING strategy with specific times, alternative routes, or lesser-known entrances"
     ],
     "diningHighlights": {
-      "mustTryDishes": "3-4 signature local dishes or drinks to try",
-      "bestCafes": "2-3 notable cafes with atmosphere descriptions",
-      "topRestaurants": "2-3 recommended restaurants with cuisine types",
+      "mustTryDishes": "3–4 signature local dishes or drinks to try",
+      "bestCafes": "2–3 notable cafes with atmosphere descriptions",
+      "topRestaurants": "2–3 recommended restaurants with cuisine types",
       "foodMarkets": "Local markets or street food areas",
       "diningTips": "Local dining etiquette, tipping, or reservation tips"
     },
     "seasonalHighlights": {
       "spring": "What's special about visiting in spring",
-      "summer": "What's special about visiting in summer", 
+      "summer": "What's special about visiting in summer",
       "fall": "What's special about visiting in fall",
       "winter": "What's special about visiting in winter"
     },
     "quickFacts": {
       "totalAttractions": "Number of attractions generated",
       "freeActivities": "Number of free activities",
-      "averageTimePerAttraction": "30-60 minutes",
+      "averageTimePerAttraction": "30–60 minutes",
       "walkingFriendly": true/false,
       "publicTransportQuality": "Excellent, Good, Fair, or Limited"
     }
@@ -176,26 +204,24 @@ Fill out the complete discoveryData section with:
 - seasonalHighlights: What makes each season special
 - quickFacts: Accurate statistics about the attractions
 
-CRITICAL: Respond ONLY with a complete, valid JSON object. No markdown, no commentary, no extra text.
+✅ JSON RULES (STRICT)
+Ensure the Gemini model follows these rules:
 
-JSON FORMATTING REQUIREMENTS:
-- Use standard double quotes for all strings: "text"
-- Escape internal quotes properly: "He said \\"Hello\\""
-- NO line breaks within string values - use spaces instead
-- NO special characters: smart quotes, em dashes, ellipsis
-- Keep attraction descriptions under 200 words each
-- Ensure ALL JSON brackets and braces are properly closed
-- End with a complete closing brace }
-- NO trailing commas in objects or arrays
-- NO comments or extra text outside the JSON object
-- Start your response immediately with { and end with }
+✅ Must start with { and end with }
 
-EXAMPLES OF WHAT TO AVOID:
-- "\`\`\`json" or "\`\`\`" 
-- "Here is the JSON:"
-- Any text before { or after }
-- Trailing commas like: "item", }
-- Line breaks inside strings like: "This is a\\nlong text"
+❌ No markdown formatting (\`\`\`json or backticks)
+
+❌ No extra text outside JSON
+
+✅ Escape all quotes properly (He said \\"Hello\\")
+
+❌ No trailing commas or line breaks in strings
+
+✅ Every key and string must be wrapped in double quotes
+
+✅ Each attraction's description must be under 200 words
+
+✅ Must be parseable with JSON.parse()
 
 VERIFY your JSON is complete before responding. The response MUST be parseable by JSON.parse().`;
 
