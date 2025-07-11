@@ -15,10 +15,10 @@ export const Navigation = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="TravelWanders Logo" className="h-10 w-auto" />
+            <img src="/logo.png" alt="TravelWanders Logo" className="h-12 w-auto sm:h-14" />
             <a href="/" className="text-xl font-bold text-gray-900 hover:text-green-600 transition-colors">TravelWanders</a>
           </div>
 
