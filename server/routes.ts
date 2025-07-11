@@ -62,9 +62,15 @@ Create a comprehensive travel guide with the title: "15 Best Things to Do in ${c
 The focus keyword is "Things to do in ${city}" - use this naturally throughout the content.
 
 IMPORTANT: This content will power interactive discovery features including:
-- Discovery Cards with insider tips, photo opportunities, and experience levels
+- Discovery Cards with insider tips, photo opportunities, experience levels, and CAFES & RESTAURANTS
 - Interactive Explorer with filtering by interests, time, cost, and type
 - Smart categorization and personalized recommendations
+
+SPECIAL FOCUS FOR CAFES & RESTAURANTS DISCOVERY CARD:
+- Include 2-4 notable cafes, restaurants, food markets, or dining experiences as attractions
+- Use keywords: "restaurant", "cafe", "coffee", "dining", "food", "cuisine", "eatery", "bistro", "market", "culinary", "meal"
+- Describe the dining atmosphere, signature dishes, and local food culture
+- Include practical dining info: price range, hours, reservation requirements
 
 Generate content with this EXACT structure in JSON format:
 {
@@ -73,7 +79,7 @@ Generate content with this EXACT structure in JSON format:
   "attractions": [
     {
       "name": "Attraction Name",
-      "description": "Multi-paragraph detailed description (200-300 words each). IMPORTANT: Include specific insider tips, photo opportunities, hidden gems, seasonal highlights, and local secrets. Use phrases like 'tip:', 'recommend', 'best time', 'avoid', 'don't miss', 'be sure to', 'consider', 'worth', 'should', 'hidden', 'secret', 'local favorite', 'view', 'photo', 'picture', 'sunset', 'panoramic', 'stunning'. Vary sentence structure, add subtle imperfections, use natural language with slight redundancy or hesitations that feel human. Break into 2-3 paragraphs.",
+      "description": "Multi-paragraph detailed description (200-300 words each). IMPORTANT: Include specific insider tips, photo opportunities, hidden gems, seasonal highlights, and local secrets. For DINING attractions, describe atmosphere, signature dishes, local specialties, price range, and dining culture. Use phrases like 'tip:', 'recommend', 'best time', 'avoid', 'don't miss', 'be sure to', 'consider', 'worth', 'should', 'hidden', 'secret', 'local favorite', 'view', 'photo', 'picture', 'sunset', 'panoramic', 'stunning', 'restaurant', 'cafe', 'coffee', 'dining', 'food', 'cuisine', 'meal', 'culinary', 'taste', 'flavors'. Vary sentence structure, add subtle imperfections, use natural language with slight redundancy or hesitations that feel human. Break into 2-3 paragraphs.",
       "practicalInfo": {
         "howToGetThere": "Detailed directions with specific transport options",
         "openingHours": "Operating hours with seasonal variations if applicable",
@@ -131,6 +137,13 @@ Generate content with this EXACT structure in JSON format:
       "Local food spot or market recommendation",
       "Best time to avoid crowds at popular spots"
     ],
+    "diningHighlights": {
+      "mustTryDishes": "3-4 signature local dishes or drinks to try",
+      "bestCafes": "2-3 notable cafes with atmosphere descriptions",
+      "topRestaurants": "2-3 recommended restaurants with cuisine types",
+      "foodMarkets": "Local markets or street food areas",
+      "diningTips": "Local dining etiquette, tipping, or reservation tips"
+    },
     "seasonalHighlights": {
       "spring": "What's special about visiting in spring",
       "summer": "What's special about visiting in summer", 
@@ -147,13 +160,14 @@ Generate content with this EXACT structure in JSON format:
   }
 }
 
-Generate 8-15 detailed attractions. Write in a natural, human tone with:
+Generate 8-15 detailed attractions. MANDATORY: Include 2-4 dining-related attractions (restaurants, cafes, food markets, street food, local cuisine spots). Write in a natural, human tone with:
 - Varied sentence structure (mix of long and short sentences)
 - Subtle imperfections and hesitations ("perhaps", "I think", mild contradictions)
 - Personal touches and reactions
 - Natural paragraph breaks
 - Avoid overly rigid or textbook-like structure
 - Skip slang but maintain conversational flow
+- For dining attractions: describe ambiance, signature dishes, pricing, local food culture
 
 For each attraction, include comprehensive discoveryTags:
 - timeRequired: Be specific (e.g., "30-60 minutes", "1-2 hours", "Half day", "Full day")
@@ -171,6 +185,7 @@ Fill out the complete discoveryData section with:
 - cityPersonality: 2-3 descriptive words
 - budgetBreakdown: Specific lists of activities by price range
 - localSecrets: 4 insider tips that locals would know
+- diningHighlights: Complete section with local dishes, best cafes, top restaurants, food markets, and dining tips
 - seasonalHighlights: What makes each season special
 - quickFacts: Accurate statistics about the attractions
 

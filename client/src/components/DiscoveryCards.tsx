@@ -56,6 +56,13 @@ interface DiscoveryCardsProps {
       budgetFriendly?: string;
       splurgeWorthy?: string;
     };
+    diningHighlights?: {
+      mustTryDishes?: string;
+      bestCafes?: string;
+      topRestaurants?: string;
+      foodMarkets?: string;
+      diningTips?: string;
+    };
     seasonalHighlights?: {
       spring?: string;
       summer?: string;
@@ -214,10 +221,48 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
     return 'Year-Round';
   };
 
-  // Helper function to extract cafes and restaurants from attractions
+  // Helper function to extract cafes and restaurants from attractions and discovery data
   const extractDiningOptions = (attractions: Attraction[]) => {
     const diningOptions: Array<{name: string, type: string, description: string}> = [];
     
+    // First, add dedicated dining highlights from discovery data if available
+    if (discoveryData?.diningHighlights) {
+      const highlights = discoveryData.diningHighlights;
+      
+      if (highlights.bestCafes) {
+        diningOptions.push({
+          name: "Local Cafes",
+          type: "Cafe",
+          description: highlights.bestCafes
+        });
+      }
+      
+      if (highlights.topRestaurants) {
+        diningOptions.push({
+          name: "Top Restaurants",
+          type: "Restaurant", 
+          description: highlights.topRestaurants
+        });
+      }
+      
+      if (highlights.foodMarkets) {
+        diningOptions.push({
+          name: "Food Markets",
+          type: "Food Market",
+          description: highlights.foodMarkets
+        });
+      }
+      
+      if (highlights.mustTryDishes) {
+        diningOptions.push({
+          name: "Must-Try Dishes",
+          type: "Local Cuisine",
+          description: highlights.mustTryDishes
+        });
+      }
+    }
+    
+    // Then, extract dining attractions from the attractions list
     attractions.forEach(attraction => {
       const desc = attraction.description.toLowerCase();
       const name = attraction.name;
@@ -400,17 +445,30 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
       content: (
         <div className="space-y-3">
           {diningOptions.length > 0 ? (
-            diningOptions.map((option, index) => (
-              <div key={index} className="p-3 bg-orange-50 dark:bg-orange-900/20 rounded-lg border-l-4 border-orange-400">
-                <div className="flex items-center gap-2 mb-1">
-                  <h4 className="font-semibold text-orange-700 dark:text-orange-300">{option.name}</h4>
-                  <Badge variant="outline" className="bg-orange-100 text-orange-700 border-orange-300 text-xs">
-                    {option.type}
-                  </Badge>
+            <>
+              {diningOptions.map((option, index) => (
+                <div key={index} className="p-3 bg-orange-50 dark:bg-orange-900/20 rounded-lg border-l-4 border-orange-400">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h4 className="font-semibold text-orange-700 dark:text-orange-300">{option.name}</h4>
+                    <Badge variant="outline" className="bg-orange-100 text-orange-700 border-orange-300 text-xs">
+                      {option.type}
+                    </Badge>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{option.description}</p>
                 </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{option.description}</p>
-              </div>
-            ))
+              ))}
+              {discoveryData?.diningHighlights?.diningTips && (
+                <div className="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg border-l-4 border-amber-400">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h4 className="font-semibold text-amber-700 dark:text-amber-300">Dining Tips</h4>
+                    <Badge variant="outline" className="bg-amber-100 text-amber-700 border-amber-300 text-xs">
+                      Local Advice
+                    </Badge>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{discoveryData.diningHighlights.diningTips}</p>
+                </div>
+              )}
+            </>
           ) : (
             <div className="p-4 text-center">
               <Coffee className="w-8 h-8 text-gray-400 mx-auto mb-2" />
