@@ -10,6 +10,19 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (January 2025)
 
+### Enhanced Gemini Prompt & Discovery System - COMPLETED ✅ (January 11, 2025)
+- ✅ **ENHANCED SEO PROMPT**: Updated Gemini prompt with improved SEO targeting using primary/secondary keywords
+- ✅ **SEMANTIC VARIATIONS**: Added 8 natural keyword variations for better search visibility
+- ✅ **STRICTER JSON RULES**: Implemented forceful JSON formatting requirements to prevent markdown output
+- ✅ **DISCOVERY TAGS INTEGRATION**: Added discoveryTags to each attraction with comprehensive metadata
+- ✅ **DISCOVERY DATA SYSTEM**: Enhanced city-wide discoveryData with personality, budget, secrets, dining, and seasonal highlights
+- ✅ **COMPONENT GENERATION FIX**: Updated React component generation to handle discoveryTags and discoveryData properly
+- ✅ **TYPESCRIPT INTERFACES**: Enhanced CityPage component interfaces to support all discovery features
+- ✅ **DINING HIGHLIGHTS**: Added comprehensive dining system with must-try dishes, cafes, restaurants, and tips
+- ✅ **ACTIONABLE INSIDER TIPS**: Improved tip system with specific WHO, WHAT, WHERE, WHEN, WHY details
+- ✅ **COMPLETE METADATA**: Each attraction now has time requirements, experience levels, interests, cost levels, and accessibility notes
+- ✅ **FUTURE-PROOF DISCOVERY**: All future city generations will include rich discovery metadata for interactive features
+
 ### Hero Image URL Support for City Generation - COMPLETED ✅ (January 11, 2025)
 - ✅ **ADMIN FORM ENHANCEMENT**: Added hero image URL field to city generation form with validation
 - ✅ **SERVER INTEGRATION**: Updated server route to accept and process hero image URLs

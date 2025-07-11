@@ -24,6 +24,18 @@ interface Attraction {
     cost?: string;
     website?: string;
   };
+  discoveryTags?: {
+    timeRequired?: string;
+    experienceLevel?: string;
+    interests?: string[];
+    costLevel?: string;
+    seasonalBest?: string;
+    photoOpportunity?: string;
+    insiderTip?: string;
+    hiddenGem?: boolean;
+    familyFriendly?: boolean;
+    accessibilityNotes?: string;
+  };
 }
 
 interface GalleryImage {
@@ -57,6 +69,13 @@ interface CityPageProps {
       splurgeWorthy?: string;
     };
     localSecrets?: string[];
+    diningHighlights?: {
+      mustTryDishes?: string;
+      bestCafes?: string;
+      topRestaurants?: string;
+      foodMarkets?: string;
+      diningTips?: string;
+    };
     seasonalHighlights?: {
       spring?: string;
       summer?: string;

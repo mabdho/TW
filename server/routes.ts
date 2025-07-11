@@ -223,6 +223,15 @@ Ensure the Gemini model follows these rules:
 
 ✅ Must be parseable with JSON.parse()
 
+CRITICAL: Your response MUST be ONLY a JSON object. Do NOT include:
+- Any text before the opening {
+- Any text after the closing }
+- Markdown code blocks like \`\`\`json or \`\`\`
+- Comments or explanations
+- Extra formatting
+
+Your response must start immediately with { and end with }. Nothing else.
+
 VERIFY your JSON is complete before responding. The response MUST be parseable by JSON.parse().`;
 
       let result;
@@ -690,7 +699,7 @@ function generateReactComponent(
   // Format highlights
   const formattedHighlights = contentData.highlights.map((h: string) => `"${h}"`).join(',\n        ');
 
-  // Format attractions
+  // Format attractions with discoveryTags
   const formattedAttractions = contentData.attractions.map((attraction: any) => `
         {
         name: "${attraction.name}",
@@ -700,6 +709,18 @@ function generateReactComponent(
         openingHours: "${attraction.practicalInfo?.openingHours || ''}",
         cost: "${attraction.practicalInfo?.cost || ''}",
         website: "${attraction.practicalInfo?.website || ''}"
+      },
+      discoveryTags: {
+        timeRequired: "${attraction.discoveryTags?.timeRequired || '1-2 hours'}",
+        experienceLevel: "${attraction.discoveryTags?.experienceLevel || 'Easy Access'}",
+        interests: [${attraction.discoveryTags?.interests?.map((i: string) => `"${i}"`).join(', ') || '"history", "culture"'}],
+        costLevel: "${attraction.discoveryTags?.costLevel || 'Moderate'}",
+        seasonalBest: "${attraction.discoveryTags?.seasonalBest || 'Year-round'}",
+        photoOpportunity: "${attraction.discoveryTags?.photoOpportunity || 'Great views available'}",
+        insiderTip: "${attraction.discoveryTags?.insiderTip || 'Visit during off-peak hours'}",
+        hiddenGem: ${attraction.discoveryTags?.hiddenGem || false},
+        familyFriendly: ${attraction.discoveryTags?.familyFriendly || true},
+        accessibilityNotes: "${attraction.discoveryTags?.accessibilityNotes || 'Standard accessibility'}"
       }
       }`).join(',');
 
@@ -721,6 +742,38 @@ function generateReactComponent(
       }`).join(',')}
       ]}` : '';
 
+  // Format discoveryData
+  const discoveryData = contentData.discoveryData ? `
+      discoveryData={{
+        cityPersonality: "${contentData.discoveryData.cityPersonality || 'Charming, Historic'}",
+        budgetBreakdown: {
+          freeActivities: "${contentData.discoveryData.budgetBreakdown?.freeActivities || 'Parks, markets, viewpoints'}",
+          budgetFriendly: "${contentData.discoveryData.budgetBreakdown?.budgetFriendly || 'Local cafes, walking tours'}",
+          splurgeWorthy: "${contentData.discoveryData.budgetBreakdown?.splurgeWorthy || 'Fine dining, premium experiences'}"
+        },
+        localSecrets: [${contentData.discoveryData.localSecrets?.map((secret: string) => `"${secret}"`).join(', ') || '"Visit early morning for fewer crowds"'}],
+        diningHighlights: {
+          mustTryDishes: "${contentData.discoveryData.diningHighlights?.mustTryDishes || 'Local specialties'}",
+          bestCafes: "${contentData.discoveryData.diningHighlights?.bestCafes || 'Charming local cafes'}",
+          topRestaurants: "${contentData.discoveryData.diningHighlights?.topRestaurants || 'Recommended restaurants'}",
+          foodMarkets: "${contentData.discoveryData.diningHighlights?.foodMarkets || 'Local food markets'}",
+          diningTips: "${contentData.discoveryData.diningHighlights?.diningTips || 'Standard dining etiquette'}"
+        },
+        seasonalHighlights: {
+          spring: "${contentData.discoveryData.seasonalHighlights?.spring || 'Pleasant weather'}",
+          summer: "${contentData.discoveryData.seasonalHighlights?.summer || 'Peak season'}",
+          fall: "${contentData.discoveryData.seasonalHighlights?.fall || 'Comfortable temperatures'}",
+          winter: "${contentData.discoveryData.seasonalHighlights?.winter || 'Cooler weather'}"
+        },
+        quickFacts: {
+          totalAttractions: "${contentData.discoveryData.quickFacts?.totalAttractions || contentData.attractions?.length || '10'}",
+          freeActivities: "${contentData.discoveryData.quickFacts?.freeActivities || '3'}",
+          averageTimePerAttraction: "${contentData.discoveryData.quickFacts?.averageTimePerAttraction || '30-60 minutes'}",
+          walkingFriendly: ${contentData.discoveryData.quickFacts?.walkingFriendly || true},
+          publicTransportQuality: "${contentData.discoveryData.quickFacts?.publicTransportQuality || 'Good'}"
+        }
+      }}` : '';
+
   return `import React from 'react';
 import { CityPage } from '../../components/CityPage';
 
@@ -733,7 +786,7 @@ export const ${cityName}: React.FC = () => {
       ]}
       highlights={[${formattedHighlights}]}
       attractions={[${formattedAttractions}
-      ]}${logistics}${faqs}
+      ]}${logistics}${faqs}${discoveryData}
     />
   );
 };`;
