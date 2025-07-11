@@ -129,8 +129,8 @@ export const CityPage: React.FC<CityPageProps> = ({
   const extractedCityName = cityName || title.match(/Best Things to Do in ([^,]+)/)?.[1] || title.split(' ')[0];
   const extractedCountry = country || title.match(/([^,]+)$/)?.[1]?.trim() || 'Unknown';
 
-  // Convert city data for SEO
-  const cityData: CityData = {
+  // Update cityData with extracted values if needed
+  const finalCityData = cityData || {
     name: extractedCityName,
     country: extractedCountry,
     content: description,
@@ -142,7 +142,7 @@ export const CityPage: React.FC<CityPageProps> = ({
   };
 
   return (
-    <CityPageTemplate cityData={cityData}>
+    <CityPageTemplate cityData={finalCityData}>
       <div className="min-h-screen bg-gray-50">
         <Navigation />
       
