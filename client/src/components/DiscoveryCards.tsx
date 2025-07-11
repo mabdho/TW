@@ -648,84 +648,110 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
           ))}
         </div>
         
-        {/* Preview Indicators */}
-        <div className="flex justify-center mt-4 space-x-2">
-          {discoveryCards.map((card, index) => (
-            <div
-              key={index}
-              className={`flex items-center gap-2 px-3 py-2 rounded-full border transition-all duration-300 cursor-pointer hover:shadow-md ${
-                currentSlide === index 
-                  ? 'bg-blue-100 border-blue-300 dark:bg-blue-900/30 dark:border-blue-600' 
-                  : 'bg-gray-100 border-gray-200 dark:bg-gray-700 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600'
-              }`}
-              onClick={() => {
-                if (scrollContainerRef.current) {
-                  const cardWidth = 360;
-                  scrollContainerRef.current.scrollTo({
-                    left: index * cardWidth,
-                    behavior: 'smooth'
-                  });
-                }
-              }}
-            >
-              <div className={`w-2 h-2 rounded-full ${
-                currentSlide === index ? 'bg-blue-500' : 'bg-gray-400'
-              }`} />
-              <span className={`text-xs font-medium ${
-                currentSlide === index 
-                  ? 'text-blue-700 dark:text-blue-300' 
-                  : 'text-gray-600 dark:text-gray-400'
-              }`}>
-                {card.title}
-              </span>
-            </div>
-          ))}
+        {/* Preview Indicators - Mobile First */}
+        <div className="flex justify-center mt-4 px-2">
+          {/* Mobile: Show dots only */}
+          <div className="flex sm:hidden justify-center space-x-2">
+            {discoveryCards.map((card, index) => (
+              <button
+                key={index}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  currentSlide === index ? 'bg-blue-500 scale-125' : 'bg-gray-400'
+                }`}
+                onClick={() => {
+                  if (scrollContainerRef.current) {
+                    const cardWidth = 360;
+                    scrollContainerRef.current.scrollTo({
+                      left: index * cardWidth,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
+                aria-label={`View ${card.title}`}
+              />
+            ))}
+          </div>
+          
+          {/* Desktop: Show full indicators */}
+          <div className="hidden sm:flex justify-center space-x-2 flex-wrap max-w-4xl">
+            {discoveryCards.map((card, index) => (
+              <button
+                key={index}
+                className={`flex items-center gap-2 px-3 py-2 rounded-full border transition-all duration-300 hover:shadow-md ${
+                  currentSlide === index 
+                    ? 'bg-blue-100 border-blue-300 dark:bg-blue-900/30 dark:border-blue-600' 
+                    : 'bg-gray-100 border-gray-200 dark:bg-gray-700 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600'
+                }`}
+                onClick={() => {
+                  if (scrollContainerRef.current) {
+                    const cardWidth = 360;
+                    scrollContainerRef.current.scrollTo({
+                      left: index * cardWidth,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
+              >
+                <div className={`w-2 h-2 rounded-full ${
+                  currentSlide === index ? 'bg-blue-500' : 'bg-gray-400'
+                }`} />
+                <span className={`text-xs font-medium whitespace-nowrap ${
+                  currentSlide === index 
+                    ? 'text-blue-700 dark:text-blue-300' 
+                    : 'text-gray-600 dark:text-gray-400'
+                }`}>
+                  {card.title}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Mobile-friendly note */}
       <div className="mt-3 text-center">
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          Swipe left to explore more discovery cards • Click any card to view full details
+          <span className="sm:hidden">Swipe left • Tap dots to jump • Click cards for details</span>
+          <span className="hidden sm:inline">Scroll horizontally • Click indicators to jump • Click any card to view full details</span>
         </p>
       </div>
 
       {/* Modal */}
       {isModalOpen && selectedCard !== null && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl animate-in fade-in-0 zoom-in-95 duration-300">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden shadow-2xl animate-in fade-in-0 zoom-in-95 duration-300">
             {/* Modal Header */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-700">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-full bg-white dark:bg-gray-800 shadow-md">
+            <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-700">
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+                <div className="p-2 rounded-full bg-white dark:bg-gray-800 shadow-md flex-shrink-0">
                   {discoveryCards[selectedCard].icon}
                 </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                <div className="min-w-0 flex-1">
+                  <h2 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white truncate">
                     {discoveryCards[selectedCard].title}
                   </h2>
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 truncate">
                     {discoveryCards[selectedCard].summary}
                   </p>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={handleModalPrev}
-                  className="h-8 w-8 p-0"
+                  className="h-8 w-8 p-0 sm:h-9 sm:w-9"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </Button>
-                <span className="text-sm text-gray-500 px-2">
-                  {selectedCard + 1} of 6
+                <span className="text-xs sm:text-sm text-gray-500 px-1 sm:px-2 whitespace-nowrap">
+                  {selectedCard + 1}/6
                 </span>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={handleModalNext}
-                  className="h-8 w-8 p-0"
+                  className="h-8 w-8 p-0 sm:h-9 sm:w-9"
                 >
                   <ChevronRight className="h-4 w-4" />
                 </Button>
@@ -733,7 +759,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
                   variant="ghost"
                   size="sm"
                   onClick={handleModalClose}
-                  className="h-8 w-8 p-0 ml-2"
+                  className="h-8 w-8 p-0 sm:h-9 sm:w-9 ml-1 sm:ml-2"
                 >
                   <X className="h-4 w-4" />
                 </Button>
@@ -741,24 +767,27 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
             </div>
             
             {/* Modal Content */}
-            <div className="p-6 overflow-y-auto max-h-[70vh]">
-              <div className="space-y-4 text-base text-gray-700 dark:text-gray-300">
+            <div className="p-4 sm:p-6 overflow-y-auto max-h-[60vh] sm:max-h-[70vh]">
+              <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-gray-700 dark:text-gray-300">
                 {discoveryCards[selectedCard].content}
               </div>
             </div>
             
             {/* Modal Footer */}
-            <div className="flex justify-between items-center p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Use arrow keys to navigate • Press Esc to close
+            <div className="flex flex-col sm:flex-row justify-between items-center p-4 sm:p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 gap-3 sm:gap-0">
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 text-center sm:text-left">
+                <span className="sm:hidden">Swipe or use buttons to navigate</span>
+                <span className="hidden sm:inline">Use arrow keys to navigate • Press Esc to close</span>
               </p>
-              <div className="flex gap-2">
-                <Button variant="outline" onClick={handleModalPrev} size="sm">
+              <div className="flex gap-2 w-full sm:w-auto">
+                <Button variant="outline" onClick={handleModalPrev} size="sm" className="flex-1 sm:flex-none">
                   <ChevronLeft className="h-4 w-4 mr-1" />
-                  Previous
+                  <span className="hidden sm:inline">Previous</span>
+                  <span className="sm:hidden">Prev</span>
                 </Button>
-                <Button variant="outline" onClick={handleModalNext} size="sm">
-                  Next
+                <Button variant="outline" onClick={handleModalNext} size="sm" className="flex-1 sm:flex-none">
+                  <span className="hidden sm:inline">Next</span>
+                  <span className="sm:hidden">Next</span>
                   <ChevronRight className="h-4 w-4 ml-1" />
                 </Button>
               </div>
