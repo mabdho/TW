@@ -790,28 +790,31 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
 
 function extractBlogDataFromFile(content: string): any | null {
   try {
-    // Extract the blog object from the file content
-    const blogObjectMatch = content.match(/export const \w+Blog: Blog = ({[\s\S]*?});/);
+    // Extract the blog object from the file content - handle both naming patterns
+    const blogObjectMatch = content.match(/export const \w+(?:Blog)?: Blog = ({[\s\S]*?});/);
     if (!blogObjectMatch) {
+      console.error('No blog object found in file');
       return null;
     }
     
     const blogObjectString = blogObjectMatch[1];
     
     // Parse the blog object properties with better regex patterns
-    const id = blogObjectString.match(/id: ["']([^"']*?)["']/)?.[1];
-    const title = blogObjectString.match(/title: ["']([^"']*?)["']/)?.[1];
-    const excerpt = blogObjectString.match(/excerpt: ["']([^"']*?)["']/)?.[1];
-    const category = blogObjectString.match(/category: ["']([^"']*?)["']/)?.[1];
-    const imageUrl = blogObjectString.match(/imageUrl: ["']([^"']*?)["']/)?.[1];
+    const id = blogObjectString.match(/id: "([^"]*?)"/)?.[1];
+    const title = blogObjectString.match(/title: "(.*?)"/)?.[1];
+    const excerpt = blogObjectString.match(/excerpt: "(.*?)"/)?.[1];
+    const category = blogObjectString.match(/category: "([^"]*?)"/)?.[1];
+    const imageUrl = blogObjectString.match(/imageUrl: "([^"]*?)"/)?.[1];
     const featured = blogObjectString.match(/featured: (true|false)/)?.[1] === 'true';
-    const readTime = blogObjectString.match(/readTime: ["']([^"']*?)["']/)?.[1];
-    const date = blogObjectString.match(/date: ["']([^"']*?)["']/)?.[1];
-    const author = blogObjectString.match(/author: ["']([^"']*?)["']/)?.[1];
+    const readTime = blogObjectString.match(/readTime: "([^"]*?)"/)?.[1];
+    const date = blogObjectString.match(/date: "([^"]*?)"/)?.[1];
+    const author = blogObjectString.match(/author: "([^"]*?)"/)?.[1];
     
     // Extract content (handles template strings with better pattern)
     const contentMatch = blogObjectString.match(/content: `([\s\S]*?)`(?=,\s*\w+:|$)/);
     const contentString = contentMatch ? contentMatch[1] : '';
+    
+    console.log('Extracted blog data:', { id, title, excerpt, category });
     
     return {
       id,
