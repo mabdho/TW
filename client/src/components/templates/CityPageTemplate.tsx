@@ -94,7 +94,7 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
 
         {/* City page hero section with beautiful gradient */}
         <div 
-          className={`city-hero-section relative text-white h-96 sm:h-[32rem] md:h-[36rem] lg:h-[40rem] ${getCityGradientClass(cityData.name, cityData.country)}`}
+          className={`city-hero-section relative text-white h-64 sm:h-80 md:h-96 lg:h-[28rem] ${getCityGradientClass(cityData.name, cityData.country)}`}
         >
           {/* SEO Header Content - Left Bottom Corner */}
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
