@@ -10,8 +10,7 @@ export const Footer = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
             {/* Brand Section */}
             <div className="sm:col-span-2 lg:col-span-2">
-              <div className="flex items-center gap-3 mb-4">
-                <img src="/logo.png" alt="TravelWanders Logo" className="h-10 w-auto sm:h-12" />
+              <div className="flex items-center mb-4">
                 <span className="text-lg sm:text-xl font-bold text-gray-900">TravelWanders</span>
               </div>
               <p className="text-sm sm:text-base text-gray-600 mb-6 max-w-md">
