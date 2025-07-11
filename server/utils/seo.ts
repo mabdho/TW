@@ -57,6 +57,7 @@ export function generateSlug(text: string): string {
  * Generate canonical URL for different content types
  */
 export function createCanonical(type: 'city' | 'blog', slug: string, baseUrl: string = ''): string {
+  // Always use production domain for canonical URLs to ensure proper SEO
   const base = baseUrl || 'https://travelwanders.com';
   
   switch (type) {

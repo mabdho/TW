@@ -10,6 +10,14 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (July 2025)
 
+### Canonical URL SEO Fix - COMPLETED ✅ (July 11, 2025)
+- ✅ **CANONICAL URL FIX**: Fixed canonical URL generation to always use production domain
+- ✅ **SEO COMPLIANCE**: Canonical URLs now properly use https://travelwanders.com instead of localhost
+- ✅ **CLIENT-SIDE FIX**: Updated client-side SEO utilities to generate correct canonical URLs
+- ✅ **SERVER-SIDE FIX**: Updated server-side SEO utilities for consistency
+- ✅ **STATIC GENERATION**: Regenerated Porto page with correct canonical URL
+- ✅ **SEARCH ENGINE READY**: All pages now have valid rel=canonical tags for proper SEO
+
 ### Complete City Code Cleanup - COMPLETED ✅ (July 11, 2025)
 - ✅ **REMOVED EXAMPLE CITIES**: Deleted Paris.tsx and Tokyo.tsx example city files 
 - ✅ **CLEANED STATIC FILES**: Removed static HTML files for example cities
