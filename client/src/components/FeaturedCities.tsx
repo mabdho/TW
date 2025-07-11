@@ -30,12 +30,24 @@ export const FeaturedCities = () => {
               <Card className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-300 overflow-hidden">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   {city.imageUrl ? (
-                    <img 
-                      src={city.imageUrl} 
-                      alt={`${city.name}, ${city.country}`}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
+                    <picture className="w-full h-full">
+                      <source 
+                        srcSet={city.imageUrl.replace(/fm=webp/g, 'fm=avif')} 
+                        type="image/avif" 
+                      />
+                      <source 
+                        srcSet={city.imageUrl.includes('fm=webp') ? city.imageUrl : `${city.imageUrl}&fm=webp`} 
+                        type="image/webp" 
+                      />
+                      <img 
+                        src={city.imageUrl} 
+                        alt={`Best things to do in ${city.name}, ${city.country} - Featured destination`}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                        width="300"
+                        height="225"
+                      />
+                    </picture>
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200"></div>
                   )}

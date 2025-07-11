@@ -44,12 +44,24 @@ export const TravelCategories = () => {
                     {/* Blog Image */}
                     <div className="relative h-48 bg-gray-100">
                       {blog.imageUrl ? (
-                        <img 
-                          src={blog.imageUrl} 
-                          alt={blog.title}
-                          className="absolute inset-0 w-full h-full object-cover"
-                          loading="lazy"
-                        />
+                        <picture className="absolute inset-0 w-full h-full">
+                          <source 
+                            srcSet={blog.imageUrl.replace(/fm=webp/g, 'fm=avif')} 
+                            type="image/avif" 
+                          />
+                          <source 
+                            srcSet={blog.imageUrl.includes('fm=webp') ? blog.imageUrl : `${blog.imageUrl}&fm=webp`} 
+                            type="image/webp" 
+                          />
+                          <img 
+                            src={blog.imageUrl} 
+                            alt={`${blog.title} - Travel blog article about ${blog.category.toLowerCase()}`}
+                            className="absolute inset-0 w-full h-full object-cover"
+                            loading="lazy"
+                            width="400"
+                            height="192"
+                          />
+                        </picture>
                       ) : (
                         <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-20"></div>
                       )}

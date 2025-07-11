@@ -1,6 +1,6 @@
 /**
  * Image SEO optimization utilities for TravelWanders
- * Generates SEO-friendly alt text for gallery images
+ * Generates SEO-friendly alt text, descriptive filenames, and optimized formats
  */
 
 import { CityData } from './seo';
@@ -45,12 +45,44 @@ export function generateOptimizedAltText(
 /**
  * Generate SEO-optimized gallery images for city pages
  */
+/**
+ * Generate SEO-friendly descriptive filename for images
+ */
+export function generateDescriptiveFilename(
+  cityName: string,
+  country: string,
+  attractionName?: string,
+  index?: number
+): string {
+  const citySlug = cityName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+  const countrySlug = country.toLowerCase().replace(/[^a-z0-9]/g, '-');
+  
+  if (attractionName) {
+    const attractionSlug = attractionName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    return `${attractionSlug}-${citySlug}-${countrySlug}.jpg`;
+  }
+  
+  return `${citySlug}-${countrySlug}-attraction-${index || 1}.jpg`;
+}
+
+/**
+ * Optimize image URL for performance (WebP, AVIF, dimensions)
+ */
+export function optimizeImageUrl(url: string, width: number = 1400): string {
+  if (url.includes('unsplash.com')) {
+    // Add optimization parameters to Unsplash URLs
+    const separator = url.includes('?') ? '&' : '?';
+    return `${url}${separator}auto=format&fit=crop&w=${width}&fm=webp`;
+  }
+  return url;
+}
+
 export function optimizeGalleryImages(
   cityData: CityData,
   originalImages: Array<{ url?: string; alt?: string; caption?: string }> = []
 ): OptimizedGalleryImage[] {
   return originalImages.map((image, index) => ({
-    url: image.url || '',
+    url: image.url ? optimizeImageUrl(image.url, 800) : '',
     alt: image.alt || `${cityData.name} landmark ${index + 1}`,
     caption: image.caption || `${cityData.name} landmark ${index + 1} - placeholder`,
     seoAlt: generateOptimizedAltText(

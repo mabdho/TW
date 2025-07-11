@@ -96,16 +96,28 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
           </ol>
         </nav>
 
-        {/* City page hero section with image or gradient */}
-        <div 
-          className={`city-hero-section relative text-white h-64 sm:h-80 md:h-96 lg:h-[28rem] ${!imageUrl ? getCityGradientClass(cityData.name, cityData.country) : 'bg-gray-900'}`}
-          style={imageUrl ? {
-            backgroundImage: `url(${imageUrl})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          } : {}}
-        >
+        {/* City page hero section with optimized image or gradient */}
+        <div className={`city-hero-section relative text-white h-64 sm:h-80 md:h-96 lg:h-[28rem] ${!imageUrl ? getCityGradientClass(cityData.name, cityData.country) : 'bg-gray-900'}`}>
+          {imageUrl && (
+            <picture className="absolute inset-0 w-full h-full">
+              <source 
+                srcSet={imageUrl.replace(/fm=webp/g, 'fm=avif')} 
+                type="image/avif" 
+              />
+              <source 
+                srcSet={imageUrl.includes('fm=webp') ? imageUrl : `${imageUrl}&fm=webp`} 
+                type="image/webp" 
+              />
+              <img 
+                src={imageUrl} 
+                alt={`Best things to do in ${cityData.name}, ${cityData.country} - Hero image showing top attractions`}
+                className="absolute inset-0 w-full h-full object-cover"
+                loading="eager"
+                width="1400"
+                height="800"
+              />
+            </picture>
+          )}
           {/* SEO Header Content - Mobile First Design */}
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent">
             <div className="max-w-7xl mx-auto px-4 pb-6 pt-12 sm:px-6 sm:pb-8 sm:pt-16">
