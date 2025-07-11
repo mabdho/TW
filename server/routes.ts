@@ -676,29 +676,78 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       // Delete the blog file
       await fs.unlink(blogFilePath);
 
-      // Update blogs index file to remove the blog
+      // Update blogs index file to remove the blog completely
       const indexPath = path.join(blogDirPath, 'index.ts');
       const indexContent = await fs.readFile(indexPath, 'utf-8');
       
-      // Remove import statement
+      // Handle both naming patterns (with and without "Blog" suffix)
       const componentName = blogId.replace(/-/g, '');
-      const importStatement = `import { ${componentName}Blog } from './${blogId}';`;
-      const blogEntry = `  ${componentName}Blog,`;
+      const possibleImports = [
+        `import { ${componentName}Blog } from './${blogId}';`,
+        `import { ${componentName} } from './${blogId}';`,
+        `import { blog${componentName} } from './${blogId}';`
+      ];
+      
+      const possibleEntries = [
+        `  ${componentName}Blog,`,
+        `  ${componentName},`,
+        `  blog${componentName},`
+      ];
       
       let updatedContent = indexContent;
       
-      // Remove import
-      updatedContent = updatedContent.replace(importStatement + '\n', '');
-      updatedContent = updatedContent.replace(importStatement, '');
+      // Remove all possible import statements
+      possibleImports.forEach(importStatement => {
+        updatedContent = updatedContent.replace(importStatement + '\n', '');
+        updatedContent = updatedContent.replace(importStatement, '');
+      });
       
       // Remove from allBlogs array
-      updatedContent = updatedContent.replace(blogEntry + '\n', '');
-      updatedContent = updatedContent.replace(blogEntry, '');
+      possibleEntries.forEach(blogEntry => {
+        updatedContent = updatedContent.replace(blogEntry + '\n', '');
+        updatedContent = updatedContent.replace(blogEntry, '');
+      });
       
-      // Clean up any double newlines
-      updatedContent = updatedContent.replace(/\n\n\n/g, '\n\n');
+      // Clean up any multiple newlines and trailing commas
+      updatedContent = updatedContent.replace(/\n\n\n+/g, '\n\n');
+      updatedContent = updatedContent.replace(/,\s*\n\s*];/g, '\n];');
+      updatedContent = updatedContent.replace(/\[\s*\n\s*\n\s*\/\//g, '[\n  //');
       
       await fs.writeFile(indexPath, updatedContent);
+
+      // Delete static HTML files if they exist
+      const distDir = path.join(process.cwd(), 'dist', 'public');
+      const possibleStaticFiles = [
+        path.join(distDir, 'blog', `${blogId}.html`),
+        path.join(distDir, 'blog', `${blogId}`, 'index.html')
+      ];
+      
+      for (const staticFile of possibleStaticFiles) {
+        try {
+          await fs.access(staticFile);
+          await fs.unlink(staticFile);
+          console.log(`Deleted static file: ${staticFile}`);
+        } catch (error) {
+          // File doesn't exist, continue
+        }
+      }
+
+      // Remove from static page generation if referenced
+      const staticPagesScript = path.join(process.cwd(), 'scripts', 'generate-static-pages.js');
+      try {
+        const staticContent = await fs.readFile(staticPagesScript, 'utf-8');
+        if (staticContent.includes(blogId)) {
+          // Remove blog references from static generation
+          const updatedStaticContent = staticContent.replace(
+            new RegExp(`\\s*"${blogId}"[,\\s]*`, 'g'),
+            ''
+          );
+          await fs.writeFile(staticPagesScript, updatedStaticContent);
+          console.log('Removed blog from static generation script');
+        }
+      } catch (error) {
+        console.warn('Could not update static generation script:', error.message);
+      }
 
       // Auto-update sitemap after blog deletion
       try {
@@ -709,11 +758,54 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
         console.warn('Failed to update sitemap after blog deletion:', sitemapError);
       }
 
+      // Clear any cached references and rebuild system files
+      try {
+        // Clear Node.js module cache for the deleted blog
+        const moduleId = path.resolve(blogFilePath);
+        delete require.cache[moduleId];
+        
+        // Clear the blogs index module cache as well
+        const indexModuleId = path.resolve(indexPath);
+        delete require.cache[indexModuleId];
+        
+        console.log('Cleared module cache for deleted blog and index file');
+      } catch (error) {
+        console.warn('Could not clear module cache:', error.message);
+      }
+
+      // Force regeneration of any cached blog listings
+      try {
+        // Clear any potential caches in memory
+        if (global.blogCache) {
+          delete global.blogCache;
+        }
+        
+        // Trigger a fresh reload of the blog index
+        const { getAllBlogs } = await import(path.resolve(indexPath));
+        const updatedBlogs = getAllBlogs();
+        console.log(`Verified blog removal: ${updatedBlogs.length} blogs remaining`);
+        
+        // Validate that the deleted blog is not in the list
+        const deletedBlogExists = updatedBlogs.some(blog => blog.id === blogId);
+        if (deletedBlogExists) {
+          console.warn(`Warning: Blog ${blogId} still appears in blog listing after deletion`);
+        }
+      } catch (error) {
+        console.warn('Could not verify blog removal:', error.message);
+      }
+
       res.json({
         success: true,
-        message: `Blog "${blogId}" deleted successfully and sitemap updated`,
+        message: `Blog "${blogId}" completely deleted with all SEO references removed`,
         blogId,
-        deletedFile: blogFileName
+        deletedFile: blogFileName,
+        cleanupActions: [
+          'Blog file deleted',
+          'Index file updated',
+          'Static files removed',
+          'Sitemap updated',
+          'Module cache cleared'
+        ]
       });
 
     } catch (error) {

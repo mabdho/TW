@@ -78,19 +78,15 @@ export async function updateSitemap() {
   try {
     console.log('Updating sitemap...');
     
-    // Get all cities
+    // Get all cities from Firestore
     const citiesSnapshot = await db.collection('cities').get();
     const cities = citiesSnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
     }));
     
-    // Get all blogs
-    const blogsSnapshot = await db.collection('blogs').get();
-    const blogs = blogsSnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }));
+    // Get all blogs from file system (since blogs are file-based)
+    const blogs = await getFileSystemBlogs();
     
     // Generate sitemap XML
     const sitemap = generateSitemapXML(cities, blogs);
@@ -107,6 +103,83 @@ export async function updateSitemap() {
   } catch (error) {
     console.error('Error updating sitemap:', error);
     throw error;
+  }
+}
+
+/**
+ * Get blogs from file system instead of database
+ */
+async function getFileSystemBlogs() {
+  try {
+    const fs = await import('fs/promises');
+    const path = await import('path');
+    
+    const blogsDir = path.join(process.cwd(), 'client/src/blogs');
+    
+    // Check if blogs directory exists
+    try {
+      await fs.access(blogsDir);
+    } catch {
+      return [];
+    }
+    
+    // Read all files in the blogs directory
+    const files = await fs.readdir(blogsDir);
+    const blogFiles = files.filter(file => file.endsWith('.tsx') && file !== 'index.ts');
+    
+    const blogs = [];
+    
+    for (const file of blogFiles) {
+      try {
+        const filePath = path.join(blogsDir, file);
+        const content = await fs.readFile(filePath, 'utf-8');
+        
+        // Parse the blog data from the file content
+        const blogData = extractBlogDataFromFile(content);
+        if (blogData) {
+          blogs.push(blogData);
+        }
+      } catch (error) {
+        console.error(`Error reading blog file ${file}:`, error);
+      }
+    }
+    
+    return blogs;
+  } catch (error) {
+    console.error('Error getting file system blogs:', error);
+    return [];
+  }
+}
+
+/**
+ * Extract blog data from file content for sitemap generation
+ */
+function extractBlogDataFromFile(content: string): any | null {
+  try {
+    // Extract the blog object from the file content - handle both naming patterns
+    const blogObjectMatch = content.match(/export const \w+(?:Blog)?: Blog = ({[\s\S]*?});/);
+    if (!blogObjectMatch) {
+      return null;
+    }
+    
+    const blogObjectString = blogObjectMatch[1];
+    
+    // Parse the blog object properties
+    const id = blogObjectString.match(/id: "([^"]*?)"/)?.[1];
+    const title = blogObjectString.match(/title: "(.*?)"/)?.[1];
+    const date = blogObjectString.match(/date: "([^"]*?)"/)?.[1];
+    
+    return {
+      id,
+      title,
+      lastUpdated: date,
+      seo: {
+        slug: id // Use the ID as slug for sitemap
+      }
+    };
+  } catch (error) {
+    console.error('Error parsing blog data:', error);
+    return null;
   }
 }
 
