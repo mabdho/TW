@@ -1,7 +1,7 @@
 import React from 'react';
 import { Blog } from '@shared/schema';
 
-export const 21231Blog: Blog = {
+export const blog21231: Blog = {
   id: "21231",
   title: "21231",
   excerpt: "asdqd",
