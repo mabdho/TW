@@ -519,9 +519,9 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
 
       {/* Horizontal Slider */}
       <div className="relative">
-        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {discoveryCards.map((card, index) => (
-            <Card key={index} className="flex-shrink-0 w-72 sm:w-80 h-48 hover:shadow-lg transition-shadow duration-200">
+            <Card key={index} className="flex-shrink-0 w-64 sm:w-72 lg:w-80 h-44 sm:h-48 hover:shadow-lg transition-shadow duration-200 snap-start">
               <CardHeader className="pb-2">
                 <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                   {card.icon}
@@ -531,7 +531,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
                   {card.summary}
                 </p>
               </CardHeader>
-              <CardContent className="pt-0 h-24 overflow-hidden">
+              <CardContent className="pt-0 h-20 sm:h-24 overflow-hidden">
                 {card.content}
               </CardContent>
             </Card>
