@@ -317,9 +317,9 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
       icon: <Lightbulb className="w-5 h-5 text-yellow-500" />,
       color: "yellow",
       summary: `${insiderTips.length} insider tips`,
-      content: insiderTips.slice(0, 3).map((tip, index) => (
-        <div key={index} className="mb-2 text-sm text-gray-700 dark:text-gray-300">
-          • {tip.length > 80 ? tip.substring(0, 80) + '...' : tip}
+      content: insiderTips.slice(0, 4).map((tip, index) => (
+        <div key={index} className="mb-2 p-2 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border-l-3 border-yellow-400">
+          <p className="text-sm text-gray-700 dark:text-gray-300">{tip}</p>
         </div>
       ))
     },
@@ -328,11 +328,11 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
       icon: <Camera className="w-5 h-5 text-blue-500" />,
       color: "blue", 
       summary: `${photoOps.length} photo opportunities`,
-      content: photoOps.slice(0, 3).map((op, index) => (
-        <div key={index} className="mb-2">
-          <h4 className="font-semibold text-blue-700 dark:text-blue-300 text-sm">{op.spot}</h4>
+      content: photoOps.slice(0, 4).map((op, index) => (
+        <div key={index} className="mb-2 p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg border-l-3 border-blue-400">
+          <h4 className="font-semibold text-blue-700 dark:text-blue-300 text-sm mb-1">{op.spot}</h4>
           <p className="text-xs text-gray-600 dark:text-gray-400">
-            {op.description.length > 70 ? op.description.substring(0, 70) + '...' : op.description}
+            {op.description}
           </p>
         </div>
       ))
@@ -377,20 +377,24 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
       color: "indigo",
       summary: `Planning guide for ${attractions.length} attractions`,
       content: (
-        <div className="space-y-2">
-          {attractions.slice(0, 2).map((attr, index) => (
-            <div key={index} className="text-sm">
-              <h4 className="font-semibold text-indigo-700 dark:text-indigo-300 mb-1">
-                {attr.name.length > 25 ? attr.name.substring(0, 25) + '...' : attr.name}
+        <div className="space-y-3">
+          {attractions.slice(0, 4).map((attr, index) => (
+            <div key={index} className="p-2 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg border-l-3 border-indigo-400">
+              <h4 className="font-semibold text-indigo-700 dark:text-indigo-300 mb-2 text-sm">
+                {attr.name}
               </h4>
               <div className="flex gap-2 flex-wrap">
-                <Badge variant="outline" className="text-xs">
+                <Badge variant="outline" className="text-xs bg-white">
                   <Clock className="w-3 h-3 mr-1" />
                   {getTimeEstimate(attr)}
                 </Badge>
-                <Badge variant="outline" className="text-xs">
+                <Badge variant="outline" className="text-xs bg-white">
                   <DollarSign className="w-3 h-3 mr-1" />
                   {getCostLevel(attr)}
+                </Badge>
+                <Badge variant="outline" className="text-xs bg-white">
+                  <Calendar className="w-3 h-3 mr-1" />
+                  {getSeasonalInfo(attr)}
                 </Badge>
               </div>
             </div>
@@ -409,19 +413,19 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
         !highlights.includes(attr.name)
       ).length} hidden gems`,
       content: (
-        <div className="space-y-2">
+        <div className="space-y-3">
           {attractions.filter(attr => 
             attr.description.toLowerCase().includes('hidden') || 
             attr.description.toLowerCase().includes('secret') ||
             attr.description.toLowerCase().includes('local') ||
             !highlights.includes(attr.name)
-          ).slice(0, 2).map((attr, index) => (
-            <div key={index} className="text-sm">
-              <h4 className="font-semibold text-pink-700 dark:text-pink-300 mb-1">
-                {attr.name.length > 25 ? attr.name.substring(0, 25) + '...' : attr.name}
+          ).slice(0, 3).map((attr, index) => (
+            <div key={index} className="p-2 bg-pink-50 dark:bg-pink-900/20 rounded-lg border-l-3 border-pink-400">
+              <h4 className="font-semibold text-pink-700 dark:text-pink-300 mb-1 text-sm">
+                {attr.name}
               </h4>
               <p className="text-xs text-gray-600 dark:text-gray-400">
-                {attr.description.split('.')[0].substring(0, 60)}...
+                {attr.description.split('.')[0]}.
               </p>
             </div>
           ))}
@@ -431,7 +435,10 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
             attr.description.toLowerCase().includes('local') ||
             !highlights.includes(attr.name)
           ).length === 0 && (
-            <p className="text-xs text-gray-500 italic">Explore beyond the highlights!</p>
+            <div className="text-center p-4">
+              <Eye className="w-6 h-6 text-gray-400 mx-auto mb-2" />
+              <p className="text-xs text-gray-500 italic">Explore beyond the highlights!</p>
+            </div>
           )}
         </div>
       )
@@ -442,28 +449,39 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
       color: "orange",
       summary: `${diningOptions.length} dining options`,
       content: (
-        <div className="space-y-2">
+        <div className="space-y-3">
           {diningOptions.length > 0 ? (
             <>
-              {diningOptions.slice(0, 2).map((option, index) => (
-                <div key={index} className="text-sm">
+              {diningOptions.slice(0, 3).map((option, index) => (
+                <div key={index} className="p-2 bg-orange-50 dark:bg-orange-900/20 rounded-lg border-l-3 border-orange-400">
                   <div className="flex items-center gap-2 mb-1">
-                    <h4 className="font-semibold text-orange-700 dark:text-orange-300">
-                      {option.name.length > 20 ? option.name.substring(0, 20) + '...' : option.name}
+                    <h4 className="font-semibold text-orange-700 dark:text-orange-300 text-sm">
+                      {option.name}
                     </h4>
                     <Badge variant="outline" className="bg-orange-100 text-orange-700 border-orange-300 text-xs">
                       {option.type}
                     </Badge>
                   </div>
                   <p className="text-xs text-gray-600 dark:text-gray-400">
-                    {option.description.length > 60 ? option.description.substring(0, 60) + '...' : option.description}
+                    {option.description}
                   </p>
                 </div>
               ))}
+              {discoveryData?.diningHighlights?.diningTips && (
+                <div className="p-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg border-l-3 border-amber-400">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h4 className="font-semibold text-amber-700 dark:text-amber-300 text-sm">Dining Tips</h4>
+                    <Badge variant="outline" className="bg-amber-100 text-amber-700 border-amber-300 text-xs">
+                      Local Advice
+                    </Badge>
+                  </div>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">{discoveryData.diningHighlights.diningTips}</p>
+                </div>
+              )}
             </>
           ) : (
-            <div className="text-center">
-              <Coffee className="w-6 h-6 text-gray-400 mx-auto mb-1" />
+            <div className="text-center p-4">
+              <Coffee className="w-8 h-8 text-gray-400 mx-auto mb-2" />
               <p className="text-xs text-gray-500 italic">
                 Discover local dining!
               </p>
@@ -478,28 +496,32 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
       color: "amber",
       summary: `${attractions.length} attractions overview`,
       content: (
-        <div className="grid grid-cols-2 gap-2">
-          <div className="p-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg text-center">
-            <div className="text-lg font-bold text-amber-600">{attractions.length}</div>
-            <div className="text-xs text-gray-600">Total</div>
-          </div>
-          <div className="p-2 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg text-center">
-            <div className="text-lg font-bold text-emerald-600">
-              {attractions.filter(attr => getCostLevel(attr) === 'Free').length}
+        <div className="space-y-3">
+          <div className="grid grid-cols-2 gap-3">
+            <div className="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg text-center border-l-3 border-amber-400">
+              <div className="text-2xl font-bold text-amber-600">{attractions.length}</div>
+              <div className="text-xs text-gray-600">Total Attractions</div>
             </div>
-            <div className="text-xs text-gray-600">Free</div>
-          </div>
-          <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-center">
-            <div className="text-lg font-bold text-blue-600">
-              {attractions.filter(attr => getTimeEstimate(attr) === '30-60 Min').length}
+            <div className="p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg text-center border-l-3 border-emerald-400">
+              <div className="text-2xl font-bold text-emerald-600">
+                {attractions.filter(attr => getCostLevel(attr) === 'Free').length}
+              </div>
+              <div className="text-xs text-gray-600">Free Activities</div>
             </div>
-            <div className="text-xs text-gray-600">Quick</div>
           </div>
-          <div className="p-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg text-center">
-            <div className="text-lg font-bold text-purple-600">
-              {attractions.filter(attr => getSeasonalInfo(attr) === 'Year-Round').length}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-center border-l-3 border-blue-400">
+              <div className="text-2xl font-bold text-blue-600">
+                {attractions.filter(attr => getTimeEstimate(attr) === '30-60 Min').length}
+              </div>
+              <div className="text-xs text-gray-600">Quick Visits</div>
             </div>
-            <div className="text-xs text-gray-600">Year-Round</div>
+            <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg text-center border-l-3 border-purple-400">
+              <div className="text-2xl font-bold text-purple-600">
+                {attractions.filter(attr => getSeasonalInfo(attr) === 'Year-Round').length}
+              </div>
+              <div className="text-xs text-gray-600">Year-Round</div>
+            </div>
           </div>
         </div>
       )
@@ -528,19 +550,23 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
           }}
         >
           {discoveryCards.map((card, index) => (
-            <Card key={index} className="flex-shrink-0 w-[280px] sm:w-72 lg:w-80 h-44 sm:h-48 hover:shadow-lg transition-shadow duration-200 snap-start border-2 border-gray-200">
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
-                  {card.icon}
-                  <span className="truncate">{card.title}</span>
-                </CardTitle>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  {card.summary}
-                </p>
-              </CardHeader>
-              <CardContent className="pt-0 h-20 sm:h-24 overflow-hidden">
-                {card.content}
-              </CardContent>
+            <Card key={index} className="flex-shrink-0 w-[320px] sm:w-80 lg:w-96 h-[280px] sm:h-[320px] bg-white dark:bg-gray-800 hover:shadow-xl transition-all duration-300 snap-start border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+              <div className="h-full flex flex-col">
+                <CardHeader className="pb-3 pt-4 px-4 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 flex-shrink-0">
+                  <CardTitle className="flex items-center gap-2 text-lg font-semibold text-gray-800 dark:text-white">
+                    {card.icon}
+                    <span className="truncate">{card.title}</span>
+                  </CardTitle>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                    {card.summary}
+                  </p>
+                </CardHeader>
+                <CardContent className="flex-1 p-4 bg-white dark:bg-gray-800 overflow-y-auto">
+                  <div className="space-y-2">
+                    {card.content}
+                  </div>
+                </CardContent>
+              </div>
             </Card>
           ))}
         </div>

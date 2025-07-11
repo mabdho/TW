@@ -57,6 +57,11 @@
     touch-action: pan-x;
     -webkit-overflow-scrolling: touch;
   }
+  
+  /* Discovery cards styling */
+  .border-l-3 {
+    border-left-width: 3px;
+  }
 }
 
 /* Travel Guide Design System - Inspired by wanderlust and adventure
