@@ -159,8 +159,13 @@ export default function AdminPage() {
   const { data: blogs = [], isLoading: blogsLoading } = useQuery({
     queryKey: ['/api/blogs'],
     queryFn: async () => {
-      const response = await apiRequest('GET', '/api/blogs');
-      return response || [];
+      try {
+        const response = await apiRequest('GET', '/api/blogs');
+        return Array.isArray(response) ? response : [];
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+        return [];
+      }
     },
   });
 

@@ -725,6 +725,49 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
     }
   });
 
+  // Blog API routes
+  app.get('/api/blogs', async (req, res) => {
+    try {
+      const blogsDir = path.join(process.cwd(), 'client/src/blogs');
+      
+      // Check if blogs directory exists
+      try {
+        await fs.access(blogsDir);
+      } catch {
+        return res.json([]);
+      }
+      
+      // Read all files in the blogs directory
+      const files = await fs.readdir(blogsDir);
+      const blogFiles = files.filter(file => file.endsWith('.tsx') && file !== 'index.ts');
+      
+      const blogs = [];
+      
+      for (const file of blogFiles) {
+        try {
+          const filePath = path.join(blogsDir, file);
+          const content = await fs.readFile(filePath, 'utf-8');
+          
+          // Parse the blog data from the file content
+          const blogData = extractBlogDataFromFile(content);
+          if (blogData) {
+            blogs.push(blogData);
+          }
+        } catch (error) {
+          console.error(`Error reading blog file ${file}:`, error);
+        }
+      }
+      
+      // Sort blogs by date (newest first)
+      blogs.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      
+      res.json(blogs);
+    } catch (error) {
+      console.error('Error loading blogs:', error);
+      res.json([]); // Return empty array if no blogs exist
+    }
+  });
+
   // SEO API routes
   app.post('/api/seo/validate', validateSEOData);
   app.get('/api/seo/sitemap.xml', getSitemap);
@@ -743,6 +786,49 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
 
   const httpServer = createServer(app);
   return httpServer;
+}
+
+function extractBlogDataFromFile(content: string): any | null {
+  try {
+    // Extract the blog object from the file content
+    const blogObjectMatch = content.match(/export const \w+Blog: Blog = ({[\s\S]*?});/);
+    if (!blogObjectMatch) {
+      return null;
+    }
+    
+    const blogObjectString = blogObjectMatch[1];
+    
+    // Parse the blog object properties with better regex patterns
+    const id = blogObjectString.match(/id: ["']([^"']*?)["']/)?.[1];
+    const title = blogObjectString.match(/title: ["']([^"']*?)["']/)?.[1];
+    const excerpt = blogObjectString.match(/excerpt: ["']([^"']*?)["']/)?.[1];
+    const category = blogObjectString.match(/category: ["']([^"']*?)["']/)?.[1];
+    const imageUrl = blogObjectString.match(/imageUrl: ["']([^"']*?)["']/)?.[1];
+    const featured = blogObjectString.match(/featured: (true|false)/)?.[1] === 'true';
+    const readTime = blogObjectString.match(/readTime: ["']([^"']*?)["']/)?.[1];
+    const date = blogObjectString.match(/date: ["']([^"']*?)["']/)?.[1];
+    const author = blogObjectString.match(/author: ["']([^"']*?)["']/)?.[1];
+    
+    // Extract content (handles template strings with better pattern)
+    const contentMatch = blogObjectString.match(/content: `([\s\S]*?)`(?=,\s*\w+:|$)/);
+    const contentString = contentMatch ? contentMatch[1] : '';
+    
+    return {
+      id,
+      title,
+      excerpt,
+      content: contentString,
+      category,
+      imageUrl,
+      featured,
+      readTime,
+      date,
+      author
+    };
+  } catch (error) {
+    console.error('Error parsing blog data:', error);
+    return null;
+  }
 }
 
 function generateBlogComponent(blogData: any): string {
