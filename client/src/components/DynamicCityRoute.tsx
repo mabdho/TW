@@ -13,6 +13,8 @@ const cityMap = {
   // Empty - ready for fresh city additions
 
   'porto': createCityImport('Porto', '../pages/cities/Porto'),
+
+  'bologna': createCityImport('Bologna', '../pages/cities/Bologna'),
 };
 
 interface DynamicCityRouteProps {

@@ -10,7 +10,8 @@ import { Badge } from '@/components/ui/badge';
 
 const cities = [
   // Cities cleared - ready for fresh production content,
-  { "name": "Porto", "country": "Portugal", "path": "/best-things-to-do-in-porto", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1577958194277-7b3bc213b03c?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
+  { "name": "Porto", "country": "Portugal", "path": "/best-things-to-do-in-porto", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1577958194277-7b3bc213b03c?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { "name": "Bologna", "country": "Italy", "path": "/best-things-to-do-in-bologna", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1677427230972-7cabe0d3e005?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
 ];
 
 const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America", "South America"];
