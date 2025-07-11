@@ -1,11 +1,7 @@
 import { Link } from 'react-router-dom';
 
 const cities = [
-  { name: "Auckland", path: "/auckland" },
-  { name: "Copenhagen", path: "/copenhagen" },
-  { name: "Tokyo", path: "/tokyo" },
-  { name: "Stockholm", path: "/stockholm" },
-  { name: "Barcelona", path: "/barcelona" }
+  // Cities cleared - ready for fresh production content
 ];
 
 export const SimpleCityList = () => {

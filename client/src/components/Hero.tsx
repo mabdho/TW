@@ -128,7 +128,7 @@ export const Hero = () => {
           {/* Clean stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900 mb-2">158+</div>
+              <div className="text-3xl font-bold text-gray-900 mb-2">New</div>
               <div className="text-sm text-gray-600 font-medium">Destinations</div>
             </div>
             <div className="text-center">

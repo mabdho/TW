@@ -61,40 +61,40 @@ export const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/best-things-to-do-in-tokyo" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                  <a href="/destinations" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
                     Featured Cities
                   </a>
                 </li>
               </ul>
             </div>
 
-            {/* Popular Cities */}
+            {/* Get Started */}
             <div>
-              <h3 className="font-semibold text-foreground mb-4 text-sm sm:text-base">Popular Cities</h3>
+              <h3 className="font-semibold text-foreground mb-4 text-sm sm:text-base">Get Started</h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="/best-things-to-do-in-tokyo" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
-                    Tokyo
+                  <a href="/destinations" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    Browse Destinations
                   </a>
                 </li>
                 <li>
-                  <a href="/best-things-to-do-in-new-york" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
-                    New York
+                  <a href="/blogs" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    Travel Inspiration
                   </a>
                 </li>
                 <li>
-                  <a href="/best-things-to-do-in-paris" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
-                    Paris
+                  <a href="/destinations" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    Plan Your Trip
                   </a>
                 </li>
                 <li>
-                  <a href="/best-things-to-do-in-london" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
-                    London
+                  <a href="/destinations" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    Discover Places
                   </a>
                 </li>
                 <li>
-                  <a href="/best-things-to-do-in-dubai" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
-                    Dubai
+                  <a href="/blogs" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    Travel Tips
                   </a>
                 </li>
               </ul>

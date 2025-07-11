@@ -231,69 +231,69 @@ export default function BlogsPage() {
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {/* Popular destination links */}
-            <a href="/best-things-to-do-in-tokyo" className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <div className="h-32 bg-gradient-to-br from-pink-500 to-orange-500"></div>
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="h-32 bg-gradient-to-br from-green-500 to-blue-500"></div>
               <div className="p-4">
-                <h3 className="font-semibold text-gray-900 mb-2">Tokyo, Japan</h3>
-                <p className="text-sm text-gray-600">Ancient temples meet modern marvels</p>
+                <h3 className="font-semibold text-gray-900 mb-2">Coming Soon</h3>
+                <p className="text-sm text-gray-600">Amazing destinations await</p>
               </div>
-            </a>
+            </div>
             
-            <a href="/best-things-to-do-in-paris" className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <div className="h-32 bg-gradient-to-br from-blue-500 to-purple-500"></div>
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="h-32 bg-gradient-to-br from-purple-500 to-pink-500"></div>
               <div className="p-4">
-                <h3 className="font-semibold text-gray-900 mb-2">Paris, France</h3>
-                <p className="text-sm text-gray-600">The City of Light awaits</p>
+                <h3 className="font-semibold text-gray-900 mb-2">New Guides</h3>
+                <p className="text-sm text-gray-600">Comprehensive city guides</p>
               </div>
-            </a>
+            </div>
             
-            <a href="/best-things-to-do-in-new-york" className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <div className="h-32 bg-gradient-to-br from-gray-500 to-gray-700"></div>
-              <div className="p-4">
-                <h3 className="font-semibold text-gray-900 mb-2">New York, USA</h3>
-                <p className="text-sm text-gray-600">The city that never sleeps</p>
-              </div>
-            </a>
-            
-            <a href="/best-things-to-do-in-barcelona" className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
               <div className="h-32 bg-gradient-to-br from-orange-500 to-red-500"></div>
               <div className="p-4">
-                <h3 className="font-semibold text-gray-900 mb-2">Barcelona, Spain</h3>
-                <p className="text-sm text-gray-600">Gaudí's architectural wonderland</p>
+                <h3 className="font-semibold text-gray-900 mb-2">Travel Tips</h3>
+                <p className="text-sm text-gray-600">Expert recommendations</p>
               </div>
-            </a>
+            </div>
             
-            <a href="/best-things-to-do-in-london" className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <div className="h-32 bg-gradient-to-br from-green-500 to-teal-500"></div>
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="h-32 bg-gradient-to-br from-blue-500 to-teal-500"></div>
               <div className="p-4">
-                <h3 className="font-semibold text-gray-900 mb-2">London, UK</h3>
-                <p className="text-sm text-gray-600">Royal heritage meets modern innovation</p>
+                <h3 className="font-semibold text-gray-900 mb-2">Insider Secrets</h3>
+                <p className="text-sm text-gray-600">Hidden gems and local favorites</p>
               </div>
-            </a>
+            </div>
             
-            <a href="/best-things-to-do-in-rome" className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
               <div className="h-32 bg-gradient-to-br from-yellow-500 to-orange-500"></div>
               <div className="p-4">
-                <h3 className="font-semibold text-gray-900 mb-2">Rome, Italy</h3>
-                <p className="text-sm text-gray-600">The Eternal City of history</p>
+                <h3 className="font-semibold text-gray-900 mb-2">Planning Tools</h3>
+                <p className="text-sm text-gray-600">Everything you need to know</p>
               </div>
-            </a>
+            </div>
             
-            <a href="/best-things-to-do-in-sydney" className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <div className="h-32 bg-gradient-to-br from-blue-400 to-teal-400"></div>
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="h-32 bg-gradient-to-br from-indigo-500 to-purple-500"></div>
               <div className="p-4">
-                <h3 className="font-semibold text-gray-900 mb-2">Sydney, Australia</h3>
-                <p className="text-sm text-gray-600">Harbour views and beach vibes</p>
+                <h3 className="font-semibold text-gray-900 mb-2">Cultural Insights</h3>
+                <p className="text-sm text-gray-600">Deep local knowledge</p>
               </div>
-            </a>
+            </div>
+            
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="h-32 bg-gradient-to-br from-pink-500 to-rose-500"></div>
+              <div className="p-4">
+                <h3 className="font-semibold text-gray-900 mb-2">Food & Dining</h3>
+                <p className="text-sm text-gray-600">Culinary adventures await</p>
+              </div>
+            </div>
             
             <a href="/destinations" className="bg-green-600 hover:bg-green-700 text-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
               <div className="h-32 bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center">
-                <span className="text-2xl font-bold">170+</span>
+                <span className="text-2xl font-bold">New</span>
               </div>
               <div className="p-4">
                 <h3 className="font-semibold text-white mb-2">View All Destinations</h3>
-                <p className="text-sm text-green-100">Explore our complete collection</p>
+                <p className="text-sm text-green-100">Ready for fresh content</p>
               </div>
             </a>
           </div>
