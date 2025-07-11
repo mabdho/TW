@@ -4,8 +4,8 @@ import bcrypt from 'bcryptjs';
 
 async function createAdminUser() {
   try {
-    const username = 'admin';
-    const password = 'admin123'; // Change this to a secure password
+    const username = 'Abdho';
+    const password = 'admin8689'; // Change this to a secure password
     
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
