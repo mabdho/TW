@@ -482,8 +482,8 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       const cityDirectoryPath = path.join(process.cwd(), 'client', 'src', 'components', 'CityDirectory.tsx');
       const cityDirectoryContent = await fs.readFile(cityDirectoryPath, 'utf-8');
       
-      // Create city entry with correct SEO-friendly URL format
-      const cityEntry = `  { "name": "${city}", "country": "${country}", "path": "/best-things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}", "continent": "${continent}" }`;
+      // Create city entry with correct SEO-friendly URL format and imageUrl
+      const cityEntry = `  { "name": "${city}", "country": "${country}", "path": "/best-things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}", "continent": "${continent}"${heroImageUrl ? `, "imageUrl": "${heroImageUrl}"` : ''} }`;
       
       // Check if city already exists
       if (!cityDirectoryContent.includes(`"name": "${city}"`)) {
@@ -1114,7 +1114,7 @@ export const ${cityName}: React.FC = () => {
   return (
     <CityPage
       title={"${title}"}
-      description={\`${contentData.description.replace(/`/g, '\\`')}\`}
+      description={\`${contentData.description.replace(/`/g, '\\`')}\`}${heroImageUrl ? `\n      imageUrl={"${heroImageUrl}"}` : ''}
       galleryImages={[${formattedGalleryImages}
       ]}
       highlights={[${formattedHighlights}]}

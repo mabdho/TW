@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 
 const cities = [
-  { "name": "Aarhus", "country": "Denmark", "path": "/best-things-to-do-in-aarhus", "continent": "Europe" },
+  { "name": "Aarhus", "country": "Denmark", "path": "/best-things-to-do-in-aarhus", "continent": "Europe", "imageUrl": "" },
   { "name": "Accra", "country": "Ghana", "path": "/best-things-to-do-in-accra", "continent": "Africa" },
   { "name": "Addis Ababa", "country": "Ethiopia", "path": "/best-things-to-do-in-addis-ababa", "continent": "Africa" },
   { "name": "Adelaide", "country": "Australia", "path": "/best-things-to-do-in-adelaide", "continent": "Oceania" },
@@ -177,7 +177,7 @@ const cities = [
   { "name": "Amalfi", "country": "Italy", "path": "/best-things-to-do-in-amalfi", "continent": "Europe" },
   { "name": "Vienna", "country": "Austria", "path": "/best-things-to-do-in-vienna", "continent": "Europe" },
   { "name": "Prague", "country": "Czech Republic", "path": "/best-things-to-do-in-prague", "continent": "Europe" },
-  { "name": "Florence", "country": "Italy", "path": "/best-things-to-do-in-florence", "continent": "Europe" }
+  { "name": "Florence", "country": "Italy", "path": "/best-things-to-do-in-florence", "continent": "Europe", "imageUrl": "" }
 ];
 
 const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America", "South America"];
@@ -279,7 +279,15 @@ export default function DestinationsPage() {
             {filteredCities.map((city) => (
               <Card key={city.path} className="group hover:shadow-lg transition-all duration-300 cursor-pointer border-gray-200">
                 <a href={city.path} className="block">
-                  <div className="relative h-48 bg-gradient-to-br from-green-400 to-blue-500 overflow-hidden rounded-t-lg">
+                  <div 
+                    className={`relative h-48 overflow-hidden rounded-t-lg ${!city.imageUrl ? 'bg-gradient-to-br from-green-400 to-blue-500' : 'bg-gray-900'}`}
+                    style={city.imageUrl ? {
+                      backgroundImage: `url(${city.imageUrl})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat'
+                    } : {}}
+                  >
                     <div className="absolute inset-0 bg-black/20"></div>
                     <div className="absolute top-3 left-3">
                       <Badge variant="secondary" className="bg-white/90 text-gray-900 text-xs">
