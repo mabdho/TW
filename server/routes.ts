@@ -189,11 +189,11 @@ JSON FORMATTING REQUIREMENTS:
 - Start your response immediately with { and end with }
 
 EXAMPLES OF WHAT TO AVOID:
-- "```json" or "```" 
+- "\`\`\`json" or "\`\`\`" 
 - "Here is the JSON:"
 - Any text before { or after }
 - Trailing commas like: "item", }
-- Line breaks inside strings like: "This is a\nlong text"
+- Line breaks inside strings like: "This is a\\nlong text"
 
 VERIFY your JSON is complete before responding. The response MUST be parseable by JSON.parse().`;
 
