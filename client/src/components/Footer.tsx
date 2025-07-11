@@ -66,11 +66,6 @@ export const Footer = () => {
                     Featured Cities
                   </a>
                 </li>
-                <li>
-                  <a href="/admin" className="text-sm sm:text-base text-orange-600 hover:text-orange-700 transition-colors flex items-center gap-2">
-                    🔒 Admin Panel
-                  </a>
-                </li>
               </ul>
             </div>
 
