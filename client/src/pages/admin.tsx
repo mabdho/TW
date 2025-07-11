@@ -99,12 +99,26 @@ export default function AdminPage() {
     },
     onError: (error: any) => {
       let errorMessage = "Failed to generate city page";
+      let errorDetails = "";
+      
       if (error.message?.includes("quota") || error.message?.includes("429")) {
         errorMessage = "API quota exceeded. Please wait a few minutes and try again.";
+      } else if (error.message?.includes("malformed JSON")) {
+        errorMessage = "AI response formatting error. Please try again.";
+        errorDetails = "The AI didn't return proper JSON format. This is usually temporary.";
+      } else if (error.message?.includes("parsing")) {
+        errorMessage = "JSON parsing error occurred";
+        errorDetails = "The AI response couldn't be processed correctly. Try again.";
+      } else if (error.responsePreview || error.details) {
+        errorMessage = "AI response error";
+        errorDetails = error.details || "Check console for detailed error information";
       }
+      
+      console.error('City generation error:', error);
+      
       toast({
         title: "Generation failed",
-        description: errorMessage,
+        description: errorDetails || errorMessage,
         variant: "destructive"
       });
     }

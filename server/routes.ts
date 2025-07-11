@@ -184,6 +184,16 @@ JSON FORMATTING REQUIREMENTS:
 - Keep attraction descriptions under 200 words each
 - Ensure ALL JSON brackets and braces are properly closed
 - End with a complete closing brace }
+- NO trailing commas in objects or arrays
+- NO comments or extra text outside the JSON object
+- Start your response immediately with { and end with }
+
+EXAMPLES OF WHAT TO AVOID:
+- "```json" or "```" 
+- "Here is the JSON:"
+- Any text before { or after }
+- Trailing commas like: "item", }
+- Line breaks inside strings like: "This is a\nlong text"
 
 VERIFY your JSON is complete before responding. The response MUST be parseable by JSON.parse().`;
 
@@ -215,7 +225,10 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       console.log('AI Response Length:', generatedText.length);
       console.log('AI Response Preview:', generatedText.substring(0, 500));
 
-      // Fix known bad formatting from Gemini - minimal cleaning approach
+      // Enhanced JSON cleaning and parsing with multiple fallback strategies
+      console.log('Raw Gemini response length:', generatedText.length);
+      console.log('Raw Gemini response preview:', generatedText.substring(0, 300));
+      
       let cleaned = generatedText
         .replace(/```json/g, '')
         .replace(/```/g, '')
@@ -225,27 +238,95 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
         .replace(/'/g, "'") // Replace smart quotes with regular quotes  
         .replace(/'/g, "'") // Replace smart quotes with regular quotes
         .replace(/…/g, '...') // Replace ellipsis character
+        .replace(/\n/g, ' ') // Replace newlines with spaces to prevent JSON parsing issues
+        .replace(/\r/g, ' ') // Replace carriage returns with spaces
+        .replace(/\t/g, ' ') // Replace tabs with spaces
+        .replace(/\s+/g, ' ') // Replace multiple spaces with single space
         .trim();
 
-      // Try to find and extract just the JSON object
+      // Try multiple strategies to extract valid JSON
+      let jsonCandidates = [];
+      
+      // Strategy 1: Find first { to last }
       const jsonStart = cleaned.indexOf('{');
       const jsonEnd = cleaned.lastIndexOf('}');
-      
       if (jsonStart !== -1 && jsonEnd !== -1 && jsonEnd > jsonStart) {
-        cleaned = cleaned.substring(jsonStart, jsonEnd + 1);
+        jsonCandidates.push(cleaned.substring(jsonStart, jsonEnd + 1));
       }
-
-      // Parse the JSON response with fallback logging
-      try {
-        contentData = JSON.parse(cleaned);
-      } catch (parseError) {
-        console.error('Failed to parse Gemini response:', cleaned.slice(0, 500));
-        console.error('Full response length:', generatedText.length);
-        console.error('Parse error:', parseError.message);
+      
+      // Strategy 2: Look for JSON object with proper bracket matching
+      let braceCount = 0;
+      let jsonStartIndex = -1;
+      let jsonEndIndex = -1;
+      
+      for (let i = 0; i < cleaned.length; i++) {
+        if (cleaned[i] === '{') {
+          if (braceCount === 0) {
+            jsonStartIndex = i;
+          }
+          braceCount++;
+        } else if (cleaned[i] === '}') {
+          braceCount--;
+          if (braceCount === 0 && jsonStartIndex !== -1) {
+            jsonEndIndex = i;
+            break;
+          }
+        }
+      }
+      
+      if (jsonStartIndex !== -1 && jsonEndIndex !== -1) {
+        jsonCandidates.push(cleaned.substring(jsonStartIndex, jsonEndIndex + 1));
+      }
+      
+      // Strategy 3: Try to clean common JSON syntax errors
+      let fixedJson = cleaned;
+      if (jsonStart !== -1 && jsonEnd !== -1) {
+        fixedJson = cleaned.substring(jsonStart, jsonEnd + 1);
+        // Fix common issues
+        fixedJson = fixedJson
+          .replace(/,\s*}/g, '}') // Remove trailing commas before closing braces
+          .replace(/,\s*]/g, ']') // Remove trailing commas before closing brackets
+          .replace(/}\s*{/g, '},{') // Fix missing commas between objects
+          .replace(/]\s*\[/g, '],[') // Fix missing commas between arrays
+          .replace(/"\s*\n\s*"/g, '" "') // Fix quotes split across lines
+          .replace(/([^"\\])\n/g, '$1 '); // Replace remaining newlines not inside strings
+        
+        jsonCandidates.push(fixedJson);
+      }
+      
+      // Remove duplicates
+      jsonCandidates = [...new Set(jsonCandidates)];
+      
+      console.log(`Found ${jsonCandidates.length} JSON candidates to try`);
+      
+      // Try parsing each candidate
+      let parseError;
+      for (let i = 0; i < jsonCandidates.length; i++) {
+        try {
+          const candidate = jsonCandidates[i];
+          console.log(`Trying JSON candidate ${i + 1}:`, candidate.substring(0, 200));
+          contentData = JSON.parse(candidate);
+          console.log('Successfully parsed JSON with candidate', i + 1);
+          break;
+        } catch (error) {
+          console.log(`Candidate ${i + 1} failed:`, error.message);
+          parseError = error;
+        }
+      }
+      
+      // If all candidates failed, return detailed error
+      if (!contentData) {
+        console.error('All JSON parsing attempts failed');
+        console.error('Original response:', generatedText);
+        console.error('Cleaned response:', cleaned);
+        console.error('Last parse error:', parseError?.message);
+        
         return res.status(500).json({ 
-          error: 'Gemini returned malformed JSON', 
-          details: parseError.message,
-          responsePreview: cleaned.substring(0, 500)
+          error: 'Gemini returned malformed JSON after multiple parsing attempts', 
+          details: parseError?.message || 'Unknown parsing error',
+          responsePreview: cleaned.substring(0, 800),
+          fullResponse: generatedText.length > 2000 ? generatedText.substring(0, 2000) + '...' : generatedText,
+          candidatesCount: jsonCandidates.length
         });
       }
 
