@@ -291,13 +291,30 @@ Return only the JSON object with no additional text or formatting.`;
         }
       }
 
-      res.json({
-        success: true,
-        cityName: cityFileName,
-        generatedCode: componentCode,
-        filePath: `client/src/pages/cities/${cityFileName}.tsx`,
-        message: `City page for ${city} created successfully and integrated into navigation`
-      });
+      // Auto-generate static HTML for the new city
+      try {
+        const { generateSingleCityStatic } = await import('../scripts/generate-single-city-static.js');
+        const staticGenerated = await generateSingleCityStatic(routePath, city);
+        
+        res.json({
+          success: true,
+          cityName: cityFileName,
+          generatedCode: componentCode,
+          filePath: `client/src/pages/cities/${cityFileName}.tsx`,
+          staticGenerated,
+          message: `City page for ${city} created successfully${staticGenerated ? ' with static HTML generated' : ''} and integrated into navigation`
+        });
+      } catch (staticError) {
+        console.warn('Failed to generate static HTML (build may not exist yet):', staticError.message);
+        res.json({
+          success: true,
+          cityName: cityFileName,
+          generatedCode: componentCode,
+          filePath: `client/src/pages/cities/${cityFileName}.tsx`,
+          staticGenerated: false,
+          message: `City page for ${city} created successfully and integrated into navigation (static HTML will be generated on next build)`
+        });
+      }
 
     } catch (error) {
       console.error('Error generating city page:', error);
