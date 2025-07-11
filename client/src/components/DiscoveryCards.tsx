@@ -518,10 +518,17 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
       </div>
 
       {/* Horizontal Slider */}
-      <div className="relative">
-        <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+      <div className="relative -mx-4">
+        <div 
+          className="flex gap-4 overflow-x-auto pb-4 pl-4 pr-4 scrollbar-hide snap-x snap-mandatory touch-pan-x" 
+          style={{ 
+            scrollbarWidth: 'none', 
+            msOverflowStyle: 'none',
+            WebkitOverflowScrolling: 'touch'
+          }}
+        >
           {discoveryCards.map((card, index) => (
-            <Card key={index} className="flex-shrink-0 w-64 sm:w-72 lg:w-80 h-44 sm:h-48 hover:shadow-lg transition-shadow duration-200 snap-start">
+            <Card key={index} className="flex-shrink-0 w-[280px] sm:w-72 lg:w-80 h-44 sm:h-48 hover:shadow-lg transition-shadow duration-200 snap-start border-2 border-gray-200">
               <CardHeader className="pb-2">
                 <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                   {card.icon}

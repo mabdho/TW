@@ -51,6 +51,12 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+  
+  /* Mobile touch scrolling optimization */
+  .touch-pan-x {
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 /* Travel Guide Design System - Inspired by wanderlust and adventure
