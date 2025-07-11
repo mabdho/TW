@@ -165,11 +165,21 @@ async function generateHTMLForRoute(route, baseHTML, cityName, cityKey) {
     console.log(`🔄 Rendering React content for ${route.path}...`);
     const renderedContent = await renderComponentToHTML(route);
     
-    // Replace empty root div with pre-rendered content
-    html = html.replace(
-      '<div id="root"></div>',
-      `<div id="root">${renderedContent}</div>`
-    );
+    // Replace existing root div content with pre-rendered city content
+    // The base HTML contains pre-rendered home page content, replace everything inside root
+    const rootStartPattern = /<div id="root">/;
+    const rootEndPattern = /<\/div>\s*\n?\s*<!-- Main application script/;
+    
+    if (rootStartPattern.test(html) && rootEndPattern.test(html)) {
+      // Extract everything between <div id="root"> and the comment before scripts
+      html = html.replace(
+        /<div id="root">.*?(?=\s*<!-- Main application script)/s,
+        renderedContent
+      );
+      console.log(`🔄 Successfully replaced root content with SSR rendered content`);
+    } else {
+      console.warn(`⚠️  Could not find root div pattern for replacement`);
+    }
     
     console.log(`✅ SSR complete for ${route.path}`);
   } catch (ssrError) {

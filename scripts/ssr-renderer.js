@@ -43,10 +43,36 @@ async function loadCityComponent(cityKey) {
       .join('');
     
     const cityPath = path.join(CLIENT_SRC, 'pages', 'cities', `${cityName}.tsx`);
+    console.log(`🔍 Looking for city component: ${cityPath}`);
     
     if (fs.existsSync(cityPath)) {
-      // For SSR, we'll create a simplified version of the city component
-      return createMockCityComponent(cityName, cityKey);
+      console.log(`✅ Found city component: ${cityName}`);
+      
+      // Import the actual component using dynamic import
+      try {
+        const cityFileUrl = `file://${cityPath}`;
+        const cityModule = await import(cityFileUrl);
+        const CityComponent = cityModule[cityName] || cityModule.default;
+        
+        if (CityComponent) {
+          console.log(`🎯 Successfully imported real ${cityName} component`);
+          return CityComponent;
+        } else {
+          console.warn(`⚠️  Component ${cityName} not found in exports, falling back to custom component`);
+          // Fallback to parsing approach
+          const cityContent = fs.readFileSync(cityPath, 'utf-8');
+          return createRealCityComponent(cityName, cityKey, cityContent);
+        }
+      } catch (importError) {
+        console.warn(`⚠️  Failed to import ${cityName} component:`, importError.message);
+        console.log(`📄 Falling back to file parsing approach`);
+        // Fallback to parsing approach
+        const cityContent = fs.readFileSync(cityPath, 'utf-8');
+        return createRealCityComponent(cityName, cityKey, cityContent);
+      }
+    } else {
+      console.log(`❌ City component not found: ${cityPath}`);
+      console.log(`📁 Available cities:`, fs.readdirSync(path.join(CLIENT_SRC, 'pages', 'cities')));
     }
     
     return null;
@@ -57,101 +83,210 @@ async function loadCityComponent(cityKey) {
 }
 
 /**
- * Create a simplified city component for SSR
+ * Create a real city component for SSR using actual data
  */
-function createMockCityComponent(cityName, cityKey) {
+function createRealCityComponent(cityName, cityKey, cityContent) {
   const formattedCityName = cityKey
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 
+  // Extract real data from city file
+  let cityData = {};
+  try {
+    // Extract title
+    const titleMatch = cityContent.match(/title=\{"([^"]+)"\}/);
+    if (titleMatch) cityData.title = titleMatch[1];
+    
+    // Extract description
+    const descMatch = cityContent.match(/description=\{`([^`]+)`\}/);
+    if (descMatch) cityData.description = descMatch[1];
+    
+    // Extract image URL
+    const imageMatch = cityContent.match(/imageUrl=\{"([^"]+)"\}/);
+    if (imageMatch) cityData.imageUrl = imageMatch[1];
+    
+    // Extract highlights
+    const highlightsMatch = cityContent.match(/highlights=\[(.*?)\]/s);
+    if (highlightsMatch) {
+      const highlightsStr = highlightsMatch[1];
+      cityData.highlights = highlightsStr.match(/"([^"]+)"/g)?.map(h => h.replace(/"/g, '')) || [];
+    }
+    
+    // Extract attraction names
+    const attractionMatches = cityContent.match(/name:\s*"([^"]+)"/g);
+    if (attractionMatches) {
+      cityData.attractions = attractionMatches.map(match => {
+        const nameMatch = match.match(/name:\s*"([^"]+)"/);
+        return nameMatch ? nameMatch[1] : '';
+      }).filter(name => name);
+    }
+    
+    console.log(`📊 Extracted city data for ${cityName}:`, {
+      title: cityData.title?.substring(0, 50) + '...',
+      description: cityData.description?.substring(0, 100) + '...',
+      imageUrl: cityData.imageUrl ? 'Present' : 'Missing',
+      highlights: cityData.highlights?.length || 0,
+      attractions: cityData.attractions?.length || 0
+    });
+  } catch (error) {
+    console.warn('Failed to parse city data:', error.message);
+  }
+
   return function CityComponent() {
-    return createElement('div', { className: 'city-page' }, [
-      // Hero Section
+    return createElement('div', { className: 'city-page min-h-screen bg-gray-50' }, [
+      // Hero Section with Real Image
       createElement('div', { 
         key: 'hero',
-        className: 'hero-section bg-gradient-to-r from-blue-600 to-orange-500 text-white py-20' 
+        className: 'relative text-white h-64 sm:h-80 md:h-96 lg:h-[28rem] bg-gray-900'
       }, [
-        createElement('div', { 
-          key: 'container', 
-          className: 'container mx-auto px-4 text-center' 
+        // Hero Image
+        cityData.imageUrl && createElement('picture', {
+          key: 'hero-picture',
+          className: 'absolute inset-0 w-full h-full'
         }, [
-          createElement('h1', { 
-            key: 'title',
-            className: 'text-4xl md:text-6xl font-bold mb-6' 
-          }, `Best Things to Do in ${formattedCityName}`),
-          createElement('p', { 
-            key: 'subtitle',
-            className: 'text-xl md:text-2xl mb-8' 
-          }, `Discover amazing attractions, experiences, and hidden gems in ${formattedCityName}`)
-        ])
-      ]),
-      
-      // Content Section
-      createElement('div', { 
-        key: 'content',
-        className: 'container mx-auto px-4 py-12' 
-      }, [
-        createElement('div', { 
-          key: 'overview',
-          className: 'prose max-w-none mb-12' 
-        }, [
-          createElement('h2', { 
-            key: 'overview-title',
-            className: 'text-3xl font-bold mb-6' 
-          }, `Overview of ${formattedCityName}`),
-          createElement('p', { 
-            key: 'overview-text',
-            className: 'text-lg leading-relaxed' 
-          }, `${formattedCityName} offers an incredible array of attractions, activities, and experiences for every type of traveler. From historic landmarks to modern attractions, cultural sites to natural wonders, this destination has something special for everyone.`)
+          createElement('source', {
+            key: 'avif-source',
+            srcSet: cityData.imageUrl.replace(/fm=webp/g, 'fm=avif'),
+            type: 'image/avif'
+          }),
+          createElement('source', {
+            key: 'webp-source', 
+            srcSet: cityData.imageUrl.includes('fm=webp') ? cityData.imageUrl : `${cityData.imageUrl}&fm=webp`,
+            type: 'image/webp'
+          }),
+          createElement('img', {
+            key: 'hero-img',
+            src: cityData.imageUrl,
+            alt: `Best things to do in ${formattedCityName} - Hero image showing top attractions`,
+            className: 'absolute inset-0 w-full h-full object-cover',
+            loading: 'eager',
+            width: '1400',
+            height: '800'
+          })
         ]),
         
+        // Hero Content Overlay
         createElement('div', { 
-          key: 'attractions',
-          className: 'grid md:grid-cols-2 lg:grid-cols-3 gap-8' 
+          key: 'hero-overlay',
+          className: 'absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent'
         }, [
           createElement('div', { 
-            key: 'attraction-1',
-            className: 'bg-white rounded-lg shadow-md p-6 border' 
+            key: 'hero-container', 
+            className: 'max-w-7xl mx-auto px-4 pb-6 pt-12 sm:px-6 sm:pb-8 sm:pt-16' 
           }, [
-            createElement('h3', { 
-              key: 'attr-title-1',
-              className: 'text-xl font-semibold mb-3' 
-            }, 'Top Attractions'),
-            createElement('p', { 
-              key: 'attr-desc-1',
-              className: 'text-gray-600' 
-            }, `Explore the must-see landmarks and iconic attractions that make ${formattedCityName} unique.`)
-          ]),
-          
-          createElement('div', { 
-            key: 'attraction-2',
-            className: 'bg-white rounded-lg shadow-md p-6 border' 
-          }, [
-            createElement('h3', { 
-              key: 'attr-title-2',
-              className: 'text-xl font-semibold mb-3' 
-            }, 'Local Experiences'),
-            createElement('p', { 
-              key: 'attr-desc-2',
-              className: 'text-gray-600' 
-            }, 'Immerse yourself in local culture with authentic experiences and hidden gems.')
-          ]),
-          
-          createElement('div', { 
-            key: 'attraction-3',
-            className: 'bg-white rounded-lg shadow-md p-6 border' 
-          }, [
-            createElement('h3', { 
-              key: 'attr-title-3',
-              className: 'text-xl font-semibold mb-3' 
-            }, 'Travel Tips'),
-            createElement('p', { 
-              key: 'attr-desc-3',
-              className: 'text-gray-600' 
-            }, `Essential information and insider tips for planning your perfect trip to ${formattedCityName}.`)
+            createElement('div', {
+              key: 'hero-content',
+              className: 'max-w-4xl'
+            }, [
+              createElement('h1', { 
+                key: 'h1-title',
+                className: 'text-2xl leading-tight sm:text-3xl sm:leading-tight md:text-4xl md:leading-tight lg:text-5xl lg:leading-tight xl:text-6xl font-bold mb-3 sm:mb-4 drop-shadow-lg' 
+              }, [
+                createElement('span', { key: 'title-part1', className: 'block sm:inline' }, 'Best Things to Do'),
+                ' ',
+                createElement('span', { key: 'title-part2', className: 'block sm:inline' }, `in ${formattedCityName}`)
+              ]),
+              createElement('p', { 
+                key: 'subtitle',
+                className: 'text-base leading-relaxed sm:text-lg sm:leading-relaxed md:text-xl lg:text-2xl mb-4 sm:mb-6 opacity-90 drop-shadow-md' 
+              }, `Discover amazing experiences and top attractions in ${formattedCityName}`)
+            ])
           ])
         ])
+      ]),
+
+      // Description Section
+      createElement('div', { 
+        key: 'description',
+        className: 'bg-white border-b border-gray-200'
+      }, [
+        createElement('div', { 
+          key: 'desc-container',
+          className: 'container mx-auto px-4 py-4 sm:py-6 lg:py-8' 
+        }, [
+          createElement('p', { 
+            key: 'description-text',
+            className: 'text-sm leading-relaxed sm:text-base sm:leading-relaxed lg:text-lg text-gray-600 max-w-4xl' 
+          }, cityData.description || `Discover the best things to do in ${formattedCityName}. This comprehensive travel guide covers top attractions, hidden gems, and local experiences.`)
+        ])
+      ]),
+
+      // Highlights Section  
+      cityData.highlights && cityData.highlights.length > 0 && createElement('div', { 
+        key: 'highlights',
+        className: 'bg-gray-50 py-8'
+      }, [
+        createElement('div', { 
+          key: 'highlights-container',
+          className: 'container mx-auto px-4'
+        }, [
+          createElement('h2', { 
+            key: 'highlights-title',
+            className: 'text-2xl sm:text-3xl font-bold mb-6 text-center' 
+          }, 'Highlights'),
+          createElement('div', { 
+            key: 'highlights-grid',
+            className: 'grid md:grid-cols-2 lg:grid-cols-3 gap-4'
+          }, cityData.highlights.slice(0, 6).map((highlight, index) =>
+            createElement('div', { 
+              key: `highlight-${index}`,
+              className: 'bg-white rounded-lg p-4 shadow-sm border border-gray-200'
+            }, [
+              createElement('div', { 
+                key: `highlight-content-${index}`,
+                className: 'flex items-center space-x-3'
+              }, [
+                createElement('div', { 
+                  key: `highlight-icon-${index}`,
+                  className: 'w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold text-sm'
+                }, (index + 1).toString()),
+                createElement('span', { 
+                  key: `highlight-text-${index}`,
+                  className: 'text-gray-800 font-medium'
+                }, highlight)
+              ])
+            ])
+          ))
+        ])
+      ]),
+
+      // Attractions Section
+      cityData.attractions && cityData.attractions.length > 0 && createElement('div', { 
+        key: 'attractions',
+        className: 'container mx-auto px-4 py-12'
+      }, [
+        createElement('h2', { 
+          key: 'attractions-title',
+          className: 'text-2xl sm:text-3xl font-bold mb-8 text-center' 
+        }, `Top Attractions in ${formattedCityName}`),
+        createElement('div', { 
+          key: 'attractions-grid',
+          className: 'grid md:grid-cols-2 lg:grid-cols-3 gap-6'
+        }, cityData.attractions.slice(0, 9).map((attraction, index) =>
+          createElement('div', { 
+            key: `attraction-${index}`,
+            className: 'bg-white rounded-lg shadow-md p-6 border border-gray-200'
+          }, [
+            createElement('div', { 
+              key: `attraction-header-${index}`,
+              className: 'flex items-center space-x-3 mb-3'
+            }, [
+              createElement('div', { 
+                key: `attraction-rank-${index}`,
+                className: 'w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-sm'
+              }, (index + 1).toString()),
+              createElement('h3', { 
+                key: `attraction-name-${index}`,
+                className: 'text-lg font-semibold text-gray-900' 
+              }, attraction)
+            ]),
+            createElement('p', { 
+              key: `attraction-desc-${index}`,
+              className: 'text-gray-600 text-sm' 
+            }, `Experience ${attraction}, one of the top attractions in ${formattedCityName}.`)
+          ])
+        ))
       ])
     ]);
   };
@@ -384,30 +519,78 @@ export async function renderComponentToHTML(route) {
       Component = createAdminComponent();
     } else if (route.path.startsWith('/best-things-to-do-in-')) {
       const cityKey = route.path.replace('/best-things-to-do-in-', '');
+      console.log(`🏙️  Loading city component for: ${cityKey}`);
       Component = await loadCityComponent(cityKey);
+      if (Component) {
+        console.log(`✅ Successfully loaded city component for: ${cityKey}`);
+      } else {
+        console.log(`❌ Failed to load city component for: ${cityKey}`);
+      }
     }
     
     if (!Component) {
-      console.warn(`No component found for route: ${route.path}`);
-      return '<div class="container mx-auto px-4 py-12 text-center"><h1 class="text-2xl">Page Not Found</h1></div>';
+      console.warn(`No component found for route: ${route.path}, falling back to home page`);
+      // Fallback to home page instead of error page to prevent broken static pages
+      Component = createHomeComponent();
+    } else {
+      console.log(`✅ Component successfully resolved for route: ${route.path}`);
+      // Debug: Test render a small sample to see what component we actually have
+      if (route.path.startsWith('/best-things-to-do-in-')) {
+        try {
+          const testRender = renderToString(createElement(Component));
+          const isHomeComponent = testRender.includes('class="home-page"');
+          const isCityComponent = testRender.includes('class="city-page"');
+          console.log(`🧪 Component test render: home=${isHomeComponent}, city=${isCityComponent}`);
+          console.log(`🧪 First 200 chars of component: ${testRender.substring(0, 200)}...`);
+        } catch (err) {
+          console.log(`🧪 Component test render failed:`, err.message);
+        }
+      }
     }
     
     // Create app wrapper with providers
-    const App = createElement('div', { id: 'app' }, [
-      createElement(MockQueryProvider, { key: 'query-provider' }, [
-        createElement(MockSEOProvider, { key: 'seo-provider' }, [
-          createElement(MemoryRouter, { 
-            key: 'router', 
-            initialEntries: [route.path] 
-          }, [
-            createElement(Component, { key: 'component' })
+    let App;
+    
+    // For city pages, render directly without router to avoid routing issues
+    if (route.path.startsWith('/best-things-to-do-in-')) {
+      // Test: Render city pages with minimal wrapping to avoid provider interference
+      App = createElement('div', { id: 'app' }, [
+        createElement(Component, { key: 'component' })
+      ]);
+      console.log(`🎯 Rendering city page with minimal wrapping for: ${route.path}`);
+    } else {
+      // For other pages, use router as normal
+      App = createElement('div', { id: 'app' }, [
+        createElement(MockQueryProvider, { key: 'query-provider' }, [
+          createElement(MockSEOProvider, { key: 'seo-provider' }, [
+            createElement(MemoryRouter, { 
+              key: 'router', 
+              initialEntries: [route.path] 
+            }, [
+              createElement(Component, { key: 'component' })
+            ])
           ])
         ])
-      ])
-    ]);
+      ]);
+    }
     
     // Render to HTML string
     const html = renderToString(App);
+    
+    // Debug: Check what's being rendered for city pages
+    if (route.path.startsWith('/best-things-to-do-in-')) {
+      const hasHomeContent = html.includes('class="home-page"');
+      const hasCityContent = html.includes('class="city-page"');
+      const hasDiscoverText = html.includes('Discover Your Next Adventure');
+      const hasCityTitle = html.includes('Best Things to Do in');
+      console.log(`🔍 Debug render result for ${route.path}:`);
+      console.log(`   - Contains home-page class: ${hasHomeContent}`);
+      console.log(`   - Contains city-page class: ${hasCityContent}`);
+      console.log(`   - Contains home hero text: ${hasDiscoverText}`);
+      console.log(`   - Contains city title text: ${hasCityTitle}`);
+      console.log(`   - HTML length: ${html.length} characters`);
+    }
+    
     return html;
     
   } catch (error) {

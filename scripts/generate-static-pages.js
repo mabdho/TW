@@ -195,27 +195,82 @@ function generateSEOData(route, cityName, cityKey) {
  */
 function generateStructuredData(route, cityName, cityKey, seoData) {
   if (cityName && cityKey) {
-    // City page structured data
+    // Extract attraction data from city file if available
+    let attractions = [];
+    try {
+      const cityPath = path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityName.replace(/\s+/g, '')}.tsx`);
+      if (fs.existsSync(cityPath)) {
+        const cityContent = fs.readFileSync(cityPath, 'utf-8');
+        const attractionMatches = cityContent.match(/name:\s*"([^"]+)"/g);
+        if (attractionMatches) {
+          attractions = attractionMatches.map((match, index) => {
+            const nameMatch = match.match(/name:\s*"([^"]+)"/);
+            return {
+              "@type": "TouristAttraction",
+              "name": nameMatch ? nameMatch[1] : `Attraction ${index + 1}`,
+              "description": `Experience ${nameMatch ? nameMatch[1] : `attraction ${index + 1}`}, one of the top things to do in ${cityName}.`,
+              "location": {
+                "@type": "Place",
+                "name": cityName,
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": cityName
+                }
+              }
+            };
+          }).slice(0, 10); // Limit to top 10 attractions
+        }
+      }
+    } catch (error) {
+      console.warn('Failed to extract attractions for structured data:', error.message);
+    }
+
+    // Enhanced city page structured data with attractions
     return {
       "@context": "https://schema.org",
       "@type": "TravelGuide",
-      "name": `${cityName} Travel Guide`,
+      "name": `Best Things to Do in ${cityName} - Complete Travel Guide`,
       "description": seoData.description,
       "url": `https://travelwanders.com${route.path}`,
       "about": {
         "@type": "City",
-        "name": cityName
+        "name": cityName,
+        "description": `Travel destination guide for ${cityName}`
       },
       "publisher": {
         "@type": "Organization",
         "name": "TravelWanders",
-        "url": "https://travelwanders.com"
+        "url": "https://travelwanders.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://travelwanders.com/logo.png"
+        }
       },
-      "mainEntity": {
+      "mainEntity": attractions.length > 0 ? {
+        "@type": "ItemList",
+        "name": `Top Attractions in ${cityName}`,
+        "description": `Complete list of the best things to do in ${cityName}`,
+        "numberOfItems": attractions.length,
+        "itemListElement": attractions.map((attraction, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "item": attraction
+        }))
+      } : {
         "@type": "City",
         "name": cityName,
         "description": `Travel guide for ${cityName}`
-      }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": `https://travelwanders.com${route.path}`,
+        "name": seoData.title,
+        "description": seoData.description,
+        "url": `https://travelwanders.com${route.path}`
+      },
+      "dateModified": new Date().toISOString(),
+      "inLanguage": "en-US",
+      "keywords": seoData.keywords
     };
   }
   
