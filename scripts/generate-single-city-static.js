@@ -31,7 +31,7 @@ async function generateCityStaticPage(cityKey, cityName) {
   // Read base HTML template
   const baseHTML = fs.readFileSync(BASE_HTML_PATH, 'utf-8');
   
-  // Generate route info
+  // Generate route info - cityKey should already be the URL-friendly format
   const route = {
     path: `/best-things-to-do-in-${cityKey}`,
     name: `city-${cityKey}`
