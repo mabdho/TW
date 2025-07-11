@@ -4,16 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
-// Get the last 8 cities from the cities array (most recently added)
+// Featured cities - will be populated with new production cities
 const featuredCities = [
-  { "name": "Addu", "country": "Maldives", "path": "/best-things-to-do-in-addu", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1701602631596-2479190eb2f2?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGFkZHUlMjBjaXR5fGVufDB8fDB8fHww" },
-  { "name": "Paris", "country": "France", "path": "/best-things-to-do-in-paris", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1550340499-a6c60fc8287c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,
-  { "name": "Florence", "country": "Italy", "path": "/best-things-to-do-in-florence", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1476362174823-3a23f4aa6d76?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,
-  { "name": "Prague", "country": "Czech Republic", "path": "/best-things-to-do-in-prague", "continent": "Europe", "imageUrl": "" },,,,
-  { "name": "Vienna", "country": "Austria", "path": "/best-things-to-do-in-vienna", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1590253198910-1683b35ba5bf?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,
-  { "name": "Amalfi", "country": "Italy", "path": "/best-things-to-do-in-amalfi", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1694475391873-0c6b9a182a4d?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,,
-  { "name": "Venice", "country": "Italy", "path": "/best-things-to-do-in-venice", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1661963047742-dabc5a735357?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,,,
-  { "name": "Rome", "country": "Italy", "path": "/best-things-to-do-in-rome", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1661964123160-8d049fa07f0c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,,,
+  // Ready for fresh production content
 ];
 
 export const FeaturedCities = () => {
