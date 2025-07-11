@@ -1,7 +1,8 @@
-import type { Express } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { loginSchema } from "@shared/schema";
 import fs from 'fs/promises';
 import path from 'path';
 import { 
@@ -20,6 +21,29 @@ import {
 
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
+
+// Extend Express Request type to include session
+declare module 'express-session' {
+  interface SessionData {
+    userId?: number;
+    isAdmin?: boolean;
+  }
+}
+
+// Authentication middleware
+const requireAuth = (req: Request, res: Response, next: NextFunction) => {
+  if (!req.session.userId) {
+    return res.status(401).json({ error: 'Authentication required' });
+  }
+  next();
+};
+
+const requireAdmin = (req: Request, res: Response, next: NextFunction) => {
+  if (!req.session.userId || !req.session.isAdmin) {
+    return res.status(403).json({ error: 'Admin access required' });
+  }
+  next();
+};
 
 // Function to clean content data and remove markdown formatting
 function cleanContentData(data: any): any {
@@ -74,8 +98,61 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Admin route to generate city pages
-  app.post('/api/admin/generate-city-page', async (req, res) => {
+  // Authentication routes
+  app.post('/api/auth/login', async (req, res) => {
+    try {
+      const { username, password } = loginSchema.parse(req.body);
+      
+      const user = await storage.getUserByUsername(username);
+      if (!user || !user.isAdmin) {
+        return res.status(401).json({ error: 'Invalid credentials' });
+      }
+      
+      const isValidPassword = await storage.verifyPassword(password, user.password);
+      if (!isValidPassword) {
+        return res.status(401).json({ error: 'Invalid credentials' });
+      }
+      
+      // Set session
+      req.session.userId = user.id;
+      req.session.isAdmin = user.isAdmin;
+      
+      res.json({ 
+        message: 'Login successful',
+        user: { 
+          id: user.id, 
+          username: user.username, 
+          isAdmin: user.isAdmin 
+        }
+      });
+    } catch (error) {
+      console.error('Login error:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
+  app.post('/api/auth/logout', (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).json({ error: 'Could not log out' });
+      }
+      res.json({ message: 'Logout successful' });
+    });
+  });
+
+  app.get('/api/auth/user', (req, res) => {
+    if (req.session.userId) {
+      res.json({ 
+        id: req.session.userId, 
+        isAdmin: req.session.isAdmin 
+      });
+    } else {
+      res.status(401).json({ error: 'Not authenticated' });
+    }
+  });
+
+  // Admin route to generate city pages (now protected)
+  app.post('/api/admin/generate-city-page', requireAdmin, async (req, res) => {
     try {
       const { city, country, continent, heroImageUrl, generationMode, manualJson } = req.body;
 
@@ -600,8 +677,8 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
     }
   });
 
-  // Blog generation route
-  app.post('/api/admin/generate-blog', async (req, res) => {
+  // Blog generation route (protected)
+  app.post('/api/admin/generate-blog', requireAdmin, async (req, res) => {
     try {
       const { title, category, imageUrl, author, generationMode, manualContent } = req.body;
 
@@ -736,8 +813,8 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
     }
   });
 
-  // Blog deletion route
-  app.delete('/api/admin/delete-blog/:blogId', async (req, res) => {
+  // Blog deletion route (protected)
+  app.delete('/api/admin/delete-blog/:blogId', requireAdmin, async (req, res) => {
     try {
       const { blogId } = req.params;
       
@@ -895,7 +972,7 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
     }
   });
 
-  // Blog API routes
+  // Blog API routes (public)
   app.get('/api/blogs', async (req, res) => {
     try {
       const blogsDir = path.join(process.cwd(), 'client/src/blogs');

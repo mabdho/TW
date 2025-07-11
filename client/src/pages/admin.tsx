@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -11,7 +12,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
-import { Loader2, FileText, BookOpen, Trash2, AlertTriangle } from 'lucide-react';
+import { Loader2, FileText, BookOpen, Trash2, AlertTriangle, LogOut } from 'lucide-react';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { useToast } from '@/hooks/use-toast';
 import { Toaster } from '@/components/ui/toaster';
@@ -20,6 +21,7 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { RichTextEditor } from '@/components/ui/rich-text-editor';
 import type { Blog } from '@shared/schema';
+import { useAuth, useLogout } from '@/hooks/useAuth';
 
 const cityFormSchema = z.object({
   city: z.string().min(1, 'City name is required'),
@@ -76,6 +78,38 @@ type BlogFormData = z.infer<typeof blogFormSchema>;
 export default function AdminPage() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const [, setLocation] = useLocation();
+  const { user, isLoading, isAuthenticated, isAdmin } = useAuth();
+  const logoutMutation = useLogout();
+
+  // Redirect to login if not authenticated
+  if (!isLoading && !isAuthenticated) {
+    setLocation('/login');
+    return null;
+  }
+
+  // Redirect to login if not admin
+  if (!isLoading && isAuthenticated && !isAdmin) {
+    toast({
+      title: "Access denied",
+      description: "You don't have admin privileges",
+      variant: "destructive"
+    });
+    setLocation('/login');
+    return null;
+  }
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="mx-auto h-8 w-8 animate-spin text-green-600" />
+          <p className="mt-2 text-gray-600">Loading admin panel...</p>
+        </div>
+      </div>
+    );
+  }
 
   // City form
   const cityForm = useForm<CityFormData>({
@@ -226,9 +260,23 @@ export default function AdminPage() {
       <Navigation />
       
       <div className="container mx-auto px-4 py-8 max-w-6xl">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
-          <p className="text-gray-600">Manage your travel website content</p>
+        <div className="mb-8 flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
+            <p className="text-gray-600">Manage your travel website content</p>
+          </div>
+          <Button
+            variant="outline"
+            onClick={() => {
+              logoutMutation.mutate();
+              setLocation('/');
+            }}
+            disabled={logoutMutation.isPending}
+            className="flex items-center gap-2"
+          >
+            <LogOut className="h-4 w-4" />
+            {logoutMutation.isPending ? 'Logging out...' : 'Logout'}
+          </Button>
         </div>
 
         <Tabs defaultValue="cities" className="space-y-6">

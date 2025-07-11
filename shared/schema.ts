@@ -1,11 +1,18 @@
 import { z } from "zod";
+import { pgTable, text, varchar, timestamp, serial, boolean } from "drizzle-orm/pg-core";
 
-// Firestore data models
-export interface User {
-  id: string;
-  username: string;
-  password: string;
-}
+// Database schema
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  username: varchar("username", { length: 50 }).unique().notNull(),
+  password: text("password").notNull(),
+  isAdmin: boolean("is_admin").default(false).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+// Types
+export type User = typeof users.$inferSelect;
+export type NewUser = typeof users.$inferInsert;
 
 // File-based blog interface for static blog files
 export interface Blog {
@@ -27,6 +34,11 @@ export const insertUserSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
+export const loginSchema = z.object({
+  username: z.string().min(1, "Username is required"),
+  password: z.string().min(1, "Password is required"),
+});
+
 export const insertBlogSchema = z.object({
   title: z.string().min(1, "Title is required"),
   excerpt: z.string().min(1, "Excerpt is required"),
@@ -38,5 +50,4 @@ export const insertBlogSchema = z.object({
   author: z.string().optional(),
 });
 
-export type InsertUser = z.infer<typeof insertUserSchema>;
 export type InsertBlog = z.infer<typeof insertBlogSchema>;

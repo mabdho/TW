@@ -1,38 +1,46 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { db } from "./firebase-config";
-
-// Type the db properly to avoid TypeScript errors
-type MockDB = {
-  collection: (name: string) => any;
-};
-
-const typedDb = db as any;
+import { type User, type NewUser, users } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
+import bcrypt from "bcryptjs";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
+  getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  createUser(user: NewUser): Promise<User>;
+  verifyPassword(plainPassword: string, hashedPassword: string): Promise<boolean>;
+  hashPassword(password: string): Promise<string>;
 }
 
-export class FirestoreStorage implements IStorage {
-  async getUser(id: string): Promise<User | undefined> {
-    const userDoc = await typedDb.collection('users').doc(id).get();
-    if (!userDoc.exists) return undefined;
-    return { id: userDoc.id, ...userDoc.data() } as User;
+export class DatabaseStorage implements IStorage {
+  async getUser(id: number): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    const usersQuery = await typedDb.collection('users').where('username', '==', username).limit(1).get();
-    if (usersQuery.empty) return undefined;
-    const userDoc = usersQuery.docs[0];
-    return { id: userDoc.id, ...userDoc.data() } as User;
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
   }
 
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const userRef = await typedDb.collection('users').add(insertUser);
-    const userDoc = await userRef.get();
-    return { id: userDoc.id, ...userDoc.data() } as User;
+  async createUser(insertUser: NewUser): Promise<User> {
+    const hashedPassword = await this.hashPassword(insertUser.password);
+    const [user] = await db
+      .insert(users)
+      .values({
+        ...insertUser,
+        password: hashedPassword,
+      })
+      .returning();
+    return user;
+  }
+
+  async verifyPassword(plainPassword: string, hashedPassword: string): Promise<boolean> {
+    return await bcrypt.compare(plainPassword, hashedPassword);
+  }
+
+  async hashPassword(password: string): Promise<string> {
+    return await bcrypt.hash(password, 10);
   }
 }
 
-export const storage = new FirestoreStorage();
+export const storage = new DatabaseStorage();

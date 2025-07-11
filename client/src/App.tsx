@@ -7,6 +7,7 @@ import { CityRoutes } from './components/DynamicCityRoute';
 const Home = lazy(() => import('./pages/home'));
 const NotFound = lazy(() => import('./pages/not-found'));
 const AdminPage = lazy(() => import('./pages/admin'));
+const LoginPage = lazy(() => import('./pages/login'));
 const BlogsPage = lazy(() => import('./pages/blogs'));
 const BlogDetailPage = lazy(() => import('./pages/blog-detail'));
 const DestinationsPage = lazy(() => import('./pages/destinations'));
@@ -29,7 +30,7 @@ const getCityRoutes = () => {
 };
 
 const validRoutes = [
-  "/", "/blogs", "/destinations", "/admin", "/privacy-policy", "/terms-of-service", "/cookie-policy",
+  "/", "/blogs", "/destinations", "/admin", "/login", "/privacy-policy", "/terms-of-service", "/cookie-policy",
   ...getCityRoutes()
 ];
 
@@ -67,6 +68,7 @@ function App() {
         <Route path="/blog/:id" component={BlogDetailPage} />
         <Route path="/destinations" component={DestinationsPage} />
         <Route path="/admin" component={AdminPage} />
+        <Route path="/login" component={LoginPage} />
         <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route path="/terms-of-service" component={TermsOfService} />
         <Route path="/cookie-policy" component={CookiePolicy} />
