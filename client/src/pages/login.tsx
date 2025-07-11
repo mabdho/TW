@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -29,12 +29,16 @@ export default function LoginPage() {
     }
   });
 
+  const queryClient = useQueryClient();
+  
   const loginMutation = useMutation({
     mutationFn: async (data: LoginFormData) => {
       const response = await apiRequest('POST', '/api/auth/login', data);
       return response.json();
     },
     onSuccess: () => {
+      // Invalidate auth query to trigger refetch
+      queryClient.invalidateQueries({ queryKey: ['auth-user'] });
       toast({
         title: "Login successful",
         description: "Welcome to the admin panel"
