@@ -189,6 +189,8 @@ const cityMap = {
   'florence': createCityImport('Florence', '../pages/cities/Florence'),
 
   'paris': createCityImport('Paris', '../pages/cities/Paris'),
+
+  'addu': createCityImport('Addu', '../pages/cities/Addu'),
 };
 
 interface DynamicCityRouteProps {
