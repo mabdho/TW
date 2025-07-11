@@ -62,7 +62,7 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // Add SSR middleware for better SEO
+  // Add SSR middleware for search engines only
   app.get('*', (req, res, next) => {
     // Check if this is a page route that should use SSR
     const isPageRoute = req.path === '/' || 
@@ -72,7 +72,12 @@ app.use((req, res, next) => {
                        req.path === '/admin' ||
                        req.path === '/login';
     
-    if (isPageRoute && req.accepts('html')) {
+    // Only use SSR for search engine crawlers
+    const userAgent = req.get('User-Agent') || '';
+    const isSearchEngine = /bot|crawler|spider|crawling|bingbot|googlebot|facebookexternalhit|twitterbot|linkedinbot|slackbot|discordbot|whatsapp|telegram/i.test(userAgent);
+    
+    if (isPageRoute && req.accepts('html') && isSearchEngine) {
+      log(`SSR for search engine: ${userAgent.slice(0, 50)}...`);
       return handleSSRRequest(req, res);
     }
     
