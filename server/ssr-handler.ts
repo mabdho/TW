@@ -43,13 +43,94 @@ const extractCityData = (cityName: string) => {
 // SSR-specific components
 const createHomeComponent = () => {
   return createElement('div', { className: 'min-h-screen bg-background' },
-    createElement('div', { className: 'container mx-auto px-4 py-12' },
-      createElement('h1', { className: 'text-4xl font-bold mb-6' }, 'TravelWanders - Discover Amazing Destinations'),
-      createElement('p', { className: 'text-xl text-gray-600 mb-8' }, 'Explore our curated collection of the world\'s most incredible travel destinations, from bustling cities to hidden gems waiting to be discovered.'),
-      createElement('div', { className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8' },
-        createElement('div', { className: 'bg-white rounded-lg shadow-md p-6' },
-          createElement('h2', { className: 'text-2xl font-bold mb-4' }, 'Featured Destinations'),
-          createElement('p', { className: 'text-gray-600' }, 'Discover our top-rated travel destinations with comprehensive guides and insider tips.')
+    // Hero Section
+    createElement('section', { className: 'relative bg-gradient-to-br from-blue-900 to-purple-900 text-white py-24' },
+      createElement('div', { className: 'container mx-auto px-4 text-center' },
+        createElement('h1', { className: 'text-5xl font-bold mb-6' }, 'Discover Your Next Adventure'),
+        createElement('p', { className: 'text-xl mb-8 max-w-2xl mx-auto' }, 'Explore curated travel guides, hidden gems, and unforgettable experiences around the world'),
+        createElement('div', { className: 'bg-white rounded-lg p-4 max-w-md mx-auto' },
+          createElement('div', { className: 'flex items-center space-x-2' },
+            createElement('input', { 
+              type: 'text', 
+              placeholder: 'Search destinations...', 
+              className: 'flex-1 px-4 py-2 border border-gray-300 rounded-lg text-black'
+            }),
+            createElement('button', { className: 'bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700' }, 'Search')
+          )
+        )
+      )
+    ),
+    // Featured Destinations Section
+    createElement('section', { className: 'py-16 bg-gray-50' },
+      createElement('div', { className: 'container mx-auto px-4' },
+        createElement('div', { className: 'text-center mb-12' },
+          createElement('h2', { className: 'text-4xl font-bold mb-4' }, 'Featured Destinations'),
+          createElement('p', { className: 'text-xl text-gray-600' }, 'Discover our most popular travel destinations')
+        ),
+        createElement('div', { className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8' },
+          createElement('div', { className: 'bg-white rounded-lg shadow-md overflow-hidden' },
+            createElement('div', { className: 'h-48 bg-gradient-to-r from-orange-400 to-red-500' }),
+            createElement('div', { className: 'p-6' },
+              createElement('h3', { className: 'text-xl font-bold mb-2' }, 'Porto, Portugal'),
+              createElement('p', { className: 'text-gray-600 mb-4' }, 'Discover historic landmarks and port wine cellars'),
+              createElement('a', { href: '/best-things-to-do-in-porto', className: 'text-blue-600 hover:text-blue-800' }, 'Explore Porto →')
+            )
+          ),
+          createElement('div', { className: 'bg-white rounded-lg shadow-md overflow-hidden' },
+            createElement('div', { className: 'h-48 bg-gradient-to-r from-green-400 to-blue-500' }),
+            createElement('div', { className: 'p-6' },
+              createElement('h3', { className: 'text-xl font-bold mb-2' }, 'Bologna, Italy'),
+              createElement('p', { className: 'text-gray-600 mb-4' }, 'Explore medieval towers and culinary delights'),
+              createElement('a', { href: '/best-things-to-do-in-bologna', className: 'text-blue-600 hover:text-blue-800' }, 'Explore Bologna →')
+            )
+          ),
+          createElement('div', { className: 'bg-white rounded-lg shadow-md overflow-hidden' },
+            createElement('div', { className: 'h-48 bg-gradient-to-r from-purple-400 to-pink-500' }),
+            createElement('div', { className: 'p-6' },
+              createElement('h3', { className: 'text-xl font-bold mb-2' }, 'More Destinations'),
+              createElement('p', { className: 'text-gray-600 mb-4' }, 'Discover amazing destinations worldwide'),
+              createElement('a', { href: '/destinations', className: 'text-blue-600 hover:text-blue-800' }, 'View All →')
+            )
+          )
+        )
+      )
+    ),
+    // Travel Categories Section
+    createElement('section', { className: 'py-16 bg-white' },
+      createElement('div', { className: 'container mx-auto px-4' },
+        createElement('div', { className: 'text-center mb-12' },
+          createElement('h2', { className: 'text-4xl font-bold mb-4' }, 'Plan Your Perfect Trip'),
+          createElement('p', { className: 'text-xl text-gray-600' }, 'From city breaks to cultural experiences')
+        ),
+        createElement('div', { className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8' },
+          createElement('div', { className: 'text-center' },
+            createElement('div', { className: 'w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4' },
+              createElement('span', { className: 'text-2xl' }, '🏛️')
+            ),
+            createElement('h3', { className: 'text-xl font-bold mb-2' }, 'Cultural Sites'),
+            createElement('p', { className: 'text-gray-600' }, 'Historic landmarks and museums')
+          ),
+          createElement('div', { className: 'text-center' },
+            createElement('div', { className: 'w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4' },
+              createElement('span', { className: 'text-2xl' }, '🍽️')
+            ),
+            createElement('h3', { className: 'text-xl font-bold mb-2' }, 'Food & Drink'),
+            createElement('p', { className: 'text-gray-600' }, 'Local cuisine and dining experiences')
+          ),
+          createElement('div', { className: 'text-center' },
+            createElement('div', { className: 'w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4' },
+              createElement('span', { className: 'text-2xl' }, '🎨')
+            ),
+            createElement('h3', { className: 'text-xl font-bold mb-2' }, 'Arts & Culture'),
+            createElement('p', { className: 'text-gray-600' }, 'Galleries, theaters, and cultural events')
+          ),
+          createElement('div', { className: 'text-center' },
+            createElement('div', { className: 'w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4' },
+              createElement('span', { className: 'text-2xl' }, '🏞️')
+            ),
+            createElement('h3', { className: 'text-xl font-bold mb-2' }, 'Nature & Views'),
+            createElement('p', { className: 'text-gray-600' }, 'Scenic spots and outdoor activities')
+          )
         )
       )
     )
@@ -169,32 +250,81 @@ export async function handleSSRRequest(req: Request, res: Response) {
     body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
     .min-h-screen { min-height: 100vh; }
     .bg-background { background-color: #ffffff; }
+    .bg-white { background-color: #ffffff; }
+    .bg-gray-50 { background-color: #f9fafb; }
+    .bg-blue-100 { background-color: #dbeafe; }
+    .bg-green-100 { background-color: #dcfce7; }
+    .bg-purple-100 { background-color: #f3e8ff; }
+    .bg-orange-100 { background-color: #fed7aa; }
+    .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
+    .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+    .from-blue-900 { --tw-gradient-from: #1e3a8a; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(30, 58, 138, 0)); }
+    .to-purple-900 { --tw-gradient-to: #581c87; }
+    .from-orange-400 { --tw-gradient-from: #fb923c; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(251, 146, 60, 0)); }
+    .to-red-500 { --tw-gradient-to: #ef4444; }
+    .from-green-400 { --tw-gradient-from: #4ade80; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(74, 222, 128, 0)); }
+    .to-blue-500 { --tw-gradient-to: #3b82f6; }
+    .from-purple-400 { --tw-gradient-from: #c084fc; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(192, 132, 252, 0)); }
+    .to-pink-500 { --tw-gradient-to: #ec4899; }
+    .text-white { color: #ffffff; }
+    .text-black { color: #000000; }
+    .text-gray-600 { color: #6b7280; }
+    .text-blue-600 { color: #2563eb; }
+    .bg-blue-600 { background-color: #2563eb; }
+    .hover\\:bg-blue-700:hover { background-color: #1d4ed8; }
+    .hover\\:text-blue-800:hover { color: #1e40af; }
     .container { max-width: 1200px; margin: 0 auto; }
     .mx-auto { margin-left: auto; margin-right: auto; }
     .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
     .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+    .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+    .py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+    .p-4 { padding: 1rem; }
+    .p-6 { padding: 1.5rem; }
+    .text-5xl { font-size: 3rem; line-height: 1; }
     .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
     .text-2xl { font-size: 1.5rem; line-height: 2rem; }
     .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
     .font-bold { font-weight: 700; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-4 { margin-bottom: 1rem; }
     .mb-6 { margin-bottom: 1.5rem; }
     .mb-8 { margin-bottom: 2rem; }
-    .mb-4 { margin-bottom: 1rem; }
-    .text-gray-600 { color: #6b7280; }
-    .bg-white { background-color: #ffffff; }
+    .mb-12 { margin-bottom: 3rem; }
+    .max-w-2xl { max-width: 42rem; }
+    .max-w-md { max-width: 28rem; }
+    .text-center { text-align: center; }
+    .relative { position: relative; }
+    .flex { display: flex; }
+    .flex-1 { flex: 1 1 0%; }
+    .items-center { align-items: center; }
+    .space-x-2 > * + * { margin-left: 0.5rem; }
     .rounded-lg { border-radius: 0.5rem; }
+    .rounded-full { border-radius: 9999px; }
+    .border { border-width: 1px; }
+    .border-gray-300 { border-color: #d1d5db; }
     .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
-    .p-6 { padding: 1.5rem; }
+    .overflow-hidden { overflow: hidden; }
     .grid { display: grid; }
     .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
     .gap-8 { gap: 2rem; }
+    .h-48 { height: 12rem; }
+    .h-16 { height: 4rem; }
+    .w-16 { width: 4rem; }
     ul { list-style: none; padding-left: 0; }
     .space-y-2 > * + * { margin-top: 0.5rem; }
+    input { outline: none; }
+    input:focus { box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); }
+    button { cursor: pointer; transition: background-color 0.2s; }
+    a { text-decoration: none; transition: color 0.2s; }
     @media (min-width: 768px) {
       .md\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (min-width: 1024px) {
       .lg\\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .lg\\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     }
   </style>
 </head>
