@@ -350,7 +350,7 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       const dynamicRoutePath = path.join(process.cwd(), 'client', 'src', 'components', 'DynamicCityRoute.tsx');
       const dynamicContent = await fs.readFile(dynamicRoutePath, 'utf-8');
       
-      const routePath = `best-things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}`;
+      const routePath = city.toLowerCase().replace(/\s+/g, '-');
       const cityMapping = `  '${routePath}': createCityImport('${cityFileName}', '../pages/cities/${cityFileName}'),`;
       
       if (!dynamicContent.includes(`'${routePath}':`)) {

@@ -173,6 +173,8 @@ const cityMap = {
   'trivandrum': createCityImport('Trivandrum', '../pages/cities/Trivandrum'),
 
   'zurich': createCityImport('Zurich', '../pages/cities/Zurich'),
+
+  'milan': createCityImport('Milan', '../pages/cities/Milan'),
 };
 
 interface DynamicCityRouteProps {

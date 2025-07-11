@@ -170,7 +170,8 @@ const cities = [
   { "name": "Yogyakarta", "country": "Indonesia", "path": "/best-things-to-do-in-yogyakarta", "continent": "Asia" },
   { "name": "Zagreb", "country": "Croatia", "path": "/best-things-to-do-in-zagreb", "continent": "Europe" },
   { "name": "Zaragoza", "country": "Spain", "path": "/best-things-to-do-in-zaragoza", "continent": "Europe" },
-  { "name": "Zurich", "country": "Switzerland", "path": "/zurich", "continent": "Europe" }
+  { "name": "Zurich", "country": "Switzerland", "path": "/zurich", "continent": "Europe" },
+  { "name": "Milan", "country": "Italy", "path": "/best-things-to-do-in-milan", "continent": "Europe" }
 ];
 
 const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America", "South America"];

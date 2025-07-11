@@ -18,6 +18,7 @@ Preferred communication style: Simple, everyday language.
 - ✅ **HOMEPAGE DISPLAY**: Hero images now display on city pages, homepage Featured Cities, and destinations page
 - ✅ **FUTURE-PROOF**: All future city generations will support hero image URLs for comprehensive visual integration
 - ✅ **SEAMLESS WORKFLOW**: Admin can now specify hero image when creating city pages for immediate visual impact
+- ✅ **ROUTING FIX**: Fixed double URL path issue in city routing system - cities now load correctly at `/best-things-to-do-in-[city]`
 
 ### URL Format Fix for New Cities - COMPLETED ✅ (January 11, 2025)
 - ✅ **SEO-FRIENDLY URL GENERATION**: Fixed newly generated cities to use proper `/best-things-to-do-in-[city]` URL format
