@@ -211,19 +211,25 @@ Return only the JSON object with no additional text or formatting.`;
       console.log('AI Response Length:', generatedText.length);
       console.log('AI Response Preview:', generatedText.substring(0, 500));
 
-      // Fix known bad formatting from Gemini
-      const cleaned = generatedText
+      // Fix known bad formatting from Gemini - minimal cleaning approach
+      let cleaned = generatedText
         .replace(/```json/g, '')
         .replace(/```/g, '')
-        .replace(/[\u0000-\u001F\u007F]/g, '') // Remove control characters
+        .replace(/[\u0000-\u0008\u000B-\u000C\u000E-\u001F\u007F]/g, '') // Remove control chars but keep \n and \r
         .replace(/"/g, '"') // Replace smart quotes with regular quotes
         .replace(/"/g, '"') // Replace smart quotes with regular quotes
-        .replace(/'/g, "'") // Replace smart quotes with regular quotes
+        .replace(/'/g, "'") // Replace smart quotes with regular quotes  
         .replace(/'/g, "'") // Replace smart quotes with regular quotes
         .replace(/…/g, '...') // Replace ellipsis character
-        .replace(/\*([^*]+)\*/g, '$1') // Remove markdown italics
-        .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove markdown bold
         .trim();
+
+      // Try to find and extract just the JSON object
+      const jsonStart = cleaned.indexOf('{');
+      const jsonEnd = cleaned.lastIndexOf('}');
+      
+      if (jsonStart !== -1 && jsonEnd !== -1 && jsonEnd > jsonStart) {
+        cleaned = cleaned.substring(jsonStart, jsonEnd + 1);
+      }
 
       // Parse the JSON response with fallback logging
       try {
