@@ -2,7 +2,6 @@ import { Route, Router } from 'wouter';
 import { useLocation } from 'wouter';
 import { lazy, Suspense } from 'react';
 import { CityRoutes } from './components/DynamicCityRoute';
-import { FloatingAdminButton } from './components/FloatingAdminButton';
 
 // Lazy load major page components for code splitting
 const Home = lazy(() => import('./pages/home'));
@@ -79,9 +78,6 @@ function App() {
         
         <ConditionalNotFound />
       </Suspense>
-      
-      {/* Floating Admin Button - appears on all pages */}
-      <FloatingAdminButton />
     </Router>
   );
 }

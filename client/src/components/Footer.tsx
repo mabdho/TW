@@ -151,6 +151,9 @@ export const Footer = () => {
               <a href="/cookie-policy" className="text-muted-foreground hover:text-primary transition-colors">
                 Cookie Policy
               </a>
+              <a href="/admin" className="text-muted-foreground hover:text-primary transition-colors">
+                🔒
+              </a>
             </div>
           </div>
         </div>
