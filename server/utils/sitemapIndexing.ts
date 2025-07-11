@@ -15,17 +15,17 @@ const SEARCH_ENGINE_ENDPOINTS: SearchEngineEndpoint[] = [
   {
     name: 'Google',
     url: 'https://www.google.com/ping?sitemap=',
-    enabled: true
+    enabled: false // Deprecated in 2023 - use Google Search Console instead
   },
   {
     name: 'Bing',
     url: 'https://www.bing.com/ping?sitemap=',
-    enabled: true
+    enabled: false // Discontinued in 2022 - use Bing Webmaster Tools instead
   },
   {
     name: 'Yandex',
     url: 'https://webmaster.yandex.com/ping?sitemap=',
-    enabled: true
+    enabled: true // Still supported
   },
   {
     name: 'Baidu',
@@ -36,6 +36,11 @@ const SEARCH_ENGINE_ENDPOINTS: SearchEngineEndpoint[] = [
 
 /**
  * Submit sitemap to search engines
+ * 
+ * Note: Google and Bing have deprecated their ping endpoints:
+ * - Google: Use Google Search Console for manual sitemap submission
+ * - Bing: Use Bing Webmaster Tools for manual sitemap submission
+ * - Yandex: Still supports automated ping submissions
  */
 export async function submitSitemapToSearchEngines(sitemapUrl: string): Promise<{
   success: boolean;
@@ -184,6 +189,7 @@ export async function getSitemapIndexingStatus(req: Request, res: Response): Pro
  */
 export function initializeSitemapIndexing(): void {
   console.log('🚀 Initializing sitemap indexing automation...');
+  console.log('📝 Note: Google and Bing ping endpoints deprecated - use their webmaster tools for manual submission');
   
   // Schedule automatic submissions
   scheduleAutomaticSitemapSubmission(24); // Every 24 hours
@@ -192,14 +198,14 @@ export function initializeSitemapIndexing(): void {
   setTimeout(async () => {
     try {
       const sitemapUrl = 'https://travelwanders.com/sitemap.xml';
-      console.log('🎯 Initial sitemap submission on startup...');
+      console.log('🎯 Initial sitemap submission on startup (Yandex only)...');
       
       const result = await submitSitemapToSearchEngines(sitemapUrl);
       
       if (result.success) {
         console.log('✅ Initial sitemap submission completed successfully');
       } else {
-        console.log('⚠️ Initial sitemap submission completed with some failures');
+        console.log('⚠️ Initial sitemap submission completed - only active engines processed');
       }
     } catch (error) {
       console.error('❌ Error during initial sitemap submission:', error);
