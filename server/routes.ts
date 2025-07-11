@@ -25,7 +25,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Admin route to generate city pages
   app.post('/api/admin/generate-city-page', async (req, res) => {
     try {
-      const { city, country, continent } = req.body;
+      const { city, country, continent, heroImageUrl } = req.body;
 
       if (!city || !country) {
         return res.status(400).json({ error: 'City and country are required' });
@@ -335,7 +335,7 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       const componentCode = generateReactComponent(
         cityFileName,
         contentData,
-        '', // heroImageUrl - empty for simplified form
+        heroImageUrl || '', // Use provided hero image URL
         [], // galleryImages - empty for simplified form
         country
       );
@@ -428,7 +428,7 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
         const featuredCitiesMatch = featuredCitiesContent.match(/const featuredCities = \[([\s\S]*?)\];/);
         if (featuredCitiesMatch) {
           const currentFeaturedCities = featuredCitiesMatch[1];
-          const newCityEntry = `  { "name": "${city}", "country": "${country}", "path": "/best-things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}", "continent": "${continent}", "imageUrl": "" }`;
+          const newCityEntry = `  { "name": "${city}", "country": "${country}", "path": "/best-things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}", "continent": "${continent}", "imageUrl": "${heroImageUrl || ''}" }`;
           
           // Add new city to the beginning and keep only 8 cities
           const lines = currentFeaturedCities.split('\n').filter(line => line.trim().startsWith('{ "name"'));

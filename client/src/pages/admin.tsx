@@ -23,7 +23,10 @@ import type { Blog } from '@shared/schema';
 const cityFormSchema = z.object({
   city: z.string().min(1, 'City name is required'),
   country: z.string().min(1, 'Country is required'),
-  continent: z.string().min(1, 'Continent is required')
+  continent: z.string().min(1, 'Continent is required'),
+  heroImageUrl: z.string().refine((val) => val === '' || z.string().url().safeParse(val).success, {
+    message: 'Please enter a valid image URL or leave empty'
+  })
 });
 
 const blogFormSchema = z.object({
@@ -61,7 +64,8 @@ export default function AdminPage() {
     defaultValues: {
       city: '',
       country: '',
-      continent: ''
+      continent: '',
+      heroImageUrl: ''
     }
   });
 
@@ -229,6 +233,20 @@ export default function AdminPage() {
                           <FormLabel>Continent *</FormLabel>
                           <FormControl>
                             <Input placeholder="e.g., North America" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={cityForm.control}
+                      name="heroImageUrl"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Hero Image URL</FormLabel>
+                          <FormControl>
+                            <Input placeholder="https://images.unsplash.com/photo-..." {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
