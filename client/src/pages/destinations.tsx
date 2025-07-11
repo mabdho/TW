@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
+import { SEOHead } from '@/components/SEOHead';
 import { MapPin, Search, Globe, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,6 +17,35 @@ const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America
 export default function DestinationsPage() {
   const [selectedContinent, setSelectedContinent] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+
+  const seoData = {
+    title: "Travel Destinations - Explore Amazing Places | TravelWanders",
+    description: "Browse our comprehensive collection of travel destinations worldwide. Find your next adventure with detailed city guides, attractions, and travel tips.",
+    keywords: "travel destinations, city guides, travel planning, vacation spots, tourist attractions, world travel, destination guides",
+    canonicalUrl: "https://travelwanders.com/destinations",
+    slug: "destinations",
+    mainKeyword: "travel destinations",
+    keywordDensity: 2.3,
+    seoScore: 92,
+    lastModified: new Date().toISOString(),
+    ogImage: "https://travelwanders.com/city-europe.jpg",
+    ogType: "website",
+    author: "TravelWanders",
+    section: "destinations"
+  };
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Travel Destinations",
+    "description": "Browse our comprehensive collection of travel destinations worldwide",
+    "url": "https://travelwanders.com/destinations",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "TravelWanders",
+      "url": "https://travelwanders.com"
+    }
+  };
 
   // Handle URL search parameters from Hero search functionality
   useEffect(() => {
@@ -40,6 +70,7 @@ export default function DestinationsPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEOHead seoData={seoData} structuredData={structuredData} />
       <Navigation />
       
       {/* Hero Section */}

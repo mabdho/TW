@@ -19,10 +19,10 @@ const CookiePolicy = lazy(() => import('./pages/CookiePolicy'));
 const PageLoadingFallback = () => null;
 
 
-// Define all valid routes - using dynamic generation for maintainability
+// Define all valid routes - cleared for fresh production content
 const getCityRoutes = () => {
   const cityKeys = [
-    "aarhus", "accra", "addis-ababa", "adelaide", "ahmedabad", "albuquerque", "algiers", "alice-springs", "antwerp", "arequipa", "asuncin", "asuncion", "auckland", "austin", "bandung", "barranquilla", "belgrade", "belo-horizonte", "bergen", "bilbao", "bologna", "bordeaux", "bratislava", "brisbane", "brno", "broome", "bucharest", "busan", "cairns", "cairo", "calgary", "cali", "cape-town", "cartagena", "casablanca", "cebu", "charleston", "chiang-mai", "christchurch", "colombo", "columbus", "copenhagen", "crdoba", "curitiba", "cusco", "da-nang", "dakar", "dalat", "dar-es-salaam", "darwin", "debrecen", "edmonton", "florence", "fukuoka", "gaborone", "gdansk", "genoa", "ghent", "gold-coast", "gothenburg", "guadalajara", "guatemala-city", "guayaquil", "halifax", "hanoi", "harare", "havana", "helsinki", "hobart", "hoi-an", "indianapolis", "ipoh", "jaipur", "johannesburg", "kampala", "kansas-city", "kathmandu", "kingston", "krakow", "la-paz", "ljubljana", "luanda", "luang-prabang", "lusaka", "lyon", "malacca", "malaga", "male", "malm", "manaus", "maputo", "maracaibo", "marrakech", "marseille", "medellin", "milwaukee", "montevideo", "nairobi", "nashville", "new-orleans", "new-york", "nice", "nouma", "oaxaca", "oslo", "ottawa", "palermo", "panama-city", "papeete", "penang", "perth", "port-moresby", "portland", "porto", "quebec-city", "queenstown", "quito", "reykjavik", "riga", "rosario", "sacramento", "salt-lake-city", "salvador", "san-antonio", "san-jose", "san-juan", "savannah", "seville", "siem-reap", "sofia", "stockholm", "strasbourg", "sucre", "surabaya", "suva", "tallinn", "tampere", "the-hague", "thessaloniki", "tokyo", "tunis", "turin", "utrecht", "valencia", "valparaiso", "victoria", "vilnius", "warsaw", "wellington", "windhoek", "winnipeg", "yogyakarta", "zagreb", "zaragoza", "dubai", "berlin", "dhaandhoo", "boston", "chicago"
+    // Cities cleared - ready for fresh production content
   ];
   
   // Only SEO-friendly routes
