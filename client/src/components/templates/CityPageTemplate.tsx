@@ -17,13 +17,15 @@ interface CityPageTemplateProps {
   children: React.ReactNode;
   className?: string;
   baseUrl?: string;
+  imageUrl?: string;
 }
 
 export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
   cityData,
   children,
   className = '',
-  baseUrl
+  baseUrl,
+  imageUrl
 }) => {
   // Generate SEO data for city page
   const seoData = generateCitySEOData(cityData, baseUrl);
@@ -92,9 +94,15 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
           </ol>
         </nav>
 
-        {/* City page hero section with beautiful gradient */}
+        {/* City page hero section with image or gradient */}
         <div 
-          className={`city-hero-section relative text-white h-64 sm:h-80 md:h-96 lg:h-[28rem] ${getCityGradientClass(cityData.name, cityData.country)}`}
+          className={`city-hero-section relative text-white h-64 sm:h-80 md:h-96 lg:h-[28rem] ${!imageUrl ? getCityGradientClass(cityData.name, cityData.country) : 'bg-gray-900'}`}
+          style={imageUrl ? {
+            backgroundImage: `url(${imageUrl})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          } : {}}
         >
           {/* SEO Header Content - Left Bottom Corner */}
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent">

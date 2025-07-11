@@ -128,7 +128,7 @@ export const CityPage: React.FC<CityPageProps> = ({
   };
 
   return (
-    <CityPageTemplate cityData={finalCityData}>
+    <CityPageTemplate cityData={finalCityData} imageUrl={imageUrl}>
       <div className="min-h-screen bg-gray-50">
         <Navigation />
       
