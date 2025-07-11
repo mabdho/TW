@@ -10,7 +10,8 @@ const createCityImport = (cityName: string, importPath: string) =>
 
 // City mapping for dynamic imports
 const cityMap = {
-  // All cities cleared - ready for fresh production content
+  'tokyo': createCityImport('Tokyo', '../pages/cities/Tokyo.tsx'),
+  'paris': createCityImport('Paris', '../pages/cities/Paris.tsx'),
 };
 
 interface DynamicCityRouteProps {
