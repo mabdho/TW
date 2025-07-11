@@ -223,6 +223,13 @@ WRITING STYLE REQUIREMENTS:
 * Don't use slang or strong regionalisms. Keep the language global and accessible, but avoid sounding like a textbook or AI.
 * Format intuitively. Use paragraph breaks where they make sense. Avoid rigid templates — write with flow and rhythm.
 
+CONTENT FORMATTING REQUIREMENTS:
+* Use H2 (##) and H3 (###) headings to structure content logically throughout all text fields
+* Structure attraction descriptions with subheadings like "## Overview", "### Best Photo Spots", "### Insider Tips"
+* Format logistics sections with clear headings like "## Getting Around", "### Public Transport", "### Best Areas"
+* For website URLs: Remove "https://" and "www." prefixes (use "museumname.com" not "https://www.museumname.com")
+* Use markdown formatting for better readability and content structure
+
 ---
 
 Generate content with this EXACT structure in valid JSON format:
@@ -236,12 +243,12 @@ Generate content with this EXACT structure in valid JSON format:
   "attractions": [
     {
       "name": "Attraction Name",
-      "description": "Multi-paragraph detailed description (150–200 words each). IMPORTANT: Include specific insider tips, photo opportunities, hidden gems, seasonal highlights, and local secrets. For dining attractions, describe atmosphere, signature dishes, local specialties, price range, and dining culture. Use phrases like 'tip:', 'recommend', 'best time', 'avoid', 'don't miss', 'be sure to', 'consider', 'worth', 'should', 'hidden', 'secret', 'local favorite', 'view', 'photo', 'picture', 'sunset', 'panoramic', 'stunning', 'restaurant', 'cafe', 'coffee', 'dining', 'food', 'cuisine', 'meal', 'culinary', 'taste', 'flavors'. Vary sentence structure, add subtle imperfections, use natural language with slight redundancy or hesitations that feel human. Break into 2-3 paragraphs.",
+      "description": "Multi-paragraph detailed description (150–200 words each) with structured formatting using ## and ### headings where appropriate (e.g., '## Overview', '### Best Photo Spots', '### Insider Tips'). IMPORTANT: Include specific insider tips, photo opportunities, hidden gems, seasonal highlights, and local secrets. For dining attractions, describe atmosphere, signature dishes, local specialties, price range, and dining culture. Use phrases like 'tip:', 'recommend', 'best time', 'avoid', 'don't miss', 'be sure to', 'consider', 'worth', 'should', 'hidden', 'secret', 'local favorite', 'view', 'photo', 'picture', 'sunset', 'panoramic', 'stunning', 'restaurant', 'cafe', 'coffee', 'dining', 'food', 'cuisine', 'meal', 'culinary', 'taste', 'flavors'. Vary sentence structure, add subtle imperfections, use natural language with slight redundancy or hesitations that feel human. Break into 2-3 paragraphs with logical subheadings.",
       "practicalInfo": {
         "howToGetThere": "Detailed directions with specific transport options",
         "openingHours": "Operating hours with seasonal variations if applicable",
         "cost": "Entry fees with specific amounts when possible, or 'Free'",
-        "website": "Official website URL if known, or null"
+        "website": "Official website URL WITHOUT 'https://' or 'www.' prefix (e.g., 'museumname.com' not 'https://www.museumname.com'), or null if unknown"
       },
       "discoveryTags": {
         "timeRequired": "30–60 minutes, 1–2 hours, Half day, or Full day",
@@ -258,10 +265,10 @@ Generate content with this EXACT structure in valid JSON format:
     }
   ],
   "logistics": {
-    "gettingAround": "Transportation options in the city (2–3 paragraphs)",
-    "whereToStay": "Accommodation recommendations by area (2–3 paragraphs)",
-    "bestTimeToVisit": "Seasonal information and weather (2–3 paragraphs)",
-    "suggestedItinerary": "Day-by-day itinerary suggestions (3–4 paragraphs)"
+    "gettingAround": "## Getting Around ${city}\n\nTransportation options in the city (2–3 paragraphs) with structured headings like '### Public Transport', '### Taxis & Rideshare', '### Walking & Cycling'",
+    "whereToStay": "## Where to Stay in ${city}\n\nAccommodation recommendations by area (2–3 paragraphs) with headings like '### Best Areas', '### Luxury Options', '### Budget-Friendly'",
+    "bestTimeToVisit": "## Best Time to Visit ${city}\n\nSeasonal information and weather (2–3 paragraphs) with headings like '### Peak Season', '### Weather Overview', '### Local Events'",
+    "suggestedItinerary": "## Suggested ${city} Itinerary\n\nDay-by-day itinerary suggestions (3–4 paragraphs) with headings like '### Day 1', '### Day 2', '### Day 3'"
   },
   "faqs": [
     {
@@ -324,11 +331,13 @@ Generate 8-12 detailed attractions. MANDATORY: Include 2-3 dining-related attrac
 - Varied sentence structure (mix of long and short sentences)
 - Subtle imperfections and hesitations ("perhaps", "I think", mild contradictions)
 - Personal touches and reactions
-- Natural paragraph breaks
+- Natural paragraph breaks with H2/H3 headings for structure
+- Use headings like "## Overview", "### Best Photo Spots", "### Insider Tips", "### What to Expect"
 - Avoid overly rigid or textbook-like structure
 - Skip slang but maintain conversational flow
 - For dining attractions: describe ambiance, signature dishes, pricing, local food culture
 - KEEP DESCRIPTIONS CONCISE (150-200 words max per attraction to prevent JSON truncation)
+- MANDATORY: Structure all content with appropriate ## and ### headings for readability
 
 CRITICAL: All insider tips must be ACTIONABLE and CONTEXTUAL. Instead of generic tips like "visit early", provide specific details like "visit at 7:30 AM when locals arrive for morning coffee" or "enter through the side door on Via XX to avoid tourist crowds" or "ask for the unmarked 'local menu' available only in Italian". Every tip should include WHO, WHAT, WHERE, WHEN, and WHY.
 
