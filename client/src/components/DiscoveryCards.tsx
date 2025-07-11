@@ -19,6 +19,7 @@ import {
   Award,
   TrendingUp,
   Coffee,
+  Utensils,
   ChevronLeft,
   ChevronRight,
   X,
@@ -385,8 +386,13 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
       color: "yellow",
       summary: `${insiderTips.length} insider tips`,
       content: insiderTips.slice(0, 4).map((tip, index) => (
-        <div key={index} className="mb-2 p-2 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border-l-3 border-yellow-400">
-          <p className="text-sm text-gray-700 dark:text-gray-300">{tip}</p>
+        <div key={index} className="mb-3 p-3 bg-gradient-to-r from-amber-50/80 to-orange-50/80 dark:from-amber-900/20 dark:to-orange-900/20 rounded-xl border-l-4 border-amber-400 shadow-sm">
+          <div className="flex items-start gap-3">
+            <div className="p-1 bg-amber-100 dark:bg-amber-800/30 rounded-lg">
+              <Lightbulb className="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0" />
+            </div>
+            <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{tip}</p>
+          </div>
         </div>
       ))
     },
@@ -396,11 +402,18 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
       color: "blue", 
       summary: `${photoOps.length} photo opportunities`,
       content: photoOps.slice(0, 4).map((op, index) => (
-        <div key={index} className="mb-2 p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg border-l-3 border-blue-400">
-          <h4 className="font-semibold text-blue-700 dark:text-blue-300 text-sm mb-1">{op.spot}</h4>
-          <p className="text-xs text-gray-600 dark:text-gray-400">
-            {op.description}
-          </p>
+        <div key={index} className="mb-3 p-3 bg-gradient-to-r from-sky-50/80 to-blue-50/80 dark:from-sky-900/20 dark:to-blue-900/20 rounded-xl border-l-4 border-sky-400 shadow-sm">
+          <div className="flex items-start gap-3">
+            <div className="p-1 bg-sky-100 dark:bg-sky-800/30 rounded-lg">
+              <Camera className="w-4 h-4 text-sky-600 dark:text-sky-400 flex-shrink-0" />
+            </div>
+            <div className="flex-1">
+              <h4 className="font-semibold text-sky-700 dark:text-sky-300 text-sm mb-1">{op.spot}</h4>
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                {op.description}
+              </p>
+            </div>
+          </div>
         </div>
       ))
     },
@@ -446,23 +459,30 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
       content: (
         <div className="space-y-3">
           {attractions.slice(0, 4).map((attr, index) => (
-            <div key={index} className="p-2 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg border-l-3 border-indigo-400">
-              <h4 className="font-semibold text-indigo-700 dark:text-indigo-300 mb-2 text-sm">
-                {attr.name}
-              </h4>
-              <div className="flex gap-2 flex-wrap">
-                <Badge variant="outline" className="text-xs bg-white">
-                  <Clock className="w-3 h-3 mr-1" />
-                  {getTimeEstimate(attr)}
-                </Badge>
-                <Badge variant="outline" className="text-xs bg-white">
-                  <DollarSign className="w-3 h-3 mr-1" />
-                  {getCostLevel(attr)}
-                </Badge>
-                <Badge variant="outline" className="text-xs bg-white">
-                  <Calendar className="w-3 h-3 mr-1" />
-                  {getSeasonalInfo(attr)}
-                </Badge>
+            <div key={index} className="p-3 bg-gradient-to-r from-violet-50/80 to-purple-50/80 dark:from-violet-900/20 dark:to-purple-900/20 rounded-xl border-l-4 border-violet-400 shadow-sm">
+              <div className="flex items-start gap-3">
+                <div className="p-1 bg-violet-100 dark:bg-violet-800/30 rounded-lg">
+                  <Clock className="w-4 h-4 text-violet-600 dark:text-violet-400 flex-shrink-0" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-violet-700 dark:text-violet-300 mb-2 text-sm">
+                    {attr.name}
+                  </h4>
+                  <div className="flex gap-2 flex-wrap">
+                    <Badge variant="outline" className="text-xs bg-white/80 border-violet-200">
+                      <Clock className="w-3 h-3 mr-1" />
+                      {getTimeEstimate(attr)}
+                    </Badge>
+                    <Badge variant="outline" className="text-xs bg-white/80 border-violet-200">
+                      <DollarSign className="w-3 h-3 mr-1" />
+                      {getCostLevel(attr)}
+                    </Badge>
+                    <Badge variant="outline" className="text-xs bg-white/80 border-violet-200">
+                      <Calendar className="w-3 h-3 mr-1" />
+                      {getSeasonalInfo(attr)}
+                    </Badge>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
@@ -487,13 +507,20 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
             attr.description.toLowerCase().includes('local') ||
             !highlights.includes(attr.name)
           ).slice(0, 3).map((attr, index) => (
-            <div key={index} className="p-2 bg-pink-50 dark:bg-pink-900/20 rounded-lg border-l-3 border-pink-400">
-              <h4 className="font-semibold text-pink-700 dark:text-pink-300 mb-1 text-sm">
-                {attr.name}
-              </h4>
-              <p className="text-xs text-gray-600 dark:text-gray-400">
-                {attr.description.split('.')[0]}.
-              </p>
+            <div key={index} className="p-3 bg-gradient-to-r from-rose-50/80 to-pink-50/80 dark:from-rose-900/20 dark:to-pink-900/20 rounded-xl border-l-4 border-rose-400 shadow-sm">
+              <div className="flex items-start gap-3">
+                <div className="p-1 bg-rose-100 dark:bg-rose-800/30 rounded-lg">
+                  <Eye className="w-4 h-4 text-rose-600 dark:text-rose-400 flex-shrink-0" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-rose-700 dark:text-rose-300 mb-1 text-sm">
+                    {attr.name}
+                  </h4>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                    {attr.description.split('.')[0]}.
+                  </p>
+                </div>
+              </div>
             </div>
           ))}
           {attractions.filter(attr => 
@@ -503,7 +530,9 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
             !highlights.includes(attr.name)
           ).length === 0 && (
             <div className="text-center p-4">
-              <Eye className="w-6 h-6 text-gray-400 mx-auto mb-2" />
+              <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg inline-block">
+                <Eye className="w-6 h-6 text-gray-400 mx-auto mb-2" />
+              </div>
               <p className="text-xs text-gray-500 italic">Explore beyond the highlights!</p>
             </div>
           )}
@@ -520,29 +549,43 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
           {diningOptions.length > 0 ? (
             <>
               {diningOptions.slice(0, 3).map((option, index) => (
-                <div key={index} className="p-2 bg-orange-50 dark:bg-orange-900/20 rounded-lg border-l-3 border-orange-400">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h4 className="font-semibold text-orange-700 dark:text-orange-300 text-sm">
-                      {option.name}
-                    </h4>
-                    <Badge variant="outline" className="bg-orange-100 text-orange-700 border-orange-300 text-xs">
-                      {option.type}
-                    </Badge>
+                <div key={index} className="p-3 bg-gradient-to-r from-orange-50/80 to-amber-50/80 dark:from-orange-900/20 dark:to-amber-900/20 rounded-xl border-l-4 border-orange-400 shadow-sm">
+                  <div className="flex items-start gap-3">
+                    <div className="p-1 bg-orange-100 dark:bg-orange-800/30 rounded-lg">
+                      <Utensils className="w-4 h-4 text-orange-600 dark:text-orange-400 flex-shrink-0" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h4 className="font-semibold text-orange-700 dark:text-orange-300 text-sm">
+                          {option.name}
+                        </h4>
+                        <Badge variant="outline" className="bg-orange-100 text-orange-700 border-orange-300 text-xs">
+                          {option.type}
+                        </Badge>
+                      </div>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                        {option.description}
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">
-                    {option.description}
-                  </p>
                 </div>
               ))}
               {discoveryData?.diningHighlights?.diningTips && (
-                <div className="p-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg border-l-3 border-amber-400">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h4 className="font-semibold text-amber-700 dark:text-amber-300 text-sm">Dining Tips</h4>
-                    <Badge variant="outline" className="bg-amber-100 text-amber-700 border-amber-300 text-xs">
-                      Local Advice
-                    </Badge>
+                <div className="p-3 bg-gradient-to-r from-amber-50/80 to-yellow-50/80 dark:from-amber-900/20 dark:to-yellow-900/20 rounded-xl border-l-4 border-amber-400 shadow-sm">
+                  <div className="flex items-start gap-3">
+                    <div className="p-1 bg-amber-100 dark:bg-amber-800/30 rounded-lg">
+                      <Lightbulb className="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h4 className="font-semibold text-amber-700 dark:text-amber-300 text-sm">Dining Tips</h4>
+                        <Badge variant="outline" className="bg-amber-100 text-amber-700 border-amber-300 text-xs">
+                          Local Advice
+                        </Badge>
+                      </div>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">{discoveryData.diningHighlights.diningTips}</p>
+                    </div>
                   </div>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">{discoveryData.diningHighlights.diningTips}</p>
                 </div>
               )}
             </>
@@ -565,29 +608,29 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
       content: (
         <div className="space-y-3">
           <div className="grid grid-cols-2 gap-3">
-            <div className="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg text-center border-l-3 border-amber-400">
-              <div className="text-2xl font-bold text-amber-600">{attractions.length}</div>
-              <div className="text-xs text-gray-600">Total Attractions</div>
+            <div className="p-4 bg-gradient-to-br from-amber-50/80 to-yellow-50/80 dark:from-amber-900/20 dark:to-yellow-900/20 rounded-xl text-center border-l-4 border-amber-400 shadow-sm">
+              <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">{attractions.length}</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">Total Attractions</div>
             </div>
-            <div className="p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg text-center border-l-3 border-emerald-400">
-              <div className="text-2xl font-bold text-emerald-600">
+            <div className="p-4 bg-gradient-to-br from-emerald-50/80 to-teal-50/80 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-xl text-center border-l-4 border-emerald-400 shadow-sm">
+              <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
                 {attractions.filter(attr => getCostLevel(attr) === 'Free').length}
               </div>
-              <div className="text-xs text-gray-600">Free Activities</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">Free Activities</div>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-center border-l-3 border-blue-400">
-              <div className="text-2xl font-bold text-blue-600">
+            <div className="p-4 bg-gradient-to-br from-sky-50/80 to-blue-50/80 dark:from-sky-900/20 dark:to-blue-900/20 rounded-xl text-center border-l-4 border-sky-400 shadow-sm">
+              <div className="text-2xl font-bold text-sky-600 dark:text-sky-400">
                 {attractions.filter(attr => getTimeEstimate(attr) === '30-60 Min').length}
               </div>
-              <div className="text-xs text-gray-600">Quick Visits</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">Quick Visits</div>
             </div>
-            <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg text-center border-l-3 border-purple-400">
-              <div className="text-2xl font-bold text-purple-600">
+            <div className="p-4 bg-gradient-to-br from-purple-50/80 to-violet-50/80 dark:from-purple-900/20 dark:to-violet-900/20 rounded-xl text-center border-l-4 border-purple-400 shadow-sm">
+              <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
                 {attractions.filter(attr => getSeasonalInfo(attr) === 'Year-Round').length}
               </div>
-              <div className="text-xs text-gray-600">Year-Round</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">Year-Round</div>
             </div>
           </div>
         </div>
@@ -620,26 +663,31 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
           {discoveryCards.map((card, index) => (
             <Card 
               key={index} 
-              className="flex-shrink-0 w-[340px] sm:w-96 lg:w-[420px] h-[380px] sm:h-[420px] bg-white dark:bg-gray-800 hover:shadow-2xl hover:scale-105 transition-all duration-300 snap-start border-2 border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-lg cursor-pointer group"
+              className="flex-shrink-0 w-[340px] sm:w-96 lg:w-[420px] h-[380px] sm:h-[420px] bg-gradient-to-br from-white to-gray-50/30 dark:from-gray-900 dark:to-gray-800/50 hover:shadow-xl hover:shadow-blue-100/20 dark:hover:shadow-blue-900/10 hover:-translate-y-1 transition-all duration-500 snap-start border border-gray-200/50 dark:border-gray-700/50 rounded-3xl overflow-hidden shadow-md cursor-pointer group backdrop-blur-sm"
               onClick={() => handleCardClick(index)}
             >
-              <div className="h-full flex flex-col">
-                <CardHeader className="pb-4 pt-6 px-6 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-800 dark:via-gray-700 dark:to-gray-600 flex-shrink-0 border-b border-gray-200 dark:border-gray-600">
-                  <CardTitle className="flex items-center gap-3 text-xl font-bold text-gray-900 dark:text-white mb-2">
-                    <div className="p-2 rounded-full bg-white dark:bg-gray-800 shadow-md group-hover:shadow-lg transition-shadow">
-                      {card.icon}
+              <div className="h-full flex flex-col relative">
+                {/* Subtle travel-themed background pattern */}
+                <div className="absolute inset-0 opacity-5 bg-gradient-to-br from-blue-500 via-teal-500 to-green-500"></div>
+                
+                <CardHeader className="pb-4 pt-6 px-6 bg-gradient-to-r from-transparent via-white/80 to-transparent dark:from-transparent dark:via-gray-800/80 dark:to-transparent flex-shrink-0 border-b border-gray-200/30 dark:border-gray-700/30 backdrop-blur-sm">
+                  <CardTitle className="flex items-center gap-3 text-xl font-bold text-gray-800 dark:text-white mb-2 relative">
+                    <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-50 to-teal-50 dark:from-blue-900/30 dark:to-teal-900/30 shadow-sm group-hover:shadow-md transition-all duration-300 border border-blue-100/50 dark:border-blue-800/50">
+                      <div className="text-blue-600 dark:text-blue-400">
+                        {card.icon}
+                      </div>
                     </div>
-                    <span className="truncate">{card.title}</span>
-                    <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Maximize2 className="w-5 h-5 text-gray-500" />
+                    <span className="truncate text-gray-800 dark:text-gray-100">{card.title}</span>
+                    <div className="ml-auto opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110">
+                      <Maximize2 className="w-5 h-5 text-blue-500 dark:text-blue-400" />
                     </div>
                   </CardTitle>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                  <p className="text-sm text-gray-600 dark:text-gray-300 font-normal leading-relaxed">
                     {card.summary}
                   </p>
                 </CardHeader>
-                <CardContent className="flex-1 p-6 bg-white dark:bg-gray-800 overflow-y-auto">
-                  <div className="space-y-4">
+                <CardContent className="flex-1 p-6 bg-gradient-to-b from-transparent to-gray-50/30 dark:to-gray-800/30 overflow-y-auto relative">
+                  <div className="space-y-4 relative z-10">
                     {card.content}
                   </div>
                 </CardContent>
@@ -718,19 +766,23 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
 
       {/* Modal */}
       {isModalOpen && selectedCard !== null && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden shadow-2xl animate-in fade-in-0 zoom-in-95 duration-300">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4">
+          <div className="bg-gradient-to-br from-white via-gray-50/80 to-white dark:from-gray-900 dark:via-gray-800/80 dark:to-gray-900 rounded-3xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden shadow-2xl border border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm animate-in fade-in-0 zoom-in-95 duration-300 relative">
+            {/* Subtle travel-themed background pattern */}
+            <div className="absolute inset-0 opacity-5 bg-gradient-to-br from-blue-500 via-teal-500 to-green-500 pointer-events-none"></div>
             {/* Modal Header */}
-            <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-700">
+            <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200/30 dark:border-gray-700/30 bg-gradient-to-r from-transparent via-white/80 to-transparent dark:from-transparent dark:via-gray-800/80 dark:to-transparent backdrop-blur-sm">
               <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
-                <div className="p-2 rounded-full bg-white dark:bg-gray-800 shadow-md flex-shrink-0">
-                  {discoveryCards[selectedCard].icon}
+                <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-50 to-teal-50 dark:from-blue-900/30 dark:to-teal-900/30 shadow-sm border border-blue-100/50 dark:border-blue-800/50 flex-shrink-0">
+                  <div className="text-blue-600 dark:text-blue-400">
+                    {discoveryCards[selectedCard].icon}
+                  </div>
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h2 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white truncate">
+                  <h2 className="text-lg sm:text-2xl font-bold text-gray-800 dark:text-white truncate">
                     {discoveryCards[selectedCard].title}
                   </h2>
-                  <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 truncate">
+                  <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 truncate">
                     {discoveryCards[selectedCard].summary}
                   </p>
                 </div>
@@ -767,14 +819,14 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
             </div>
             
             {/* Modal Content */}
-            <div className="p-4 sm:p-6 overflow-y-auto max-h-[60vh] sm:max-h-[70vh]">
-              <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-gray-700 dark:text-gray-300">
+            <div className="p-4 sm:p-6 overflow-y-auto max-h-[60vh] sm:max-h-[70vh] relative">
+              <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-gray-700 dark:text-gray-300 relative z-10">
                 {discoveryCards[selectedCard].content}
               </div>
             </div>
             
             {/* Modal Footer */}
-            <div className="flex flex-col sm:flex-row justify-between items-center p-4 sm:p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 gap-3 sm:gap-0">
+            <div className="flex flex-col sm:flex-row justify-between items-center p-4 sm:p-6 border-t border-gray-200/30 dark:border-gray-700/30 bg-gradient-to-r from-gray-50/80 to-gray-100/80 dark:from-gray-900/80 dark:to-gray-800/80 backdrop-blur-sm gap-3 sm:gap-0">
               <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 text-center sm:text-left">
                 <span className="sm:hidden">Swipe or use buttons to navigate</span>
                 <span className="hidden sm:inline">Use arrow keys to navigate • Press Esc to close</span>
