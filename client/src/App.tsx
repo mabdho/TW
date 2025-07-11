@@ -10,6 +10,9 @@ const AdminPage = lazy(() => import('./pages/admin'));
 const BlogsPage = lazy(() => import('./pages/blogs'));
 const BlogDetailPage = lazy(() => import('./pages/blog-detail'));
 const DestinationsPage = lazy(() => import('./pages/destinations'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsOfService = lazy(() => import('./pages/TermsOfService'));
+const CookiePolicy = lazy(() => import('./pages/CookiePolicy'));
 
 // No loading fallback - invisible to eliminate flash
 const PageLoadingFallback = () => null;
@@ -26,7 +29,7 @@ const getCityRoutes = () => {
 };
 
 const validRoutes = [
-  "/", "/blogs", "/destinations", "/admin", 
+  "/", "/blogs", "/destinations", "/admin", "/privacy-policy", "/terms-of-service", "/cookie-policy",
   ...getCityRoutes()
 ];
 
@@ -50,6 +53,9 @@ function App() {
         <Route path="/blog/:id" component={BlogDetailPage} />
         <Route path="/destinations" component={DestinationsPage} />
         <Route path="/admin" component={AdminPage} />
+        <Route path="/privacy-policy" component={PrivacyPolicy} />
+        <Route path="/terms-of-service" component={TermsOfService} />
+        <Route path="/cookie-policy" component={CookiePolicy} />
         
         {/* Dynamic city routes with code splitting */}
         <CityRoutes />

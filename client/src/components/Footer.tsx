@@ -7,7 +7,7 @@ export const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-12 sm:py-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
             {/* Brand Section */}
             <div className="sm:col-span-2 lg:col-span-2">
               <div className="flex items-center gap-2 mb-4">
@@ -105,6 +105,38 @@ export const Footer = () => {
                 </li>
               </ul>
             </div>
+
+            {/* Legal & Support */}
+            <div>
+              <h3 className="font-semibold text-foreground mb-4 text-sm sm:text-base">Legal & Support</h3>
+              <ul className="space-y-3">
+                <li>
+                  <a href="/privacy-policy" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="/terms-of-service" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    Terms of Service
+                  </a>
+                </li>
+                <li>
+                  <a href="/cookie-policy" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    Cookie Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="mailto:support@travelwanders.com" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    Contact Support
+                  </a>
+                </li>
+                <li>
+                  <a href="mailto:feedback@travelwanders.com" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    Send Feedback
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -115,14 +147,14 @@ export const Footer = () => {
               © 2025 TravelWanders. All rights reserved. Made with ❤️ for travelers worldwide.
             </p>
             <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm">
-              <a href="/destinations" className="text-muted-foreground hover:text-primary transition-colors">
-                Destinations
+              <a href="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">
+                Privacy Policy
               </a>
-              <a href="/blogs" className="text-muted-foreground hover:text-primary transition-colors">
-                Blogs
+              <a href="/terms-of-service" className="text-muted-foreground hover:text-primary transition-colors">
+                Terms of Service
               </a>
-              <a href="/" className="text-muted-foreground hover:text-primary transition-colors">
-                Home
+              <a href="/cookie-policy" className="text-muted-foreground hover:text-primary transition-colors">
+                Cookie Policy
               </a>
             </div>
           </div>
