@@ -53,13 +53,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
         let model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
         let modelName = "gemini-2.0-flash-exp";
 
-      const prompt = `You are a professional travel content writer creating an SEO-optimized city guide.
+      const prompt = `You are a professional travel content writer creating an SEO-optimized city guide with interactive discovery features.
 
 Generate content for: ${city}, ${country}${continent ? ` (${continent})` : ''}
 
 Create a comprehensive travel guide with the title: "15 Best Things to Do in ${city}, ${country} (2025 Guide)"
 
 The focus keyword is "Things to do in ${city}" - use this naturally throughout the content.
+
+IMPORTANT: This content will power interactive discovery features including:
+- Discovery Cards with insider tips, photo opportunities, and experience levels
+- Interactive Explorer with filtering by interests, time, cost, and type
+- Smart categorization and personalized recommendations
 
 Generate content with this EXACT structure in JSON format:
 {
@@ -68,12 +73,24 @@ Generate content with this EXACT structure in JSON format:
   "attractions": [
     {
       "name": "Attraction Name",
-      "description": "Multi-paragraph detailed description (200-300 words each). Vary sentence structure, add subtle imperfections, use natural language with slight redundancy or hesitations that feel human. Break into 2-3 paragraphs.",
+      "description": "Multi-paragraph detailed description (200-300 words each). IMPORTANT: Include specific insider tips, photo opportunities, hidden gems, seasonal highlights, and local secrets. Use phrases like 'tip:', 'recommend', 'best time', 'avoid', 'don't miss', 'be sure to', 'consider', 'worth', 'should', 'hidden', 'secret', 'local favorite', 'view', 'photo', 'picture', 'sunset', 'panoramic', 'stunning'. Vary sentence structure, add subtle imperfections, use natural language with slight redundancy or hesitations that feel human. Break into 2-3 paragraphs.",
       "practicalInfo": {
-        "howToGetThere": "Detailed directions",
-        "openingHours": "Operating hours",
-        "cost": "Entry fees or 'Free'",
+        "howToGetThere": "Detailed directions with specific transport options",
+        "openingHours": "Operating hours with seasonal variations if applicable",
+        "cost": "Entry fees with specific amounts when possible, or 'Free'",
         "website": "Official website URL if known, or null"
+      },
+      "discoveryTags": {
+        "timeRequired": "30-60 minutes, 1-2 hours, Half day, or Full day",
+        "experienceLevel": "Easy Access, Moderate Adventure, or Local Expert",
+        "interests": ["history", "art", "architecture", "nature", "food", "adventure", "relaxation", "photography"],
+        "costLevel": "Free, Budget-friendly, Moderate, or Expensive",
+        "seasonalBest": "Spring, Summer, Fall, Winter, or Year-round",
+        "photoOpportunity": "Describe the best photo spots and timing",
+        "insiderTip": "Specific local knowledge or pro tip",
+        "hiddenGem": true/false,
+        "familyFriendly": true/false,
+        "accessibilityNotes": "Any accessibility information"
       }
     }
   ],
@@ -100,7 +117,34 @@ Generate content with this EXACT structure in JSON format:
       "question": "When is the best time to visit ${city}?",
       "answer": "Seasonal recommendations"
     }
-  ]
+  ],
+  "discoveryData": {
+    "cityPersonality": "Describe the city's character in 2-3 adjectives",
+    "budgetBreakdown": {
+      "freeActivities": "List 3-4 free things to do",
+      "budgetFriendly": "List 3-4 budget activities with approximate costs",
+      "splurgeWorthy": "List 2-3 premium experiences worth the cost"
+    },
+    "localSecrets": [
+      "Hidden gem known mainly to locals",
+      "Best photo spot that's not crowded",
+      "Local food spot or market recommendation",
+      "Best time to avoid crowds at popular spots"
+    ],
+    "seasonalHighlights": {
+      "spring": "What's special about visiting in spring",
+      "summer": "What's special about visiting in summer", 
+      "fall": "What's special about visiting in fall",
+      "winter": "What's special about visiting in winter"
+    },
+    "quickFacts": {
+      "totalAttractions": "Number of attractions generated",
+      "freeActivities": "Number of free activities",
+      "averageTimePerAttraction": "30-60 minutes",
+      "walkingFriendly": true/false,
+      "publicTransportQuality": "Excellent, Good, Fair, or Limited"
+    }
+  }
 }
 
 Generate 8-15 detailed attractions. Write in a natural, human tone with:
@@ -110,6 +154,25 @@ Generate 8-15 detailed attractions. Write in a natural, human tone with:
 - Natural paragraph breaks
 - Avoid overly rigid or textbook-like structure
 - Skip slang but maintain conversational flow
+
+For each attraction, include comprehensive discoveryTags:
+- timeRequired: Be specific (e.g., "30-60 minutes", "1-2 hours", "Half day", "Full day")
+- experienceLevel: "Easy Access", "Moderate Adventure", or "Local Expert"
+- interests: Select 2-4 relevant tags from the list
+- costLevel: "Free", "Budget-friendly", "Moderate", or "Expensive"
+- seasonalBest: Best season to visit or "Year-round"
+- photoOpportunity: Specific photo tips and best spots
+- insiderTip: Unique local knowledge or pro tip
+- hiddenGem: true if it's lesser-known, false if popular
+- familyFriendly: true/false based on suitability for families
+- accessibilityNotes: Brief accessibility information
+
+Fill out the complete discoveryData section with:
+- cityPersonality: 2-3 descriptive words
+- budgetBreakdown: Specific lists of activities by price range
+- localSecrets: 4 insider tips that locals would know
+- seasonalHighlights: What makes each season special
+- quickFacts: Accurate statistics about the attractions
 
 Respond ONLY with valid JSON. Do NOT wrap the output in markdown code blocks (like \`\`\`json or \`\`\`). Do not include any commentary. Return only the JSON object.
 

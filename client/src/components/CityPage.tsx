@@ -49,6 +49,28 @@ interface CityPageProps {
     question: string;
     answer: string;
   }>;
+  discoveryData?: {
+    cityPersonality?: string;
+    budgetBreakdown?: {
+      freeActivities?: string;
+      budgetFriendly?: string;
+      splurgeWorthy?: string;
+    };
+    localSecrets?: string[];
+    seasonalHighlights?: {
+      spring?: string;
+      summer?: string;
+      fall?: string;
+      winter?: string;
+    };
+    quickFacts?: {
+      totalAttractions?: string;
+      freeActivities?: string;
+      averageTimePerAttraction?: string;
+      walkingFriendly?: boolean;
+      publicTransportQuality?: string;
+    };
+  };
   // SEO enhancement props
   cityName?: string;
   country?: string;
@@ -63,6 +85,7 @@ export const CityPage: React.FC<CityPageProps> = ({
   galleryImages = [],
   logistics,
   faqs,
+  discoveryData,
   cityName,
   country
 }) => {
@@ -131,6 +154,7 @@ export const CityPage: React.FC<CityPageProps> = ({
             attractions={attractions}
             cityName={extractedCityName}
             highlights={highlights}
+            discoveryData={discoveryData}
           />
         </div>
       </div>

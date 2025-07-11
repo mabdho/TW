@@ -33,6 +33,18 @@ interface Attraction {
     cost?: string;
     website?: string;
   };
+  discoveryTags?: {
+    timeRequired?: string;
+    experienceLevel?: string;
+    interests?: string[];
+    costLevel?: string;
+    seasonalBest?: string;
+    photoOpportunity?: string;
+    insiderTip?: string;
+    hiddenGem?: boolean;
+    familyFriendly?: boolean;
+    accessibilityNotes?: string;
+  };
 }
 
 interface InteractiveAttractionExplorerProps {
@@ -75,6 +87,15 @@ export const InteractiveAttractionExplorer: React.FC<InteractiveAttractionExplor
   };
 
   const getTimeEstimate = (attraction: Attraction) => {
+    // Use discovery tags if available
+    if (attraction.discoveryTags?.timeRequired) {
+      const time = attraction.discoveryTags.timeRequired.toLowerCase();
+      if (time.includes('half day') || time.includes('full day')) return 'halfday';
+      if (time.includes('30-60') || time.includes('quick')) return 'quick';
+      return 'quick';
+    }
+    
+    // Fall back to description analysis
     const desc = attraction.description.toLowerCase();
     if (desc.includes('hours') || desc.includes('day') || desc.includes('entire')) return 'halfday';
     if (desc.includes('stroll') || desc.includes('walk') || desc.includes('quick')) return 'quick';
@@ -82,12 +103,28 @@ export const InteractiveAttractionExplorer: React.FC<InteractiveAttractionExplor
   };
 
   const getCostLevel = (attraction: Attraction) => {
+    // Use discovery tags if available
+    if (attraction.discoveryTags?.costLevel) {
+      const cost = attraction.discoveryTags.costLevel.toLowerCase();
+      if (cost.includes('free')) return 'free';
+      return 'paid';
+    }
+    
+    // Fall back to practical info analysis
     const cost = attraction.practicalInfo?.cost?.toLowerCase() || '';
     if (cost.includes('free')) return 'free';
     return 'paid';
   };
 
   const getInterestTags = (attraction: Attraction): InterestType[] => {
+    // Use discovery tags if available
+    if (attraction.discoveryTags?.interests) {
+      return attraction.discoveryTags.interests.filter(interest => 
+        ['history', 'art', 'architecture', 'nature', 'food', 'adventure', 'relaxation', 'photography'].includes(interest)
+      ) as InterestType[];
+    }
+    
+    // Fall back to description analysis
     const desc = attraction.description.toLowerCase();
     const tags: InterestType[] = [];
     
@@ -109,6 +146,9 @@ export const InteractiveAttractionExplorer: React.FC<InteractiveAttractionExplor
     if (attraction.description.length > 300) score += 5;
     if (attraction.practicalInfo?.website) score += 3;
     if (getCostLevel(attraction) === 'free') score += 2;
+    if (attraction.discoveryTags?.hiddenGem) score += 8;
+    if (attraction.discoveryTags?.insiderTip) score += 4;
+    if (attraction.discoveryTags?.photoOpportunity) score += 3;
     return score;
   };
 

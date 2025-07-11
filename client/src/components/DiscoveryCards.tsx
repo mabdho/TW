@@ -31,18 +31,52 @@ interface Attraction {
     cost?: string;
     website?: string;
   };
+  discoveryTags?: {
+    timeRequired?: string;
+    experienceLevel?: string;
+    interests?: string[];
+    costLevel?: string;
+    seasonalBest?: string;
+    photoOpportunity?: string;
+    insiderTip?: string;
+    hiddenGem?: boolean;
+    familyFriendly?: boolean;
+    accessibilityNotes?: string;
+  };
 }
 
 interface DiscoveryCardsProps {
   attractions: Attraction[];
   cityName: string;
   highlights: string[];
+  discoveryData?: {
+    localSecrets?: string[];
+    budgetBreakdown?: {
+      freeActivities?: string;
+      budgetFriendly?: string;
+      splurgeWorthy?: string;
+    };
+    seasonalHighlights?: {
+      spring?: string;
+      summer?: string;
+      fall?: string;
+      winter?: string;
+    };
+    quickFacts?: {
+      totalAttractions?: string;
+      freeActivities?: string;
+      averageTimePerAttraction?: string;
+      walkingFriendly?: boolean;
+      publicTransportQuality?: string;
+    };
+  };
 }
 
 export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({ 
   attractions, 
   cityName, 
-  highlights 
+  highlights,
+  discoveryData 
 }) => {
   const [activeCard, setActiveCard] = useState(0);
 
@@ -72,42 +106,79 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
     return categories;
   };
 
-  // Helper function to extract insider tips from descriptions
+  // Helper function to extract insider tips from descriptions and discovery tags
   const extractInsiderTips = (attractions: Attraction[]) => {
     const tips: string[] = [];
+    
+    // First, use dedicated insider tips from discovery tags
     attractions.forEach(attraction => {
-      const desc = attraction.description;
-      // Extract sentences that contain tip-like phrases
-      const sentences = desc.split(/[.!?]+/);
-      sentences.forEach(sentence => {
-        if (sentence.includes('tip') || sentence.includes('recommend') || sentence.includes('best time') || 
-            sentence.includes('avoid') || sentence.includes('don\'t miss') || sentence.includes('be sure to') ||
-            sentence.includes('consider') || sentence.includes('worth') || sentence.includes('should')) {
-          tips.push(sentence.trim() + '.');
-        }
-      });
+      if (attraction.discoveryTags?.insiderTip) {
+        tips.push(attraction.discoveryTags.insiderTip);
+      }
     });
+    
+    // Then extract from descriptions if needed
+    if (tips.length < 6) {
+      attractions.forEach(attraction => {
+        const desc = attraction.description;
+        const sentences = desc.split(/[.!?]+/);
+        sentences.forEach(sentence => {
+          if (sentence.includes('tip') || sentence.includes('recommend') || sentence.includes('best time') || 
+              sentence.includes('avoid') || sentence.includes('don\'t miss') || sentence.includes('be sure to') ||
+              sentence.includes('consider') || sentence.includes('worth') || sentence.includes('should')) {
+            tips.push(sentence.trim() + '.');
+          }
+        });
+      });
+    }
+    
+    // Add local secrets from discovery data if available
+    if (discoveryData?.localSecrets) {
+      tips.push(...discoveryData.localSecrets);
+    }
+    
     return tips.slice(0, 6); // Limit to 6 tips
   };
 
-  // Helper function to extract photo opportunities from descriptions
+  // Helper function to extract photo opportunities from descriptions and discovery tags
   const extractPhotoOps = (attractions: Attraction[]) => {
     const photoOps: Array<{spot: string, description: string}> = [];
+    
+    // First, use dedicated photo opportunities from discovery tags
     attractions.forEach(attraction => {
-      const desc = attraction.description;
-      if (desc.includes('view') || desc.includes('photo') || desc.includes('picture') || 
-          desc.includes('sunset') || desc.includes('panoramic') || desc.includes('stunning')) {
+      if (attraction.discoveryTags?.photoOpportunity) {
         photoOps.push({
           spot: attraction.name,
-          description: desc.split('.')[0] + '.'
+          description: attraction.discoveryTags.photoOpportunity
         });
       }
     });
+    
+    // Then extract from descriptions if needed
+    if (photoOps.length < 6) {
+      attractions.forEach(attraction => {
+        const desc = attraction.description;
+        if (desc.includes('view') || desc.includes('photo') || desc.includes('picture') || 
+            desc.includes('sunset') || desc.includes('panoramic') || desc.includes('stunning')) {
+          photoOps.push({
+            spot: attraction.name,
+            description: desc.split('.')[0] + '.'
+          });
+        }
+      });
+    }
+    
     return photoOps.slice(0, 6);
   };
 
   // Helper function to calculate estimated time for attractions
   const getTimeEstimate = (attraction: Attraction) => {
+    // Use discovery tags if available
+    if (attraction.discoveryTags?.timeRequired) {
+      return attraction.discoveryTags.timeRequired;
+    }
+    
+    // Fall back to description analysis
     const desc = attraction.description.toLowerCase();
     if (desc.includes('hours') || desc.includes('day') || desc.includes('entire')) return 'Half Day+';
     if (desc.includes('stroll') || desc.includes('walk') || desc.includes('explore')) return '1-2 Hours';
@@ -116,6 +187,12 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
 
   // Helper function to get cost level
   const getCostLevel = (attraction: Attraction) => {
+    // Use discovery tags if available
+    if (attraction.discoveryTags?.costLevel) {
+      return attraction.discoveryTags.costLevel;
+    }
+    
+    // Fall back to practical info analysis
     const cost = attraction.practicalInfo?.cost?.toLowerCase() || '';
     if (cost.includes('free')) return 'Free';
     if (cost.includes('$') || cost.includes('expensive') || cost.includes('fee')) return 'Paid';
@@ -124,6 +201,12 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
 
   // Helper function to extract seasonal info
   const getSeasonalInfo = (attraction: Attraction) => {
+    // Use discovery tags if available
+    if (attraction.discoveryTags?.seasonalBest) {
+      return attraction.discoveryTags.seasonalBest;
+    }
+    
+    // Fall back to description analysis
     const desc = attraction.description.toLowerCase();
     if (desc.includes('summer') || desc.includes('warm')) return 'Best in Summer';
     if (desc.includes('winter') || desc.includes('cold')) return 'Winter Special';
