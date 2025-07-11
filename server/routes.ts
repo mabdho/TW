@@ -760,36 +760,30 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
 
       // Clear any cached references and rebuild system files
       try {
-        // Clear Node.js module cache for the deleted blog
-        const moduleId = path.resolve(blogFilePath);
-        delete require.cache[moduleId];
-        
-        // Clear the blogs index module cache as well
-        const indexModuleId = path.resolve(indexPath);
-        delete require.cache[indexModuleId];
-        
-        console.log('Cleared module cache for deleted blog and index file');
-      } catch (error) {
-        console.warn('Could not clear module cache:', error.message);
-      }
-
-      // Force regeneration of any cached blog listings
-      try {
         // Clear any potential caches in memory
         if (global.blogCache) {
           delete global.blogCache;
         }
         
-        // Trigger a fresh reload of the blog index
-        const { getAllBlogs } = await import(path.resolve(indexPath));
-        const updatedBlogs = getAllBlogs();
-        console.log(`Verified blog removal: ${updatedBlogs.length} blogs remaining`);
-        
-        // Validate that the deleted blog is not in the list
-        const deletedBlogExists = updatedBlogs.some(blog => blog.id === blogId);
-        if (deletedBlogExists) {
-          console.warn(`Warning: Blog ${blogId} still appears in blog listing after deletion`);
+        // For ES modules, we can't directly clear the cache, but we can log the action
+        console.log('Cleared in-memory caches for deleted blog');
+      } catch (error) {
+        console.warn('Could not clear caches:', error.message);
+      }
+
+      // Verify blog removal by checking the file system
+      try {
+        // Check if the blog file still exists
+        const blogStillExists = await fs.access(blogFilePath).then(() => true).catch(() => false);
+        if (blogStillExists) {
+          console.warn(`Warning: Blog file ${blogFilePath} still exists after deletion`);
         }
+        
+        // Count remaining blog files
+        const remainingFiles = await fs.readdir(blogDirPath);
+        const remainingBlogs = remainingFiles.filter(file => file.endsWith('.tsx') && file !== 'index.ts');
+        console.log(`Verified blog removal: ${remainingBlogs.length} blog files remaining`);
+        
       } catch (error) {
         console.warn('Could not verify blog removal:', error.message);
       }
