@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -20,7 +20,9 @@ import {
   TrendingUp,
   Coffee,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  X,
+  Maximize2
 } from 'lucide-react';
 
 interface Attraction {
@@ -86,6 +88,71 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
   highlights,
   discoveryData 
 }) => {
+  const [selectedCard, setSelectedCard] = useState<number | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Handle card click
+  const handleCardClick = (index: number) => {
+    setSelectedCard(index);
+    setIsModalOpen(true);
+  };
+
+  // Handle modal close
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedCard(null);
+  };
+
+  // Handle modal navigation
+  const handleModalNext = () => {
+    if (selectedCard !== null) {
+      setSelectedCard((selectedCard + 1) % 6); // 6 discovery cards
+    }
+  };
+
+  const handleModalPrev = () => {
+    if (selectedCard !== null) {
+      setSelectedCard(selectedCard === 0 ? 5 : selectedCard - 1); // 6 discovery cards
+    }
+  };
+
+  // Handle scroll tracking for preview indicators
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollContainerRef.current) {
+        const scrollLeft = scrollContainerRef.current.scrollLeft;
+        const cardWidth = 360; // Approximate card width including gap
+        const newIndex = Math.round(scrollLeft / cardWidth);
+        setCurrentSlide(Math.max(0, Math.min(newIndex, 5))); // Max 6 cards
+      }
+    };
+
+    const scrollContainer = scrollContainerRef.current;
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', handleScroll);
+      return () => scrollContainer.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
+  // Keyboard navigation for modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isModalOpen) {
+        if (e.key === 'Escape') {
+          handleModalClose();
+        } else if (e.key === 'ArrowLeft') {
+          handleModalPrev();
+        } else if (e.key === 'ArrowRight') {
+          handleModalNext();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isModalOpen, selectedCard]);
   const [activeCard, setActiveCard] = useState(0);
 
   // Helper function to categorize attractions by difficulty/accessibility
@@ -542,6 +609,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
       {/* Horizontal Slider */}
       <div className="relative -mx-4 py-2">
         <div 
+          ref={scrollContainerRef}
           className="flex gap-6 overflow-x-auto pb-6 pl-6 pr-6 scrollbar-hide snap-x snap-mandatory touch-pan-x" 
           style={{ 
             scrollbarWidth: 'none', 
@@ -550,14 +618,21 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
           }}
         >
           {discoveryCards.map((card, index) => (
-            <Card key={index} className="flex-shrink-0 w-[340px] sm:w-96 lg:w-[420px] h-[380px] sm:h-[420px] bg-white dark:bg-gray-800 hover:shadow-2xl hover:scale-105 transition-all duration-300 snap-start border-2 border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-lg">
+            <Card 
+              key={index} 
+              className="flex-shrink-0 w-[340px] sm:w-96 lg:w-[420px] h-[380px] sm:h-[420px] bg-white dark:bg-gray-800 hover:shadow-2xl hover:scale-105 transition-all duration-300 snap-start border-2 border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-lg cursor-pointer group"
+              onClick={() => handleCardClick(index)}
+            >
               <div className="h-full flex flex-col">
                 <CardHeader className="pb-4 pt-6 px-6 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-800 dark:via-gray-700 dark:to-gray-600 flex-shrink-0 border-b border-gray-200 dark:border-gray-600">
                   <CardTitle className="flex items-center gap-3 text-xl font-bold text-gray-900 dark:text-white mb-2">
-                    <div className="p-2 rounded-full bg-white dark:bg-gray-800 shadow-md">
+                    <div className="p-2 rounded-full bg-white dark:bg-gray-800 shadow-md group-hover:shadow-lg transition-shadow">
                       {card.icon}
                     </div>
                     <span className="truncate">{card.title}</span>
+                    <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Maximize2 className="w-5 h-5 text-gray-500" />
+                    </div>
                   </CardTitle>
                   <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
                     {card.summary}
@@ -573,13 +648,37 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
           ))}
         </div>
         
-        {/* Scroll Indicator */}
-        <div className="flex justify-center mt-2 space-x-1">
-          {discoveryCards.map((_, index) => (
+        {/* Preview Indicators */}
+        <div className="flex justify-center mt-4 space-x-2">
+          {discoveryCards.map((card, index) => (
             <div
               key={index}
-              className="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600"
-            />
+              className={`flex items-center gap-2 px-3 py-2 rounded-full border transition-all duration-300 cursor-pointer hover:shadow-md ${
+                currentSlide === index 
+                  ? 'bg-blue-100 border-blue-300 dark:bg-blue-900/30 dark:border-blue-600' 
+                  : 'bg-gray-100 border-gray-200 dark:bg-gray-700 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600'
+              }`}
+              onClick={() => {
+                if (scrollContainerRef.current) {
+                  const cardWidth = 360;
+                  scrollContainerRef.current.scrollTo({
+                    left: index * cardWidth,
+                    behavior: 'smooth'
+                  });
+                }
+              }}
+            >
+              <div className={`w-2 h-2 rounded-full ${
+                currentSlide === index ? 'bg-blue-500' : 'bg-gray-400'
+              }`} />
+              <span className={`text-xs font-medium ${
+                currentSlide === index 
+                  ? 'text-blue-700 dark:text-blue-300' 
+                  : 'text-gray-600 dark:text-gray-400'
+              }`}>
+                {card.title}
+              </span>
+            </div>
           ))}
         </div>
       </div>
@@ -587,9 +686,86 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
       {/* Mobile-friendly note */}
       <div className="mt-3 text-center">
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          Swipe left to explore more discovery cards
+          Swipe left to explore more discovery cards • Click any card to view full details
         </p>
       </div>
+
+      {/* Modal */}
+      {isModalOpen && selectedCard !== null && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl animate-in fade-in-0 zoom-in-95 duration-300">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-700">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-full bg-white dark:bg-gray-800 shadow-md">
+                  {discoveryCards[selectedCard].icon}
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                    {discoveryCards[selectedCard].title}
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    {discoveryCards[selectedCard].summary}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleModalPrev}
+                  className="h-8 w-8 p-0"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <span className="text-sm text-gray-500 px-2">
+                  {selectedCard + 1} of 6
+                </span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleModalNext}
+                  className="h-8 w-8 p-0"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleModalClose}
+                  className="h-8 w-8 p-0 ml-2"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+            
+            {/* Modal Content */}
+            <div className="p-6 overflow-y-auto max-h-[70vh]">
+              <div className="space-y-4 text-base text-gray-700 dark:text-gray-300">
+                {discoveryCards[selectedCard].content}
+              </div>
+            </div>
+            
+            {/* Modal Footer */}
+            <div className="flex justify-between items-center p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Use arrow keys to navigate • Press Esc to close
+              </p>
+              <div className="flex gap-2">
+                <Button variant="outline" onClick={handleModalPrev} size="sm">
+                  <ChevronLeft className="h-4 w-4 mr-1" />
+                  Previous
+                </Button>
+                <Button variant="outline" onClick={handleModalNext} size="sm">
+                  Next
+                  <ChevronRight className="h-4 w-4 ml-1" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
