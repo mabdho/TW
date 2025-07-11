@@ -529,20 +529,20 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
   ];
 
   return (
-    <div className="w-full">
-      <div className="mb-4 sm:mb-6">
-        <h3 className="text-xl sm:text-2xl font-bold mb-2 text-gray-900 dark:text-white">
+    <div className="w-full py-4">
+      <div className="mb-6 sm:mb-8">
+        <h3 className="text-2xl sm:text-3xl font-bold mb-3 text-gray-900 dark:text-white">
           Discover {cityName}
         </h3>
-        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+        <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400">
           Interactive guides to help you explore like a local
         </p>
       </div>
 
       {/* Horizontal Slider */}
-      <div className="relative -mx-4">
+      <div className="relative -mx-4 py-2">
         <div 
-          className="flex gap-4 overflow-x-auto pb-4 pl-4 pr-4 scrollbar-hide snap-x snap-mandatory touch-pan-x" 
+          className="flex gap-6 overflow-x-auto pb-6 pl-6 pr-6 scrollbar-hide snap-x snap-mandatory touch-pan-x" 
           style={{ 
             scrollbarWidth: 'none', 
             msOverflowStyle: 'none',
@@ -550,19 +550,21 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
           }}
         >
           {discoveryCards.map((card, index) => (
-            <Card key={index} className="flex-shrink-0 w-[320px] sm:w-80 lg:w-96 h-[280px] sm:h-[320px] bg-white dark:bg-gray-800 hover:shadow-xl transition-all duration-300 snap-start border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+            <Card key={index} className="flex-shrink-0 w-[340px] sm:w-96 lg:w-[420px] h-[380px] sm:h-[420px] bg-white dark:bg-gray-800 hover:shadow-2xl hover:scale-105 transition-all duration-300 snap-start border-2 border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-lg">
               <div className="h-full flex flex-col">
-                <CardHeader className="pb-3 pt-4 px-4 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 flex-shrink-0">
-                  <CardTitle className="flex items-center gap-2 text-lg font-semibold text-gray-800 dark:text-white">
-                    {card.icon}
+                <CardHeader className="pb-4 pt-6 px-6 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-800 dark:via-gray-700 dark:to-gray-600 flex-shrink-0 border-b border-gray-200 dark:border-gray-600">
+                  <CardTitle className="flex items-center gap-3 text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    <div className="p-2 rounded-full bg-white dark:bg-gray-800 shadow-md">
+                      {card.icon}
+                    </div>
                     <span className="truncate">{card.title}</span>
                   </CardTitle>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
                     {card.summary}
                   </p>
                 </CardHeader>
-                <CardContent className="flex-1 p-4 bg-white dark:bg-gray-800 overflow-y-auto">
-                  <div className="space-y-2">
+                <CardContent className="flex-1 p-6 bg-white dark:bg-gray-800 overflow-y-auto">
+                  <div className="space-y-4">
                     {card.content}
                   </div>
                 </CardContent>
