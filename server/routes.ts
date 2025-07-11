@@ -77,7 +77,7 @@ Generate content with this EXACT structure in JSON format:
         "costLevel": "Free, Budget-friendly, Moderate, or Expensive",
         "seasonalBest": "Spring, Summer, Fall, Winter, or Year-round",
         "photoOpportunity": "Describe the best photo spots and timing",
-        "insiderTip": "Specific local knowledge or pro tip",
+        "insiderTip": "ACTIONABLE insider tip with specific details - include exact timing, location, or method that locals use",
         "hiddenGem": true/false,
         "familyFriendly": true/false,
         "accessibilityNotes": "Any accessibility information"
@@ -116,10 +116,10 @@ Generate content with this EXACT structure in JSON format:
       "splurgeWorthy": "List 2-3 premium experiences worth the cost"
     },
     "localSecrets": [
-      "Hidden gem known mainly to locals",
-      "Best photo spot that's not crowded",
-      "Local food spot or market recommendation",
-      "Best time to avoid crowds at popular spots"
+      "CONTEXTUAL insider tip with specific location, timing, or method - explain WHY this tip is valuable and HOW to use it",
+      "SECRET photo spot with exact location details, best time to visit, and what makes it special",
+      "LOCAL dining tip with specific restaurant name, dish recommendation, and cultural context",
+      "CROWD-BEATING strategy with specific times, alternative routes, or lesser-known entrances"
     ],
     "diningHighlights": {
       "mustTryDishes": "3-4 signature local dishes or drinks to try",
@@ -154,6 +154,8 @@ Generate 8-12 detailed attractions. MANDATORY: Include 2-3 dining-related attrac
 - For dining attractions: describe ambiance, signature dishes, pricing, local food culture
 - KEEP DESCRIPTIONS CONCISE (150-200 words max per attraction to prevent JSON truncation)
 
+CRITICAL: All insider tips must be ACTIONABLE and CONTEXTUAL. Instead of generic tips like "visit early", provide specific details like "visit at 7:30 AM when locals arrive for morning coffee" or "enter through the side door on Via XX to avoid tourist crowds" or "ask for the unmarked 'local menu' available only in Italian". Every tip should include WHO, WHAT, WHERE, WHEN, and WHY.
+
 For each attraction, include comprehensive discoveryTags:
 - timeRequired: Be specific (e.g., "30-60 minutes", "1-2 hours", "Half day", "Full day")
 - experienceLevel: "Easy Access", "Moderate Adventure", or "Local Expert"
@@ -169,7 +171,7 @@ For each attraction, include comprehensive discoveryTags:
 Fill out the complete discoveryData section with:
 - cityPersonality: 2-3 descriptive words
 - budgetBreakdown: Specific lists of activities by price range
-- localSecrets: 4 insider tips that locals would know
+- localSecrets: 4 ACTIONABLE insider tips with specific context (exact locations, timing, methods) that locals would know and WHY they're valuable
 - diningHighlights: Complete section with local dishes, best cafes, top restaurants, food markets, and dining tips
 - seasonalHighlights: What makes each season special
 - quickFacts: Accurate statistics about the attractions
