@@ -169,7 +169,8 @@ const cities = [
   { "name": "Winnipeg", "country": "Canada", "path": "/best-things-to-do-in-winnipeg", "continent": "North America" },
   { "name": "Yogyakarta", "country": "Indonesia", "path": "/best-things-to-do-in-yogyakarta", "continent": "Asia" },
   { "name": "Zagreb", "country": "Croatia", "path": "/best-things-to-do-in-zagreb", "continent": "Europe" },
-  { "name": "Zaragoza", "country": "Spain", "path": "/best-things-to-do-in-zaragoza", "continent": "Europe" }
+  { "name": "Zaragoza", "country": "Spain", "path": "/best-things-to-do-in-zaragoza", "continent": "Europe" },
+  { "name": "Zurich", "country": "Switzerland", "path": "/zurich", "continent": "Europe" }
 ];
 
 const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America", "South America"];
