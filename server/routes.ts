@@ -22,6 +22,31 @@ import {
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // City page SSR routes - serve pre-rendered HTML with proper SEO
+  // This MUST be before other routes to catch city pages
+  app.get('/best-things-to-do-in-*', async (req, res, next) => {
+    try {
+      const url = req.originalUrl;
+      
+      // Check for pre-rendered static HTML file
+      const staticDistPath = path.join(process.cwd(), 'dist', 'public');
+      const staticHtmlPath = path.join(staticDistPath, url, 'index.html');
+      
+      try {
+        const staticContent = await fs.readFile(staticHtmlPath, 'utf-8');
+        console.log(`Serving pre-rendered city page: ${staticHtmlPath}`);
+        return res.status(200).set({ 'Content-Type': 'text/html' }).send(staticContent);
+      } catch (staticError) {
+        console.log(`No static file found for ${url}, falling back to dynamic template`);
+        // Fall back to default behavior
+        next();
+      }
+    } catch (error) {
+      console.error('Error serving city page:', error);
+      next();
+    }
+  });
+
   // Admin route to generate city pages
   app.post('/api/admin/generate-city-page', async (req, res) => {
     try {
@@ -853,6 +878,8 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       res.json([]); // Return empty array if no blogs exist
     }
   });
+
+
 
   // SEO API routes
   app.post('/api/seo/validate', validateSEOData);

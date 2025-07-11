@@ -39,28 +39,98 @@ export async function validateSEOData(req: Request, res: Response) {
  */
 export async function getSitemap(req: Request, res: Response) {
   try {
-    // Get sitemap from Firestore
-    const sitemapDoc = await db.collection('system').doc('sitemap').get();
+    // Generate sitemap on-demand instead of relying on Firestore
+    const fs = await import('fs/promises');
+    const path = await import('path');
     
-    if (!sitemapDoc.exists) {
-      // Generate sitemap if it doesn't exist
-      await updateSitemap();
-      const newSitemapDoc = await db.collection('system').doc('sitemap').get();
-      
-      if (newSitemapDoc.exists) {
-        const sitemapData = newSitemapDoc.data();
-        res.set('Content-Type', 'application/xml');
-        res.send(sitemapData.xml);
-      } else {
-        res.status(404).json({ error: 'Sitemap not found' });
-      }
-    } else {
-      const sitemapData = sitemapDoc.data();
-      res.set('Content-Type', 'application/xml');
-      res.send(sitemapData.xml);
+    // Get all city files from filesystem
+    const citiesDir = path.join(process.cwd(), 'client/src/pages/cities');
+    const cityFiles = await fs.readdir(citiesDir);
+    const cities = cityFiles
+      .filter(file => file.endsWith('.tsx'))
+      .map(file => {
+        const cityName = file.replace('.tsx', '');
+        // Convert PascalCase to kebab-case properly
+        const cityPath = `/best-things-to-do-in-${cityName.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '')}`;
+        return {
+          name: cityName,
+          path: cityPath
+        };
+      });
+    
+    // Get all blog files from filesystem
+    const blogsDir = path.join(process.cwd(), 'client/src/blogs');
+    let blogs = [];
+    try {
+      const blogFiles = await fs.readdir(blogsDir);
+      blogs = blogFiles
+        .filter(file => file.endsWith('.tsx') && file !== 'index.ts')
+        .map(file => {
+          const blogId = file.replace('.tsx', '');
+          return {
+            id: blogId,
+            path: `/blog/${blogId}`
+          };
+        });
+    } catch (error) {
+      console.log('No blogs directory or empty blogs');
     }
+    
+    // Generate sitemap XML
+    const baseUrl = req.headers.host?.includes('localhost') ? 'http://localhost:5000' : 'https://travelwanders.com';
+    const currentDate = new Date().toISOString().split('T')[0];
+    
+    let sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${baseUrl}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/destinations</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/blogs</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>`;
+    
+    // Add city pages
+    cities.forEach(city => {
+      sitemapXml += `
+  <url>
+    <loc>${baseUrl}${city.path}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>`;
+    });
+    
+    // Add blog pages
+    blogs.forEach(blog => {
+      sitemapXml += `
+  <url>
+    <loc>${baseUrl}${blog.path}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`;
+    });
+    
+    sitemapXml += `
+</urlset>`;
+    
+    res.set('Content-Type', 'application/xml');
+    res.send(sitemapXml);
+    
   } catch (error) {
-    console.error('Error getting sitemap:', error);
+    console.error('Error generating sitemap:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 }
@@ -208,6 +278,7 @@ export async function batchUpdateBlogsSEO(req: Request, res: Response) {
  */
 export async function getRobotsTxt(req: Request, res: Response) {
   try {
+    const baseUrl = req.headers.host?.includes('localhost') ? 'http://localhost:5000' : 'https://travelwanders.com';
     const robotsTxt = `User-agent: *
 Allow: /
 
@@ -220,7 +291,7 @@ Allow: /
 Crawl-delay: 2
 
 # Sitemaps
-Sitemap: https://travelwanders.com/api/seo/sitemap.xml
+Sitemap: ${baseUrl}/sitemap.xml
 
 # Disallow admin areas
 Disallow: /admin
