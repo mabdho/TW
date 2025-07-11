@@ -10,9 +10,10 @@ interface SEOHeadProps {
   seoData: SEOData;
   structuredData?: object;
   breadcrumbData?: object;
+  faqData?: object;
 }
 
-export const SEOHead: React.FC<SEOHeadProps> = ({ seoData, structuredData, breadcrumbData }) => {
+export const SEOHead: React.FC<SEOHeadProps> = ({ seoData, structuredData, breadcrumbData, faqData }) => {
   const {
     title,
     description,
@@ -120,7 +121,19 @@ export const SEOHead: React.FC<SEOHeadProps> = ({ seoData, structuredData, bread
       }
       breadcrumbScript.textContent = JSON.stringify(breadcrumbData);
     }
-  }, [title, description, keywords, canonicalUrl, ogImage, ogType, author, publishedTime, modifiedTime, section, tags, structuredData, breadcrumbData]);
+    
+    // FAQ Structured Data
+    if (faqData) {
+      let faqScript = document.getElementById('faq-data');
+      if (!faqScript) {
+        faqScript = document.createElement('script');
+        faqScript.id = 'faq-data';
+        faqScript.type = 'application/ld+json';
+        document.head.appendChild(faqScript);
+      }
+      faqScript.textContent = JSON.stringify(faqData);
+    }
+  }, [title, description, keywords, canonicalUrl, ogImage, ogType, author, publishedTime, modifiedTime, section, tags, structuredData, breadcrumbData, faqData]);
 
   return null;
 };

@@ -11,6 +11,7 @@ interface BasePageTemplateProps {
   seoData: SEOData;
   structuredData?: object;
   breadcrumbData?: object;
+  faqData?: object;
   children: React.ReactNode;
   className?: string;
 }
@@ -19,6 +20,7 @@ export const BasePageTemplate: React.FC<BasePageTemplateProps> = ({
   seoData,
   structuredData,
   breadcrumbData,
+  faqData,
   children,
   className = ''
 }) => {
@@ -45,6 +47,7 @@ export const BasePageTemplate: React.FC<BasePageTemplateProps> = ({
         seoData={seoData}
         structuredData={structuredData}
         breadcrumbData={breadcrumbData}
+        faqData={faqData}
       />
       
       <div className={`min-h-screen bg-white dark:bg-gray-900 ${className}`}>

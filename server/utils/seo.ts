@@ -233,10 +233,40 @@ export function generateCityStructuredData(cityData: CityData, seoData: SEOData)
         "description": attraction.description
       }))
     },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": seoData.canonicalUrl,
+      "name": seoData.title,
+      "description": seoData.description,
+      "url": seoData.canonicalUrl
+    },
     "dateModified": seoData.lastModified,
     "url": seoData.canonicalUrl
   };
 }
+
+/**
+ * Generate FAQPage structured data for FAQ sections
+ */
+export function generateFAQStructuredData(faqs: Array<{question: string; answer: string}>, pageUrl: string): object {
+  if (!faqs || faqs.length === 0) return {};
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    })),
+    "url": pageUrl
+  };
+}
+
+
 
 /**
  * Generate structured data for blog posts

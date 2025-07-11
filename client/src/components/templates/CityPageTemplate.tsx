@@ -6,7 +6,7 @@
 
 import React from 'react';
 import BasePageTemplate from './BasePageTemplate';
-import { CityData, generateCitySEOData, generateCityStructuredData, generateBreadcrumbStructuredData, generateRelatedCityLinks, generateContextualLinks } from '../../utils/seo';
+import { CityData, generateCitySEOData, generateCityStructuredData, generateBreadcrumbStructuredData, generateFAQStructuredData, generateRelatedCityLinks, generateContextualLinks } from '../../utils/seo';
 import { InternalLinks } from '../InternalLinks';
 import { getAllCitiesData, getAllBlogsData } from '../../utils/dataService';
 import { generatePlaceSchema } from '../../utils/geoData';
@@ -18,6 +18,7 @@ interface CityPageTemplateProps {
   className?: string;
   baseUrl?: string;
   imageUrl?: string;
+  faqs?: Array<{question: string; answer: string}>;
 }
 
 export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
@@ -25,7 +26,8 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
   children,
   className = '',
   baseUrl,
-  imageUrl
+  imageUrl,
+  faqs
 }) => {
   // Generate SEO data for city page
   const seoData = generateCitySEOData(cityData, baseUrl);
@@ -52,12 +54,16 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
       url: seoData.canonicalUrl
     }
   ]);
+  
+  // Generate FAQ structured data if FAQs exist
+  const faqData = faqs && faqs.length > 0 ? generateFAQStructuredData(faqs, seoData.canonicalUrl) : undefined;
 
   return (
     <BasePageTemplate
       seoData={seoData}
       structuredData={structuredData}
       breadcrumbData={breadcrumbData}
+      faqData={faqData}
       className={className}
     >
       {/* City-specific components */}
