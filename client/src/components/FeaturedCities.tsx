@@ -68,10 +68,12 @@ export const FeaturedCities = () => {
 
         {/* Bottom Call to Action */}
         <div className="text-center">
-          <Button className="bg-green-600 hover:bg-green-700 text-white font-medium px-8 py-3 text-base">
-            View all destinations
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          <a href="/destinations">
+            <Button className="bg-green-600 hover:bg-green-700 text-white font-medium px-8 py-3 text-base">
+              View all destinations
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </a>
         </div>
       </div>
     </section>
