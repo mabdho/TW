@@ -37,8 +37,10 @@ export const Navigation = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <a href="/admin" className="text-orange-600 hover:text-orange-700 transition-colors font-medium text-sm">
-              Admin
+            <a href="/destinations">
+              <Button className="bg-green-600 hover:bg-green-700 text-white font-medium">
+                Get Started
+              </Button>
             </a>
           </div>
 
@@ -83,12 +85,13 @@ export const Navigation = () => {
             </a>
             <div className="pt-4 pb-2 border-t border-gray-200 mt-4">
               <div className="px-3">
-                <a 
-                  href="/admin" 
-                  className="block py-3 text-base text-orange-600 hover:text-orange-700 transition-colors font-medium"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Admin
+                <a href="/destinations">
+                  <Button 
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-medium"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Get Started
+                  </Button>
                 </a>
               </div>
             </div>

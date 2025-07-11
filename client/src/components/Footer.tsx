@@ -19,18 +19,26 @@ export const Footer = () => {
                 We curate the best travel experiences to make your journey unforgettable.
               </p>
               <div className="flex gap-3 sm:gap-4">
-                <Button variant="ghost" size="icon" className="hover:text-primary h-8 w-8 sm:h-10 sm:w-10">
-                  <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
-                </Button>
-                <Button variant="ghost" size="icon" className="hover:text-primary h-8 w-8 sm:h-10 sm:w-10">
-                  <Twitter className="h-4 w-4 sm:h-5 sm:w-5" />
-                </Button>
-                <Button variant="ghost" size="icon" className="hover:text-primary h-8 w-8 sm:h-10 sm:w-10">
-                  <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
-                </Button>
-                <Button variant="ghost" size="icon" className="hover:text-primary h-8 w-8 sm:h-10 sm:w-10">
-                  <Youtube className="h-4 w-4 sm:h-5 sm:w-5" />
-                </Button>
+                <a href="https://facebook.com/travelwanders" target="_blank" rel="noopener noreferrer">
+                  <Button variant="ghost" size="icon" className="hover:text-primary h-8 w-8 sm:h-10 sm:w-10">
+                    <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
+                  </Button>
+                </a>
+                <a href="https://twitter.com/travelwanders" target="_blank" rel="noopener noreferrer">
+                  <Button variant="ghost" size="icon" className="hover:text-primary h-8 w-8 sm:h-10 sm:w-10">
+                    <Twitter className="h-4 w-4 sm:h-5 sm:w-5" />
+                  </Button>
+                </a>
+                <a href="https://instagram.com/travelwanders" target="_blank" rel="noopener noreferrer">
+                  <Button variant="ghost" size="icon" className="hover:text-primary h-8 w-8 sm:h-10 sm:w-10">
+                    <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
+                  </Button>
+                </a>
+                <a href="https://youtube.com/travelwanders" target="_blank" rel="noopener noreferrer">
+                  <Button variant="ghost" size="icon" className="hover:text-primary h-8 w-8 sm:h-10 sm:w-10">
+                    <Youtube className="h-4 w-4 sm:h-5 sm:w-5" />
+                  </Button>
+                </a>
               </div>
             </div>
 
@@ -39,60 +47,60 @@ export const Footer = () => {
               <h3 className="font-semibold text-foreground mb-4 text-sm sm:text-base">Quick Links</h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="#destinations" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                  <a href="/destinations" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
                     Destinations
                   </a>
                 </li>
                 <li>
-                  <a href="#experiences" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
-                    Experiences
-                  </a>
-                </li>
-                <li>
-                  <a href="#about" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a href="#contact" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#blog" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                  <a href="/blogs" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
                     Travel Blog
+                  </a>
+                </li>
+                <li>
+                  <a href="/" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="/best-things-to-do-in-tokyo" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    Featured Cities
+                  </a>
+                </li>
+                <li>
+                  <a href="/admin" className="text-sm sm:text-base text-orange-600 hover:text-orange-700 transition-colors flex items-center gap-2">
+                    🔒 Admin Panel
                   </a>
                 </li>
               </ul>
             </div>
 
-            {/* Support */}
+            {/* Popular Cities */}
             <div>
-              <h3 className="font-semibold text-foreground mb-4 text-sm sm:text-base">Support</h3>
+              <h3 className="font-semibold text-foreground mb-4 text-sm sm:text-base">Popular Cities</h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="#help" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
-                    Help Center
+                  <a href="/best-things-to-do-in-tokyo" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    Tokyo
                   </a>
                 </li>
                 <li>
-                  <a href="#safety" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
-                    Safety Guidelines
+                  <a href="/best-things-to-do-in-new-york" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    New York
                   </a>
                 </li>
                 <li>
-                  <a href="#terms" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
-                    Terms of Service
+                  <a href="/best-things-to-do-in-paris" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    Paris
                   </a>
                 </li>
                 <li>
-                  <a href="#privacy" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
-                    Privacy Policy
+                  <a href="/best-things-to-do-in-london" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    London
                   </a>
                 </li>
                 <li>
-                  <a href="#faq" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
-                    FAQ
+                  <a href="/best-things-to-do-in-dubai" className="text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors">
+                    Dubai
                   </a>
                 </li>
               </ul>
@@ -107,14 +115,14 @@ export const Footer = () => {
               © 2025 TravelWanders. All rights reserved. Made with ❤️ for travelers worldwide.
             </p>
             <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm">
-              <a href="#privacy" className="text-muted-foreground hover:text-primary transition-colors">
-                Privacy
+              <a href="/destinations" className="text-muted-foreground hover:text-primary transition-colors">
+                Destinations
               </a>
-              <a href="#terms" className="text-muted-foreground hover:text-primary transition-colors">
-                Terms
+              <a href="/blogs" className="text-muted-foreground hover:text-primary transition-colors">
+                Blogs
               </a>
-              <a href="#cookies" className="text-muted-foreground hover:text-primary transition-colors">
-                Cookies
+              <a href="/" className="text-muted-foreground hover:text-primary transition-colors">
+                Home
               </a>
             </div>
           </div>
