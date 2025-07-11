@@ -212,10 +212,12 @@ Generate content with this EXACT structure in valid JSON format:
       "splurgeWorthy": "List 2–3 premium experiences worth the cost"
     },
     "localSecrets": [
-      "CONTEXTUAL insider tip with specific location, timing, or method - explain WHY this tip is valuable and HOW to use it",
-      "SECRET photo spot with exact location details, best time to visit, and what makes it special",
-      "LOCAL dining tip with specific restaurant name, dish recommendation, and cultural context",
-      "CROWD-BEATING strategy with specific times, alternative routes, or lesser-known entrances"
+      "Best time to visit popular attractions to avoid crowds - provide EXACT times and days when crowds are lightest, with specific entrance strategies",
+      "How to use public transport like a local - specify which metro/transport cards to buy, essential apps to download, and local transit etiquette tips",
+      "Realistic budget estimate for 3 days - break down daily costs for meals, transport, attractions, and miscellaneous expenses with specific amounts in local currency",
+      "Best markets or local shops for authentic goods - name specific markets, shops, or districts where locals shop, what to buy, and how to negotiate prices",
+      "Tourist traps to avoid - identify specific overpriced restaurants, shops, or attractions that target tourists and suggest better local alternatives",
+      "Local festivals or seasonal events - mention specific dates, holidays, or events that could affect travel plans, both positively (festivals to attend) and negatively (closures or crowds)"
     ],
     "diningHighlights": {
       "mustTryDishes": "3–4 signature local dishes or drinks to try",
@@ -252,6 +254,14 @@ Generate 8-12 detailed attractions. MANDATORY: Include 2-3 dining-related attrac
 
 CRITICAL: All insider tips must be ACTIONABLE and CONTEXTUAL. Instead of generic tips like "visit early", provide specific details like "visit at 7:30 AM when locals arrive for morning coffee" or "enter through the side door on Via XX to avoid tourist crowds" or "ask for the unmarked 'local menu' available only in Italian". Every tip should include WHO, WHAT, WHERE, WHEN, and WHY.
 
+ENHANCED LOCAL SECRETS REQUIREMENTS: Each of the 6 localSecrets must be highly specific:
+1. Crowd avoidance: Exact times (e.g., "Tuesdays at 8:30 AM"), specific entrances, off-peak days
+2. Transport tips: Exact card names (e.g., "MetroCard vs. OMNY"), specific app names (e.g., "Citymapper"), platform numbers, local etiquette rules
+3. Budget breakdown: Actual currency amounts (e.g., "€45-60 per day"), meal costs by type, transportation daily costs, attraction pricing
+4. Shopping locations: Specific market names, districts, street names, bargaining strategies, what items to buy
+5. Tourist traps: Name specific restaurants/shops to avoid, exact reasons why, and precise alternatives with addresses
+6. Events/festivals: Exact dates if known, months for seasonal events, how they impact transportation/closures, cultural significance
+
 For each attraction, include comprehensive discoveryTags:
 - timeRequired: Be specific (e.g., "30-60 minutes", "1-2 hours", "Half day", "Full day")
 - experienceLevel: "Easy Access", "Moderate Adventure", or "Local Expert"
@@ -267,7 +277,7 @@ For each attraction, include comprehensive discoveryTags:
 Fill out the complete discoveryData section with:
 - cityPersonality: 2-3 descriptive words
 - budgetBreakdown: Specific lists of activities by price range
-- localSecrets: 4 ACTIONABLE insider tips with specific context (exact locations, timing, methods) that locals would know and WHY they're valuable
+- localSecrets: 6 SPECIFIC insider tips following the exact categories above - provide precise times, costs, app names, specific locations, and actionable advice that locals would actually use
 - diningHighlights: Complete section with local dishes, best cafes, top restaurants, food markets, and dining tips
 - seasonalHighlights: What makes each season special
 - quickFacts: Accurate statistics about the attractions
