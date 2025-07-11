@@ -161,7 +161,8 @@ export default function AdminPage() {
     queryFn: async () => {
       try {
         const response = await apiRequest('GET', '/api/blogs');
-        return Array.isArray(response) ? response : [];
+        const data = await response.json();
+        return Array.isArray(data) ? data : [];
       } catch (error) {
         console.error('Error fetching blogs:', error);
         return [];

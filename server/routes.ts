@@ -814,7 +814,7 @@ function extractBlogDataFromFile(content: string): any | null {
     const contentMatch = blogObjectString.match(/content: `([\s\S]*?)`(?=,\s*\w+:|$)/);
     const contentString = contentMatch ? contentMatch[1] : '';
     
-    console.log('Extracted blog data:', { id, title, excerpt, category });
+
     
     return {
       id,
