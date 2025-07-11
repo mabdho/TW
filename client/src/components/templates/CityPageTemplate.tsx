@@ -136,18 +136,6 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
           {children}
         </main>
 
-        {/* Internal Links Section */}
-        <section className="bg-gray-50 dark:bg-gray-900">
-          <InternalLinks
-            links={[
-              ...generateRelatedCityLinks(cityData, getAllCitiesData()),
-              ...generateContextualLinks(cityData, getAllBlogsData())
-            ]}
-            title="Explore More Destinations"
-            description={`Discover other amazing cities in ${cityData.country} and read our latest travel guides`}
-          />
-        </section>
-
         {/* Footer schema for local SEO */}
         <script
           type="application/ld+json"

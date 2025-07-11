@@ -8,7 +8,9 @@ import { MapPin, Clock, DollarSign, Globe, Star, Users, Info, Camera, Image, Che
 import { Navigation } from './Navigation';
 import { Footer } from './Footer';
 import { CityPageTemplate } from './templates/CityPageTemplate';
-import { CityData } from '../utils/seo';
+import { InternalLinks } from './InternalLinks';
+import { CityData, generateRelatedCityLinks, generateContextualLinks } from '../utils/seo';
+import { getAllCitiesData, getAllBlogsData } from '../utils/dataService';
 
 interface Attraction {
   name: string;
@@ -704,6 +706,19 @@ export const CityPage: React.FC<CityPageProps> = ({
           )}
         </Tabs>
       </div>
+      
+      {/* Internal Links Section - positioned before footer */}
+      <section className="bg-gray-50 dark:bg-gray-900">
+        <InternalLinks
+          links={[
+            ...generateRelatedCityLinks(finalCityData, getAllCitiesData()),
+            ...generateContextualLinks(finalCityData, getAllBlogsData())
+          ]}
+          title="Explore More Destinations"
+          description={`Discover other amazing cities in ${finalCityData.country} and read our latest travel guides`}
+        />
+      </section>
+      
       <Footer />
     </div>
     </CityPageTemplate>
