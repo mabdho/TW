@@ -27,7 +27,25 @@ const cityFormSchema = z.object({
   continent: z.string().min(1, 'Continent is required'),
   heroImageUrl: z.string().refine((val) => val === '' || z.string().url().safeParse(val).success, {
     message: 'Please enter a valid image URL or leave empty'
-  })
+  }),
+  generationMode: z.enum(['ai', 'manual']).default('ai'),
+  manualJson: z.string().optional()
+}).refine((data) => {
+  if (data.generationMode === 'manual' && !data.manualJson) {
+    return false;
+  }
+  if (data.generationMode === 'manual' && data.manualJson) {
+    try {
+      JSON.parse(data.manualJson);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+  return true;
+}, {
+  message: 'Valid JSON is required when using manual mode',
+  path: ['manualJson']
 });
 
 const blogFormSchema = z.object({
@@ -66,7 +84,9 @@ export default function AdminPage() {
       city: '',
       country: '',
       continent: '',
-      heroImageUrl: ''
+      heroImageUrl: '',
+      generationMode: 'ai',
+      manualJson: ''
     }
   });
 
@@ -291,12 +311,65 @@ export default function AdminPage() {
                       )}
                     />
 
-                    <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
-                      <h3 className="text-sm font-medium text-emerald-900 mb-2">🎯 Streamlined City Generation</h3>
-                      <p className="text-sm text-emerald-700">
-                        Just provide the city name, country, and continent. The AI will automatically generate comprehensive content with discovery features, SEO optimization, and professional visuals.
-                      </p>
-                    </div>
+                    <FormField
+                      control={cityForm.control}
+                      name="generationMode"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                          <div className="space-y-0.5">
+                            <FormLabel className="text-base">Generation Mode</FormLabel>
+                            <div className="text-sm text-gray-500">
+                              Use AI to generate content or provide manual JSON data
+                            </div>
+                          </div>
+                          <FormControl>
+                            <Switch
+                              checked={field.value === 'manual'}
+                              onCheckedChange={(checked) => field.onChange(checked ? 'manual' : 'ai')}
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+
+                    {cityForm.watch('generationMode') === 'manual' && (
+                      <FormField
+                        control={cityForm.control}
+                        name="manualJson"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>City JSON Data *</FormLabel>
+                            <FormControl>
+                              <Textarea 
+                                placeholder='{"metaTitle": "Best Things to Do in...", "attractions": [...], ...}'
+                                className="min-h-[200px] font-mono text-xs"
+                                {...field}
+                              />
+                            </FormControl>
+                            <div className="text-xs text-gray-500">
+                              Provide the complete JSON data structure for the city page. Must be valid JSON format.
+                            </div>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    )}
+
+                    {cityForm.watch('generationMode') === 'ai' ? (
+                      <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+                        <h3 className="text-sm font-medium text-emerald-900 mb-2">🎯 AI-Powered City Generation</h3>
+                        <p className="text-sm text-emerald-700">
+                          Just provide the city name, country, and continent. The AI will automatically generate comprehensive content with discovery features, SEO optimization, and professional visuals.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <h3 className="text-sm font-medium text-blue-900 mb-2">📝 Manual JSON Input</h3>
+                        <p className="text-sm text-blue-700">
+                          Provide your own JSON data structure. Must include all required fields: metaTitle, metaDescription, slug, description, attractions, logistics, faqs, and discoveryData.
+                        </p>
+                      </div>
+                    )}
 
                     <Button 
                       type="submit" 
@@ -306,10 +379,14 @@ export default function AdminPage() {
                       {generateCityPageMutation.isPending ? (
                         <>
                           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Generating City Page with AI...
+                          {cityForm.watch('generationMode') === 'manual' 
+                            ? 'Creating City Page...' 
+                            : 'Generating City Page with AI...'}
                         </>
                       ) : (
-                        'Generate City Page'
+                        cityForm.watch('generationMode') === 'manual' 
+                          ? 'Create City Page' 
+                          : 'Generate City Page'
                       )}
                     </Button>
                   </form>

@@ -50,13 +50,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Admin route to generate city pages
   app.post('/api/admin/generate-city-page', async (req, res) => {
     try {
-      const { city, country, continent, heroImageUrl } = req.body;
+      const { city, country, continent, heroImageUrl, generationMode, manualJson } = req.body;
 
       if (!city || !country) {
         return res.status(400).json({ error: 'City and country are required' });
       }
 
       let contentData;
+
+      if (generationMode === 'manual') {
+        if (!manualJson) {
+          return res.status(400).json({ error: 'Manual JSON data is required when using manual mode' });
+        }
+        
+        try {
+          contentData = JSON.parse(manualJson);
+          console.log('Using manual JSON data for city generation');
+        } catch (error) {
+          return res.status(400).json({ error: 'Invalid JSON format in manual data' });
+        }
+      } else {
 
       // Generate content using Gemini with fallback
         let model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
@@ -391,6 +404,7 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
           candidatesCount: jsonCandidates.length
         });
       }
+      } // Close the else block for AI generation
 
       // Generate the React component file
       const cityFileName = city.replace(/\s+/g, '');
