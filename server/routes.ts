@@ -46,9 +46,9 @@ Create a comprehensive travel guide with the title: "Best Things to Do in ${city
 The primary keyword is: "Best Things to Do in ${city}"
 The secondary keyword is: "Things to do in ${city}"
 
-Use both naturally throughout the content. Prioritize placing the **primary keyword** in the title, description, and within the first 1–2 sentences of content. Use the **secondary keyword** 4–5 times naturally in different sections.
+Use both naturally throughout the content. Prioritize placing the primary keyword in the title, description, and within the first 1–2 sentences of content. Use the secondary keyword 4–5 times naturally in different sections.
 
-Use the following **semantic variations** naturally across the content:
+Use the following semantic variations naturally across the content:
 * what to do in ${city}
 * top attractions in ${city}
 * must-see places in ${city}
@@ -58,12 +58,12 @@ Use the following **semantic variations** naturally across the content:
 * fun things to do in ${city}
 * ${city} itinerary
 
-This content will power **interactive discovery features**, including:
+This content will power interactive discovery features, including:
 * Discovery Cards with insider tips, photo opportunities, experience levels, and CAFES & RESTAURANTS
 * Interactive Explorer with filtering by interests, time, cost, and type
 * Smart categorization and personalized recommendations
 
-**SPECIAL FOCUS FOR CAFES & RESTAURANTS DISCOVERY CARD**:
+SPECIAL FOCUS FOR CAFES & RESTAURANTS DISCOVERY CARD:
 Include 2–4 notable cafes, restaurants, food markets, or dining experiences as attractions.
 Use keywords: "restaurant", "cafe", "coffee", "dining", "food", "cuisine", "eatery", "bistro", "market", "culinary", "meal"
 Describe the dining atmosphere, signature dishes, and local food culture
@@ -80,7 +80,7 @@ WRITING STYLE REQUIREMENTS:
 
 ---
 
-Generate content with this EXACT structure in **valid JSON** format:
+Generate content with this EXACT structure in valid JSON format:
 
 {
   "metaTitle": "15 Best Things to Do in ${city}, ${country} (2025 Guide)",
