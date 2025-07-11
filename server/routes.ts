@@ -144,7 +144,7 @@ Generate content with this EXACT structure in JSON format:
   }
 }
 
-Generate 8-15 detailed attractions. MANDATORY: Include 2-4 dining-related attractions (restaurants, cafes, food markets, street food, local cuisine spots). Write in a natural, human tone with:
+Generate 8-12 detailed attractions. MANDATORY: Include 2-3 dining-related attractions (restaurants, cafes, food markets, street food, local cuisine spots). Write in a natural, human tone with:
 - Varied sentence structure (mix of long and short sentences)
 - Subtle imperfections and hesitations ("perhaps", "I think", mild contradictions)
 - Personal touches and reactions
@@ -152,6 +152,7 @@ Generate 8-15 detailed attractions. MANDATORY: Include 2-4 dining-related attrac
 - Avoid overly rigid or textbook-like structure
 - Skip slang but maintain conversational flow
 - For dining attractions: describe ambiance, signature dishes, pricing, local food culture
+- KEEP DESCRIPTIONS CONCISE (150-200 words max per attraction to prevent JSON truncation)
 
 For each attraction, include comprehensive discoveryTags:
 - timeRequired: Be specific (e.g., "30-60 minutes", "1-2 hours", "Half day", "Full day")
@@ -173,15 +174,18 @@ Fill out the complete discoveryData section with:
 - seasonalHighlights: What makes each season special
 - quickFacts: Accurate statistics about the attractions
 
-Respond ONLY with valid JSON. Do NOT wrap the output in markdown code blocks (like \`\`\`json or \`\`\`). Do not include any commentary. Return only the JSON object.
+CRITICAL: Respond ONLY with a complete, valid JSON object. No markdown, no commentary, no extra text.
 
-CRITICAL JSON FORMATTING REQUIREMENTS:
-- Use only basic punctuation: periods, commas, apostrophes, hyphens
-- NO special characters like smart quotes, em dashes, or ellipsis
-- Escape all quotes in text content properly
-- Keep descriptions concise to avoid parsing issues
+JSON FORMATTING REQUIREMENTS:
+- Use standard double quotes for all strings: "text"
+- Escape internal quotes properly: "He said \\"Hello\\""
+- NO line breaks within string values - use spaces instead
+- NO special characters: smart quotes, em dashes, ellipsis
+- Keep attraction descriptions under 200 words each
+- Ensure ALL JSON brackets and braces are properly closed
+- End with a complete closing brace }
 
-Return only the JSON object with no additional text or formatting.`;
+VERIFY your JSON is complete before responding. The response MUST be parseable by JSON.parse().`;
 
       let result;
       try {
