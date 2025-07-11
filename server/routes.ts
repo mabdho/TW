@@ -28,7 +28,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const url = req.originalUrl;
       
-      // Check for pre-rendered static HTML file
+      // In development mode, always fall back to Vite for proper module loading
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`Development mode: routing ${url} to Vite`);
+        return next();
+      }
+      
+      // In production, check for pre-rendered static HTML file
       const staticDistPath = path.join(process.cwd(), 'dist', 'public');
       const staticHtmlPath = path.join(staticDistPath, url, 'index.html');
       
