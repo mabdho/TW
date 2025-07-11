@@ -6,14 +6,14 @@ import { Badge } from '@/components/ui/badge';
 
 // Get the last 8 cities from the cities array (most recently added)
 const featuredCities = [
-  { "name": "Rome", "country": "Italy", "path": "/best-things-to-do-in-rome", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1661964123160-8d049fa07f0c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { "name": "Milan", "country": "Italy", "path": "/best-things-to-do-in-milan", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1661962887170-e7db3f307c7a?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,
-  { "name": "Zurich", "country": "Switzerland", "path": "/best-things-to-do-in-zurich", "continent": "Europe", "imageUrl": "" },,,
-  { "name": "Trivandrum", "country": "India", "path": "/best-things-to-do-in-trivandrum", "continent": "Asia", "imageUrl": "" },,,
-  { "name": "Chicago", "country": "USA", "path": "/best-things-to-do-in-chicago", "continent": "North America", "imageUrl": "https://images.unsplash.com/photo-1623607769583-f95269221eaf?q=80&w=1375&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,
-  { "name": "Boston", "country": "USA", "path": "/best-things-to-do-in-boston", "continent": "North America", "imageUrl": "https://images.unsplash.com/photo-1720655259605-5b0237f6c512?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,
+  { "name": "Venice", "country": "Italy", "path": "/best-things-to-do-in-venice", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1661963047742-dabc5a735357?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { "name": "Rome", "country": "Italy", "path": "/best-things-to-do-in-rome", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1661964123160-8d049fa07f0c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,
+  { "name": "Milan", "country": "Italy", "path": "/best-things-to-do-in-milan", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1661962887170-e7db3f307c7a?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,
+  { "name": "Zurich", "country": "Switzerland", "path": "/best-things-to-do-in-zurich", "continent": "Europe", "imageUrl": "" },,,,
+  { "name": "Trivandrum", "country": "India", "path": "/best-things-to-do-in-trivandrum", "continent": "Asia", "imageUrl": "" },,,,
+  { "name": "Chicago", "country": "USA", "path": "/best-things-to-do-in-chicago", "continent": "North America", "imageUrl": "https://images.unsplash.com/photo-1623607769583-f95269221eaf?q=80&w=1375&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,
+  { "name": "Boston", "country": "USA", "path": "/best-things-to-do-in-boston", "continent": "North America", "imageUrl": "https://images.unsplash.com/photo-1720655259605-5b0237f6c512?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,
   { "name": "Dhaandhoo", "country": "Maldives", "path": "/best-things-to-do-in-dhaandhoo", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=1798&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,
-  { "name": "Berlin", "country": "Germany", "path": "/best-things-to-do-in-berlin", "continent": "Europe", "imageUrl": "" },,
 ];
 
 export const FeaturedCities = () => {
