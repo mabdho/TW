@@ -12,6 +12,8 @@ import { InternalLinks } from './InternalLinks';
 import { CityData, generateRelatedCityLinks, generateContextualLinks } from '../utils/seo';
 import { getAllCitiesData, getAllBlogsData } from '../utils/dataService';
 import { OptimizedGalleryImage, optimizeGalleryImages } from '../utils/imageOptimization';
+import { DiscoveryCards } from './DiscoveryCards';
+import { InteractiveAttractionExplorer } from './InteractiveAttractionExplorer';
 
 interface Attraction {
   name: string;
@@ -78,58 +80,15 @@ export const CityPage: React.FC<CityPageProps> = ({
   
   // 🔧 SEO IMPROVEMENT: Optimize gallery images with SEO-friendly alt text
   const optimizedGalleryImages = cityData ? optimizeGalleryImages(cityData, galleryImages) : [];
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const top5Attractions = attractions.slice(0, 5);
   
   // Calculate number of tabs dynamically
-  const tabCount = 2 + (logistics ? 1 : 0) + (faqs ? 1 : 0);
-  const mobileGridCols = tabCount === 2 ? 'grid-cols-2' : 
-                        tabCount === 3 ? 'grid-cols-3' : 
-                        tabCount === 4 ? 'grid-cols-4' : 'grid-cols-5';
+  const tabCount = 3 + (logistics ? 1 : 0) + (faqs ? 1 : 0);
+  const mobileGridCols = tabCount === 3 ? 'grid-cols-3' : 
+                        tabCount === 4 ? 'grid-cols-4' : 
+                        tabCount === 5 ? 'grid-cols-5' : 'grid-cols-6';
 
-  // Generate unique gradient colors based on city name
-  const getGradientClass = (cityName: string) => {
-    const hash = cityName.split('').reduce((acc, char) => char.charCodeAt(0) + acc, 0);
-    const gradients = [
-      'from-blue-400 via-purple-500 to-pink-500',
-      'from-green-400 via-blue-500 to-purple-600',
-      'from-yellow-400 via-orange-500 to-red-500',
-      'from-pink-400 via-red-500 to-orange-500',
-      'from-indigo-400 via-purple-500 to-pink-500',
-      'from-cyan-400 via-blue-500 to-indigo-600',
-      'from-emerald-400 via-teal-500 to-cyan-600',
-      'from-amber-400 via-orange-500 to-red-600',
-      'from-rose-400 via-pink-500 to-purple-600',
-      'from-violet-400 via-indigo-500 to-blue-600'
-    ];
-    return gradients[hash % gradients.length];
-  };
 
-  // Slider navigation functions
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % 6);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => prev === 0 ? 5 : prev - 1);
-  };
-
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
-  };
-
-  // Auto-play functionality
-  React.useEffect(() => {
-    if (isAutoPlaying) {
-      const interval = setInterval(nextSlide, 4000);
-      return () => clearInterval(interval);
-    }
-  }, [isAutoPlaying]);
-
-  const toggleAutoPlay = () => {
-    setIsAutoPlaying(!isAutoPlaying);
-  };
 
   // Extract city name and country from title if not provided
   const extractedCityName = cityName || title.match(/Best Things to Do in ([^,]+)/)?.[1] || title.split(' ')[0];
@@ -165,174 +124,14 @@ export const CityPage: React.FC<CityPageProps> = ({
         </div>
       </div>
 
-      {/* Photo Gallery Slider Section */}
+      {/* Interactive Discovery Section */}
       <div className="bg-gradient-to-br from-gray-50 to-gray-100 border-b border-gray-200">
         <div className="container mx-auto px-4 py-8 sm:py-12">
-          {/* Gallery Header */}
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
-                <Camera className="w-5 h-5 text-white" />
-              </div>
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Photo Gallery</h2>
-            </div>
-            <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
-              Discover the beauty of {title} through our curated collection of stunning photographs
-            </p>
-          </div>
-          
-          {/* Main Slider Container */}
-          <div className="max-w-4xl mx-auto">
-            <div className="relative group">
-              {/* Main Image Display */}
-              <div className="relative aspect-[16/10] bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl overflow-hidden shadow-2xl">
-                {galleryImages[currentSlide]?.url ? (
-                  <picture className="w-full h-full">
-                    <source 
-                      srcSet={galleryImages[currentSlide].url.replace('&fm=webp', '&fm=avif')} 
-                      type="image/avif" 
-                    />
-                    <source 
-                      srcSet={galleryImages[currentSlide].url} 
-                      type="image/webp" 
-                    />
-                    <img 
-                      src={galleryImages[currentSlide].url} 
-                      alt={optimizedGalleryImages[currentSlide]?.seoAlt || galleryImages[currentSlide].alt || `${title} photo ${currentSlide + 1}`}
-                      className="w-full h-full object-cover transition-all duration-500"
-                      loading="lazy"
-                      width="1400"
-                      height="800"
-                    />
-                  </picture>
-                ) : (
-                  <>
-                    {/* Enhanced placeholder for current slide */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${getGradientClass(title + currentSlide)} opacity-30`}></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center p-8">
-                        <div className="w-20 h-20 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4">
-                          <Image className="w-12 h-12 text-gray-600" />
-                        </div>
-                        <h3 className="text-xl font-bold text-gray-800 mb-2">{title} Photo {currentSlide + 1}</h3>
-                        <p className="text-gray-600">Stunning view awaits here</p>
-                      </div>
-                    </div>
-                    
-                    {/* Decorative elements */}
-                    <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
-                    <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
-                  </>
-                )}
-                
-                {/* Navigation Arrows */}
-                <button
-                  onClick={prevSlide}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg hover:scale-110"
-                >
-                  <ChevronLeft className="w-6 h-6 text-gray-700" />
-                </button>
-                
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg hover:scale-110"
-                >
-                  <ChevronRight className="w-6 h-6 text-gray-700" />
-                </button>
-                
-                {/* Image Caption Overlay */}
-                {galleryImages[currentSlide]?.caption && (
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                    <p className="text-white text-lg font-medium text-center">{galleryImages[currentSlide].caption}</p>
-                  </div>
-                )}
-                
-                {/* Slide Counter */}
-                <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium">
-                  {currentSlide + 1} / 6
-                </div>
-              </div>
-              
-              {/* Thumbnail Navigation */}
-              <div className="flex justify-center gap-2 mt-6">
-                {Array.from({ length: 6 }, (_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToSlide(index)}
-                    className={`relative w-16 h-12 rounded-lg overflow-hidden transition-all duration-300 border-2 ${
-                      currentSlide === index 
-                        ? 'border-pink-500 shadow-lg scale-110' 
-                        : 'border-transparent hover:border-gray-300 hover:scale-105'
-                    }`}
-                  >
-                    {galleryImages[index]?.url ? (
-                      <picture className="w-full h-full">
-                        <source 
-                          srcSet={galleryImages[index].url.replace('&fm=webp', '&fm=avif')} 
-                          type="image/avif" 
-                        />
-                        <source 
-                          srcSet={galleryImages[index].url} 
-                          type="image/webp" 
-                        />
-                        <img 
-                          src={galleryImages[index].url} 
-                          alt={optimizedGalleryImages[index]?.seoAlt || `Thumbnail ${index + 1}`}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                          width="64"
-                          height="48"
-                        />
-                      </picture>
-                    ) : (
-                      <div className={`w-full h-full bg-gradient-to-br ${getGradientClass(title + index)} opacity-60 flex items-center justify-center`}>
-                        <span className="text-white text-xs font-bold">{index + 1}</span>
-                      </div>
-                    )}
-                    
-                    {/* Active indicator */}
-                    {currentSlide === index && (
-                      <div className="absolute inset-0 bg-pink-500/20 border-2 border-pink-500 rounded-lg"></div>
-                    )}
-                  </button>
-                ))}
-              </div>
-              
-              {/* Controls */}
-              <div className="flex justify-center items-center gap-4 mt-6">
-                <button
-                  onClick={toggleAutoPlay}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 ${
-                    isAutoPlaying 
-                      ? 'bg-pink-500 text-white border-pink-500 hover:bg-pink-600' 
-                      : 'bg-white text-gray-700 border-gray-300 hover:border-pink-300'
-                  }`}
-                >
-                  {isAutoPlaying ? (
-                    <>
-                      <Pause className="w-4 h-4" />
-                      <span className="text-sm font-medium">Pause</span>
-                    </>
-                  ) : (
-                    <>
-                      <Play className="w-4 h-4" />
-                      <span className="text-sm font-medium">Play</span>
-                    </>
-                  )}
-                </button>
-                
-                <button
-                  onClick={() => goToSlide(0)}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-white text-gray-700 border border-gray-300 hover:border-pink-300 transition-all duration-300"
-                >
-                  <RotateCcw className="w-4 h-4" />
-                  <span className="text-sm font-medium">Reset</span>
-                </button>
-              </div>
-            </div>
-          </div>
-          
-
+          <DiscoveryCards 
+            attractions={attractions}
+            cityName={extractedCityName}
+            highlights={highlights}
+          />
         </div>
       </div>
 
@@ -346,6 +145,10 @@ export const CityPage: React.FC<CityPageProps> = ({
             <TabsTrigger value="all" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap data-[state=active]:bg-green-50 data-[state=active]:text-green-700 data-[state=active]:border-green-200">
               <span className="hidden sm:inline">All Attractions</span>
               <span className="sm:hidden">All</span>
+            </TabsTrigger>
+            <TabsTrigger value="explore" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700 data-[state=active]:border-blue-200">
+              <span className="hidden sm:inline">Interactive Explorer</span>
+              <span className="sm:hidden">Explore</span>
             </TabsTrigger>
 
             {logistics && <TabsTrigger value="plan" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap data-[state=active]:bg-green-50 data-[state=active]:text-green-700 data-[state=active]:border-green-200">
@@ -608,6 +411,16 @@ export const CityPage: React.FC<CityPageProps> = ({
             </div>
           </TabsContent>
 
+          {/* Interactive Explorer Tab */}
+          <TabsContent value="explore" className="space-y-6">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <InteractiveAttractionExplorer 
+                attractions={attractions}
+                cityName={extractedCityName}
+                highlights={highlights}
+              />
+            </div>
+          </TabsContent>
 
           {/* Plan Your Trip Tab */}
           {logistics && (
