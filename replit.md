@@ -10,6 +10,14 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (January 2025)
 
+### URL Format Fix for New Cities - COMPLETED ✅ (January 11, 2025)
+- ✅ **SEO-FRIENDLY URL GENERATION**: Fixed newly generated cities to use proper `/best-things-to-do-in-[city]` URL format
+- ✅ **CONSISTENT ROUTING**: Updated DynamicCityRoute mapping to use SEO-friendly paths for new cities
+- ✅ **HOMEPAGE INTEGRATION**: Fixed Featured Cities component to use correct URL format
+- ✅ **DESTINATIONS PAGE SYNC**: Ensured all new cities appear with proper URLs on destinations page
+- ✅ **AUTOMATIC INTEGRATION**: New cities now automatically appear with correct URLs across all pages
+- ✅ **SYNTAX CLEANUP**: Fixed syntax errors in Featured Cities component (removed extra commas)
+
 ### Interactive Discovery Features Implementation - COMPLETED ✅ (January 11, 2025)
 - ✅ **GEMINI PROMPT ENHANCEMENT**: Updated AI prompt to generate specific interactive discovery data instead of duplicate content
 - ✅ **DISCOVERY TAGS SYSTEM**: Added comprehensive discoveryTags to attractions with time requirements, experience levels, interests, cost levels, seasonal best times, photo opportunities, insider tips, hidden gems, family-friendly ratings, and accessibility notes

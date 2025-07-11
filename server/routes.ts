@@ -350,7 +350,7 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       const dynamicRoutePath = path.join(process.cwd(), 'client', 'src', 'components', 'DynamicCityRoute.tsx');
       const dynamicContent = await fs.readFile(dynamicRoutePath, 'utf-8');
       
-      const routePath = city.toLowerCase().replace(/\s+/g, '-');
+      const routePath = `best-things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}`;
       const cityMapping = `  '${routePath}': createCityImport('${cityFileName}', '../pages/cities/${cityFileName}'),`;
       
       if (!dynamicContent.includes(`'${routePath}':`)) {
@@ -371,8 +371,8 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       const cityDirectoryPath = path.join(process.cwd(), 'client', 'src', 'components', 'CityDirectory.tsx');
       const cityDirectoryContent = await fs.readFile(cityDirectoryPath, 'utf-8');
       
-      // Create city entry
-      const cityEntry = `  { "name": "${city}", "country": "${country}", "path": "/${city.toLowerCase().replace(/\s+/g, '-')}", "continent": "${continent}" }`;
+      // Create city entry with correct SEO-friendly URL format
+      const cityEntry = `  { "name": "${city}", "country": "${country}", "path": "/best-things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}", "continent": "${continent}" }`;
       
       // Check if city already exists
       if (!cityDirectoryContent.includes(`"name": "${city}"`)) {

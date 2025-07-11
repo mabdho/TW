@@ -5,138 +5,166 @@ export const Zurich: React.FC = () => {
   return (
     <CityPage
       title={"15 Best Things to Do in Zurich, Switzerland (2025 Guide)"}
-      description={`Zurich, oh Zurich! Wondering about the best things to do in Zurich? Well, you're in for a treat. This Swiss city is a fantastic blend of old-world charm and modern sophistication, and frankly, there's something for everyone. From exploring the historic Old Town (Altstadt) to indulging in some seriously good Swiss chocolate, or taking a refreshing dip in Lake Zurich, there's a ton to see and experience. It's clean, efficient, and stunningly beautiful. I mean, really, what's not to love? This guide aims to help you navigate Zurich's many attractions and hidden gems, so you can make the most of your visit and discover all the best things Zurich has to offer.`}
+      description={`Looking for the best things to do in Zurich? You've come to the right place! This Swiss city is a delightful blend of old-world charm and modern sophistication. From exploring the historic Old Town to indulging in world-class chocolate, there’s something for everyone. I think Zurich offers a unique experience that’s hard to find anywhere else, and this guide will point you to the absolute best the city has to offer. We'll explore the iconic landmarks, discover hidden gems, and give you some tips to help you make the most of your trip. So, whether you're a first-time visitor or a seasoned traveler, get ready to explore the top things to do in Zurich and create unforgettable memories.`}
       galleryImages={[
       ]}
-      highlights={["Wander through the charming Old Town (Altstadt).",
-        "Take a boat trip on Lake Zurich.",
-        "Visit the Kunsthaus Zürich art museum.",
-        "Explore the Lindt Home of Chocolate.",
-        "Hike or bike on Uetliberg mountain."]}
+      highlights={["Wander through the charming Niederdorf in the Old Town.",
+        "Take a boat trip on Lake Zurich for stunning views.",
+        "Visit the iconic Grossmünster church and climb its towers.",
+        "Explore the art collections at the Kunsthaus Zürich museum.",
+        "Indulge in delicious Swiss chocolate at a local chocolatier."]}
       attractions={[
         {
-        name: "Old Town (Altstadt)",
-        description: `The Altstadt is the heart of Zurich, a maze of cobblestone streets, historic buildings, and charming squares. Wander through Niederdorfstrasse, a pedestrian zone filled with shops, restaurants, and cafes. Don't miss the Grossmünster church with its twin towers and the Fraumünster church with its stunning stained-glass windows by Marc Chagall. It's worth just getting lost in the alleys. Tip: grab a coffee and pastry at a local cafe and soak up the atmosphere. Be sure to look out for the hidden courtyards and fountains scattered throughout the area. You should definitely bring your camera! A picture with the Grossmunster is a must.`,
+        name: "Niederdorf (Old Town)",
+        description: `The Niederdorf, Zurich's Old Town, is a maze of narrow cobblestone streets, charming shops, and historic buildings. It’s a pedestrian zone, making it perfect for leisurely strolls. You can easily spend hours exploring its hidden alleyways and discovering unique boutiques and art galleries. Don't miss the colorful buildings and the lively atmosphere, especially in the evenings. Tip: Try to find the smallest restaurant in Zurich! Photo opportunity: The best pictures are in the early morning when the streets are less crowded and the light is soft. Be sure to look up to appreciate the architecture. I think you'll find something you love here.`,
         practicalInfo: {
-        howToGetThere: "Easily accessible by tram to various stops within the Old Town.",
-        openingHours: "Open 24/7 (shops and restaurants have varying hours)",
-        cost: "Free (entry to churches may have a small fee)",
-        website: "https://www.zuerich.com/en/visit/old-town"
+        howToGetThere: "Take tram lines 4 or 15 to the Rudolf-Brun-Brücke stop.",
+        openingHours: "Open 24/7, though shops and restaurants have varying hours.",
+        cost: "Free",
+        website: ""
       }
       },
         {
         name: "Lake Zurich",
-        description: `Lake Zurich is the perfect place to escape the city bustle and enjoy some fresh air. Take a boat trip for stunning views of the city and surrounding mountains. You can also swim in the lake at various designated bathing areas or relax on the shore. There are parks and walking paths along the lake, perfect for a stroll or a picnic. Consider renting a paddleboat or kayak for a different perspective. The sunset over the lake is absolutely stunning, a great photo opportunity. Tip: the Limmat river cruise is a nice way to see both the lake and city sights.`,
+        description: `Lake Zurich offers stunning views of the city and the surrounding mountains. A boat trip on the lake is a must-do, providing a relaxing and scenic experience. You can also enjoy swimming, sunbathing, or simply strolling along the shore. Several parks and gardens line the lake, offering peaceful spots to relax. Consider taking a ferry to one of the charming villages along the lake's shores, such as Rapperswil. The lake is especially beautiful at sunset. The photo opportunities are abundant. Don't miss the chance to capture the stunning views of the Alps. Best time to visit: Summer for swimming and sunbathing, or spring and fall for pleasant weather and fewer crowds.`,
         practicalInfo: {
-        howToGetThere: "Easily accessible by tram to various lakeside locations.",
-        openingHours: "Open 24/7 (boat trips have specific schedules)",
-        cost: "Free (boat trips and rentals have varying costs)",
-        website: "https://www.zuerich.com/en/visit/lake-zurich"
+        howToGetThere: "Easily accessible by tram or bus to various lakeside points.",
+        openingHours: "Open 24/7; boat tours have specific schedules.",
+        cost: "Free to access; boat tours vary in price.",
+        website: ""
+      }
+      },
+        {
+        name: "Grossmünster Church",
+        description: `The Grossmünster is one of Zurich's most iconic landmarks, with its distinctive twin towers dominating the skyline. Legend has it that Charlemagne discovered the graves of the city's patron saints, Felix and Regula, here. Climbing the towers offers panoramic views of the city. Inside, you can admire the Romanesque architecture and the stained glass windows. The church also has a fascinating history. I think it's worth the climb! Photo tip: Capture the towers from across the Limmat River for a classic Zurich view. Avoid visiting during peak hours to avoid long lines. Don't miss the crypt.`,
+        practicalInfo: {
+        howToGetThere: "Located in the Old Town, easily accessible by tram or on foot.",
+        openingHours: "10:00 AM - 6:00 PM daily; tower access may have limited hours.",
+        cost: "CHF 5 for tower access.",
+        website: ""
       }
       },
         {
         name: "Kunsthaus Zürich",
-        description: `The Kunsthaus Zürich is one of Switzerland's most important art museums, boasting an impressive collection of art from the Middle Ages to the present day. You'll find works by renowned artists like Monet, Munch, Picasso, and Giacometti. The museum also hosts temporary exhibitions. It's a good place to spend an afternoon. Tip: Check the museum's website for upcoming events and guided tours. The collection of Swiss art is particularly strong and worth checking out. Don't miss the Alberto Giacometti collection; it's quite extensive.`,
+        description: `The Kunsthaus Zürich is one of Switzerland's most important art museums, housing an impressive collection of art from the Middle Ages to the present day. You'll find works by renowned artists such as Monet, Picasso, and Munch. The museum also hosts temporary exhibitions, so there's always something new to see. The architecture of the building itself is also worth admiring. Plan to spend at least a few hours here to fully appreciate the collection. Photo tip: Capture the exterior of the museum with the Heimplatz square in the background. Avoid bringing large bags, as there are lockers available. The best time to visit is on a weekday morning to avoid crowds.`,
         practicalInfo: {
-        howToGetThere: "Tram lines 3, 5, 8 and 9 to Kunsthaus stop.",
-        openingHours: "Tuesday, Friday - Sunday: 10 AM - 6 PM, Wednesday - Thursday: 10 AM - 8 PM, Monday: Closed",
-        cost: "CHF 23 (adults), CHF 16 (students)",
-        website: "https://www.kunsthaus.ch/en/"
-      }
-      },
-        {
-        name: "Lindt Home of Chocolate",
-        description: `For chocolate lovers, the Lindt Home of Chocolate is a must-visit. This interactive museum takes you through the history of chocolate, from bean to bar. You can learn about the production process, taste different varieties of Lindt chocolate, and even create your own chocolate masterpiece. And there's a massive chocolate fountain! I mean, who wouldn't want to see that? Tip: Book your tickets online in advance to avoid queues, especially during peak season. The chocolate tasting is definitely a highlight. Be sure to check out the Lindt shop for exclusive products.`,
-        practicalInfo: {
-        howToGetThere: "Train to Kilchberg station, then a short walk.",
-        openingHours: "Daily, 10 AM - 6 PM",
-        cost: "CHF 15 (adults), CHF 10 (children)",
-        website: "https://www.lindt-home-of-chocolate.com/en/"
-      }
-      },
-        {
-        name: "Uetliberg Mountain",
-        description: `For panoramic views of Zurich and the surrounding Alps, head to Uetliberg Mountain. You can hike or take a train to the summit. At the top, there's a viewing tower, a restaurant, and various hiking trails. It's a great place to escape the city and enjoy nature. The Planet Trail is a fun walk that shows the scale of our solar system. Tip: Check the weather forecast before you go, as the views can be obscured by clouds. The best time to visit is on a clear day, especially at sunset.`,
-        practicalInfo: {
-        howToGetThere: "Train from Zurich Hauptbahnhof to Uetliberg station.",
-        openingHours: "Open 24/7 (train and restaurant have specific hours)",
-        cost: "Train ticket required",
-        website: "https://www.zuerich.com/en/visit/nature/uetliberg-zurichs-landmark"
-      }
-      },
-        {
-        name: "Bahnhofstrasse",
-        description: `Bahnhofstrasse is Zurich's premier shopping street, lined with luxury boutiques, department stores, and Swiss watch shops. Even if you're not planning on buying anything, it's worth a stroll to admire the architecture and window displays. Be sure to check out the Sprüngli chocolate shop for delicious truffles. The atmosphere is always buzzing. Tip: Window shopping is free! It's a great place for people-watching too.`,
-        practicalInfo: {
-        howToGetThere: "Accessible by tram to Bahnhofstrasse or Paradeplatz stops.",
-        openingHours: "Varying hours (typically 10 AM - 7 PM on weekdays, shorter hours on weekends)",
-        cost: "Free (shopping is optional)",
-        website: "https://www.zuerich.com/en/visit/shopping/bahnhofstrasse"
-      }
-      },
-        {
-        name: "Sternen Grill",
-        description: `For a classic Zurich culinary experience, visit Sternen Grill. This iconic food stall serves up delicious bratwurst and other Swiss sausages. It's a local favorite and a great place to grab a quick and tasty lunch. The atmosphere is casual and lively. Tip: Try the 'Bratwurst mit Bürli' (sausage with a crusty roll). Be prepared to stand in line during peak hours! This is a cheap and easy way to enjoy Zurich food.`,
-        practicalInfo: {
-        howToGetThere: "Located at Bellevueplatz, easily accessible by tram.",
-        openingHours: "Daily, 11 AM - 11 PM",
-        cost: "Budget-friendly (under CHF 10)",
-        website: "https://www.sternengrill.ch/"
+        howToGetThere: "Take tram lines 3, 5, 8, or 9 to the Kunsthaus stop.",
+        openingHours: "Tuesday, Friday-Sunday: 10:00 AM - 6:00 PM, Wednesday & Thursday: 10:00 AM - 8:00 PM, closed on Mondays.",
+        cost: "CHF 23 for adults; discounts available for students and seniors.",
+        website: ""
       }
       },
         {
         name: "Confiserie Sprüngli",
-        description: `Confiserie Sprüngli is a Zurich institution, renowned for its exquisite chocolates, pastries, and Luxemburgerli (macarons). It's the perfect place to indulge your sweet tooth and experience Swiss culinary excellence. The cafe offers a sophisticated dining experience. Indulge in pastries such as the famous Luxemburgerli, signature chocolates and truffles accompanied by aromatic coffee or rich hot chocolate. Pricing is moderate to expensive. Open daily with varying hours, especially on holidays. Reservations are recommended during peak hours. You won't regret visiting this iconic eatery.`,
+        description: `Confiserie Sprüngli is a legendary Swiss chocolatier, famous for its Luxemburgerli macarons and exquisite chocolates. Indulge in a delightful treat at their cafe or purchase some sweets to take home as souvenirs. The cafe offers a cozy and elegant atmosphere, perfect for a relaxing break. The Luxemburgerli are a must-try, and they offer a variety of flavors. The chocolates are also of exceptional quality. Dining here is a quintessential Zurich experience. Price range: Moderate. They offer breakfast, lunch and snacks. Be sure to try the hot chocolate! It's worth the visit, trust me. It’s a Zurich institution. `,
         practicalInfo: {
-        howToGetThere: "Located on Bahnhofstrasse, easily accessible by tram.",
-        openingHours: "Monday - Friday: 7:30 AM - 6:30 PM, Saturday: 8:00 AM - 6:00 PM, Sunday: 9:00 AM - 6:00 PM",
+        howToGetThere: "Located on Paradeplatz, easily accessible by tram.",
+        openingHours: "7:30 AM - 6:30 PM Monday-Friday, 8:00 AM - 6:00 PM Saturday, 9:00 AM - 6:00 PM Sunday.",
         cost: "Moderate",
-        website: "https://www.spruengli.ch/en/"
+        website: ""
       }
       },
         {
-        name: "Markthalle Zurich",
-        description: `Markthalle Zurich is a vibrant indoor food market offering a diverse range of culinary delights from around the world. You'll find everything from fresh produce and local specialties to international cuisine. It's a great place to grab lunch or a snack and experience Zurich's multicultural food scene. Prices are budget-friendly to moderate. The atmosphere is bustling and lively. Tip: try to go on a Saturday and explore the surrounding area. It is located right next to the train station and easily accessible. This is an excellent spot to taste some amazing Swiss and International cuisine.`,
+        name: "Fraumünster Church",
+        description: `The Fraumünster Church is famous for its stunning stained glass windows designed by Marc Chagall. The church was founded in 853 and has a rich history. The interior is relatively simple, but the stained glass windows are the main attraction. The colors and designs are truly breathtaking. Take your time to admire the details and the artistry. Photo opportunity: Capture the stained glass windows from different angles. Avoid visiting during services. The church is relatively small, so it can get crowded quickly.`,
         practicalInfo: {
-        howToGetThere: "Located near Zurich Main Station (Hauptbahnhof).",
-        openingHours: "Varies by vendor, generally open daily from 11 AM - 10 PM",
-        cost: "Budget-friendly to Moderate",
-        website: "https://www.markthalle.ch/"
+        howToGetThere: "Located in the Old Town, easily accessible by tram or on foot.",
+        openingHours: "10:00 AM - 6:00 PM daily.",
+        cost: "CHF 5 to enter and view the Chagall windows.",
+        website: ""
       }
       },
         {
-        name: "FIFA Museum",
-        description: `For football (soccer) fans, the FIFA Museum is a must-see. Explore the history of the sport, see iconic memorabilia, and learn about the World Cup. Even if you aren't a huge soccer fan, it is worth a visit. Tip: Allocate around 2-3 hours to explore the museum fully. Don't miss the World Cup trophy exhibit and interactive exhibits. A picture with the World Cup trophy is a great way to commemorate your visit.`,
+        name: "Swiss National Museum",
+        description: `The Swiss National Museum showcases the history and culture of Switzerland from prehistoric times to the present day. It's housed in a castle-like building and features a vast collection of artifacts, costumes, and historical documents. It's a great place to learn about Swiss history and traditions. The museum is quite large, so plan to spend at least a few hours here. I think you'll love the exhibits! Photo tip: Capture the exterior of the museum with the Limmat River in the foreground. Don't miss the temporary exhibitions. The museum is located near the main train station.`,
         practicalInfo: {
-        howToGetThere: "Tram lines 5 and 6 to FIFA Museum stop.",
-        openingHours: "Tuesday - Sunday: 10 AM - 6 PM, Monday: Closed",
-        cost: "CHF 24 (adults), CHF 14 (children)",
-        website: "https://www.fifamuseum.com/en/"
+        howToGetThere: "Located near the main train station, easily accessible by tram or on foot.",
+        openingHours: "Tuesday-Sunday: 10:00 AM - 5:00 PM, closed on Mondays.",
+        cost: "CHF 10 for adults; discounts available for students and seniors.",
+        website: ""
+      }
+      },
+        {
+        name: "Bürkliplatz Market",
+        description: `The Bürkliplatz Market is a vibrant farmers market located on the shores of Lake Zurich. It's held every Tuesday and Friday morning and offers a wide variety of fresh produce, local delicacies, and handcrafted goods. It's a great place to experience the local food culture and find unique souvenirs. The atmosphere is lively and colorful. The market is especially popular during the summer months. Photo tip: Capture the colorful displays of fruits and vegetables with the lake in the background. Arrive early for the best selection. The market is a great place to sample local cheeses and breads.`,
+        practicalInfo: {
+        howToGetThere: "Located on Bürkliplatz, easily accessible by tram.",
+        openingHours: "Tuesdays and Fridays: 6:00 AM - 11:00 AM.",
+        cost: "Free to enter; costs vary for purchases.",
+        website: ""
+      }
+      },
+        {
+        name: "Sternen Grill",
+        description: `Sternen Grill is a Zurich institution, famous for its delicious sausages and casual atmosphere. It's a popular spot for a quick and affordable meal. The sausages are grilled fresh and served with a variety of mustards and breads. It’s the perfect spot for lunch. It's simple, delicious, and affordable. Price range: Budget-friendly. Don't miss the opportunity to try a traditional Swiss sausage. Dining here is a true Zurich experience. I recommend trying the Cervelat sausage.`,
+        practicalInfo: {
+        howToGetThere: "Located near Bellevueplatz, easily accessible by tram.",
+        openingHours: "11:00 AM - 12:00 AM daily.",
+        cost: "Budget-friendly",
+        website: ""
+      }
+      },
+        {
+        name: "Lindenhof Hill",
+        description: `Lindenhof Hill offers panoramic views of Zurich's Old Town, the Limmat River, and the Alps in the distance. It's a historic site that was once a Roman fort and a Carolingian royal residence. It's a great place to relax and enjoy the scenery. The views are especially beautiful at sunset. The park on top of the hill is a peaceful oasis in the heart of the city. Photo opportunity: Capture the panoramic views of the Old Town and the Limmat River. Avoid visiting during peak hours to avoid crowds.`,
+        practicalInfo: {
+        howToGetThere: "Located in the Old Town, easily accessible by tram or on foot.",
+        openingHours: "Open 24/7.",
+        cost: "Free",
+        website: ""
+      }
+      },
+        {
+        name: "Restaurant Swiss Chuchi",
+        description: `Restaurant Swiss Chuchi is renowned for serving traditional Swiss cuisine in a cozy, rustic setting. Located near the Zurich train station, it specializes in fondue and raclette, offering a genuine taste of Switzerland. The atmosphere is warm and inviting, making it an ideal spot to savor authentic dishes. They are known for their fondue, raclette and rosti. Dining at Swiss Chuchi provides a flavorful immersion into Switzerland’s culinary culture. Price range: Moderate to Expensive. Reservations are recommended. I think the Cheese Fondue is a must.`,
+        practicalInfo: {
+        howToGetThere: "Located near the main train station.",
+        openingHours: "11:30 AM - 2:30 PM, 6:00 PM - 11:00 PM daily.",
+        cost: "Moderate",
+        website: ""
       }
       }
       ]}
       logistics={{
-        gettingAround: `Zurich has an excellent public transportation system, including trams, buses, and trains. A Zurich Card provides unlimited travel on all forms of public transport within the city, as well as free or discounted admission to many museums and attractions. Walking is also a great way to explore the Old Town and other central areas. Taxis and ride-sharing services are readily available, but they can be expensive. Consider renting a bike for a more active way to get around.`,
-        whereToStay: `The Old Town (Altstadt) is a popular choice for its central location and historic charm. However, accommodation in this area tends to be more expensive. Other good options include the trendy Kreis 4 and Kreis 5 districts, which offer a mix of hotels, guesthouses, and apartments. For budget-friendly options, consider staying slightly outside the city center. Zurich West is an up-and-coming area with modern hotels and restaurants. Be sure to book in advance, especially during peak season.`,
-        bestTimeToVisit: `The best time to visit Zurich is during the shoulder seasons (April-May and September-October). The weather is pleasant, and the crowds are smaller than in the peak summer months. Summer (June-August) is also a good time to visit, but be prepared for higher prices and more tourists. Winter (November-March) can be cold and snowy, but it's a magical time to visit the Christmas markets and enjoy winter sports in the nearby Alps. The weather in Zurich can be unpredictable, so be sure to pack layers.`,
-        suggestedItinerary: `Day 1: Explore the Old Town (Altstadt), visit the Grossmünster and Fraumünster churches, and stroll along the Limmat River. In the afternoon, take a boat trip on Lake Zurich. Enjoy dinner at a traditional Swiss restaurant. Day 2: Visit the Kunsthaus Zürich art museum, explore the Bahnhofstrasse shopping street, and indulge in chocolate at Sprüngli. In the afternoon, head to Uetliberg Mountain for panoramic views of the city. Enjoy dinner in the trendy Zurich West district. Day 3: Visit the Lindt Home of Chocolate, explore the FIFA Museum, and take a relaxing walk along the lake. Alternatively, take a day trip to the Rhine Falls, Europe's largest waterfall.`
+        gettingAround: `Zurich has an excellent public transportation system, including trams, buses, and trains. Purchasing a Zurich Card gives you unlimited travel on all forms of public transport within the city, as well as free or discounted admission to many museums and attractions. Walking is also a great way to explore the city center, especially the Old Town. Consider renting a bike for a more active way to get around. 
+
+Taxis and ride-sharing services are also available, but they can be more expensive than public transportation. Keep in mind that Zurich is a very pedestrian-friendly city, so you may not need a car at all. Driving within the city center can be challenging due to limited parking and traffic congestion.
+
+Overall, Zurich's transportation options are efficient and convenient, making it easy to get around and explore all that the city has to offer. Be sure to take advantage of the public transportation system to save time and money.`,
+        whereToStay: `The best areas to stay in Zurich depend on your preferences and budget. The Old Town (Niederdorf) is a great option if you want to be in the heart of the action, with easy access to restaurants, shops, and attractions. However, it can be more expensive. 
+
+Wiedikon is a trendy and up-and-coming neighborhood with a vibrant nightlife and a variety of restaurants and bars. It's a good option if you're looking for a more local experience. Kreis 4 and Kreis 5 are also popular choices, known for their artsy atmosphere and diverse range of accommodations. 
+
+For budget-friendly options, consider staying in areas slightly further from the city center, such as Aussersihl or Seefeld. These areas offer a range of hotels and guesthouses at more affordable prices. Regardless of where you choose to stay, Zurich is a relatively small city, so you'll be able to easily access the main attractions by public transportation.`,
+        bestTimeToVisit: `The best time to visit Zurich depends on your interests and preferences. Summer (June-August) is the most popular time to visit, with warm weather and long days, perfect for outdoor activities like swimming in the lake and hiking in the mountains. However, it can also be more crowded and expensive. 
+
+Spring (April-May) and fall (September-October) offer pleasant weather and fewer crowds, making them ideal for sightseeing and exploring the city's attractions. The fall foliage in the surrounding hills is particularly beautiful. 
+
+Winter (November-March) can be cold and snowy, but it's a magical time to visit, with Christmas markets and festive events. The nearby mountains offer excellent skiing and snowboarding opportunities. Just be prepared for shorter days and potentially icy conditions. Consider the Christmas market if visiting in December!`,
+        suggestedItinerary: `Day 1: Start your Zurich adventure by exploring the Old Town (Niederdorf). Wander through the cobblestone streets, visit the Grossmünster and Fraumünster churches, and enjoy lunch at a traditional Swiss restaurant. In the afternoon, take a boat trip on Lake Zurich for stunning views of the city and the Alps. End the day with dinner at a lakeside restaurant.
+
+Day 2: Visit the Kunsthaus Zürich to admire its impressive art collection. In the afternoon, explore the Swiss National Museum to learn about Swiss history and culture. Take some time to relax at Lindenhof Hill, enjoying the panoramic views of the city. In the evening, indulge in a delicious Swiss chocolate experience at Confiserie Sprüngli.
+
+Day 3: Take a day trip to the nearby mountains for hiking or skiing, depending on the season. Alternatively, explore the Uetliberg mountain, offering stunning views of the city and the surrounding area. Enjoy a picnic lunch with a view. In the evening, explore the vibrant nightlife of the Wiedikon district.
+
+Day 4: Visit the Zurich Zoo, home to a wide variety of animals from around the world. In the afternoon, explore the botanical garden. Consider a visit to the FIFA Museum to learn about the world of football. In the evening, enjoy a farewell dinner at a restaurant of your choice, savoring the flavors of Zurich.`
       }}
       faqs={[
         {
         question: "What are the best things to do in Zurich?",
-        answer: `The best things to do in Zurich include exploring the Old Town (Altstadt), taking a boat trip on Lake Zurich, visiting the Kunsthaus Zürich art museum, indulging in chocolate at the Lindt Home of Chocolate, hiking or biking on Uetliberg Mountain, and experiencing the vibrant food scene.`
+        answer: `Some of the best things to do in Zurich include exploring the Old Town (Niederdorf), taking a boat trip on Lake Zurich, visiting the Grossmünster and Fraumünster churches, exploring the Kunsthaus Zürich, and indulging in Swiss chocolate at Confiserie Sprüngli.`
       },
         {
         question: "How many days do you need in Zurich?",
-        answer: `I would say 2-3 days is ideal for exploring Zurich's main attractions and getting a feel for the city. This allows you to explore the Old Town, visit museums, enjoy the lake, and perhaps take a day trip to nearby attractions like the Rhine Falls.`
+        answer: `I recommend spending at least 3-4 days in Zurich to fully explore the city and its surrounding areas. This will give you enough time to visit the main attractions, take a day trip to the mountains, and experience the local culture.`
       },
         {
         question: "What is Zurich famous for?",
-        answer: `Zurich is famous for being a global financial center, its high quality of life, its stunning natural beauty (especially Lake Zurich), and its rich cultural heritage. It's also known for its chocolate, Swiss watches, and efficient public transportation.`
+        answer: `Zurich is famous for its banking industry, high quality of life, stunning scenery, historic Old Town, delicious chocolate, and world-class museums.`
       },
         {
         question: "When is the best time to visit Zurich?",
-        answer: `The best time to visit Zurich is during the shoulder seasons (April-May and September-October) for pleasant weather and fewer crowds. Summer is also nice but busier, while winter offers Christmas markets and winter sports.`
+        answer: `The best time to visit Zurich depends on your interests. Summer (June-August) is great for outdoor activities, spring (April-May) and fall (September-October) offer pleasant weather and fewer crowds, and winter (November-March) is ideal for Christmas markets and skiing.`
       }
       ]}
     />
