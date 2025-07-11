@@ -5,7 +5,7 @@ export const Florence: React.FC = () => {
   return (
     <CityPage
       title={"15 Best Things to Do in Florence, Italy (2025 Guide)"}
-      description={`Planning a trip to Tuscany's crown jewel? Discover the **best things to do in Florence** with our ultimate 2025 guide! From Renaissance masterpieces to mouth-watering Tuscan cuisine, we've curated a list that will make your visit unforgettable. Whether you're a first-timer or returning to soak up more of its charm, there are so many fantastic **things to do in Florence** that promise to enchant every type of traveler. Get ready to explore the city where art, history, and incredible food seamlessly intertwine, creating an experience that truly lingers long after you've left. We've got you covered with insider tips and everything you need for an amazing Florentine adventure.`}
+      description={`Planning a trip to Tuscany's crown jewel? Discover the best things to do in Florence with our ultimate 2025 guide! From Renaissance masterpieces to mouth-watering Tuscan cuisine, we've curated a list that will make your visit unforgettable. Whether you're a first-timer or returning to soak up more of its charm, there are so many fantastic things to do in Florence that promise to enchant every type of traveler. Get ready to explore the city where art, history, and incredible food seamlessly intertwine, creating an experience that truly lingers long after you've left. We've got you covered with insider tips and everything you need for an amazing Florentine adventure.`}
       galleryImages={[
       ]}
       highlights={["Marvel at Michelangelo's David at the Accademia Gallery.",

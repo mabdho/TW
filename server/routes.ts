@@ -21,6 +21,27 @@ import {
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
+// Function to clean content data and remove markdown formatting
+function cleanContentData(data: any): any {
+  if (typeof data === 'string') {
+    return data.replace(/\*\*(.*?)\*\*/g, '$1'); // Remove markdown bold formatting
+  }
+  
+  if (Array.isArray(data)) {
+    return data.map(cleanContentData);
+  }
+  
+  if (typeof data === 'object' && data !== null) {
+    const cleaned: any = {};
+    for (const [key, value] of Object.entries(data)) {
+      cleaned[key] = cleanContentData(value);
+    }
+    return cleaned;
+  }
+  
+  return data;
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // City page SSR routes - serve pre-rendered HTML with proper SEO
   // This MUST be before other routes to catch city pages
@@ -72,6 +93,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         try {
           contentData = JSON.parse(manualJson);
           console.log('Using manual JSON data for city generation');
+          
+          // Clean manual JSON content to remove markdown formatting
+          contentData = cleanContentData(contentData);
         } catch (error) {
           return res.status(400).json({ error: 'Invalid JSON format in manual data' });
         }
@@ -273,8 +297,10 @@ CRITICAL: Your response MUST be ONLY a JSON object. Do NOT include:
 - Markdown code blocks like \`\`\`json or \`\`\`
 - Comments or explanations
 - Extra formatting
+- Markdown bold formatting (** or __) anywhere in the content
 
 Your response must start immediately with { and end with }. Nothing else.
+All text content must be clean, readable text without any markdown formatting.
 
 VERIFY your JSON is complete before responding. The response MUST be parseable by JSON.parse().`;
 
@@ -319,6 +345,7 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
         .replace(/'/g, "'") // Replace smart quotes with regular quotes  
         .replace(/'/g, "'") // Replace smart quotes with regular quotes
         .replace(/…/g, '...') // Replace ellipsis character
+        .replace(/\*\*(.*?)\*\*/g, '$1') // Remove markdown bold formatting
         .replace(/\n/g, ' ') // Replace newlines with spaces to prevent JSON parsing issues
         .replace(/\r/g, ' ') // Replace carriage returns with spaces
         .replace(/\t/g, ' ') // Replace tabs with spaces
@@ -388,6 +415,8 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
           console.log(`Trying JSON candidate ${i + 1}:`, candidate.substring(0, 200));
           contentData = JSON.parse(candidate);
           console.log('Successfully parsed JSON with candidate', i + 1);
+          // Clean all content data to remove markdown formatting
+          contentData = cleanContentData(contentData);
           break;
         } catch (error) {
           console.log(`Candidate ${i + 1} failed:`, error.message);
