@@ -9,6 +9,7 @@ import BasePageTemplate from './BasePageTemplate';
 import { CityData, generateCitySEOData, generateCityStructuredData, generateBreadcrumbStructuredData, generateRelatedCityLinks, generateContextualLinks } from '../../utils/seo';
 import { InternalLinks } from '../InternalLinks';
 import { getAllCitiesData, getAllBlogsData } from '../../utils/dataService';
+import { generatePlaceSchema } from '../../utils/geoData';
 
 interface CityPageTemplateProps {
   cityData: CityData;
@@ -136,26 +137,15 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
           {children}
         </main>
 
-        {/* Footer schema for local SEO */}
+        {/* Enhanced Place schema with actual coordinates */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Place",
-              "name": cityData.name,
-              "address": {
-                "@type": "PostalAddress",
-                "addressCountry": cityData.country
-              },
-              "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": "0", // Would be replaced with actual coordinates
-                "longitude": "0"
-              },
-              "touristType": "Travelers seeking best things to do",
-              "description": `Complete travel guide for ${cityData.name}, ${cityData.country}. Discover the best attractions, activities, and experiences.`
-            })
+            __html: JSON.stringify(generatePlaceSchema(
+              cityData.name,
+              cityData.country,
+              `Complete travel guide for ${cityData.name}, ${cityData.country}. Discover the best attractions, activities, and experiences.`
+            ))
           }}
         />
       </div>

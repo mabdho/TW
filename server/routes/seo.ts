@@ -7,6 +7,7 @@ import { Request, Response } from 'express';
 import { db } from '../firebase-config';
 import { validateSEO } from '../utils/seoValidation';
 import { autoGenerateCitySEO, autoGenerateBlogSEO, updateSitemap, getSEOAnalytics } from '../functions/autoSEO';
+import { manualSitemapSubmission, getSitemapIndexingStatus } from '../utils/sitemapIndexing';
 
 /**
  * POST /api/seo/validate
@@ -241,4 +242,20 @@ Cache-Control: public, max-age=86400
     console.error('Error generating robots.txt:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
+}
+
+/**
+ * POST /api/seo/submit/sitemap
+ * Submit sitemap to search engines manually
+ */
+export async function submitSitemapManually(req: Request, res: Response) {
+  await manualSitemapSubmission(req, res);
+}
+
+/**
+ * GET /api/seo/indexing/status
+ * Get sitemap indexing status
+ */
+export async function getSitemapIndexingStatusRoute(req: Request, res: Response) {
+  await getSitemapIndexingStatus(req, res);
 }

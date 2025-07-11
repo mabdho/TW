@@ -11,6 +11,7 @@ import { CityPageTemplate } from './templates/CityPageTemplate';
 import { InternalLinks } from './InternalLinks';
 import { CityData, generateRelatedCityLinks, generateContextualLinks } from '../utils/seo';
 import { getAllCitiesData, getAllBlogsData } from '../utils/dataService';
+import { OptimizedGalleryImage, optimizeGalleryImages } from '../utils/imageOptimization';
 
 interface Attraction {
   name: string;
@@ -74,6 +75,9 @@ export const CityPage: React.FC<CityPageProps> = ({
       description: attr.description
     })) || []
   } : null;
+  
+  // 🔧 SEO IMPROVEMENT: Optimize gallery images with SEO-friendly alt text
+  const optimizedGalleryImages = cityData ? optimizeGalleryImages(cityData, galleryImages) : [];
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const top5Attractions = attractions.slice(0, 5);
@@ -194,7 +198,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                     />
                     <img 
                       src={galleryImages[currentSlide].url} 
-                      alt={galleryImages[currentSlide].alt || `${title} photo ${currentSlide + 1}`}
+                      alt={optimizedGalleryImages[currentSlide]?.seoAlt || galleryImages[currentSlide].alt || `${title} photo ${currentSlide + 1}`}
                       className="w-full h-full object-cover transition-all duration-500"
                       loading="lazy"
                       width="1400"
@@ -273,7 +277,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                         />
                         <img 
                           src={galleryImages[index].url} 
-                          alt={`Thumbnail ${index + 1}`}
+                          alt={optimizedGalleryImages[index]?.seoAlt || `Thumbnail ${index + 1}`}
                           className="w-full h-full object-cover"
                           loading="lazy"
                           width="64"

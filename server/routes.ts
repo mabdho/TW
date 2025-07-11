@@ -13,7 +13,9 @@ import {
   getSEOAnalyticsData, 
   batchUpdateCitiesSEO, 
   batchUpdateBlogsSEO, 
-  getRobotsTxt 
+  getRobotsTxt,
+  submitSitemapManually,
+  getSitemapIndexingStatusRoute
 } from "./routes/seo";
 
 // Initialize Gemini AI
@@ -463,6 +465,10 @@ Return only the JSON object with no additional text or formatting.`;
   app.post('/api/seo/batch/cities', batchUpdateCitiesSEO);
   app.post('/api/seo/batch/blogs', batchUpdateBlogsSEO);
   app.get('/robots.txt', getRobotsTxt);
+  
+  // Sitemap indexing routes
+  app.post('/api/seo/submit/sitemap', submitSitemapManually);
+  app.get('/api/seo/indexing/status', getSitemapIndexingStatusRoute);
 
   const httpServer = createServer(app);
   return httpServer;
