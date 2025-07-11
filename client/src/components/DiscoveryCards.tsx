@@ -214,9 +214,56 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
     return 'Year-Round';
   };
 
+  // Helper function to extract cafes and restaurants from attractions
+  const extractDiningOptions = (attractions: Attraction[]) => {
+    const diningOptions: Array<{name: string, type: string, description: string}> = [];
+    
+    attractions.forEach(attraction => {
+      const desc = attraction.description.toLowerCase();
+      const name = attraction.name;
+      
+      // Check for dining-related keywords
+      if (desc.includes('restaurant') || desc.includes('cafe') || desc.includes('coffee') || 
+          desc.includes('dining') || desc.includes('food') || desc.includes('cuisine') ||
+          desc.includes('eatery') || desc.includes('bistro') || desc.includes('brasserie') ||
+          desc.includes('tavern') || desc.includes('pub') || desc.includes('bar') ||
+          desc.includes('market') && (desc.includes('food') || desc.includes('eat')) ||
+          desc.includes('culinary') || desc.includes('gastronom') || desc.includes('menu') ||
+          desc.includes('meal') || desc.includes('breakfast') || desc.includes('lunch') || desc.includes('dinner')) {
+        
+        let type = 'Dining';
+        if (desc.includes('cafe') || desc.includes('coffee')) type = 'Cafe';
+        else if (desc.includes('restaurant') || desc.includes('dining')) type = 'Restaurant';
+        else if (desc.includes('market') && desc.includes('food')) type = 'Food Market';
+        else if (desc.includes('pub') || desc.includes('bar') || desc.includes('tavern')) type = 'Bar/Pub';
+        else if (desc.includes('street food') || desc.includes('vendor')) type = 'Street Food';
+        
+        // Extract a relevant snippet about the dining experience
+        const sentences = attraction.description.split(/[.!?]+/);
+        let relevantSentence = sentences.find(sentence => 
+          sentence.toLowerCase().includes('food') || 
+          sentence.toLowerCase().includes('restaurant') ||
+          sentence.toLowerCase().includes('cafe') ||
+          sentence.toLowerCase().includes('cuisine') ||
+          sentence.toLowerCase().includes('meal') ||
+          sentence.toLowerCase().includes('dining')
+        ) || sentences[0];
+        
+        diningOptions.push({
+          name: name,
+          type: type,
+          description: relevantSentence.trim() + (relevantSentence.endsWith('.') ? '' : '.')
+        });
+      }
+    });
+    
+    return diningOptions.slice(0, 6); // Limit to 6 options
+  };
+
   const categories = categorizeAttractions(attractions);
   const insiderTips = extractInsiderTips(attractions);
   const photoOps = extractPhotoOps(attractions);
+  const diningOptions = extractDiningOptions(attractions);
 
   const discoveryCards = [
     {
@@ -348,6 +395,34 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
       )
     },
     {
+      title: "Cafes & Restaurants",
+      icon: <Coffee className="w-5 h-5 text-orange-600" />,
+      content: (
+        <div className="space-y-3">
+          {diningOptions.length > 0 ? (
+            diningOptions.map((option, index) => (
+              <div key={index} className="p-3 bg-orange-50 dark:bg-orange-900/20 rounded-lg border-l-4 border-orange-400">
+                <div className="flex items-center gap-2 mb-1">
+                  <h4 className="font-semibold text-orange-700 dark:text-orange-300">{option.name}</h4>
+                  <Badge variant="outline" className="bg-orange-100 text-orange-700 border-orange-300 text-xs">
+                    {option.type}
+                  </Badge>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{option.description}</p>
+              </div>
+            ))
+          ) : (
+            <div className="p-4 text-center">
+              <Coffee className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+              <p className="text-sm text-gray-500 italic">
+                Explore {cityName} to discover amazing local dining spots and cafes!
+              </p>
+            </div>
+          )}
+        </div>
+      )
+    },
+    {
       title: "Quick Facts",
       icon: <Zap className="w-5 h-5 text-amber-500" />,
       content: (
@@ -391,7 +466,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
       </div>
 
       <Tabs defaultValue="0" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6 mb-6">
+        <TabsList className="grid w-full grid-cols-3 lg:grid-cols-7 mb-6">
           {discoveryCards.map((card, index) => (
             <TabsTrigger 
               key={index} 
