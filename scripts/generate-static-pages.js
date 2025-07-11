@@ -92,6 +92,12 @@ async function generateHTMLForRoute(route, baseHTML) {
     );
   }
   
+  // 🔧 FIX DUPLICATION: Remove existing duplicate tags before adding new ones
+  html = html.replace(/<link rel="canonical".*?>\n/g, '');
+  html = html.replace(/<meta property="og:.*?>\n/g, '');
+  html = html.replace(/<meta name="twitter:.*?>\n/g, '');
+  html = html.replace(/<script type="application\/ld\+json">.*?<\/script>\n/gs, '');
+  
   // Add canonical URL
   html = html.replace(
     '</head>',

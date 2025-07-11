@@ -29,10 +29,12 @@ export const SEOHead: React.FC<SEOHeadProps> = ({ seoData, structuredData, bread
 
   // Use native DOM manipulation for SEO metadata
   useEffect(() => {
-    // Set document title
-    document.title = title;
+    // 🔧 HYDRATION FIX: Only update if content differs from what's already in DOM
+    if (document.title !== title) {
+      document.title = title;
+    }
     
-    // Update or create meta tags
+    // Update or create meta tags (check if already exists to prevent duplication)
     const updateMetaTag = (name: string, content: string, attribute: string = 'name') => {
       let meta = document.querySelector(`meta[${attribute}="${name}"]`);
       if (!meta) {
@@ -40,7 +42,10 @@ export const SEOHead: React.FC<SEOHeadProps> = ({ seoData, structuredData, bread
         meta.setAttribute(attribute, name);
         document.head.appendChild(meta);
       }
-      meta.setAttribute('content', content);
+      // Only update if content is different
+      if (meta.getAttribute('content') !== content) {
+        meta.setAttribute('content', content);
+      }
     };
     
     // Update or create link tags

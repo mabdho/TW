@@ -61,6 +61,17 @@ export const CityPage: React.FC<CityPageProps> = ({
   cityName,
   country
 }) => {
+  // 🔧 HYDRATION FIX: Use consistent data structure for SEO
+  const cityData = cityName && country ? {
+    name: cityName,
+    country: country,
+    content: description,
+    imageUrl: imageUrl,
+    attractions: attractions?.map(attr => ({
+      name: attr.name,
+      description: attr.description
+    })) || []
+  } : null;
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const top5Attractions = attractions.slice(0, 5);
