@@ -40,96 +40,170 @@ const extractCityData = (cityName: string) => {
   return cityDataMap[cityName.toLowerCase()] || null;
 };
 
-// SSR-specific components
+// SSR-specific components that mirror the beautiful original homepage
 const createHomeComponent = () => {
   return createElement('div', { className: 'min-h-screen bg-background' },
-    // Hero Section
-    createElement('section', { className: 'relative bg-gradient-to-br from-blue-900 to-purple-900 text-white py-24' },
-      createElement('div', { className: 'container mx-auto px-4 text-center' },
-        createElement('h1', { className: 'text-5xl font-bold mb-6' }, 'Discover Your Next Adventure'),
-        createElement('p', { className: 'text-xl mb-8 max-w-2xl mx-auto' }, 'Explore curated travel guides, hidden gems, and unforgettable experiences around the world'),
-        createElement('div', { className: 'bg-white rounded-lg p-4 max-w-md mx-auto' },
-          createElement('div', { className: 'flex items-center space-x-2' },
-            createElement('input', { 
-              type: 'text', 
-              placeholder: 'Search destinations...', 
-              className: 'flex-1 px-4 py-2 border border-gray-300 rounded-lg text-black'
-            }),
-            createElement('button', { className: 'bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700' }, 'Search')
+    // Hero Section - mimicking the beautiful original design
+    createElement('section', { className: 'relative bg-white min-h-screen flex items-center justify-center overflow-hidden' },
+      // Background pattern
+      createElement('div', { className: 'absolute inset-0 bg-gradient-to-br from-orange-50 via-white to-green-50' }),
+      
+      // Content
+      createElement('div', { className: 'relative z-10 container mx-auto px-4 text-center' },
+        createElement('div', { className: 'max-w-4xl mx-auto' },
+          // Trust indicator
+          createElement('div', { className: 'flex justify-center mb-8' },
+            createElement('div', { className: 'bg-green-100 text-green-800 border border-green-200 px-4 py-2 rounded-full flex items-center' },
+              createElement('span', { className: 'text-sm mr-2' }, '⭐'),
+              createElement('span', { className: 'text-sm font-medium' }, 'Trusted by millions of travelers')
+            )
+          ),
+          
+          // Modern headline
+          createElement('h1', { className: 'text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight' },
+            'Explore the world with ',
+            createElement('span', { className: 'block text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-orange-500' }, 'confidence')
+          ),
+          
+          createElement('p', { className: 'text-lg sm:text-xl text-gray-600 mb-12 max-w-2xl mx-auto' },
+            'Get trusted reviews, insider tips, and comprehensive guides for destinations worldwide.'
+          ),
+          
+          // Search box
+          createElement('div', { className: 'relative max-w-2xl mx-auto mb-12' },
+            createElement('div', { className: 'bg-white rounded-2xl shadow-lg p-2 flex items-center' },
+              createElement('input', { 
+                type: 'text', 
+                placeholder: 'Where do you want to go?', 
+                className: 'flex-1 px-6 py-4 text-lg border-0 outline-none bg-transparent text-gray-800 placeholder-gray-500'
+              }),
+              createElement('button', { className: 'bg-green-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-green-700 transition-colors' }, 'Search')
+            )
+          ),
+          
+          // Stats
+          createElement('div', { className: 'flex justify-center items-center gap-8 text-sm text-gray-600' },
+            createElement('div', { className: 'flex items-center gap-2' },
+              createElement('span', { className: 'text-green-600' }, '🌍'),
+              createElement('span', {}, '2+ destinations')
+            ),
+            createElement('div', { className: 'flex items-center gap-2' },
+              createElement('span', { className: 'text-orange-500' }, '⭐'),
+              createElement('span', {}, 'Trusted reviews')
+            ),
+            createElement('div', { className: 'flex items-center gap-2' },
+              createElement('span', { className: 'text-blue-600' }, '📱'),
+              createElement('span', {}, 'Mobile friendly')
+            )
           )
         )
       )
     ),
-    // Featured Destinations Section
-    createElement('section', { className: 'py-16 bg-gray-50' },
-      createElement('div', { className: 'container mx-auto px-4' },
-        createElement('div', { className: 'text-center mb-12' },
-          createElement('h2', { className: 'text-4xl font-bold mb-4' }, 'Featured Destinations'),
-          createElement('p', { className: 'text-xl text-gray-600' }, 'Discover our most popular travel destinations')
-        ),
-        createElement('div', { className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8' },
-          createElement('div', { className: 'bg-white rounded-lg shadow-md overflow-hidden' },
-            createElement('div', { className: 'h-48 bg-gradient-to-r from-orange-400 to-red-500' }),
-            createElement('div', { className: 'p-6' },
-              createElement('h3', { className: 'text-xl font-bold mb-2' }, 'Porto, Portugal'),
-              createElement('p', { className: 'text-gray-600 mb-4' }, 'Discover historic landmarks and port wine cellars'),
-              createElement('a', { href: '/best-things-to-do-in-porto', className: 'text-blue-600 hover:text-blue-800' }, 'Explore Porto →')
-            )
-          ),
-          createElement('div', { className: 'bg-white rounded-lg shadow-md overflow-hidden' },
-            createElement('div', { className: 'h-48 bg-gradient-to-r from-green-400 to-blue-500' }),
-            createElement('div', { className: 'p-6' },
-              createElement('h3', { className: 'text-xl font-bold mb-2' }, 'Bologna, Italy'),
-              createElement('p', { className: 'text-gray-600 mb-4' }, 'Explore medieval towers and culinary delights'),
-              createElement('a', { href: '/best-things-to-do-in-bologna', className: 'text-blue-600 hover:text-blue-800' }, 'Explore Bologna →')
-            )
-          ),
-          createElement('div', { className: 'bg-white rounded-lg shadow-md overflow-hidden' },
-            createElement('div', { className: 'h-48 bg-gradient-to-r from-purple-400 to-pink-500' }),
-            createElement('div', { className: 'p-6' },
-              createElement('h3', { className: 'text-xl font-bold mb-2' }, 'More Destinations'),
-              createElement('p', { className: 'text-gray-600 mb-4' }, 'Discover amazing destinations worldwide'),
-              createElement('a', { href: '/destinations', className: 'text-blue-600 hover:text-blue-800' }, 'View All →')
-            )
-          )
-        )
-      )
-    ),
-    // Travel Categories Section
+    
+    // Featured Cities Section - matching the beautiful original
     createElement('section', { className: 'py-16 bg-white' },
       createElement('div', { className: 'container mx-auto px-4' },
         createElement('div', { className: 'text-center mb-12' },
-          createElement('h2', { className: 'text-4xl font-bold mb-4' }, 'Plan Your Perfect Trip'),
-          createElement('p', { className: 'text-xl text-gray-600' }, 'From city breaks to cultural experiences')
+          createElement('h2', { className: 'text-3xl sm:text-4xl font-bold text-gray-900 mb-4' }, 'Popular destinations'),
+          createElement('p', { className: 'text-lg text-gray-600 max-w-2xl mx-auto' }, 
+            'Discover the world\'s most beloved travel destinations with comprehensive guides and insider tips.'
+          )
         ),
-        createElement('div', { className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8' },
-          createElement('div', { className: 'text-center' },
-            createElement('div', { className: 'w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4' },
-              createElement('span', { className: 'text-2xl' }, '🏛️')
-            ),
-            createElement('h3', { className: 'text-xl font-bold mb-2' }, 'Cultural Sites'),
-            createElement('p', { className: 'text-gray-600' }, 'Historic landmarks and museums')
+        
+        // Featured cities grid
+        createElement('div', { className: 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12' },
+          // Bologna card
+          createElement('a', { href: '/best-things-to-do-in-bologna', className: 'group' },
+            createElement('div', { className: 'bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-all duration-300 overflow-hidden' },
+              createElement('div', { className: 'relative aspect-4/3 overflow-hidden' },
+                createElement('img', { 
+                  src: 'https://plus.unsplash.com/premium_photo-1677427230972-7cabe0d3e005?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&fm=webp', 
+                  alt: 'Best things to do in Bologna, Italy - Featured destination',
+                  className: 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-300',
+                  loading: 'lazy',
+                  width: '300',
+                  height: '225'
+                })
+              ),
+              createElement('div', { className: 'p-4' },
+                createElement('div', { className: 'flex items-start justify-between' },
+                  createElement('div', {},
+                    createElement('h3', { className: 'font-semibold text-gray-900 text-lg group-hover:text-green-600 transition-colors' }, 'Bologna'),
+                    createElement('p', { className: 'text-sm text-gray-600 flex items-center gap-1 mt-1' },
+                      createElement('span', { className: 'text-xs' }, '📍'),
+                      'Italy'
+                    )
+                  ),
+                  createElement('span', { className: 'text-gray-400 group-hover:translate-x-1 transition-transform' }, '→')
+                )
+              )
+            )
           ),
-          createElement('div', { className: 'text-center' },
-            createElement('div', { className: 'w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4' },
-              createElement('span', { className: 'text-2xl' }, '🍽️')
-            ),
-            createElement('h3', { className: 'text-xl font-bold mb-2' }, 'Food & Drink'),
-            createElement('p', { className: 'text-gray-600' }, 'Local cuisine and dining experiences')
+          
+          // Porto card
+          createElement('a', { href: '/best-things-to-do-in-porto', className: 'group' },
+            createElement('div', { className: 'bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-all duration-300 overflow-hidden' },
+              createElement('div', { className: 'relative aspect-4/3 overflow-hidden' },
+                createElement('img', { 
+                  src: 'https://images.unsplash.com/photo-1577958194277-7b3bc213b03c?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&fm=webp', 
+                  alt: 'Best things to do in Porto, Portugal - Featured destination',
+                  className: 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-300',
+                  loading: 'lazy',
+                  width: '300',
+                  height: '225'
+                })
+              ),
+              createElement('div', { className: 'p-4' },
+                createElement('div', { className: 'flex items-start justify-between' },
+                  createElement('div', {},
+                    createElement('h3', { className: 'font-semibold text-gray-900 text-lg group-hover:text-green-600 transition-colors' }, 'Porto'),
+                    createElement('p', { className: 'text-sm text-gray-600 flex items-center gap-1 mt-1' },
+                      createElement('span', { className: 'text-xs' }, '📍'),
+                      'Portugal'
+                    )
+                  ),
+                  createElement('span', { className: 'text-gray-400 group-hover:translate-x-1 transition-transform' }, '→')
+                )
+              )
+            )
+          )
+        ),
+        
+        // Bottom CTA
+        createElement('div', { className: 'text-center' },
+          createElement('a', { 
+            href: '/destinations', 
+            className: 'inline-flex items-center px-8 py-4 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-colors'
+          },
+            'View all destinations',
+            createElement('span', { className: 'ml-2' }, '→')
+          )
+        )
+      )
+    ),
+    
+    // Travel Categories Section - matching the beautiful original
+    createElement('section', { className: 'py-16 bg-gray-50' },
+      createElement('div', { className: 'container mx-auto px-4' },
+        createElement('div', { className: 'text-center mb-12' },
+          createElement('h2', { className: 'text-3xl sm:text-4xl font-bold text-gray-900 mb-4' },
+            'Latest Travel ',
+            createElement('span', { className: 'text-green-600' }, 'Stories')
           ),
-          createElement('div', { className: 'text-center' },
-            createElement('div', { className: 'w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4' },
-              createElement('span', { className: 'text-2xl' }, '🎨')
-            ),
-            createElement('h3', { className: 'text-xl font-bold mb-2' }, 'Arts & Culture'),
-            createElement('p', { className: 'text-gray-600' }, 'Galleries, theaters, and cultural events')
-          ),
-          createElement('div', { className: 'text-center' },
-            createElement('div', { className: 'w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4' },
-              createElement('span', { className: 'text-2xl' }, '🏞️')
-            ),
-            createElement('h3', { className: 'text-xl font-bold mb-2' }, 'Nature & Views'),
-            createElement('p', { className: 'text-gray-600' }, 'Scenic spots and outdoor activities')
+          createElement('p', { className: 'text-lg text-gray-600 max-w-2xl mx-auto' },
+            'Get inspired by our latest travel insights, tips, and destination guides.'
+          )
+        ),
+        
+        // Blog preview or CTA
+        createElement('div', { className: 'text-center py-12' },
+          createElement('p', { className: 'text-gray-600 mb-4' }, 'No blog posts available yet.'),
+          createElement('a', { 
+            href: '/blogs', 
+            className: 'inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors'
+          },
+            'Visit Blog Page',
+            createElement('span', { className: 'ml-2' }, '→')
           )
         )
       )
@@ -258,21 +332,34 @@ export async function handleSSRRequest(req: Request, res: Response) {
     .bg-orange-100 { background-color: #fed7aa; }
     .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
     .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
-    .from-blue-900 { --tw-gradient-from: #1e3a8a; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(30, 58, 138, 0)); }
-    .to-purple-900 { --tw-gradient-to: #581c87; }
-    .from-orange-400 { --tw-gradient-from: #fb923c; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(251, 146, 60, 0)); }
-    .to-red-500 { --tw-gradient-to: #ef4444; }
-    .from-green-400 { --tw-gradient-from: #4ade80; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(74, 222, 128, 0)); }
-    .to-blue-500 { --tw-gradient-to: #3b82f6; }
-    .from-purple-400 { --tw-gradient-from: #c084fc; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(192, 132, 252, 0)); }
-    .to-pink-500 { --tw-gradient-to: #ec4899; }
+    .from-orange-50 { --tw-gradient-from: #fff7ed; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(255, 247, 237, 0)); }
+    .via-white { --tw-gradient-via: #ffffff; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to, rgba(255, 255, 255, 0)); }
+    .to-green-50 { --tw-gradient-to: #f0fdf4; }
+    .from-green-600 { --tw-gradient-from: #16a34a; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(22, 163, 74, 0)); }
+    .to-orange-500 { --tw-gradient-to: #f97316; }
+    .text-transparent { color: transparent; }
+    .bg-clip-text { background-clip: text; }
     .text-white { color: #ffffff; }
     .text-black { color: #000000; }
     .text-gray-600 { color: #6b7280; }
+    .text-gray-800 { color: #1f2937; }
+    .text-gray-900 { color: #111827; }
+    .text-gray-400 { color: #9ca3af; }
+    .text-gray-500 { color: #6b7280; }
     .text-blue-600 { color: #2563eb; }
+    .text-green-600 { color: #16a34a; }
+    .text-green-800 { color: #166534; }
+    .text-orange-500 { color: #f97316; }
     .bg-blue-600 { background-color: #2563eb; }
+    .bg-green-600 { background-color: #16a34a; }
+    .bg-green-200 { background-color: #bbf7d0; }
+    .border-green-200 { border-color: #bbf7d0; }
     .hover\\:bg-blue-700:hover { background-color: #1d4ed8; }
+    .hover\\:bg-green-700:hover { background-color: #15803d; }
     .hover\\:text-blue-800:hover { color: #1e40af; }
+    .hover\\:text-green-600:hover { color: #16a34a; }
+    .hover\\:scale-105:hover { transform: scale(1.05); }
+    .hover\\:translate-x-1:hover { transform: translateX(0.25rem); }
     .container { max-width: 1200px; margin: 0 auto; }
     .mx-auto { margin-left: auto; margin-right: auto; }
     .px-4 { padding-left: 1rem; padding-right: 1rem; }
@@ -302,11 +389,51 @@ export async function handleSSRRequest(req: Request, res: Response) {
     .items-center { align-items: center; }
     .space-x-2 > * + * { margin-left: 0.5rem; }
     .rounded-lg { border-radius: 0.5rem; }
+    .rounded-xl { border-radius: 0.75rem; }
+    .rounded-2xl { border-radius: 1rem; }
     .rounded-full { border-radius: 9999px; }
     .border { border-width: 1px; }
+    .border-0 { border-width: 0; }
+    .border-gray-200 { border-color: #e5e7eb; }
     .border-gray-300 { border-color: #d1d5db; }
     .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+    .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
     .overflow-hidden { overflow: hidden; }
+    .aspect-4\\/3 { aspect-ratio: 4/3; }
+    .relative { position: relative; }
+    .absolute { position: absolute; }
+    .inset-0 { inset: 0; }
+    .z-10 { z-index: 10; }
+    .object-cover { object-fit: cover; }
+    .leading-tight { line-height: 1.25; }
+    .outline-none { outline: none; }
+    .placeholder-gray-500::placeholder { color: #6b7280; }
+    .group:hover .group-hover\\:scale-105 { transform: scale(1.05); }
+    .group:hover .group-hover\\:text-green-600 { color: #16a34a; }
+    .group:hover .group-hover\\:translate-x-1 { transform: translateX(0.25rem); }
+    .sm\\:text-4xl { font-size: 2.25rem; }
+    .sm\\:text-5xl { font-size: 3rem; }
+    .sm\\:text-xl { font-size: 1.25rem; }
+    .md\\:text-6xl { font-size: 3.75rem; }
+    .lg\\:text-7xl { font-size: 4.5rem; }
+    .mr-2 { margin-right: 0.5rem; }
+    .ml-2 { margin-left: 0.5rem; }
+    .mt-1 { margin-top: 0.25rem; }
+    .gap-1 { gap: 0.25rem; }
+    .gap-2 { gap: 0.5rem; }
+    .gap-6 { gap: 1.5rem; }
+    .text-xs { font-size: 0.75rem; }
+    .text-sm { font-size: 0.875rem; }
+    .font-medium { font-weight: 500; }
+    .font-semibold { font-weight: 600; }
+    .inline-flex { display: inline-flex; }
+    .justify-between { justify-content: space-between; }
+    .items-start { align-items: flex-start; }
+    .transition-all { transition: all 0.15s ease; }
+    .transition-colors { transition: color 0.15s ease, background-color 0.15s ease; }
+    .transition-transform { transition: transform 0.15s ease; }
+    .duration-300 { transition-duration: 0.3s; }
+    .cursor-pointer { cursor: pointer; }
     .grid { display: grid; }
     .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
     .gap-8 { gap: 2rem; }
