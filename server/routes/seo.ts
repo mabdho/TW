@@ -4,7 +4,6 @@
  */
 
 import { Request, Response } from 'express';
-import { db } from '../firebase-config';
 import { validateSEO } from '../utils/seoValidation';
 import { autoGenerateCitySEO, autoGenerateBlogSEO, updateSitemap, getSEOAnalytics } from '../functions/autoSEO';
 import { manualSitemapSubmission, getSitemapIndexingStatus } from '../utils/sitemapIndexing';

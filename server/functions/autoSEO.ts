@@ -1,14 +1,13 @@
 /**
- * Firebase Functions for automatic SEO generation
+ * File System Functions for automatic SEO generation
  * Auto-generates SEO data for cities and blog posts
  */
 
-import { db } from '../firebase-config';
 import { generateCitySEOData, generateBlogSEOData, CityData, BlogData } from '../utils/seo';
 import { validateSEO } from '../utils/seoValidation';
 
 /**
- * Auto-generate SEO data for city documents
+ * Auto-generate SEO data for city documents (file system only)
  */
 export async function autoGenerateCitySEO(cityId: string, cityData: CityData) {
   try {
@@ -20,12 +19,6 @@ export async function autoGenerateCitySEO(cityId: string, cityData: CityData) {
     // Validate SEO data
     const validation = validateSEO(seoData, cityData, 'city');
     seoData.seoScore = validation.score;
-    
-    // Update city document with SEO data
-    await db.collection('cities').doc(cityId).update({
-      seo: seoData,
-      lastUpdated: new Date().toISOString()
-    });
     
     console.log(`SEO data generated for ${cityData.name} with score: ${seoData.seoScore}`);
     
@@ -40,7 +33,7 @@ export async function autoGenerateCitySEO(cityId: string, cityData: CityData) {
 }
 
 /**
- * Auto-generate SEO data for blog posts
+ * Auto-generate SEO data for blog posts (file system only)
  */
 export async function autoGenerateBlogSEO(blogId: string, blogData: BlogData) {
   try {
@@ -52,12 +45,6 @@ export async function autoGenerateBlogSEO(blogId: string, blogData: BlogData) {
     // Validate SEO data
     const validation = validateSEO(seoData, blogData, 'blog');
     seoData.seoScore = validation.score;
-    
-    // Update blog document with SEO data
-    await db.collection('blogs').doc(blogId).update({
-      seo: seoData,
-      lastUpdated: new Date().toISOString()
-    });
     
     console.log(`SEO data generated for blog "${blogData.title}" with score: ${seoData.seoScore}`);
     
@@ -78,31 +65,75 @@ export async function updateSitemap() {
   try {
     console.log('Updating sitemap...');
     
-    // Get all cities from Firestore
-    const citiesSnapshot = await db.collection('cities').get();
-    const cities = citiesSnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }));
+    // Get all cities from file system (no Firestore)
+    const cities = await getFileSystemCities();
     
-    // Get all blogs from file system (since blogs are file-based)
+    // Get all blogs from file system
     const blogs = await getFileSystemBlogs();
     
     // Generate sitemap XML
     const sitemap = generateSitemapXML(cities, blogs);
     
-    // Store sitemap in Firestore
-    await db.collection('system').doc('sitemap').set({
-      xml: sitemap,
-      lastUpdated: new Date().toISOString(),
-      totalUrls: cities.length + blogs.length + 3 // +3 for home, destinations, blog pages
-    });
+    // Save sitemap to file system
+    const fs = await import('fs/promises');
+    const path = await import('path');
     
-    console.log(`Sitemap updated with ${cities.length + blogs.length + 3} URLs`);
+    const sitemapPath = path.join(process.cwd(), 'demo-static-output', 'sitemap.xml');
+    await fs.writeFile(sitemapPath, sitemap, 'utf-8');
+    
+    console.log(`Sitemap updated with ${cities.length + blogs.length + 6} URLs`);
     
   } catch (error) {
     console.error('Error updating sitemap:', error);
     throw error;
+  }
+}
+
+/**
+ * Get cities from file system instead of database
+ */
+async function getFileSystemCities() {
+  try {
+    const fs = await import('fs/promises');
+    const path = await import('path');
+    
+    const citiesDir = path.join(process.cwd(), 'client/src/pages/cities');
+    
+    // Check if cities directory exists
+    try {
+      await fs.access(citiesDir);
+    } catch {
+      return [];
+    }
+    
+    // Read all files in the cities directory
+    const files = await fs.readdir(citiesDir);
+    const cityFiles = files.filter(file => file.endsWith('.tsx'));
+    
+    const cities = [];
+    
+    for (const file of cityFiles) {
+      try {
+        const filePath = path.join(citiesDir, file);
+        const content = await fs.readFile(filePath, 'utf-8');
+        
+        // Extract city key from filename
+        const cityKey = file.replace('.tsx', '');
+        
+        // Parse the city data from the file content
+        const cityData = extractCityDataFromFile(content, cityKey);
+        if (cityData) {
+          cities.push(cityData);
+        }
+      } catch (error) {
+        console.error(`Error reading city file ${file}:`, error);
+      }
+    }
+    
+    return cities;
+  } catch (error) {
+    console.error('Error getting cities from file system:', error);
+    return [];
   }
 }
 
@@ -152,6 +183,31 @@ async function getFileSystemBlogs() {
 }
 
 /**
+ * Extract city data from file content for sitemap generation
+ */
+function extractCityDataFromFile(content: string, cityKey: string): any | null {
+  try {
+    // Extract city name from React component
+    const nameMatch = content.match(/name:\s*['"](.*?)['"]/);
+    const countryMatch = content.match(/country:\s*['"](.*?)['"]/);
+    
+    if (!nameMatch) {
+      return null;
+    }
+    
+    return {
+      name: nameMatch[1],
+      country: countryMatch ? countryMatch[1] : '',
+      slug: cityKey,
+      url: `/best-things-to-do-in-${cityKey}`
+    };
+  } catch (error) {
+    console.error('Error extracting city data:', error);
+    return null;
+  }
+}
+
+/**
  * Extract blog data from file content for sitemap generation
  */
 function extractBlogDataFromFile(content: string): any | null {
@@ -188,36 +244,48 @@ function extractBlogDataFromFile(content: string): any | null {
  */
 function generateSitemapXML(cities: any[], blogs: any[]): string {
   const baseUrl = 'https://travelwanders.com';
+  const today = new Date().toISOString().split('T')[0];
   
   let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>${baseUrl}</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>daily</changefreq>
+    <loc>${baseUrl}/</loc>
+    <lastmod>${today}</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>${baseUrl}/destinations</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>${today}</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/blogs</loc>
+    <lastmod>${today}</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>${baseUrl}/blog</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
+    <loc>${baseUrl}/privacy-policy</loc>
+    <lastmod>${today}</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/terms-of-service</loc>
+    <lastmod>${today}</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/cookie-policy</loc>
+    <lastmod>${today}</lastmod>
+    <priority>0.5</priority>
   </url>
 `;
 
   // Add city pages
   cities.forEach(city => {
-    const slug = city.seo?.slug || city.name.toLowerCase().replace(/\s+/g, '-');
+    const slug = city.slug || city.name.toLowerCase().replace(/\s+/g, '-');
     xml += `  <url>
     <loc>${baseUrl}/best-things-to-do-in-${slug}</loc>
-    <lastmod>${city.lastUpdated || new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>${city.lastUpdated || today}</lastmod>
     <priority>0.9</priority>
   </url>
 `;
@@ -225,11 +293,10 @@ function generateSitemapXML(cities: any[], blogs: any[]): string {
 
   // Add blog pages
   blogs.forEach(blog => {
-    const slug = blog.seo?.slug || blog.title.toLowerCase().replace(/\s+/g, '-');
+    const slug = blog.seo?.slug || blog.id || blog.title.toLowerCase().replace(/\s+/g, '-');
     xml += `  <url>
     <loc>${baseUrl}/blog/${slug}</loc>
-    <lastmod>${blog.lastUpdated || new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>${blog.lastUpdated || today}</lastmod>
     <priority>0.7</priority>
   </url>
 `;
@@ -241,17 +308,13 @@ function generateSitemapXML(cities: any[], blogs: any[]): string {
 }
 
 /**
- * Batch update SEO for all existing cities
+ * Batch update SEO for all existing cities (file system only)
  */
 export async function batchUpdateCitySEO() {
   try {
     console.log('Starting batch SEO update for all cities...');
     
-    const citiesSnapshot = await db.collection('cities').get();
-    const cities = citiesSnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }));
+    const cities = await getFileSystemCities();
     
     const batchSize = 10;
     const batches = [];
@@ -264,7 +327,7 @@ export async function batchUpdateCitySEO() {
       await Promise.all(
         batch.map(async (city) => {
           try {
-            await autoGenerateCitySEO(city.id, city);
+            await autoGenerateCitySEO(city.slug, city);
             console.log(`Updated SEO for ${city.name}`);
           } catch (error) {
             console.error(`Error updating SEO for ${city.name}:`, error);
@@ -291,11 +354,7 @@ export async function batchUpdateBlogSEO() {
   try {
     console.log('Starting batch SEO update for all blogs...');
     
-    const blogsSnapshot = await db.collection('blogs').get();
-    const blogs = blogsSnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }));
+    const blogs = await getFileSystemBlogs();
     
     const batchSize = 10;
     const batches = [];
