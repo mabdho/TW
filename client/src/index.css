@@ -41,6 +41,16 @@
   }
   
   /* Minimal loading states - no visible loading indicators */
+  
+  /* Hide scrollbar for discovery cards slider */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Travel Guide Design System - Inspired by wanderlust and adventure

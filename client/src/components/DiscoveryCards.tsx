@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { 
   Lightbulb, 
   Camera, 
@@ -19,7 +18,9 @@ import {
   Zap,
   Award,
   TrendingUp,
-  Coffee
+  Coffee,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 
 interface Attraction {
@@ -314,83 +315,74 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
     {
       title: "Local Insider Tips",
       icon: <Lightbulb className="w-5 h-5 text-yellow-500" />,
-      content: insiderTips.map((tip, index) => (
-        <div key={index} className="mb-3 p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border-l-4 border-yellow-400">
-          <p className="text-sm text-gray-700 dark:text-gray-300">{tip}</p>
+      color: "yellow",
+      summary: `${insiderTips.length} insider tips`,
+      content: insiderTips.slice(0, 3).map((tip, index) => (
+        <div key={index} className="mb-2 text-sm text-gray-700 dark:text-gray-300">
+          • {tip.length > 80 ? tip.substring(0, 80) + '...' : tip}
         </div>
       ))
     },
     {
-      title: "Photo Opportunities",
+      title: "Photo Spots",
       icon: <Camera className="w-5 h-5 text-blue-500" />,
-      content: photoOps.map((op, index) => (
-        <div key={index} className="mb-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-          <h4 className="font-semibold text-blue-700 dark:text-blue-300 mb-1">{op.spot}</h4>
-          <p className="text-sm text-gray-600 dark:text-gray-400">{op.description}</p>
+      color: "blue", 
+      summary: `${photoOps.length} photo opportunities`,
+      content: photoOps.slice(0, 3).map((op, index) => (
+        <div key={index} className="mb-2">
+          <h4 className="font-semibold text-blue-700 dark:text-blue-300 text-sm">{op.spot}</h4>
+          <p className="text-xs text-gray-600 dark:text-gray-400">
+            {op.description.length > 70 ? op.description.substring(0, 70) + '...' : op.description}
+          </p>
         </div>
       ))
     },
     {
       title: "Experience Levels",
       icon: <Target className="w-5 h-5 text-green-500" />,
+      color: "green",
+      summary: `${categories.easyAccess.length + categories.moderateAdventure.length + categories.localExpert.length} attractions categorized`,
       content: (
-        <div className="space-y-4">
+        <div className="space-y-2">
           {categories.easyAccess.length > 0 && (
-            <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <Badge variant="outline" className="bg-green-100 text-green-700 border-green-300">
-                  Easy Access
-                </Badge>
-                <span className="text-sm text-gray-600">{categories.easyAccess.length} attractions</span>
-              </div>
-              <div className="space-y-1">
-                {categories.easyAccess.slice(0, 3).map((attr, index) => (
-                  <p key={index} className="text-sm text-gray-700 dark:text-gray-300">• {attr.name}</p>
-                ))}
-              </div>
+            <div className="flex items-center gap-2">
+              <Badge variant="outline" className="bg-green-100 text-green-700 border-green-300 text-xs">
+                Easy Access
+              </Badge>
+              <span className="text-xs text-gray-600">{categories.easyAccess.length}</span>
             </div>
           )}
           {categories.moderateAdventure.length > 0 && (
-            <div className="p-3 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <Badge variant="outline" className="bg-orange-100 text-orange-700 border-orange-300">
-                  Moderate Adventure
-                </Badge>
-                <span className="text-sm text-gray-600">{categories.moderateAdventure.length} attractions</span>
-              </div>
-              <div className="space-y-1">
-                {categories.moderateAdventure.slice(0, 3).map((attr, index) => (
-                  <p key={index} className="text-sm text-gray-700 dark:text-gray-300">• {attr.name}</p>
-                ))}
-              </div>
+            <div className="flex items-center gap-2">
+              <Badge variant="outline" className="bg-orange-100 text-orange-700 border-orange-300 text-xs">
+                Moderate
+              </Badge>
+              <span className="text-xs text-gray-600">{categories.moderateAdventure.length}</span>
             </div>
           )}
           {categories.localExpert.length > 0 && (
-            <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <Badge variant="outline" className="bg-purple-100 text-purple-700 border-purple-300">
-                  Local Expert
-                </Badge>
-                <span className="text-sm text-gray-600">{categories.localExpert.length} attractions</span>
-              </div>
-              <div className="space-y-1">
-                {categories.localExpert.slice(0, 3).map((attr, index) => (
-                  <p key={index} className="text-sm text-gray-700 dark:text-gray-300">• {attr.name}</p>
-                ))}
-              </div>
+            <div className="flex items-center gap-2">
+              <Badge variant="outline" className="bg-purple-100 text-purple-700 border-purple-300 text-xs">
+                Expert
+              </Badge>
+              <span className="text-xs text-gray-600">{categories.localExpert.length}</span>
             </div>
           )}
         </div>
       )
     },
     {
-      title: "Time & Budget Guide",
+      title: "Time & Budget",
       icon: <Clock className="w-5 h-5 text-indigo-500" />,
+      color: "indigo",
+      summary: `Planning guide for ${attractions.length} attractions`,
       content: (
-        <div className="space-y-3">
-          {attractions.slice(0, 4).map((attr, index) => (
-            <div key={index} className="p-3 border rounded-lg">
-              <h4 className="font-semibold text-sm mb-2">{attr.name}</h4>
+        <div className="space-y-2">
+          {attractions.slice(0, 2).map((attr, index) => (
+            <div key={index} className="text-sm">
+              <h4 className="font-semibold text-indigo-700 dark:text-indigo-300 mb-1">
+                {attr.name.length > 25 ? attr.name.substring(0, 25) + '...' : attr.name}
+              </h4>
               <div className="flex gap-2 flex-wrap">
                 <Badge variant="outline" className="text-xs">
                   <Clock className="w-3 h-3 mr-1" />
@@ -399,10 +391,6 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
                 <Badge variant="outline" className="text-xs">
                   <DollarSign className="w-3 h-3 mr-1" />
                   {getCostLevel(attr)}
-                </Badge>
-                <Badge variant="outline" className="text-xs">
-                  <Calendar className="w-3 h-3 mr-1" />
-                  {getSeasonalInfo(attr)}
                 </Badge>
               </div>
             </div>
@@ -413,18 +401,27 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
     {
       title: "Hidden Gems",
       icon: <Eye className="w-5 h-5 text-pink-500" />,
+      color: "pink",
+      summary: `${attractions.filter(attr => 
+        attr.description.toLowerCase().includes('hidden') || 
+        attr.description.toLowerCase().includes('secret') ||
+        attr.description.toLowerCase().includes('local') ||
+        !highlights.includes(attr.name)
+      ).length} hidden gems`,
       content: (
-        <div className="space-y-3">
+        <div className="space-y-2">
           {attractions.filter(attr => 
             attr.description.toLowerCase().includes('hidden') || 
             attr.description.toLowerCase().includes('secret') ||
             attr.description.toLowerCase().includes('local') ||
             !highlights.includes(attr.name)
-          ).slice(0, 3).map((attr, index) => (
-            <div key={index} className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded-lg border-l-4 border-pink-400">
-              <h4 className="font-semibold text-pink-700 dark:text-pink-300 mb-1">{attr.name}</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                {attr.description.split('.')[0]}.
+          ).slice(0, 2).map((attr, index) => (
+            <div key={index} className="text-sm">
+              <h4 className="font-semibold text-pink-700 dark:text-pink-300 mb-1">
+                {attr.name.length > 25 ? attr.name.substring(0, 25) + '...' : attr.name}
+              </h4>
+              <p className="text-xs text-gray-600 dark:text-gray-400">
+                {attr.description.split('.')[0].substring(0, 60)}...
               </p>
             </div>
           ))}
@@ -434,46 +431,41 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
             attr.description.toLowerCase().includes('local') ||
             !highlights.includes(attr.name)
           ).length === 0 && (
-            <p className="text-sm text-gray-500 italic">Explore beyond the highlights to discover {cityName}'s hidden treasures!</p>
+            <p className="text-xs text-gray-500 italic">Explore beyond the highlights!</p>
           )}
         </div>
       )
     },
     {
-      title: "Cafes & Restaurants",
+      title: "Dining",
       icon: <Coffee className="w-5 h-5 text-orange-600" />,
+      color: "orange",
+      summary: `${diningOptions.length} dining options`,
       content: (
-        <div className="space-y-3">
+        <div className="space-y-2">
           {diningOptions.length > 0 ? (
             <>
-              {diningOptions.map((option, index) => (
-                <div key={index} className="p-3 bg-orange-50 dark:bg-orange-900/20 rounded-lg border-l-4 border-orange-400">
+              {diningOptions.slice(0, 2).map((option, index) => (
+                <div key={index} className="text-sm">
                   <div className="flex items-center gap-2 mb-1">
-                    <h4 className="font-semibold text-orange-700 dark:text-orange-300">{option.name}</h4>
+                    <h4 className="font-semibold text-orange-700 dark:text-orange-300">
+                      {option.name.length > 20 ? option.name.substring(0, 20) + '...' : option.name}
+                    </h4>
                     <Badge variant="outline" className="bg-orange-100 text-orange-700 border-orange-300 text-xs">
                       {option.type}
                     </Badge>
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{option.description}</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    {option.description.length > 60 ? option.description.substring(0, 60) + '...' : option.description}
+                  </p>
                 </div>
               ))}
-              {discoveryData?.diningHighlights?.diningTips && (
-                <div className="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg border-l-4 border-amber-400">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h4 className="font-semibold text-amber-700 dark:text-amber-300">Dining Tips</h4>
-                    <Badge variant="outline" className="bg-amber-100 text-amber-700 border-amber-300 text-xs">
-                      Local Advice
-                    </Badge>
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{discoveryData.diningHighlights.diningTips}</p>
-                </div>
-              )}
             </>
           ) : (
-            <div className="p-4 text-center">
-              <Coffee className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-              <p className="text-sm text-gray-500 italic">
-                Explore {cityName} to discover amazing local dining spots and cafes!
+            <div className="text-center">
+              <Coffee className="w-6 h-6 text-gray-400 mx-auto mb-1" />
+              <p className="text-xs text-gray-500 italic">
+                Discover local dining!
               </p>
             </div>
           )}
@@ -483,26 +475,28 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
     {
       title: "Quick Facts",
       icon: <Zap className="w-5 h-5 text-amber-500" />,
+      color: "amber",
+      summary: `${attractions.length} attractions overview`,
       content: (
-        <div className="grid grid-cols-2 gap-3">
-          <div className="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg text-center">
-            <div className="text-2xl font-bold text-amber-600">{attractions.length}</div>
-            <div className="text-xs text-gray-600">Total Attractions</div>
+        <div className="grid grid-cols-2 gap-2">
+          <div className="p-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg text-center">
+            <div className="text-lg font-bold text-amber-600">{attractions.length}</div>
+            <div className="text-xs text-gray-600">Total</div>
           </div>
-          <div className="p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg text-center">
-            <div className="text-2xl font-bold text-emerald-600">
+          <div className="p-2 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg text-center">
+            <div className="text-lg font-bold text-emerald-600">
               {attractions.filter(attr => getCostLevel(attr) === 'Free').length}
             </div>
-            <div className="text-xs text-gray-600">Free Activities</div>
+            <div className="text-xs text-gray-600">Free</div>
           </div>
-          <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-center">
-            <div className="text-2xl font-bold text-blue-600">
+          <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-center">
+            <div className="text-lg font-bold text-blue-600">
               {attractions.filter(attr => getTimeEstimate(attr) === '30-60 Min').length}
             </div>
-            <div className="text-xs text-gray-600">Quick Visits</div>
+            <div className="text-xs text-gray-600">Quick</div>
           </div>
-          <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg text-center">
-            <div className="text-2xl font-bold text-purple-600">
+          <div className="p-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg text-center">
+            <div className="text-lg font-bold text-purple-600">
               {attractions.filter(attr => getSeasonalInfo(attr) === 'Year-Round').length}
             </div>
             <div className="text-xs text-gray-600">Year-Round</div>
@@ -514,45 +508,53 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
 
   return (
     <div className="w-full">
-      <div className="mb-6">
-        <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">
+      <div className="mb-4 sm:mb-6">
+        <h3 className="text-xl sm:text-2xl font-bold mb-2 text-gray-900 dark:text-white">
           Discover {cityName}
         </h3>
-        <p className="text-gray-600 dark:text-gray-400">
+        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
           Interactive guides to help you explore like a local
         </p>
       </div>
 
-      <Tabs defaultValue="0" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 lg:grid-cols-7 mb-6">
+      {/* Horizontal Slider */}
+      <div className="relative">
+        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {discoveryCards.map((card, index) => (
-            <TabsTrigger 
-              key={index} 
-              value={index.toString()}
-              className="flex items-center gap-1 text-xs"
-            >
-              {card.icon}
-              <span className="hidden sm:inline">{card.title}</span>
-            </TabsTrigger>
-          ))}
-        </TabsList>
-
-        {discoveryCards.map((card, index) => (
-          <TabsContent key={index} value={index.toString()}>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+            <Card key={index} className="flex-shrink-0 w-72 sm:w-80 h-48 hover:shadow-lg transition-shadow duration-200">
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                   {card.icon}
-                  {card.title}
+                  <span className="truncate">{card.title}</span>
                 </CardTitle>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  {card.summary}
+                </p>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pt-0 h-24 overflow-hidden">
                 {card.content}
               </CardContent>
             </Card>
-          </TabsContent>
-        ))}
-      </Tabs>
+          ))}
+        </div>
+        
+        {/* Scroll Indicator */}
+        <div className="flex justify-center mt-2 space-x-1">
+          {discoveryCards.map((_, index) => (
+            <div
+              key={index}
+              className="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600"
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile-friendly note */}
+      <div className="mt-3 text-center">
+        <p className="text-xs text-gray-500 dark:text-gray-400">
+          Swipe left to explore more discovery cards
+        </p>
+      </div>
     </div>
   );
 };
