@@ -151,12 +151,12 @@ export const CityPage: React.FC<CityPageProps> = ({
       <div className="min-h-screen bg-gray-50">
         <Navigation />
       
-      {/* Description Section */}
+      {/* Description Section - Mobile First */}
       <div className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 py-6 sm:py-8">
-          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+        <div className="container mx-auto px-4 py-4 sm:py-6 lg:py-8">
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 sm:gap-6">
             <div className="flex-1">
-              <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-3xl">
+              <p className="text-sm leading-relaxed sm:text-base sm:leading-relaxed lg:text-lg text-gray-600 max-w-4xl">
                 {description}
               </p>
             </div>
@@ -164,9 +164,9 @@ export const CityPage: React.FC<CityPageProps> = ({
         </div>
       </div>
 
-      {/* Interactive Discovery Section */}
+      {/* Interactive Discovery Section - Mobile First */}
       <div className="bg-gradient-to-br from-gray-50 to-gray-100 border-b border-gray-200">
-        <div className="container mx-auto px-4 py-8 sm:py-12">
+        <div className="container mx-auto px-4 py-6 sm:py-8 lg:py-12">
           <DiscoveryCards 
             attractions={attractions}
             cityName={extractedCityName}
@@ -176,9 +176,9 @@ export const CityPage: React.FC<CityPageProps> = ({
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-6 sm:py-8">
+      <div className="container mx-auto px-4 py-4 sm:py-6 lg:py-8">
         <Tabs defaultValue="top5" className="w-full">
-          <TabsList className={`grid w-full ${mobileGridCols} mb-6 sm:mb-8 bg-white border border-gray-200 shadow-sm rounded-lg`}>
+          <TabsList className={`grid w-full ${mobileGridCols} mb-4 sm:mb-6 lg:mb-8 bg-white border border-gray-200 shadow-sm rounded-lg overflow-x-auto`}>
             <TabsTrigger value="top5" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap data-[state=active]:bg-green-50 data-[state=active]:text-green-700 data-[state=active]:border-green-200">
               <span className="hidden sm:inline">Top Attractions</span>
               <span className="sm:hidden">Top</span>
@@ -266,12 +266,12 @@ export const CityPage: React.FC<CityPageProps> = ({
             </div>
           </TabsContent>
 
-          {/* Top Attractions Tab */}
-          <TabsContent value="top5" className="space-y-6">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
-                  <Star className="w-5 h-5 text-orange-600" />
+          {/* Top Attractions Tab - Mobile First */}
+          <TabsContent value="top5" className="space-y-4 sm:space-y-6">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <div className="w-6 h-6 sm:w-8 sm:h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                  <Star className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
                 </div>
                 <div>
                   <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Top Attractions</h2>
@@ -279,38 +279,38 @@ export const CityPage: React.FC<CityPageProps> = ({
                 </div>
               </div>
               
-              <Accordion type="single" collapsible className="w-full space-y-3">
+              <Accordion type="single" collapsible className="w-full space-y-2 sm:space-y-3">
                 {top5Attractions.map((attraction, index) => (
                   <AccordionItem key={index} value={`item-${index}`} className="border border-gray-200 rounded-lg overflow-hidden">
-                    <AccordionTrigger className="px-4 py-3 hover:no-underline hover:bg-gray-50 transition-colors">
-                      <div className="flex items-center gap-4 w-full">
+                    <AccordionTrigger className="px-3 py-2.5 sm:px-4 sm:py-3 hover:no-underline hover:bg-gray-50 transition-colors">
+                      <div className="flex items-center gap-2 sm:gap-4 w-full">
                         <div className="flex-shrink-0">
-                          <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center text-white font-bold text-xs sm:text-sm">
                             {index + 1}
                           </div>
                         </div>
-                        <div className="flex-1 text-left">
-                          <h3 className="text-base sm:text-lg font-semibold text-gray-900">{attraction.name}</h3>
+                        <div className="flex-1 text-left min-w-0">
+                          <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 truncate">{attraction.name}</h3>
                         </div>
                         <div className="flex items-center gap-1 flex-shrink-0">
-                          <Star className="w-4 h-4 fill-orange-400 text-orange-400" />
-                          <span className="text-sm font-medium text-gray-700">4.{9 - index}</span>
+                          <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-orange-400 text-orange-400" />
+                          <span className="text-xs sm:text-sm font-medium text-gray-700">4.{9 - index}</span>
                         </div>
                       </div>
                     </AccordionTrigger>
-                    <AccordionContent className="px-4 pb-4">
-                      <div className="space-y-4">
-                        <p className="text-gray-600 text-sm leading-relaxed">
+                    <AccordionContent className="px-3 pb-3 sm:px-4 sm:pb-4">
+                      <div className="space-y-3 sm:space-y-4">
+                        <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
                           {attraction.description}
                         </p>
                         
                         {attraction.practicalInfo && (
-                          <div className="bg-gray-50 rounded-lg p-4 space-y-3">
-                            <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2 text-sm">
-                              <MapPin className="h-4 w-4 text-gray-500" />
+                          <div className="bg-gray-50 rounded-lg p-3 sm:p-4 space-y-2 sm:space-y-3">
+                            <h4 className="font-semibold text-gray-900 mb-2 sm:mb-3 flex items-center gap-2 text-xs sm:text-sm">
+                              <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-gray-500" />
                               Practical Information
                             </h4>
-                            <div className="grid gap-3 text-sm">
+                            <div className="grid gap-2 sm:gap-3 text-xs sm:text-sm">
                               {attraction.practicalInfo.openingHours && (
                                 <div className="flex items-start gap-2">
                                   <Clock className="h-4 w-4 text-gray-500 mt-0.5 flex-shrink-0" />
@@ -363,16 +363,16 @@ export const CityPage: React.FC<CityPageProps> = ({
             </div>
           </TabsContent>
 
-          {/* All Attractions Tab */}
-          <TabsContent value="all" className="space-y-6">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-blue-600" />
+          {/* All Attractions Tab - Mobile First */}
+          <TabsContent value="all" className="space-y-4 sm:space-y-6">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+              <div className="flex items-center justify-between mb-4 sm:mb-6">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                   </div>
                   <div>
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900">All Attractions</h2>
+                    <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">All Attractions</h2>
                     <p className="text-sm text-gray-600">Complete guide to {attractions.length} places</p>
                   </div>
                 </div>
@@ -384,20 +384,20 @@ export const CityPage: React.FC<CityPageProps> = ({
               <div className="grid gap-4">
                 {attractions.map((attraction, index) => (
                   <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                    <div className="flex items-start gap-4">
+                    <div className="flex items-start gap-2 sm:gap-4">
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between gap-4 mb-3">
-                          <h3 className="text-lg font-semibold text-gray-900">{attraction.name}</h3>
-                          <div className="flex items-center gap-1">
-                            <Star className="w-4 h-4 fill-orange-400 text-orange-400" />
-                            <span className="text-sm font-medium text-gray-700">4.{Math.floor(Math.random() * 5) + 3}</span>
+                        <div className="flex items-start justify-between gap-2 sm:gap-4 mb-2 sm:mb-3">
+                          <h3 className="text-base sm:text-lg font-semibold text-gray-900 leading-tight">{attraction.name}</h3>
+                          <div className="flex items-center gap-1 flex-shrink-0">
+                            <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-orange-400 text-orange-400" />
+                            <span className="text-xs sm:text-sm font-medium text-gray-700">4.{Math.floor(Math.random() * 5) + 3}</span>
                           </div>
                         </div>
-                        <p className="text-gray-600 text-sm leading-relaxed mb-4">{attraction.description}</p>
+                        <p className="text-gray-600 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">{attraction.description}</p>
                         
                         {attraction.practicalInfo && (
-                          <div className="bg-gray-50 rounded-lg p-4">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
+                          <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 text-xs sm:text-sm">
                               {attraction.practicalInfo.openingHours && (
                                 <div className="flex items-center gap-2">
                                   <Clock className="h-4 w-4 text-gray-500" />
@@ -452,9 +452,9 @@ export const CityPage: React.FC<CityPageProps> = ({
             </div>
           </TabsContent>
 
-          {/* Interactive Explorer Tab */}
-          <TabsContent value="explore" className="space-y-6">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          {/* Interactive Explorer Tab - Mobile First */}
+          <TabsContent value="explore" className="space-y-4 sm:space-y-6">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
               <InteractiveAttractionExplorer 
                 attractions={attractions}
                 cityName={extractedCityName}
@@ -463,66 +463,66 @@ export const CityPage: React.FC<CityPageProps> = ({
             </div>
           </TabsContent>
 
-          {/* Plan Your Trip Tab */}
+          {/* Plan Your Trip Tab - Mobile First */}
           {logistics && (
-            <TabsContent value="plan" className="space-y-6">
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-purple-600" />
+            <TabsContent value="plan" className="space-y-4 sm:space-y-6">
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+                <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
                   </div>
                   <div>
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Plan Your Trip</h2>
-                    <p className="text-sm text-gray-600">Essential travel information and tips</p>
+                    <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">Plan Your Trip</h2>
+                    <p className="text-xs sm:text-sm text-gray-600">Essential travel information and tips</p>
                   </div>
                 </div>
                 
-                <div className="grid gap-6 md:grid-cols-2">
+                <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
                   {logistics.gettingAround && (
-                    <div className="bg-blue-50 rounded-lg border border-blue-200 p-4">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
-                          <MapPin className="w-4 h-4 text-blue-600" />
+                    <div className="bg-blue-50 rounded-lg border border-blue-200 p-3 sm:p-4">
+                      <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                          <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
                         </div>
-                        <h3 className="text-lg font-semibold text-gray-900">Getting Around</h3>
+                        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Getting Around</h3>
                       </div>
-                      <p className="text-gray-700 leading-relaxed text-sm">{logistics.gettingAround}</p>
+                      <p className="text-gray-700 leading-relaxed text-xs sm:text-sm">{logistics.gettingAround}</p>
                     </div>
                   )}
                   
                   {logistics.whereToStay && (
-                    <div className="bg-green-50 rounded-lg border border-green-200 p-4">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                          <Star className="w-4 h-4 text-green-600" />
+                    <div className="bg-green-50 rounded-lg border border-green-200 p-3 sm:p-4">
+                      <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 bg-green-100 rounded-full flex items-center justify-center">
+                          <Star className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
                         </div>
-                        <h3 className="text-lg font-semibold text-gray-900">Where to Stay</h3>
+                        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Where to Stay</h3>
                       </div>
-                      <p className="text-gray-700 leading-relaxed text-sm">{logistics.whereToStay}</p>
+                      <p className="text-gray-700 leading-relaxed text-xs sm:text-sm">{logistics.whereToStay}</p>
                     </div>
                   )}
                   
                   {logistics.bestTimeToVisit && (
-                    <div className="bg-orange-50 rounded-lg border border-orange-200 p-4">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center">
-                          <Clock className="w-4 h-4 text-orange-600" />
+                    <div className="bg-orange-50 rounded-lg border border-orange-200 p-3 sm:p-4">
+                      <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 bg-orange-100 rounded-full flex items-center justify-center">
+                          <Clock className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600" />
                         </div>
-                        <h3 className="text-lg font-semibold text-gray-900">Best Time to Visit</h3>
+                        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Best Time to Visit</h3>
                       </div>
-                      <p className="text-gray-700 leading-relaxed text-sm">{logistics.bestTimeToVisit}</p>
+                      <p className="text-gray-700 leading-relaxed text-xs sm:text-sm">{logistics.bestTimeToVisit}</p>
                     </div>
                   )}
                   
                   {logistics.suggestedItinerary && (
-                    <div className="bg-purple-50 rounded-lg border border-purple-200 p-4 md:col-span-2">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center">
-                          <Users className="w-4 h-4 text-purple-600" />
+                    <div className="bg-purple-50 rounded-lg border border-purple-200 p-3 sm:p-4 md:col-span-2">
+                      <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 bg-purple-100 rounded-full flex items-center justify-center">
+                          <Users className="w-3 h-3 sm:w-4 sm:h-4 text-purple-600" />
                         </div>
-                        <h3 className="text-lg font-semibold text-gray-900">Suggested Itinerary</h3>
+                        <h3 className="text-base sm:text-lg font-semibold text-gray-900">Suggested Itinerary</h3>
                       </div>
-                      <p className="text-gray-700 leading-relaxed text-sm whitespace-pre-line">{logistics.suggestedItinerary}</p>
+                      <p className="text-gray-700 leading-relaxed text-xs sm:text-sm whitespace-pre-line">{logistics.suggestedItinerary}</p>
                     </div>
                   )}
                 </div>
@@ -530,31 +530,31 @@ export const CityPage: React.FC<CityPageProps> = ({
             </TabsContent>
           )}
 
-          {/* FAQs Tab */}
+          {/* FAQs Tab - Mobile First */}
           {faqs && (
-            <TabsContent value="faqs" className="space-y-6">
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center">
-                    <Info className="w-5 h-5 text-indigo-600" />
+            <TabsContent value="faqs" className="space-y-4 sm:space-y-6">
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+                <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-indigo-100 rounded-full flex items-center justify-center">
+                    <Info className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
                   </div>
                   <div>
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Frequently Asked Questions</h2>
-                    <p className="text-sm text-gray-600">Common questions from travelers</p>
+                    <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">Frequently Asked Questions</h2>
+                    <p className="text-xs sm:text-sm text-gray-600">Common questions from travelers</p>
                   </div>
                 </div>
                 
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {faqs.map((faq, index) => (
-                    <div key={index} className="border border-gray-200 rounded-lg p-4 hover:shadow-sm transition-shadow">
-                      <h3 className="text-base font-semibold text-gray-900 mb-2 flex items-start gap-2">
-                        <span className="w-5 h-5 bg-indigo-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div key={index} className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-sm transition-shadow">
+                      <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-2 flex items-start gap-2">
+                        <span className="w-4 h-4 sm:w-5 sm:h-5 bg-indigo-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                           <span className="text-indigo-600 text-xs font-bold">Q</span>
                         </span>
                         {faq.question}
                       </h3>
-                      <div className="ml-7">
-                        <p className="text-gray-700 leading-relaxed text-sm">{faq.answer}</p>
+                      <div className="ml-6 sm:ml-7">
+                        <p className="text-gray-700 leading-relaxed text-xs sm:text-sm">{faq.answer}</p>
                       </div>
                     </div>
                   ))}

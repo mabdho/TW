@@ -176,7 +176,8 @@ const cities = [
   { "name": "Amalfi", "country": "Italy", "path": "/best-things-to-do-in-amalfi", "continent": "Europe" },
   { "name": "Vienna", "country": "Austria", "path": "/best-things-to-do-in-vienna", "continent": "Europe" },
   { "name": "Prague", "country": "Czech Republic", "path": "/best-things-to-do-in-prague", "continent": "Europe" },
-  { "name": "Florence", "country": "Italy", "path": "/best-things-to-do-in-florence", "continent": "Europe" }
+  { "name": "Florence", "country": "Italy", "path": "/best-things-to-do-in-florence", "continent": "Europe" },
+  { "name": "Paris", "country": "France", "path": "/best-things-to-do-in-paris", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1550340499-a6c60fc8287c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
 ];
 
 const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America", "South America"];

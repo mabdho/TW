@@ -6,14 +6,14 @@ import { Badge } from '@/components/ui/badge';
 
 // Get the last 8 cities from the cities array (most recently added)
 const featuredCities = [
-  { "name": "Florence", "country": "Italy", "path": "/best-things-to-do-in-florence", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1476362174823-3a23f4aa6d76?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { "name": "Prague", "country": "Czech Republic", "path": "/best-things-to-do-in-prague", "continent": "Europe", "imageUrl": "" },,
-  { "name": "Vienna", "country": "Austria", "path": "/best-things-to-do-in-vienna", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1590253198910-1683b35ba5bf?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,
-  { "name": "Amalfi", "country": "Italy", "path": "/best-things-to-do-in-amalfi", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1694475391873-0c6b9a182a4d?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,
-  { "name": "Venice", "country": "Italy", "path": "/best-things-to-do-in-venice", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1661963047742-dabc5a735357?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,
-  { "name": "Rome", "country": "Italy", "path": "/best-things-to-do-in-rome", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1661964123160-8d049fa07f0c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,,
+  { "name": "Paris", "country": "France", "path": "/best-things-to-do-in-paris", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1550340499-a6c60fc8287c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { "name": "Florence", "country": "Italy", "path": "/best-things-to-do-in-florence", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1476362174823-3a23f4aa6d76?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,
+  { "name": "Prague", "country": "Czech Republic", "path": "/best-things-to-do-in-prague", "continent": "Europe", "imageUrl": "" },,,
+  { "name": "Vienna", "country": "Austria", "path": "/best-things-to-do-in-vienna", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1590253198910-1683b35ba5bf?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,
+  { "name": "Amalfi", "country": "Italy", "path": "/best-things-to-do-in-amalfi", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1694475391873-0c6b9a182a4d?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,
+  { "name": "Venice", "country": "Italy", "path": "/best-things-to-do-in-venice", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1661963047742-dabc5a735357?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,,
+  { "name": "Rome", "country": "Italy", "path": "/best-things-to-do-in-rome", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1661964123160-8d049fa07f0c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,,,
   { "name": "Milan", "country": "Italy", "path": "/best-things-to-do-in-milan", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1661962887170-e7db3f307c7a?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },,,,,,,
-  { "name": "Zurich", "country": "Switzerland", "path": "/best-things-to-do-in-zurich", "continent": "Europe", "imageUrl": "" },,,,,,,
 ];
 
 export const FeaturedCities = () => {
