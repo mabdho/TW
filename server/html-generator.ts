@@ -128,6 +128,100 @@ const pageStyles = `
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   }
 
+  .hero-breadcrumb {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  .badge {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .tabs-container {
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+
+  .tabs-list {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    overflow-x: auto;
+  }
+
+  .tab-trigger {
+    padding: 1rem 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: #64748b;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .tab-trigger:hover,
+  .tab-trigger.active {
+    color: #0f172a;
+    border-bottom-color: #3b82f6;
+  }
+
+  .tab-content {
+    display: none;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  .top-attraction {
+    position: relative;
+    padding-left: 60px;
+  }
+
+  .attraction-number {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    background: #3b82f6;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
   .highlights-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -322,84 +416,124 @@ const pageStyles = `
   }
 `;
 
-// Generate complete HTML page (from Firebase Functions)
+// Helper functions for generating HTML components
+function generatePracticalInfoHTML(practicalInfo: any): string {
+  return `
+    <div class="practical-info">
+      <h4>📍 Practical Information</h4>
+      <div class="practical-grid">
+        <div class="practical-item">
+          <strong>🚌 How to get there:</strong> ${practicalInfo.howToGetThere || 'Information not available'}
+        </div>
+        <div class="practical-item">
+          <strong>⏰ Opening hours:</strong> ${practicalInfo.openingHours || 'Check website'}
+        </div>
+        <div class="practical-item">
+          <strong>💰 Cost:</strong> ${practicalInfo.cost || 'Varies'}
+        </div>
+        ${practicalInfo.website ? `
+          <div class="practical-item">
+            <strong>🌐 Website:</strong> <a href="https://${practicalInfo.website}" target="_blank" rel="noopener">${practicalInfo.website}</a>
+          </div>
+        ` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function generateDiscoveryTagsHTML(discoveryTags: any): string {
+  return `
+    <div class="discovery-tags">
+      <h4>🎯 Discovery Info</h4>
+      <div class="tags-grid">
+        ${discoveryTags.timeRequired ? `<span class="discovery-tag">⏱️ ${discoveryTags.timeRequired}</span>` : ''}
+        ${discoveryTags.experienceLevel ? `<span class="discovery-tag">🎯 ${discoveryTags.experienceLevel}</span>` : ''}
+        ${discoveryTags.costLevel ? `<span class="discovery-tag">💰 ${discoveryTags.costLevel}</span>` : ''}
+        ${discoveryTags.seasonalBest ? `<span class="discovery-tag">🌟 ${discoveryTags.seasonalBest}</span>` : ''}
+        ${discoveryTags.hiddenGem ? '<span class="discovery-tag gem">💎 Hidden Gem</span>' : ''}
+        ${discoveryTags.familyFriendly ? '<span class="discovery-tag family">👨‍👩‍👧‍👦 Family Friendly</span>' : ''}
+      </div>
+      ${discoveryTags.interests && discoveryTags.interests.length > 0 ? `
+        <div class="interests">
+          <strong>🎨 Interests:</strong> ${discoveryTags.interests.join(', ')}
+        </div>
+      ` : ''}
+      ${discoveryTags.photoOpportunity ? `
+        <div class="photo-tip">
+          <strong>📸 Photo Opportunity:</strong> ${discoveryTags.photoOpportunity}
+        </div>
+      ` : ''}
+      ${discoveryTags.insiderTip ? `
+        <div class="insider-tip">
+          <strong>💡 Insider Tip:</strong> ${discoveryTags.insiderTip}
+        </div>
+      ` : ''}
+      ${discoveryTags.accessibilityNotes ? `
+        <div class="accessibility-notes">
+          <strong>♿ Accessibility:</strong> ${discoveryTags.accessibilityNotes}
+        </div>
+      ` : ''}
+    </div>
+  `;
+}
+
+// Generate complete HTML page matching CityPage React component structure
 export function generateCompleteHTML(cityData: CityData): string {
   const seoTitle = cityData.title || `Best Things to Do in ${cityData.cityName}, ${cityData.country}`;
   const seoDescription = (cityData.description || 'Explore this amazing destination').substring(0, 160) + '...';
   
   const heroStyle = `background-image: url('${cityData.imageUrl || ''}');`;
   
+  // Create hero section with proper title and badges like React component
+  const heroHTML = `
+    <div class="hero-section" style="${heroStyle}">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-breadcrumb">
+          <span>${cityData.country || 'Country'}</span> › <span>${cityData.cityName}</span>
+        </div>
+        <h1 class="hero-title">${seoTitle}</h1>
+        <p class="hero-subtitle">Discover amazing experiences and top attractions in ${cityData.cityName}, ${cityData.country} (2025 Guide)</p>
+        <div class="hero-badges">
+          <span class="badge">${cityData.cityName}, ${cityData.country} (2025 Guide)</span>
+          <span class="badge">🎯 ${cityData.attractions?.length || 0}+ Attractions</span>
+          <span class="badge">⭐ Travel Guide</span>
+        </div>
+      </div>
+    </div>
+  `;
+  
   const highlightsHTML = (cityData.highlights || []).map(highlight => 
     `<div class="highlight-card">
       <p>${highlight}</p>
     </div>`
   ).join('');
-  
-  const attractionsHTML = cityData.attractions.map(attraction => 
+
+  const topAttractionsHTML = cityData.attractions.slice(0, 6).map((attraction, index) => 
+    `<div class="attraction-card top-attraction">
+      <div class="attraction-number">${index + 1}</div>
+      <div class="attraction-content">
+        <h3 class="attraction-name">${attraction.name || 'Unnamed Attraction'}</h3>
+        <div class="attraction-description">${(attraction.description || 'No description available').replace(/#{1,6}\s/g, '<h4>').replace(/\n/g, '<br>')}</div>
+        ${attraction.practicalInfo ? generatePracticalInfoHTML(attraction.practicalInfo) : ''}
+        ${attraction.discoveryTags ? generateDiscoveryTagsHTML(attraction.discoveryTags) : ''}
+      </div>
+    </div>`
+  ).join('');
+
+  const allAttractionsHTML = cityData.attractions.map(attraction => 
     `<div class="attraction-card">
       <div class="attraction-content">
         <h3 class="attraction-name">${attraction.name || 'Unnamed Attraction'}</h3>
         <div class="attraction-description">${(attraction.description || 'No description available').replace(/#{1,6}\s/g, '<h4>').replace(/\n/g, '<br>')}</div>
         
-        ${attraction.practicalInfo ? `
-          <div class="practical-info">
-            <h4>📍 Practical Information</h4>
-            <div class="practical-grid">
-              <div class="practical-item">
-                <strong>🚌 How to get there:</strong> ${attraction.practicalInfo.howToGetThere}
-              </div>
-              <div class="practical-item">
-                <strong>⏰ Opening hours:</strong> ${attraction.practicalInfo.openingHours}
-              </div>
-              <div class="practical-item">
-                <strong>💰 Cost:</strong> ${attraction.practicalInfo.cost}
-              </div>
-              ${attraction.practicalInfo.website ? `
-                <div class="practical-item">
-                  <strong>🌐 Website:</strong> <a href="https://${attraction.practicalInfo.website}" target="_blank" rel="noopener">${attraction.practicalInfo.website}</a>
-                </div>
-              ` : ''}
-            </div>
-          </div>
-        ` : ''}
-        
-        ${attraction.discoveryTags ? `
-          <div class="discovery-tags">
-            <h4>🎯 Discovery Info</h4>
-            <div class="tags-grid">
-              <span class="discovery-tag">⏱️ ${attraction.discoveryTags.timeRequired}</span>
-              <span class="discovery-tag">🎯 ${attraction.discoveryTags.experienceLevel}</span>
-              <span class="discovery-tag">💰 ${attraction.discoveryTags.costLevel}</span>
-              <span class="discovery-tag">🌟 ${attraction.discoveryTags.seasonalBest}</span>
-              ${attraction.discoveryTags.hiddenGem ? '<span class="discovery-tag gem">💎 Hidden Gem</span>' : ''}
-              ${attraction.discoveryTags.familyFriendly ? '<span class="discovery-tag family">👨‍👩‍👧‍👦 Family Friendly</span>' : ''}
-            </div>
-            ${attraction.discoveryTags.interests && attraction.discoveryTags.interests.length > 0 ? `
-              <div class="interests">
-                <strong>🎨 Interests:</strong> ${attraction.discoveryTags.interests.join(', ')}
-              </div>
-            ` : ''}
-            ${attraction.discoveryTags.photoOpportunity ? `
-              <div class="photo-tip">
-                <strong>📸 Photo Opportunity:</strong> ${attraction.discoveryTags.photoOpportunity}
-              </div>
-            ` : ''}
-            ${attraction.discoveryTags.insiderTip ? `
-              <div class="insider-tip">
-                <strong>💡 Insider Tip:</strong> ${attraction.discoveryTags.insiderTip}
-              </div>
-            ` : ''}
-            ${attraction.discoveryTags.accessibilityNotes ? `
-              <div class="accessibility-notes">
-                <strong>♿ Accessibility:</strong> ${attraction.discoveryTags.accessibilityNotes}
-              </div>
-            ` : ''}
-          </div>
-        ` : ''}
+        ${attraction.practicalInfo ? generatePracticalInfoHTML(attraction.practicalInfo) : ''}
+        ${attraction.discoveryTags ? generateDiscoveryTagsHTML(attraction.discoveryTags) : ''}
       </div>
     </div>`
   ).join('');
-  
+
+  // Generate discovery cards for overview tab (moved before tab content generation)
   const discoveryCardsHTML = cityData.discoveryData ? `
     <section class="section">
       <h2 class="section-title">🔍 Interactive Explorer</h2>
@@ -411,16 +545,21 @@ export function generateCompleteHTML(cityData: CityData): string {
               ${cityData.discoveryData.localSecrets.map(secret => `<li>${secret}</li>`).join('')}
             </ul>
           </div>
-        ` : ''}
-        
-        ${cityData.discoveryData.photoSpots && cityData.discoveryData.photoSpots.length > 0 ? `
+        ` : `
           <div class="discovery-card">
-            <h3>📸 Photo Spots</h3>
+            <h3>🤫 Local Secrets</h3>
             <ul class="discovery-list">
-              ${cityData.discoveryData.photoSpots.map(spot => `<li>${spot}</li>`).join('')}
+              <li>Discover hidden gems and local favorites</li>
             </ul>
           </div>
-        ` : ''}
+        `}
+        
+        <div class="discovery-card">
+          <h3>📸 Photo Spots</h3>
+          <ul class="discovery-list">
+            <li>Best photo locations in ${cityData.cityName}</li>
+          </ul>
+        </div>
         
         ${cityData.discoveryData.budgetBreakdown ? `
           <div class="discovery-card">
@@ -495,47 +634,96 @@ export function generateCompleteHTML(cityData: CityData): string {
             </div>
           </div>
         ` : ''}
-        
-        ${cityData.discoveryData.seasonalHighlights ? `
-          <div class="discovery-card">
-            <h3>🌸 Seasonal Highlights</h3>
-            <div class="seasonal-content">
-              ${cityData.discoveryData.seasonalHighlights.spring ? `
-                <div class="season-item">
-                  <strong>🌸 Spring:</strong> ${cityData.discoveryData.seasonalHighlights.spring}
-                </div>
-              ` : ''}
-              ${cityData.discoveryData.seasonalHighlights.summer ? `
-                <div class="season-item">
-                  <strong>☀️ Summer:</strong> ${cityData.discoveryData.seasonalHighlights.summer}
-                </div>
-              ` : ''}
-              ${cityData.discoveryData.seasonalHighlights.fall ? `
-                <div class="season-item">
-                  <strong>🍂 Fall:</strong> ${cityData.discoveryData.seasonalHighlights.fall}
-                </div>
-              ` : ''}
-              ${cityData.discoveryData.seasonalHighlights.winter ? `
-                <div class="season-item">
-                  <strong>❄️ Winter:</strong> ${cityData.discoveryData.seasonalHighlights.winter}
-                </div>
-              ` : ''}
-            </div>
-          </div>
-        ` : ''}
-        
-        ${cityData.discoveryData.quickFacts ? `
-          <div class="discovery-card">
-            <h3>⚡ Quick Facts</h3>
-            <ul class="discovery-list">
-              ${cityData.discoveryData.quickFacts.map(fact => `<li>${fact}</li>`).join('')}
-            </ul>
-          </div>
-        ` : ''}
       </div>
     </section>
   ` : '';
+
+  // Generate tab-based content structure
+  const overviewContent = `
+    <div class="tab-content active" id="overview">
+      <div class="container">
+        <section class="section">
+          <h2 class="section-title">✨ Highlights</h2>
+          <div class="highlights-grid">
+            ${highlightsHTML}
+          </div>
+        </section>
+        ${discoveryCardsHTML}
+      </div>
+    </div>
+  `;
   
+  // Generate complete tab content structure
+  const topAttractionsContent = `
+    <div class="tab-content" id="top-attractions">
+      <div class="container">
+        <section class="section">
+          <h2 class="section-title">🏆 Top Attractions</h2>
+          <div class="attractions-grid">
+            ${topAttractionsHTML}
+          </div>
+        </section>
+      </div>
+    </div>
+  `;
+
+  const allAttractionsContent = `
+    <div class="tab-content" id="all-attractions">
+      <div class="container">
+        <section class="section">
+          <h2 class="section-title">🎯 All Attractions</h2>
+          <div class="attractions-grid">
+            ${allAttractionsHTML}
+          </div>
+        </section>
+      </div>
+    </div>
+  `;
+
+  const interactiveExplorerContent = `
+    <div class="tab-content" id="interactive-explorer">
+      <div class="container">
+        ${discoveryCardsHTML}
+      </div>
+    </div>
+  `;
+
+  const planTripContent = cityData.logistics ? `
+    <div class="tab-content" id="plan-trip">
+      <div class="container">
+        <section class="section">
+          <h2 class="section-title">📋 Plan Your Trip</h2>
+          <div class="logistics-grid">
+            ${cityData.logistics.gettingAround ? `
+              <div class="logistics-card">
+                <h3>🚌 Getting Around</h3>
+                <div class="logistics-content">${cityData.logistics.gettingAround.replace(/#{1,6}\s/g, '<h4>').replace(/\n/g, '<br>')}</div>
+              </div>
+            ` : ''}
+            ${cityData.logistics.whereToStay ? `
+              <div class="logistics-card">
+                <h3>🏨 Where to Stay</h3>
+                <div class="logistics-content">${cityData.logistics.whereToStay.replace(/#{1,6}\s/g, '<h4>').replace(/\n/g, '<br>')}</div>
+              </div>
+            ` : ''}
+            ${cityData.logistics.bestTimeToVisit ? `
+              <div class="logistics-card">
+                <h3>📅 Best Time to Visit</h3>
+                <div class="logistics-content">${cityData.logistics.bestTimeToVisit.replace(/#{1,6}\s/g, '<h4>').replace(/\n/g, '<br>')}</div>
+              </div>
+            ` : ''}
+            ${cityData.logistics.suggestedItinerary ? `
+              <div class="logistics-card">
+                <h3>🎯 Suggested Itinerary</h3>
+                <div class="logistics-content">${cityData.logistics.suggestedItinerary.replace(/#{1,6}\s/g, '<h4>').replace(/\n/g, '<br>')}</div>
+              </div>
+            ` : ''}
+          </div>
+        </section>
+      </div>
+    </div>
+  ` : '';
+
   const faqsHTML = cityData.faqs ? cityData.faqs.map(faq => 
     `<div class="faq-item">
       <div class="faq-question">${faq.question}</div>
@@ -543,6 +731,18 @@ export function generateCompleteHTML(cityData: CityData): string {
     </div>`
   ).join('') : '';
   
+  const faqsContent = cityData.faqs && cityData.faqs.length > 0 ? `
+    <div class="tab-content" id="faqs">
+      <div class="container">
+        <section class="section">
+          <h2 class="section-title">❓ Frequently Asked Questions</h2>
+          ${faqsHTML}
+        </section>
+      </div>
+    </div>
+  ` : '';
+
+  // Complete HTML structure with tabbed navigation matching React CityPage component
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -588,68 +788,27 @@ export function generateCompleteHTML(cityData: CityData): string {
 </head>
 <body>
     <div id="root">
-        <!-- Hero Section -->
-        <div class="hero-section" style="${heroStyle}">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1 class="hero-title">${cityData.cityName}</h1>
-                <p class="hero-description">${cityData.description.substring(0, 200)}...</p>
-            </div>
+        ${heroHTML}
+        
+        <!-- Tab Navigation -->
+        <div class="tabs-container">
+          <div class="tabs-list">
+            <button class="tab-trigger active" onclick="showTab('overview')">Overview</button>
+            <button class="tab-trigger" onclick="showTab('top-attractions')">Top Attractions</button>
+            <button class="tab-trigger" onclick="showTab('all-attractions')">All Attractions</button>
+            <button class="tab-trigger" onclick="showTab('interactive-explorer')">Interactive Explorer</button>
+            <button class="tab-trigger" onclick="showTab('plan-trip')">Plan Your Trip</button>
+            ${cityData.faqs && cityData.faqs.length > 0 ? '<button class="tab-trigger" onclick="showTab(\'faqs\')">FAQs</button>' : ''}
+          </div>
         </div>
         
-        <!-- Main Content -->
-        <div class="container">
-            <!-- Highlights Section -->
-            <section class="section">
-                <h2 class="section-title">✨ Highlights</h2>
-                <div class="highlights-grid">
-                    ${highlightsHTML}
-                </div>
-            </section>
-            
-            <!-- Discovery Cards Section -->
-            ${discoveryCardsHTML}
-            
-            <!-- Attractions Section -->
-            <section class="section">
-                <h2 class="section-title">🎯 Top Attractions</h2>
-                <div class="attractions-grid">
-                    ${attractionsHTML}
-                </div>
-            </section>
-            
-            <!-- Logistics Section -->
-            ${cityData.logistics && typeof cityData.logistics === 'object' ? `
-            <section class="section">
-                <h2 class="section-title">🗺️ Plan Your Trip</h2>
-                <div class="logistics-grid">
-                    <div class="logistics-card">
-                        <h3>🚌 Getting Around</h3>
-                        <div class="logistics-content">${(cityData.logistics.gettingAround || 'Public transport recommended').toString().replace(/#{1,6}\s/g, '').replace(/\n/g, '<br>')}</div>
-                    </div>
-                    <div class="logistics-card">
-                        <h3>🏨 Where to Stay</h3>
-                        <div class="logistics-content">${(cityData.logistics.whereToStay || 'City center recommended').toString().replace(/#{1,6}\s/g, '').replace(/\n/g, '<br>')}</div>
-                    </div>
-                    <div class="logistics-card">
-                        <h3>📅 Best Time to Visit</h3>
-                        <div class="logistics-content">${(cityData.logistics.bestTimeToVisit || 'Spring and Fall are ideal').toString().replace(/#{1,6}\s/g, '').replace(/\n/g, '<br>')}</div>
-                    </div>
-                    <div class="logistics-card">
-                        <h3>🎯 Suggested Itinerary</h3>
-                        <div class="logistics-content">${(cityData.logistics.suggestedItinerary || '3-4 days recommended').toString().replace(/#{1,6}\s/g, '').replace(/\n/g, '<br>')}</div>
-                    </div>
-                </div>
-            </section>` : ''}
-            
-            <!-- FAQs Section -->
-            ${cityData.faqs && cityData.faqs.length > 0 ? `
-            <section class="section">
-                <h2 class="section-title">❓ Frequently Asked Questions</h2>
-                ${faqsHTML}
-            </section>
-            ` : ''}
-        </div>
+        <!-- Tab Contents -->
+        ${overviewContent}
+        ${topAttractionsContent}
+        ${allAttractionsContent}
+        ${interactiveExplorerContent}
+        ${planTripContent}
+        ${faqsContent}
         
         <!-- Footer -->
         <footer class="footer">
@@ -659,26 +818,49 @@ export function generateCompleteHTML(cityData: CityData): string {
             </div>
         </footer>
     </div>
-    
+
     <script>
-        // Analytics and SEO enhancements
-        console.log('TravelWanders - ${cityData.cityName} Guide loaded successfully');
-        
-        // Basic interactivity
-        document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scrolling for any anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
+      function showTab(tabId) {
+        // Hide all tab contents
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabContents.forEach(content => {
+          content.classList.remove('active');
         });
+        
+        // Remove active class from all triggers
+        const tabTriggers = document.querySelectorAll('.tab-trigger');
+        tabTriggers.forEach(trigger => {
+          trigger.classList.remove('active');
+        });
+        
+        // Show selected tab content
+        const selectedTab = document.getElementById(tabId);
+        if (selectedTab) {
+          selectedTab.classList.add('active');
+        }
+        
+        // Add active class to clicked trigger
+        event.target.classList.add('active');
+      }
+
+      // Analytics and SEO enhancements
+      console.log('TravelWanders - ${cityData.cityName} Guide loaded successfully');
+      
+      // Basic interactivity
+      document.addEventListener('DOMContentLoaded', function() {
+          // Smooth scrolling for any anchor links
+          document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+              anchor.addEventListener('click', function (e) {
+                  e.preventDefault();
+                  const target = document.querySelector(this.getAttribute('href'));
+                  if (target) {
+                      target.scrollIntoView({
+                          behavior: 'smooth'
+                      });
+                  }
+              });
+          });
+      });
     </script>
 </body>
 </html>`;
