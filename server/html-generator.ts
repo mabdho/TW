@@ -1058,11 +1058,27 @@ function extractArrayFromTSX(content: string, fieldName: string): string[] {
     const match = content.match(pattern);
     if (match) {
       try {
+        // First try direct JSON parse
         return JSON.parse(match[1].replace(/'/g, '"'));
       } catch (e) {
-        // Fallback to manual parsing
-        const itemMatches = match[1].match(/['"`]([^'"`]+)['"`]/g);
-        return itemMatches ? itemMatches.map(item => item.replace(/['"`]/g, '')) : [];
+        // Enhanced fallback parsing for multiline arrays
+        const arrayContent = match[1];
+        
+        // Extract all quoted strings, handling multiline content
+        const itemMatches = arrayContent.match(/"([^"\\]|\\.)*"/g);
+        if (itemMatches) {
+          return itemMatches.map(item => item.replace(/^"/, '').replace(/"$/, ''));
+        }
+        
+        // Fallback to single quotes
+        const singleQuoteMatches = arrayContent.match(/'([^'\\]|\\.)*'/g);
+        if (singleQuoteMatches) {
+          return singleQuoteMatches.map(item => item.replace(/^'/, '').replace(/'$/, ''));
+        }
+        
+        // Last resort - extract any text within quotes
+        const genericMatches = arrayContent.match(/['"`]([^'"`]+)['"`]/g);
+        return genericMatches ? genericMatches.map(item => item.replace(/['"`]/g, '')) : [];
       }
     }
   }
@@ -1096,16 +1112,8 @@ export async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityD
     const publishedDate = extractFieldFromTSX(tsxContent, 'publishedDate');
     const tags = extractArrayFromTSX(tsxContent, 'tags');
     
-    // Extract highlights
-    const highlightsMatch = tsxContent.match(/highlights=\{(\[[\s\S]*?\])\}/);
-    let highlights: string[] = [];
-    if (highlightsMatch) {
-      try {
-        highlights = JSON.parse(highlightsMatch[1].replace(/'/g, '"'));
-      } catch (e) {
-        console.warn('Failed to parse highlights, using empty array');
-      }
-    }
+    // Extract highlights using enhanced array extraction
+    const highlights = extractArrayFromTSX(tsxContent, 'highlights');
     
     // Extract attractions with COMPLETE content including descriptions, practical info, and discovery tags
     const attractionsMatch = tsxContent.match(/attractions=\{(\[[\s\S]*?\])\}/);
