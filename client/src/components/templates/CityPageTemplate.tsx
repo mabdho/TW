@@ -11,6 +11,7 @@ import { InternalLinks } from '../InternalLinks';
 import { getAllCitiesData, getAllBlogsData } from '../../utils/dataService';
 import { generatePlaceSchema } from '../../utils/geoData';
 import { generateCityTravelGuideSchema, generateTouristAttractionSchema, detectBusinessType, generateLocalBusinessSchema } from '../../utils/structuredData';
+import { generateCityMetaTags, generateOptimizedMetaDescription, generateEnhancedStructuredData } from '../../utils/seoOptimization';
 import { getCityGradientClass } from '../../utils/cityGradients';
 
 interface CityPageTemplateProps {
