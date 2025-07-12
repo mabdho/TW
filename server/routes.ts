@@ -19,6 +19,450 @@ import {
   getSitemapIndexingStatusRoute
 } from "./routes/seo";
 
+// Firebase Functions HTML Generator Interface
+interface CityData {
+  cityName: string;
+  country: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  galleryImages: Array<{
+    url: string;
+    alt: string;
+    caption: string;
+  }>;
+  highlights: string[];
+  attractions: Array<{
+    name: string;
+    description: string;
+    practicalInfo: {
+      howToGetThere: string;
+      openingHours: string;
+      cost: string;
+      website: string;
+    };
+    discoveryTags: {
+      timeRequired: string;
+      experienceLevel: string;
+      interests: string[];
+      costLevel: string;
+      seasonalBest: string;
+      photoOpportunity: string;
+      insiderTip: string;
+      hiddenGem: boolean;
+      familyFriendly: boolean;
+      accessibilityNotes: string;
+    };
+  }>;
+  discoveryData?: {
+    localSecrets?: string[];
+    photoSpots?: string[];
+    quickFacts?: string[];
+    seasonalHighlights?: string[];
+    budgetBreakdown?: {
+      budget: string;
+      midRange: string;
+      luxury: string;
+    };
+    diningHighlights?: {
+      mustTryDishes: string[];
+      bestCafes: string[];
+      topRestaurants: string[];
+      foodMarkets: string[];
+      diningTips: string[];
+    };
+  };
+  logistics?: {
+    gettingAround: string;
+    whereToStay: string;
+    bestTimeToVisit: string;
+    suggestedItinerary: string;
+  };
+  faqs?: Array<{
+    question: string;
+    answer: string;
+  }>;
+}
+
+// CSS styles for the complete HTML page
+const pageStyles = `
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8fafc;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .hero-section {
+    position: relative;
+    height: 60vh;
+    min-height: 400px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .hero-description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .section {
+    padding: 4rem 0;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #2c3e50;
+  }
+
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .highlight-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #3498db;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .highlight-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .attractions-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .attraction-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .attraction-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .attraction-content {
+    padding: 2rem;
+  }
+
+  .attraction-name {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+  }
+
+  .attraction-description {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .practical-info {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+  }
+
+  .discovery-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .discovery-tag {
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .discovery-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .discovery-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .discovery-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .discovery-list {
+    list-style: none;
+  }
+
+  .discovery-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .faq-section {
+    background: #f8f9fa;
+    padding: 3rem 0;
+    margin: 4rem 0;
+  }
+
+  .faq-item {
+    background: white;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .faq-question {
+    padding: 1.5rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #2c3e50;
+  }
+
+  .faq-answer {
+    padding: 0 1.5rem 1.5rem;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  .footer {
+    background: #2c3e50;
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2rem;
+    }
+    
+    .hero-description {
+      font-size: 1rem;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .highlights-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .discovery-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+`;
+
+// Firebase Functions HTML Generator (simplified for Express)
+function generateCompleteHTML(cityData: CityData): string {
+  const seoTitle = cityData.title || `Best Things to Do in ${cityData.cityName}, ${cityData.country}`;
+  const seoDescription = cityData.description.substring(0, 160) + '...';
+  
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${seoTitle}</title>
+    <meta name="description" content="${seoDescription}">
+    <meta name="keywords" content="things to do in ${cityData.cityName}, ${cityData.cityName} travel guide">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
+    <style>${pageStyles}</style>
+</head>
+<body>
+    <div id="root">
+        <div class="hero-section" style="background-image: url('${cityData.imageUrl}');">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">${cityData.cityName}</h1>
+                <p class="hero-description">${cityData.description.substring(0, 200)}...</p>
+            </div>
+        </div>
+        
+        <div class="container">
+            <section class="section">
+                <h2 class="section-title">✨ Highlights</h2>
+                <div class="highlights-grid">
+                    ${cityData.highlights.map(highlight => `<div class="highlight-card"><p>${highlight}</p></div>`).join('')}
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">🎯 Top Attractions</h2>
+                <div class="attractions-grid">
+                    ${cityData.attractions.map(attraction => `
+                    <div class="attraction-card">
+                        <div class="attraction-content">
+                            <h3 class="attraction-name">${attraction.name}</h3>
+                            <div class="attraction-description">${attraction.description}</div>
+                        </div>
+                    </div>`).join('')}
+                </div>
+            </section>
+        </div>
+        
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2025 TravelWanders. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>`;
+}
+
+// TSX extraction function (simplified version)
+async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityData | null> {
+  try {
+    const tsxContent = await fs.readFile(tsxFilePath, 'utf-8');
+    
+    // Extract basic city information
+    const cityNameMatch = tsxContent.match(/cityName="([^"]+)"/);
+    const countryMatch = tsxContent.match(/country="([^"]+)"/);
+    const titleMatch = tsxContent.match(/title=\{?"([^"]+)"\}?/);
+    const descriptionMatch = tsxContent.match(/description=\{`([^`]+)`\}/);
+    const imageUrlMatch = tsxContent.match(/imageUrl=\{?"([^"]+)"\}?/);
+    
+    if (!cityNameMatch || !countryMatch || !titleMatch || !descriptionMatch) {
+      console.error('Failed to extract basic city data from TSX file');
+      return null;
+    }
+    
+    // Extract highlights
+    const highlightsMatch = tsxContent.match(/highlights=\{(\[[\s\S]*?\])\}/);
+    let highlights: string[] = [];
+    if (highlightsMatch) {
+      const highlightItems = highlightsMatch[1].match(/"([^"]+)"/g);
+      highlights = highlightItems ? highlightItems.map(item => item.replace(/"/g, '')) : [];
+    }
+    
+    // Extract attractions (basic)
+    const attractions: CityData['attractions'] = [];
+    const attractionsMatch = tsxContent.match(/attractions=\{(\[[\s\S]*?\])\}/);
+    if (attractionsMatch) {
+      // Simple extraction for basic attraction data
+      const attractionPattern = /name:\s*"([^"]+)"/g;
+      let match;
+      while ((match = attractionPattern.exec(attractionsMatch[1])) !== null) {
+        attractions.push({
+          name: match[1],
+          description: `Explore ${match[1]} in ${cityNameMatch[1]}`,
+          practicalInfo: {
+            howToGetThere: 'Public transport recommended',
+            openingHours: 'Check official website',
+            cost: 'Varies',
+            website: 'Check local tourism website'
+          },
+          discoveryTags: {
+            timeRequired: '1-2 hours',
+            experienceLevel: 'All levels',
+            interests: ['Culture', 'History'],
+            costLevel: 'Medium',
+            seasonalBest: 'Year-round',
+            photoOpportunity: 'Excellent',
+            insiderTip: 'Visit early morning for fewer crowds',
+            hiddenGem: false,
+            familyFriendly: true,
+            accessibilityNotes: 'Check with venue'
+          }
+        });
+      }
+    }
+
+    return {
+      cityName: cityNameMatch[1],
+      country: countryMatch[1],
+      title: titleMatch[1],
+      description: descriptionMatch[1],
+      imageUrl: imageUrlMatch ? imageUrlMatch[1] : '',
+      galleryImages: [],
+      highlights,
+      attractions,
+      logistics: {
+        gettingAround: 'Public transport recommended',
+        whereToStay: 'City center recommended',
+        bestTimeToVisit: 'Spring and Fall',
+        suggestedItinerary: '3-4 days recommended'
+      },
+      faqs: []
+    };
+  } catch (error) {
+    console.error('Error extracting city data:', error);
+    return null;
+  }
+}
+
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
@@ -67,6 +511,161 @@ function cleanContentData(data: any): any {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // API routes MUST come first to prevent being caught by wildcard routes
+  
+  // Explicit middleware to handle API routes before Vite
+  app.use('/api/*', (req, res, next) => {
+    // Set proper headers for API responses
+    res.set('Content-Type', 'application/json');
+    next();
+  });
+  
+  // Firebase Functions HTML Generation API endpoints
+  app.post('/api/generate-page', async (req, res) => {
+    try {
+      const { cityKey } = req.body;
+      
+      if (!cityKey) {
+        return res.status(400).json({ error: 'City key is required' });
+      }
+      
+      // Look for TSX file
+      const tsxFilePath = path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityKey}.tsx`);
+      
+      try {
+        const cityData = await extractCityDataFromTSX(tsxFilePath);
+        
+        if (!cityData) {
+          return res.status(404).json({ error: 'Could not extract city data from TSX file' });
+        }
+        
+        // Generate complete HTML
+        const generatedHTML = generateCompleteHTML(cityData);
+        
+        // Ensure output directory exists
+        const outputDir = path.join(process.cwd(), 'dist', 'public', `best-things-to-do-in-${cityData.cityName.toLowerCase()}`);
+        await fs.mkdir(outputDir, { recursive: true });
+        
+        // Write HTML file
+        const outputFile = path.join(outputDir, 'index.html');
+        await fs.writeFile(outputFile, generatedHTML, 'utf-8');
+        
+        console.log(`✅ Generated HTML for ${cityData.cityName} (${generatedHTML.length} bytes)`);
+        
+        res.json({
+          success: true,
+          message: `Generated HTML for ${cityData.cityName}`,
+          outputPath: outputFile,
+          fileSize: `${(generatedHTML.length / 1024).toFixed(2)} KB`,
+          cityName: cityData.cityName,
+          country: cityData.country
+        });
+        
+      } catch (tsxError) {
+        console.error('Error processing TSX file:', tsxError);
+        return res.status(500).json({ 
+          error: 'Failed to process TSX file',
+          details: tsxError instanceof Error ? tsxError.message : 'Unknown error'
+        });
+      }
+      
+    } catch (error) {
+      console.error('Error generating page:', error);
+      res.status(500).json({ 
+        error: 'Failed to generate page',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  app.post('/api/generate-all-pages', async (req, res) => {
+    try {
+      const citiesDir = path.join(process.cwd(), 'client', 'src', 'pages', 'cities');
+      
+      try {
+        const cityFiles = await fs.readdir(citiesDir);
+        const tsxFiles = cityFiles.filter(file => file.endsWith('.tsx'));
+        
+        const results = [];
+        
+        for (const tsxFile of tsxFiles) {
+          const cityKey = tsxFile.replace('.tsx', '');
+          const tsxFilePath = path.join(citiesDir, tsxFile);
+          
+          try {
+            const cityData = await extractCityDataFromTSX(tsxFilePath);
+            
+            if (cityData) {
+              // Generate complete HTML
+              const generatedHTML = generateCompleteHTML(cityData);
+              
+              // Ensure output directory exists
+              const outputDir = path.join(process.cwd(), 'dist', 'public', `best-things-to-do-in-${cityData.cityName.toLowerCase()}`);
+              await fs.mkdir(outputDir, { recursive: true });
+              
+              // Write HTML file
+              const outputFile = path.join(outputDir, 'index.html');
+              await fs.writeFile(outputFile, generatedHTML, 'utf-8');
+              
+              results.push({
+                cityKey,
+                cityName: cityData.cityName,
+                country: cityData.country,
+                success: true,
+                fileSize: `${(generatedHTML.length / 1024).toFixed(2)} KB`,
+                outputPath: outputFile
+              });
+              
+              console.log(`✅ Generated HTML for ${cityData.cityName} (${generatedHTML.length} bytes)`);
+            } else {
+              results.push({
+                cityKey,
+                success: false,
+                error: 'Could not extract city data'
+              });
+            }
+            
+          } catch (cityError) {
+            console.error(`Error processing ${cityKey}:`, cityError);
+            results.push({
+              cityKey,
+              success: false,
+              error: cityError instanceof Error ? cityError.message : 'Unknown error'
+            });
+          }
+        }
+        
+        const successCount = results.filter(r => r.success).length;
+        const totalCount = results.length;
+        
+        res.json({
+          success: true,
+          message: `Generated ${successCount}/${totalCount} city pages`,
+          results,
+          summary: {
+            total: totalCount,
+            successful: successCount,
+            failed: totalCount - successCount
+          }
+        });
+        
+      } catch (dirError) {
+        console.error('Error reading cities directory:', dirError);
+        return res.status(500).json({ 
+          error: 'Could not read cities directory',
+          details: dirError instanceof Error ? dirError.message : 'Unknown error'
+        });
+      }
+      
+    } catch (error) {
+      console.error('Error generating all pages:', error);
+      res.status(500).json({ 
+        error: 'Failed to generate pages',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+  
   // City page SSR routes - serve pre-rendered HTML with proper SEO
   // This MUST be before other routes to catch city pages
   app.get('/best-things-to-do-in-*', async (req, res, next) => {
