@@ -74,6 +74,13 @@ interface CityData {
     question: string;
     answer: string;
   }>;
+  // New metadata fields for future expansion
+  author?: string;
+  lastUpdated?: string;
+  disclaimer?: string;
+  publishedDate?: string;
+  tags?: string[];
+  metaData?: Record<string, any>; // Flexible field for any future additions
 }
 
 // CSS styles for the complete HTML page (from Firebase Functions)
@@ -900,8 +907,11 @@ export function generateCompleteHTML(cityData: CityData): string {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${seoTitle}</title>
     <meta name="description" content="${seoDescription}">
-    <meta name="keywords" content="things to do in ${cityData.cityName}, ${cityData.cityName} travel guide, ${cityData.cityName} attractions, ${cityData.cityName} ${cityData.country}">
+    <meta name="keywords" content="${cityData.tags && cityData.tags.length > 0 ? cityData.tags.join(', ') + ', ' : ''}things to do in ${cityData.cityName}, ${cityData.cityName} travel guide, ${cityData.cityName} attractions, ${cityData.cityName} ${cityData.country}">
     <meta name="robots" content="index, follow">
+    <meta name="author" content="${cityData.author || 'TravelWanders'}">
+    ${cityData.lastUpdated ? `<meta name="last-modified" content="${cityData.lastUpdated}">` : ''}
+    ${cityData.publishedDate ? `<meta name="article:published_time" content="${cityData.publishedDate}">` : ''}
     <link rel="canonical" href="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
     
     <!-- Open Graph tags -->
@@ -910,6 +920,7 @@ export function generateCompleteHTML(cityData: CityData): string {
     <meta property="og:image" content="${cityData.imageUrl}">
     <meta property="og:url" content="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
     <meta property="og:type" content="article">
+    ${cityData.author ? `<meta property="article:author" content="${cityData.author}">` : ''}
     
     <!-- Twitter Card tags -->
     <meta name="twitter:card" content="summary_large_image">
@@ -926,6 +937,9 @@ export function generateCompleteHTML(cityData: CityData): string {
       "description": "${seoDescription}",
       "image": "${cityData.imageUrl}",
       "url": "https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}",
+      ${cityData.publishedDate ? `"datePublished": "${cityData.publishedDate}",` : ''}
+      ${cityData.lastUpdated ? `"dateModified": "${cityData.lastUpdated}",` : ''}
+      ${cityData.author ? `"author": {"@type": "Person", "name": "${cityData.author}"},` : ''}
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "${cityData.cityName}",
@@ -1016,27 +1030,71 @@ export function generateCompleteHTML(cityData: CityData): string {
 </html>`;
 }
 
-// Extract city data from TSX file (from Firebase Functions) - COMPLETE EXTRACTION
+// Enhanced extraction functions for flexible TSX parsing
+function extractFieldFromTSX(content: string, fieldName: string): string | null {
+  // Try multiple patterns for field extraction
+  const patterns = [
+    new RegExp(`${fieldName}=\\{?"([^"]+)"\\}?`),
+    new RegExp(`${fieldName}:\\s*['"\`]([^'"\`]+)['"\`]`),
+    new RegExp(`${fieldName}=\\{\`([^\`]+)\`\\}`),
+    new RegExp(`${fieldName}="([^"]+)"`),  // Direct string prop
+    new RegExp(`${fieldName}=\\{"([^"]+)"\\}`) // String in JSX expression
+  ];
+  
+  for (const pattern of patterns) {
+    const match = content.match(pattern);
+    if (match) return match[1];
+  }
+  return null;
+}
+
+function extractArrayFromTSX(content: string, fieldName: string): string[] {
+  const patterns = [
+    new RegExp(`${fieldName}=\\{(\\[[\\s\\S]*?\\])\\}`),
+    new RegExp(`${fieldName}:\\s*(\\[[\\s\\S]*?\\])`)
+  ];
+  
+  for (const pattern of patterns) {
+    const match = content.match(pattern);
+    if (match) {
+      try {
+        return JSON.parse(match[1].replace(/'/g, '"'));
+      } catch (e) {
+        // Fallback to manual parsing
+        const itemMatches = match[1].match(/['"`]([^'"`]+)['"`]/g);
+        return itemMatches ? itemMatches.map(item => item.replace(/['"`]/g, '')) : [];
+      }
+    }
+  }
+  return [];
+}
+
+// Extract city data from TSX file (from Firebase Functions) - COMPLETE EXTRACTION WITH FLEXIBLE METADATA
 export async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityData | null> {
   try {
     const tsxContent = fs.readFileSync(tsxFilePath, 'utf-8');
     
-    // Extract basic city information
-    const titleMatch = tsxContent.match(/title=\{?"([^"]+)"\}?/);
-    const descriptionMatch = tsxContent.match(/description=\{`([\s\S]*?)`\}/);
-    const imageUrlMatch = tsxContent.match(/imageUrl=\{?"([^"]+)"\}?/);
+    // Extract basic city information using enhanced extraction
+    const title = extractFieldFromTSX(tsxContent, 'title');
+    const description = extractFieldFromTSX(tsxContent, 'description');
+    const imageUrl = extractFieldFromTSX(tsxContent, 'imageUrl');
     
-    if (!titleMatch || !descriptionMatch) {
+    if (!title || !description) {
       console.error('Failed to extract basic city data from TSX file');
       return null;
     }
     
     // Extract city name and country from title
-    const title = titleMatch[1];
-    const description = descriptionMatch[1];
     const titleParseMatch = title.match(/Best Things to Do in (.*?), (.*?) \(/);
     const cityName = titleParseMatch ? titleParseMatch[1] : 'Unknown City';
     const country = titleParseMatch ? titleParseMatch[2] : 'Unknown Country';
+    
+    // Extract new metadata fields using flexible extraction
+    const author = extractFieldFromTSX(tsxContent, 'author');
+    const lastUpdated = extractFieldFromTSX(tsxContent, 'lastUpdated');
+    const disclaimer = extractFieldFromTSX(tsxContent, 'disclaimer');
+    const publishedDate = extractFieldFromTSX(tsxContent, 'publishedDate');
+    const tags = extractArrayFromTSX(tsxContent, 'tags');
     
     // Extract highlights
     const highlightsMatch = tsxContent.match(/highlights=\{(\[[\s\S]*?\])\}/);
@@ -1247,12 +1305,13 @@ export async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityD
       };
     }
     
-    return {
+    // Build the city data object with flexible metadata
+    const cityData: CityData = {
       cityName,
       country,
-      title: titleMatch[1],
-      description: descriptionMatch[1],
-      imageUrl: imageUrlMatch?.[1] || '',
+      title,
+      description,
+      imageUrl: imageUrl || '',
       galleryImages: [],
       highlights,
       attractions,
@@ -1260,6 +1319,15 @@ export async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityD
       logistics,
       faqs
     };
+    
+    // Add optional metadata fields only if they exist
+    if (author) cityData.author = author;
+    if (lastUpdated) cityData.lastUpdated = lastUpdated;
+    if (disclaimer) cityData.disclaimer = disclaimer;
+    if (publishedDate) cityData.publishedDate = publishedDate;
+    if (tags.length > 0) cityData.tags = tags;
+    
+    return cityData;
   } catch (error) {
     console.error('Error extracting city data from TSX:', error);
     return null;
