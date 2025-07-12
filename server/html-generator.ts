@@ -38,8 +38,19 @@ interface CityData {
   discoveryData?: {
     localSecrets?: string[];
     photoSpots?: string[];
-    quickFacts?: string[];
-    seasonalHighlights?: string[];
+    quickFacts?: {
+      totalAttractions: string;
+      freeActivities: string;
+      averageTimePerAttraction: string;
+      walkingFriendly: boolean;
+      publicTransportQuality: string;
+    };
+    seasonalHighlights?: {
+      spring: string;
+      summer: string;
+      fall: string;
+      winter: string;
+    };
     budgetBreakdown?: {
       budget: string;
       midRange: string;
@@ -410,6 +421,46 @@ const pageStyles = `
     line-height: 1.7;
   }
 
+  .quick-facts-content,
+  .seasonal-content,
+  .dining-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .quick-fact-item,
+  .seasonal-item,
+  .dining-section {
+    padding: 0.75rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 3px solid #3b82f6;
+  }
+
+  .quick-fact-item strong,
+  .seasonal-item strong,
+  .dining-section strong {
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .dining-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+  }
+
+  .dining-list li {
+    padding: 0.25rem 0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .dining-list li:last-child {
+    border-bottom: none;
+  }
+
   @media (max-width: 768px) {
     .hero-title {
       font-size: 2rem;
@@ -574,7 +625,10 @@ export function generateCompleteHTML(cityData: CityData): string {
         <div class="discovery-card">
           <h3>📸 Photo Spots</h3>
           <ul class="discovery-list">
-            <li>Best photo locations in ${cityData.cityName}</li>
+            ${cityData.discoveryData.photoSpots && cityData.discoveryData.photoSpots.length > 0 ? 
+              cityData.discoveryData.photoSpots.map(spot => `<li>${spot}</li>`).join('') : 
+              `<li>Best photo locations in ${cityData.cityName}</li>`
+            }
           </ul>
         </div>
         
@@ -646,6 +700,78 @@ export function generateCompleteHTML(cityData: CityData): string {
                   <ul class="dining-list">
                     ${cityData.discoveryData.diningHighlights.diningTips.map(tip => `<li>${tip}</li>`).join('')}
                   </ul>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        ` : ''}
+        
+        ${cityData.attractions && cityData.attractions.some(attr => attr.discoveryTags && attr.discoveryTags.hiddenGem) ? `
+          <div class="discovery-card">
+            <h3>💎 Hidden Gems</h3>
+            <ul class="discovery-list">
+              ${cityData.attractions.filter(attr => attr.discoveryTags && attr.discoveryTags.hiddenGem).map(attr => `
+                <li><strong>${attr.name}</strong> - ${attr.discoveryTags.insiderTip || 'A hidden gem worth discovering'}</li>
+              `).join('')}
+            </ul>
+          </div>
+        ` : ''}
+        
+        ${cityData.discoveryData.quickFacts ? `
+          <div class="discovery-card">
+            <h3>⚡ Quick Facts</h3>
+            <div class="quick-facts-content">
+              ${cityData.discoveryData.quickFacts.totalAttractions ? `
+                <div class="quick-fact-item">
+                  <strong>🎯 Total Attractions:</strong> ${cityData.discoveryData.quickFacts.totalAttractions}
+                </div>
+              ` : ''}
+              ${cityData.discoveryData.quickFacts.freeActivities ? `
+                <div class="quick-fact-item">
+                  <strong>🆓 Free Activities:</strong> ${cityData.discoveryData.quickFacts.freeActivities}
+                </div>
+              ` : ''}
+              ${cityData.discoveryData.quickFacts.averageTimePerAttraction ? `
+                <div class="quick-fact-item">
+                  <strong>⏱️ Average Time per Attraction:</strong> ${cityData.discoveryData.quickFacts.averageTimePerAttraction}
+                </div>
+              ` : ''}
+              ${cityData.discoveryData.quickFacts.walkingFriendly ? `
+                <div class="quick-fact-item">
+                  <strong>🚶 Walking Friendly:</strong> ${cityData.discoveryData.quickFacts.walkingFriendly ? 'Yes' : 'No'}
+                </div>
+              ` : ''}
+              ${cityData.discoveryData.quickFacts.publicTransportQuality ? `
+                <div class="quick-fact-item">
+                  <strong>🚌 Public Transport:</strong> ${cityData.discoveryData.quickFacts.publicTransportQuality}
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        ` : ''}
+        
+        ${cityData.discoveryData.seasonalHighlights ? `
+          <div class="discovery-card">
+            <h3>🌟 Seasonal Highlights</h3>
+            <div class="seasonal-content">
+              ${cityData.discoveryData.seasonalHighlights.spring ? `
+                <div class="seasonal-item">
+                  <strong>🌸 Spring:</strong> ${cityData.discoveryData.seasonalHighlights.spring}
+                </div>
+              ` : ''}
+              ${cityData.discoveryData.seasonalHighlights.summer ? `
+                <div class="seasonal-item">
+                  <strong>☀️ Summer:</strong> ${cityData.discoveryData.seasonalHighlights.summer}
+                </div>
+              ` : ''}
+              ${cityData.discoveryData.seasonalHighlights.fall ? `
+                <div class="seasonal-item">
+                  <strong>🍂 Fall:</strong> ${cityData.discoveryData.seasonalHighlights.fall}
+                </div>
+              ` : ''}
+              ${cityData.discoveryData.seasonalHighlights.winter ? `
+                <div class="seasonal-item">
+                  <strong>❄️ Winter:</strong> ${cityData.discoveryData.seasonalHighlights.winter}
                 </div>
               ` : ''}
             </div>
@@ -1044,10 +1170,10 @@ export async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityD
         
         diningHighlights = {
           mustTryDishes: mustTryDishesMatch ? mustTryDishesMatch[1].split(',').map(d => d.trim()) : [],
-          bestCafes: bestCafesMatch ? bestCafesMatch[1].split(',').map(c => c.trim()) : [],
-          topRestaurants: topRestaurantsMatch ? topRestaurantsMatch[1].split(',').map(r => r.trim()) : [],
-          foodMarkets: foodMarketsMatch ? foodMarketsMatch[1].split(',').map(m => m.trim()) : [],
-          diningTips: diningTipsMatch ? diningTipsMatch[1].split(',').map(t => t.trim()) : []
+          bestCafes: bestCafesMatch ? bestCafesMatch[1].split('.').filter(c => c.trim()).map(c => c.trim()) : [],
+          topRestaurants: topRestaurantsMatch ? topRestaurantsMatch[1].split('.').filter(r => r.trim()).map(r => r.trim()) : [],
+          foodMarkets: foodMarketsMatch ? foodMarketsMatch[1].split('.').filter(m => m.trim()).map(m => m.trim()) : [],
+          diningTips: diningTipsMatch ? [diningTipsMatch[1]] : []
         };
       }
       
@@ -1069,6 +1195,26 @@ export async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityD
         };
       }
       
+      // Extract quick facts
+      const quickFactsMatch = discoveryContent.match(/quickFacts:\s*\{([\s\S]*?)\}/);
+      let quickFacts: any = {};
+      if (quickFactsMatch) {
+        const quickFactsContent = quickFactsMatch[1];
+        const totalAttractionsMatch = quickFactsContent.match(/totalAttractions:\s*"([^"]+)"/);
+        const freeActivitiesMatch = quickFactsContent.match(/freeActivities:\s*"([^"]+)"/);
+        const averageTimeMatch = quickFactsContent.match(/averageTimePerAttraction:\s*"([^"]+)"/);
+        const walkingFriendlyMatch = quickFactsContent.match(/walkingFriendly:\s*(true|false)/);
+        const transportQualityMatch = quickFactsContent.match(/publicTransportQuality:\s*"([^"]+)"/);
+        
+        quickFacts = {
+          totalAttractions: totalAttractionsMatch ? totalAttractionsMatch[1] : attractions.length.toString(),
+          freeActivities: freeActivitiesMatch ? freeActivitiesMatch[1] : 'Several free activities available',
+          averageTimePerAttraction: averageTimeMatch ? averageTimeMatch[1] : '1-2 hours',
+          walkingFriendly: walkingFriendlyMatch ? walkingFriendlyMatch[1] === 'true' : true,
+          publicTransportQuality: transportQualityMatch ? transportQualityMatch[1] : 'Good'
+        };
+      }
+      
       // Extract budget breakdown
       const budgetBreakdownMatch = discoveryContent.match(/budgetBreakdown:\s*\{([\s\S]*?)\}/);
       let budgetBreakdown: any = {};
@@ -1085,10 +1231,16 @@ export async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityD
         };
       }
       
+      // Extract photo spots from attractions' photoOpportunity fields
+      const photoSpots = attractions.length > 0 ? 
+        attractions.filter(attr => attr.discoveryTags && attr.discoveryTags.photoOpportunity)
+          .map(attr => `${attr.name}: ${attr.discoveryTags.photoOpportunity}`) 
+        : [`Best photo locations in ${cityName}`];
+      
       discoveryData = {
         localSecrets,
-        photoSpots: [`Best photo locations in ${cityName}`],
-        quickFacts: [`${cityName} is known for its rich culture and stunning scenery`],
+        photoSpots,
+        quickFacts: quickFacts,
         seasonalHighlights,
         budgetBreakdown,
         diningHighlights

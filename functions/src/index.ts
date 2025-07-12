@@ -43,8 +43,19 @@ interface CityData {
   discoveryData?: {
     localSecrets?: string[];
     photoSpots?: string[];
-    quickFacts?: string[];
-    seasonalHighlights?: string[];
+    quickFacts?: {
+      totalAttractions: string;
+      freeActivities: string;
+      averageTimePerAttraction: string;
+      walkingFriendly: boolean;
+      publicTransportQuality: string;
+    };
+    seasonalHighlights?: {
+      spring: string;
+      summer: string;
+      fall: string;
+      winter: string;
+    };
     budgetBreakdown?: {
       budget: string;
       midRange: string;
