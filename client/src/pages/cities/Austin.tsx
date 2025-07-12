@@ -4,6 +4,8 @@ import { CityPage } from '../../components/CityPage';
 export const Austin: React.FC = () => {
   return (
     <CityPage
+      cityName="Austin"
+      country="USA"
       title={"15 Best Things to Do in Austin, USA (2025 Guide)"}
       description={`Planning a trip to the Live Music Capital of the World? You're probably wondering about the best things to do in Austin. Well, look no further! This guide is your key to unlocking the city's vibrant soul, from its iconic music venues to its delicious culinary scene. Austin offers a unique blend of outdoor adventures, cultural experiences, and, of course, incredible music. Whether you're a first-time visitor or a seasoned traveler, there are so many things to do in Austin that you're sure to find something to love. Let's dive in and explore what makes this Texas city so special. Honestly, I think you'll be pleasantly surprised.`}
       imageUrl={"https://images.unsplash.com/photo-1557335200-a65f7f032602?q=80&w=1758&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
