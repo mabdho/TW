@@ -18,6 +18,7 @@ import {
   submitSitemapManually,
   getSitemapIndexingStatusRoute
 } from "./routes/seo";
+import { generateCompleteHTML, extractCityDataFromTSX as extractCityDataFromTSXHtmlGen } from './html-generator';
 
 // Firebase Functions HTML Generator Interface
 interface CityData {
@@ -323,145 +324,7 @@ const pageStyles = `
   }
 `;
 
-// Firebase Functions HTML Generator (simplified for Express)
-function generateCompleteHTML(cityData: CityData): string {
-  const seoTitle = cityData.title || `Best Things to Do in ${cityData.cityName}, ${cityData.country}`;
-  const seoDescription = cityData.description.substring(0, 160) + '...';
-  
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${seoTitle}</title>
-    <meta name="description" content="${seoDescription}">
-    <meta name="keywords" content="things to do in ${cityData.cityName}, ${cityData.cityName} travel guide">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
-    <style>${pageStyles}</style>
-</head>
-<body>
-    <div id="root">
-        <div class="hero-section" style="background-image: url('${cityData.imageUrl}');">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1 class="hero-title">${cityData.cityName}</h1>
-                <p class="hero-description">${cityData.description.substring(0, 200)}...</p>
-            </div>
-        </div>
-        
-        <div class="container">
-            <section class="section">
-                <h2 class="section-title">✨ Highlights</h2>
-                <div class="highlights-grid">
-                    ${cityData.highlights.map(highlight => `<div class="highlight-card"><p>${highlight}</p></div>`).join('')}
-                </div>
-            </section>
-            
-            <section class="section">
-                <h2 class="section-title">🎯 Top Attractions</h2>
-                <div class="attractions-grid">
-                    ${cityData.attractions.map(attraction => `
-                    <div class="attraction-card">
-                        <div class="attraction-content">
-                            <h3 class="attraction-name">${attraction.name}</h3>
-                            <div class="attraction-description">${attraction.description}</div>
-                        </div>
-                    </div>`).join('')}
-                </div>
-            </section>
-        </div>
-        
-        <footer class="footer">
-            <div class="container">
-                <p>&copy; 2025 TravelWanders. All rights reserved.</p>
-            </div>
-        </footer>
-    </div>
-</body>
-</html>`;
-}
-
-// TSX extraction function (simplified version)
-async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityData | null> {
-  try {
-    const tsxContent = await fs.readFile(tsxFilePath, 'utf-8');
-    
-    // Extract basic city information
-    const cityNameMatch = tsxContent.match(/cityName="([^"]+)"/);
-    const countryMatch = tsxContent.match(/country="([^"]+)"/);
-    const titleMatch = tsxContent.match(/title=\{?"([^"]+)"\}?/);
-    const descriptionMatch = tsxContent.match(/description=\{`([^`]+)`\}/);
-    const imageUrlMatch = tsxContent.match(/imageUrl=\{?"([^"]+)"\}?/);
-    
-    if (!cityNameMatch || !countryMatch || !titleMatch || !descriptionMatch) {
-      console.error('Failed to extract basic city data from TSX file');
-      return null;
-    }
-    
-    // Extract highlights
-    const highlightsMatch = tsxContent.match(/highlights=\{(\[[\s\S]*?\])\}/);
-    let highlights: string[] = [];
-    if (highlightsMatch) {
-      const highlightItems = highlightsMatch[1].match(/"([^"]+)"/g);
-      highlights = highlightItems ? highlightItems.map(item => item.replace(/"/g, '')) : [];
-    }
-    
-    // Extract attractions (basic)
-    const attractions: CityData['attractions'] = [];
-    const attractionsMatch = tsxContent.match(/attractions=\{(\[[\s\S]*?\])\}/);
-    if (attractionsMatch) {
-      // Simple extraction for basic attraction data
-      const attractionPattern = /name:\s*"([^"]+)"/g;
-      let match;
-      while ((match = attractionPattern.exec(attractionsMatch[1])) !== null) {
-        attractions.push({
-          name: match[1],
-          description: `Explore ${match[1]} in ${cityNameMatch[1]}`,
-          practicalInfo: {
-            howToGetThere: 'Public transport recommended',
-            openingHours: 'Check official website',
-            cost: 'Varies',
-            website: 'Check local tourism website'
-          },
-          discoveryTags: {
-            timeRequired: '1-2 hours',
-            experienceLevel: 'All levels',
-            interests: ['Culture', 'History'],
-            costLevel: 'Medium',
-            seasonalBest: 'Year-round',
-            photoOpportunity: 'Excellent',
-            insiderTip: 'Visit early morning for fewer crowds',
-            hiddenGem: false,
-            familyFriendly: true,
-            accessibilityNotes: 'Check with venue'
-          }
-        });
-      }
-    }
-
-    return {
-      cityName: cityNameMatch[1],
-      country: countryMatch[1],
-      title: titleMatch[1],
-      description: descriptionMatch[1],
-      imageUrl: imageUrlMatch ? imageUrlMatch[1] : '',
-      galleryImages: [],
-      highlights,
-      attractions,
-      logistics: {
-        gettingAround: 'Public transport recommended',
-        whereToStay: 'City center recommended',
-        bestTimeToVisit: 'Spring and Fall',
-        suggestedItinerary: '3-4 days recommended'
-      },
-      faqs: []
-    };
-  } catch (error) {
-    console.error('Error extracting city data:', error);
-    return null;
-  }
-}
+// Note: HTML generation and TSX extraction now handled by ./html-generator.ts module
 
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
@@ -533,13 +396,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const tsxFilePath = path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityKey}.tsx`);
       
       try {
-        const cityData = await extractCityDataFromTSX(tsxFilePath);
+        const cityData = await extractCityDataFromTSXHtmlGen(tsxFilePath);
         
         if (!cityData) {
           return res.status(404).json({ error: 'Could not extract city data from TSX file' });
         }
         
-        // Generate complete HTML
+        // Generate complete HTML using Firebase Functions HTML generator
         const generatedHTML = generateCompleteHTML(cityData);
         
         // Ensure output directory exists
@@ -593,10 +456,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const tsxFilePath = path.join(citiesDir, tsxFile);
           
           try {
-            const cityData = await extractCityDataFromTSX(tsxFilePath);
+            const cityData = await extractCityDataFromTSXHtmlGen(tsxFilePath);
             
             if (cityData) {
-              // Generate complete HTML
+              // Generate complete HTML using Firebase Functions HTML generator
               const generatedHTML = generateCompleteHTML(cityData);
               
               // Ensure output directory exists
