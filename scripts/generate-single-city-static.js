@@ -59,10 +59,12 @@ async function generateCityStaticPage(cityKey, cityName) {
 }
 
 /**
- * Generate SEO-optimized HTML for city route
+ * Generate SEO-optimized HTML for city route using enhanced content extraction
  */
 async function generateHTMLForRoute(route, baseHTML, cityName, cityKey) {
   let html = baseHTML;
+  
+  console.log(`🔄 Using enhanced content extraction for ${cityName}...`);
   
   // Generate SEO data
   const seoData = {
@@ -72,6 +74,29 @@ async function generateHTMLForRoute(route, baseHTML, cityName, cityKey) {
     ogType: 'article',
     ogImage: `https://travelwanders.com/images/cities/${cityKey}-hero.jpg`
   };
+  
+  // Generate rich HTML content using the enhanced SSR system
+  let htmlContent;
+  try {
+    // Try to use the enhanced content extraction from SSR renderer
+    htmlContent = await renderComponentToHTML(route.path);
+    console.log(`✅ Enhanced static generation: Generated HTML content with ${htmlContent.length} characters`);
+  } catch (error) {
+    console.warn(`⚠️  Enhanced static generation failed, using fallback:`, error.message);
+    // Use a basic fallback if the enhanced system fails
+    htmlContent = `<div class="city-page min-h-screen bg-gray-50">
+      <div class="container mx-auto px-4 py-12">
+        <h1 class="text-4xl font-bold mb-6">Best Things to Do in ${cityName}</h1>
+        <p class="text-lg text-gray-600 mb-8">Discover the best attractions and experiences in ${cityName}.</p>
+        <div class="grid gap-6">
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-semibold mb-4">Top Attractions</h2>
+            <p class="text-gray-600">Loading city attractions...</p>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
   
   // Replace title
   html = html.replace(
@@ -160,10 +185,12 @@ async function generateHTMLForRoute(route, baseHTML, cityName, cityKey) {
     `  <script type="application/ld+json">${JSON.stringify(structuredData, null, 0)}</script>\n</head>`
   );
   
-  // 🚀 SSR: Pre-render React content
+  // 🚀 SSR: Pre-render React content with enhanced HTML
   try {
     console.log(`🔄 Rendering React content for ${route.path}...`);
-    const renderedContent = await renderComponentToHTML(route);
+    
+    // Use the enhanced HTML content that we generated earlier
+    const renderedContent = `<div id="app">${htmlContent}</div>`;
     
     // Replace existing root div content with pre-rendered city content
     // The base HTML contains pre-rendered home page content, replace everything inside root
@@ -176,14 +203,14 @@ async function generateHTMLForRoute(route, baseHTML, cityName, cityKey) {
         /<div id="root">.*?(?=\s*<!-- Main application script)/s,
         renderedContent
       );
-      console.log(`🔄 Successfully replaced root content with SSR rendered content`);
+      console.log(`🔄 Successfully replaced root content with enhanced SSR rendered content`);
     } else {
       console.warn(`⚠️  Could not find root div pattern for replacement`);
     }
     
-    console.log(`✅ SSR complete for ${route.path}`);
+    console.log(`✅ Enhanced SSR complete for ${route.path}`);
   } catch (ssrError) {
-    console.warn(`⚠️  SSR failed for ${route.path}:`, ssrError.message);
+    console.warn(`⚠️  Enhanced SSR failed for ${route.path}:`, ssrError.message);
     // Keep original empty root div - client-side rendering will take over
   }
   
