@@ -2,7 +2,6 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as esbuild from 'esbuild';
 
 // Initialize Firebase Admin
 admin.initializeApp();
@@ -279,6 +278,32 @@ const pageStyles = `
     text-align: center;
   }
 
+  .logistics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  .logistics-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #28a745;
+  }
+
+  .logistics-card h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+  }
+
+  .logistics-content {
+    color: #555;
+    line-height: 1.7;
+  }
+
   @media (max-width: 768px) {
     .hero-title {
       font-size: 2rem;
@@ -449,13 +474,35 @@ function generateCompleteHTML(cityData: CityData): string {
                 </div>
             </section>
             
+            <!-- Logistics Section -->
+            ${cityData.logistics ? `
+            <section class="section">
+                <h2 class="section-title">🗺️ Plan Your Trip</h2>
+                <div class="logistics-grid">
+                    <div class="logistics-card">
+                        <h3>🚌 Getting Around</h3>
+                        <div class="logistics-content">${cityData.logistics.gettingAround.replace(/#{1,6}\s/g, '').replace(/\n/g, '<br>')}</div>
+                    </div>
+                    <div class="logistics-card">
+                        <h3>🏨 Where to Stay</h3>
+                        <div class="logistics-content">${cityData.logistics.whereToStay.replace(/#{1,6}\s/g, '').replace(/\n/g, '<br>')}</div>
+                    </div>
+                    <div class="logistics-card">
+                        <h3>📅 Best Time to Visit</h3>
+                        <div class="logistics-content">${cityData.logistics.bestTimeToVisit.replace(/#{1,6}\s/g, '').replace(/\n/g, '<br>')}</div>
+                    </div>
+                    <div class="logistics-card">
+                        <h3>🎯 Suggested Itinerary</h3>
+                        <div class="logistics-content">${cityData.logistics.suggestedItinerary.replace(/#{1,6}\s/g, '').replace(/\n/g, '<br>')}</div>
+                    </div>
+                </div>
+            </section>` : ''}
+            
             <!-- FAQs Section -->
             ${cityData.faqs && cityData.faqs.length > 0 ? `
-            <section class="faq-section">
-                <div class="container">
-                    <h2 class="section-title">❓ Frequently Asked Questions</h2>
-                    ${faqsHTML}
-                </div>
+            <section class="section">
+                <h2 class="section-title">❓ Frequently Asked Questions</h2>
+                ${faqsHTML}
             </section>
             ` : ''}
         </div>
@@ -498,116 +545,194 @@ async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityData | n
   try {
     const tsxContent = fs.readFileSync(tsxFilePath, 'utf-8');
     
-    // Use esbuild to compile TSX to JavaScript
-    const result = await esbuild.build({
-      stdin: {
-        contents: tsxContent,
-        loader: 'tsx',
-        resolveDir: path.dirname(tsxFilePath),
-      },
-      bundle: false,
-      format: 'cjs',
-      target: 'node18',
-      write: false,
-      external: ['react', 'react-dom'],
-    });
+    // Extract basic city information
+    const cityNameMatch = tsxContent.match(/cityName="([^"]+)"/);
+    const countryMatch = tsxContent.match(/country="([^"]+)"/);
+    const titleMatch = tsxContent.match(/title=\{?"([^"]+)"\}?/);
+    const descriptionMatch = tsxContent.match(/description=\{`([^`]+)`\}/);
+    const imageUrlMatch = tsxContent.match(/imageUrl=\{?"([^"]+)"\}?/);
     
-    if (result.outputFiles && result.outputFiles.length > 0) {
-      // const compiledCode = result.outputFiles[0].text;
-      
-      // Extract CityPage props using regex
-      const cityPageMatch = tsxContent.match(/<CityPage\s+([^>]+)>/s);
-      if (cityPageMatch) {
-        const propsString = cityPageMatch[1];
-        
-        // Extract individual props
-        const extractProp = (propName: string) => {
-          const match = propsString.match(new RegExp(`${propName}=\\{([^}]+)\\}|${propName}="([^"]*)"`, 's'));
-          return match ? (match[1] || match[2]) : null;
-        };
-        
-        const extractArrayProp = (propName: string) => {
-          const match = propsString.match(new RegExp(`${propName}=\\{\\[([^\\]]+)\\]\\}`, 's'));
-          if (match) {
-            return match[1].split(',').map(item => item.trim().replace(/['"]/g, ''));
-          }
-          return [];
-        };
-        
-        // const extractObjectProp = (propName: string) => {
-        //   const match = propsString.match(new RegExp(`${propName}=\\{([^}]+)\\}`, 's'));
-        //   return match ? match[1] : null;
-        // };
-        
-        const cityData: CityData = {
-          cityName: extractProp('cityName') || '',
-          country: extractProp('country') || '',
-          title: extractProp('title') || '',
-          description: extractProp('description') || '',
-          imageUrl: extractProp('imageUrl') || '',
-          galleryImages: [],
-          highlights: extractArrayProp('highlights'),
-          attractions: [],
-          discoveryData: {},
-          logistics: {
-            gettingAround: 'Public transport recommended',
-            whereToStay: 'City center recommended',
-            bestTimeToVisit: 'Spring and Fall',
-            suggestedItinerary: '3-4 days recommended'
-          },
-          faqs: []
-        };
-        
-        // Extract attractions array from TSX content
-        const attractionsMatch = tsxContent.match(/attractions=\{(\[[\s\S]*?\])\}/);
-        if (attractionsMatch) {
-          try {
-            // This is a simplified extraction - in a real implementation,
-            // you'd want more robust parsing
-            const attractionsString = attractionsMatch[1];
-            // For now, we'll extract basic attraction data
-            const attractionMatches = attractionsString.match(/\{[\s\S]*?\}/g);
-            if (attractionMatches) {
-              cityData.attractions = attractionMatches.map(match => {
-                const nameMatch = match.match(/name:\s*"([^"]*)"/);
-                const descMatch = match.match(/description:\s*`([^`]*)`/);
-                
-                return {
-                  name: nameMatch ? nameMatch[1] : 'Unknown',
-                  description: descMatch ? descMatch[1] : 'No description available',
-                  practicalInfo: {
-                    howToGetThere: 'Check local transport options',
-                    openingHours: 'Varies',
-                    cost: 'Check official website',
-                    website: 'N/A'
-                  },
-                  discoveryTags: {
-                    timeRequired: '1-2 hours',
-                    experienceLevel: 'Easy Access',
-                    interests: ['tourism'],
-                    costLevel: 'Moderate',
-                    seasonalBest: 'Year-round',
-                    photoOpportunity: 'Great views',
-                    insiderTip: 'Visit during off-peak hours',
-                    hiddenGem: false,
-                    familyFriendly: true,
-                    accessibilityNotes: 'Check accessibility on arrival'
-                  }
-                };
-              });
-            }
-          } catch (error) {
-            console.error('Error parsing attractions:', error);
-          }
-        }
-        
-        return cityData;
-      }
+    if (!cityNameMatch || !countryMatch || !titleMatch || !descriptionMatch) {
+      console.error('Failed to extract basic city data from TSX file');
+      return null;
     }
     
-    return null;
+    // Extract highlights
+    const highlightsMatch = tsxContent.match(/highlights=\{(\[[\s\S]*?\])\}/);
+    let highlights: string[] = [];
+    if (highlightsMatch) {
+      const highlightItems = highlightsMatch[1].match(/"([^"]+)"/g);
+      highlights = highlightItems ? highlightItems.map(item => item.replace(/"/g, '')) : [];
+    }
+    
+    // Extract all attractions with complete data
+    const attractions: CityData['attractions'] = [];
+    const attractionsMatch = tsxContent.match(/attractions=\{(\[[\s\S]*?\])\}/);
+    if (attractionsMatch) {
+      const attractionsContent = attractionsMatch[1];
+      
+      // Match each attraction object
+      const attractionPattern = /\{\s*name:\s*"([^"]+)",\s*description:\s*`([\s\S]*?)`,\s*practicalInfo:\s*\{([\s\S]*?)\},\s*discoveryTags:\s*\{([\s\S]*?)\}\s*\}/g;
+      let attractionMatch;
+      
+      while ((attractionMatch = attractionPattern.exec(attractionsContent)) !== null) {
+        const name = attractionMatch[1];
+        const description = attractionMatch[2];
+        const practicalInfoStr = attractionMatch[3];
+        const discoveryTagsStr = attractionMatch[4];
+        
+        // Parse practical info
+        const howToGetThereMatch = practicalInfoStr.match(/howToGetThere:\s*"([^"]+)"/);
+        const openingHoursMatch = practicalInfoStr.match(/openingHours:\s*"([^"]+)"/);
+        const costMatch = practicalInfoStr.match(/cost:\s*"([^"]+)"/);
+        const websiteMatch = practicalInfoStr.match(/website:\s*"([^"]*)"/);
+        
+        // Parse discovery tags
+        const timeRequiredMatch = discoveryTagsStr.match(/timeRequired:\s*"([^"]+)"/);
+        const experienceLevelMatch = discoveryTagsStr.match(/experienceLevel:\s*"([^"]+)"/);
+        const interestsMatch = discoveryTagsStr.match(/interests:\s*\[([^\]]+)\]/);
+        const costLevelMatch = discoveryTagsStr.match(/costLevel:\s*"([^"]+)"/);
+        const seasonalBestMatch = discoveryTagsStr.match(/seasonalBest:\s*"([^"]+)"/);
+        const photoOpportunityMatch = discoveryTagsStr.match(/photoOpportunity:\s*"([^"]+)"/);
+        const insiderTipMatch = discoveryTagsStr.match(/insiderTip:\s*"([^"]+)"/);
+        const hiddenGemMatch = discoveryTagsStr.match(/hiddenGem:\s*(true|false)/);
+        const familyFriendlyMatch = discoveryTagsStr.match(/familyFriendly:\s*(true|false)/);
+        const accessibilityNotesMatch = discoveryTagsStr.match(/accessibilityNotes:\s*"([^"]+)"/);
+        
+        const interests = interestsMatch ? 
+          interestsMatch[1].match(/"([^"]+)"/g)?.map(item => item.replace(/"/g, '')) || [] : [];
+        
+        attractions.push({
+          name,
+          description,
+          practicalInfo: {
+            howToGetThere: howToGetThereMatch ? howToGetThereMatch[1] : '',
+            openingHours: openingHoursMatch ? openingHoursMatch[1] : '',
+            cost: costMatch ? costMatch[1] : '',
+            website: websiteMatch ? websiteMatch[1] : ''
+          },
+          discoveryTags: {
+            timeRequired: timeRequiredMatch ? timeRequiredMatch[1] : '',
+            experienceLevel: experienceLevelMatch ? experienceLevelMatch[1] : '',
+            interests,
+            costLevel: costLevelMatch ? costLevelMatch[1] : '',
+            seasonalBest: seasonalBestMatch ? seasonalBestMatch[1] : '',
+            photoOpportunity: photoOpportunityMatch ? photoOpportunityMatch[1] : '',
+            insiderTip: insiderTipMatch ? insiderTipMatch[1] : '',
+            hiddenGem: hiddenGemMatch ? hiddenGemMatch[1] === 'true' : false,
+            familyFriendly: familyFriendlyMatch ? familyFriendlyMatch[1] === 'true' : true,
+            accessibilityNotes: accessibilityNotesMatch ? accessibilityNotesMatch[1] : ''
+          }
+        });
+      }
+    }
+
+    // Extract logistics
+    const logisticsMatch = tsxContent.match(/logistics=\{\{([\s\S]*?)\}\}/);
+    let logistics: CityData['logistics'] = {
+      gettingAround: 'Public transport recommended',
+      whereToStay: 'City center recommended',
+      bestTimeToVisit: 'Spring and Fall',
+      suggestedItinerary: '3-4 days recommended'
+    };
+    
+    if (logisticsMatch) {
+      const logisticsContent = logisticsMatch[1];
+      const gettingAroundMatch = logisticsContent.match(/gettingAround:\s*`([^`]+)`/);
+      const whereToStayMatch = logisticsContent.match(/whereToStay:\s*`([^`]+)`/);
+      const bestTimeToVisitMatch = logisticsContent.match(/bestTimeToVisit:\s*`([^`]+)`/);
+      const suggestedItineraryMatch = logisticsContent.match(/suggestedItinerary:\s*`([^`]+)`/);
+      
+      logistics = {
+        gettingAround: gettingAroundMatch ? gettingAroundMatch[1] : logistics.gettingAround,
+        whereToStay: whereToStayMatch ? whereToStayMatch[1] : logistics.whereToStay,
+        bestTimeToVisit: bestTimeToVisitMatch ? bestTimeToVisitMatch[1] : logistics.bestTimeToVisit,
+        suggestedItinerary: suggestedItineraryMatch ? suggestedItineraryMatch[1] : logistics.suggestedItinerary
+      };
+    }
+
+    // Extract FAQs
+    const faqsMatch = tsxContent.match(/faqs=\{(\[[\s\S]*?\])\}/);
+    let faqs: CityData['faqs'] = [];
+    if (faqsMatch) {
+      const faqsContent = faqsMatch[1];
+      const faqPattern = /\{\s*question:\s*"([^"]+)",\s*answer:\s*`([^`]+)`\s*\}/g;
+      let faqMatch;
+      
+      while ((faqMatch = faqPattern.exec(faqsContent)) !== null) {
+        faqs.push({
+          question: faqMatch[1],
+          answer: faqMatch[2]
+        });
+      }
+    }
+
+    // Extract discovery data
+    const discoveryDataMatch = tsxContent.match(/discoveryData=\{\{([\s\S]*?)\}\}/);
+    let discoveryData: CityData['discoveryData'] = {};
+    
+    if (discoveryDataMatch) {
+      const discoveryContent = discoveryDataMatch[1];
+      
+      // Extract local secrets
+      const localSecretsMatch = discoveryContent.match(/localSecrets:\s*\[([^\]]+)\]/);
+      if (localSecretsMatch) {
+        const secretItems = localSecretsMatch[1].match(/"([^"]+)"/g);
+        discoveryData.localSecrets = secretItems ? secretItems.map(item => item.replace(/"/g, '')) : [];
+      }
+      
+      // Extract dining highlights
+      const diningMatch = discoveryContent.match(/diningHighlights:\s*\{([\s\S]*?)\}/);
+      if (diningMatch) {
+        const diningContent = diningMatch[1];
+        const mustTryDishesMatch = diningContent.match(/mustTryDishes:\s*"([^"]+)"/);
+        const bestCafesMatch = diningContent.match(/bestCafes:\s*"([^"]+)"/);
+        const topRestaurantsMatch = diningContent.match(/topRestaurants:\s*"([^"]+)"/);
+        const foodMarketsMatch = diningContent.match(/foodMarkets:\s*"([^"]+)"/);
+        const diningTipsMatch = diningContent.match(/diningTips:\s*"([^"]+)"/);
+        
+        discoveryData.diningHighlights = {
+          mustTryDishes: mustTryDishesMatch ? mustTryDishesMatch[1].split(',').map(s => s.trim()) : [],
+          bestCafes: bestCafesMatch ? bestCafesMatch[1].split(',').map(s => s.trim()) : [],
+          topRestaurants: topRestaurantsMatch ? topRestaurantsMatch[1].split(',').map(s => s.trim()) : [],
+          foodMarkets: foodMarketsMatch ? foodMarketsMatch[1].split(',').map(s => s.trim()) : [],
+          diningTips: diningTipsMatch ? diningTipsMatch[1].split(',').map(s => s.trim()) : []
+        };
+      }
+      
+      // Extract budget breakdown
+      const budgetMatch = discoveryContent.match(/budgetBreakdown:\s*\{([\s\S]*?)\}/);
+      if (budgetMatch) {
+        const budgetContent = budgetMatch[1];
+        const freeActivitiesMatch = budgetContent.match(/freeActivities:\s*"([^"]+)"/);
+        const budgetFriendlyMatch = budgetContent.match(/budgetFriendly:\s*"([^"]+)"/);
+        const splurgeWorthyMatch = budgetContent.match(/splurgeWorthy:\s*"([^"]+)"/);
+        
+        discoveryData.budgetBreakdown = {
+          budget: freeActivitiesMatch ? freeActivitiesMatch[1] : '',
+          midRange: budgetFriendlyMatch ? budgetFriendlyMatch[1] : '',
+          luxury: splurgeWorthyMatch ? splurgeWorthyMatch[1] : ''
+        };
+      }
+    }
+
+    const cityData: CityData = {
+      cityName: cityNameMatch[1],
+      country: countryMatch[1],
+      title: titleMatch[1],
+      description: descriptionMatch[1],
+      imageUrl: imageUrlMatch ? imageUrlMatch[1] : '',
+      galleryImages: [],
+      highlights,
+      attractions,
+      discoveryData,
+      logistics,
+      faqs
+    };
+
+    return cityData;
   } catch (error) {
-    console.error('Error extracting city data:', error);
+    console.error('Error extracting city data from TSX:', error);
     return null;
   }
 }
@@ -625,8 +750,29 @@ export const generatePage = functions.https.onRequest(async (req, res) => {
     const cityNameStr = Array.isArray(cityName) ? String(cityName[0]) : String(cityName);
     const tsxFilePath = path.join(__dirname, `../../../client/src/pages/cities/${cityNameStr}.tsx`);
     
+    console.log('Looking for TSX file at:', tsxFilePath);
+    console.log('File exists:', fs.existsSync(tsxFilePath));
+    
     if (!fs.existsSync(tsxFilePath)) {
-      res.status(404).json({ error: 'City TSX file not found' });
+      // Try alternative path
+      const alternativePath = path.join(__dirname, `../../client/src/pages/cities/${cityNameStr}.tsx`);
+      console.log('Trying alternative path:', alternativePath);
+      
+      if (!fs.existsSync(alternativePath)) {
+        res.status(404).json({ error: 'City TSX file not found' });
+        return;
+      }
+      
+      // Use alternative path
+      const cityData = await extractCityDataFromTSX(alternativePath);
+      if (!cityData) {
+        res.status(500).json({ error: 'Failed to extract city data' });
+        return;
+      }
+      
+      const html = generateCompleteHTML(cityData);
+      res.setHeader('Content-Type', 'text/html');
+      res.send(html);
       return;
     }
     
