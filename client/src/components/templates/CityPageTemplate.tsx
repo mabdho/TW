@@ -10,6 +10,7 @@ import { CityData, generateCitySEOData, generateCityStructuredData, generateBrea
 import { InternalLinks } from '../InternalLinks';
 import { getAllCitiesData, getAllBlogsData } from '../../utils/dataService';
 import { generatePlaceSchema } from '../../utils/geoData';
+import { generateCityTravelGuideSchema, generateTouristAttractionSchema, detectBusinessType, generateLocalBusinessSchema } from '../../utils/structuredData';
 import { getCityGradientClass } from '../../utils/cityGradients';
 
 interface CityPageTemplateProps {
@@ -107,20 +108,20 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
           {imageUrl && (
             <picture className="absolute inset-0 w-full h-full">
               <source 
-                srcSet={imageUrl.replace(/fm=webp/g, 'fm=avif')} 
+                srcSet={`${imageUrl.split('?')[0]}?auto=format&fit=crop&w=1920&fm=avif&q=75`}
                 type="image/avif" 
               />
               <source 
-                srcSet={imageUrl.includes('fm=webp') ? imageUrl : `${imageUrl}&fm=webp`} 
+                srcSet={`${imageUrl.split('?')[0]}?auto=format&fit=crop&w=1920&fm=webp&q=80`}
                 type="image/webp" 
               />
               <img 
-                src={imageUrl} 
-                alt={`Best things to do in ${cityData.name}, ${cityData.country} - Hero image showing top attractions`}
+                src={`${imageUrl.split('?')[0]}?auto=format&fit=crop&w=1920&fm=jpg&q=80`}
+                alt={`Best things to do in ${cityData.name}, ${cityData.country} - travel guide hero image featuring top attractions and city overview`}
                 className="absolute inset-0 w-full h-full object-cover"
                 loading="eager"
-                width="1400"
-                height="800"
+                width="1920"
+                height="1080"
               />
             </picture>
           )}
@@ -161,7 +162,19 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
           {children}
         </main>
 
-        {/* Enhanced Place schema with actual coordinates */}
+        {/* Enhanced structured data schemas for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateCityTravelGuideSchema(
+              cityData,
+              seoData.title,
+              seoData.description,
+              seoData.canonicalUrl
+            ))
+          }}
+        />
+        
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -172,6 +185,27 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
             ))
           }}
         />
+        
+        {/* Individual TouristAttraction schemas for major attractions */}
+        {cityData.attractions?.slice(0, 5).map((attraction, index) => (
+          <script
+            key={index}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(generateTouristAttractionSchema(attraction, cityData.name, cityData.country))
+            }}
+          />
+        ))}
+        
+        {/* FAQ structured data if available */}
+        {faqs && faqs.length > 0 && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(generateFAQStructuredData(faqs, seoData.canonicalUrl))
+            }}
+          />
+        )}
       </div>
     </BasePageTemplate>
   );

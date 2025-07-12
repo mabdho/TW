@@ -11,7 +11,8 @@ import { CityPageTemplate } from './templates/CityPageTemplate';
 import { InternalLinks } from './InternalLinks';
 import { CityData, generateRelatedCityLinks, generateContextualLinks } from '../utils/seo';
 import { getAllCitiesData, getAllBlogsData } from '../utils/dataService';
-import { OptimizedGalleryImage, optimizeGalleryImages } from '../utils/imageOptimization';
+import { optimizeGalleryImages, generateImageAltText, optimizeImageUrl } from '../utils/imageOptimization';
+import { getRelatedCityLinks, generateInternalLinkingContent } from '../utils/internalLinking';
 import { DiscoveryCards } from './DiscoveryCards';
 import { InteractiveAttractionExplorer } from './InteractiveAttractionExplorer';
 
@@ -120,7 +121,10 @@ export const CityPage: React.FC<CityPageProps> = ({
   } : null;
   
   // 🔧 SEO IMPROVEMENT: Optimize gallery images with SEO-friendly alt text
-  const optimizedGalleryImages = cityData ? optimizeGalleryImages(cityData, galleryImages) : [];
+  const optimizedGalleryImages = cityData ? optimizeGalleryImages(galleryImages, cityData.name) : [];
+  
+  // 🔧 SEO IMPROVEMENT: Generate internal linking content
+  const internalLinkingContent = generateInternalLinkingContent(extractedCityName);
   const top5Attractions = attractions.slice(0, 5);
   
   // Calculate number of tabs dynamically
@@ -565,16 +569,31 @@ export const CityPage: React.FC<CityPageProps> = ({
         </Tabs>
       </div>
       
-      {/* Internal Links Section - positioned before footer */}
-      <section className="bg-gray-50 dark:bg-gray-900">
-        <InternalLinks
-          links={[
-            ...generateRelatedCityLinks(finalCityData, getAllCitiesData()),
-            ...generateContextualLinks(finalCityData, getAllBlogsData())
-          ]}
-          title="Explore More Destinations"
-          description={`Discover other amazing cities in ${finalCityData.country} and read our latest travel guides`}
-        />
+      {/* Internal Links Section - SEO-optimized cross-linking */}
+      <section className="bg-gray-50 border-t border-gray-200">
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Explore More European Destinations</h2>
+            <p className="text-gray-600 mb-6">{internalLinkingContent.linkingText}</p>
+            
+            <div className="grid gap-4 md:grid-cols-3">
+              {internalLinkingContent.relatedCities.map((city, index) => (
+                <a 
+                  key={index}
+                  href={city.url}
+                  className="block p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow group"
+                >
+                  <h3 className="font-semibold text-green-600 group-hover:text-green-700 mb-2">
+                    Best Things to Do in {city.name}
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    Discover amazing attractions and experiences in {city.name}, {city.country}
+                  </p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
       
       <Footer />

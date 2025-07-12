@@ -1,126 +1,154 @@
 /**
- * Image SEO optimization utilities for TravelWanders
- * Generates SEO-friendly alt text, descriptive filenames, and optimized formats
+ * Image optimization utilities for TravelWanders
+ * Provides lazy loading, alt text generation, and responsive image handling
  */
 
-import { CityData } from './seo';
-
-export interface OptimizedGalleryImage {
-  url?: string;
+export interface OptimizedImageProps {
+  src: string;
   alt: string;
-  caption: string;
-  seoAlt?: string; // SEO-optimized alt text
+  cityName?: string;
+  attractionName?: string;
+  loading?: 'lazy' | 'eager';
+  className?: string;
+  width?: number;
+  height?: number;
 }
 
 /**
- * Generate SEO-optimized alt text for gallery images
+ * Generate SEO-optimized alt text for city and attraction images
  */
-export function generateOptimizedAltText(
-  cityName: string,
-  country: string,
-  imageIndex: number,
-  attractions: Array<{ name: string; description: string }> = []
+export function generateImageAltText(
+  cityName: string, 
+  attractionName?: string, 
+  context: 'hero' | 'gallery' | 'attraction' = 'hero'
 ): string {
-  // Use actual attraction names when available
-  const attractionNames = attractions.slice(0, 6).map(attr => attr.name);
-  
-  if (attractionNames[imageIndex]) {
-    return `${attractionNames[imageIndex]} in ${cityName}, ${country} - Top attraction and best thing to do`;
-  }
-  
-  // Fallback to optimized descriptive alt text
-  const descriptors = [
-    'scenic view',
-    'historic landmark',
-    'popular attraction',
-    'cultural site',
-    'architectural marvel',
-    'tourist destination'
-  ];
-  
-  const descriptor = descriptors[imageIndex] || 'beautiful location';
-  return `${descriptor} in ${cityName}, ${country} - Best things to do and travel guide`;
-}
-
-/**
- * Generate SEO-optimized gallery images for city pages
- */
-/**
- * Generate SEO-friendly descriptive filename for images
- */
-export function generateDescriptiveFilename(
-  cityName: string,
-  country: string,
-  attractionName?: string,
-  index?: number
-): string {
-  const citySlug = cityName.toLowerCase().replace(/[^a-z0-9]/g, '-');
-  const countrySlug = country.toLowerCase().replace(/[^a-z0-9]/g, '-');
-  
   if (attractionName) {
-    const attractionSlug = attractionName.toLowerCase().replace(/[^a-z0-9]/g, '-');
-    return `${attractionSlug}-${citySlug}-${countrySlug}.jpg`;
+    switch (context) {
+      case 'hero':
+        return `${attractionName} in ${cityName} - must-see attraction and top things to do`;
+      case 'gallery':
+        return `${attractionName}, ${cityName} - beautiful view of this iconic attraction`;
+      case 'attraction':
+        return `${attractionName} in ${cityName} - visitor photo showcasing this popular destination`;
+      default:
+        return `${attractionName} in ${cityName} - travel photography`;
+    }
   }
   
-  return `${citySlug}-${countrySlug}-attraction-${index || 1}.jpg`;
+  switch (context) {
+    case 'hero':
+      return `Best things to do in ${cityName} - travel guide and city overview`;
+    case 'gallery':
+      return `${cityName} travel photography - beautiful cityscape and attractions`;
+    default:
+      return `${cityName} travel destination - tourist attractions and experiences`;
+  }
 }
 
 /**
- * Optimize image URL for performance (WebP, AVIF, dimensions)
+ * Optimize Unsplash image URLs with performance parameters
  */
-export function optimizeImageUrl(url: string, width: number = 1400): string {
-  if (url.includes('unsplash.com')) {
-    // Add optimization parameters to Unsplash URLs
-    const separator = url.includes('?') ? '&' : '?';
-    return `${url}${separator}auto=format&fit=crop&w=${width}&fm=webp`;
+export function optimizeImageUrl(
+  originalUrl: string, 
+  options: {
+    width?: number;
+    height?: number;
+    format?: 'webp' | 'avif' | 'jpg';
+    quality?: number;
+  } = {}
+): string {
+  const { width = 1400, height, format = 'webp', quality = 80 } = options;
+  
+  if (!originalUrl.includes('unsplash.com')) {
+    return originalUrl;
   }
-  return url;
-}
-
-export function optimizeGalleryImages(
-  cityData: CityData,
-  originalImages: Array<{ url?: string; alt?: string; caption?: string }> = []
-): OptimizedGalleryImage[] {
-  return originalImages.map((image, index) => ({
-    url: image.url ? optimizeImageUrl(image.url, 800) : '',
-    alt: image.alt || `${cityData.name} landmark ${index + 1}`,
-    caption: image.caption || `${cityData.name} landmark ${index + 1} - placeholder`,
-    seoAlt: generateOptimizedAltText(
-      cityData.name,
-      cityData.country,
-      index,
-      cityData.attractions
-    )
-  }));
+  
+  // Extract base URL and add optimization parameters
+  const baseUrl = originalUrl.split('?')[0];
+  const params = new URLSearchParams();
+  
+  params.set('auto', 'format');
+  params.set('fit', 'crop');
+  params.set('w', width.toString());
+  if (height) params.set('h', height.toString());
+  params.set('fm', format);
+  params.set('q', quality.toString());
+  
+  return `${baseUrl}?${params.toString()}`;
 }
 
 /**
- * Generate image structured data for SEO
+ * Create responsive picture element with modern format fallbacks
  */
-export function generateImageStructuredData(
-  cityData: CityData,
-  images: OptimizedGalleryImage[]
-): object {
-  const validImages = images.filter(img => img.url && img.url.trim() !== '');
+export function createPictureElement(props: OptimizedImageProps) {
+  const { src, alt, loading = 'lazy', className = '', width, height } = props;
   
-  if (validImages.length === 0) {
-    return {};
-  }
+  // Generate optimized URLs for different formats
+  const webpUrl = optimizeImageUrl(src, { width, height, format: 'webp' });
+  const avifUrl = optimizeImageUrl(src, { width, height, format: 'avif' });
+  const jpegUrl = optimizeImageUrl(src, { width, height, format: 'jpg' });
   
+  // Return image element for now (JSX would need React import)
   return {
-    "@context": "https://schema.org",
-    "@type": "ImageGallery",
-    "name": `${cityData.name} Travel Photo Gallery`,
-    "description": `Best photos and images of top attractions in ${cityData.name}, ${cityData.country}`,
-    "associatedMedia": validImages.map(img => ({
-      "@type": "ImageObject",
-      "url": img.url,
-      "name": img.seoAlt,
-      "description": img.caption,
-      "contentLocation": {
-        "@type": "Place",
-        "name": `${cityData.name}, ${cityData.country}`
-      }
-    }))
+    webpUrl,
+    avifUrl, 
+    jpegUrl,
+    alt,
+    loading,
+    width,
+    height,
+    className
   };
 }
+
+/**
+ * Generate optimized image props with lazy loading and SEO alt text
+ */
+export function optimizeImageProps(props: OptimizedImageProps) {
+  const { 
+    src, 
+    alt, 
+    cityName, 
+    attractionName, 
+    loading = 'lazy', 
+    className = '',
+    width = 1400,
+    height 
+  } = props;
+  
+  const optimizedAlt = alt || generateImageAltText(
+    cityName || 'destination', 
+    attractionName, 
+    'gallery'
+  );
+  
+  const optimizedSrc = optimizeImageUrl(src, { width, height });
+  
+  return {
+    src: optimizedSrc,
+    alt: optimizedAlt,
+    loading,
+    width,
+    height,
+    className: `w-full h-full object-cover ${className}`
+  };
+}
+
+/**
+ * Generate gallery images with optimized alt text
+ */
+export function optimizeGalleryImages(
+  images: Array<{ url?: string; alt?: string; caption?: string }>,
+  cityName: string
+): Array<{ url: string; alt: string; caption?: string }> {
+  return images
+    .filter(img => img.url)
+    .map((img, index) => ({
+      url: optimizeImageUrl(img.url!, { width: 800, height: 600 }),
+      alt: img.alt || generateImageAltText(cityName, undefined, 'gallery'),
+      caption: img.caption
+    }));
+}
+
+export type { OptimizedImageProps };
+export { generateImageAltText, optimizeImageUrl, createPictureElement, optimizeImageProps, optimizeGalleryImages };

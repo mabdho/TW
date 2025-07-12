@@ -4,9 +4,11 @@ import { CityPage } from '../../components/CityPage';
 export const Milan: React.FC = () => {
   return (
     <CityPage
+      cityName="Milan"
+      country="Italy"
       title={"15 Best Things to Do in Milan, Italy (2025 Guide)"}
       description={`Planning a trip and wondering about the best things to do in Milan? You're in the right place! Milan, a global capital of fashion and design, offers a blend of historical landmarks, modern architecture, and of course, incredible food. This guide highlights the top attractions and hidden gems that even some locals might not know about. We'll explore everything from iconic cathedrals to world-class museums, and, perhaps most importantly, the best places to indulge in authentic Italian cuisine. When considering things to do in Milan, remember to pace yourself; there's a lot to take in. This guide is designed to help you plan the perfect Milan itinerary, whether you're here for a weekend or a longer stay. So, let's dive in and discover the magic of Milan!`}
-      imageUrl={"https://plus.unsplash.com/premium_photo-1715075305614-e9258ad8c118?q=80&w=1801&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+      imageUrl={"https://plus.unsplash.com/premium_photo-1715075305614-e9258ad8c118?auto=format&fit=crop&w=1400&fm=webp&q=80"}
       galleryImages={[
       ]}
       highlights={["Marvel at the Duomo di Milano.",

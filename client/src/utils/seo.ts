@@ -72,22 +72,27 @@ export function createCanonical(type: 'city' | 'blog', slug: string, baseUrl: st
 
 /**
  * Generate optimized meta description targeting "Best things to do in [city]"
+ * Strictly limited to 160 characters for optimal SERP display
  */
 export function generateMetaDescription(cityData: CityData): string {
   const { name, country, attractions = [] } = cityData;
   const mainKeyword = `Best things to do in ${name}`;
   
-  // Extract top attractions for description
-  const topAttractions = attractions.slice(0, 3).map(attr => attr.name).join(', ');
+  // Create concise description under 160 characters
+  let description = `${mainKeyword}: Visit top attractions, hidden gems & local experiences in ${name}, ${country}. Complete travel guide.`;
   
-  const description = `${mainKeyword}: Discover ${topAttractions} and more amazing experiences in ${name}, ${country}. Complete travel guide with insider tips and must-visit attractions.`;
-  
-  // Ensure description is within 120-160 characters
+  // If still too long, use shorter version
   if (description.length > 160) {
-    return `${mainKeyword}: Discover amazing experiences in ${name}, ${country}. Complete travel guide with insider tips and must-visit attractions.`;
+    description = `${mainKeyword}: Top attractions & experiences in ${name}, ${country}. Complete guide with insider tips.`;
   }
   
-  return description;
+  // Final fallback for very long city names
+  if (description.length > 160) {
+    description = `${mainKeyword}: Top attractions & experiences. Complete ${name} travel guide with insider tips.`;
+  }
+  
+  // Ensure it's under 160 characters
+  return description.length <= 160 ? description : description.substring(0, 157) + '...';
 }
 
 /**
@@ -228,12 +233,13 @@ export function generateBreadcrumbStructuredData(breadcrumbs: Array<{name: strin
 }
 
 /**
- * Generate structured data for city pages
+ * Generate enhanced structured data for city pages with comprehensive tourist attraction schemas
  */
 export function generateCityStructuredData(cityData: CityData, seoData: SEOData): object {
   const { name, country, attractions = [] } = cityData;
   
-  return {
+  // Main TravelGuide schema
+  const travelGuideSchema = {
     "@context": "https://schema.org",
     "@type": "TravelGuide",
     "name": seoData.title,
@@ -252,7 +258,15 @@ export function generateCityStructuredData(cityData: CityData, seoData: SEOData)
         "@type": "TouristAttraction",
         "position": index + 1,
         "name": attraction.name,
-        "description": attraction.description
+        "description": attraction.description,
+        "location": {
+          "@type": "City",
+          "name": name,
+          "containedInPlace": {
+            "@type": "Country",
+            "name": country
+          }
+        }
       }))
     },
     "mainEntityOfPage": {
@@ -264,6 +278,49 @@ export function generateCityStructuredData(cityData: CityData, seoData: SEOData)
     },
     "dateModified": seoData.lastModified,
     "url": seoData.canonicalUrl
+  };
+
+  return travelGuideSchema;
+}
+
+/**
+ * Generate individual TouristAttraction structured data for major attractions
+ */
+export function generateTouristAttractionSchema(attraction: any, cityName: string, country: string): object {
+  return {
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    "name": attraction.name,
+    "description": attraction.description,
+    "location": {
+      "@type": "City",
+      "name": cityName,
+      "containedInPlace": {
+        "@type": "Country",
+        "name": country
+      }
+    },
+    "touristType": "Tourist"
+  };
+}
+
+/**
+ * Generate Place schema for the city itself
+ */
+export function generateCityPlaceSchema(cityName: string, country: string, description: string): object {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Place",
+    "name": cityName,
+    "description": description,
+    "containedInPlace": {
+      "@type": "Country",
+      "name": country
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "addressCountry": country
+    }
   };
 }
 
