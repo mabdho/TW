@@ -541,16 +541,20 @@ export async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityD
     const tsxContent = fs.readFileSync(tsxFilePath, 'utf-8');
     
     // Extract basic city information
-    const cityNameMatch = tsxContent.match(/cityName="([^"]+)"/);
-    const countryMatch = tsxContent.match(/country="([^"]+)"/);
     const titleMatch = tsxContent.match(/title=\{?"([^"]+)"\}?/);
-    const descriptionMatch = tsxContent.match(/description=\{`([^`]+)`\}/);
+    const descriptionMatch = tsxContent.match(/description=\{`([\s\S]*?)`\}/);
     const imageUrlMatch = tsxContent.match(/imageUrl=\{?"([^"]+)"\}?/);
     
-    if (!cityNameMatch || !countryMatch || !titleMatch || !descriptionMatch) {
+    if (!titleMatch || !descriptionMatch) {
       console.error('Failed to extract basic city data from TSX file');
       return null;
     }
+    
+    // Extract city name and country from title
+    const title = titleMatch[1];
+    const titleParseMatch = title.match(/Best Things to Do in (.*?), (.*?) \(/);
+    const cityName = titleParseMatch ? titleParseMatch[1] : 'Unknown City';
+    const country = titleParseMatch ? titleParseMatch[2] : 'Unknown Country';
     
     // Extract highlights
     const highlightsMatch = tsxContent.match(/highlights=\{(\[[\s\S]*?\])\}/);
@@ -578,22 +582,36 @@ export async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityD
     }
     
     return {
-      cityName: cityNameMatch[1],
-      country: countryMatch[1],
+      cityName,
+      country,
       title: titleMatch[1],
       description: descriptionMatch[1],
       imageUrl: imageUrlMatch?.[1] || '',
       galleryImages: [],
       highlights,
       attractions,
-      discoveryData: {},
-      logistics: {
-        gettingAround: 'Public transport recommended',
-        whereToStay: 'City center recommended',
-        bestTimeToVisit: 'Spring and Fall are ideal',
-        suggestedItinerary: '3-4 days recommended'
+      discoveryData: {
+        localSecrets: [`Hidden gems in ${cityName} await discovery`],
+        photoSpots: [`Best photo locations in ${cityName}`],
+        quickFacts: [`${cityName} is known for its rich culture and stunning scenery`],
+        seasonalHighlights: [`${cityName} offers unique experiences year-round`]
       },
-      faqs: []
+      logistics: {
+        gettingAround: `${cityName} has excellent public transport connections`,
+        whereToStay: `Various accommodations available throughout ${cityName}`,
+        bestTimeToVisit: 'Spring and Fall are ideal visiting seasons',
+        suggestedItinerary: `Plan 2-3 days to explore the highlights of ${cityName}`
+      },
+      faqs: [
+        {
+          question: `What are the must-see attractions in ${cityName}?`,
+          answer: `The top attractions include ${highlights.slice(0, 3).join(', ')} and many more exciting destinations.`
+        },
+        {
+          question: `How many days should I spend in ${cityName}?`,
+          answer: `We recommend at least 2-3 days to experience the best of ${cityName}.`
+        }
+      ]
     };
   } catch (error) {
     console.error('Error extracting city data from TSX:', error);
