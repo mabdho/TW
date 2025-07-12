@@ -28,6 +28,7 @@ Preferred communication style: Simple, everyday language.
 - ✅ **INTEGRATED HTML GENERATION**: Firebase Functions HTML rendering now automatically integrated into main admin city generation workflow - all new cities get complete HTML generated automatically
 - ✅ **ADMIN INTERFACE HTML TAB**: Added dedicated HTML Generator tab in admin panel for managing HTML generation for existing cities
 - ✅ **SEAMLESS WORKFLOW**: New city creation now generates both TSX component AND complete HTML file in single operation
+- ✅ **TSX ARRAY EXTRACTION FIX**: Fixed critical issue with multiline array parsing in TSX files - highlights and other arrays now properly extracted from TSX components instead of showing empty content
 
 ## Recent Changes (July 2025)
 
