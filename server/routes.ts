@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { loginSchema } from "@shared/schema";
 import fs from 'fs/promises';
+import { existsSync } from 'fs';
 import path from 'path';
 import { 
   validateSEOData, 
@@ -392,8 +393,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: 'City key is required' });
       }
       
-      // Look for TSX file
-      const tsxFilePath = path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityKey}.tsx`);
+      // Look for TSX file - handle proper case
+      const cityKeyCapitalized = cityKey.charAt(0).toUpperCase() + cityKey.slice(1);
+      const tsxFilePath = path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityKeyCapitalized}.tsx`);
+      
+      console.log(`🔍 Looking for TSX file at: ${tsxFilePath}`);
+      
+      // Check if file exists before processing
+      if (!existsSync(tsxFilePath)) {
+        return res.status(404).json({ 
+          error: 'TSX file not found', 
+          filePath: tsxFilePath,
+          hint: 'Make sure the city TSX file exists in the correct location'
+        });
+      }
       
       try {
         const cityData = await extractCityDataFromTSXHtmlGen(tsxFilePath);

@@ -339,52 +339,201 @@ export function generateCompleteHTML(cityData: CityData): string {
     `<div class="attraction-card">
       <div class="attraction-content">
         <h3 class="attraction-name">${attraction.name || 'Unnamed Attraction'}</h3>
-        <div class="attraction-description">${(attraction.description || 'No description available').replace(/#{1,6}\s/g, '').replace(/\n/g, '<br>')}</div>
-        <div class="practical-info">
-          <h4>Practical Information</h4>
-          <p><strong>How to get there:</strong> ${attraction.practicalInfo?.howToGetThere || 'Check local transport'}</p>
-          <p><strong>Opening hours:</strong> ${attraction.practicalInfo?.openingHours || 'Check official website'}</p>
-          <p><strong>Cost:</strong> ${attraction.practicalInfo?.cost || 'Varies'}</p>
-          <p><strong>Website:</strong> <a href="https://${attraction.practicalInfo?.website || 'example.com'}" target="_blank">${attraction.practicalInfo?.website || 'Check online'}</a></p>
-        </div>
-        <div class="discovery-tags">
-          <span class="discovery-tag">⏰ ${attraction.discoveryTags?.timeRequired || '1-2 hours'}</span>
-          <span class="discovery-tag">🎯 ${attraction.discoveryTags?.experienceLevel || 'All levels'}</span>
-          <span class="discovery-tag">💰 ${attraction.discoveryTags?.costLevel || 'Medium'}</span>
-          <span class="discovery-tag">📅 ${attraction.discoveryTags?.seasonalBest || 'Year-round'}</span>
-          ${attraction.discoveryTags?.familyFriendly ? '<span class="discovery-tag">👨‍👩‍👧‍👦 Family Friendly</span>' : ''}
-        </div>
+        <div class="attraction-description">${(attraction.description || 'No description available').replace(/#{1,6}\s/g, '<h4>').replace(/\n/g, '<br>')}</div>
+        
+        ${attraction.practicalInfo ? `
+          <div class="practical-info">
+            <h4>📍 Practical Information</h4>
+            <div class="practical-grid">
+              <div class="practical-item">
+                <strong>🚌 How to get there:</strong> ${attraction.practicalInfo.howToGetThere}
+              </div>
+              <div class="practical-item">
+                <strong>⏰ Opening hours:</strong> ${attraction.practicalInfo.openingHours}
+              </div>
+              <div class="practical-item">
+                <strong>💰 Cost:</strong> ${attraction.practicalInfo.cost}
+              </div>
+              ${attraction.practicalInfo.website ? `
+                <div class="practical-item">
+                  <strong>🌐 Website:</strong> <a href="https://${attraction.practicalInfo.website}" target="_blank" rel="noopener">${attraction.practicalInfo.website}</a>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        ` : ''}
+        
+        ${attraction.discoveryTags ? `
+          <div class="discovery-tags">
+            <h4>🎯 Discovery Info</h4>
+            <div class="tags-grid">
+              <span class="discovery-tag">⏱️ ${attraction.discoveryTags.timeRequired}</span>
+              <span class="discovery-tag">🎯 ${attraction.discoveryTags.experienceLevel}</span>
+              <span class="discovery-tag">💰 ${attraction.discoveryTags.costLevel}</span>
+              <span class="discovery-tag">🌟 ${attraction.discoveryTags.seasonalBest}</span>
+              ${attraction.discoveryTags.hiddenGem ? '<span class="discovery-tag gem">💎 Hidden Gem</span>' : ''}
+              ${attraction.discoveryTags.familyFriendly ? '<span class="discovery-tag family">👨‍👩‍👧‍👦 Family Friendly</span>' : ''}
+            </div>
+            ${attraction.discoveryTags.interests && attraction.discoveryTags.interests.length > 0 ? `
+              <div class="interests">
+                <strong>🎨 Interests:</strong> ${attraction.discoveryTags.interests.join(', ')}
+              </div>
+            ` : ''}
+            ${attraction.discoveryTags.photoOpportunity ? `
+              <div class="photo-tip">
+                <strong>📸 Photo Opportunity:</strong> ${attraction.discoveryTags.photoOpportunity}
+              </div>
+            ` : ''}
+            ${attraction.discoveryTags.insiderTip ? `
+              <div class="insider-tip">
+                <strong>💡 Insider Tip:</strong> ${attraction.discoveryTags.insiderTip}
+              </div>
+            ` : ''}
+            ${attraction.discoveryTags.accessibilityNotes ? `
+              <div class="accessibility-notes">
+                <strong>♿ Accessibility:</strong> ${attraction.discoveryTags.accessibilityNotes}
+              </div>
+            ` : ''}
+          </div>
+        ` : ''}
       </div>
     </div>`
   ).join('');
   
   const discoveryCardsHTML = cityData.discoveryData ? `
-    <div class="discovery-cards">
-      ${cityData.discoveryData.localSecrets ? `
-        <div class="discovery-card">
-          <h3>🤫 Local Secrets</h3>
-          <ul class="discovery-list">
-            ${cityData.discoveryData.localSecrets.map(secret => `<li>${secret}</li>`).join('')}
-          </ul>
-        </div>
-      ` : ''}
-      ${cityData.discoveryData.photoSpots ? `
-        <div class="discovery-card">
-          <h3>📸 Photo Spots</h3>
-          <ul class="discovery-list">
-            ${cityData.discoveryData.photoSpots.map(spot => `<li>${spot}</li>`).join('')}
-          </ul>
-        </div>
-      ` : ''}
-      ${cityData.discoveryData.diningHighlights ? `
-        <div class="discovery-card">
-          <h3>🍽️ Dining Highlights</h3>
-          <ul class="discovery-list">
-            ${cityData.discoveryData.diningHighlights.mustTryDishes ? cityData.discoveryData.diningHighlights.mustTryDishes.map(dish => `<li>${dish}</li>`).join('') : ''}
-          </ul>
-        </div>
-      ` : ''}
-    </div>
+    <section class="section">
+      <h2 class="section-title">🔍 Interactive Explorer</h2>
+      <div class="discovery-cards">
+        ${cityData.discoveryData.localSecrets && cityData.discoveryData.localSecrets.length > 0 ? `
+          <div class="discovery-card">
+            <h3>🤫 Local Secrets</h3>
+            <ul class="discovery-list">
+              ${cityData.discoveryData.localSecrets.map(secret => `<li>${secret}</li>`).join('')}
+            </ul>
+          </div>
+        ` : ''}
+        
+        ${cityData.discoveryData.photoSpots && cityData.discoveryData.photoSpots.length > 0 ? `
+          <div class="discovery-card">
+            <h3>📸 Photo Spots</h3>
+            <ul class="discovery-list">
+              ${cityData.discoveryData.photoSpots.map(spot => `<li>${spot}</li>`).join('')}
+            </ul>
+          </div>
+        ` : ''}
+        
+        ${cityData.discoveryData.budgetBreakdown ? `
+          <div class="discovery-card">
+            <h3>💰 Time & Budget</h3>
+            <div class="budget-breakdown">
+              ${cityData.discoveryData.budgetBreakdown.budget ? `
+                <div class="budget-item">
+                  <strong>💸 Free Activities:</strong>
+                  <p>${cityData.discoveryData.budgetBreakdown.budget}</p>
+                </div>
+              ` : ''}
+              ${cityData.discoveryData.budgetBreakdown.midRange ? `
+                <div class="budget-item">
+                  <strong>💳 Budget-Friendly:</strong>
+                  <p>${cityData.discoveryData.budgetBreakdown.midRange}</p>
+                </div>
+              ` : ''}
+              ${cityData.discoveryData.budgetBreakdown.luxury ? `
+                <div class="budget-item">
+                  <strong>💎 Splurge-Worthy:</strong>
+                  <p>${cityData.discoveryData.budgetBreakdown.luxury}</p>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        ` : ''}
+        
+        ${cityData.discoveryData.diningHighlights ? `
+          <div class="discovery-card">
+            <h3>🍽️ Dining Highlights</h3>
+            <div class="dining-content">
+              ${cityData.discoveryData.diningHighlights.mustTryDishes && cityData.discoveryData.diningHighlights.mustTryDishes.length > 0 ? `
+                <div class="dining-section">
+                  <strong>🍲 Must-Try Dishes:</strong>
+                  <ul class="dining-list">
+                    ${cityData.discoveryData.diningHighlights.mustTryDishes.map(dish => `<li>${dish}</li>`).join('')}
+                  </ul>
+                </div>
+              ` : ''}
+              ${cityData.discoveryData.diningHighlights.bestCafes && cityData.discoveryData.diningHighlights.bestCafes.length > 0 ? `
+                <div class="dining-section">
+                  <strong>☕ Best Cafes:</strong>
+                  <ul class="dining-list">
+                    ${cityData.discoveryData.diningHighlights.bestCafes.map(cafe => `<li>${cafe}</li>`).join('')}
+                  </ul>
+                </div>
+              ` : ''}
+              ${cityData.discoveryData.diningHighlights.topRestaurants && cityData.discoveryData.diningHighlights.topRestaurants.length > 0 ? `
+                <div class="dining-section">
+                  <strong>🏆 Top Restaurants:</strong>
+                  <ul class="dining-list">
+                    ${cityData.discoveryData.diningHighlights.topRestaurants.map(restaurant => `<li>${restaurant}</li>`).join('')}
+                  </ul>
+                </div>
+              ` : ''}
+              ${cityData.discoveryData.diningHighlights.foodMarkets && cityData.discoveryData.diningHighlights.foodMarkets.length > 0 ? `
+                <div class="dining-section">
+                  <strong>🛒 Food Markets:</strong>
+                  <ul class="dining-list">
+                    ${cityData.discoveryData.diningHighlights.foodMarkets.map(market => `<li>${market}</li>`).join('')}
+                  </ul>
+                </div>
+              ` : ''}
+              ${cityData.discoveryData.diningHighlights.diningTips && cityData.discoveryData.diningHighlights.diningTips.length > 0 ? `
+                <div class="dining-section">
+                  <strong>💡 Dining Tips:</strong>
+                  <ul class="dining-list">
+                    ${cityData.discoveryData.diningHighlights.diningTips.map(tip => `<li>${tip}</li>`).join('')}
+                  </ul>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        ` : ''}
+        
+        ${cityData.discoveryData.seasonalHighlights ? `
+          <div class="discovery-card">
+            <h3>🌸 Seasonal Highlights</h3>
+            <div class="seasonal-content">
+              ${cityData.discoveryData.seasonalHighlights.spring ? `
+                <div class="season-item">
+                  <strong>🌸 Spring:</strong> ${cityData.discoveryData.seasonalHighlights.spring}
+                </div>
+              ` : ''}
+              ${cityData.discoveryData.seasonalHighlights.summer ? `
+                <div class="season-item">
+                  <strong>☀️ Summer:</strong> ${cityData.discoveryData.seasonalHighlights.summer}
+                </div>
+              ` : ''}
+              ${cityData.discoveryData.seasonalHighlights.fall ? `
+                <div class="season-item">
+                  <strong>🍂 Fall:</strong> ${cityData.discoveryData.seasonalHighlights.fall}
+                </div>
+              ` : ''}
+              ${cityData.discoveryData.seasonalHighlights.winter ? `
+                <div class="season-item">
+                  <strong>❄️ Winter:</strong> ${cityData.discoveryData.seasonalHighlights.winter}
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        ` : ''}
+        
+        ${cityData.discoveryData.quickFacts ? `
+          <div class="discovery-card">
+            <h3>⚡ Quick Facts</h3>
+            <ul class="discovery-list">
+              ${cityData.discoveryData.quickFacts.map(fact => `<li>${fact}</li>`).join('')}
+            </ul>
+          </div>
+        ` : ''}
+      </div>
+    </section>
   ` : '';
   
   const faqsHTML = cityData.faqs ? cityData.faqs.map(faq => 
@@ -535,7 +684,7 @@ export function generateCompleteHTML(cityData: CityData): string {
 </html>`;
 }
 
-// Extract city data from TSX file (from Firebase Functions)
+// Extract city data from TSX file (from Firebase Functions) - COMPLETE EXTRACTION
 export async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityData | null> {
   try {
     const tsxContent = fs.readFileSync(tsxFilePath, 'utf-8');
@@ -567,18 +716,176 @@ export async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityD
       }
     }
     
-    // Extract attractions (simplified extraction)
+    // Extract attractions with COMPLETE content including descriptions, practical info, and discovery tags
     const attractionsMatch = tsxContent.match(/attractions=\{(\[[\s\S]*?\])\}/);
     let attractions: any[] = [];
     if (attractionsMatch) {
-      try {
-        const attractionsStr = attractionsMatch[1]
-          .replace(/'/g, '"')
-          .replace(/(\w+):/g, '"$1":');
-        attractions = JSON.parse(attractionsStr);
-      } catch (e) {
-        console.warn('Failed to parse attractions, using empty array');
+      const attractionsContent = attractionsMatch[1];
+      
+      // Find all attraction objects
+      const attractionMatches = attractionsContent.match(/\{\s*name:\s*"([^"]+)"[\s\S]*?\}/g);
+      if (attractionMatches) {
+        attractions = attractionMatches.map(attractionStr => {
+          const nameMatch = attractionStr.match(/name:\s*"([^"]+)"/);
+          const descriptionMatch = attractionStr.match(/description:\s*`([^`]+)`/);
+          const howToGetThereMatch = attractionStr.match(/howToGetThere:\s*"([^"]+)"/);
+          const openingHoursMatch = attractionStr.match(/openingHours:\s*"([^"]+)"/);
+          const costMatch = attractionStr.match(/cost:\s*"([^"]+)"/);
+          const websiteMatch = attractionStr.match(/website:\s*"([^"]+)"/);
+          const timeRequiredMatch = attractionStr.match(/timeRequired:\s*"([^"]+)"/);
+          const experienceLevelMatch = attractionStr.match(/experienceLevel:\s*"([^"]+)"/);
+          const interestsMatch = attractionStr.match(/interests:\s*\[(.*?)\]/);
+          const costLevelMatch = attractionStr.match(/costLevel:\s*"([^"]+)"/);
+          const seasonalBestMatch = attractionStr.match(/seasonalBest:\s*"([^"]+)"/);
+          const photoOpportunityMatch = attractionStr.match(/photoOpportunity:\s*"([^"]+)"/);
+          const insiderTipMatch = attractionStr.match(/insiderTip:\s*"([^"]+)"/);
+          const hiddenGemMatch = attractionStr.match(/hiddenGem:\s*(true|false)/);
+          const familyFriendlyMatch = attractionStr.match(/familyFriendly:\s*(true|false)/);
+          const accessibilityNotesMatch = attractionStr.match(/accessibilityNotes:\s*"([^"]+)"/);
+          
+          const interests = interestsMatch ? interestsMatch[1].split(',').map(i => i.trim().replace(/['"]/g, '')) : [];
+          
+          return {
+            name: nameMatch ? nameMatch[1] : 'Unknown',
+            description: descriptionMatch ? descriptionMatch[1] : 'Description not available',
+            practicalInfo: {
+              howToGetThere: howToGetThereMatch ? howToGetThereMatch[1] : 'Information not available',
+              openingHours: openingHoursMatch ? openingHoursMatch[1] : 'Check locally',
+              cost: costMatch ? costMatch[1] : 'Varies',
+              website: websiteMatch ? websiteMatch[1] : ''
+            },
+            discoveryTags: {
+              timeRequired: timeRequiredMatch ? timeRequiredMatch[1] : '1-2 hours',
+              experienceLevel: experienceLevelMatch ? experienceLevelMatch[1] : 'Easy Access',
+              interests: interests,
+              costLevel: costLevelMatch ? costLevelMatch[1] : 'Moderate',
+              seasonalBest: seasonalBestMatch ? seasonalBestMatch[1] : 'Year-round',
+              photoOpportunity: photoOpportunityMatch ? photoOpportunityMatch[1] : 'Great photo opportunities',
+              insiderTip: insiderTipMatch ? insiderTipMatch[1] : 'Visit during off-peak hours',
+              hiddenGem: hiddenGemMatch ? hiddenGemMatch[1] === 'true' : false,
+              familyFriendly: familyFriendlyMatch ? familyFriendlyMatch[1] === 'true' : true,
+              accessibilityNotes: accessibilityNotesMatch ? accessibilityNotesMatch[1] : 'Generally accessible'
+            }
+          };
+        });
       }
+    }
+    
+    // Extract logistics with full content
+    const logisticsMatch = tsxContent.match(/logistics=\{\{([\s\S]*?)\}\}/);
+    let logistics: any = {};
+    if (logisticsMatch) {
+      const logisticsContent = logisticsMatch[1];
+      const gettingAroundMatch = logisticsContent.match(/gettingAround:\s*`([^`]+)`/);
+      const whereToStayMatch = logisticsContent.match(/whereToStay:\s*`([^`]+)`/);
+      const bestTimeToVisitMatch = logisticsContent.match(/bestTimeToVisit:\s*`([^`]+)`/);
+      const suggestedItineraryMatch = logisticsContent.match(/suggestedItinerary:\s*`([^`]+)`/);
+      
+      logistics = {
+        gettingAround: gettingAroundMatch ? gettingAroundMatch[1] : `${cityName} has excellent public transport connections`,
+        whereToStay: whereToStayMatch ? whereToStayMatch[1] : `Various accommodations available throughout ${cityName}`,
+        bestTimeToVisit: bestTimeToVisitMatch ? bestTimeToVisitMatch[1] : 'Spring and Fall are ideal visiting seasons',
+        suggestedItinerary: suggestedItineraryMatch ? suggestedItineraryMatch[1] : `Plan 2-3 days to explore the highlights of ${cityName}`
+      };
+    }
+    
+    // Extract FAQs with complete content
+    const faqsMatch = tsxContent.match(/faqs=\{(\[[\s\S]*?\])\}/);
+    let faqs: any[] = [];
+    if (faqsMatch) {
+      const faqsContent = faqsMatch[1];
+      const faqMatches = faqsContent.match(/\{\s*question:\s*"([^"]+)",\s*answer:\s*`([^`]+)`\s*\}/g);
+      if (faqMatches) {
+        faqs = faqMatches.map(faqStr => {
+          const questionMatch = faqStr.match(/question:\s*"([^"]+)"/);
+          const answerMatch = faqStr.match(/answer:\s*`([^`]+)`/);
+          return {
+            question: questionMatch ? questionMatch[1] : 'Question not available',
+            answer: answerMatch ? answerMatch[1] : 'Answer not available'
+          };
+        });
+      }
+    }
+    
+    // Extract discovery data with full content
+    const discoveryDataMatch = tsxContent.match(/discoveryData=\{\{([\s\S]*?)\}\}/);
+    let discoveryData: any = {};
+    if (discoveryDataMatch) {
+      const discoveryContent = discoveryDataMatch[1];
+      
+      // Extract local secrets
+      const localSecretsMatch = discoveryContent.match(/localSecrets:\s*\[([\s\S]*?)\]/);
+      let localSecrets: string[] = [];
+      if (localSecretsMatch) {
+        const secretsContent = localSecretsMatch[1];
+        const secretMatches = secretsContent.match(/"([^"]+)"/g);
+        if (secretMatches) {
+          localSecrets = secretMatches.map(s => s.replace(/"/g, ''));
+        }
+      }
+      
+      // Extract dining highlights
+      const diningHighlightsMatch = discoveryContent.match(/diningHighlights:\s*\{([\s\S]*?)\}/);
+      let diningHighlights: any = {};
+      if (diningHighlightsMatch) {
+        const diningContent = diningHighlightsMatch[1];
+        const mustTryDishesMatch = diningContent.match(/mustTryDishes:\s*"([^"]+)"/);
+        const bestCafesMatch = diningContent.match(/bestCafes:\s*"([^"]+)"/);
+        const topRestaurantsMatch = diningContent.match(/topRestaurants:\s*"([^"]+)"/);
+        const foodMarketsMatch = diningContent.match(/foodMarkets:\s*"([^"]+)"/);
+        const diningTipsMatch = diningContent.match(/diningTips:\s*"([^"]+)"/);
+        
+        diningHighlights = {
+          mustTryDishes: mustTryDishesMatch ? mustTryDishesMatch[1].split(',').map(d => d.trim()) : [],
+          bestCafes: bestCafesMatch ? bestCafesMatch[1].split(',').map(c => c.trim()) : [],
+          topRestaurants: topRestaurantsMatch ? topRestaurantsMatch[1].split(',').map(r => r.trim()) : [],
+          foodMarkets: foodMarketsMatch ? foodMarketsMatch[1].split(',').map(m => m.trim()) : [],
+          diningTips: diningTipsMatch ? diningTipsMatch[1].split(',').map(t => t.trim()) : []
+        };
+      }
+      
+      // Extract seasonal highlights
+      const seasonalHighlightsMatch = discoveryContent.match(/seasonalHighlights:\s*\{([\s\S]*?)\}/);
+      let seasonalHighlights: any = {};
+      if (seasonalHighlightsMatch) {
+        const seasonalContent = seasonalHighlightsMatch[1];
+        const springMatch = seasonalContent.match(/spring:\s*"([^"]+)"/);
+        const summerMatch = seasonalContent.match(/summer:\s*"([^"]+)"/);
+        const fallMatch = seasonalContent.match(/fall:\s*"([^"]+)"/);
+        const winterMatch = seasonalContent.match(/winter:\s*"([^"]+)"/);
+        
+        seasonalHighlights = {
+          spring: springMatch ? springMatch[1] : '',
+          summer: summerMatch ? summerMatch[1] : '',
+          fall: fallMatch ? fallMatch[1] : '',
+          winter: winterMatch ? winterMatch[1] : ''
+        };
+      }
+      
+      // Extract budget breakdown
+      const budgetBreakdownMatch = discoveryContent.match(/budgetBreakdown:\s*\{([\s\S]*?)\}/);
+      let budgetBreakdown: any = {};
+      if (budgetBreakdownMatch) {
+        const budgetContent = budgetBreakdownMatch[1];
+        const freeActivitiesMatch = budgetContent.match(/freeActivities:\s*"([^"]+)"/);
+        const budgetFriendlyMatch = budgetContent.match(/budgetFriendly:\s*"([^"]+)"/);
+        const splurgeWorthyMatch = budgetContent.match(/splurgeWorthy:\s*"([^"]+)"/);
+        
+        budgetBreakdown = {
+          budget: freeActivitiesMatch ? freeActivitiesMatch[1] : 'Free activities available',
+          midRange: budgetFriendlyMatch ? budgetFriendlyMatch[1] : 'Budget-friendly options available',
+          luxury: splurgeWorthyMatch ? splurgeWorthyMatch[1] : 'Luxury experiences available'
+        };
+      }
+      
+      discoveryData = {
+        localSecrets,
+        photoSpots: [`Best photo locations in ${cityName}`],
+        quickFacts: [`${cityName} is known for its rich culture and stunning scenery`],
+        seasonalHighlights,
+        budgetBreakdown,
+        diningHighlights
+      };
     }
     
     return {
@@ -590,28 +897,9 @@ export async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityD
       galleryImages: [],
       highlights,
       attractions,
-      discoveryData: {
-        localSecrets: [`Hidden gems in ${cityName} await discovery`],
-        photoSpots: [`Best photo locations in ${cityName}`],
-        quickFacts: [`${cityName} is known for its rich culture and stunning scenery`],
-        seasonalHighlights: [`${cityName} offers unique experiences year-round`]
-      },
-      logistics: {
-        gettingAround: `${cityName} has excellent public transport connections`,
-        whereToStay: `Various accommodations available throughout ${cityName}`,
-        bestTimeToVisit: 'Spring and Fall are ideal visiting seasons',
-        suggestedItinerary: `Plan 2-3 days to explore the highlights of ${cityName}`
-      },
-      faqs: [
-        {
-          question: `What are the must-see attractions in ${cityName}?`,
-          answer: `The top attractions include ${highlights.slice(0, 3).join(', ')} and many more exciting destinations.`
-        },
-        {
-          question: `How many days should I spend in ${cityName}?`,
-          answer: `We recommend at least 2-3 days to experience the best of ${cityName}.`
-        }
-      ]
+      discoveryData,
+      logistics,
+      faqs
     };
   } catch (error) {
     console.error('Error extracting city data from TSX:', error);
