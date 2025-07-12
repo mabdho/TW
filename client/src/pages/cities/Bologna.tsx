@@ -7,18 +7,19 @@ export const Bologna: React.FC = () => {
       title={"15 Best Things to Do in Bologna, Italy (2025 Guide)"}
       description={`Looking for the best things to do in Bologna? You've come to the right place. This guide highlights the must-see landmarks, hidden corners, and culinary delights that make Bologna a truly special destination. Exploring Bologna is an experience in itself, and knowing what to do in Bologna beforehand will help you maximize your time. From its iconic towers to its vibrant food scene, this city has something for everyone. We'll cover everything from the top attractions in Bologna to some less-explored gems, helping you craft the perfect Bologna itinerary. Whether you're a first-time visitor or a seasoned traveler, this guide will help you discover the magic of Bologna. And don't worry about figuring out all the logistics – we've got you covered with practical tips on getting around, finding accommodation, and more!`}
       imageUrl={"https://plus.unsplash.com/premium_photo-1677427230972-7cabe0d3e005?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
-      galleryImages={[
-      ]}
-      highlights={["Climb the Asinelli Tower for panoramic city views.",
+      galleryImages={[]}
+      highlights={[
+        "Climb the Asinelli Tower for panoramic city views.",
         "Explore Piazza Maggiore, the heart of Bologna.",
         "Indulge in a culinary journey through Bologna's food markets.",
         "Discover the hidden canals of Bologna.",
         "Visit the Sanctuary of San Luca, a pilgrimage site.",
-        "Wander through the University of Bologna, one of the oldest universities in the world."]}
+        "Wander through the University of Bologna, one of the oldest universities in the world."
+      ]}
       attractions={[
         {
-        name: "Asinelli Tower",
-        description: `## Overview
+          name: "Asinelli Tower",
+          description: `## Overview
 The Asinelli Tower is one of Bologna's most iconic symbols and a must-see for any visitor. Climbing to the top offers breathtaking panoramic views of the city. It's one of the two famous towers – the other being Garisenda, which leans more dramatically. I think it's worth the climb (though it can be a bit strenuous!).
 
 ### Best Photo Spots
@@ -26,28 +27,28 @@ Capture stunning photos from the top of the tower, especially during sunset. Als
 
 ### Insider Tips
 Tip: Buy your tickets online in advance to avoid long queues, especially during peak season. Be prepared for a climb of nearly 500 steps! Arrive early in the morning or later in the afternoon to avoid the midday rush. The view is absolutely worth it, but pace yourself!`,
-        practicalInfo: {
-        howToGetThere: "Located in Piazza di Porta Ravegnana, easily accessible by bus or on foot from the city center.",
-        openingHours: "Typically open from 10:00 AM to 6:00 PM, but check the official website for current hours.",
-        cost: "Approximately €5 per person.",
-        website: "torreasinelli.com"
-      },
-      discoveryTags: {
-        timeRequired: "1-2 hours",
-        experienceLevel: "Moderate Adventure",
-        interests: ["architecture", "history", "photography"],
-        costLevel: "Budget-friendly",
-        seasonalBest: "Year-round",
-        photoOpportunity: "Panoramic city views, especially at sunset.",
-        insiderTip: "Purchase tickets online in advance to skip the line. The climb is demanding, so wear comfortable shoes.",
-        hiddenGem: false,
-        familyFriendly: true,
-        accessibilityNotes: "Not accessible for people with mobility issues due to the stairs."
-      }
-      },
+          practicalInfo: {
+            howToGetThere: "Located in Piazza di Porta Ravegnana, easily accessible by bus or on foot from the city center.",
+            openingHours: "Typically open from 10:00 AM to 6:00 PM, but check the official website for current hours.",
+            cost: "Approximately €5 per person.",
+            website: "torreasinelli.com"
+          },
+          discoveryTags: {
+            timeRequired: "1-2 hours",
+            experienceLevel: "Moderate Adventure",
+            interests: ["architecture", "history", "photography"],
+            costLevel: "Budget-friendly",
+            seasonalBest: "Year-round",
+            photoOpportunity: "Panoramic city views, especially at sunset.",
+            insiderTip: "Purchase tickets online in advance to skip the line. The climb is demanding, so wear comfortable shoes.",
+            hiddenGem: false,
+            familyFriendly: true,
+            accessibilityNotes: "Not accessible for people with mobility issues due to the stairs."
+          }
+        },
         {
-        name: "Piazza Maggiore",
-        description: `## Overview
+          name: "Piazza Maggiore",
+          description: `## Overview
 Piazza Maggiore is the heart of Bologna, a bustling square surrounded by historical buildings. It's the perfect place to start your exploration of the city. Some say it's one of the most beautiful squares in Italy, and I think they might be right. 
 
 ### Best Photo Spots
@@ -55,28 +56,28 @@ Capture the grandeur of the Basilica di San Petronio, the Palazzo d'Accursio, an
 
 ### Insider Tips
 Avoid visiting during major events, as the square can get extremely crowded. Consider taking a guided walking tour to learn about the history of the buildings surrounding the piazza. Don't miss the Salaborsa library, housed in a former stock exchange building, for a glimpse into Bologna's past. You can freely enter and enjoy the architecture and archaeological ruins beneath the glass floor.`,
-        practicalInfo: {
-        howToGetThere: "Located in the city center, easily accessible on foot from most areas.",
-        openingHours: "Open 24/7.",
-        cost: "Free",
-        website: ""
-      },
-      discoveryTags: {
-        timeRequired: "30-60 minutes",
-        experienceLevel: "Easy Access",
-        interests: ["history", "architecture", "photography"],
-        costLevel: "Free",
-        seasonalBest: "Year-round",
-        photoOpportunity: "Basilica di San Petronio, Fountain of Neptune, Palazzo d'Accursio.",
-        insiderTip: "Visit early in the morning to avoid crowds and enjoy the square in peace.",
-        hiddenGem: false,
-        familyFriendly: true,
-        accessibilityNotes: "Fully accessible."
-      }
-      },
+          practicalInfo: {
+            howToGetThere: "Located in the city center, easily accessible on foot from most areas.",
+            openingHours: "Open 24/7.",
+            cost: "Free",
+            website: ""
+          },
+          discoveryTags: {
+            timeRequired: "30-60 minutes",
+            experienceLevel: "Easy Access",
+            interests: ["history", "architecture", "photography"],
+            costLevel: "Free",
+            seasonalBest: "Year-round",
+            photoOpportunity: "Basilica di San Petronio, Fountain of Neptune, Palazzo d'Accursio.",
+            insiderTip: "Visit early in the morning to avoid crowds and enjoy the square in peace.",
+            hiddenGem: false,
+            familyFriendly: true,
+            accessibilityNotes: "Fully accessible."
+          }
+        },
         {
-        name: "Sanctuary of San Luca",
-        description: `## Overview
+          name: "Sanctuary of San Luca",
+          description: `## Overview
 The Sanctuary of San Luca is a beautiful church located on a hilltop overlooking Bologna. A long, covered portico, more than 3.5 kilometers long, leads up to the sanctuary from the city center. It's a popular pilgrimage site and offers stunning views. The walk up under the porticoes is a unique experience, or you can take a little train.
 
 ### Best Photo Spots
@@ -84,28 +85,28 @@ Capture panoramic photos of Bologna from the sanctuary's terrace. The portico it
 
 ### Insider Tips
 Consider taking the San Luca Express tourist train to avoid the long walk uphill. Alternatively, you can walk part of the way and then take a bus. The best time to visit is during sunset for breathtaking views. Don't miss the small museum inside the sanctuary.`,
-        practicalInfo: {
-        howToGetThere: "Take bus number 20 from the city center or the San Luca Express tourist train.",
-        openingHours: "Typically open from 7:00 AM to 7:00 PM, but check the official website for current hours.",
-        cost: "Free entry to the sanctuary; small fee for the museum.",
-        website: "sanlucabo.it"
-      },
-      discoveryTags: {
-        timeRequired: "Half day",
-        experienceLevel: "Moderate Adventure",
-        interests: ["religion", "architecture", "history", "photography"],
-        costLevel: "Budget-friendly",
-        seasonalBest: "Spring",
-        photoOpportunity: "Panoramic views of Bologna, the portico.",
-        insiderTip: "Take the San Luca Express tourist train to avoid the uphill walk, especially during hot weather.",
-        hiddenGem: false,
-        familyFriendly: true,
-        accessibilityNotes: "Partially accessible; some areas may be difficult to access for people with mobility issues."
-      }
-      },
+          practicalInfo: {
+            howToGetThere: "Take bus number 20 from the city center or the San Luca Express tourist train.",
+            openingHours: "Typically open from 7:00 AM to 7:00 PM, but check the official website for current hours.",
+            cost: "Free entry to the sanctuary; small fee for the museum.",
+            website: "sanlucabo.it"
+          },
+          discoveryTags: {
+            timeRequired: "Half day",
+            experienceLevel: "Moderate Adventure",
+            interests: ["religion", "architecture", "history", "photography"],
+            costLevel: "Budget-friendly",
+            seasonalBest: "Spring",
+            photoOpportunity: "Panoramic views of Bologna, the portico.",
+            insiderTip: "Take the San Luca Express tourist train to avoid the uphill walk, especially during hot weather.",
+            hiddenGem: false,
+            familyFriendly: true,
+            accessibilityNotes: "Partially accessible; some areas may be difficult to access for people with mobility issues."
+          }
+        },
         {
-        name: "Quadrilatero",
-        description: `## Overview
+          name: "Quadrilatero",
+          description: `## Overview
 The Quadrilatero is Bologna's historic market district, a maze of narrow streets filled with food stalls, artisan shops, and bustling restaurants. It's a sensory overload in the best way possible! If you want to experience the true culinary heart of Bologna, this is the place to be.
 
 ### What to Expect
@@ -113,28 +114,28 @@ Expect to be surrounded by the sights, sounds, and smells of delicious Italian c
 
 ### Insider Tips
 Visit early in the morning (around 9:00 AM) to avoid the biggest crowds and see the vendors setting up their stalls. Look for hidden trattorias tucked away in the side streets for a more authentic dining experience. Don't miss Tamburini, a historic delicatessen, and Paolo Atti & Figli, a renowned pasta shop.`,
-        practicalInfo: {
-        howToGetThere: "Located near Piazza Maggiore, easily accessible on foot.",
-        openingHours: "Typically open from 9:00 AM to 7:00 PM, but hours vary by vendor.",
-        cost: "Varies depending on purchases.",
-        website: ""
-      },
-      discoveryTags: {
-        timeRequired: "1-2 hours",
-        experienceLevel: "Easy Access",
-        interests: ["food", "shopping", "culture"],
-        costLevel: "Budget-friendly",
-        seasonalBest: "Year-round",
-        photoOpportunity: "Colorful food stalls, bustling streets, artisan shops.",
-        insiderTip: "Visit early in the morning to avoid crowds and get the freshest produce. Try the mortadella from a local deli.",
-        hiddenGem: false,
-        familyFriendly: true,
-        accessibilityNotes: "Generally accessible, but some streets may be narrow and crowded."
-      }
-      },
+          practicalInfo: {
+            howToGetThere: "Located near Piazza Maggiore, easily accessible on foot.",
+            openingHours: "Typically open from 9:00 AM to 7:00 PM, but hours vary by vendor.",
+            cost: "Varies depending on purchases.",
+            website: ""
+          },
+          discoveryTags: {
+            timeRequired: "1-2 hours",
+            experienceLevel: "Easy Access",
+            interests: ["food", "shopping", "culture"],
+            costLevel: "Budget-friendly",
+            seasonalBest: "Year-round",
+            photoOpportunity: "Colorful food stalls, bustling streets, artisan shops.",
+            insiderTip: "Visit early in the morning to avoid crowds and get the freshest produce. Try the mortadella from a local deli.",
+            hiddenGem: false,
+            familyFriendly: true,
+            accessibilityNotes: "Generally accessible, but some streets may be narrow and crowded."
+          }
+        },
         {
-        name: "Osteria dell'Orsa",
-        description: `## Overview
+          name: "Osteria dell'Orsa",
+          description: `## Overview
 Osteria dell'Orsa is a local favorite restaurant known for its traditional Bolognese cuisine and lively atmosphere. It's the kind of place where you can enjoy a hearty meal and feel like you're part of the family. It's incredibly popular, so you might have to queue, but it's usually worth the wait.
 
 ### What to Expect
@@ -143,117 +144,85 @@ Expect a bustling, informal atmosphere with communal tables and friendly service
 ### Signature Dishes
 Don't miss the tagliatelle al ragù (Bolognese sauce), tortellini in brodo (broth), and the crescentine (fried dough). The house wine is also a good choice. They're all must-tries.
 
-### Practical Dining Info
-Price range: Budget-friendly. Hours: Typically open for lunch and dinner, but check their Facebook page for the most up-to-date hours. Reservations: Not usually accepted, so be prepared to queue.`,
-        practicalInfo: {
-        howToGetThere: "Located near the university area, easily accessible by bus or on foot.",
-        openingHours: "Check their Facebook page for current hours.",
-        cost: "Budget-friendly.",
-        website: ""
-      },
-      discoveryTags: {
-        timeRequired: "1-2 hours",
-        experienceLevel: "Easy Access",
-        interests: ["food", "culture"],
-        costLevel: "Budget-friendly",
-        seasonalBest: "Year-round",
-        photoOpportunity: "Photos of the food and the lively atmosphere.",
-        insiderTip: "Arrive early to avoid the long queues, especially during peak hours. Ask for the daily specials for a taste of local cuisine.",
-        hiddenGem: false,
-        familyFriendly: true,
-        accessibilityNotes: "Generally accessible, but the restaurant can be crowded."
-      }
-      },
+### Insider Tips
+Be prepared to wait in line, especially during peak dining hours. The restaurant doesn't take reservations, so arrive early or be patient. Consider sharing a few dishes with your table – it's a common practice and allows you to try more items. The atmosphere is informal, so don't dress up.`,
+          practicalInfo: {
+            howToGetThere: "Located in Via Mentana, a short walk from the city center.",
+            openingHours: "Typically open from 12:00 PM to 1:00 AM, but check for current hours.",
+            cost: "Approximately €10-€15 per person for a meal.",
+            website: ""
+          },
+          discoveryTags: {
+            timeRequired: "1-2 hours",
+            experienceLevel: "Easy Access",
+            interests: ["food", "culture", "dining"],
+            costLevel: "Budget-friendly",
+            seasonalBest: "Year-round",
+            photoOpportunity: "Traditional Italian dishes, bustling atmosphere.",
+            insiderTip: "Arrive early to avoid the longest queues. The tagliatelle al ragù is their signature dish.",
+            hiddenGem: false,
+            familyFriendly: true,
+            accessibilityNotes: "Generally accessible, but the restaurant can get crowded."
+          }
+        },
         {
-        name: "Caffè Terzi",
-        description: `## Overview
-Caffè Terzi is a renowned coffee shop in Bologna, known for its high-quality coffee and elegant atmosphere. It's a great place to start your day with a delicious cappuccino or enjoy a relaxing afternoon break. The coffee is sourced directly from farms around the world and roasted in-house.
+          name: "University of Bologna",
+          description: `## Overview
+The University of Bologna is one of the oldest universities in the world, founded in 1088. It's a fascinating place to explore, with historic buildings, beautiful courtyards, and a rich academic atmosphere. Even if you're not a student, it's worth visiting to appreciate the centuries of learning and knowledge that have taken place here.
 
-### What to Expect
-Expect a sophisticated atmosphere with a focus on quality coffee. The baristas are knowledgeable and passionate about coffee, and they can help you choose the perfect blend. They also offer a selection of pastries and light snacks.
-
-### Coffee Culture
-Bologna has a rich coffee culture, and Caffè Terzi is one of the best places to experience it. The locals often stop by for a quick espresso at the bar, or they linger over a cappuccino and a pastry. It's a social hub where people meet and chat.
-
-### Practical Dining Info
-Price range: Moderate. Hours: Typically open from morning to evening. Reservations: Not required.`,
-        practicalInfo: {
-        howToGetThere: "Located in the city center, near Piazza Maggiore.",
-        openingHours: "Typically open from 7:30 AM to 8:00 PM.",
-        cost: "Moderate.",
-        website: "caffeterzi.it"
-      },
-      discoveryTags: {
-        timeRequired: "30-60 minutes",
-        experienceLevel: "Easy Access",
-        interests: ["food", "coffee", "relaxation"],
-        costLevel: "Moderate",
-        seasonalBest: "Year-round",
-        photoOpportunity: "Elegant coffee bar, beautifully presented coffee drinks.",
-        insiderTip: "Try one of their specialty coffee blends. Pair your coffee with a small pastry for the complete experience.",
-        hiddenGem: false,
-        familyFriendly: true,
-        accessibilityNotes: "Fully accessible."
-      }
-      },
-        {
-        name: "University of Bologna",
-        description: `## Overview
-The University of Bologna is one of the oldest universities in the world, founded in 1088. Exploring its historic buildings and courtyards is like stepping back in time. While much of the university's activity is now spread across the city, the original buildings near Piazza Maggiore are well worth a visit. It's impressive, I think, to see a place with so much history still in use today.
-
-### Best Photo Spots
-Capture photos of the Archiginnasio, the former main building of the university, and its anatomical theater. The courtyard of Palazzo Poggi is another great spot.
+### What to See
+Don't miss the Palazzo Poggi, which houses the university's museum and historic collections. The Anatomical Theatre is particularly impressive – it's an 18th-century dissection theater that gives you a glimpse into the history of medical education. The university's botanical garden is also worth a visit.
 
 ### Insider Tips
-Check if any lectures or events are open to the public during your visit. Explore the University Museum to learn more about the history of the university. Consider joining a guided tour for a deeper understanding of the university's significance.`,
-        practicalInfo: {
-        howToGetThere: "Located near Piazza Maggiore, easily accessible on foot.",
-        openingHours: "Varies depending on the building; check individual websites for details.",
-        cost: "Free to enter the courtyards; small fee for the University Museum.",
-        website: "unibo.it"
-      },
-      discoveryTags: {
-        timeRequired: "1-2 hours",
-        experienceLevel: "Easy Access",
-        interests: ["history", "architecture", "education"],
-        costLevel: "Budget-friendly",
-        seasonalBest: "Year-round",
-        photoOpportunity: "Archiginnasio, anatomical theater, Palazzo Poggi courtyard.",
-        insiderTip: "Visit during the academic year to experience the vibrant student atmosphere.",
-        hiddenGem: false,
-        familyFriendly: true,
-        accessibilityNotes: "Partially accessible; some areas may be difficult to access for people with mobility issues."
-      }
-      },
+Many of the university's buildings are open to the public, and some offer free guided tours. Check the university's website for tour schedules. The area around the university is also known for its student life, with plenty of bars and cafes that are popular with students.`,
+          practicalInfo: {
+            howToGetThere: "Located in the city center, easily accessible on foot.",
+            openingHours: "Hours vary by building; check the university's website for current information.",
+            cost: "Free to visit most areas; some museums may have a small entrance fee.",
+            website: "unibo.it"
+          },
+          discoveryTags: {
+            timeRequired: "1-2 hours",
+            experienceLevel: "Easy Access",
+            interests: ["history", "education", "architecture"],
+            costLevel: "Free",
+            seasonalBest: "Year-round",
+            photoOpportunity: "Historic courtyards, the Anatomical Theatre, university buildings.",
+            insiderTip: "Visit the Palazzo Poggi for a glimpse into the university's history. Many areas are free to explore.",
+            hiddenGem: false,
+            familyFriendly: true,
+            accessibilityNotes: "Most areas are accessible, but some historic buildings may have limited access."
+          }
+        },
         {
-        name: "Finestrella",
-        description: `## Overview
-The Finestrella, or "Little Window," is a hidden gem that offers a glimpse into Bologna's past as a city of canals. It's a small window that opens onto one of the few remaining visible canals in the city. Many people don't know Bologna had canals, so it's a bit of a secret. 
+          name: "Finestrella",
+          description: `## Overview
+The Finestrella is one of Bologna's hidden gems – a small window on Via Piella that offers a glimpse of the city's historic canals. Most people don't even know that Bologna has canals, but they were once an important part of the city's transportation system. Finding this little window is like discovering a secret.
 
 ### How to Find It
 The Finestrella is located on Via Piella, near Piazza Maggiore. Keep an eye out for a small opening in the wall; you might miss it if you're not looking carefully.
 
 ### Insider Tips
 The best time to visit is during the day when there's plenty of light to see the canal. Take a moment to appreciate this hidden piece of Bologna's history. It's worth finding, I think.`,
-        practicalInfo: {
-        howToGetThere: "Located on Via Piella, near Piazza Maggiore.",
-        openingHours: "Open 24/7.",
-        cost: "Free",
-        website: ""
-      },
-      discoveryTags: {
-        timeRequired: "30 minutes",
-        experienceLevel: "Easy Access",
-        interests: ["history", "photography"],
-        costLevel: "Free",
-        seasonalBest: "Year-round",
-        photoOpportunity: "The canal view through the small window.",
-        insiderTip: "Look for the small plaque that explains the history of the canals.",
-        hiddenGem: true,
-        familyFriendly: true,
-        accessibilityNotes: "Fully accessible."
-      }
-      }
+          practicalInfo: {
+            howToGetThere: "Located on Via Piella, near Piazza Maggiore.",
+            openingHours: "Open 24/7.",
+            cost: "Free",
+            website: ""
+          },
+          discoveryTags: {
+            timeRequired: "30 minutes",
+            experienceLevel: "Easy Access",
+            interests: ["history", "photography"],
+            costLevel: "Free",
+            seasonalBest: "Year-round",
+            photoOpportunity: "The canal view through the small window.",
+            insiderTip: "Look for the small plaque that explains the history of the canals.",
+            hiddenGem: true,
+            familyFriendly: true,
+            accessibilityNotes: "Fully accessible."
+          }
+        }
       ]}
       logistics={{
         gettingAround: `## Getting Around Bologna
@@ -298,21 +267,21 @@ Take a day trip to nearby Parma or Modena, known for their culinary specialties.
       }}
       faqs={[
         {
-        question: "What are the best things to do in Bologna?",
-        answer: `The best things to do in Bologna include visiting Piazza Maggiore, climbing the Asinelli Tower, exploring the Quadrilatero market district, visiting the Sanctuary of San Luca, and exploring the University of Bologna.`
-      },
+          question: "What are the best things to do in Bologna?",
+          answer: `The best things to do in Bologna include visiting Piazza Maggiore, climbing the Asinelli Tower, exploring the Quadrilatero market district, visiting the Sanctuary of San Luca, and exploring the University of Bologna.`
+        },
         {
-        question: "How many days do you need in Bologna?",
-        answer: `2-3 days is a good amount of time to see the main attractions in Bologna. This allows you to explore the city at a relaxed pace and also take a day trip to nearby towns like Parma or Modena.`
-      },
+          question: "How many days do you need in Bologna?",
+          answer: `2-3 days is a good amount of time to see the main attractions in Bologna. This allows you to explore the city at a relaxed pace and also take a day trip to nearby towns like Parma or Modena.`
+        },
         {
-        question: "What is Bologna famous for?",
-        answer: `Bologna is famous for its historic architecture, delicious cuisine, and its prestigious university, one of the oldest in the world.`
-      },
+          question: "What is Bologna famous for?",
+          answer: `Bologna is famous for its historic architecture, delicious cuisine, and its prestigious university, one of the oldest in the world.`
+        },
         {
-        question: "When is the best time to visit Bologna?",
-        answer: `The best time to visit Bologna is during the spring (April-May) or fall (September-October) when the weather is mild and the crowds are smaller.`
-      }
+          question: "When is the best time to visit Bologna?",
+          answer: `The best time to visit Bologna is during the spring (April-May) or fall (September-October) when the weather is mild and the crowds are smaller.`
+        }
       ]}
       discoveryData={{
         cityPersonality: "Historic, Culinary, Vibrant",
