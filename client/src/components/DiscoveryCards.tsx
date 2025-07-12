@@ -186,14 +186,21 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
   const extractInsiderTips = (attractions: Attraction[]) => {
     const tips: string[] = [];
     
-    // First, use dedicated insider tips from discovery tags
-    attractions.forEach(attraction => {
-      if (attraction.discoveryTags?.insiderTip) {
-        tips.push(attraction.discoveryTags.insiderTip);
-      }
-    });
+    // PRIORITIZE: Use local secrets from discovery data first if available
+    if (discoveryData?.localSecrets) {
+      tips.push(...discoveryData.localSecrets);
+    }
     
-    // Then extract from descriptions if needed
+    // Then add dedicated insider tips from discovery tags if we need more
+    if (tips.length < 6) {
+      attractions.forEach(attraction => {
+        if (attraction.discoveryTags?.insiderTip) {
+          tips.push(attraction.discoveryTags.insiderTip);
+        }
+      });
+    }
+    
+    // Finally extract from descriptions if still needed
     if (tips.length < 6) {
       attractions.forEach(attraction => {
         const desc = attraction.description;
@@ -206,11 +213,6 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
           }
         });
       });
-    }
-    
-    // Add local secrets from discovery data if available
-    if (discoveryData?.localSecrets) {
-      tips.push(...discoveryData.localSecrets);
     }
     
     return tips.slice(0, 6); // Limit to 6 tips

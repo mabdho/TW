@@ -29,6 +29,7 @@ Preferred communication style: Simple, everyday language.
 - ✅ **ADMIN INTERFACE HTML TAB**: Added dedicated HTML Generator tab in admin panel for managing HTML generation for existing cities
 - ✅ **SEAMLESS WORKFLOW**: New city creation now generates both TSX component AND complete HTML file in single operation
 - ✅ **TSX ARRAY EXTRACTION FIX**: Fixed critical issue with multiline array parsing in TSX files - highlights and other arrays now properly extracted from TSX components instead of showing empty content
+- ✅ **LOCAL INSIDER TIPS SYNC**: Fixed React component to prioritize discoveryData.localSecrets over extracted tips from attraction descriptions, ensuring website shows same detailed insider tips as HTML files
 
 ## Recent Changes (July 2025)
 
