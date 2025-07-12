@@ -82,36 +82,7 @@ export default function AdminPage() {
   const { user, isLoading, isAuthenticated, isAdmin } = useAuth();
   const logoutMutation = useLogout();
 
-  // Redirect to login if not authenticated
-  if (!isLoading && !isAuthenticated) {
-    setLocation('/login');
-    return null;
-  }
-
-  // Redirect to login if not admin
-  if (!isLoading && isAuthenticated && !isAdmin) {
-    toast({
-      title: "Access denied",
-      description: "You don't have admin privileges",
-      variant: "destructive"
-    });
-    setLocation('/login');
-    return null;
-  }
-
-  // Show loading state
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <Loader2 className="mx-auto h-8 w-8 animate-spin text-green-600" />
-          <p className="mt-2 text-gray-600">Loading admin panel...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // City form
+  // City form - moved before early returns to prevent hooks order issues
   const cityForm = useForm<CityFormData>({
     resolver: zodResolver(cityFormSchema),
     defaultValues: {
@@ -123,8 +94,6 @@ export default function AdminPage() {
       manualJson: ''
     }
   });
-
-
 
   // Blog form
   const blogForm = useForm<BlogFormData>({
@@ -253,7 +222,35 @@ export default function AdminPage() {
     await generateBlogMutation.mutateAsync(data);
   };
 
+  // Early returns AFTER all hooks
+  // Redirect to login if not authenticated
+  if (!isLoading && !isAuthenticated) {
+    setLocation('/login');
+    return null;
+  }
 
+  // Redirect to login if not admin
+  if (!isLoading && isAuthenticated && !isAdmin) {
+    toast({
+      title: "Access denied",
+      description: "You don't have admin privileges",
+      variant: "destructive"
+    });
+    setLocation('/login');
+    return null;
+  }
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="mx-auto h-8 w-8 animate-spin text-green-600" />
+          <p className="mt-2 text-gray-600">Loading admin panel...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">

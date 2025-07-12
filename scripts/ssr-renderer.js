@@ -508,6 +508,12 @@ export async function renderComponentToHTML(route) {
   try {
     let Component;
     
+    // Ensure route is defined and has a path
+    if (!route || !route.path) {
+      console.error('Route or route.path is undefined:', route);
+      return '<div class="container mx-auto px-4 py-12 text-center"><h1 class="text-2xl mb-4">Page Loading...</h1><p class="text-gray-600">Content will appear when JavaScript loads.</p></div>';
+    }
+    
     // Determine which component to render based on route
     if (route.path === '/') {
       Component = createHomeComponent();

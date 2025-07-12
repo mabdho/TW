@@ -15,6 +15,8 @@ const cityMap = {
   'porto': createCityImport('Porto', '../pages/cities/Porto'),
 
   'milan': createCityImport('Milan', '../pages/cities/Milan'),
+
+  'zurich': createCityImport('Zurich', '../pages/cities/Zurich'),
 };
 
 interface DynamicCityRouteProps {

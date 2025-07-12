@@ -79,7 +79,7 @@ async function generateHTMLForRoute(route, baseHTML, cityName, cityKey) {
   let htmlContent;
   try {
     // Try to use the enhanced content extraction from SSR renderer
-    htmlContent = await renderComponentToHTML(route.path);
+    htmlContent = await renderComponentToHTML(route);
     console.log(`✅ Enhanced static generation: Generated HTML content with ${htmlContent.length} characters`);
   } catch (error) {
     console.warn(`⚠️  Enhanced static generation failed, using fallback:`, error.message);
