@@ -109,6 +109,10 @@ export const CityPage: React.FC<CityPageProps> = ({
   cityName,
   country
 }) => {
+  // Extract city name and country from title if not provided - MOVED TO TOP
+  const extractedCityName = cityName || title.match(/Best Things to Do in ([^,]+)/)?.[1] || title.split(' ')[0];
+  const extractedCountry = country || title.match(/([^,]+)$/)?.[1]?.trim() || 'Unknown';
+
   // 🔧 HYDRATION FIX: Use consistent data structure for SEO
   const cityData = cityName && country ? {
     name: cityName,
@@ -132,12 +136,6 @@ export const CityPage: React.FC<CityPageProps> = ({
   const mobileGridCols = tabCount === 3 ? 'grid-cols-3' : 
                         tabCount === 4 ? 'grid-cols-4' : 
                         tabCount === 5 ? 'grid-cols-5' : 'grid-cols-6';
-
-
-
-  // Extract city name and country from title if not provided
-  const extractedCityName = cityName || title.match(/Best Things to Do in ([^,]+)/)?.[1] || title.split(' ')[0];
-  const extractedCountry = country || title.match(/([^,]+)$/)?.[1]?.trim() || 'Unknown';
 
   // Update cityData with extracted values if needed
   const finalCityData = cityData || {
