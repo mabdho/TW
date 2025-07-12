@@ -4,7 +4,7 @@
 
 This is a modern travel website called "WanderGuide" built with React frontend and Express backend. The application showcases beautiful destinations, travel experiences, and curated travel guides. It features a stunning visual design with travel-themed components, comprehensive mobile-first responsive layouts, and modern animations. The website includes hero sections, travel categories, comprehensive city directory, and individual city guide pages with TripAdvisor-style layouts.
 
-**Latest Addition**: Complete Firebase Static HTML Generator system that converts TSX city files into fully-rendered HTML pages using only Firebase Hosting and Functions.
+**Latest Addition**: Complete Firebase Static HTML Generator system that converts TSX city files into fully-rendered HTML pages using only Firebase Hosting and Functions. **Latest Fix**: TSX to HTML description rendering now includes complete description paragraphs in all generated pages.
 
 ## User Preferences
 

@@ -247,6 +247,23 @@ const pageStyles = `
     color: #2c3e50;
   }
 
+  .description-content {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    padding: 2rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    border-left: 4px solid #3b82f6;
+  }
+
+  .description-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #374151;
+    text-align: left;
+    margin: 0;
+  }
+
   .attractions-grid {
     display: grid;
     gap: 2rem;
@@ -642,6 +659,13 @@ export function generateCompleteHTML(cityData: CityData): string {
   const overviewContent = `
     <div class="tab-content active" id="overview">
       <div class="container">
+        ${cityData.description ? `
+        <section class="section">
+          <div class="description-content">
+            <p class="description-text">${cityData.description}</p>
+          </div>
+        </section>
+        ` : ''}
         <section class="section">
           <h2 class="section-title">✨ Highlights</h2>
           <div class="highlights-grid">
@@ -883,6 +907,7 @@ export async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityD
     
     // Extract city name and country from title
     const title = titleMatch[1];
+    const description = descriptionMatch[1];
     const titleParseMatch = title.match(/Best Things to Do in (.*?), (.*?) \(/);
     const cityName = titleParseMatch ? titleParseMatch[1] : 'Unknown City';
     const country = titleParseMatch ? titleParseMatch[2] : 'Unknown Country';
