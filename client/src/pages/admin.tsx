@@ -81,6 +81,7 @@ export default function AdminPage() {
   const [, setLocation] = useLocation();
   const { user, isLoading, isAuthenticated, isAdmin } = useAuth();
   const logoutMutation = useLogout();
+  const [singleCityName, setSingleCityName] = useState('');
 
   // City form - moved before early returns to prevent hooks order issues
   const cityForm = useForm<CityFormData>({
@@ -214,6 +215,45 @@ export default function AdminPage() {
     },
   });
 
+  // HTML generation mutations
+  const generateHtmlMutation = useMutation({
+    mutationFn: async (cityName: string) => {
+      return await apiRequest('POST', '/api/admin/generate-html', { cityName });
+    },
+    onSuccess: (response) => {
+      toast({
+        title: 'HTML Generated!',
+        description: `Generated ${response.fileSize} HTML file for ${response.cityName}`,
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: 'HTML Generation Failed',
+        description: error.message || 'Failed to generate HTML',
+        variant: 'destructive',
+      });
+    },
+  });
+
+  const generateAllHtmlMutation = useMutation({
+    mutationFn: async () => {
+      return await apiRequest('POST', '/api/admin/generate-all-html');
+    },
+    onSuccess: (response) => {
+      toast({
+        title: 'All HTML Generated!',
+        description: `Generated HTML for ${response.successful} cities (${response.failed} failed)`,
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: 'HTML Generation Failed',
+        description: error.message || 'Failed to generate HTML files',
+        variant: 'destructive',
+      });
+    },
+  });
+
   const onCitySubmit = async (data: CityFormData) => {
     await generateCityPageMutation.mutateAsync(data);
   };
@@ -277,10 +317,14 @@ export default function AdminPage() {
         </div>
 
         <Tabs defaultValue="cities" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="cities" className="flex items-center gap-2">
               <FileText className="h-4 w-4" />
               City Pages
+            </TabsTrigger>
+            <TabsTrigger value="html" className="flex items-center gap-2">
+              <FileText className="h-4 w-4" />
+              HTML Generator
             </TabsTrigger>
             <TabsTrigger value="blogs" className="flex items-center gap-2">
               <BookOpen className="h-4 w-4" />
@@ -438,6 +482,93 @@ export default function AdminPage() {
                 </Form>
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="html">
+            <div className="space-y-6">
+              {/* HTML Generation Controls */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Firebase Functions HTML Generator</CardTitle>
+                  <CardDescription>
+                    Convert TSX city files to complete HTML pages with full content rendering
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex gap-4">
+                      <Button
+                        onClick={() => generateAllHtmlMutation.mutate()}
+                        disabled={generateAllHtmlMutation.isPending}
+                        className="flex items-center gap-2"
+                      >
+                        {generateAllHtmlMutation.isPending ? (
+                          <>
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                            Generating All HTML...
+                          </>
+                        ) : (
+                          <>
+                            <FileText className="h-4 w-4" />
+                            Generate All City HTML
+                          </>
+                        )}
+                      </Button>
+                    </div>
+
+                    <div className="border-t pt-4">
+                      <h3 className="text-lg font-semibold mb-3">Generate Single City HTML</h3>
+                      <div className="flex gap-2">
+                        <Input
+                          placeholder="Enter city name (e.g., Milan, Porto)"
+                          value={singleCityName}
+                          onChange={(e) => setSingleCityName(e.target.value)}
+                          className="flex-1"
+                        />
+                        <Button
+                          onClick={() => {
+                            if (singleCityName.trim()) {
+                              generateHtmlMutation.mutate(singleCityName.trim());
+                              setSingleCityName('');
+                            }
+                          }}
+                          disabled={generateHtmlMutation.isPending || !singleCityName.trim()}
+                        >
+                          {generateHtmlMutation.isPending ? (
+                            <>
+                              <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                              Generating...
+                            </>
+                          ) : (
+                            'Generate HTML'
+                          )}
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* HTML Generation Info */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Complete HTML Generation System</CardTitle>
+                  <CardDescription>
+                    Firebase Functions-powered HTML rendering with full content extraction
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-sm text-gray-600 space-y-2">
+                    <p>✅ Extracts complete data from TSX city files</p>
+                    <p>✅ Renders all attractions, highlights, and discovery content</p>
+                    <p>✅ Includes SEO optimization and meta tags</p>
+                    <p>✅ Generates responsive HTML with inline CSS</p>
+                    <p>✅ Perfect for Firebase Hosting deployment</p>
+                    <p>✅ Complete HTML documents ready for search engines</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
 
           <TabsContent value="blogs">

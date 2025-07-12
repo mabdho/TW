@@ -1137,35 +1137,212 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
         }
       }
 
-      // Auto-generate static HTML for the new city
+      // Auto-generate Firebase Functions HTML for the new city
+      let htmlGenerated = false;
+      let htmlMessage = '';
+      
       try {
-        const { generateSingleCityStatic } = await import('../scripts/generate-single-city-static.js');
-        const staticGenerated = await generateSingleCityStatic(routePath, city);
+        // First try the Firebase Functions HTML generator
+        const { generateCompleteHTML, extractCityDataFromTSX } = await import('./html-generator');
+        const tsxFilePath = path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityFileName}.tsx`);
         
-        res.json({
-          success: true,
-          cityName: cityFileName,
-          generatedCode: componentCode,
-          filePath: `client/src/pages/cities/${cityFileName}.tsx`,
-          staticGenerated,
-          message: `City page for ${city} created successfully${staticGenerated ? ' with static HTML generated' : ''} and integrated into navigation`
-        });
-      } catch (staticError) {
-        console.warn('Failed to generate static HTML (build may not exist yet):', staticError.message);
-        res.json({
-          success: true,
-          cityName: cityFileName,
-          generatedCode: componentCode,
-          filePath: `client/src/pages/cities/${cityFileName}.tsx`,
-          staticGenerated: false,
-          message: `City page for ${city} created successfully and integrated into navigation (static HTML will be generated on next build)`
-        });
+        // Extract city data from the newly created TSX file
+        const cityData = await extractCityDataFromTSX(tsxFilePath);
+        
+        if (cityData) {
+          // Generate complete HTML using Firebase Functions system
+          const completeHTML = generateCompleteHTML(cityData);
+          
+          // Save the HTML file to public directory
+          const htmlFileName = `best-things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}.html`;
+          const htmlFilePath = path.join(process.cwd(), 'public', htmlFileName);
+          
+          await fs.writeFile(htmlFilePath, completeHTML);
+          htmlGenerated = true;
+          htmlMessage = ` with complete HTML generated at /${htmlFileName}`;
+          
+          console.log(`Generated complete HTML for ${city} using Firebase Functions system`);
+        } else {
+          console.warn('Could not extract city data from TSX file for HTML generation');
+        }
+      } catch (htmlError) {
+        console.warn('Firebase Functions HTML generation failed, trying fallback static generation:', htmlError.message);
+        
+        // Fallback to old static generation system
+        try {
+          const { generateSingleCityStatic } = await import('../scripts/generate-single-city-static.js');
+          const staticGenerated = await generateSingleCityStatic(routePath, city);
+          
+          if (staticGenerated) {
+            htmlGenerated = true;
+            htmlMessage = ' with static HTML generated';
+          }
+        } catch (staticError) {
+          console.warn('Both HTML generation methods failed:', staticError.message);
+        }
       }
+      
+      res.json({
+        success: true,
+        cityName: cityFileName,
+        generatedCode: componentCode,
+        filePath: `client/src/pages/cities/${cityFileName}.tsx`,
+        htmlGenerated,
+        message: `City page for ${city} created successfully${htmlMessage} and integrated into navigation`
+      });
 
     } catch (error) {
       console.error('Error generating city page:', error);
       res.status(500).json({ 
         error: 'Failed to generate city page',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  // Firebase Functions HTML generation route (protected)
+  app.post('/api/admin/generate-html', requireAdmin, async (req, res) => {
+    try {
+      const { cityName } = req.body;
+      
+      if (!cityName) {
+        return res.status(400).json({ error: 'City name is required' });
+      }
+      
+      console.log(`Generating HTML for city: ${cityName}`);
+      
+      // Try to find the TSX file for this city
+      const possibleFiles = [
+        `${cityName}.tsx`,
+        `${cityName.toLowerCase()}.tsx`,
+        `${cityName.toLowerCase().replace(/\s+/g, '-')}.tsx`,
+        `${cityName.charAt(0).toUpperCase() + cityName.slice(1).toLowerCase()}.tsx`
+      ];
+      
+      let tsxFilePath = null;
+      const citiesDir = path.join(process.cwd(), 'client', 'src', 'pages', 'cities');
+      
+      for (const fileName of possibleFiles) {
+        const filePath = path.join(citiesDir, fileName);
+        if (await fs.access(filePath).then(() => true).catch(() => false)) {
+          tsxFilePath = filePath;
+          break;
+        }
+      }
+      
+      if (!tsxFilePath) {
+        return res.status(404).json({ error: `TSX file not found for city: ${cityName}` });
+      }
+      
+      // Generate HTML using Firebase Functions system
+      const { generateCompleteHTML, extractCityDataFromTSX } = await import('./html-generator');
+      const cityData = await extractCityDataFromTSX(tsxFilePath);
+      
+      if (!cityData) {
+        return res.status(500).json({ error: 'Failed to extract city data from TSX file' });
+      }
+      
+      const completeHTML = generateCompleteHTML(cityData);
+      
+      // Save the HTML file to public directory
+      const htmlFileName = `best-things-to-do-in-${cityName.toLowerCase().replace(/\s+/g, '-')}.html`;
+      const htmlFilePath = path.join(process.cwd(), 'public', htmlFileName);
+      
+      await fs.writeFile(htmlFilePath, completeHTML);
+      
+      res.json({
+        success: true,
+        cityName,
+        fileName: htmlFileName,
+        filePath: htmlFilePath,
+        fileSize: `${(completeHTML.length / 1024).toFixed(2)} KB`,
+        url: `/${htmlFileName}`,
+        message: `Complete HTML generated for ${cityName}`
+      });
+      
+    } catch (error) {
+      console.error('Error generating HTML:', error);
+      res.status(500).json({ 
+        error: 'Failed to generate HTML',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  // Generate HTML for all cities route (protected)
+  app.post('/api/admin/generate-all-html', requireAdmin, async (req, res) => {
+    try {
+      const citiesDir = path.join(process.cwd(), 'client', 'src', 'pages', 'cities');
+      
+      // Get all TSX files in the cities directory
+      const files = await fs.readdir(citiesDir);
+      const tsxFiles = files.filter(file => file.endsWith('.tsx'));
+      
+      if (tsxFiles.length === 0) {
+        return res.status(404).json({ error: 'No city TSX files found' });
+      }
+      
+      console.log(`Found ${tsxFiles.length} city files to generate HTML for`);
+      
+      const { generateCompleteHTML, extractCityDataFromTSX } = await import('./html-generator');
+      const results = [];
+      
+      for (const file of tsxFiles) {
+        try {
+          const tsxFilePath = path.join(citiesDir, file);
+          const cityData = await extractCityDataFromTSX(tsxFilePath);
+          
+          if (cityData) {
+            const completeHTML = generateCompleteHTML(cityData);
+            
+            // Generate HTML filename from city name
+            const cityName = cityData.cityName.toLowerCase().replace(/\s+/g, '-');
+            const htmlFileName = `best-things-to-do-in-${cityName}.html`;
+            const htmlFilePath = path.join(process.cwd(), 'public', htmlFileName);
+            
+            await fs.writeFile(htmlFilePath, completeHTML);
+            
+            results.push({
+              success: true,
+              cityName: cityData.cityName,
+              fileName: htmlFileName,
+              fileSize: `${(completeHTML.length / 1024).toFixed(2)} KB`,
+              url: `/${htmlFileName}`
+            });
+            
+            console.log(`Generated HTML for ${cityData.cityName} (${(completeHTML.length / 1024).toFixed(2)} KB)`);
+          } else {
+            results.push({
+              success: false,
+              fileName: file,
+              error: 'Failed to extract city data'
+            });
+          }
+        } catch (error) {
+          results.push({
+            success: false,
+            fileName: file,
+            error: error instanceof Error ? error.message : 'Unknown error'
+          });
+        }
+      }
+      
+      const successful = results.filter(r => r.success).length;
+      const failed = results.filter(r => !r.success).length;
+      
+      res.json({
+        success: true,
+        totalFiles: tsxFiles.length,
+        successful,
+        failed,
+        results,
+        message: `Generated HTML for ${successful} cities (${failed} failed)`
+      });
+      
+    } catch (error) {
+      console.error('Error generating all HTML:', error);
+      res.status(500).json({ 
+        error: 'Failed to generate HTML for all cities',
         details: error instanceof Error ? error.message : 'Unknown error'
       });
     }

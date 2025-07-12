@@ -25,6 +25,9 @@ Preferred communication style: Simple, everyday language.
 - ✅ **BUILD SYSTEM**: Automated build script for Firebase deployment preparation
 - ✅ **FIREBASE ONLY**: Uses only Firebase Hosting and Functions, no other Firebase services required
 - ✅ **ENHANCED DISCOVERY EXTRACTION**: Fixed Local Insider Tips, Photo Spots, Experience Levels, Time & Budget, Hidden Gems, Dining, Quick Facts, and Interactive Explorer sections to render with complete content from TSX files
+- ✅ **INTEGRATED HTML GENERATION**: Firebase Functions HTML rendering now automatically integrated into main admin city generation workflow - all new cities get complete HTML generated automatically
+- ✅ **ADMIN INTERFACE HTML TAB**: Added dedicated HTML Generator tab in admin panel for managing HTML generation for existing cities
+- ✅ **SEAMLESS WORKFLOW**: New city creation now generates both TSX component AND complete HTML file in single operation
 
 ## Recent Changes (July 2025)
 
