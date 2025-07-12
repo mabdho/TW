@@ -1694,6 +1694,8 @@ import { CityPage } from '../../components/CityPage';
 export const ${cityName}: React.FC = () => {
   return (
     <CityPage
+      cityName="${cityName.replace(/([A-Z])/g, ' $1').trim()}"
+      country="${country}"
       title={"${title}"}
       description={\`${contentData.description.replace(/`/g, '\\`')}\`}${heroImageUrl ? `\n      imageUrl={"${heroImageUrl}"}` : ''}
       galleryImages={[${formattedGalleryImages}
