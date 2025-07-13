@@ -41,19 +41,26 @@ async function regenerateStaticFiles() {
     const { saveHtmlFile, saveHtmlFileToSubdirectory } = await import('./html-generator');
     
     // Regenerate home page
+    console.log('  → Regenerating home page...');
     const homePageHTML = generateHomePageHTML();
     await saveHtmlFile('index.html', homePageHTML);
+    console.log('  ✅ Home page regenerated');
     
     // Regenerate destinations page
+    console.log('  → Regenerating destinations page...');
     const destinationsHTML = generateDestinationsPageHTML();
     await saveHtmlFile('destinations.html', destinationsHTML);
+    console.log('  ✅ Destinations page regenerated');
     
     // Regenerate blogs page
+    console.log('  → Regenerating blogs page...');
     const blogsHTML = generateBlogsPageHTML();
     await saveHtmlFile('blogs.html', blogsHTML);
+    console.log('  ✅ Blogs page regenerated');
     
     // Regenerate individual blog HTML files for all existing blogs
     try {
+      console.log('  → Regenerating individual blog HTML files...');
       const allBlogsData = readBlogDataFromFileSystem();
       
       let blogHtmlCount = 0;
@@ -67,12 +74,13 @@ async function regenerateStaticFiles() {
         }
       }
       
-      console.log(`✅ Generated ${blogHtmlCount} individual blog HTML files`);
+      console.log(`  ✅ Generated ${blogHtmlCount} individual blog HTML files`);
     } catch (blogHtmlError) {
       console.warn('Failed to regenerate individual blog HTML files:', blogHtmlError.message);
     }
     
     // Regenerate legal pages for SEO compliance
+    console.log('  → Regenerating legal pages...');
     const privacyHTML = generatePrivacyPolicyHTML();
     await saveHtmlFile('privacy-policy.html', privacyHTML);
     
@@ -81,11 +89,13 @@ async function regenerateStaticFiles() {
     
     const cookieHTML = generateCookiePolicyHTML();
     await saveHtmlFile('cookie-policy.html', cookieHTML);
+    console.log('  ✅ Legal pages regenerated');
     
     console.log('✅ Static HTML files regenerated successfully (home, destinations, blogs, individual blog pages, legal pages)');
     return true;
   } catch (error) {
     console.error('❌ Error regenerating static HTML files:', error);
+    console.error('Error details:', error);
     return false;
   }
 }
