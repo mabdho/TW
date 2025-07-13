@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -262,21 +262,26 @@ export default function AdminPage() {
     await generateBlogMutation.mutateAsync(data);
   };
 
+  // Handle redirects in useEffect to avoid setState during render
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      setLocation('/login');
+    } else if (!isLoading && isAuthenticated && !isAdmin) {
+      toast({
+        title: "Access denied",
+        description: "You don't have admin privileges",
+        variant: "destructive"
+      });
+      setLocation('/login');
+    }
+  }, [isLoading, isAuthenticated, isAdmin, setLocation, toast]);
+
   // Early returns AFTER all hooks
-  // Redirect to login if not authenticated
   if (!isLoading && !isAuthenticated) {
-    setLocation('/login');
     return null;
   }
 
-  // Redirect to login if not admin
   if (!isLoading && isAuthenticated && !isAdmin) {
-    toast({
-      title: "Access denied",
-      description: "You don't have admin privileges",
-      variant: "destructive"
-    });
-    setLocation('/login');
     return null;
   }
 
