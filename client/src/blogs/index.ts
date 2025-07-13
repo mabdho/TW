@@ -1,10 +1,13 @@
 // File-based blog system - this file will export all available blogs
 import { Blog } from '@shared/schema';
 // Blog imports will be automatically added when new blogs are generated
+import { underrateddestinationsforsolotravelersBlog } from './underrated-destinations-for-solo-travelers.tsx';
+
 
 // This file will be automatically updated when new blogs are generated
 export const allBlogs: Blog[] = [
   // Blogs cleared - ready for fresh production content via admin panel
+  underrateddestinationsforsolotravelersBlog,
 ];
 
 export function getAllBlogs(): Blog[] {
