@@ -2925,9 +2925,9 @@ export async function extractBlogDataFromTSX(tsxFilePath: string): Promise<any |
     
     // Extract content (handles template strings)
     const contentMatch = blogObjectString.match(/content: `([\s\S]*?)`,/);
-    const content = contentMatch ? contentMatch[1].replace(/\\`/g, '`') : '';
+    const blogContent = contentMatch ? contentMatch[1].replace(/\\`/g, '`') : '';
     
-    if (!id || !title || !content) {
+    if (!id || !title || !blogContent) {
       console.error('Missing required blog fields');
       return null;
     }
@@ -2936,7 +2936,7 @@ export async function extractBlogDataFromTSX(tsxFilePath: string): Promise<any |
       id,
       title,
       excerpt: excerpt || '',
-      content,
+      content: blogContent,
       category: category || 'Travel',
       imageUrl: imageUrl || '',
       featured: featured || false,
@@ -2949,4 +2949,654 @@ export async function extractBlogDataFromTSX(tsxFilePath: string): Promise<any |
     console.error('Error extracting blog data from TSX:', error);
     return null;
   }
+}
+
+// Generate legal pages HTML
+export function generatePrivacyPolicyHTML(): string {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - TravelWanders</title>
+  <meta name="description" content="Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.">
+  
+  <!-- SEO Meta Tags -->
+  <meta property="og:title" content="Privacy Policy - TravelWanders">
+  <meta property="og:description" content="Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://travelwanders.com/privacy-policy">
+  <meta property="og:site_name" content="TravelWanders">
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Privacy Policy - TravelWanders">
+  <meta name="twitter:description" content="Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.">
+  
+  <link rel="canonical" href="https://travelwanders.com/privacy-policy">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  
+  <style>
+    ${generateCommonStyles()}
+    
+    .legal-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      line-height: 1.8;
+    }
+    
+    .legal-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    
+    .legal-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+    
+    .legal-updated {
+      color: #6b7280;
+      font-size: 1rem;
+    }
+    
+    .legal-section {
+      margin-bottom: 2rem;
+    }
+    
+    .legal-section h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 0.5rem;
+    }
+    
+    .legal-section h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    
+    .legal-section p {
+      margin-bottom: 1rem;
+      color: #4b5563;
+    }
+    
+    .legal-section ul {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+    
+    .legal-section li {
+      margin-bottom: 0.5rem;
+      color: #4b5563;
+    }
+    
+    .contact-info {
+      background: #f9fafb;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 2rem;
+    }
+    
+    .contact-info h3 {
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+    
+    .contact-info p {
+      color: #4b5563;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  ${generateNavigation()}
+  
+  <main class="legal-content">
+    <header class="legal-header">
+      <h1 class="legal-title">Privacy Policy</h1>
+      <p class="legal-updated">Last Updated: July 13, 2025</p>
+    </header>
+    
+    <section class="legal-section">
+      <h2>1. Information We Collect</h2>
+      <p>At TravelWanders, we collect information to provide you with the best travel guide experience possible.</p>
+      
+      <h3>Information You Provide</h3>
+      <ul>
+        <li>Account information (username, email)</li>
+        <li>Profile information and preferences</li>
+        <li>Comments and reviews you submit</li>
+        <li>Communication with our support team</li>
+      </ul>
+      
+      <h3>Information We Collect Automatically</h3>
+      <ul>
+        <li>Usage data and analytics</li>
+        <li>Device information and IP address</li>
+        <li>Cookies and similar technologies</li>
+        <li>Location data (with your permission)</li>
+      </ul>
+    </section>
+    
+    <section class="legal-section">
+      <h2>2. How We Use Your Information</h2>
+      <p>We use the information we collect to:</p>
+      <ul>
+        <li>Provide and improve our travel guide services</li>
+        <li>Personalize your experience and recommendations</li>
+        <li>Communicate with you about updates and features</li>
+        <li>Ensure security and prevent fraud</li>
+        <li>Comply with legal obligations</li>
+      </ul>
+    </section>
+    
+    <section class="legal-section">
+      <h2>3. Information Sharing</h2>
+      <p>We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described below:</p>
+      <ul>
+        <li>With service providers who assist in our operations</li>
+        <li>When required by law or to protect our rights</li>
+        <li>In connection with a business transaction</li>
+        <li>With your explicit consent</li>
+      </ul>
+    </section>
+    
+    <section class="legal-section">
+      <h2>4. Data Security</h2>
+      <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure.</p>
+    </section>
+    
+    <section class="legal-section">
+      <h2>5. Your Rights</h2>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Access your personal information</li>
+        <li>Correct inaccurate information</li>
+        <li>Request deletion of your information</li>
+        <li>Object to processing of your information</li>
+        <li>Data portability</li>
+      </ul>
+    </section>
+    
+    <section class="legal-section">
+      <h2>6. Cookies and Tracking</h2>
+      <p>We use cookies and similar technologies to enhance your experience, analyze usage, and provide personalized content. You can control cookie settings through your browser preferences.</p>
+    </section>
+    
+    <section class="legal-section">
+      <h2>7. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.</p>
+    </section>
+    
+    <div class="contact-info">
+      <h3>Contact Us</h3>
+      <p>If you have any questions about this Privacy Policy, please contact us:</p>
+      <p><strong>Email:</strong> privacy@travelwanders.com</p>
+      <p><strong>Address:</strong> TravelWanders Privacy Team</p>
+    </div>
+  </main>
+  
+  ${generateFooter()}
+</body>
+</html>`;
+}
+
+export function generateTermsOfServiceHTML(): string {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service - TravelWanders</title>
+  <meta name="description" content="Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.">
+  
+  <!-- SEO Meta Tags -->
+  <meta property="og:title" content="Terms of Service - TravelWanders">
+  <meta property="og:description" content="Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://travelwanders.com/terms-of-service">
+  <meta property="og:site_name" content="TravelWanders">
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Terms of Service - TravelWanders">
+  <meta name="twitter:description" content="Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.">
+  
+  <link rel="canonical" href="https://travelwanders.com/terms-of-service">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  
+  <style>
+    ${generateCommonStyles()}
+    
+    .legal-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      line-height: 1.8;
+    }
+    
+    .legal-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    
+    .legal-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+    
+    .legal-updated {
+      color: #6b7280;
+      font-size: 1rem;
+    }
+    
+    .legal-section {
+      margin-bottom: 2rem;
+    }
+    
+    .legal-section h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 0.5rem;
+    }
+    
+    .legal-section h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    
+    .legal-section p {
+      margin-bottom: 1rem;
+      color: #4b5563;
+    }
+    
+    .legal-section ul {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+    
+    .legal-section li {
+      margin-bottom: 0.5rem;
+      color: #4b5563;
+    }
+    
+    .contact-info {
+      background: #f9fafb;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 2rem;
+    }
+    
+    .contact-info h3 {
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+    
+    .contact-info p {
+      color: #4b5563;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  ${generateNavigation()}
+  
+  <main class="legal-content">
+    <header class="legal-header">
+      <h1 class="legal-title">Terms of Service</h1>
+      <p class="legal-updated">Last Updated: July 13, 2025</p>
+    </header>
+    
+    <section class="legal-section">
+      <h2>1. Acceptance of Terms</h2>
+      <p>By accessing and using TravelWanders, you accept and agree to be bound by the terms and provision of this agreement.</p>
+    </section>
+    
+    <section class="legal-section">
+      <h2>2. Use License</h2>
+      <p>Permission is granted to temporarily download one copy of the materials on TravelWanders for personal, non-commercial transitory viewing only.</p>
+      
+      <h3>Under this license you may not:</h3>
+      <ul>
+        <li>Modify or copy the materials</li>
+        <li>Use the materials for commercial purpose or public display</li>
+        <li>Attempt to reverse engineer any software contained on the website</li>
+        <li>Remove any copyright or other proprietary notations</li>
+      </ul>
+    </section>
+    
+    <section class="legal-section">
+      <h2>3. User Accounts</h2>
+      <p>When you create an account with us, you must provide information that is accurate, complete, and current at all times.</p>
+      
+      <h3>Account Responsibilities</h3>
+      <ul>
+        <li>You are responsible for safeguarding your account credentials</li>
+        <li>You must notify us immediately of any breach of security</li>
+        <li>You may not use another user's account without permission</li>
+        <li>You may not share your account credentials with others</li>
+      </ul>
+    </section>
+    
+    <section class="legal-section">
+      <h2>4. Content Guidelines</h2>
+      <p>Our service allows you to post, link, store, share and otherwise make available certain information, text, graphics, videos, or other material.</p>
+      
+      <h3>Prohibited Content</h3>
+      <ul>
+        <li>Illegal, harmful, or offensive material</li>
+        <li>Spam, fraudulent, or misleading content</li>
+        <li>Content that infringes on intellectual property rights</li>
+        <li>Personal information of others without consent</li>
+      </ul>
+    </section>
+    
+    <section class="legal-section">
+      <h2>5. Intellectual Property</h2>
+      <p>The service and its original content, features and functionality are and will remain the exclusive property of TravelWanders and its licensors.</p>
+    </section>
+    
+    <section class="legal-section">
+      <h2>6. Disclaimer</h2>
+      <p>The information on this website is provided on an 'as is' basis. To the fullest extent permitted by law, TravelWanders excludes all representations, warranties, and conditions relating to our website and use of this website.</p>
+    </section>
+    
+    <section class="legal-section">
+      <h2>7. Limitation of Liability</h2>
+      <p>In no event shall TravelWanders, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages.</p>
+    </section>
+    
+    <section class="legal-section">
+      <h2>8. Termination</h2>
+      <p>We may terminate or suspend your account and bar access to the service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever.</p>
+    </section>
+    
+    <section class="legal-section">
+      <h2>9. Changes to Terms</h2>
+      <p>We reserve the right to modify these terms at any time. We will notify users of any changes by posting the new Terms of Service on this page.</p>
+    </section>
+    
+    <div class="contact-info">
+      <h3>Contact Us</h3>
+      <p>If you have any questions about these Terms of Service, please contact us:</p>
+      <p><strong>Email:</strong> legal@travelwanders.com</p>
+      <p><strong>Address:</strong> TravelWanders Legal Team</p>
+    </div>
+  </main>
+  
+  ${generateFooter()}
+</body>
+</html>`;
+}
+
+export function generateCookiePolicyHTML(): string {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookie Policy - TravelWanders</title>
+  <meta name="description" content="Cookie Policy for TravelWanders - Learn about how we use cookies and similar technologies to enhance your travel guide experience.">
+  
+  <!-- SEO Meta Tags -->
+  <meta property="og:title" content="Cookie Policy - TravelWanders">
+  <meta property="og:description" content="Cookie Policy for TravelWanders - Learn about how we use cookies and similar technologies to enhance your travel guide experience.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://travelwanders.com/cookie-policy">
+  <meta property="og:site_name" content="TravelWanders">
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cookie Policy - TravelWanders">
+  <meta name="twitter:description" content="Cookie Policy for TravelWanders - Learn about how we use cookies and similar technologies to enhance your travel guide experience.">
+  
+  <link rel="canonical" href="https://travelwanders.com/cookie-policy">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  
+  <style>
+    ${generateCommonStyles()}
+    
+    .legal-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      line-height: 1.8;
+    }
+    
+    .legal-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    
+    .legal-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+    
+    .legal-updated {
+      color: #6b7280;
+      font-size: 1rem;
+    }
+    
+    .legal-section {
+      margin-bottom: 2rem;
+    }
+    
+    .legal-section h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 0.5rem;
+    }
+    
+    .legal-section h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    
+    .legal-section p {
+      margin-bottom: 1rem;
+      color: #4b5563;
+    }
+    
+    .legal-section ul {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+    
+    .legal-section li {
+      margin-bottom: 0.5rem;
+      color: #4b5563;
+    }
+    
+    .cookie-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    
+    .cookie-table th,
+    .cookie-table td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .cookie-table th {
+      background-color: #f9fafb;
+      font-weight: 600;
+      color: #111827;
+    }
+    
+    .cookie-table td {
+      color: #4b5563;
+    }
+    
+    .contact-info {
+      background: #f9fafb;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 2rem;
+    }
+    
+    .contact-info h3 {
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+    
+    .contact-info p {
+      color: #4b5563;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  ${generateNavigation()}
+  
+  <main class="legal-content">
+    <header class="legal-header">
+      <h1 class="legal-title">Cookie Policy</h1>
+      <p class="legal-updated">Last Updated: July 13, 2025</p>
+    </header>
+    
+    <section class="legal-section">
+      <h2>1. What Are Cookies</h2>
+      <p>Cookies are small text files that are placed on your computer or mobile device when you visit our website. They are widely used to make websites work more efficiently and provide information to website owners.</p>
+    </section>
+    
+    <section class="legal-section">
+      <h2>2. How We Use Cookies</h2>
+      <p>TravelWanders uses cookies to:</p>
+      <ul>
+        <li>Remember your preferences and settings</li>
+        <li>Provide personalized travel recommendations</li>
+        <li>Analyze website usage and performance</li>
+        <li>Improve user experience and functionality</li>
+        <li>Ensure website security</li>
+      </ul>
+    </section>
+    
+    <section class="legal-section">
+      <h2>3. Types of Cookies We Use</h2>
+      
+      <table class="cookie-table">
+        <thead>
+          <tr>
+            <th>Cookie Type</th>
+            <th>Purpose</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Essential Cookies</td>
+            <td>Required for basic website functionality</td>
+            <td>Session</td>
+          </tr>
+          <tr>
+            <td>Analytics Cookies</td>
+            <td>Help us understand website usage</td>
+            <td>Up to 2 years</td>
+          </tr>
+          <tr>
+            <td>Functional Cookies</td>
+            <td>Remember your preferences</td>
+            <td>Up to 1 year</td>
+          </tr>
+          <tr>
+            <td>Marketing Cookies</td>
+            <td>Deliver relevant advertisements</td>
+            <td>Up to 1 year</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    
+    <section class="legal-section">
+      <h2>4. Third-Party Cookies</h2>
+      <p>We may also use third-party cookies from trusted partners to:</p>
+      <ul>
+        <li>Provide analytics and insights (Google Analytics)</li>
+        <li>Enable social media integration</li>
+        <li>Deliver targeted advertising</li>
+        <li>Improve website performance</li>
+      </ul>
+    </section>
+    
+    <section class="legal-section">
+      <h2>5. Managing Cookies</h2>
+      <p>You can control and manage cookies in several ways:</p>
+      
+      <h3>Browser Settings</h3>
+      <p>Most browsers allow you to:</p>
+      <ul>
+        <li>View and delete cookies</li>
+        <li>Block cookies from specific sites</li>
+        <li>Block third-party cookies</li>
+        <li>Delete all cookies when you close your browser</li>
+      </ul>
+      
+      <h3>Opt-Out Tools</h3>
+      <p>You can opt out of targeted advertising cookies through:</p>
+      <ul>
+        <li>Google Ads Settings</li>
+        <li>Network Advertising Initiative opt-out page</li>
+        <li>Digital Advertising Alliance opt-out page</li>
+      </ul>
+    </section>
+    
+    <section class="legal-section">
+      <h2>6. Impact of Disabling Cookies</h2>
+      <p>Please note that disabling cookies may affect website functionality:</p>
+      <ul>
+        <li>Some features may not work properly</li>
+        <li>Personalization may be limited</li>
+        <li>You may need to re-enter information</li>
+        <li>Performance may be reduced</li>
+      </ul>
+    </section>
+    
+    <section class="legal-section">
+      <h2>7. Updates to This Policy</h2>
+      <p>We may update this Cookie Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of any material changes by posting the updated policy on this page.</p>
+    </section>
+    
+    <div class="contact-info">
+      <h3>Contact Us</h3>
+      <p>If you have any questions about this Cookie Policy, please contact us:</p>
+      <p><strong>Email:</strong> privacy@travelwanders.com</p>
+      <p><strong>Address:</strong> TravelWanders Privacy Team</p>
+    </div>
+  </main>
+  
+  ${generateFooter()}
+</body>
+</html>`;
 }

@@ -24,7 +24,10 @@ import {
   extractCityDataFromTSX as extractCityDataFromTSXHtmlGen,
   generateHomePageHTML,
   generateDestinationsPageHTML,
-  generateBlogsPageHTML
+  generateBlogsPageHTML,
+  generatePrivacyPolicyHTML,
+  generateTermsOfServiceHTML,
+  generateCookiePolicyHTML
 } from './html-generator';
 
 // Helper function to regenerate static HTML files
@@ -44,7 +47,17 @@ async function regenerateStaticFiles() {
     const blogsHTML = generateBlogsPageHTML();
     await fs.writeFile(path.join(process.cwd(), 'public', 'blogs.html'), blogsHTML, 'utf-8');
     
-    console.log('✅ Static HTML files regenerated successfully (home, destinations, blogs)');
+    // Regenerate legal pages for SEO compliance
+    const privacyHTML = generatePrivacyPolicyHTML();
+    await fs.writeFile(path.join(process.cwd(), 'public', 'privacy-policy.html'), privacyHTML, 'utf-8');
+    
+    const termsHTML = generateTermsOfServiceHTML();
+    await fs.writeFile(path.join(process.cwd(), 'public', 'terms-of-service.html'), termsHTML, 'utf-8');
+    
+    const cookieHTML = generateCookiePolicyHTML();
+    await fs.writeFile(path.join(process.cwd(), 'public', 'cookie-policy.html'), cookieHTML, 'utf-8');
+    
+    console.log('✅ Static HTML files regenerated successfully (home, destinations, blogs, legal pages)');
     return true;
   } catch (error) {
     console.error('❌ Error regenerating static HTML files:', error);
@@ -728,6 +741,67 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
       
+      // Generate legal pages for SEO compliance
+      try {
+        const privacyHtml = generatePrivacyPolicyHTML();
+        const privacyPath = path.join(process.cwd(), 'dist', 'public', 'privacy-policy.html');
+        await fs.mkdir(path.dirname(privacyPath), { recursive: true });
+        await fs.writeFile(privacyPath, privacyHtml, 'utf-8');
+        const privacySize = (await fs.stat(privacyPath)).size;
+        results.push({
+          page: 'Privacy Policy',
+          success: true,
+          fileSize: (privacySize / 1024).toFixed(2) + ' KB',
+          outputPath: privacyPath
+        });
+      } catch (error) {
+        results.push({
+          page: 'Privacy Policy',
+          success: false,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        });
+      }
+      
+      try {
+        const termsHtml = generateTermsOfServiceHTML();
+        const termsPath = path.join(process.cwd(), 'dist', 'public', 'terms-of-service.html');
+        await fs.mkdir(path.dirname(termsPath), { recursive: true });
+        await fs.writeFile(termsPath, termsHtml, 'utf-8');
+        const termsSize = (await fs.stat(termsPath)).size;
+        results.push({
+          page: 'Terms of Service',
+          success: true,
+          fileSize: (termsSize / 1024).toFixed(2) + ' KB',
+          outputPath: termsPath
+        });
+      } catch (error) {
+        results.push({
+          page: 'Terms of Service',
+          success: false,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        });
+      }
+      
+      try {
+        const cookieHtml = generateCookiePolicyHTML();
+        const cookiePath = path.join(process.cwd(), 'dist', 'public', 'cookie-policy.html');
+        await fs.mkdir(path.dirname(cookiePath), { recursive: true });
+        await fs.writeFile(cookiePath, cookieHtml, 'utf-8');
+        const cookieSize = (await fs.stat(cookiePath)).size;
+        results.push({
+          page: 'Cookie Policy',
+          success: true,
+          fileSize: (cookieSize / 1024).toFixed(2) + ' KB',
+          outputPath: cookiePath
+        });
+      } catch (error) {
+        results.push({
+          page: 'Cookie Policy',
+          success: false,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        });
+      }
+      
       const successCount = results.filter(r => r.success).length;
       const totalCount = results.length;
       
@@ -745,6 +819,96 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.error('Error generating all static pages:', error);
       res.status(500).json({
         error: 'Failed to generate static pages',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  // Generate legal pages endpoint
+  app.post('/api/generate-legal-pages', async (req, res) => {
+    try {
+      console.log('🔄 Generating legal pages for SEO compliance...');
+      
+      const results = [];
+      
+      // Generate Privacy Policy
+      try {
+        const privacyHTML = generatePrivacyPolicyHTML();
+        const privacyPath = path.join(process.cwd(), 'public', 'privacy-policy.html');
+        await fs.writeFile(privacyPath, privacyHTML, 'utf-8');
+        const privacySize = (await fs.stat(privacyPath)).size;
+        results.push({
+          page: 'Privacy Policy',
+          success: true,
+          fileSize: (privacySize / 1024).toFixed(2) + ' KB',
+          outputPath: privacyPath
+        });
+      } catch (error) {
+        results.push({
+          page: 'Privacy Policy',
+          success: false,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        });
+      }
+      
+      // Generate Terms of Service
+      try {
+        const termsHTML = generateTermsOfServiceHTML();
+        const termsPath = path.join(process.cwd(), 'public', 'terms-of-service.html');
+        await fs.writeFile(termsPath, termsHTML, 'utf-8');
+        const termsSize = (await fs.stat(termsPath)).size;
+        results.push({
+          page: 'Terms of Service',
+          success: true,
+          fileSize: (termsSize / 1024).toFixed(2) + ' KB',
+          outputPath: termsPath
+        });
+      } catch (error) {
+        results.push({
+          page: 'Terms of Service',
+          success: false,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        });
+      }
+      
+      // Generate Cookie Policy
+      try {
+        const cookieHTML = generateCookiePolicyHTML();
+        const cookiePath = path.join(process.cwd(), 'public', 'cookie-policy.html');
+        await fs.writeFile(cookiePath, cookieHTML, 'utf-8');
+        const cookieSize = (await fs.stat(cookiePath)).size;
+        results.push({
+          page: 'Cookie Policy',
+          success: true,
+          fileSize: (cookieSize / 1024).toFixed(2) + ' KB',
+          outputPath: cookiePath
+        });
+      } catch (error) {
+        results.push({
+          page: 'Cookie Policy',
+          success: false,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        });
+      }
+      
+      const successCount = results.filter(r => r.success).length;
+      const totalCount = results.length;
+      
+      console.log(`✅ Legal pages generated successfully: ${successCount}/${totalCount}`);
+      res.json({ 
+        success: true, 
+        message: `Generated ${successCount}/${totalCount} legal pages`,
+        results,
+        summary: {
+          total: totalCount,
+          successful: successCount,
+          failed: totalCount - successCount
+        }
+      });
+    } catch (error) {
+      console.error('❌ Error generating legal pages:', error);
+      res.status(500).json({ 
+        error: 'Failed to generate legal pages',
         details: error instanceof Error ? error.message : 'Unknown error'
       });
     }
