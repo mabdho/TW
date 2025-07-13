@@ -66,7 +66,10 @@ app.use((req, res, next) => {
 
   // Serve static files from public directory (including blog HTML files)
   // This needs to be before Vite middleware to prevent it from intercepting
-  app.use(express.static('public'));
+  // BUT we need to exclude index.html so our route handlers can detect bots
+  app.use(express.static('public', {
+    index: false // Prevent serving index.html automatically
+  }));
 
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
