@@ -2682,3 +2682,271 @@ function generateFooter(): string {
     </footer>
   `;
 }
+
+// Generate individual blog HTML page
+export function generateIndividualBlogHTML(blogData: any): string {
+  const publishedDate = new Date(blogData.date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${blogData.title} - TravelWanders</title>
+  <meta name="description" content="${blogData.excerpt}">
+  
+  <!-- SEO Meta Tags -->
+  <meta property="og:title" content="${blogData.title} - TravelWanders">
+  <meta property="og:description" content="${blogData.excerpt}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://travelwanders.com/blog/${blogData.id}">
+  <meta property="og:site_name" content="TravelWanders">
+  ${blogData.imageUrl ? `<meta property="og:image" content="${blogData.imageUrl}">` : ''}
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${blogData.title} - TravelWanders">
+  <meta name="twitter:description" content="${blogData.excerpt}">
+  ${blogData.imageUrl ? `<meta name="twitter:image" content="${blogData.imageUrl}">` : ''}
+  
+  <link rel="canonical" href="https://travelwanders.com/blog/${blogData.id}">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  
+  <!-- Structured Data for Blog Post -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "${blogData.title}",
+    "description": "${blogData.excerpt}",
+    "author": {
+      "@type": "Person",
+      "name": "${blogData.author || 'TravelWanders Team'}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "TravelWanders",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://travelwanders.com/favicon.svg"
+      }
+    },
+    "datePublished": "${blogData.date}",
+    "dateModified": "${blogData.date}",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://travelwanders.com/blog/${blogData.id}"
+    }${blogData.imageUrl ? `,
+    "image": {
+      "@type": "ImageObject",
+      "url": "${blogData.imageUrl}"
+    }` : ''}
+  }
+  </script>
+  
+  <style>
+    ${generateCommonStyles()}
+    
+    .blog-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .blog-header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .blog-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    
+    .blog-excerpt {
+      font-size: 1.125rem;
+      color: #4b5563;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    
+    .blog-hero-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+    
+    .blog-body {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #374151;
+    }
+    
+    .blog-body h1, .blog-body h2, .blog-body h3 {
+      color: #111827;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .blog-body h1 { font-size: 2rem; }
+    .blog-body h2 { font-size: 1.5rem; }
+    .blog-body h3 { font-size: 1.25rem; }
+    
+    .blog-body p {
+      margin-bottom: 1.5rem;
+    }
+    
+    .blog-body ul, .blog-body ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+    
+    .blog-body li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .blog-body blockquote {
+      border-left: 4px solid #059669;
+      padding-left: 1.5rem;
+      margin: 2rem 0;
+      font-style: italic;
+      color: #4b5563;
+    }
+    
+    .category-badge {
+      background: #f3f4f6;
+      color: #4b5563;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    
+    .featured-badge {
+      background: #ea580c;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    
+    @media (max-width: 768px) {
+      .blog-content {
+        padding: 1rem;
+      }
+      
+      .blog-title {
+        font-size: 2rem;
+      }
+      
+      .blog-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .blog-hero-image {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  ${generateNavigation()}
+  
+  <article class="blog-content">
+    <header class="blog-header">
+      <div class="blog-meta">
+        <span class="category-badge">${blogData.category}</span>
+        ${blogData.featured ? '<span class="featured-badge">Featured</span>' : ''}
+        <span>${publishedDate}</span>
+        <span>${blogData.readTime}</span>
+        <span>By ${blogData.author || 'TravelWanders Team'}</span>
+      </div>
+      
+      <h1 class="blog-title">${blogData.title}</h1>
+      <p class="blog-excerpt">${blogData.excerpt}</p>
+      
+      ${blogData.imageUrl ? `<img src="${blogData.imageUrl}" alt="${blogData.title}" class="blog-hero-image">` : ''}
+    </header>
+    
+    <div class="blog-body">
+      ${convertMarkdownToHTML(blogData.content)}
+    </div>
+  </article>
+  
+  ${generateFooter()}
+</body>
+</html>`;
+}
+
+// Extract blog data from TSX file
+export async function extractBlogDataFromTSX(tsxFilePath: string): Promise<any | null> {
+  try {
+    const content = await fs.readFile(tsxFilePath, 'utf-8');
+    
+    // Extract the blog object from the file content
+    const blogObjectMatch = content.match(/export const \w+(?:Blog)?: Blog = ({[\s\S]*?});/);
+    if (!blogObjectMatch) {
+      console.error('No blog object found in file');
+      return null;
+    }
+    
+    const blogObjectString = blogObjectMatch[1];
+    
+    // Parse the blog object properties
+    const id = blogObjectString.match(/id: "([^"]*?)"/)?.[1];
+    const title = blogObjectString.match(/title: "([^"]*?)"/)?.[1];
+    const excerpt = blogObjectString.match(/excerpt: "([^"]*?)"/)?.[1];
+    const category = blogObjectString.match(/category: "([^"]*?)"/)?.[1];
+    const imageUrl = blogObjectString.match(/imageUrl: "([^"]*?)"/)?.[1];
+    const featured = blogObjectString.match(/featured: (true|false)/)?.[1] === 'true';
+    const readTime = blogObjectString.match(/readTime: "([^"]*?)"/)?.[1];
+    const date = blogObjectString.match(/date: "([^"]*?)"/)?.[1];
+    const author = blogObjectString.match(/author: "([^"]*?)"/)?.[1];
+    
+    // Extract content (handles template strings)
+    const contentMatch = blogObjectString.match(/content: `([\s\S]*?)`,/);
+    const content = contentMatch ? contentMatch[1].replace(/\\`/g, '`') : '';
+    
+    if (!id || !title || !content) {
+      console.error('Missing required blog fields');
+      return null;
+    }
+    
+    return {
+      id,
+      title,
+      excerpt: excerpt || '',
+      content,
+      category: category || 'Travel',
+      imageUrl: imageUrl || '',
+      featured: featured || false,
+      readTime: readTime || '5 min read',
+      date: date || new Date().toISOString().split('T')[0],
+      author: author || 'TravelWanders Team'
+    };
+    
+  } catch (error) {
+    console.error('Error extracting blog data from TSX:', error);
+    return null;
+  }
+}

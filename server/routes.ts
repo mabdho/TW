@@ -44,7 +44,7 @@ async function regenerateStaticFiles() {
     const blogsHTML = generateBlogsPageHTML();
     await fs.writeFile(path.join(process.cwd(), 'public', 'blogs.html'), blogsHTML, 'utf-8');
     
-    console.log('✅ Static HTML files regenerated successfully');
+    console.log('✅ Static HTML files regenerated successfully (home, destinations, blogs)');
     return true;
   } catch (error) {
     console.error('❌ Error regenerating static HTML files:', error);
@@ -750,6 +750,60 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // API endpoint to generate individual blog HTML files for existing blogs
+  app.post('/api/admin/generate-blog-html', requireAuth, async (req, res) => {
+    console.log('🔄 Generating HTML for existing blog...');
+    
+    try {
+      const { blogId } = req.body;
+      
+      if (!blogId) {
+        return res.status(400).json({ error: 'Blog ID is required' });
+      }
+      
+      const { generateIndividualBlogHTML, extractBlogDataFromTSX } = await import('./html-generator');
+      
+      // Find the blog TSX file
+      const blogFilePath = path.join(process.cwd(), 'client', 'src', 'blogs', `${blogId}.tsx`);
+      
+      if (!existsSync(blogFilePath)) {
+        return res.status(404).json({ error: 'Blog not found' });
+      }
+      
+      // Extract blog data from TSX file
+      const blogData = await extractBlogDataFromTSX(blogFilePath);
+      
+      if (!blogData) {
+        return res.status(400).json({ error: 'Unable to extract blog data' });
+      }
+      
+      // Generate HTML
+      const blogHtml = generateIndividualBlogHTML(blogData);
+      
+      // Save the individual blog HTML file
+      const blogHtmlFileName = `${blogId}.html`;
+      const blogHtmlPath = path.join(process.cwd(), 'public', 'blog', blogHtmlFileName);
+      
+      // Ensure blog directory exists
+      await fs.mkdir(path.dirname(blogHtmlPath), { recursive: true });
+      await fs.writeFile(blogHtmlPath, blogHtml);
+      
+      console.log(`Generated individual HTML for blog "${blogData.title}"`);
+      
+      res.json({
+        success: true,
+        blogId,
+        title: blogData.title,
+        htmlPath: `/blog/${blogHtmlFileName}`,
+        message: `Individual HTML generated for blog "${blogData.title}"`
+      });
+      
+    } catch (error) {
+      console.error('❌ Error generating blog HTML:', error);
+      res.status(500).json({ error: 'Failed to generate blog HTML', details: error.message });
+    }
+  });
+
   // Authentication routes
   app.post('/api/auth/login', async (req, res) => {
     try {
@@ -1384,6 +1438,16 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       console.log('🔄 Regenerating static HTML files after new city creation...');
       const regenerationSuccess = await regenerateStaticFiles();
       
+      // Additionally regenerate destinations page specifically for new city
+      console.log('🌍 Regenerating destinations page with new city...');
+      try {
+        const destinationsHTML = generateDestinationsPageHTML();
+        await fs.writeFile(path.join(process.cwd(), 'public', 'destinations.html'), destinationsHTML, 'utf-8');
+        console.log('✅ Destinations page regenerated successfully');
+      } catch (destError) {
+        console.error('❌ Error regenerating destinations page:', destError);
+      }
+      
       res.json({
         success: true,
         cityName: cityFileName,
@@ -1670,6 +1734,30 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
         console.warn('Failed to update sitemap after blog creation:', sitemapError);
       }
 
+      // Generate individual blog HTML file
+      let blogHtmlGenerated = false;
+      let blogHtmlMessage = '';
+      
+      try {
+        const { generateIndividualBlogHTML } = await import('./html-generator');
+        const blogHtml = generateIndividualBlogHTML(blogData);
+        
+        // Save the individual blog HTML file
+        const blogHtmlFileName = `${blogId}.html`;
+        const blogHtmlPath = path.join(process.cwd(), 'public', 'blog', blogHtmlFileName);
+        
+        // Ensure blog directory exists
+        await fs.mkdir(path.dirname(blogHtmlPath), { recursive: true });
+        await fs.writeFile(blogHtmlPath, blogHtml);
+        
+        blogHtmlGenerated = true;
+        blogHtmlMessage = ` with individual HTML generated at /blog/${blogHtmlFileName}`;
+        
+        console.log(`Generated individual HTML for blog "${title}"`);
+      } catch (htmlError) {
+        console.warn('Failed to generate individual blog HTML:', htmlError.message);
+      }
+
       // Automatically regenerate static HTML files to reflect the new blog
       console.log('🔄 Regenerating static HTML files after new blog creation...');
       const regenerationSuccess = await regenerateStaticFiles();
@@ -1679,8 +1767,9 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
         blogId,
         fileName: blogFileName,
         filePath: `client/src/blogs/${blogFileName}`,
+        blogHtmlGenerated,
         staticFilesRegenerated: regenerationSuccess,
-        message: `Blog "${title}" created successfully and sitemap updated${regenerationSuccess ? ' with static files updated' : ''}`
+        message: `Blog "${title}" created successfully and sitemap updated${blogHtmlMessage}${regenerationSuccess ? ' with static files updated' : ''}`
       });
 
     } catch (error) {
@@ -1715,6 +1804,15 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
 
       // Delete the blog file
       await fs.unlink(blogFilePath);
+
+      // Delete the individual blog HTML file
+      try {
+        const blogHtmlPath = path.join(process.cwd(), 'public', 'blog', `${blogId}.html`);
+        await fs.unlink(blogHtmlPath);
+        console.log(`Deleted individual HTML file for blog "${blogId}"`);
+      } catch (htmlError) {
+        console.warn(`Failed to delete individual HTML file for blog "${blogId}":`, htmlError.message);
+      }
 
       // Update blogs index file to remove the blog completely
       const indexPath = path.join(blogDirPath, 'index.ts');
