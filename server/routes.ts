@@ -778,6 +778,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Serve home page HTML for search engines
+  app.get('/', async (req, res, next) => {
+    const userAgent = req.get('User-Agent') || '';
+    const isBot = /bot|crawler|spider|scraper|facebook|twitter|googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest|developers\.google\.com/i.test(userAgent);
+    
+    // If it's a search engine bot, serve the static HTML
+    if (isBot) {
+      try {
+        const htmlContent = generateHomePageHTML();
+        res.set('Content-Type', 'text/html');
+        res.send(htmlContent);
+      } catch (error) {
+        console.error('Error generating home page HTML:', error);
+        res.status(500).send('Error generating page');
+      }
+    } else {
+      // For regular users, continue to next middleware (Vite in development)
+      next();
+    }
+  });
+
   // Admin route to generate city pages (now protected)
   app.post('/api/admin/generate-city-page', requireAdmin, async (req, res) => {
     try {
