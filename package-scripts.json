@@ -1,7 +1,0 @@
-{
-  "scripts": {
-    "analyze-bundle": "node analyze-code-splitting.js",
-    "build-optimized": "npm run build && npm run analyze-bundle",
-    "check-splitting": "node analyze-code-splitting.js && echo '\n🚀 Run npm run build to see the bundle size improvements!'"
-  }
-}
