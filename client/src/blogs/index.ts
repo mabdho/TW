@@ -45,11 +45,11 @@ export const allBlogs: Blog[] = [
     date: '2025-01-13',
     author: 'TravelWanders Team'
   },
+  maldivesBlog,
+  abdhoBlog,
   test1Blog,
   firebasestatichtmlgeneratorcompleteimplementationpromptBlog,
   testtestBlog,
-  abdhoBlog,
-  maldivesBlog,
 ];
 
 export function getAllBlogs(): Blog[] {
