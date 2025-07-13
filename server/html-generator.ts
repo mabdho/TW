@@ -102,6 +102,8 @@ function getDefaultCities() {
 // Helper function to read blog data from file system
 export function readBlogDataFromFileSystem(): Array<{ id: string; title: string; excerpt: string; category: string; imageUrl?: string; featured: boolean; readTime: string; date: string; author?: string }> {
   try {
+    console.log('🔍 Reading blog data from file system...');
+    
     // Read blog index file
     const blogIndexPath = path.join(process.cwd(), 'client', 'src', 'blogs', 'index.ts');
     if (!fs.existsSync(blogIndexPath)) {
@@ -121,11 +123,14 @@ export function readBlogDataFromFileSystem(): Array<{ id: string; title: string;
     const blogsArrayContent = blogsMatch[1];
     const blogs = [];
     
-    // Parse each blog object using a simpler, more reliable regex
+    console.log('📄 Found allBlogs array, parsing content...');
+    
+    // Parse inline blog objects first
     const blogObjectRegex = /\{\s*id:\s*['"]([^'"]+)['"],\s*title:\s*['"]([^'"]+)['"],\s*excerpt:\s*['"]([^'"]+)['"],\s*content:\s*['"]([^'"]*?)['"],\s*category:\s*['"]([^'"]+)['"],\s*imageUrl:\s*['"]([^'"]*?)['"],\s*featured:\s*(true|false),\s*readTime:\s*['"]([^'"]+)['"],\s*date:\s*['"]([^'"]+)['"],\s*author:\s*['"]([^'"]*?)['"][\s\S]*?\}/g;
     
     let blogMatch;
     while ((blogMatch = blogObjectRegex.exec(blogsArrayContent)) !== null) {
+      console.log(`📝 Found inline blog: ${blogMatch[2]}`);
       blogs.push({
         id: blogMatch[1],
         title: blogMatch[2],
@@ -139,8 +144,72 @@ export function readBlogDataFromFileSystem(): Array<{ id: string; title: string;
       });
     }
     
-    // Sort blogs by date (newest first)
-    return blogs.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    // Also parse imported blog references and read their actual files
+    const blogDir = path.join(process.cwd(), 'client', 'src', 'blogs');
+    const importedBlogRegex = /([a-zA-Z0-9_]+Blog),?/g;
+    
+    let importMatch;
+    while ((importMatch = importedBlogRegex.exec(blogsArrayContent)) !== null) {
+      const blogVarName = importMatch[1];
+      
+      // Find the corresponding import statement and file
+      const importRegex = new RegExp(`import \\{ ${blogVarName} \\} from '\\./([^']+)';`);
+      const importStatementMatch = blogIndexContent.match(importRegex);
+      
+      if (importStatementMatch) {
+        const fileName = importStatementMatch[1];
+        const blogFilePath = path.join(blogDir, fileName.endsWith('.tsx') ? fileName : `${fileName}.tsx`);
+        
+        if (fs.existsSync(blogFilePath)) {
+          try {
+            const blogFileContent = fs.readFileSync(blogFilePath, 'utf-8');
+            
+            // Extract blog data from the individual file
+            const blogDataMatch = blogFileContent.match(/export const \w+(?:Blog)?: Blog = \{([\s\S]*?)\};/);
+            if (blogDataMatch) {
+              const blogData = blogDataMatch[1];
+              
+              // Parse the blog data with more robust regex patterns
+              const id = blogData.match(/id:\s*["']([^"']+)["']/)?.[1];
+              const title = blogData.match(/title:\s*["']([^"']+)["']/)?.[1];
+              const excerpt = blogData.match(/excerpt:\s*["']([^"']+)["']/)?.[1];
+              const category = blogData.match(/category:\s*["']([^"']+)["']/)?.[1];
+              const imageUrl = blogData.match(/imageUrl:\s*["']([^"']*?)["']/)?.[1] || '';
+              const featured = blogData.match(/featured:\s*(true|false)/)?.[1] === 'true';
+              const readTime = blogData.match(/readTime:\s*["']([^"']+)["']/)?.[1];
+              const date = blogData.match(/date:\s*["']([^"']+)["']/)?.[1];
+              const author = blogData.match(/author:\s*["']([^"']*?)["']/)?.[1] || 'TravelWanders Team';
+              
+              if (id && title && excerpt && category && readTime && date) {
+                blogs.push({
+                  id,
+                  title,
+                  excerpt,
+                  category,
+                  imageUrl,
+                  featured,
+                  readTime,
+                  date,
+                  author
+                });
+                console.log(`Successfully parsed blog: ${title} (${id})`);
+              } else {
+                console.warn(`Missing required fields in blog ${blogVarName}:`, { id, title, excerpt, category, readTime, date });
+              }
+            }
+          } catch (fileError) {
+            console.warn(`Error reading blog file ${fileName}:`, fileError);
+          }
+        }
+      }
+    }
+    
+    // Remove duplicates and sort blogs by date (newest first)
+    const uniqueBlogs = blogs.filter((blog, index, self) => 
+      index === self.findIndex(b => b.id === blog.id)
+    );
+    
+    return uniqueBlogs.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   } catch (error) {
     console.error('Error reading blog data from file system:', error);
     return [];

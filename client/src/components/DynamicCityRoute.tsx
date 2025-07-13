@@ -33,6 +33,8 @@ const cityMap = {
   'los-angeles': createCityImport('LosAngeles', '../pages/cities/LosAngeles'),
 
   'boston': createCityImport('Boston', '../pages/cities/Boston'),
+
+  'male': createCityImport('Male', '../pages/cities/Male'),
 };
 
 interface DynamicCityRouteProps {
