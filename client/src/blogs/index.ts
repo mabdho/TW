@@ -26,6 +26,18 @@ export const allBlogs: Blog[] = [
     readTime: '7 min read',
     date: '2025-01-12',
     author: 'TravelWanders Team'
+  },
+  {
+    id: 'hidden-gems-europe-2025',
+    title: 'Hidden Gems of Europe 2025',
+    excerpt: 'Discover lesser-known European destinations that offer authentic culture, stunning landscapes, and unforgettable experiences.',
+    content: 'Europe is filled with countless hidden gems waiting to be discovered. From the colorful houses of Cinque Terre to the mystical forests of Bavaria, these destinations offer travelers a chance to escape the crowds and experience authentic European culture.',
+    category: 'Destinations',
+    imageUrl: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    featured: false,
+    readTime: '6 min read',
+    date: '2025-01-13',
+    author: 'TravelWanders Team'
   }
 ];
 
