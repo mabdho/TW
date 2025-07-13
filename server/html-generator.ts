@@ -1619,51 +1619,291 @@ export function generateHomePageHTML(): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TravelWanders - Discover Amazing Destinations Worldwide</title>
-  <meta name="description" content="Explore the world with confidence. Get trusted reviews, insider tips, and comprehensive guides for destinations worldwide. Start your adventure today!">
+  <title>TravelWanders - Discover Amazing Destinations & Travel Guides</title>
+  <meta name="description" content="Discover the best travel destinations, attractions, and experiences with TravelWanders. Your ultimate guide to exploring the world with comprehensive city guides and travel tips.">
   
   <!-- SEO Meta Tags -->
-  <meta property="og:title" content="TravelWanders - Discover Amazing Destinations Worldwide">
-  <meta property="og:description" content="Explore the world with confidence. Get trusted reviews, insider tips, and comprehensive guides for destinations worldwide. Start your adventure today!">
+  <meta property="og:title" content="TravelWanders - Discover Amazing Destinations & Travel Guides">
+  <meta property="og:description" content="Discover the best travel destinations, attractions, and experiences with TravelWanders. Your ultimate guide to exploring the world with comprehensive city guides and travel tips.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://travelwanders.com/">
   <meta property="og:site_name" content="TravelWanders">
   
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="TravelWanders - Discover Amazing Destinations Worldwide">
-  <meta name="twitter:description" content="Explore the world with confidence. Get trusted reviews, insider tips, and comprehensive guides for destinations worldwide. Start your adventure today!">
+  <meta name="twitter:title" content="TravelWanders - Discover Amazing Destinations & Travel Guides">
+  <meta name="twitter:description" content="Discover the best travel destinations, attractions, and experiences with TravelWanders. Your ultimate guide to exploring the world with comprehensive city guides and travel tips.">
   
   <link rel="canonical" href="https://travelwanders.com/">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   
   <style>
     ${generateCommonStyles()}
+    
+    /* Hero Section Styles */
+    .hero-section {
+      position: relative;
+      background: white;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 237, 213, 0.3) 0%, rgba(255, 255, 255, 1) 50%, rgba(236, 253, 245, 0.3) 100%);
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 64rem;
+      margin: 0 auto;
+    }
+    
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+      border-radius: 9999px;
+      padding: 0.5rem 1rem;
+      margin-bottom: 2rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    
+    .hero-title {
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+    }
+    
+    .hero-gradient-text {
+      background: linear-gradient(135deg, #059669 0%, #ea580c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: #4b5563;
+      margin-bottom: 3rem;
+      max-width: 32rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #059669;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+    
+    .hero-cta:hover {
+      background: #047857;
+    }
+    
+    /* Travel Categories Section */
+    .travel-categories {
+      padding: 4rem 0;
+      background: #f9fafb;
+    }
+    
+    .travel-categories-content {
+      text-align: center;
+      padding: 3rem 0;
+    }
+    
+    .travel-categories h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+    
+    .travel-categories p {
+      color: #4b5563;
+      margin-bottom: 2rem;
+    }
+    
+    .travel-categories-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #059669;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+    
+    .travel-categories-cta:hover {
+      background: #047857;
+    }
+    
+    /* Destinations Section */
+    .destinations-section {
+      padding: 4rem 0;
+      background: white;
+    }
+    
+    .destinations-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .destinations-header h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+    
+    .destinations-header p {
+      font-size: 1.125rem;
+      color: #4b5563;
+      max-width: 32rem;
+      margin: 0 auto 2rem;
+    }
+    
+    .destinations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .destination-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    .destination-card:hover {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .destination-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #059669 0%, #3b82f6 100%);
+      position: relative;
+    }
+    
+    .destination-content {
+      padding: 1.5rem;
+    }
+    
+    .destination-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+    
+    .destination-country {
+      color: #4b5563;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+    
+    .destination-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #059669;
+      font-weight: 500;
+      font-size: 0.875rem;
+    }
+    
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .destinations-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
   ${generateNavigation()}
   
-  <section class="py-20 bg-gradient-to-br from-green-50 to-blue-50">
-    <div class="container mx-auto px-4 text-center">
-      <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">Discover Amazing Destinations</h1>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-10">Explore the world with confidence. Get trusted reviews, insider tips, and comprehensive guides for destinations worldwide.</p>
-      
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href="/destinations" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
-          View All Destinations
-        </a>
-        <a href="/blogs" class="border border-green-600 text-green-600 hover:bg-green-50 font-semibold py-3 px-8 rounded-lg transition-colors">
-          Read Travel Stories
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-bg"></div>
+    <div class="container mx-auto px-4">
+      <div class="hero-content">
+        <div class="trust-badge">
+          ⭐ Trusted by millions of travelers
+        </div>
+        
+        <h1 class="hero-title">
+          Explore the world with
+          <span class="hero-gradient-text">confidence</span>
+        </h1>
+        
+        <p class="hero-subtitle">
+          Get trusted reviews, insider tips, and comprehensive guides for destinations worldwide.
+        </p>
+        
+        <a href="/destinations" class="hero-cta">
+          Start Exploring
+          <span>→</span>
         </a>
       </div>
     </div>
   </section>
   
-  <section class="py-16">
+  <!-- Travel Categories Section -->
+  <section class="travel-categories">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-12">Featured Destinations</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        ${generateFeaturedDestinationsCards()}
+      <div class="travel-categories-content">
+        <h2>Latest Travel <span style="color: #059669;">Stories</span></h2>
+        <p>Get inspired by our latest travel insights, tips, and destination guides.</p>
+        <p style="color: #4b5563; margin-bottom: 1rem;">No blog posts available yet.</p>
+        <a href="/blogs" class="travel-categories-cta">
+          Visit Blog Page
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Destinations Section -->
+  <section class="destinations-section">
+    <div class="container mx-auto px-4">
+      <div class="destinations-header">
+        <h2>All destinations</h2>
+        <p>Browse our complete collection of travel guides and insider tips for destinations worldwide.</p>
+        <p style="color: #6b7280; font-size: 0.875rem;">${generateDestinationCount()} destinations</p>
+      </div>
+      
+      <div class="destinations-grid">
+        ${generateAllDestinationsCards()}
       </div>
     </div>
   </section>
@@ -1807,6 +2047,22 @@ function generateFeaturedDestinationsCards(): string {
   `).join('');
 }
 
+function generateDestinationCount(): number {
+  const cities = [
+    { name: 'Austin', country: 'USA', route: '/best-things-to-do-in-austin' },
+    { name: 'Berlin', country: 'Germany', route: '/best-things-to-do-in-berlin' },
+    { name: 'Miami', country: 'USA', route: '/best-things-to-do-in-miami' },
+    { name: 'Milan', country: 'Italy', route: '/best-things-to-do-in-milan' },
+    { name: 'Porto', country: 'Portugal', route: '/best-things-to-do-in-porto' },
+    { name: 'Venice', country: 'Italy', route: '/best-things-to-do-in-venice' },
+    { name: 'Zurich', country: 'Switzerland', route: '/best-things-to-do-in-zurich' },
+    { name: 'New York', country: 'USA', route: '/best-things-to-do-in-new-york' },
+    { name: 'Sydney', country: 'Australia', route: '/best-things-to-do-in-sydney' }
+  ];
+  
+  return cities.length;
+}
+
 function generateAllDestinationsCards(): string {
   const cities = [
     { name: 'Austin', country: 'USA', route: '/best-things-to-do-in-austin' },
@@ -1815,22 +2071,20 @@ function generateAllDestinationsCards(): string {
     { name: 'Milan', country: 'Italy', route: '/best-things-to-do-in-milan' },
     { name: 'Porto', country: 'Portugal', route: '/best-things-to-do-in-porto' },
     { name: 'Venice', country: 'Italy', route: '/best-things-to-do-in-venice' },
-    { name: 'Zurich', country: 'Switzerland', route: '/best-things-to-do-in-zurich' }
+    { name: 'Zurich', country: 'Switzerland', route: '/best-things-to-do-in-zurich' },
+    { name: 'New York', country: 'USA', route: '/best-things-to-do-in-new-york' },
+    { name: 'Sydney', country: 'Australia', route: '/best-things-to-do-in-sydney' }
   ];
   
   return cities.map(city => `
-    <a href="${city.route}" class="group">
-      <div class="bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-all duration-300 overflow-hidden">
-        <div class="relative aspect-4/3 overflow-hidden">
-          <div class="w-full h-full bg-gradient-to-br from-green-500 to-blue-500"></div>
-        </div>
-        <div class="p-6">
-          <h3 class="font-semibold text-gray-900 text-lg group-hover:text-green-600 transition-colors mb-2">${city.name}</h3>
-          <p class="text-gray-600 text-sm mb-4">Discover amazing attractions and experiences</p>
-          <div class="flex items-center text-green-600 group-hover:text-green-700 font-medium text-sm">
-            <span>Explore Destination</span>
-            <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-          </div>
+    <a href="${city.route}" class="destination-card">
+      <div class="destination-image"></div>
+      <div class="destination-content">
+        <h3 class="destination-title">${city.name}</h3>
+        <p class="destination-country">${city.country}</p>
+        <div class="destination-cta">
+          <span>Explore Destination</span>
+          <span>→</span>
         </div>
       </div>
     </a>
