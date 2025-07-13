@@ -542,7 +542,104 @@ const pageStyles = `
     color: #059669;
   }
 
-  /* Internal Links Styles */
+  /* Intelligent Internal Links Styles - Matching TSX Component */
+  .internal-links-description {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .internal-links-description p {
+    color: #6b7280;
+    max-width: 48rem;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .internal-links-grid,
+  .intelligent-links-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .internal-link-card {
+    display: block;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+
+  .internal-link-card:hover {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transform: translateY(-2px);
+    border-color: #10b981;
+  }
+
+  .internal-link-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .internal-link-icon {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+  }
+
+  .internal-link-badge {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+  }
+
+  .internal-link-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+  }
+
+  .internal-link-card:hover .internal-link-title {
+    color: #10b981;
+  }
+
+  .internal-link-country {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+
+  .internal-link-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #10b981;
+    font-weight: 500;
+    font-size: 0.875rem;
+  }
+
+  .internal-link-arrow {
+    transition: transform 0.3s ease;
+  }
+
+  .internal-link-card:hover .internal-link-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Legacy internal links styles for backward compatibility */
   .internal-links {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -596,6 +693,20 @@ const pageStyles = `
     
     .links-grid {
       grid-template-columns: 1fr;
+    }
+
+    .internal-links-grid,
+    .intelligent-links-container {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .internal-link-card {
+      padding: 1rem;
+    }
+
+    .internal-link-title {
+      font-size: 1rem;
     }
   }
 
@@ -766,6 +877,135 @@ function generateDiscoveryTagsHTML(discoveryTags: any): string {
 }
 
 // Generate complete HTML page matching CityPage React component structure
+// Intelligent internal linking system matching the TSX component functionality
+const CITY_LINKS = [
+  {
+    name: 'Milan',
+    url: '/best-things-to-do-in-milan',
+    country: 'Italy',
+    keywords: ['fashion', 'design', 'cathedral', 'opera', 'italy', 'duomo', 'scala', 'gothic', 'architecture']
+  },
+  {
+    name: 'Porto',
+    url: '/best-things-to-do-in-porto', 
+    country: 'Portugal',
+    keywords: ['port wine', 'douro', 'portugal', 'azulejo', 'tiles', 'river', 'unesco', 'historic']
+  },
+  {
+    name: 'Venice',
+    url: '/best-things-to-do-in-venice',
+    country: 'Italy',
+    keywords: ['canals', 'gondola', 'italy', 'bridges', 'piazza', 'san marco', 'romantic', 'islands']
+  },
+  {
+    name: 'Berlin',
+    url: '/best-things-to-do-in-berlin',
+    country: 'Germany',
+    keywords: ['history', 'wall', 'germany', 'museums', 'culture', 'art', 'nightlife', 'brandenburg']
+  },
+  {
+    name: 'Bologna',
+    url: '/best-things-to-do-in-bologna',
+    country: 'Italy',
+    keywords: ['food', 'university', 'italy', 'towers', 'cuisine', 'medieval', 'pasta', 'emilia-romagna']
+  },
+  {
+    name: 'Zurich',
+    url: '/best-things-to-do-in-zurich',
+    country: 'Switzerland',
+    keywords: ['lakes', 'mountains', 'switzerland', 'banks', 'chocolate', 'old town', 'alpine', 'luxury']
+  }
+];
+
+function getRelatedCityLinks(currentCityName: string, maxLinks: number = 3) {
+  const currentCity = CITY_LINKS.find(city => city.name.toLowerCase() === currentCityName.toLowerCase());
+  
+  if (!currentCity) {
+    return CITY_LINKS.slice(0, maxLinks);
+  }
+  
+  // Score cities based on shared keywords and same country
+  const scoredCities = CITY_LINKS
+    .filter(city => city.name.toLowerCase() !== currentCityName.toLowerCase())
+    .map(city => {
+      let score = 0;
+      
+      // Higher score for same country
+      if (city.country === currentCity.country) {
+        score += 3;
+      }
+      
+      // Score for shared keywords
+      const sharedKeywords = city.keywords.filter(keyword => 
+        currentCity.keywords.some(currentKeyword => 
+          currentKeyword.includes(keyword) || keyword.includes(currentKeyword)
+        )
+      );
+      score += sharedKeywords.length;
+      
+      return { ...city, score };
+    })
+    .sort((a, b) => b.score - a.score);
+    
+  return scoredCities.slice(0, maxLinks);
+}
+
+function generateIntelligentInternalLinks(cityName: string): string {
+  const relatedCities = getRelatedCityLinks(cityName, 3);
+  
+  return `
+    <div class="intelligent-links-container">
+      ${relatedCities.map(city => `
+        <a href="https://travelwanders.com${city.url}" class="internal-link-card">
+          <div class="internal-link-content">
+            <div class="internal-link-header">
+              <span class="internal-link-icon">📍</span>
+              <span class="internal-link-badge">Destination</span>
+            </div>
+            <h3 class="internal-link-title">Best Things to Do in ${city.name}</h3>
+            <div class="internal-link-country">${city.country}</div>
+            <div class="internal-link-action">
+              <span>Explore Destination</span>
+              <span class="internal-link-arrow">→</span>
+            </div>
+          </div>
+        </a>
+      `).join('')}
+      
+      <!-- Additional site links -->
+      <a href="https://travelwanders.com/destinations" class="internal-link-card">
+        <div class="internal-link-content">
+          <div class="internal-link-header">
+            <span class="internal-link-icon">🌍</span>
+            <span class="internal-link-badge">Category</span>
+          </div>
+          <h3 class="internal-link-title">All Destinations</h3>
+          <div class="internal-link-country">Travel Guides</div>
+          <div class="internal-link-action">
+            <span>Browse Category</span>
+            <span class="internal-link-arrow">→</span>
+          </div>
+        </div>
+      </a>
+      
+      <a href="https://travelwanders.com/blogs" class="internal-link-card">
+        <div class="internal-link-content">
+          <div class="internal-link-header">
+            <span class="internal-link-icon">📚</span>
+            <span class="internal-link-badge">Blog</span>
+          </div>
+          <h3 class="internal-link-title">Travel Tips & Guides</h3>
+          <div class="internal-link-country">Expert Advice</div>
+          <div class="internal-link-action">
+            <span>Read Articles</span>
+            <span class="internal-link-arrow">→</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  `;
+}
+
 export function generateCompleteHTML(cityData: CityData): string {
   const seoTitle = cityData.title || `Best Things to Do in ${cityData.cityName}, ${cityData.country}`;
   const seoDescription = (cityData.description || 'Explore this amazing destination').substring(0, 160) + '...';
@@ -1020,26 +1260,14 @@ export function generateCompleteHTML(cityData: CityData): string {
         </section>
         ${discoveryCardsHTML}
         
-        <!-- Internal Links Section for SEO -->
+        <!-- Intelligent Internal Links Section for SEO -->
         <section class="section">
           <h2 class="section-title">🔗 Related Destinations</h2>
-          <div class="internal-links">
-            <div class="link-group">
-              <h3>Explore More in ${cityData.country}</h3>
-              <div class="links-grid">
-                <a href="https://travelwanders.com/destinations" class="internal-link">Browse All Destinations</a>
-                <a href="https://travelwanders.com/blogs" class="internal-link">Travel Guides & Tips</a>
-                <a href="https://travelwanders.com/destinations" class="internal-link">Featured Cities</a>
-              </div>
-            </div>
-            <div class="link-group">
-              <h3>Popular Travel Resources</h3>
-              <div class="links-grid">
-                <a href="https://travelwanders.com/blogs" class="internal-link">Travel Blog</a>
-                <a href="https://travelwanders.com/destinations" class="internal-link">City Guides</a>
-                <a href="https://travelwanders.com/destinations" class="internal-link">Travel Planning</a>
-              </div>
-            </div>
+          <div class="internal-links-description">
+            <p>Explore more amazing destinations and discover the best things to do in other incredible cities. Planning your next adventure? Don't miss our comprehensive travel guides for other wonderful destinations.</p>
+          </div>
+          <div class="internal-links-grid">
+            ${generateIntelligentInternalLinks(cityData.cityName)}
           </div>
         </section>
       </div>

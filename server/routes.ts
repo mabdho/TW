@@ -20,6 +20,7 @@ import {
   getSitemapIndexingStatusRoute
 } from "./routes/seo";
 import { generateCompleteHTML, extractCityDataFromTSX as extractCityDataFromTSXHtmlGen } from './html-generator';
+import { handleComprehensiveSSR } from './comprehensive-ssr';
 
 // Firebase Functions HTML Generator Interface
 interface CityData {
@@ -542,33 +543,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // City page SSR routes - serve pre-rendered HTML with proper SEO
-  // This MUST be before other routes to catch city pages
-  app.get('/best-things-to-do-in-*', async (req, res, next) => {
+  // Comprehensive SSR for all pages - serves search engines with rendered content
+  // This middleware handles ALL page types: home, destinations, blogs, cities, legal pages
+  app.use(async (req, res, next) => {
     try {
-      const url = req.originalUrl;
-      
-      // In development mode, always fall back to Vite for proper module loading
-      if (process.env.NODE_ENV === 'development') {
-        console.log(`Development mode: routing ${url} to Vite`);
-        return next();
+      // Try comprehensive SSR first (for search engines)
+      const ssrHandled = await handleComprehensiveSSR(req, res);
+      if (ssrHandled) {
+        return; // SSR handled the request
       }
       
-      // In production, check for pre-rendered static HTML file
-      const staticDistPath = path.join(process.cwd(), 'dist', 'public');
-      const staticHtmlPath = path.join(staticDistPath, url, 'index.html');
-      
-      try {
-        const staticContent = await fs.readFile(staticHtmlPath, 'utf-8');
-        console.log(`Serving pre-rendered city page: ${staticHtmlPath}`);
-        return res.status(200).set({ 'Content-Type': 'text/html' }).send(staticContent);
-      } catch (staticError) {
-        console.log(`No static file found for ${url}, falling back to dynamic template`);
-        // Fall back to default behavior
-        next();
+      // For city pages, also check for pre-rendered static HTML (production only)
+      if (req.path.startsWith('/best-things-to-do-in-') && process.env.NODE_ENV !== 'development') {
+        const staticDistPath = path.join(process.cwd(), 'dist', 'public');
+        const staticHtmlPath = path.join(staticDistPath, req.originalUrl, 'index.html');
+        
+        try {
+          const staticContent = await fs.readFile(staticHtmlPath, 'utf-8');
+          console.log(`Serving pre-rendered city page: ${staticHtmlPath}`);
+          return res.status(200).set({ 'Content-Type': 'text/html' }).send(staticContent);
+        } catch (staticError) {
+          // Fall through to normal routing
+        }
       }
+      
+      // Continue to next middleware (normal React routing)
+      next();
     } catch (error) {
-      console.error('Error serving city page:', error);
+      console.error('Error in comprehensive SSR middleware:', error);
       next();
     }
   });
