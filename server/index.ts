@@ -3,7 +3,7 @@ import session from "express-session";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { initializeSitemapIndexing } from "./utils/sitemapIndexing";
-import { handleSSRRequest } from "./ssr-handler";
+
 
 const app = express();
 app.use(express.json());
@@ -62,27 +62,7 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // Add SSR middleware for search engines only
-  app.get('*', (req, res, next) => {
-    // Check if this is a page route that should use SSR
-    const isPageRoute = req.path === '/' || 
-                       req.path.startsWith('/best-things-to-do-in-') ||
-                       req.path === '/blogs' ||
-                       req.path === '/destinations' ||
-                       req.path === '/admin' ||
-                       req.path === '/login';
-    
-    // Only use SSR for search engine crawlers
-    const userAgent = req.get('User-Agent') || '';
-    const isSearchEngine = /bot|crawler|spider|crawling|bingbot|googlebot|facebookexternalhit|twitterbot|linkedinbot|slackbot|discordbot|whatsapp|telegram/i.test(userAgent);
-    
-    if (isPageRoute && req.accepts('html') && isSearchEngine) {
-      log(`SSR for search engine: ${userAgent.slice(0, 50)}...`);
-      return handleSSRRequest(req, res);
-    }
-    
-    next();
-  });
+
 
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route

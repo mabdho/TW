@@ -19,8 +19,13 @@ import {
   submitSitemapManually,
   getSitemapIndexingStatusRoute
 } from "./routes/seo";
-import { generateCompleteHTML, extractCityDataFromTSX as extractCityDataFromTSXHtmlGen } from './html-generator';
-import { handleComprehensiveSSR } from './comprehensive-ssr';
+import { 
+  generateCompleteHTML, 
+  extractCityDataFromTSX as extractCityDataFromTSXHtmlGen,
+  generateHomePageHTML,
+  generateDestinationsPageHTML,
+  generateBlogsPageHTML
+} from './html-generator';
 
 // Firebase Functions HTML Generator Interface
 interface CityData {
@@ -543,35 +548,180 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // Comprehensive SSR for all pages - serves search engines with rendered content
-  // This middleware handles ALL page types: home, destinations, blogs, cities, legal pages
-  app.use(async (req, res, next) => {
+  // Add new API routes for generating other page types using Firebase HTML Generator
+  app.post('/api/generate-homepage', async (req, res) => {
     try {
-      // Try comprehensive SSR first (for search engines)
-      const ssrHandled = await handleComprehensiveSSR(req, res);
-      if (ssrHandled) {
-        return; // SSR handled the request
-      }
+      const htmlContent = generateHomePageHTML();
+      const outputPath = path.join(process.cwd(), 'dist', 'public', 'index.html');
       
-      // For city pages, also check for pre-rendered static HTML (production only)
-      if (req.path.startsWith('/best-things-to-do-in-') && process.env.NODE_ENV !== 'development') {
-        const staticDistPath = path.join(process.cwd(), 'dist', 'public');
-        const staticHtmlPath = path.join(staticDistPath, req.originalUrl, 'index.html');
-        
-        try {
-          const staticContent = await fs.readFile(staticHtmlPath, 'utf-8');
-          console.log(`Serving pre-rendered city page: ${staticHtmlPath}`);
-          return res.status(200).set({ 'Content-Type': 'text/html' }).send(staticContent);
-        } catch (staticError) {
-          // Fall through to normal routing
-        }
-      }
+      // Ensure directory exists
+      await fs.mkdir(path.dirname(outputPath), { recursive: true });
       
-      // Continue to next middleware (normal React routing)
-      next();
+      // Write HTML file
+      await fs.writeFile(outputPath, htmlContent, 'utf-8');
+      
+      const fileStat = await fs.stat(outputPath);
+      const fileSize = (fileStat.size / 1024).toFixed(2) + ' KB';
+      
+      res.json({
+        success: true,
+        message: 'Generated homepage HTML',
+        outputPath,
+        fileSize
+      });
     } catch (error) {
-      console.error('Error in comprehensive SSR middleware:', error);
-      next();
+      console.error('Error generating homepage:', error);
+      res.status(500).json({
+        error: 'Failed to generate homepage',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+  
+  app.post('/api/generate-destinations', async (req, res) => {
+    try {
+      const htmlContent = generateDestinationsPageHTML();
+      const outputPath = path.join(process.cwd(), 'dist', 'public', 'destinations', 'index.html');
+      
+      // Ensure directory exists
+      await fs.mkdir(path.dirname(outputPath), { recursive: true });
+      
+      // Write HTML file
+      await fs.writeFile(outputPath, htmlContent, 'utf-8');
+      
+      const fileStat = await fs.stat(outputPath);
+      const fileSize = (fileStat.size / 1024).toFixed(2) + ' KB';
+      
+      res.json({
+        success: true,
+        message: 'Generated destinations page HTML',
+        outputPath,
+        fileSize
+      });
+    } catch (error) {
+      console.error('Error generating destinations page:', error);
+      res.status(500).json({
+        error: 'Failed to generate destinations page',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+  
+  app.post('/api/generate-blogs', async (req, res) => {
+    try {
+      const htmlContent = generateBlogsPageHTML();
+      const outputPath = path.join(process.cwd(), 'dist', 'public', 'blogs', 'index.html');
+      
+      // Ensure directory exists
+      await fs.mkdir(path.dirname(outputPath), { recursive: true });
+      
+      // Write HTML file
+      await fs.writeFile(outputPath, htmlContent, 'utf-8');
+      
+      const fileStat = await fs.stat(outputPath);
+      const fileSize = (fileStat.size / 1024).toFixed(2) + ' KB';
+      
+      res.json({
+        success: true,
+        message: 'Generated blogs page HTML',
+        outputPath,
+        fileSize
+      });
+    } catch (error) {
+      console.error('Error generating blogs page:', error);
+      res.status(500).json({
+        error: 'Failed to generate blogs page',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+  
+  app.post('/api/generate-all-static-pages', async (req, res) => {
+    try {
+      const results = [];
+      
+      // Generate homepage
+      try {
+        const homeHtml = generateHomePageHTML();
+        const homePath = path.join(process.cwd(), 'dist', 'public', 'index.html');
+        await fs.mkdir(path.dirname(homePath), { recursive: true });
+        await fs.writeFile(homePath, homeHtml, 'utf-8');
+        const homeSize = (await fs.stat(homePath)).size;
+        results.push({
+          page: 'Homepage',
+          success: true,
+          fileSize: (homeSize / 1024).toFixed(2) + ' KB',
+          outputPath: homePath
+        });
+      } catch (error) {
+        results.push({
+          page: 'Homepage',
+          success: false,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        });
+      }
+      
+      // Generate destinations page
+      try {
+        const destHtml = generateDestinationsPageHTML();
+        const destPath = path.join(process.cwd(), 'dist', 'public', 'destinations', 'index.html');
+        await fs.mkdir(path.dirname(destPath), { recursive: true });
+        await fs.writeFile(destPath, destHtml, 'utf-8');
+        const destSize = (await fs.stat(destPath)).size;
+        results.push({
+          page: 'Destinations',
+          success: true,
+          fileSize: (destSize / 1024).toFixed(2) + ' KB',
+          outputPath: destPath
+        });
+      } catch (error) {
+        results.push({
+          page: 'Destinations',
+          success: false,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        });
+      }
+      
+      // Generate blogs page
+      try {
+        const blogsHtml = generateBlogsPageHTML();
+        const blogsPath = path.join(process.cwd(), 'dist', 'public', 'blogs', 'index.html');
+        await fs.mkdir(path.dirname(blogsPath), { recursive: true });
+        await fs.writeFile(blogsPath, blogsHtml, 'utf-8');
+        const blogsSize = (await fs.stat(blogsPath)).size;
+        results.push({
+          page: 'Blogs',
+          success: true,
+          fileSize: (blogsSize / 1024).toFixed(2) + ' KB',
+          outputPath: blogsPath
+        });
+      } catch (error) {
+        results.push({
+          page: 'Blogs',
+          success: false,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        });
+      }
+      
+      const successCount = results.filter(r => r.success).length;
+      const totalCount = results.length;
+      
+      res.json({
+        success: true,
+        message: `Generated ${successCount}/${totalCount} static pages`,
+        results,
+        summary: {
+          total: totalCount,
+          successful: successCount,
+          failed: totalCount - successCount
+        }
+      });
+    } catch (error) {
+      console.error('Error generating all static pages:', error);
+      res.status(500).json({
+        error: 'Failed to generate static pages',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
     }
   });
 

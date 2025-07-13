@@ -122,6 +122,18 @@
             <button class="btn-secondary" onclick="generateAllPages()">Generate All Pages</button>
         </div>
         
+        <hr style="margin: 40px 0; border: 1px solid #eee;">
+        
+        <h2>🌐 All Page Types Generation</h2>
+        <p>Generate static HTML for homepage, destinations, and blogs pages using the unified Firebase HTML Generator system.</p>
+        
+        <div class="button-group">
+            <button class="btn-primary" onclick="generateHomepage()">Generate Homepage</button>
+            <button class="btn-primary" onclick="generateDestinations()">Generate Destinations</button>
+            <button class="btn-primary" onclick="generateBlogs()">Generate Blogs</button>
+            <button class="btn-secondary" onclick="generateAllStaticPages()">Generate All Pages</button>
+        </div>
+        
         <div id="results" class="results" style="display: none;"></div>
     </div>
 
@@ -253,6 +265,117 @@
                 generateSinglePage();
             }
         });
+        
+        // New page generation functions
+        async function generateHomepage() {
+            await generatePageType('/api/generate-homepage', 'Homepage');
+        }
+        
+        async function generateDestinations() {
+            await generatePageType('/api/generate-destinations', 'Destinations Page');
+        }
+        
+        async function generateBlogs() {
+            await generatePageType('/api/generate-blogs', 'Blogs Page');
+        }
+        
+        async function generateAllStaticPages() {
+            showLoading(true);
+            
+            try {
+                const response = await fetch('/api/generate-all-static-pages', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({})
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    let resultsHTML = `
+                        <h3>✅ All Pages Generated!</h3>
+                        <p><strong>Message:</strong> ${data.message}</p>
+                        <div class="city-list">
+                    `;
+                    
+                    data.results.forEach(result => {
+                        if (result.success) {
+                            resultsHTML += `
+                                <div class="city-item">
+                                    <h3>✅ ${result.page}</h3>
+                                    <p>File Size: ${result.fileSize} | Output: ${result.outputPath}</p>
+                                </div>
+                            `;
+                        } else {
+                            resultsHTML += `
+                                <div class="city-item">
+                                    <h3>❌ ${result.page}</h3>
+                                    <p>Error: ${result.error}</p>
+                                </div>
+                            `;
+                        }
+                    });
+                    
+                    resultsHTML += '</div>';
+                    
+                    showResults(resultsHTML, 'success');
+                } else {
+                    showResults(`
+                        <h3>❌ Error</h3>
+                        <p><strong>Error:</strong> ${data.error}</p>
+                        ${data.details ? `<p><strong>Details:</strong> ${data.details}</p>` : ''}
+                    `, 'error');
+                }
+            } catch (error) {
+                showResults(`
+                    <h3>❌ Network Error</h3>
+                    <p>Failed to connect to the server: ${error.message}</p>
+                `, 'error');
+            }
+            
+            showLoading(false);
+        }
+        
+        async function generatePageType(endpoint, pageName) {
+            showLoading(true);
+            
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({})
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResults(`
+                        <h3>✅ Success!</h3>
+                        <p><strong>Page:</strong> ${pageName}</p>
+                        <p><strong>File Size:</strong> ${data.fileSize}</p>
+                        <p><strong>Output:</strong> ${data.outputPath}</p>
+                        <p><strong>Message:</strong> ${data.message}</p>
+                    `, 'success');
+                } else {
+                    showResults(`
+                        <h3>❌ Error</h3>
+                        <p><strong>Error:</strong> ${data.error}</p>
+                        ${data.details ? `<p><strong>Details:</strong> ${data.details}</p>` : ''}
+                    `, 'error');
+                }
+            } catch (error) {
+                showResults(`
+                    <h3>❌ Network Error</h3>
+                    <p>Failed to connect to the server: ${error.message}</p>
+                `, 'error');
+            }
+            
+            showLoading(false);
+        }
     </script>
 </body>
 </html>
