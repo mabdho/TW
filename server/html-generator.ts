@@ -2,6 +2,103 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { readFileSync, existsSync } from 'fs';
 
+// Helper function to read city data from React components
+function readCityDataFromComponents(): Array<{ name: string; country: string; route: string; continent?: string; imageUrl?: string }> {
+  try {
+    // Read CityDirectory.tsx to get the main city list
+    const cityDirectoryPath = path.join(process.cwd(), 'client', 'src', 'components', 'CityDirectory.tsx');
+    const cityDirectoryContent = fs.readFileSync(cityDirectoryPath, 'utf-8');
+    
+    // Extract the cities array from the file
+    const citiesMatch = cityDirectoryContent.match(/const cities = \[([\s\S]*?)\];/);
+    if (!citiesMatch) {
+      console.warn('Could not find cities array in CityDirectory.tsx, falling back to default cities');
+      return getDefaultCities();
+    }
+    
+    const citiesArrayContent = citiesMatch[1];
+    const cities = [];
+    
+    // Parse each city object
+    const cityMatches = citiesArrayContent.match(/\{\s*"name":\s*"([^"]+)",\s*"country":\s*"([^"]+)",\s*"path":\s*"([^"]+)",\s*"continent":\s*"([^"]+)"(?:,\s*"imageUrl":\s*"([^"]*)")?\s*\}/g);
+    
+    if (cityMatches) {
+      cityMatches.forEach(match => {
+        const cityMatch = match.match(/"name":\s*"([^"]+)",\s*"country":\s*"([^"]+)",\s*"path":\s*"([^"]+)",\s*"continent":\s*"([^"]+)"(?:,\s*"imageUrl":\s*"([^"]*)")?/);
+        if (cityMatch) {
+          cities.push({
+            name: cityMatch[1],
+            country: cityMatch[2],
+            route: cityMatch[3],
+            continent: cityMatch[4],
+            imageUrl: cityMatch[5] || ''
+          });
+        }
+      });
+    }
+    
+    return cities.length > 0 ? cities : getDefaultCities();
+  } catch (error) {
+    console.error('Error reading city data from components:', error);
+    return getDefaultCities();
+  }
+}
+
+// Helper function to read featured cities from React components
+function readFeaturedCitiesFromComponents(): Array<{ name: string; country: string; route: string; continent?: string; imageUrl?: string }> {
+  try {
+    // Read FeaturedCities.tsx to get the featured cities list
+    const featuredCitiesPath = path.join(process.cwd(), 'client', 'src', 'components', 'FeaturedCities.tsx');
+    const featuredCitiesContent = fs.readFileSync(featuredCitiesPath, 'utf-8');
+    
+    // Extract the featuredCities array from the file
+    const featuredCitiesMatch = featuredCitiesContent.match(/const featuredCities = \[([\s\S]*?)\];/);
+    if (!featuredCitiesMatch) {
+      console.warn('Could not find featuredCities array in FeaturedCities.tsx, falling back to city directory');
+      return readCityDataFromComponents().slice(0, 6);
+    }
+    
+    const featuredCitiesArrayContent = featuredCitiesMatch[1];
+    const cities = [];
+    
+    // Parse each city object
+    const cityMatches = featuredCitiesArrayContent.match(/\{\s*"name":\s*"([^"]+)",\s*"country":\s*"([^"]+)",\s*"path":\s*"([^"]+)",\s*"continent":\s*"([^"]+)"(?:,\s*"imageUrl":\s*"([^"]*)")?\s*\}/g);
+    
+    if (cityMatches) {
+      cityMatches.forEach(match => {
+        const cityMatch = match.match(/"name":\s*"([^"]+)",\s*"country":\s*"([^"]+)",\s*"path":\s*"([^"]+)",\s*"continent":\s*"([^"]+)"(?:,\s*"imageUrl":\s*"([^"]*)")?/);
+        if (cityMatch) {
+          cities.push({
+            name: cityMatch[1],
+            country: cityMatch[2],
+            route: cityMatch[3],
+            continent: cityMatch[4],
+            imageUrl: cityMatch[5] || ''
+          });
+        }
+      });
+    }
+    
+    return cities.length > 0 ? cities : readCityDataFromComponents().slice(0, 6);
+  } catch (error) {
+    console.error('Error reading featured cities from components:', error);
+    return readCityDataFromComponents().slice(0, 6);
+  }
+}
+
+// Fallback default cities
+function getDefaultCities() {
+  return [
+    { name: 'Austin', country: 'USA', route: '/best-things-to-do-in-austin', continent: 'North America' },
+    { name: 'Berlin', country: 'Germany', route: '/best-things-to-do-in-berlin', continent: 'Europe' },
+    { name: 'Miami', country: 'USA', route: '/best-things-to-do-in-miami', continent: 'North America' },
+    { name: 'Milan', country: 'Italy', route: '/best-things-to-do-in-milan', continent: 'Europe' },
+    { name: 'Porto', country: 'Portugal', route: '/best-things-to-do-in-porto', continent: 'Europe' },
+    { name: 'Venice', country: 'Italy', route: '/best-things-to-do-in-venice', continent: 'Europe' },
+    { name: 'Zurich', country: 'Switzerland', route: '/best-things-to-do-in-zurich', continent: 'Europe' }
+  ];
+}
+
 interface CityData {
   cityName: string;
   country: string;
@@ -2015,21 +2112,16 @@ export function generateBlogsPageHTML(): string {
 }
 
 function generateFeaturedDestinationsCards(): string {
-  const cities = [
-    { name: 'Austin', country: 'USA', route: '/best-things-to-do-in-austin' },
-    { name: 'Berlin', country: 'Germany', route: '/best-things-to-do-in-berlin' },
-    { name: 'Miami', country: 'USA', route: '/best-things-to-do-in-miami' },
-    { name: 'Milan', country: 'Italy', route: '/best-things-to-do-in-milan' },
-    { name: 'Porto', country: 'Portugal', route: '/best-things-to-do-in-porto' },
-    { name: 'Venice', country: 'Italy', route: '/best-things-to-do-in-venice' },
-    { name: 'Zurich', country: 'Switzerland', route: '/best-things-to-do-in-zurich' }
-  ];
+  const cities = readFeaturedCitiesFromComponents();
   
   return cities.slice(0, 6).map(city => `
     <a href="${city.route}" class="group">
       <div class="bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-all duration-300 overflow-hidden">
         <div class="relative aspect-4/3 overflow-hidden">
-          <div class="w-full h-full bg-gradient-to-br from-green-500 to-blue-500"></div>
+          <div class="w-full h-full ${city.imageUrl ? 
+            `bg-gray-900" style="background-image: url(${city.imageUrl}); background-size: cover; background-position: center;"` : 
+            'bg-gradient-to-br from-green-500 to-blue-500"'
+          }></div>
         </div>
         <div class="p-6">
           <h3 class="font-semibold text-gray-900 text-lg group-hover:text-green-600 transition-colors mb-2">${city.name}</h3>
@@ -2207,37 +2299,16 @@ function generateLatestBlogsHTML(): string {
 }
 
 function generateDestinationCount(): number {
-  const cities = [
-    { name: 'Austin', country: 'USA', route: '/best-things-to-do-in-austin' },
-    { name: 'Berlin', country: 'Germany', route: '/best-things-to-do-in-berlin' },
-    { name: 'Miami', country: 'USA', route: '/best-things-to-do-in-miami' },
-    { name: 'Milan', country: 'Italy', route: '/best-things-to-do-in-milan' },
-    { name: 'Porto', country: 'Portugal', route: '/best-things-to-do-in-porto' },
-    { name: 'Venice', country: 'Italy', route: '/best-things-to-do-in-venice' },
-    { name: 'Zurich', country: 'Switzerland', route: '/best-things-to-do-in-zurich' },
-    { name: 'New York', country: 'USA', route: '/best-things-to-do-in-new-york' },
-    { name: 'Sydney', country: 'Australia', route: '/best-things-to-do-in-sydney' }
-  ];
-  
+  const cities = readCityDataFromComponents();
   return cities.length;
 }
 
 function generateAllDestinationsCards(): string {
-  const cities = [
-    { name: 'Austin', country: 'USA', route: '/best-things-to-do-in-austin' },
-    { name: 'Berlin', country: 'Germany', route: '/best-things-to-do-in-berlin' },
-    { name: 'Miami', country: 'USA', route: '/best-things-to-do-in-miami' },
-    { name: 'Milan', country: 'Italy', route: '/best-things-to-do-in-milan' },
-    { name: 'Porto', country: 'Portugal', route: '/best-things-to-do-in-porto' },
-    { name: 'Venice', country: 'Italy', route: '/best-things-to-do-in-venice' },
-    { name: 'Zurich', country: 'Switzerland', route: '/best-things-to-do-in-zurich' },
-    { name: 'New York', country: 'USA', route: '/best-things-to-do-in-new-york' },
-    { name: 'Sydney', country: 'Australia', route: '/best-things-to-do-in-sydney' }
-  ];
+  const cities = readCityDataFromComponents();
   
   return cities.map(city => `
     <a href="${city.route}" class="destination-card">
-      <div class="destination-image"></div>
+      <div class="destination-image" style="${city.imageUrl ? `background-image: url(${city.imageUrl}); background-size: cover; background-position: center;` : 'background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);'}"></div>
       <div class="destination-content">
         <h3 class="destination-title">${city.name}</h3>
         <p class="destination-country">${city.country}</p>
