@@ -1942,13 +1942,20 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       // Update the file
       let updatedContent = indexContent;
       if (!updatedContent.includes(importStatement)) {
-        // Add import after existing imports
-        const lastImportIndex = updatedContent.lastIndexOf("import");
-        if (lastImportIndex === -1) {
-          updatedContent = `${importStatement}\n${updatedContent}`;
+        // Add import after existing imports - look for the end of the import section
+        const importSectionEnd = updatedContent.search(/\n\s*\/\/ This file will be automatically updated/);
+        if (importSectionEnd !== -1) {
+          // Insert before the comment line
+          updatedContent = updatedContent.slice(0, importSectionEnd) + importStatement + '\n' + updatedContent.slice(importSectionEnd);
         } else {
-          const afterLastImport = updatedContent.indexOf('\n', lastImportIndex) + 1;
-          updatedContent = updatedContent.slice(0, afterLastImport) + importStatement + '\n' + updatedContent.slice(afterLastImport);
+          // Fallback: add after last import statement
+          const lastImportIndex = updatedContent.lastIndexOf("import");
+          if (lastImportIndex === -1) {
+            updatedContent = `${importStatement}\n${updatedContent}`;
+          } else {
+            const afterLastImport = updatedContent.indexOf('\n', lastImportIndex) + 1;
+            updatedContent = updatedContent.slice(0, afterLastImport) + importStatement + '\n' + updatedContent.slice(afterLastImport);
+          }
         }
         
         // Add to allBlogs array

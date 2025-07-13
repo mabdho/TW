@@ -44,6 +44,7 @@ export const allBlogs: Blog[] = [
   test1Blog,
   firebasestatichtmlgeneratorcompleteimplementationpromptBlog,
   test1Blog,
+  test1Blog,
 ];
 
 export function getAllBlogs(): Blog[] {

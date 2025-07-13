@@ -3,9 +3,9 @@ import { Blog } from '@shared/schema';
 
 export const test1Blog: Blog = {
   id: "test-1",
-  title: "Test 1",
-  excerpt: "test 2",
-  content: `2 tseT`,
+  title: "test 1",
+  excerpt: "sadada",
+  content: `adsaddsa`,
   category: "Travel Tips",
   imageUrl: "",
   featured: false,
