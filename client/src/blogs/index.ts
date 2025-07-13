@@ -2,7 +2,8 @@
 import { Blog } from '@shared/schema';
 import { test1Blog } from './test-1.tsx';
 import { firebasestatichtmlgeneratorcompleteimplementationpromptBlog } from './firebase-static-html-generator-complete-implementation-prompt.tsx';
-import { testtestBlog } from './test-test';import { abdhoBlog } from './abdho';import { maldivesBlog } from './maldives';import { maldives2Blog } from './maldives-2';
+import { testtestBlog } from './test-test';import { abdhoBlog } from './abdho';import { maldivesBlog } from './maldives';import { maldives2Blog } from './maldives-2';import { maldives3Blog } from './maldives-3';
+
 
 
 
@@ -52,6 +53,7 @@ export const allBlogs: Blog[] = [
   firebasestatichtmlgeneratorcompleteimplementationpromptBlog,
   testtestBlog,
   maldives2Blog,
+  maldives3Blog,
 ];
 
 export function getAllBlogs(): Blog[] {
