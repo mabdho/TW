@@ -1,11 +1,11 @@
 import { Clock, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { getLatestBlogs } from '../blogs';
+import { getLatestBlogsForHomePage } from '../blogs';
 
 export const TravelCategories = () => {
-  // Get latest 2 blogs from file system
-  const latestBlogs = getLatestBlogs(2);
+  // Get latest 2 blogs from file system - always featured on home page
+  const latestBlogs = getLatestBlogsForHomePage(2);
 
   return (
     <section id="experiences" className="py-16 bg-gray-50">

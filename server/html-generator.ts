@@ -2363,8 +2363,8 @@ function generateLatestBlogsHTML(): string {
       `;
     }
     
-    // Get latest 2 blogs (they're already sorted by date)
-    const latestBlogs = blogs.slice(0, 2);
+    // Get latest 2 blogs (they're already sorted by date) and mark them as featured for home page
+    const latestBlogs = blogs.slice(0, 2).map(blog => ({ ...blog, featured: true }));
     
     if (latestBlogs.length === 0) {
       return `

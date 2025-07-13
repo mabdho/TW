@@ -46,8 +46,6 @@ export const allBlogs: Blog[] = [
   },
   test1Blog,
   firebasestatichtmlgeneratorcompleteimplementationpromptBlog,
-  test1Blog,
-  test1Blog,
   testtestBlog,
   abdhoBlog,
 ];
@@ -58,6 +56,12 @@ export function getAllBlogs(): Blog[] {
 
 export function getLatestBlogs(limit: number = 2): Blog[] {
   return getAllBlogs().slice(0, limit);
+}
+
+export function getLatestBlogsForHomePage(limit: number = 2): Blog[] {
+  const latestBlogs = getAllBlogs().slice(0, limit);
+  // Mark the latest blogs as featured for home page display
+  return latestBlogs.map(blog => ({ ...blog, featured: true }));
 }
 
 export function getBlogById(id: string): Blog | undefined {
