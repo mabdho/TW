@@ -138,7 +138,7 @@ function getDefaultCities() {
 }
 
 // Helper function to read blog data from file system
-export function readBlogDataFromFileSystem(): Array<{ id: string; title: string; excerpt: string; category: string; imageUrl?: string; featured: boolean; readTime: string; date: string; author?: string }> {
+export function readBlogDataFromFileSystem(): Array<{ id: string; title: string; excerpt: string; content: string; category: string; imageUrl?: string; featured: boolean; readTime: string; date: string; author?: string }> {
   try {
     console.log('🔍 Reading blog data from file system...');
     
@@ -173,6 +173,7 @@ export function readBlogDataFromFileSystem(): Array<{ id: string; title: string;
         id: blogMatch[1],
         title: blogMatch[2],
         excerpt: blogMatch[3],
+        content: blogMatch[4] || '',
         category: blogMatch[5],
         imageUrl: blogMatch[6] || '',
         featured: blogMatch[7] === 'true',
@@ -211,6 +212,7 @@ export function readBlogDataFromFileSystem(): Array<{ id: string; title: string;
               const id = blogData.match(/id:\s*["']([^"']+)["']/)?.[1];
               const title = blogData.match(/title:\s*["']([^"']+)["']/)?.[1];
               const excerpt = blogData.match(/excerpt:\s*["']([^"']+)["']/)?.[1];
+              const content = blogData.match(/content:\s*`([^`]*)`/s)?.[1] || '';
               const category = blogData.match(/category:\s*["']([^"']+)["']/)?.[1];
               const imageUrl = blogData.match(/imageUrl:\s*["']([^"']*?)["']/)?.[1] || '';
               const featured = blogData.match(/featured:\s*(true|false)/)?.[1] === 'true';
@@ -224,6 +226,7 @@ export function readBlogDataFromFileSystem(): Array<{ id: string; title: string;
                   id,
                   title,
                   excerpt,
+                  content,
                   category,
                   imageUrl,
                   featured,
@@ -3245,7 +3248,7 @@ export function generateIndividualBlogHTML(blogData: any): string {
     </header>
     
     <div class="blog-body">
-      ${convertMarkdownToHTML(blogData.content)}
+      ${blogData.content || ''}
     </div>
     
     <!-- Author Section -->
