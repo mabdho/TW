@@ -3,10 +3,127 @@ import express, { type Request, Response, NextFunction } from "express";
 import session from "express-session";
 import { registerRoutes } from "./routes.js";
 import { serveStatic } from "./vite.js";
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Bot detection function
+function isSearchEngineBot(userAgent: string): boolean {
+  if (!userAgent) return false;
+  
+  const botPatterns = [
+    /googlebot/i,
+    /bingbot/i,
+    /slurp/i,
+    /duckduckbot/i,
+    /baiduspider/i,
+    /yandexbot/i,
+    /facebookexternalhit/i,
+    /twitterbot/i,
+    /linkedinbot/i,
+    /whatsapp/i,
+    /telegram/i,
+    /applebot/i,
+    /discordbot/i,
+    /slackbot/i,
+    /crawler/i,
+    /spider/i,
+    /bot/i
+  ];
+  
+  return botPatterns.some(pattern => pattern.test(userAgent));
+}
+
+// Bot detection middleware for core pages
+app.get('/', (req, res, next) => {
+  const userAgent = req.get('user-agent') || '';
+  
+  if (isSearchEngineBot(userAgent)) {
+    try {
+      const seoHtml = readFileSync(join(process.cwd(), 'dist/public/home-seo.html'), 'utf-8');
+      res.setHeader('Content-Type', 'text/html');
+      res.send(seoHtml);
+      return;
+    } catch (error) {
+      console.log('Could not read home-seo.html, continuing to React app');
+    }
+  }
+  
+  next();
+});
+
+app.get('/destinations', (req, res, next) => {
+  const userAgent = req.get('user-agent') || '';
+  
+  if (isSearchEngineBot(userAgent)) {
+    try {
+      const seoHtml = readFileSync(join(process.cwd(), 'dist/public/destinations-seo.html'), 'utf-8');
+      res.setHeader('Content-Type', 'text/html');
+      res.send(seoHtml);
+      return;
+    } catch (error) {
+      console.log('Could not read destinations-seo.html, continuing to React app');
+    }
+  }
+  
+  next();
+});
+
+app.get('/blogs', (req, res, next) => {
+  const userAgent = req.get('user-agent') || '';
+  
+  if (isSearchEngineBot(userAgent)) {
+    try {
+      const seoHtml = readFileSync(join(process.cwd(), 'dist/public/blogs-seo.html'), 'utf-8');
+      res.setHeader('Content-Type', 'text/html');
+      res.send(seoHtml);
+      return;
+    } catch (error) {
+      console.log('Could not read blogs-seo.html, continuing to React app');
+    }
+  }
+  
+  next();
+});
+
+app.get('/best-things-to-do-in-:cityName', (req, res, next) => {
+  const userAgent = req.get('user-agent') || '';
+  
+  if (isSearchEngineBot(userAgent)) {
+    try {
+      const cityName = req.params.cityName;
+      const seoHtml = readFileSync(join(process.cwd(), `dist/public/best-things-to-do-in-${cityName}/index.html`), 'utf-8');
+      res.setHeader('Content-Type', 'text/html');
+      res.send(seoHtml);
+      return;
+    } catch (error) {
+      console.log(`Could not read city SEO HTML for ${req.params.cityName}, continuing to React app`);
+    }
+  }
+  
+  next();
+});
+
+app.get('/blog/:blogId', (req, res, next) => {
+  const userAgent = req.get('user-agent') || '';
+  
+  if (isSearchEngineBot(userAgent)) {
+    try {
+      const blogId = req.params.blogId;
+      const seoHtml = readFileSync(join(process.cwd(), `dist/public/blog/${blogId}.html`), 'utf-8');
+      res.setHeader('Content-Type', 'text/html');
+      res.send(seoHtml);
+      return;
+    } catch (error) {
+      console.log(`Could not read blog SEO HTML for ${blogId}, continuing to React app`);
+    }
+  }
+  
+  next();
+});
 
 // Session configuration optimized for Firebase Functions
 app.use(session({

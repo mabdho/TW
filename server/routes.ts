@@ -40,22 +40,22 @@ async function regenerateStaticFiles() {
     // Import the save functions
     const { saveHtmlFile, saveHtmlFileToSubdirectory } = await import('./html-generator');
     
-    // Regenerate home page
+    // Regenerate home page (save as SEO version, don't overwrite React app)
     console.log('  → Regenerating home page...');
     const homePageHTML = generateHomePageHTML();
-    await saveHtmlFile('index.html', homePageHTML);
+    await saveHtmlFile('home-seo.html', homePageHTML);
     console.log('  ✅ Home page regenerated');
     
-    // Regenerate destinations page
+    // Regenerate destinations page (save as SEO version)
     console.log('  → Regenerating destinations page...');
     const destinationsHTML = generateDestinationsPageHTML();
-    await saveHtmlFile('destinations.html', destinationsHTML);
+    await saveHtmlFile('destinations-seo.html', destinationsHTML);
     console.log('  ✅ Destinations page regenerated');
     
-    // Regenerate blogs page
+    // Regenerate blogs page (save as SEO version)
     console.log('  → Regenerating blogs page...');
     const blogsHTML = generateBlogsPageHTML();
-    await saveHtmlFile('blogs.html', blogsHTML);
+    await saveHtmlFile('blogs-seo.html', blogsHTML);
     console.log('  ✅ Blogs page regenerated');
     
     // Regenerate individual blog HTML files for all existing blogs
@@ -625,7 +625,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post('/api/generate-homepage', async (req, res) => {
     try {
       const htmlContent = generateHomePageHTML();
-      const outputPath = path.join(process.cwd(), 'dist', 'public', 'index.html');
+      const outputPath = path.join(process.cwd(), 'dist', 'public', 'home-seo.html');
       
       // Ensure directory exists
       await fs.mkdir(path.dirname(outputPath), { recursive: true });
@@ -654,7 +654,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post('/api/generate-destinations', async (req, res) => {
     try {
       const htmlContent = generateDestinationsPageHTML();
-      const outputPath = path.join(process.cwd(), 'dist', 'public', 'destinations', 'index.html');
+      const outputPath = path.join(process.cwd(), 'dist', 'public', 'destinations-seo.html');
       
       // Ensure directory exists
       await fs.mkdir(path.dirname(outputPath), { recursive: true });
@@ -683,7 +683,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post('/api/generate-blogs', async (req, res) => {
     try {
       const htmlContent = generateBlogsPageHTML();
-      const outputPath = path.join(process.cwd(), 'dist', 'public', 'blogs', 'index.html');
+      const outputPath = path.join(process.cwd(), 'dist', 'public', 'blogs-seo.html');
       
       // Ensure directory exists
       await fs.mkdir(path.dirname(outputPath), { recursive: true });
@@ -716,7 +716,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Generate homepage
       try {
         const homeHtml = generateHomePageHTML();
-        const homePath = path.join(process.cwd(), 'dist', 'public', 'index.html');
+        const homePath = path.join(process.cwd(), 'dist', 'public', 'home-seo.html');
         await fs.mkdir(path.dirname(homePath), { recursive: true });
         await fs.writeFile(homePath, homeHtml, 'utf-8');
         const homeSize = (await fs.stat(homePath)).size;
@@ -737,7 +737,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Generate destinations page
       try {
         const destHtml = generateDestinationsPageHTML();
-        const destPath = path.join(process.cwd(), 'dist', 'public', 'destinations', 'index.html');
+        const destPath = path.join(process.cwd(), 'dist', 'public', 'destinations-seo.html');
         await fs.mkdir(path.dirname(destPath), { recursive: true });
         await fs.writeFile(destPath, destHtml, 'utf-8');
         const destSize = (await fs.stat(destPath)).size;
@@ -758,7 +758,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Generate blogs page
       try {
         const blogsHtml = generateBlogsPageHTML();
-        const blogsPath = path.join(process.cwd(), 'dist', 'public', 'blogs', 'index.html');
+        const blogsPath = path.join(process.cwd(), 'dist', 'public', 'blogs-seo.html');
         await fs.mkdir(path.dirname(blogsPath), { recursive: true });
         await fs.writeFile(blogsPath, blogsHtml, 'utf-8');
         const blogsSize = (await fs.stat(blogsPath)).size;
@@ -1857,11 +1857,11 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
     try {
       const homePageHTML = generateHomePageHTML();
       const { saveHtmlFile } = await import('./html-generator');
-      const filePath = await saveHtmlFile('index.html', homePageHTML);
+      const filePath = await saveHtmlFile('home-seo.html', homePageHTML);
       
       res.json({
         success: true,
-        fileName: 'index.html',
+        fileName: 'home-seo.html',
         filePath: filePath,
         fileSize: `${(homePageHTML.length / 1024).toFixed(2)} KB`,
         message: 'Homepage HTML generated successfully'
@@ -1929,9 +1929,9 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       
       // Generate all main pages
       const pages = [
-        { name: 'Homepage', fileName: 'index.html', generator: generateHomePageHTML },
-        { name: 'Destinations', fileName: 'destinations.html', generator: generateDestinationsPageHTML },
-        { name: 'Blogs', fileName: 'blogs.html', generator: generateBlogsPageHTML },
+        { name: 'Homepage', fileName: 'home-seo.html', generator: generateHomePageHTML },
+        { name: 'Destinations', fileName: 'destinations-seo.html', generator: generateDestinationsPageHTML },
+        { name: 'Blogs', fileName: 'blogs-seo.html', generator: generateBlogsPageHTML },
         { name: 'Privacy Policy', fileName: 'privacy-policy.html', generator: generatePrivacyPolicyHTML },
         { name: 'Terms of Service', fileName: 'terms-of-service.html', generator: generateTermsOfServiceHTML },
         { name: 'Cookie Policy', fileName: 'cookie-policy.html', generator: generateCookiePolicyHTML }
