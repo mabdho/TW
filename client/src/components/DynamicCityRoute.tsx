@@ -10,37 +10,7 @@ const createCityImport = (cityName: string, importPath: string) =>
 
 // City mapping for dynamic imports
 const cityMap = {
-  // Empty - ready for fresh city additions
-
-  'porto': createCityImport('Porto', '../pages/cities/Porto'),
-
-  'milan': createCityImport('Milan', '../pages/cities/Milan'),
-
-  'zurich': createCityImport('Zurich', '../pages/cities/Zurich'),
-
-  'austin': createCityImport('Austin', '../pages/cities/Austin'),
-
-  'miami': createCityImport('Miami', '../pages/cities/Miami'),
-
-  'venice': createCityImport('Venice', '../pages/cities/Venice'),
-
-  'berlin': createCityImport('Berlin', '../pages/cities/Berlin'),
-
-  'new-york': createCityImport('NewYork', '../pages/cities/NewYork'),
-
-  'sydney': createCityImport('Sydney', '../pages/cities/Sydney'),
-
-  'los-angeles': createCityImport('LosAngeles', '../pages/cities/LosAngeles'),
-
-  'boston': createCityImport('Boston', '../pages/cities/Boston'),
-
-  'male': createCityImport('Male', '../pages/cities/Male'),
-
-  'colombo': createCityImport('Colombo', '../pages/cities/Colombo'),
-
-  'chicago': createCityImport('Chicago', '../pages/cities/Chicago'),
-
-  'aarhus': createCityImport('Aarhus', '../pages/cities/Aarhus'),
+  // Empty - ready for fresh city additions via admin panel
 };
 
 interface DynamicCityRouteProps {

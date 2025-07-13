@@ -6,14 +6,7 @@ import { Badge } from '@/components/ui/badge';
 
 // Featured cities - will be populated with new production cities
 const featuredCities = [
-  { "name": "Aarhus", "country": "Denmark", "path": "/best-things-to-do-in-aarhus", "continent": "Europe", "imageUrl": "" },
-  { "name": "Chicago", "country": "USA", "path": "/best-things-to-do-in-chicago", "continent": "North America", "imageUrl": "" },,
-  { "name": "Colombo", "country": "Sri Lanka", "path": "/best-things-to-do-in-colombo", "continent": "Asia", "imageUrl": "" },,,
-  { "name": "Male", "country": "Maldives", "path": "/best-things-to-do-in-male", "continent": "Asia", "imageUrl": "" },,,,
-  { "name": "Boston", "country": "USA", "path": "/best-things-to-do-in-boston", "continent": "North America", "imageUrl": "" },,,,,
-  { "name": "Los Angeles", "country": "USA", "path": "/best-things-to-do-in-los-angeles", "continent": "North America", "imageUrl": "" },,,,,,
-  { "name": "Sydney", "country": "Australia", "path": "/best-things-to-do-in-sydney", "continent": "Australia", "imageUrl": "" },,,,,,
-  { "name": "New York", "country": "USA", "path": "/best-things-to-do-in-new-york", "continent": "North America", "imageUrl": "" },,,,,
+  // Featured cities cleared - ready for fresh production content via admin panel
 ];
 
 export const FeaturedCities = () => {
