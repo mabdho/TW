@@ -2,7 +2,8 @@
 import { Blog } from '@shared/schema';
 import { test1Blog } from './test-1.tsx';
 import { firebasestatichtmlgeneratorcompleteimplementationpromptBlog } from './firebase-static-html-generator-complete-implementation-prompt.tsx';
-import { testtestBlog } from './test-test';import { abdhoBlog } from './abdho';import { maldivesBlog } from './maldives';import { maldives2Blog } from './maldives-2';import { maldives3Blog } from './maldives-3';import { colomboBlog } from './colombo';import { test5Blog } from './test-5';
+import { testtestBlog } from './test-test';import { abdhoBlog } from './abdho';import { maldivesBlog } from './maldives';import { maldives2Blog } from './maldives-2';import { maldives3Blog } from './maldives-3';import { colomboBlog } from './colombo';import { test5Blog } from './test-5';import { test6Blog } from './test-6';
+
 
 
 
@@ -58,6 +59,7 @@ export const allBlogs: Blog[] = [
   maldives3Blog,
   colomboBlog,
   test5Blog,
+  test6Blog,
 ];
 
 export function getAllBlogs(): Blog[] {
