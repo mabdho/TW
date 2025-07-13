@@ -33,6 +33,19 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (July 2025)
 
+### Latest 2 Blogs Auto-Featured on Home Page - COMPLETED ✅ (July 13, 2025)
+- ✅ **DUPLICATE KEY WARNING FIX**: Removed duplicate blog entries causing React console warnings
+- ✅ **AUTO-FEATURED SYSTEM**: Created getLatestBlogsForHomePage() function that automatically marks latest 2 blogs as featured
+- ✅ **HOME PAGE INTEGRATION**: Updated TravelCategories component to always show latest 2 blogs with featured badges
+- ✅ **HTML GENERATOR SYNC**: Updated static HTML generation to apply same auto-featured logic
+- ✅ **CONSISTENT DISPLAY**: Latest 2 blogs now consistently show as featured across React app and static HTML
+
+### Blog Payload Size Fix - COMPLETED ✅ (July 13, 2025)
+- ✅ **PAYLOAD TOO LARGE ERROR FIX**: Fixed blog generation failure caused by request body exceeding Express default size limit
+- ✅ **INCREASED BODY PARSER LIMIT**: Updated Express configuration to handle 10MB payload for AI-generated content
+- ✅ **BLOG GENERATION RESTORED**: Blog creation through admin panel now works with large AI-generated content
+- ✅ **FUTURE-PROOF**: System can now handle comprehensive blog posts with extensive content
+
 ### Blog Creation Index File Fix - COMPLETED ✅ (July 13, 2025)
 - ✅ **ROOT CAUSE IDENTIFIED**: Server blog creation code was inserting import statements in wrong location within index.ts file
 - ✅ **SYNTAX ERROR FIX**: Fixed blog index.ts file generation to properly place import statements before comment line
