@@ -1,6 +1,6 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from 'fs/promises';
 import { readFileSync, existsSync } from 'fs';
+import * as path from 'path';
 
 // Utility function to get the correct HTML output directory based on environment
 function getHtmlOutputDirectory(): string {
@@ -52,7 +52,7 @@ function readCityDataFromComponents(): Array<{ name: string; country: string; ro
   try {
     // Read CityDirectory.tsx to get the main city list
     const cityDirectoryPath = path.join(process.cwd(), 'client', 'src', 'components', 'CityDirectory.tsx');
-    const cityDirectoryContent = fs.readFileSync(cityDirectoryPath, 'utf-8');
+    const cityDirectoryContent = readFileSync(cityDirectoryPath, 'utf-8');
     
     // Extract the cities array from the file
     const citiesMatch = cityDirectoryContent.match(/const cities = \[([\s\S]*?)\];/);
@@ -94,7 +94,7 @@ function readFeaturedCitiesFromComponents(): Array<{ name: string; country: stri
   try {
     // Read FeaturedCities.tsx to get the featured cities list
     const featuredCitiesPath = path.join(process.cwd(), 'client', 'src', 'components', 'FeaturedCities.tsx');
-    const featuredCitiesContent = fs.readFileSync(featuredCitiesPath, 'utf-8');
+    const featuredCitiesContent = readFileSync(featuredCitiesPath, 'utf-8');
     
     // Extract the featuredCities array from the file
     const featuredCitiesMatch = featuredCitiesContent.match(/const featuredCities = \[([\s\S]*?)\];/);
@@ -151,12 +151,12 @@ export function readBlogDataFromFileSystem(): Array<{ id: string; title: string;
     
     // Read blog index file
     const blogIndexPath = path.join(process.cwd(), 'client', 'src', 'blogs', 'index.ts');
-    if (!fs.existsSync(blogIndexPath)) {
+    if (!existsSync(blogIndexPath)) {
       console.warn('Blog index file not found, returning empty array');
       return [];
     }
     
-    const blogIndexContent = fs.readFileSync(blogIndexPath, 'utf-8');
+    const blogIndexContent = readFileSync(blogIndexPath, 'utf-8');
     
     // Extract the allBlogs array from the file
     const blogsMatch = blogIndexContent.match(/export const allBlogs: Blog\[\] = \[([\s\S]*?)\];/);
@@ -205,9 +205,9 @@ export function readBlogDataFromFileSystem(): Array<{ id: string; title: string;
         const fileName = importStatementMatch[1];
         const blogFilePath = path.join(blogDir, fileName.endsWith('.tsx') ? fileName : `${fileName}.tsx`);
         
-        if (fs.existsSync(blogFilePath)) {
+        if (existsSync(blogFilePath)) {
           try {
-            const blogFileContent = fs.readFileSync(blogFilePath, 'utf-8');
+            const blogFileContent = readFileSync(blogFilePath, 'utf-8');
             
             // Extract blog data from the individual file
             const blogDataMatch = blogFileContent.match(/export const \w+(?:Blog)?: Blog = \{([\s\S]*?)\};/);
@@ -2623,7 +2623,7 @@ function generateCommonStyles(): string {
 
 export async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityData | null> {
   try {
-    const tsxContent = fs.readFileSync(tsxFilePath, 'utf-8');
+    const tsxContent = readFileSync(tsxFilePath, 'utf-8');
     
     // Extract basic city information using enhanced extraction
     const title = extractFieldFromTSX(tsxContent, 'title');

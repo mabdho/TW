@@ -18,7 +18,8 @@ const cities = [
   { "name": "Sydney", "country": "Australia", "path": "/best-things-to-do-in-sydney", "continent": "Australia" },
   { "name": "Los Angeles", "country": "USA", "path": "/best-things-to-do-in-los-angeles", "continent": "North America" },
   { "name": "Boston", "country": "USA", "path": "/best-things-to-do-in-boston", "continent": "North America" },
-  { "name": "Male", "country": "Maldives", "path": "/best-things-to-do-in-male", "continent": "Asia" }
+  { "name": "Male", "country": "Maldives", "path": "/best-things-to-do-in-male", "continent": "Asia" },
+  { "name": "Colombo", "country": "Sri Lanka", "path": "/best-things-to-do-in-colombo", "continent": "Asia" }
 ];
 
 const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America", "South America"];
