@@ -25,6 +25,8 @@ const cityMap = {
   'venice': createCityImport('Venice', '../pages/cities/Venice'),
 
   'berlin': createCityImport('Berlin', '../pages/cities/Berlin'),
+
+  'new-york': createCityImport('NewYork', '../pages/cities/NewYork'),
 };
 
 interface DynamicCityRouteProps {

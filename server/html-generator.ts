@@ -2218,3 +2218,54 @@ export async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityD
     return null;
   }
 }
+
+function generateFooter(): string {
+  return `
+    <footer class="bg-gray-50 border-t border-gray-200 py-12">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <div class="flex items-center space-x-3 mb-4">
+              <div class="h-8 w-8 bg-green-600 rounded-lg flex items-center justify-center">
+                <span class="text-white text-lg font-bold">T</span>
+              </div>
+              <span class="text-xl font-bold text-gray-900">TravelWanders</span>
+            </div>
+            <p class="text-gray-600 text-sm">Discover amazing destinations and create unforgettable memories with our curated travel guides.</p>
+          </div>
+          
+          <div>
+            <h3 class="text-gray-900 font-semibold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li><a href="/" class="text-gray-600 hover:text-green-600 text-sm transition-colors">Home</a></li>
+              <li><a href="/destinations" class="text-gray-600 hover:text-green-600 text-sm transition-colors">Destinations</a></li>
+              <li><a href="/blogs" class="text-gray-600 hover:text-green-600 text-sm transition-colors">Travel Blog</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="text-gray-900 font-semibold mb-4">Travel Resources</h3>
+            <ul class="space-y-2">
+              <li><a href="/destinations" class="text-gray-600 hover:text-green-600 text-sm transition-colors">City Guides</a></li>
+              <li><a href="/blogs" class="text-gray-600 hover:text-green-600 text-sm transition-colors">Travel Tips</a></li>
+              <li><a href="/destinations" class="text-gray-600 hover:text-green-600 text-sm transition-colors">Popular Destinations</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="text-gray-900 font-semibold mb-4">Legal & Support</h3>
+            <ul class="space-y-2">
+              <li><a href="/privacy" class="text-gray-600 hover:text-green-600 text-sm transition-colors">Privacy Policy</a></li>
+              <li><a href="/terms" class="text-gray-600 hover:text-green-600 text-sm transition-colors">Terms of Service</a></li>
+              <li><a href="mailto:support@travelwanders.com" class="text-gray-600 hover:text-green-600 text-sm transition-colors">Contact Support</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-200 mt-8 pt-6 text-center">
+          <p class="text-gray-600 text-sm">&copy; 2025 TravelWanders. All rights reserved. Made with ❤️ for travelers worldwide.</p>
+        </div>
+      </div>
+    </footer>
+  `;
+}
