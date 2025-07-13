@@ -689,6 +689,22 @@ const pageStyles = `
 `;
 
 // Helper functions for generating HTML components
+// Convert markdown to HTML with proper header hierarchy
+function convertMarkdownToHTML(text: string): string {
+  if (!text) return '';
+  
+  return text
+    .replace(/### (.*)/g, '<h4>$1</h4>')  // Convert ### to h4
+    .replace(/## (.*)/g, '<h3>$1</h3>')   // Convert ## to h3  
+    .replace(/# (.*)/g, '<h2>$1</h2>')    // Convert # to h2
+    .replace(/\n/g, '<br>')               // Convert newlines to br
+    .replace(/<br><br>/g, '</p><p>')      // Convert double breaks to paragraphs
+    .replace(/^/, '<p>')                  // Add opening p tag
+    .replace(/$/, '</p>')                 // Add closing p tag
+    .replace(/<p><h([1-6])>/g, '<h$1>')   // Remove p tags around headers
+    .replace(/<\/h([1-6])><\/p>/g, '</h$1>'); // Remove p tags around headers
+}
+
 function generatePracticalInfoHTML(practicalInfo: any): string {
   return `
     <div class="practical-info">
@@ -786,7 +802,7 @@ export function generateCompleteHTML(cityData: CityData): string {
       <div class="attraction-number">${index + 1}</div>
       <div class="attraction-content">
         <h3 class="attraction-name">${attraction.name || 'Unnamed Attraction'}</h3>
-        <div class="attraction-description">${(attraction.description || 'No description available').replace(/#{1,6}\s/g, '<h4>').replace(/\n/g, '<br>')}</div>
+        <div class="attraction-description">${convertMarkdownToHTML(attraction.description || 'No description available')}</div>
         ${attraction.practicalInfo ? generatePracticalInfoHTML(attraction.practicalInfo) : ''}
         ${attraction.discoveryTags ? generateDiscoveryTagsHTML(attraction.discoveryTags) : ''}
       </div>
@@ -797,7 +813,7 @@ export function generateCompleteHTML(cityData: CityData): string {
     `<div class="attraction-card">
       <div class="attraction-content">
         <h3 class="attraction-name">${attraction.name || 'Unnamed Attraction'}</h3>
-        <div class="attraction-description">${(attraction.description || 'No description available').replace(/#{1,6}\s/g, '<h4>').replace(/\n/g, '<br>')}</div>
+        <div class="attraction-description">${convertMarkdownToHTML(attraction.description || 'No description available')}</div>
         
         ${attraction.practicalInfo ? generatePracticalInfoHTML(attraction.practicalInfo) : ''}
         ${attraction.discoveryTags ? generateDiscoveryTagsHTML(attraction.discoveryTags) : ''}
@@ -992,7 +1008,7 @@ export function generateCompleteHTML(cityData: CityData): string {
         ${cityData.description ? `
         <section class="section">
           <div class="description-content">
-            <p class="description-text">${cityData.description}</p>
+            <div class="description-text">${convertMarkdownToHTML(cityData.description)}</div>
           </div>
         </section>
         ` : ''}
@@ -1311,18 +1327,21 @@ export function generateCompleteHTML(cityData: CityData): string {
 
 // Enhanced extraction functions for flexible TSX parsing
 function extractFieldFromTSX(content: string, fieldName: string): string | null {
-  // Try multiple patterns for field extraction
+  // Try multiple patterns for field extraction, including multiline template literals
   const patterns = [
+    new RegExp(`${fieldName}=\\{\`([\\s\\S]*?)\`\\}`, 's'),  // Template literal with multiline support
     new RegExp(`${fieldName}=\\{?"([^"]+)"\\}?`),
     new RegExp(`${fieldName}:\\s*['"\`]([^'"\`]+)['"\`]`),
-    new RegExp(`${fieldName}=\\{\`([^\`]+)\`\\}`),
     new RegExp(`${fieldName}="([^"]+)"`),  // Direct string prop
     new RegExp(`${fieldName}=\\{"([^"]+)"\\}`) // String in JSX expression
   ];
   
   for (const pattern of patterns) {
     const match = content.match(pattern);
-    if (match) return match[1];
+    if (match) {
+      // Clean up template literal content
+      return match[1].trim();
+    }
   }
   return null;
 }
