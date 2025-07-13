@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { readFileSync, existsSync } from 'fs';
 
 interface CityData {
   cityName: string;
@@ -1884,11 +1885,7 @@ export function generateHomePageHTML(): string {
       <div class="travel-categories-content">
         <h2>Latest Travel <span style="color: #059669;">Stories</span></h2>
         <p>Get inspired by our latest travel insights, tips, and destination guides.</p>
-        <p style="color: #4b5563; margin-bottom: 1rem;">No blog posts available yet.</p>
-        <a href="/blogs" class="travel-categories-cta">
-          Visit Blog Page
-          <span>→</span>
-        </a>
+        ${generateLatestBlogsHTML()}
       </div>
     </div>
   </section>
@@ -2045,6 +2042,168 @@ function generateFeaturedDestinationsCards(): string {
       </div>
     </a>
   `).join('');
+}
+
+function generateLatestBlogsHTML(): string {
+  try {
+    // Read blog files from the file system
+    const blogsDir = path.join(process.cwd(), 'client', 'src', 'blogs');
+    const blogIndexPath = path.join(blogsDir, 'index.ts');
+    
+    if (!existsSync(blogIndexPath)) {
+      return `
+        <p style="color: #4b5563; margin-bottom: 1rem;">No blog posts available yet.</p>
+        <a href="/blogs" class="travel-categories-cta">
+          Visit Blog Page
+          <span>→</span>
+        </a>
+      `;
+    }
+    
+    // Read the blog index file and extract blog data
+    const blogIndexContent = readFileSync(blogIndexPath, 'utf-8');
+    
+    // Extract blogs from the allBlogs array - more robust pattern to handle multiline objects
+    const blogsMatch = blogIndexContent.match(/export const allBlogs: Blog\[\] = \[([\s\S]*?)\];/);
+    if (!blogsMatch) {
+      return `
+        <p style="color: #4b5563; margin-bottom: 1rem;">No blog posts available yet.</p>
+        <a href="/blogs" class="travel-categories-cta">
+          Visit Blog Page
+          <span>→</span>
+        </a>
+      `;
+    }
+    
+    // Parse blog objects from the string
+    const blogsString = blogsMatch[1].trim();
+    const blogs = [];
+    
+    // Find all blog objects using a more robust regex that handles proper brace matching
+    let braceDepth = 0;
+    let currentObject = '';
+    let inString = false;
+    let stringChar = '';
+    
+    for (let i = 0; i < blogsString.length; i++) {
+      const char = blogsString[i];
+      const prevChar = i > 0 ? blogsString[i - 1] : '';
+      
+      if (!inString && (char === '"' || char === "'")) {
+        inString = true;
+        stringChar = char;
+      } else if (inString && char === stringChar && prevChar !== '\\') {
+        inString = false;
+        stringChar = '';
+      }
+      
+      if (!inString) {
+        if (char === '{') {
+          if (braceDepth === 0) {
+            currentObject = char;
+          } else {
+            currentObject += char;
+          }
+          braceDepth++;
+        } else if (char === '}') {
+          currentObject += char;
+          braceDepth--;
+          if (braceDepth === 0) {
+            // We found a complete object
+            const titleMatch = currentObject.match(/id:\s*['"]([^'"]+)['"]/);
+            const titlePropMatch = currentObject.match(/title:\s*['"]([^'"]+)['"]/);
+            const excerptMatch = currentObject.match(/excerpt:\s*['"]([^'"]+)['"]/);
+            const categoryMatch = currentObject.match(/category:\s*['"]([^'"]+)['"]/);
+            const imageUrlMatch = currentObject.match(/imageUrl:\s*['"]([^'"]+)['"]/);
+            const featuredMatch = currentObject.match(/featured:\s*(true|false)/);
+            const readTimeMatch = currentObject.match(/readTime:\s*['"]([^'"]+)['"]/);
+            
+            if (titleMatch && titlePropMatch && excerptMatch) {
+              blogs.push({
+                id: titleMatch[1],
+                title: titlePropMatch[1],
+                excerpt: excerptMatch[1],
+                category: categoryMatch ? categoryMatch[1] : 'Travel',
+                imageUrl: imageUrlMatch ? imageUrlMatch[1] : '',
+                featured: featuredMatch ? featuredMatch[1] === 'true' : false,
+                readTime: readTimeMatch ? readTimeMatch[1] : '5 min read'
+              });
+            }
+            currentObject = '';
+          }
+        } else if (braceDepth > 0) {
+          currentObject += char;
+        }
+      } else {
+        currentObject += char;
+      }
+    }
+    
+    if (blogs.length === 0) {
+      return `
+        <p style="color: #4b5563; margin-bottom: 1rem;">No blog posts available yet.</p>
+        <a href="/blogs" class="travel-categories-cta">
+          Visit Blog Page
+          <span>→</span>
+        </a>
+      `;
+    }
+    
+    // Sort by date (newest first) and get latest 2
+    const latestBlogs = blogs.slice(0, 2);
+    
+    if (latestBlogs.length === 0) {
+      return `
+        <p style="color: #4b5563; margin-bottom: 1rem;">No blog posts available yet.</p>
+        <a href="/blogs" class="travel-categories-cta">
+          Visit Blog Page
+          <span>→</span>
+        </a>
+      `;
+    }
+    
+    // Generate HTML for blog cards
+    const blogCardsHTML = latestBlogs.map(blog => `
+      <div style="background: white; border: 1px solid #e5e7eb; border-radius: 0.75rem; overflow: hidden; transition: all 0.3s ease; margin-bottom: 1.5rem;">
+        <div style="height: 12rem; background: linear-gradient(135deg, #059669 0%, #3b82f6 100%); position: relative;">
+          ${blog.imageUrl ? `<img src="${blog.imageUrl}" alt="${blog.title}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;">` : ''}
+          ${blog.featured ? '<div style="position: absolute; top: 1rem; left: 1rem; background: #ea580c; color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 500;">Featured</div>' : ''}
+        </div>
+        <div style="padding: 1.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <span style="background: #f3f4f6; color: #4b5563; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 500;">${blog.category}</span>
+            <span style="color: #6b7280; font-size: 0.75rem;">${blog.readTime}</span>
+          </div>
+          <h3 style="font-size: 1.125rem; font-weight: 600; color: #111827; margin-bottom: 0.5rem; line-height: 1.4;">${blog.title}</h3>
+          <p style="color: #4b5563; font-size: 0.875rem; line-height: 1.5; margin-bottom: 1rem;">${blog.excerpt}</p>
+          <a href="/blog/${blog.id}" style="display: inline-flex; align-items: center; color: #059669; font-weight: 500; font-size: 0.875rem; text-decoration: none;">
+            Read More
+            <span style="margin-left: 0.5rem;">→</span>
+          </a>
+        </div>
+      </div>
+    `).join('');
+    
+    return `
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+        ${blogCardsHTML}
+      </div>
+      <a href="/blogs" class="travel-categories-cta">
+        View All Stories
+        <span>→</span>
+      </a>
+    `;
+    
+  } catch (error) {
+    console.error('Error generating latest blogs HTML:', error);
+    return `
+      <p style="color: #4b5563; margin-bottom: 1rem;">No blog posts available yet.</p>
+      <a href="/blogs" class="travel-categories-cta">
+        Visit Blog Page
+        <span>→</span>
+      </a>
+    `;
+  }
 }
 
 function generateDestinationCount(): number {

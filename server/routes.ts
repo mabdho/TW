@@ -27,6 +27,31 @@ import {
   generateBlogsPageHTML
 } from './html-generator';
 
+// Helper function to regenerate static HTML files
+async function regenerateStaticFiles() {
+  try {
+    console.log('🔄 Regenerating static HTML files...');
+    
+    // Regenerate home page
+    const homePageHTML = generateHomePageHTML();
+    await fs.writeFile(path.join(process.cwd(), 'public', 'index.html'), homePageHTML, 'utf-8');
+    
+    // Regenerate destinations page
+    const destinationsHTML = generateDestinationsPageHTML();
+    await fs.writeFile(path.join(process.cwd(), 'public', 'destinations.html'), destinationsHTML, 'utf-8');
+    
+    // Regenerate blogs page
+    const blogsHTML = generateBlogsPageHTML();
+    await fs.writeFile(path.join(process.cwd(), 'public', 'blogs.html'), blogsHTML, 'utf-8');
+    
+    console.log('✅ Static HTML files regenerated successfully');
+    return true;
+  } catch (error) {
+    console.error('❌ Error regenerating static HTML files:', error);
+    return false;
+  }
+}
+
 // Firebase Functions HTML Generator Interface
 interface CityData {
   cityName: string;
@@ -1355,13 +1380,18 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
         }
       }
       
+      // Automatically regenerate static HTML files to reflect the new city
+      console.log('🔄 Regenerating static HTML files after new city creation...');
+      const regenerationSuccess = await regenerateStaticFiles();
+      
       res.json({
         success: true,
         cityName: cityFileName,
         generatedCode: componentCode,
         filePath: `client/src/pages/cities/${cityFileName}.tsx`,
         htmlGenerated,
-        message: `City page for ${city} created successfully${htmlMessage} and integrated into navigation`
+        staticFilesRegenerated: regenerationSuccess,
+        message: `City page for ${city} created successfully${htmlMessage} and integrated into navigation${regenerationSuccess ? ' with static files updated' : ''}`
       });
 
     } catch (error) {
@@ -1640,12 +1670,17 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
         console.warn('Failed to update sitemap after blog creation:', sitemapError);
       }
 
+      // Automatically regenerate static HTML files to reflect the new blog
+      console.log('🔄 Regenerating static HTML files after new blog creation...');
+      const regenerationSuccess = await regenerateStaticFiles();
+
       res.json({
         success: true,
         blogId,
         fileName: blogFileName,
         filePath: `client/src/blogs/${blogFileName}`,
-        message: `Blog "${title}" created successfully and sitemap updated`
+        staticFilesRegenerated: regenerationSuccess,
+        message: `Blog "${title}" created successfully and sitemap updated${regenerationSuccess ? ' with static files updated' : ''}`
       });
 
     } catch (error) {
@@ -1793,17 +1828,23 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
         console.warn('Could not verify blog removal:', error.message);
       }
 
+      // Automatically regenerate static HTML files to reflect the blog deletion
+      console.log('🔄 Regenerating static HTML files after blog deletion...');
+      const regenerationSuccess = await regenerateStaticFiles();
+
       res.json({
         success: true,
         message: `Blog "${blogId}" completely deleted with all SEO references removed`,
         blogId,
         deletedFile: blogFileName,
+        staticFilesRegenerated: regenerationSuccess,
         cleanupActions: [
           'Blog file deleted',
           'Index file updated',
           'Static files removed',
           'Sitemap updated',
-          'Module cache cleared'
+          'Module cache cleared',
+          regenerationSuccess ? 'Static HTML files regenerated' : 'Static HTML regeneration failed'
         ]
       });
 
