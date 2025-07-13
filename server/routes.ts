@@ -1048,10 +1048,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Helper function to detect search engine bots
+  const isSearchEngineBot = (userAgent: string): boolean => {
+    return /bot|crawler|spider|scraper|facebook|twitter|googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest|developers\.google\.com/i.test(userAgent);
+  };
+
   // Serve home page HTML for search engines
   app.get('/', async (req, res, next) => {
     const userAgent = req.get('User-Agent') || '';
-    const isBot = /bot|crawler|spider|scraper|facebook|twitter|googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest|developers\.google\.com/i.test(userAgent);
+    const isBot = isSearchEngineBot(userAgent);
     
     // If it's a search engine bot, serve the static HTML
     if (isBot) {
@@ -1062,6 +1067,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } catch (error) {
         console.error('Error generating home page HTML:', error);
         res.status(500).send('Error generating page');
+      }
+    } else {
+      // For regular users, continue to next middleware (Vite in development)
+      next();
+    }
+  });
+
+  // Serve city page HTML for search engines
+  app.get('/best-things-to-do-in-:cityName', async (req, res, next) => {
+    const userAgent = req.get('User-Agent') || '';
+    const isBot = isSearchEngineBot(userAgent);
+    
+    // If it's a search engine bot, serve the static HTML
+    if (isBot) {
+      try {
+        const { cityName } = req.params;
+        
+        // Convert city name to proper case for TSX file lookup
+        const cityNameCapitalized = cityName.charAt(0).toUpperCase() + cityName.slice(1);
+        const tsxFilePath = path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityNameCapitalized}.tsx`);
+        
+        // Check if TSX file exists
+        if (existsSync(tsxFilePath)) {
+          const cityData = await extractCityDataFromTSXHtmlGen(tsxFilePath);
+          
+          if (cityData) {
+            const htmlContent = generateCompleteHTML(cityData);
+            res.set('Content-Type', 'text/html');
+            res.send(htmlContent);
+            return;
+          }
+        }
+        
+        // If no city data found, continue to next middleware (404 or React app)
+        next();
+      } catch (error) {
+        console.error('Error generating city page HTML:', error);
+        next(); // Continue to next middleware instead of serving error
       }
     } else {
       // For regular users, continue to next middleware (Vite in development)
