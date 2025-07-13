@@ -165,17 +165,34 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
     };
 
     attractions.forEach(attraction => {
-      const desc = attraction.description.toLowerCase();
-      const hasEasyAccess = desc.includes('easy') || desc.includes('accessible') || desc.includes('central') || desc.includes('main');
-      const hasModerateAccess = desc.includes('walk') || desc.includes('bike') || desc.includes('explore') || desc.includes('stroll');
-      const hasExpertLevel = desc.includes('hidden') || desc.includes('local') || desc.includes('secret') || desc.includes('off the beaten');
+      // Use discoveryTags experienceLevel if available
+      const experienceLevel = attraction.discoveryTags?.experienceLevel?.toLowerCase() || '';
       
-      if (hasExpertLevel) {
-        categories.localExpert.push(attraction);
-      } else if (hasModerateAccess) {
-        categories.moderateAdventure.push(attraction);
+      if (experienceLevel) {
+        if (experienceLevel.includes('easy') || experienceLevel.includes('accessible')) {
+          categories.easyAccess.push(attraction);
+        } else if (experienceLevel.includes('moderate') || experienceLevel.includes('intermediate')) {
+          categories.moderateAdventure.push(attraction);
+        } else if (experienceLevel.includes('expert') || experienceLevel.includes('advanced')) {
+          categories.localExpert.push(attraction);
+        } else {
+          // Default to easy access if unclear
+          categories.easyAccess.push(attraction);
+        }
       } else {
-        categories.easyAccess.push(attraction);
+        // Fall back to description analysis if no discoveryTags
+        const desc = attraction.description.toLowerCase();
+        const hasEasyAccess = desc.includes('easy') || desc.includes('accessible') || desc.includes('central') || desc.includes('main');
+        const hasModerateAccess = desc.includes('walk') || desc.includes('bike') || desc.includes('explore') || desc.includes('stroll');
+        const hasExpertLevel = desc.includes('hidden') || desc.includes('local') || desc.includes('secret') || desc.includes('off the beaten');
+        
+        if (hasExpertLevel) {
+          categories.localExpert.push(attraction);
+        } else if (hasModerateAccess) {
+          categories.moderateAdventure.push(attraction);
+        } else {
+          categories.easyAccess.push(attraction);
+        }
       }
     });
 
@@ -606,17 +623,19 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
       title: "Quick Facts",
       icon: <Zap className="w-5 h-5 text-amber-500" />,
       color: "amber",
-      summary: `${attractions.length} attractions overview`,
+      summary: `${discoveryData?.quickFacts?.totalAttractions || attractions.length} attractions overview`,
       content: (
         <div className="space-y-3">
           <div className="grid grid-cols-2 gap-3">
             <div className="p-4 bg-gradient-to-br from-amber-50/80 to-yellow-50/80 dark:from-amber-900/20 dark:to-yellow-900/20 rounded-xl text-center border-l-4 border-amber-400 shadow-sm">
-              <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">{attractions.length}</div>
+              <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">
+                {discoveryData?.quickFacts?.totalAttractions || attractions.length}
+              </div>
               <div className="text-xs text-gray-600 dark:text-gray-400">Total Attractions</div>
             </div>
             <div className="p-4 bg-gradient-to-br from-emerald-50/80 to-teal-50/80 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-xl text-center border-l-4 border-emerald-400 shadow-sm">
               <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
-                {attractions.filter(attr => getCostLevel(attr) === 'Free').length}
+                {discoveryData?.quickFacts?.freeActivities || attractions.filter(attr => getCostLevel(attr) === 'Free').length}
               </div>
               <div className="text-xs text-gray-600 dark:text-gray-400">Free Activities</div>
             </div>
@@ -624,17 +643,27 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
           <div className="grid grid-cols-2 gap-3">
             <div className="p-4 bg-gradient-to-br from-sky-50/80 to-blue-50/80 dark:from-sky-900/20 dark:to-blue-900/20 rounded-xl text-center border-l-4 border-sky-400 shadow-sm">
               <div className="text-2xl font-bold text-sky-600 dark:text-sky-400">
-                {attractions.filter(attr => getTimeEstimate(attr) === '30-60 Min').length}
+                {discoveryData?.quickFacts?.averageTimePerAttraction || 'Varies'}
               </div>
-              <div className="text-xs text-gray-600 dark:text-gray-400">Quick Visits</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">Average Time</div>
             </div>
             <div className="p-4 bg-gradient-to-br from-purple-50/80 to-violet-50/80 dark:from-purple-900/20 dark:to-violet-900/20 rounded-xl text-center border-l-4 border-purple-400 shadow-sm">
               <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
-                {attractions.filter(attr => getSeasonalInfo(attr) === 'Year-Round').length}
+                {discoveryData?.quickFacts?.walkingFriendly ? 'Yes' : 'Varies'}
               </div>
-              <div className="text-xs text-gray-600 dark:text-gray-400">Year-Round</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">Walking Friendly</div>
             </div>
           </div>
+          {discoveryData?.quickFacts?.publicTransportQuality && (
+            <div className="p-3 bg-gradient-to-r from-indigo-50/80 to-purple-50/80 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl border-l-4 border-indigo-400 shadow-sm">
+              <div className="text-center">
+                <div className="text-lg font-bold text-indigo-600 dark:text-indigo-400">
+                  {discoveryData.quickFacts.publicTransportQuality}
+                </div>
+                <div className="text-xs text-gray-600 dark:text-gray-400">Public Transport</div>
+              </div>
+            </div>
+          )}
         </div>
       )
     }
