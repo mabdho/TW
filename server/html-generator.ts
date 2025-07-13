@@ -3087,6 +3087,109 @@ export function generateIndividualBlogHTML(blogData: any): string {
       font-weight: 500;
     }
     
+    /* Author Section */
+    .author-section {
+      margin-top: 3rem;
+      padding: 2rem 0;
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    .author-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .author-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #059669;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    
+    .author-name {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+    
+    .author-bio {
+      color: #6b7280;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    
+    /* Social Media Sharing */
+    .social-sharing {
+      margin-top: 2rem;
+      padding: 2rem 0;
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    .social-sharing h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+    
+    .social-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .social-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border: 1px solid #e5e7eb;
+      color: #374151;
+      background: white;
+    }
+    
+    .social-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .social-button.twitter:hover {
+      background: #1d9bf0;
+      border-color: #1d9bf0;
+      color: white;
+    }
+    
+    .social-button.facebook:hover {
+      background: #1877f2;
+      border-color: #1877f2;
+      color: white;
+    }
+    
+    .social-button.linkedin:hover {
+      background: #0a66c2;
+      border-color: #0a66c2;
+      color: white;
+    }
+    
+    .social-button.email:hover {
+      background: #059669;
+      border-color: #059669;
+      color: white;
+    }
+    
     @media (max-width: 768px) {
       .blog-content {
         padding: 1rem;
@@ -3103,6 +3206,21 @@ export function generateIndividualBlogHTML(blogData: any): string {
       
       .blog-hero-image {
         height: 250px;
+      }
+      
+      .author-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .social-buttons {
+        justify-content: center;
+      }
+      
+      .social-button {
+        flex: 1;
+        min-width: 120px;
+        justify-content: center;
       }
     }
   </style>
@@ -3129,6 +3247,57 @@ export function generateIndividualBlogHTML(blogData: any): string {
     <div class="blog-body">
       ${convertMarkdownToHTML(blogData.content)}
     </div>
+    
+    <!-- Author Section -->
+    <section class="author-section">
+      <div class="author-card">
+        <div class="author-avatar">
+          ${blogData.author ? blogData.author.charAt(0).toUpperCase() : 'T'}
+        </div>
+        <div class="author-info">
+          <h3 class="author-name">${blogData.author || 'TravelWanders Team'}</h3>
+          <p class="author-bio">
+            ${blogData.author ? `${blogData.author} is a passionate travel writer who loves exploring hidden gems and sharing authentic travel experiences.` : 'Our travel experts are passionate explorers who curate the best travel guides and insider tips for authentic adventures around the world.'}
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Social Media Sharing -->
+    <section class="social-sharing">
+      <h3>Share this article</h3>
+      <div class="social-buttons">
+        <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(blogData.title)}&url=${encodeURIComponent(`https://travelwanders.com/blog/${blogData.id}`)}" 
+           target="_blank" rel="noopener" class="social-button twitter">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+          Twitter
+        </a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://travelwanders.com/blog/${blogData.id}`)}" 
+           target="_blank" rel="noopener" class="social-button facebook">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+          Facebook
+        </a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://travelwanders.com/blog/${blogData.id}`)}" 
+           target="_blank" rel="noopener" class="social-button linkedin">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          LinkedIn
+        </a>
+        <a href="mailto:?subject=${encodeURIComponent(blogData.title)}&body=${encodeURIComponent(`Check out this article: ${blogData.title} - https://travelwanders.com/blog/${blogData.id}`)}" 
+           class="social-button email">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/>
+            <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/>
+          </svg>
+          Email
+        </a>
+      </div>
+    </section>
   </article>
   
   ${generateFooter()}
