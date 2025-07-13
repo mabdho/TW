@@ -100,7 +100,7 @@ function getDefaultCities() {
 }
 
 // Helper function to read blog data from file system
-function readBlogDataFromFileSystem(): Array<{ id: string; title: string; excerpt: string; category: string; imageUrl?: string; featured: boolean; readTime: string; date: string; author?: string }> {
+export function readBlogDataFromFileSystem(): Array<{ id: string; title: string; excerpt: string; category: string; imageUrl?: string; featured: boolean; readTime: string; date: string; author?: string }> {
   try {
     // Read blog index file
     const blogIndexPath = path.join(process.cwd(), 'client', 'src', 'blogs', 'index.ts');

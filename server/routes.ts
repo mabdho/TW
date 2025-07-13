@@ -27,7 +27,9 @@ import {
   generateBlogsPageHTML,
   generatePrivacyPolicyHTML,
   generateTermsOfServiceHTML,
-  generateCookiePolicyHTML
+  generateCookiePolicyHTML,
+  readBlogDataFromFileSystem,
+  generateIndividualBlogHTML
 } from './html-generator';
 
 // Helper function to regenerate static HTML files
@@ -47,6 +49,31 @@ async function regenerateStaticFiles() {
     const blogsHTML = generateBlogsPageHTML();
     await fs.writeFile(path.join(process.cwd(), 'public', 'blogs.html'), blogsHTML, 'utf-8');
     
+    // Regenerate individual blog HTML files for all existing blogs
+    try {
+      const allBlogsData = readBlogDataFromFileSystem();
+      const blogHtmlDir = path.join(process.cwd(), 'public', 'blog');
+      
+      // Ensure blog directory exists
+      await fs.mkdir(blogHtmlDir, { recursive: true });
+      
+      let blogHtmlCount = 0;
+      for (const blogData of allBlogsData) {
+        try {
+          const blogHtml = generateIndividualBlogHTML(blogData);
+          const blogHtmlPath = path.join(blogHtmlDir, `${blogData.id}.html`);
+          await fs.writeFile(blogHtmlPath, blogHtml, 'utf-8');
+          blogHtmlCount++;
+        } catch (blogError) {
+          console.warn(`Failed to generate HTML for blog "${blogData.title}":`, blogError.message);
+        }
+      }
+      
+      console.log(`✅ Generated ${blogHtmlCount} individual blog HTML files`);
+    } catch (blogHtmlError) {
+      console.warn('Failed to regenerate individual blog HTML files:', blogHtmlError.message);
+    }
+    
     // Regenerate legal pages for SEO compliance
     const privacyHTML = generatePrivacyPolicyHTML();
     await fs.writeFile(path.join(process.cwd(), 'public', 'privacy-policy.html'), privacyHTML, 'utf-8');
@@ -57,7 +84,7 @@ async function regenerateStaticFiles() {
     const cookieHTML = generateCookiePolicyHTML();
     await fs.writeFile(path.join(process.cwd(), 'public', 'cookie-policy.html'), cookieHTML, 'utf-8');
     
-    console.log('✅ Static HTML files regenerated successfully (home, destinations, blogs, legal pages)');
+    console.log('✅ Static HTML files regenerated successfully (home, destinations, blogs, individual blog pages, legal pages)');
     return true;
   } catch (error) {
     console.error('❌ Error regenerating static HTML files:', error);
@@ -2163,6 +2190,37 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
   });
 
 
+
+  // Test endpoint to manually trigger static file regeneration
+  app.post('/api/test-regenerate-static-files', async (req, res) => {
+    try {
+      console.log('🧪 Manual regeneration test triggered');
+      const success = await regenerateStaticFiles();
+      
+      // Check if blog HTML files were generated
+      const blogHtmlDir = path.join(process.cwd(), 'public', 'blog');
+      let blogHtmlFiles = [];
+      try {
+        const files = await fs.readdir(blogHtmlDir);
+        blogHtmlFiles = files.filter(file => file.endsWith('.html'));
+      } catch (error) {
+        console.warn('Could not read blog HTML directory:', error.message);
+      }
+      
+      res.json({
+        success,
+        message: 'Static files regeneration test completed',
+        blogHtmlFiles,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Error in regeneration test:', error);
+      res.status(500).json({ 
+        error: 'Test failed',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
 
   // SEO API routes
   app.post('/api/seo/validate', validateSEOData);
