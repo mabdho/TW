@@ -33,6 +33,17 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (July 2025)
 
+### Firebase HTML Deployment Directory Fix - COMPLETED ✅ (July 13, 2025)
+- ✅ **DEPLOYMENT PATH CORRECTION**: Fixed HTML files to save to correct Firebase deployment directory (dist/public/)
+- ✅ **ENVIRONMENT-BASED SAVING**: Added utility functions to detect Firebase deployment and save HTML files to correct location
+- ✅ **UNIFIED SAVE FUNCTIONS**: Created saveHtmlFile() and saveHtmlFileToSubdirectory() functions for consistent HTML file handling
+- ✅ **ALL ROUTES UPDATED**: Updated all HTML generation routes to use new save functions (city pages, blogs, static pages)
+- ✅ **FIREBASE API ENDPOINTS**: Added comprehensive Firebase HTML generator API endpoints for all page types
+- ✅ **DEPLOYMENT SCRIPTS**: Created deployment scripts to ensure HTML files are in correct Firebase hosting directory
+- ✅ **DIRECTORY STRUCTURE VERIFIED**: Confirmed dist/public/ contains 18 HTML files and all city directories
+- ✅ **BUILD PROCESS INTEGRATION**: HTML files now automatically saved to Firebase deployment directory during build
+- ✅ **PRODUCTION READY**: All HTML files properly positioned for Firebase hosting deployment
+
 ### Latest 2 Blogs Auto-Featured on Home Page - COMPLETED ✅ (July 13, 2025)
 - ✅ **DUPLICATE KEY WARNING FIX**: Removed duplicate blog entries causing React console warnings
 - ✅ **AUTO-FEATURED SYSTEM**: Created getLatestBlogsForHomePage() function that automatically marks latest 2 blogs as featured

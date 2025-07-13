@@ -2,6 +2,51 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { readFileSync, existsSync } from 'fs';
 
+// Utility function to get the correct HTML output directory based on environment
+function getHtmlOutputDirectory(): string {
+  // For Firebase deployment, use dist/public
+  // For development, use public
+  const isFirebaseDeployment = process.env.NODE_ENV === 'production' || process.env.FIREBASE_DEPLOYMENT === 'true';
+  
+  if (isFirebaseDeployment) {
+    return path.join(process.cwd(), 'dist', 'public');
+  } else {
+    return path.join(process.cwd(), 'public');
+  }
+}
+
+// Utility function to ensure directory exists
+async function ensureDirectoryExists(dirPath: string): Promise<void> {
+  try {
+    await fs.access(dirPath);
+  } catch (error) {
+    await fs.mkdir(dirPath, { recursive: true });
+  }
+}
+
+// Utility function to save HTML files to the correct directory
+export async function saveHtmlFile(fileName: string, content: string): Promise<string> {
+  const outputDir = getHtmlOutputDirectory();
+  await ensureDirectoryExists(outputDir);
+  
+  const filePath = path.join(outputDir, fileName);
+  await fs.writeFile(filePath, content, 'utf-8');
+  
+  return filePath;
+}
+
+// Utility function to save HTML files to specific subdirectories (like city pages)
+export async function saveHtmlFileToSubdirectory(subdirectory: string, fileName: string, content: string): Promise<string> {
+  const outputDir = getHtmlOutputDirectory();
+  const fullDir = path.join(outputDir, subdirectory);
+  await ensureDirectoryExists(fullDir);
+  
+  const filePath = path.join(fullDir, fileName);
+  await fs.writeFile(filePath, content, 'utf-8');
+  
+  return filePath;
+}
+
 // Helper function to read city data from React components
 function readCityDataFromComponents(): Array<{ name: string; country: string; route: string; continent?: string; imageUrl?: string }> {
   try {

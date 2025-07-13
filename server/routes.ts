@@ -37,32 +37,30 @@ async function regenerateStaticFiles() {
   try {
     console.log('🔄 Regenerating static HTML files...');
     
+    // Import the save functions
+    const { saveHtmlFile, saveHtmlFileToSubdirectory } = await import('./html-generator');
+    
     // Regenerate home page
     const homePageHTML = generateHomePageHTML();
-    await fs.writeFile(path.join(process.cwd(), 'public', 'index.html'), homePageHTML, 'utf-8');
+    await saveHtmlFile('index.html', homePageHTML);
     
     // Regenerate destinations page
     const destinationsHTML = generateDestinationsPageHTML();
-    await fs.writeFile(path.join(process.cwd(), 'public', 'destinations.html'), destinationsHTML, 'utf-8');
+    await saveHtmlFile('destinations.html', destinationsHTML);
     
     // Regenerate blogs page
     const blogsHTML = generateBlogsPageHTML();
-    await fs.writeFile(path.join(process.cwd(), 'public', 'blogs.html'), blogsHTML, 'utf-8');
+    await saveHtmlFile('blogs.html', blogsHTML);
     
     // Regenerate individual blog HTML files for all existing blogs
     try {
       const allBlogsData = readBlogDataFromFileSystem();
-      const blogHtmlDir = path.join(process.cwd(), 'public', 'blog');
-      
-      // Ensure blog directory exists
-      await fs.mkdir(blogHtmlDir, { recursive: true });
       
       let blogHtmlCount = 0;
       for (const blogData of allBlogsData) {
         try {
           const blogHtml = generateIndividualBlogHTML(blogData);
-          const blogHtmlPath = path.join(blogHtmlDir, `${blogData.id}.html`);
-          await fs.writeFile(blogHtmlPath, blogHtml, 'utf-8');
+          await saveHtmlFileToSubdirectory('blog', `${blogData.id}.html`, blogHtml);
           blogHtmlCount++;
         } catch (blogError) {
           console.warn(`Failed to generate HTML for blog "${blogData.title}":`, blogError.message);
@@ -76,13 +74,13 @@ async function regenerateStaticFiles() {
     
     // Regenerate legal pages for SEO compliance
     const privacyHTML = generatePrivacyPolicyHTML();
-    await fs.writeFile(path.join(process.cwd(), 'public', 'privacy-policy.html'), privacyHTML, 'utf-8');
+    await saveHtmlFile('privacy-policy.html', privacyHTML);
     
     const termsHTML = generateTermsOfServiceHTML();
-    await fs.writeFile(path.join(process.cwd(), 'public', 'terms-of-service.html'), termsHTML, 'utf-8');
+    await saveHtmlFile('terms-of-service.html', termsHTML);
     
     const cookieHTML = generateCookiePolicyHTML();
-    await fs.writeFile(path.join(process.cwd(), 'public', 'cookie-policy.html'), cookieHTML, 'utf-8');
+    await saveHtmlFile('cookie-policy.html', cookieHTML);
     
     console.log('✅ Static HTML files regenerated successfully (home, destinations, blogs, individual blog pages, legal pages)');
     return true;
@@ -973,11 +971,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Save the individual blog HTML file
       const blogHtmlFileName = `${blogId}.html`;
-      const blogHtmlPath = path.join(process.cwd(), 'public', 'blog', blogHtmlFileName);
-      
-      // Ensure blog directory exists
-      await fs.mkdir(path.dirname(blogHtmlPath), { recursive: true });
-      await fs.writeFile(blogHtmlPath, blogHtml);
+      const { saveHtmlFileToSubdirectory } = await import('./html-generator');
+      await saveHtmlFileToSubdirectory('blog', blogHtmlFileName, blogHtml);
       
       console.log(`Generated individual HTML for blog "${blogData.title}"`);
       
@@ -1639,11 +1634,10 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
           // Generate complete HTML using Firebase Functions system
           const completeHTML = generateCompleteHTML(cityData);
           
-          // Save the HTML file to public directory
+          // Save the HTML file to correct deployment directory
           const htmlFileName = `best-things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}.html`;
-          const htmlFilePath = path.join(process.cwd(), 'public', htmlFileName);
-          
-          await fs.writeFile(htmlFilePath, completeHTML);
+          const { saveHtmlFile } = await import('./html-generator');
+          const htmlFilePath = await saveHtmlFile(htmlFileName, completeHTML);
           htmlGenerated = true;
           htmlMessage = ` with complete HTML generated at /${htmlFileName}`;
           
@@ -1676,7 +1670,8 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       console.log('🌍 Regenerating destinations page with new city...');
       try {
         const destinationsHTML = generateDestinationsPageHTML();
-        await fs.writeFile(path.join(process.cwd(), 'public', 'destinations.html'), destinationsHTML, 'utf-8');
+        const { saveHtmlFile } = await import('./html-generator');
+        await saveHtmlFile('destinations.html', destinationsHTML);
         console.log('✅ Destinations page regenerated successfully');
       } catch (destError) {
         console.error('❌ Error regenerating destinations page:', destError);
@@ -1745,11 +1740,10 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       
       const completeHTML = generateCompleteHTML(cityData);
       
-      // Save the HTML file to public directory
+      // Save the HTML file to correct deployment directory
       const htmlFileName = `best-things-to-do-in-${cityName.toLowerCase().replace(/\s+/g, '-')}.html`;
-      const htmlFilePath = path.join(process.cwd(), 'public', htmlFileName);
-      
-      await fs.writeFile(htmlFilePath, completeHTML);
+      const { saveHtmlFile } = await import('./html-generator');
+      const htmlFilePath = await saveHtmlFile(htmlFileName, completeHTML);
       
       res.json({
         success: true,
@@ -1799,9 +1793,8 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
             // Generate HTML filename from city name
             const cityName = cityData.cityName.toLowerCase().replace(/\s+/g, '-');
             const htmlFileName = `best-things-to-do-in-${cityName}.html`;
-            const htmlFilePath = path.join(process.cwd(), 'public', htmlFileName);
-            
-            await fs.writeFile(htmlFilePath, completeHTML);
+            const { saveHtmlFile } = await import('./html-generator');
+            const htmlFilePath = await saveHtmlFile(htmlFileName, completeHTML);
             
             results.push({
               success: true,
@@ -1844,6 +1837,131 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       console.error('Error generating all HTML:', error);
       res.status(500).json({ 
         error: 'Failed to generate HTML for all cities',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  // Firebase HTML Generator - Additional endpoints for static page generation
+  app.post('/api/admin/generate-homepage', requireAdmin, async (req, res) => {
+    try {
+      const homePageHTML = generateHomePageHTML();
+      const { saveHtmlFile } = await import('./html-generator');
+      const filePath = await saveHtmlFile('index.html', homePageHTML);
+      
+      res.json({
+        success: true,
+        fileName: 'index.html',
+        filePath: filePath,
+        fileSize: `${(homePageHTML.length / 1024).toFixed(2)} KB`,
+        message: 'Homepage HTML generated successfully'
+      });
+      
+    } catch (error) {
+      console.error('Error generating homepage HTML:', error);
+      res.status(500).json({ 
+        error: 'Failed to generate homepage HTML',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  app.post('/api/admin/generate-destinations', requireAdmin, async (req, res) => {
+    try {
+      const destinationsHTML = generateDestinationsPageHTML();
+      const { saveHtmlFile } = await import('./html-generator');
+      const filePath = await saveHtmlFile('destinations.html', destinationsHTML);
+      
+      res.json({
+        success: true,
+        fileName: 'destinations.html',
+        filePath: filePath,
+        fileSize: `${(destinationsHTML.length / 1024).toFixed(2)} KB`,
+        message: 'Destinations page HTML generated successfully'
+      });
+      
+    } catch (error) {
+      console.error('Error generating destinations HTML:', error);
+      res.status(500).json({ 
+        error: 'Failed to generate destinations HTML',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  app.post('/api/admin/generate-blogs', requireAdmin, async (req, res) => {
+    try {
+      const blogsHTML = generateBlogsPageHTML();
+      const { saveHtmlFile } = await import('./html-generator');
+      const filePath = await saveHtmlFile('blogs.html', blogsHTML);
+      
+      res.json({
+        success: true,
+        fileName: 'blogs.html',
+        filePath: filePath,
+        fileSize: `${(blogsHTML.length / 1024).toFixed(2)} KB`,
+        message: 'Blogs page HTML generated successfully'
+      });
+      
+    } catch (error) {
+      console.error('Error generating blogs HTML:', error);
+      res.status(500).json({ 
+        error: 'Failed to generate blogs HTML',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  app.post('/api/admin/generate-all-static-pages', requireAdmin, async (req, res) => {
+    try {
+      const { saveHtmlFile } = await import('./html-generator');
+      const results = [];
+      
+      // Generate all main pages
+      const pages = [
+        { name: 'Homepage', fileName: 'index.html', generator: generateHomePageHTML },
+        { name: 'Destinations', fileName: 'destinations.html', generator: generateDestinationsPageHTML },
+        { name: 'Blogs', fileName: 'blogs.html', generator: generateBlogsPageHTML },
+        { name: 'Privacy Policy', fileName: 'privacy-policy.html', generator: generatePrivacyPolicyHTML },
+        { name: 'Terms of Service', fileName: 'terms-of-service.html', generator: generateTermsOfServiceHTML },
+        { name: 'Cookie Policy', fileName: 'cookie-policy.html', generator: generateCookiePolicyHTML }
+      ];
+      
+      for (const page of pages) {
+        try {
+          const html = page.generator();
+          const filePath = await saveHtmlFile(page.fileName, html);
+          results.push({
+            success: true,
+            name: page.name,
+            fileName: page.fileName,
+            fileSize: `${(html.length / 1024).toFixed(2)} KB`
+          });
+        } catch (error) {
+          results.push({
+            success: false,
+            name: page.name,
+            error: error.message
+          });
+        }
+      }
+      
+      const successful = results.filter(r => r.success).length;
+      const failed = results.filter(r => !r.success).length;
+      
+      res.json({
+        success: true,
+        totalPages: pages.length,
+        successful,
+        failed,
+        results,
+        message: `Generated ${successful} static pages (${failed} failed)`
+      });
+      
+    } catch (error) {
+      console.error('Error generating all static pages:', error);
+      res.status(500).json({ 
+        error: 'Failed to generate all static pages',
         details: error instanceof Error ? error.message : 'Unknown error'
       });
     }
@@ -1987,11 +2105,8 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
         
         // Save the individual blog HTML file
         const blogHtmlFileName = `${blogId}.html`;
-        const blogHtmlPath = path.join(process.cwd(), 'public', 'blog', blogHtmlFileName);
-        
-        // Ensure blog directory exists
-        await fs.mkdir(path.dirname(blogHtmlPath), { recursive: true });
-        await fs.writeFile(blogHtmlPath, blogHtml);
+        const { saveHtmlFileToSubdirectory } = await import('./html-generator');
+        await saveHtmlFileToSubdirectory('blog', blogHtmlFileName, blogHtml);
         
         blogHtmlGenerated = true;
         blogHtmlMessage = ` with individual HTML generated at /blog/${blogHtmlFileName}`;
