@@ -2,7 +2,8 @@
 import { Blog } from '@shared/schema';
 import { test1Blog } from './test-1.tsx';
 import { firebasestatichtmlgeneratorcompleteimplementationpromptBlog } from './firebase-static-html-generator-complete-implementation-prompt.tsx';
-import { testtestBlog } from './test-test';import { abdhoBlog } from './abdho';import { maldivesBlog } from './maldives';
+import { testtestBlog } from './test-test';import { abdhoBlog } from './abdho';import { maldivesBlog } from './maldives';import { maldives2Blog } from './maldives-2';
+
 
 
 
@@ -50,10 +51,16 @@ export const allBlogs: Blog[] = [
   test1Blog,
   firebasestatichtmlgeneratorcompleteimplementationpromptBlog,
   testtestBlog,
+  maldives2Blog,
 ];
 
 export function getAllBlogs(): Blog[] {
-  return allBlogs.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return allBlogs.sort((a, b) => {
+    // Use createdAt timestamp if available, fallback to date
+    const timeA = a.createdAt ? new Date(a.createdAt).getTime() : new Date(a.date).getTime();
+    const timeB = b.createdAt ? new Date(b.createdAt).getTime() : new Date(b.date).getTime();
+    return timeB - timeA; // Most recent first
+  });
 }
 
 export function getLatestBlogs(limit: number = 2): Blog[] {

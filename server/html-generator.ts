@@ -178,6 +178,7 @@ export function readBlogDataFromFileSystem(): Array<{ id: string; title: string;
               const featured = blogData.match(/featured:\s*(true|false)/)?.[1] === 'true';
               const readTime = blogData.match(/readTime:\s*["']([^"']+)["']/)?.[1];
               const date = blogData.match(/date:\s*["']([^"']+)["']/)?.[1];
+              const createdAt = blogData.match(/createdAt:\s*["']([^"']*?)["']/)?.[1]; // Parse createdAt timestamp
               const author = blogData.match(/author:\s*["']([^"']*?)["']/)?.[1] || 'TravelWanders Team';
               
               if (id && title && excerpt && category && readTime && date) {
@@ -190,6 +191,7 @@ export function readBlogDataFromFileSystem(): Array<{ id: string; title: string;
                   featured,
                   readTime,
                   date,
+                  createdAt, // Include createdAt in the parsed blog data
                   author
                 });
                 console.log(`Successfully parsed blog: ${title} (${id})`);
@@ -209,7 +211,12 @@ export function readBlogDataFromFileSystem(): Array<{ id: string; title: string;
       index === self.findIndex(b => b.id === blog.id)
     );
     
-    return uniqueBlogs.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    return uniqueBlogs.sort((a, b) => {
+      // Use createdAt timestamp if available, fallback to date for precise ordering
+      const timeA = a.createdAt ? new Date(a.createdAt).getTime() : new Date(a.date).getTime();
+      const timeB = b.createdAt ? new Date(b.createdAt).getTime() : new Date(b.date).getTime();
+      return timeB - timeA; // Most recent first
+    });
   } catch (error) {
     console.error('Error reading blog data from file system:', error);
     return [];

@@ -25,6 +25,7 @@ export interface Blog {
   featured: boolean;
   readTime: string;
   date: string;
+  createdAt?: string; // ISO timestamp for precise ordering
   author?: string;
 }
 

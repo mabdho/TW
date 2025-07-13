@@ -1908,6 +1908,7 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       const blogId = title.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-');
       const readTime = Math.ceil(content.split(' ').length / 200) + ' min read';
       
+      const now = new Date();
       const blogData = {
         id: blogId,
         title,
@@ -1917,7 +1918,8 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
         imageUrl: imageUrl || '',
         featured: false,
         readTime,
-        date: new Date().toISOString().split('T')[0],
+        date: now.toISOString().split('T')[0],
+        createdAt: now.toISOString(), // Add precise creation timestamp
         author: author || 'TravelWanders Team'
       };
 
@@ -2354,6 +2356,7 @@ export const ${componentName}Blog: Blog = {
   featured: ${blogData.featured},
   readTime: "${blogData.readTime}",
   date: "${blogData.date}",
+  createdAt: "${blogData.createdAt || blogData.date}",
   author: "${blogData.author}"
 };`;
 }
