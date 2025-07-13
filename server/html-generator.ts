@@ -395,11 +395,208 @@ const pageStyles = `
     line-height: 1.7;
   }
 
-  .footer {
-    background: #2c3e50;
+  /* Navigation Styles */
+  .navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .nav-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-logo:hover {
+    color: #059669;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-link {
+    color: #4b5563;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .nav-link:hover {
+    color: #059669;
+  }
+
+  .nav-cta {
+    background: #059669;
     color: white;
-    padding: 3rem 0;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s;
+  }
+
+  .nav-cta:hover {
+    background: #047857;
+  }
+
+  /* Main content padding for fixed nav */
+  .main-content {
+    padding-top: 60px;
+  }
+
+  /* Footer Styles */
+  .footer {
+    background: #f9fafb;
+    border-top: 1px solid #e2e8f0;
+    padding: 3rem 0 1.5rem;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .footer-section h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1rem;
+  }
+
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-section li {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-section a {
+    color: #6b7280;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.3s;
+  }
+
+  .footer-section a:hover {
+    color: #059669;
+  }
+
+  .footer-brand {
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1.5rem;
+    margin-top: 2rem;
     text-align: center;
+    color: #6b7280;
+    font-size: 0.875rem;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .social-links a {
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .social-links a:hover {
+    color: #059669;
+  }
+
+  /* Internal Links Styles */
+  .internal-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .link-group h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1rem;
+  }
+
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .internal-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    color: #374151;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .internal-link:hover {
+    background: #e0f2fe;
+    border-color: #0891b2;
+    color: #0891b2;
+    transform: translateY(-1px);
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+    
+    .internal-links {
+      grid-template-columns: 1fr;
+    }
+    
+    .links-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .logistics-grid {
@@ -806,6 +1003,29 @@ export function generateCompleteHTML(cityData: CityData): string {
           </div>
         </section>
         ${discoveryCardsHTML}
+        
+        <!-- Internal Links Section for SEO -->
+        <section class="section">
+          <h2 class="section-title">🔗 Related Destinations</h2>
+          <div class="internal-links">
+            <div class="link-group">
+              <h3>Explore More in ${cityData.country}</h3>
+              <div class="links-grid">
+                <a href="https://travelwanders.com/destinations" class="internal-link">Browse All Destinations</a>
+                <a href="https://travelwanders.com/blogs" class="internal-link">Travel Guides & Tips</a>
+                <a href="https://travelwanders.com/destinations" class="internal-link">Featured Cities</a>
+              </div>
+            </div>
+            <div class="link-group">
+              <h3>Popular Travel Resources</h3>
+              <div class="links-grid">
+                <a href="https://travelwanders.com/blogs" class="internal-link">Travel Blog</a>
+                <a href="https://travelwanders.com/destinations" class="internal-link">City Guides</a>
+                <a href="https://travelwanders.com/destinations" class="internal-link">Travel Planning</a>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   `;
@@ -951,7 +1171,20 @@ export function generateCompleteHTML(cityData: CityData): string {
     <style>${pageStyles}</style>
 </head>
 <body>
-    <div id="root">
+    <!-- Navigation Header -->
+    <nav class="navigation">
+        <div class="nav-container">
+            <a href="https://travelwanders.com" class="nav-logo">TravelWanders</a>
+            <ul class="nav-links">
+                <li><a href="https://travelwanders.com" class="nav-link">Home</a></li>
+                <li><a href="https://travelwanders.com/destinations" class="nav-link">Destinations</a></li>
+                <li><a href="https://travelwanders.com/blogs" class="nav-link">Blogs</a></li>
+                <li><a href="https://travelwanders.com/destinations" class="nav-cta">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root" class="main-content">
         ${heroHTML}
         
         <!-- Tab Navigation -->
@@ -976,9 +1209,55 @@ export function generateCompleteHTML(cityData: CityData): string {
         
         <!-- Footer -->
         <footer class="footer">
-            <div class="container">
-                <p>&copy; 2025 TravelWanders. All rights reserved.</p>
-                <p>Explore the world with confidence and discover hidden gems in every destination.</p>
+            <div class="footer-content">
+                <!-- Brand Section -->
+                <div class="footer-section">
+                    <h3>TravelWanders</h3>
+                    <p class="footer-brand">Your trusted companion for discovering amazing destinations around the world. We curate the best travel experiences to make your journey unforgettable.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/travelwanders" target="_blank" rel="noopener noreferrer">Facebook</a>
+                        <a href="https://twitter.com/travelwanders" target="_blank" rel="noopener noreferrer">Twitter</a>
+                        <a href="https://instagram.com/travelwanders" target="_blank" rel="noopener noreferrer">Instagram</a>
+                        <a href="https://youtube.com/travelwanders" target="_blank" rel="noopener noreferrer">YouTube</a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="https://travelwanders.com/destinations">Destinations</a></li>
+                        <li><a href="https://travelwanders.com/blogs">Travel Blog</a></li>
+                        <li><a href="https://travelwanders.com">Home</a></li>
+                        <li><a href="https://travelwanders.com/destinations">Featured Cities</a></li>
+                    </ul>
+                </div>
+
+                <!-- Get Started -->
+                <div class="footer-section">
+                    <h3>Get Started</h3>
+                    <ul>
+                        <li><a href="https://travelwanders.com/destinations">Browse Destinations</a></li>
+                        <li><a href="https://travelwanders.com/blogs">Travel Inspiration</a></li>
+                        <li><a href="https://travelwanders.com/destinations">Plan Your Trip</a></li>
+                        <li><a href="https://travelwanders.com/destinations">Discover Places</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal & Support -->
+                <div class="footer-section">
+                    <h3>Legal & Support</h3>
+                    <ul>
+                        <li><a href="https://travelwanders.com/privacy-policy">Privacy Policy</a></li>
+                        <li><a href="https://travelwanders.com/terms-of-service">Terms of Service</a></li>
+                        <li><a href="https://travelwanders.com/cookie-policy">Cookie Policy</a></li>
+                        <li><a href="mailto:support@travelwanders.com">Contact Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 TravelWanders. All rights reserved. Made with ❤️ for travelers worldwide.</p>
             </div>
         </footer>
     </div>
