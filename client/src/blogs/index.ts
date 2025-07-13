@@ -1,5 +1,6 @@
 // File-based blog system - this file will export all available blogs
 import { Blog } from '@shared/schema';
+import { test1Blog } from './test-1.tsx';
 
 // This file will be automatically updated when new blogs are generated
 export const allBlogs: Blog[] = [
@@ -20,7 +21,6 @@ export const allBlogs: Blog[] = [
     title: 'Sustainable Travel Tips for Eco-Conscious Explorers',
     excerpt: 'Learn how to reduce your environmental impact while traveling and support local communities.',
     content: 'Sustainable travel is more important than ever. Here are practical tips for eco-conscious explorers...',
-import { test1Blog } from './test-1';
     category: 'Tips',
     imageUrl: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80',
     featured: false,
@@ -39,7 +39,7 @@ import { test1Blog } from './test-1';
     readTime: '6 min read',
     date: '2025-01-13',
     author: 'TravelWanders Team'
-  }
+  },
   test1Blog,
 ];
 
