@@ -78,7 +78,16 @@ export async function updateSitemap() {
     const fs = await import('fs/promises');
     const path = await import('path');
     
-    const sitemapPath = path.join(process.cwd(), 'demo-static-output', 'sitemap.xml');
+    const sitemapPath = path.join(process.cwd(), 'dist', 'public', 'sitemap.xml');
+    
+    // Ensure the dist/public directory exists
+    const distPublicDir = path.join(process.cwd(), 'dist', 'public');
+    try {
+      await fs.access(distPublicDir);
+    } catch {
+      await fs.mkdir(distPublicDir, { recursive: true });
+    }
+    
     await fs.writeFile(sitemapPath, sitemap, 'utf-8');
     
     console.log(`Sitemap updated with ${cities.length + blogs.length + 6} URLs`);

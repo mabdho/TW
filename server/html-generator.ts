@@ -2,17 +2,10 @@ import * as fs from 'fs/promises';
 import { readFileSync, existsSync } from 'fs';
 import * as path from 'path';
 
-// Utility function to get the correct HTML output directory based on environment
+// Utility function to get the correct HTML output directory - ALWAYS use dist/public for Firebase deployment
 function getHtmlOutputDirectory(): string {
-  // For Firebase deployment, use dist/public
-  // For development, use public
-  const isFirebaseDeployment = process.env.NODE_ENV === 'production' || process.env.FIREBASE_DEPLOYMENT === 'true';
-  
-  if (isFirebaseDeployment) {
-    return path.join(process.cwd(), 'dist', 'public');
-  } else {
-    return path.join(process.cwd(), 'public');
-  }
+  // ALWAYS use dist/public for Firebase hosting deployment
+  return path.join(process.cwd(), 'dist', 'public');
 }
 
 // Utility function to ensure directory exists
