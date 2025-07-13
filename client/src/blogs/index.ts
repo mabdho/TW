@@ -2,7 +2,8 @@
 import { Blog } from '@shared/schema';
 import { test1Blog } from './test-1.tsx';
 import { firebasestatichtmlgeneratorcompleteimplementationpromptBlog } from './firebase-static-html-generator-complete-implementation-prompt.tsx';
-import { testtestBlog } from './test-test';
+import { testtestBlog } from './test-test';import { abdhoBlog } from './abdho';
+
 
 
 // This file will be automatically updated when new blogs are generated
@@ -48,6 +49,7 @@ export const allBlogs: Blog[] = [
   test1Blog,
   test1Blog,
   testtestBlog,
+  abdhoBlog,
 ];
 
 export function getAllBlogs(): Blog[] {

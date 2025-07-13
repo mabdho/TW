@@ -51,6 +51,11 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://travelwanders.com/best-things-to-do-in-Male</loc>
+    <lastmod>2025-07-13</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://travelwanders.com/best-things-to-do-in-Miami</loc>
     <lastmod>2025-07-13</lastmod>
     <priority>0.9</priority>
@@ -84,6 +89,11 @@
     <loc>https://travelwanders.com/best-things-to-do-in-Zurich</loc>
     <lastmod>2025-07-13</lastmod>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://travelwanders.com/blog/abdho</loc>
+    <lastmod>2025-07-13</lastmod>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://travelwanders.com/blog/firebase-static-html-generator-complete-implementation-prompt</loc>
