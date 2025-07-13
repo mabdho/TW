@@ -99,6 +99,54 @@ function getDefaultCities() {
   ];
 }
 
+// Helper function to read blog data from file system
+function readBlogDataFromFileSystem(): Array<{ id: string; title: string; excerpt: string; category: string; imageUrl?: string; featured: boolean; readTime: string; date: string; author?: string }> {
+  try {
+    // Read blog index file
+    const blogIndexPath = path.join(process.cwd(), 'client', 'src', 'blogs', 'index.ts');
+    if (!fs.existsSync(blogIndexPath)) {
+      console.warn('Blog index file not found, returning empty array');
+      return [];
+    }
+    
+    const blogIndexContent = fs.readFileSync(blogIndexPath, 'utf-8');
+    
+    // Extract the allBlogs array from the file
+    const blogsMatch = blogIndexContent.match(/export const allBlogs: Blog\[\] = \[([\s\S]*?)\];/);
+    if (!blogsMatch) {
+      console.warn('Could not find allBlogs array in index.ts');
+      return [];
+    }
+    
+    const blogsArrayContent = blogsMatch[1];
+    const blogs = [];
+    
+    // Parse each blog object using a simpler, more reliable regex
+    const blogObjectRegex = /\{\s*id:\s*['"]([^'"]+)['"],\s*title:\s*['"]([^'"]+)['"],\s*excerpt:\s*['"]([^'"]+)['"],\s*content:\s*['"]([^'"]*?)['"],\s*category:\s*['"]([^'"]+)['"],\s*imageUrl:\s*['"]([^'"]*?)['"],\s*featured:\s*(true|false),\s*readTime:\s*['"]([^'"]+)['"],\s*date:\s*['"]([^'"]+)['"],\s*author:\s*['"]([^'"]*?)['"][\s\S]*?\}/g;
+    
+    let blogMatch;
+    while ((blogMatch = blogObjectRegex.exec(blogsArrayContent)) !== null) {
+      blogs.push({
+        id: blogMatch[1],
+        title: blogMatch[2],
+        excerpt: blogMatch[3],
+        category: blogMatch[5],
+        imageUrl: blogMatch[6] || '',
+        featured: blogMatch[7] === 'true',
+        readTime: blogMatch[8],
+        date: blogMatch[9],
+        author: blogMatch[10] || 'TravelWanders Team'
+      });
+    }
+    
+    // Sort blogs by date (newest first)
+    return blogs.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  } catch (error) {
+    console.error('Error reading blog data from file system:', error);
+    return [];
+  }
+}
+
 interface CityData {
   cityName: string;
   country: string;
@@ -2058,6 +2106,8 @@ export function generateDestinationsPageHTML(): string {
 }
 
 export function generateBlogsPageHTML(): string {
+  const blogs = readBlogDataFromFileSystem();
+  
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -2082,6 +2132,79 @@ export function generateBlogsPageHTML(): string {
   
   <style>
     ${generateCommonStyles()}
+    
+    /* Blog-specific styles */
+    .blog-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+    
+    .blog-card:hover {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .blog-image {
+      width: 100%;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    
+    .blog-content {
+      padding: 1.5rem;
+    }
+    
+    .blog-category {
+      background: #dcfce7;
+      color: #166534;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      display: inline-block;
+      margin-bottom: 0.75rem;
+    }
+    
+    .blog-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+    
+    .blog-excerpt {
+      color: #6b7280;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    
+    .blog-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+    
+    .featured-badge {
+      background: #fef3c7;
+      color: #92400e;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
   </style>
 </head>
 <body>
@@ -2091,18 +2214,39 @@ export function generateBlogsPageHTML(): string {
     <div class="container mx-auto px-4 text-center">
       <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Travel Blog</h1>
       <p class="text-xl text-gray-600 max-w-3xl mx-auto">Get inspired with our travel stories, tips, and destination guides from expert travelers around the world.</p>
+      ${blogs.length > 0 ? `<p class="mt-4 text-green-600 font-medium">${blogs.length} Article${blogs.length !== 1 ? 's' : ''} Available</p>` : ''}
     </div>
   </section>
   
   <section class="py-16">
     <div class="container mx-auto px-4">
-      <div class="text-center py-12">
-        <h2 class="text-2xl font-semibold text-gray-900 mb-4">Coming Soon</h2>
-        <p class="text-gray-600 mb-8">We're working on amazing travel stories and guides for you!</p>
-        <a href="/destinations" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
-          Explore Destinations
-        </a>
-      </div>
+      ${blogs.length > 0 ? `
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          ${blogs.map(blog => `
+            <a href="/blog/${blog.id}" class="blog-card">
+              ${blog.featured ? '<div class="featured-badge">Featured</div>' : ''}
+              <div class="blog-image" style="${blog.imageUrl ? `background-image: url(${blog.imageUrl});` : 'background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);'}"></div>
+              <div class="blog-content">
+                <div class="blog-category">${blog.category}</div>
+                <h2 class="blog-title">${blog.title}</h2>
+                <p class="blog-excerpt">${blog.excerpt}</p>
+                <div class="blog-meta">
+                  <span>${blog.author}</span>
+                  <span>${blog.readTime}</span>
+                </div>
+              </div>
+            </a>
+          `).join('')}
+        </div>
+      ` : `
+        <div class="text-center py-12">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">No Blog Posts Yet</h2>
+          <p class="text-gray-600 mb-8">We're working on amazing travel stories and guides for you!</p>
+          <a href="/destinations" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
+            Explore Destinations
+          </a>
+        </div>
+      `}
     </div>
   </section>
   
@@ -2138,98 +2282,7 @@ function generateFeaturedDestinationsCards(): string {
 
 function generateLatestBlogsHTML(): string {
   try {
-    // Read blog files from the file system
-    const blogsDir = path.join(process.cwd(), 'client', 'src', 'blogs');
-    const blogIndexPath = path.join(blogsDir, 'index.ts');
-    
-    if (!existsSync(blogIndexPath)) {
-      return `
-        <p style="color: #4b5563; margin-bottom: 1rem;">No blog posts available yet.</p>
-        <a href="/blogs" class="travel-categories-cta">
-          Visit Blog Page
-          <span>→</span>
-        </a>
-      `;
-    }
-    
-    // Read the blog index file and extract blog data
-    const blogIndexContent = readFileSync(blogIndexPath, 'utf-8');
-    
-    // Extract blogs from the allBlogs array - more robust pattern to handle multiline objects
-    const blogsMatch = blogIndexContent.match(/export const allBlogs: Blog\[\] = \[([\s\S]*?)\];/);
-    if (!blogsMatch) {
-      return `
-        <p style="color: #4b5563; margin-bottom: 1rem;">No blog posts available yet.</p>
-        <a href="/blogs" class="travel-categories-cta">
-          Visit Blog Page
-          <span>→</span>
-        </a>
-      `;
-    }
-    
-    // Parse blog objects from the string
-    const blogsString = blogsMatch[1].trim();
-    const blogs = [];
-    
-    // Find all blog objects using a more robust regex that handles proper brace matching
-    let braceDepth = 0;
-    let currentObject = '';
-    let inString = false;
-    let stringChar = '';
-    
-    for (let i = 0; i < blogsString.length; i++) {
-      const char = blogsString[i];
-      const prevChar = i > 0 ? blogsString[i - 1] : '';
-      
-      if (!inString && (char === '"' || char === "'")) {
-        inString = true;
-        stringChar = char;
-      } else if (inString && char === stringChar && prevChar !== '\\') {
-        inString = false;
-        stringChar = '';
-      }
-      
-      if (!inString) {
-        if (char === '{') {
-          if (braceDepth === 0) {
-            currentObject = char;
-          } else {
-            currentObject += char;
-          }
-          braceDepth++;
-        } else if (char === '}') {
-          currentObject += char;
-          braceDepth--;
-          if (braceDepth === 0) {
-            // We found a complete object
-            const titleMatch = currentObject.match(/id:\s*['"]([^'"]+)['"]/);
-            const titlePropMatch = currentObject.match(/title:\s*['"]([^'"]+)['"]/);
-            const excerptMatch = currentObject.match(/excerpt:\s*['"]([^'"]+)['"]/);
-            const categoryMatch = currentObject.match(/category:\s*['"]([^'"]+)['"]/);
-            const imageUrlMatch = currentObject.match(/imageUrl:\s*['"]([^'"]+)['"]/);
-            const featuredMatch = currentObject.match(/featured:\s*(true|false)/);
-            const readTimeMatch = currentObject.match(/readTime:\s*['"]([^'"]+)['"]/);
-            
-            if (titleMatch && titlePropMatch && excerptMatch) {
-              blogs.push({
-                id: titleMatch[1],
-                title: titlePropMatch[1],
-                excerpt: excerptMatch[1],
-                category: categoryMatch ? categoryMatch[1] : 'Travel',
-                imageUrl: imageUrlMatch ? imageUrlMatch[1] : '',
-                featured: featuredMatch ? featuredMatch[1] === 'true' : false,
-                readTime: readTimeMatch ? readTimeMatch[1] : '5 min read'
-              });
-            }
-            currentObject = '';
-          }
-        } else if (braceDepth > 0) {
-          currentObject += char;
-        }
-      } else {
-        currentObject += char;
-      }
-    }
+    const blogs = readBlogDataFromFileSystem();
     
     if (blogs.length === 0) {
       return `
@@ -2241,7 +2294,7 @@ function generateLatestBlogsHTML(): string {
       `;
     }
     
-    // Sort by date (newest first) and get latest 2
+    // Get latest 2 blogs (they're already sorted by date)
     const latestBlogs = blogs.slice(0, 2);
     
     if (latestBlogs.length === 0) {
