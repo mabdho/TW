@@ -465,7 +465,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                             {attraction.practicalInfo.howToGetThere && (
                               <div className="mt-3 pt-3 border-t border-gray-200">
                                 <div className="flex items-start gap-2">
-                                  <MapPin className="h-4 w-4 text-gray-500 mt-0.5" />
+                                  <MapPinIcon className="h-4 w-4 text-gray-500 mt-0.5" />
                                   <div>
                                     <div className="font-medium text-gray-900 text-sm">How to Get There</div>
                                     <div className="text-gray-600 text-xs">{attraction.practicalInfo.howToGetThere}</div>
@@ -500,7 +500,7 @@ export const CityPage: React.FC<CityPageProps> = ({
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
                 <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
                   <div className="w-6 h-6 sm:w-8 sm:h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
+                    <MapPinIcon className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
                   </div>
                   <div>
                     <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">Plan Your Trip</h2>
@@ -513,7 +513,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                     <div className="bg-blue-50 rounded-lg border border-blue-200 p-3 sm:p-4">
                       <div className="flex items-center gap-2 mb-2 sm:mb-3">
                         <div className="w-5 h-5 sm:w-6 sm:h-6 bg-blue-100 rounded-full flex items-center justify-center">
-                          <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
+                          <MapPinIcon className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
                         </div>
                         <h3 className="text-base sm:text-lg font-semibold text-gray-900">Getting Around</h3>
                       </div>

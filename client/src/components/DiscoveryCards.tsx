@@ -761,7 +761,9 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
                     </div>
                     <span className="truncate text-gray-800 dark:text-gray-100">{card.title}</span>
                     <div className="ml-auto opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110">
-                      <Maximize2 className="w-5 h-5 text-blue-500 dark:text-blue-400" />
+                      <svg className="w-5 h-5 text-blue-500 dark:text-blue-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path d="M8 3v3a2 2 0 0 1-2 2H3M18 8h3m-3 8h3M8 21v-3a2 2 0 0 0-2-2H3M16 8V5a2 2 0 0 0-2-2H11M16 16v3a2 2 0 0 1-2 2H11"/>
+                      </svg>
                     </div>
                   </CardTitle>
                   <p className="text-sm text-gray-600 dark:text-gray-300 font-normal leading-relaxed">
