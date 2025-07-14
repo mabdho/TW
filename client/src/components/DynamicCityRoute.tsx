@@ -4,16 +4,21 @@ import { Route } from 'wouter';
 // Invisible loading fallback - no loading screens
 const CityLoadingFallback = () => null;
 
+// Helper function to create city imports
+const createCityImport = (cityName: string, modulePath: string) => {
+  return lazy(() => import(modulePath + '.tsx').then(module => ({ default: module[cityName] })));
+};
+
 // Direct imports for city components
 const London = lazy(() => import('../pages/cities/London.tsx').then(module => ({ default: module.London })));
+const Rome = createCityImport('Rome', '../pages/cities/Rome');
 
 // City mapping for dynamic imports
 const cityMap = {
   // Empty - ready for fresh city additions via admin panel
 
   'london': London,
-
-  'rome': createCityImport('Rome', '../pages/cities/Rome'),
+  'rome': Rome,
 };
 
 interface DynamicCityRouteProps {
