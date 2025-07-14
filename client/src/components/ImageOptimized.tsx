@@ -76,12 +76,15 @@ export const ImageOptimized: React.FC<ImageOptimizedProps> = ({
     };
   }, [priority]);
 
-  // Preload critical images
+  // Only preload if not already preloaded by CriticalResourceLoader
   useEffect(() => {
     if (priority && src) {
-      imageService.preloadImage(src, true).catch(() => {
-        // Silently handle preload errors
-      });
+      // Check if image is already preloaded using the service tracker
+      if (!imageService.isPreloaded(src)) {
+        imageService.preloadImage(src, true).catch(() => {
+          // Silently handle preload errors
+        });
+      }
     }
   }, [priority, src, imageService]);
 

@@ -36,6 +36,7 @@ class ImageOptimizationService {
   private analytics: ImageAnalytics[] = [];
   private cache: Map<string, OptimizedImage> = new Map();
   private loadingQueue: Set<string> = new Set();
+  private preloadedImages: Set<string> = new Set();
   private observer: IntersectionObserver | null = null;
 
   private constructor() {
@@ -408,6 +409,12 @@ class ImageOptimizationService {
    * Preload critical images
    */
   public preloadImage(src: string, priority: boolean = false): Promise<void> {
+    // Check if already preloaded
+    if (this.preloadedImages.has(src)) {
+      console.log(`🔄 Skipping duplicate preload for: ${src}`);
+      return Promise.resolve();
+    }
+    
     return new Promise((resolve, reject) => {
       const link = document.createElement('link');
       link.rel = 'preload';
@@ -418,7 +425,10 @@ class ImageOptimizationService {
         link.setAttribute('fetchpriority', 'high');
       }
       
-      link.onload = () => resolve();
+      link.onload = () => {
+        this.preloadedImages.add(src);
+        resolve();
+      };
       link.onerror = () => reject(new Error(`Failed to preload image: ${src}`));
       
       document.head.appendChild(link);
@@ -448,6 +458,13 @@ class ImageOptimizationService {
    */
   public clearCache(): void {
     this.cache.clear();
+  }
+
+  /**
+   * Check if image is already preloaded
+   */
+  public isPreloaded(src: string): boolean {
+    return this.preloadedImages.has(src);
   }
 }
 
