@@ -397,7 +397,7 @@ export const InteractiveAttractionExplorer: React.FC<InteractiveAttractionExplor
                     )}
                     {attraction.practicalInfo.openingHours && (
                       <div className="flex items-start gap-1">
-                        <Clock className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                        <ClockIcon className="w-3 h-3 mt-0.5 flex-shrink-0" />
                         <span className="line-clamp-1">{attraction.practicalInfo.openingHours}</span>
                       </div>
                     )}
