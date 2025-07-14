@@ -9,7 +9,7 @@ const featuredCities = [
   { "name": "London", "country": "United Kingdom", "path": "/best-things-to-do-in-london", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1737649766441-a334350d6015?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
 ];
 
-export const FeaturedCities = () => {
+const FeaturedCities = () => {
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -84,3 +84,6 @@ export const FeaturedCities = () => {
     </section>
   );
 };
+
+export default FeaturedCities;
+export { FeaturedCities };

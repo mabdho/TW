@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { getLatestBlogsForHomePage } from '../blogs';
 
-export const TravelCategories = () => {
+const TravelCategories = () => {
   // Get latest 2 blogs from file system - always featured on home page
   const latestBlogs = getLatestBlogsForHomePage(2);
 
@@ -127,3 +127,6 @@ export const TravelCategories = () => {
     </section>
   );
 };
+
+export default TravelCategories;
+export { TravelCategories };

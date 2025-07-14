@@ -1,10 +1,6 @@
 import { Navigation } from '@/components/Navigation';
 import { Hero } from '@/components/Hero';
-import { FeaturedCities } from '@/components/FeaturedCities';
-import { TravelCategories } from '@/components/TravelCategories';
-import { Footer } from '@/components/Footer';
 import { SEOHead } from '@/components/SEOHead';
-import { EnhancedInternalLinks } from '@/components/EnhancedInternalLinks';
 import { lazy, Suspense } from 'react';
 
 // Lazy load below-the-fold components for better FCP
