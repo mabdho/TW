@@ -2,7 +2,7 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Cookie, Settings, Eye, Shield, Mail } from 'lucide-react';
+import { CookieIcon, SettingsIcon, EyeIcon, ShieldIcon, MailIcon } from '@/components/icons/LightweightIcons';
 
 export default function CookiePolicy() {
   return (
@@ -15,7 +15,7 @@ export default function CookiePolicy() {
           <div className="text-center mb-12">
             <div className="flex justify-center mb-4">
               <Badge className="bg-orange-100 text-orange-800 border-orange-200 px-4 py-2">
-                <Cookie className="w-4 h-4 mr-2" />
+                <CookieIcon className="w-4 h-4 mr-2" />
                 Cookie Policy
               </Badge>
             </div>
@@ -35,7 +35,7 @@ export default function CookiePolicy() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Cookie className="w-5 h-5 text-orange-600" />
+                  <CookieIcon className="w-5 h-5 text-orange-600" />
                   What Are Cookies?
                 </CardTitle>
               </CardHeader>
@@ -53,14 +53,14 @@ export default function CookiePolicy() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Settings className="w-5 h-5 text-blue-600" />
+                  <SettingsIcon className="w-5 h-5 text-blue-600" />
                   Types of Cookies We Use
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                    <Shield className="w-4 h-4 text-green-600" />
+                    <ShieldIcon className="w-4 h-4 text-green-600" />
                     Essential Cookies
                   </h3>
                   <p className="text-gray-600 mb-2">
@@ -75,7 +75,7 @@ export default function CookiePolicy() {
 
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                    <Eye className="w-4 h-4 text-purple-600" />
+                    <EyeIcon className="w-4 h-4 text-purple-600" />
                     Analytics Cookies
                   </h3>
                   <p className="text-gray-600 mb-2">
@@ -90,7 +90,7 @@ export default function CookiePolicy() {
 
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                    <Settings className="w-4 h-4 text-indigo-600" />
+                    <SettingsIcon className="w-4 h-4 text-indigo-600" />
                     Functional Cookies
                   </h3>
                   <p className="text-gray-600 mb-2">
@@ -105,7 +105,7 @@ export default function CookiePolicy() {
 
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                    <Eye className="w-4 h-4 text-orange-600" />
+                    <EyeIcon className="w-4 h-4 text-orange-600" />
                     Marketing Cookies
                   </h3>
                   <p className="text-gray-600 mb-2">
@@ -142,7 +142,7 @@ export default function CookiePolicy() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Settings className="w-5 h-5 text-green-600" />
+                  <SettingsIcon className="w-5 h-5 text-green-600" />
                   Managing Your Cookie Preferences
                 </CardTitle>
               </CardHeader>
@@ -228,7 +228,7 @@ export default function CookiePolicy() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Mail className="w-5 h-5 text-blue-600" />
+                  <MailIcon className="w-5 h-5 text-blue-600" />
                   Contact Us
                 </CardTitle>
               </CardHeader>
@@ -238,7 +238,7 @@ export default function CookiePolicy() {
                 </p>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-gray-600">
-                    <Mail className="w-4 h-4" />
+                    <MailIcon className="w-4 h-4" />
                     <span>privacy@travelwanders.com</span>
                   </div>
                 </div>

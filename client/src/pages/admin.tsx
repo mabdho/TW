@@ -12,7 +12,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
-import { Loader2, FileText, BookOpen, Trash2, AlertTriangle, LogOut } from 'lucide-react';
+import { Loader2Icon, FileTextIcon, BookOpenIcon, Trash2Icon, AlertTriangleIcon, LogOutIcon } from '@/components/icons/LightweightIcons';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { useToast } from '@/hooks/use-toast';
 import { Toaster } from '@/components/ui/toaster';
@@ -290,7 +290,7 @@ export default function AdminPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="mx-auto h-8 w-8 animate-spin text-green-600" />
+          <Loader2Icon className="mx-auto h-8 w-8 animate-spin text-green-600" />
           <p className="mt-2 text-gray-600">Loading admin panel...</p>
         </div>
       </div>
@@ -316,7 +316,7 @@ export default function AdminPage() {
             disabled={logoutMutation.isPending}
             className="flex items-center gap-2"
           >
-            <LogOut className="h-4 w-4" />
+            <LogOutIcon className="h-4 w-4" />
             {logoutMutation.isPending ? 'Logging out...' : 'Logout'}
           </Button>
         </div>
@@ -324,15 +324,15 @@ export default function AdminPage() {
         <Tabs defaultValue="cities" className="space-y-6">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="cities" className="flex items-center gap-2">
-              <FileText className="h-4 w-4" />
+              <FileTextIcon className="h-4 w-4" />
               City Pages
             </TabsTrigger>
             <TabsTrigger value="html" className="flex items-center gap-2">
-              <FileText className="h-4 w-4" />
+              <FileTextIcon className="h-4 w-4" />
               HTML Generator
             </TabsTrigger>
             <TabsTrigger value="blogs" className="flex items-center gap-2">
-              <BookOpen className="h-4 w-4" />
+              <BookOpenIcon className="h-4 w-4" />
               Blog Posts
             </TabsTrigger>
           </TabsList>
@@ -472,7 +472,7 @@ export default function AdminPage() {
                     >
                       {generateCityPageMutation.isPending ? (
                         <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
                           {cityForm.watch('generationMode') === 'manual' 
                             ? 'Creating City Page...' 
                             : 'Generating City Page with AI...'}
@@ -509,12 +509,12 @@ export default function AdminPage() {
                       >
                         {generateAllHtmlMutation.isPending ? (
                           <>
-                            <Loader2 className="h-4 w-4 animate-spin" />
+                            <Loader2Icon className="h-4 w-4 animate-spin" />
                             Generating All HTML...
                           </>
                         ) : (
                           <>
-                            <FileText className="h-4 w-4" />
+                            <FileTextIcon className="h-4 w-4" />
                             Generate All City HTML
                           </>
                         )}
@@ -541,7 +541,7 @@ export default function AdminPage() {
                         >
                           {generateHtmlMutation.isPending ? (
                             <>
-                              <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                              <Loader2Icon className="h-4 w-4 animate-spin mr-2" />
                               Generating...
                             </>
                           ) : (
@@ -716,7 +716,7 @@ export default function AdminPage() {
                         >
                           {generateBlogMutation.isPending ? (
                             <>
-                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
                               Generating Blog...
                             </>
                           ) : (
@@ -740,11 +740,11 @@ export default function AdminPage() {
                 <CardContent>
                   {blogsLoading ? (
                     <div className="flex items-center justify-center py-8">
-                      <Loader2 className="h-8 w-8 animate-spin" />
+                      <Loader2Icon className="h-8 w-8 animate-spin" />
                     </div>
                   ) : blogs.length === 0 ? (
                     <div className="text-center py-8 text-gray-500">
-                      <BookOpen className="h-16 w-16 mx-auto mb-4 text-gray-300" />
+                      <BookOpenIcon className="h-16 w-16 mx-auto mb-4 text-gray-300" />
                       <p>No blogs created yet. Generate your first blog post above!</p>
                     </div>
                   ) : (
@@ -772,13 +772,13 @@ export default function AdminPage() {
                                     className="text-red-600 hover:text-red-700 hover:bg-red-50"
                                     disabled={deleteBlogMutation.isPending}
                                   >
-                                    <Trash2 className="h-4 w-4" />
+                                    <Trash2Icon className="h-4 w-4" />
                                   </Button>
                                 </AlertDialogTrigger>
                                 <AlertDialogContent>
                                   <AlertDialogHeader>
                                     <AlertDialogTitle className="flex items-center gap-2">
-                                      <AlertTriangle className="h-5 w-5 text-red-500" />
+                                      <AlertTriangleIcon className="h-5 w-5 text-red-500" />
                                       Delete Blog Post
                                     </AlertDialogTitle>
                                     <AlertDialogDescription>

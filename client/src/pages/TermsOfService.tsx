@@ -2,7 +2,7 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileText, Users, Shield, AlertTriangle, Scale, Mail } from 'lucide-react';
+import { FileTextIcon, UsersIcon, ShieldIcon, AlertTriangleIcon, ScaleIcon, MailIcon } from '@/components/icons/LightweightIcons';
 
 export default function TermsOfService() {
   return (
@@ -15,7 +15,7 @@ export default function TermsOfService() {
           <div className="text-center mb-12">
             <div className="flex justify-center mb-4">
               <Badge className="bg-blue-100 text-blue-800 border-blue-200 px-4 py-2">
-                <FileText className="w-4 h-4 mr-2" />
+                <FileTextIcon className="w-4 h-4 mr-2" />
                 Terms of Service
               </Badge>
             </div>
@@ -35,7 +35,7 @@ export default function TermsOfService() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Users className="w-5 h-5 text-blue-600" />
+                  <UsersIcon className="w-5 h-5 text-blue-600" />
                   Agreement to Terms
                 </CardTitle>
               </CardHeader>
@@ -53,7 +53,7 @@ export default function TermsOfService() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Scale className="w-5 h-5 text-green-600" />
+                  <ScaleIcon className="w-5 h-5 text-green-600" />
                   Use License
                 </CardTitle>
               </CardHeader>
@@ -74,7 +74,7 @@ export default function TermsOfService() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-purple-600" />
+                  <ShieldIcon className="w-5 h-5 text-purple-600" />
                   User Responsibilities
                 </CardTitle>
               </CardHeader>
@@ -103,7 +103,7 @@ export default function TermsOfService() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <AlertTriangle className="w-5 h-5 text-orange-600" />
+                  <AlertTriangleIcon className="w-5 h-5 text-orange-600" />
                   Service Availability
                 </CardTitle>
               </CardHeader>
@@ -127,7 +127,7 @@ export default function TermsOfService() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <AlertTriangle className="w-5 h-5 text-red-600" />
+                  <AlertTriangleIcon className="w-5 h-5 text-red-600" />
                   Disclaimer
                 </CardTitle>
               </CardHeader>
@@ -167,7 +167,7 @@ export default function TermsOfService() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Scale className="w-5 h-5 text-indigo-600" />
+                  <ScaleIcon className="w-5 h-5 text-indigo-600" />
                   Limitation of Liability
                 </CardTitle>
               </CardHeader>
@@ -209,7 +209,7 @@ export default function TermsOfService() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Mail className="w-5 h-5 text-blue-600" />
+                  <MailIcon className="w-5 h-5 text-blue-600" />
                   Contact Information
                 </CardTitle>
               </CardHeader>
@@ -219,7 +219,7 @@ export default function TermsOfService() {
                 </p>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-gray-600">
-                    <Mail className="w-4 h-4" />
+                    <MailIcon className="w-4 h-4" />
                     <span>legal@travelwanders.com</span>
                   </div>
                 </div>

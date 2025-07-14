@@ -91,7 +91,7 @@ export const InternalLinks: React.FC<InternalLinksProps> = ({
                       {link.type === 'city' ? 'Explore Destination' : 
                        link.type === 'blog' ? 'Read Article' : 'Browse Category'}
                     </span>
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRightIcon className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </CardContent>
               </Card>

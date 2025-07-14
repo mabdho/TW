@@ -2,7 +2,7 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Shield, Eye, Cookie, Database, Mail, Phone } from 'lucide-react';
+import { ShieldIcon, EyeIcon, CookieIcon, DatabaseIcon, MailIcon, PhoneIcon } from '@/components/icons/LightweightIcons';
 
 export default function PrivacyPolicy() {
   return (
@@ -15,7 +15,7 @@ export default function PrivacyPolicy() {
           <div className="text-center mb-12">
             <div className="flex justify-center mb-4">
               <Badge className="bg-green-100 text-green-800 border-green-200 px-4 py-2">
-                <Shield className="w-4 h-4 mr-2" />
+                <ShieldIcon className="w-4 h-4 mr-2" />
                 Privacy Policy
               </Badge>
             </div>
@@ -35,7 +35,7 @@ export default function PrivacyPolicy() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Database className="w-5 h-5 text-blue-600" />
+                  <DatabaseIcon className="w-5 h-5 text-blue-600" />
                   Information We Collect
                 </CardTitle>
               </CardHeader>
@@ -64,7 +64,7 @@ export default function PrivacyPolicy() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Eye className="w-5 h-5 text-green-600" />
+                  <EyeIcon className="w-5 h-5 text-green-600" />
                   How We Use Your Information
                 </CardTitle>
               </CardHeader>
@@ -84,7 +84,7 @@ export default function PrivacyPolicy() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-purple-600" />
+                  <ShieldIcon className="w-5 h-5 text-purple-600" />
                   Data Protection & Security
                 </CardTitle>
               </CardHeader>
@@ -111,7 +111,7 @@ export default function PrivacyPolicy() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Cookie className="w-5 h-5 text-orange-600" />
+                  <CookieIcon className="w-5 h-5 text-orange-600" />
                   Cookies & Tracking
                 </CardTitle>
               </CardHeader>
@@ -141,7 +141,7 @@ export default function PrivacyPolicy() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-red-600" />
+                  <ShieldIcon className="w-5 h-5 text-red-600" />
                   Your Rights
                 </CardTitle>
               </CardHeader>
@@ -161,7 +161,7 @@ export default function PrivacyPolicy() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Mail className="w-5 h-5 text-blue-600" />
+                  <MailIcon className="w-5 h-5 text-blue-600" />
                   Contact Us
                 </CardTitle>
               </CardHeader>
@@ -171,11 +171,11 @@ export default function PrivacyPolicy() {
                 </p>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-gray-600">
-                    <Mail className="w-4 h-4" />
+                    <MailIcon className="w-4 h-4" />
                     <span>privacy@travelwanders.com</span>
                   </div>
                   <div className="flex items-center gap-2 text-gray-600">
-                    <Phone className="w-4 h-4" />
+                    <PhoneIcon className="w-4 h-4" />
                     <span>+1 (555) 123-4567</span>
                   </div>
                 </div>

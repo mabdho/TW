@@ -472,28 +472,8 @@ export const FilterIcon = ({ className = '', size = 24, ...props }: IconProps) =
   </svg>
 );
 
-export const Loader2Icon = ({ className = '', size = 24, ...props }: IconProps) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className} {...props}>
-    <path d="M21 12a9 9 0 11-6.219-8.56"/>
-  </svg>
-);
 
-export const Trash2Icon = ({ className = '', size = 24, ...props }: IconProps) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className} {...props}>
-    <path d="m3 6 3 12c0 .6.4 1 1 1h8c.6 0 1-.4 1-1l3-12"/>
-    <path d="M8 6V4c0-.6.4-1 1-1h4c.6 0 1 .4 1 1v2"/>
-    <line x1="10" y1="11" x2="10" y2="17"/>
-    <line x1="14" y1="11" x2="14" y2="17"/>
-  </svg>
-);
 
-export const LogOutIcon = ({ className = '', size = 24, ...props }: IconProps) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className} {...props}>
-    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-    <polyline points="16,17 21,12 16,7"/>
-    <line x1="21" y1="12" x2="9" y2="12"/>
-  </svg>
-);
 
 // Icon name mapping for easy replacement
 export const IconMap = {
