@@ -1,9 +1,42 @@
 
-import React, { useState } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import React, { useState, Suspense } from 'react';
 import { Badge } from '@/components/ui/badge';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Skeleton } from '@/components/ui/skeleton';
+
+// Lazy load heavy Radix components to reduce initial bundle size
+const Tabs = React.lazy(() => import('@/components/ui/tabs').then(m => ({ default: m.Tabs })));
+const TabsContent = React.lazy(() => import('@/components/ui/tabs').then(m => ({ default: m.TabsContent })));
+const TabsList = React.lazy(() => import('@/components/ui/tabs').then(m => ({ default: m.TabsList })));
+const TabsTrigger = React.lazy(() => import('@/components/ui/tabs').then(m => ({ default: m.TabsTrigger })));
+
+const Accordion = React.lazy(() => import('@/components/ui/accordion').then(m => ({ default: m.Accordion })));
+const AccordionContent = React.lazy(() => import('@/components/ui/accordion').then(m => ({ default: m.AccordionContent })));
+const AccordionItem = React.lazy(() => import('@/components/ui/accordion').then(m => ({ default: m.AccordionItem })));
+const AccordionTrigger = React.lazy(() => import('@/components/ui/accordion').then(m => ({ default: m.AccordionTrigger })));
+
+const Dialog = React.lazy(() => import('@/components/ui/dialog').then(m => ({ default: m.Dialog })));
+const DialogContent = React.lazy(() => import('@/components/ui/dialog').then(m => ({ default: m.DialogContent })));
+const DialogTrigger = React.lazy(() => import('@/components/ui/dialog').then(m => ({ default: m.DialogTrigger })));
+
+// Loading fallbacks for better UX
+const TabsSkeleton = () => (
+  <div className="w-full">
+    <div className="flex border-b mb-4">
+      <Skeleton className="h-10 w-24 mr-4" />
+      <Skeleton className="h-10 w-32 mr-4" />
+      <Skeleton className="h-10 w-28" />
+    </div>
+    <Skeleton className="h-64 w-full" />
+  </div>
+);
+
+const AccordionSkeleton = () => (
+  <div className="w-full space-y-2">
+    <Skeleton className="h-12 w-full" />
+    <Skeleton className="h-12 w-full" />
+    <Skeleton className="h-12 w-full" />
+  </div>
+);
 // Optimized lucide-react imports - essential icons only
 import { MapPinIcon, ClockIcon, DollarSignIcon, GlobeIcon, StarIcon, CameraIcon, UsersIcon, InfoIcon } from '@/components/icons/LightweightIcons';
 
@@ -208,7 +241,8 @@ export const CityPage: React.FC<CityPageProps> = ({
       </div>
 
       <div className="container mx-auto px-4 py-4 sm:py-6 lg:py-8">
-        <Tabs defaultValue="top5" className="w-full">
+        <Suspense fallback={<TabsSkeleton />}>
+          <Tabs defaultValue="top5" className="w-full">
           <TabsList className={`grid w-full ${mobileGridCols} mb-4 sm:mb-6 lg:mb-8 bg-white border border-gray-200 shadow-sm rounded-lg overflow-x-auto`}>
             <TabsTrigger value="top5" className="text-xs sm:text-sm font-medium px-1 sm:px-4 whitespace-nowrap data-[state=active]:bg-green-50 data-[state=active]:text-green-700 data-[state=active]:border-green-200">
               <span className="hidden sm:inline">Top Attractions</span>
@@ -593,7 +627,8 @@ export const CityPage: React.FC<CityPageProps> = ({
               </div>
             </TabsContent>
           )}
-        </Tabs>
+          </Tabs>
+        </Suspense>
       </div>
       
       {/* Internal Links Section - SEO-optimized cross-linking */}

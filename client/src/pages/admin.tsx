@@ -10,12 +10,43 @@ import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Loader2Icon, FileTextIcon, BookOpenIcon, Trash2Icon, AlertTriangleIcon, LogOutIcon } from '@/components/icons/LightweightIcons';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { useToast } from '@/hooks/use-toast';
-import { Toaster } from '@/components/ui/toaster';
+
+// Lazy load heavy Radix components for admin panel optimization
+const Tabs = React.lazy(() => import('@/components/ui/tabs').then(m => ({ default: m.Tabs })));
+const TabsContent = React.lazy(() => import('@/components/ui/tabs').then(m => ({ default: m.TabsContent })));
+const TabsList = React.lazy(() => import('@/components/ui/tabs').then(m => ({ default: m.TabsList })));
+const TabsTrigger = React.lazy(() => import('@/components/ui/tabs').then(m => ({ default: m.TabsTrigger })));
+
+const AlertDialog = React.lazy(() => import('@/components/ui/alert-dialog').then(m => ({ default: m.AlertDialog })));
+const AlertDialogAction = React.lazy(() => import('@/components/ui/alert-dialog').then(m => ({ default: m.AlertDialogAction })));
+const AlertDialogCancel = React.lazy(() => import('@/components/ui/alert-dialog').then(m => ({ default: m.AlertDialogCancel })));
+const AlertDialogContent = React.lazy(() => import('@/components/ui/alert-dialog').then(m => ({ default: m.AlertDialogContent })));
+const AlertDialogDescription = React.lazy(() => import('@/components/ui/alert-dialog').then(m => ({ default: m.AlertDialogDescription })));
+const AlertDialogFooter = React.lazy(() => import('@/components/ui/alert-dialog').then(m => ({ default: m.AlertDialogFooter })));
+const AlertDialogHeader = React.lazy(() => import('@/components/ui/alert-dialog').then(m => ({ default: m.AlertDialogHeader })));
+const AlertDialogTitle = React.lazy(() => import('@/components/ui/alert-dialog').then(m => ({ default: m.AlertDialogTitle })));
+const AlertDialogTrigger = React.lazy(() => import('@/components/ui/alert-dialog').then(m => ({ default: m.AlertDialogTrigger })));
+
+const Toaster = React.lazy(() => import('@/components/ui/toaster').then(m => ({ default: m.Toaster })));
+
+// Admin-specific loading skeletons
+const AdminTabsSkeleton = () => (
+  <div className="w-full">
+    <div className="flex border-b mb-6">
+      <Skeleton className="h-10 w-32 mr-6" />
+      <Skeleton className="h-10 w-28 mr-6" />
+      <Skeleton className="h-10 w-24" />
+    </div>
+    <div className="grid gap-6">
+      <Skeleton className="h-32 w-full" />
+      <Skeleton className="h-48 w-full" />
+    </div>
+  </div>
+);
 import { apiRequest } from '@/lib/queryClient';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
@@ -322,7 +353,8 @@ export default function AdminPage() {
           </Button>
         </div>
 
-        <Tabs defaultValue="cities" className="space-y-6">
+        <Suspense fallback={<AdminTabsSkeleton />}>
+          <Tabs defaultValue="cities" className="space-y-6">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="cities" className="flex items-center gap-2">
               <FileTextIcon className="h-4 w-4" />
@@ -826,11 +858,14 @@ export default function AdminPage() {
               </Card>
             </div>
           </TabsContent>
-        </Tabs>
+          </Tabs>
+        </Suspense>
       </div>
 
       <Footer />
-      <Toaster />
+      <Suspense fallback={<div className="text-center py-4">Loading...</div>}>
+        <Toaster />
+      </Suspense>
     </div>
   );
 }
