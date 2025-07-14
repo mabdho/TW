@@ -76,14 +76,8 @@ export const ImageOptimized: React.FC<ImageOptimizedProps> = ({
     };
   }, [priority]);
 
-  // Disable individual preloading entirely for priority images
-  // to prevent duplicate requests - rely on CriticalResourceLoader
-  // useEffect(() => {
-  //   if (priority && src) {
-  //     // Individual preloading disabled to prevent duplicates
-  //     // CriticalResourceLoader handles this globally
-  //   }
-  // }, [priority, src, imageService, width]);
+  // No individual preloading - rely on browser-native optimization
+  // This completely eliminates duplicate requests caused by preloading
 
   // Generate optimized URLs with enterprise service
   const avifUrl = imageService.generateOptimizedUrl(src, width || 1200, 'avif', quality);
