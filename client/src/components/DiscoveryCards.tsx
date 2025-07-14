@@ -2,29 +2,76 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+// Optimized icon imports - using essential icons only
 import { 
-  Lightbulb, 
   Camera, 
   MapPin, 
   Clock, 
   DollarSign, 
   Star, 
-  Users,
-  Compass,
-  Calendar,
-  Target,
-  Eye,
   Heart,
-  Zap,
-  Award,
-  TrendingUp,
-  Coffee,
-  Utensils,
-  ChevronLeft,
-  ChevronRight,
-  X,
-  Maximize2
+  Eye,
+  Coffee
 } from 'lucide-react';
+
+// Simple SVG icons for less critical elements
+const SimpleIcon = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+  <span className={`inline-flex items-center justify-center ${className}`}>{children}</span>
+);
+
+// Lightweight icon alternatives
+const LightbulbIcon = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17h8v-2.3c1.8-1.2 3-3.3 3-5.7 0-3.9-3.1-7-7-7z"/>
+  </svg>
+);
+
+const TrendingIcon = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/>
+    <polyline points="17,6 23,6 23,12"/>
+  </svg>
+);
+
+const AwardIcon = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <circle cx="12" cy="8" r="7"/>
+    <polyline points="8.21,13.89 7,23 12,20 17,23 15.79,13.88"/>
+  </svg>
+);
+
+const TargetIcon = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <circle cx="12" cy="12" r="10"/>
+    <circle cx="12" cy="12" r="6"/>
+    <circle cx="12" cy="12" r="2"/>
+  </svg>
+);
+
+const UtensilsIcon = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="m3 2 1.5 12L5 22l5-3 5 3 .5-8L18 2l-5 3-5-3z"/>
+    <path d="M9 12V6.5a2.5 2.5 0 0 1 5 0V12"/>
+  </svg>
+);
+
+const ZapIcon = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/>
+  </svg>
+);
+
+const ChevronLeftIcon = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <polyline points="15,18 9,12 15,6"/>
+  </svg>
+);
+
+const ChevronRightIcon = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <polyline points="9,18 15,12 9,6"/>
+  </svg>
+);
 
 interface Attraction {
   name: string;
@@ -401,14 +448,14 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
   const discoveryCards = [
     {
       title: "Local Insider Tips",
-      icon: <Lightbulb className="w-5 h-5 text-yellow-500" />,
+      icon: <LightbulbIcon className="w-5 h-5 text-yellow-500" />,
       color: "yellow",
       summary: `${insiderTips.length} insider tips`,
       content: insiderTips.slice(0, 4).map((tip, index) => (
         <div key={index} className="mb-3 p-3 bg-gradient-to-r from-amber-50/80 to-orange-50/80 dark:from-amber-900/20 dark:to-orange-900/20 rounded-xl border-l-4 border-amber-400 shadow-sm">
           <div className="flex items-start gap-3">
             <div className="p-1 bg-amber-100 dark:bg-amber-800/30 rounded-lg">
-              <Lightbulb className="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0" />
+              <LightbulbIcon className="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0" />
             </div>
             <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{tip}</p>
           </div>
@@ -438,7 +485,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
     },
     {
       title: "Experience Levels",
-      icon: <Target className="w-5 h-5 text-green-500" />,
+      icon: <TargetIcon className="w-5 h-5 text-green-500" />,
       color: "green",
       summary: `${categories.easyAccess.length + categories.moderateAdventure.length + categories.localExpert.length} attractions categorized`,
       content: (
@@ -571,7 +618,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
                 <div key={index} className="p-3 bg-gradient-to-r from-orange-50/80 to-amber-50/80 dark:from-orange-900/20 dark:to-amber-900/20 rounded-xl border-l-4 border-orange-400 shadow-sm">
                   <div className="flex items-start gap-3">
                     <div className="p-1 bg-orange-100 dark:bg-orange-800/30 rounded-lg">
-                      <Utensils className="w-4 h-4 text-orange-600 dark:text-orange-400 flex-shrink-0" />
+                      <UtensilsIcon className="w-4 h-4 text-orange-600 dark:text-orange-400 flex-shrink-0" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
@@ -593,7 +640,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
                 <div className="p-3 bg-gradient-to-r from-amber-50/80 to-yellow-50/80 dark:from-amber-900/20 dark:to-yellow-900/20 rounded-xl border-l-4 border-amber-400 shadow-sm">
                   <div className="flex items-start gap-3">
                     <div className="p-1 bg-amber-100 dark:bg-amber-800/30 rounded-lg">
-                      <Lightbulb className="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0" />
+                      <LightbulbIcon className="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
@@ -621,7 +668,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
     },
     {
       title: "Quick Facts",
-      icon: <Zap className="w-5 h-5 text-amber-500" />,
+      icon: <ZapIcon className="w-5 h-5 text-amber-500" />,
       color: "amber",
       summary: `${discoveryData?.quickFacts?.totalAttractions || attractions.length} attractions overview`,
       content: (
@@ -825,7 +872,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
                   onClick={handleModalPrev}
                   className="h-8 w-8 p-0 sm:h-9 sm:w-9"
                 >
-                  <ChevronLeft className="h-4 w-4" />
+                  <ChevronLeftIcon className="h-4 w-4" />
                 </Button>
                 <span className="text-xs sm:text-sm text-gray-500 px-1 sm:px-2 whitespace-nowrap">
                   {selectedCard + 1}/6
@@ -836,7 +883,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
                   onClick={handleModalNext}
                   className="h-8 w-8 p-0 sm:h-9 sm:w-9"
                 >
-                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRightIcon className="h-4 w-4" />
                 </Button>
                 <Button
                   variant="ghost"
@@ -864,14 +911,14 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
               </p>
               <div className="flex gap-2 w-full sm:w-auto">
                 <Button variant="outline" onClick={handleModalPrev} size="sm" className="flex-1 sm:flex-none">
-                  <ChevronLeft className="h-4 w-4 mr-1" />
+                  <ChevronLeftIcon className="h-4 w-4 mr-1" />
                   <span className="hidden sm:inline">Previous</span>
                   <span className="sm:hidden">Prev</span>
                 </Button>
                 <Button variant="outline" onClick={handleModalNext} size="sm" className="flex-1 sm:flex-none">
                   <span className="hidden sm:inline">Next</span>
                   <span className="sm:hidden">Next</span>
-                  <ChevronRight className="h-4 w-4 ml-1" />
+                  <ChevronRightIcon className="h-4 w-4 ml-1" />
                 </Button>
               </div>
             </div>

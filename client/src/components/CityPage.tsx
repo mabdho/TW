@@ -4,7 +4,36 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { MapPin, Clock, DollarSign, Globe, Star, Users, Info, Camera, Image, ChevronLeft, ChevronRight, Play, Pause, RotateCcw } from 'lucide-react';
+// Optimized lucide-react imports - essential icons only
+import { MapPin, Clock, DollarSign, Globe, Star, Camera } from 'lucide-react';
+
+// Lightweight SVG alternatives for UI controls
+const UIIcons = {
+  Info: ({ className = "" }: { className?: string }) => (
+    <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="12" y1="16" x2="12" y2="12"/>
+      <line x1="12" y1="8" x2="12.01" y2="8"/>
+    </svg>
+  ),
+  Users: ({ className = "" }: { className?: string }) => (
+    <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+      <circle cx="9" cy="7" r="4"/>
+      <path d="m22 21-3-3m0 0a2 2 0 1 0-4-4 2 2 0 0 0 4 4z"/>
+    </svg>
+  ),
+  ChevronLeft: ({ className = "" }: { className?: string }) => (
+    <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <polyline points="15,18 9,12 15,6"/>
+    </svg>
+  ),
+  ChevronRight: ({ className = "" }: { className?: string }) => (
+    <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <polyline points="9,18 15,12 9,6"/>
+    </svg>
+  )
+};
 import { Navigation } from './Navigation';
 import { Footer } from './Footer';
 import { CityPageTemplate } from './templates/CityPageTemplate';
@@ -210,7 +239,7 @@ export const CityPage: React.FC<CityPageProps> = ({
               <div className="lg:col-span-2 space-y-6">
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                   <div className="flex items-center gap-2 mb-4">
-                    <Info className="w-5 h-5 text-green-600" />
+                    <UIIcons.Info className="w-5 h-5 text-green-600" />
                     <h2 className="text-xl font-semibold text-gray-900">About {title}</h2>
                   </div>
                   <p className="text-gray-700 leading-relaxed">{description}</p>
@@ -520,7 +549,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                     <div className="bg-purple-50 rounded-lg border border-purple-200 p-3 sm:p-4 md:col-span-2">
                       <div className="flex items-center gap-2 mb-2 sm:mb-3">
                         <div className="w-5 h-5 sm:w-6 sm:h-6 bg-purple-100 rounded-full flex items-center justify-center">
-                          <Users className="w-3 h-3 sm:w-4 sm:h-4 text-purple-600" />
+                          <UIIcons.Users className="w-3 h-3 sm:w-4 sm:h-4 text-purple-600" />
                         </div>
                         <h3 className="text-base sm:text-lg font-semibold text-gray-900">Suggested Itinerary</h3>
                       </div>
@@ -538,7 +567,7 @@ export const CityPage: React.FC<CityPageProps> = ({
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
                 <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
                   <div className="w-6 h-6 sm:w-8 sm:h-8 bg-indigo-100 rounded-full flex items-center justify-center">
-                    <Info className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
+                    <UIIcons.Info className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
                   </div>
                   <div>
                     <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">Frequently Asked Questions</h2>

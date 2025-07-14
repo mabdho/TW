@@ -55,6 +55,7 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/memoizee": "^0.4.12",
     "@types/ws": "^8.18.1",
+    "babel-plugin-react-remove-properties": "^0.3.0",
     "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
