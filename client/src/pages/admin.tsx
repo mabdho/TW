@@ -12,8 +12,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Loader2Icon, FileTextIcon, BookOpenIcon, Trash2Icon, AlertTriangleIcon, LogOutIcon } from '@/components/icons/LightweightIcons';
+import { Loader2Icon, FileTextIcon, BookOpenIcon, Trash2Icon, AlertTriangleIcon, LogOutIcon, ImageIcon } from '@/components/icons/LightweightIcons';
 import { useToast } from '@/hooks/use-toast';
+import { ImageOptimizer } from '@/components/ImageOptimizer';
 
 // Lazy load heavy Radix components for admin panel optimization
 const Tabs = React.lazy(() => import('@/components/ui/tabs').then(m => ({ default: m.Tabs })));
@@ -355,7 +356,7 @@ export default function AdminPage() {
 
         <Suspense fallback={<AdminTabsSkeleton />}>
           <Tabs defaultValue="cities" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="cities" className="flex items-center gap-2">
               <FileTextIcon className="h-4 w-4" />
               City Pages
@@ -363,6 +364,10 @@ export default function AdminPage() {
             <TabsTrigger value="html" className="flex items-center gap-2">
               <FileTextIcon className="h-4 w-4" />
               HTML Generator
+            </TabsTrigger>
+            <TabsTrigger value="images" className="flex items-center gap-2">
+              <ImageIcon className="h-4 w-4" />
+              Image Optimizer
             </TabsTrigger>
             <TabsTrigger value="blogs" className="flex items-center gap-2">
               <BookOpenIcon className="h-4 w-4" />
@@ -606,6 +611,12 @@ export default function AdminPage() {
                   </div>
                 </CardContent>
               </Card>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="images">
+            <div className="space-y-6">
+              <ImageOptimizer />
             </div>
           </TabsContent>
 

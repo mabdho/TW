@@ -1,4 +1,5 @@
 import type { Express, Request, Response, NextFunction } from "express";
+import express from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { GoogleGenerativeAI } from '@google/generative-ai';
@@ -31,6 +32,13 @@ import {
   readBlogDataFromFileSystem,
   generateIndividualBlogHTML
 } from './html-generator';
+import { 
+  optimizeUploadedImage,
+  handleImageOptimization,
+  optimizeImageFile,
+  batchOptimizeImages,
+  getOptimizationStats
+} from './routes/imageOptimization';
 
 // Helper function to regenerate static HTML files
 async function regenerateStaticFiles() {
@@ -999,6 +1007,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ error: 'Failed to generate blog HTML', details: error.message });
     }
   });
+
+  // Image optimization routes
+  app.post('/api/images/optimize', optimizeUploadedImage, handleImageOptimization);
+  app.post('/api/images/optimize-file', optimizeImageFile);
+  app.post('/api/images/batch-optimize', batchOptimizeImages);
+  app.get('/api/images/optimization-stats', getOptimizationStats);
+  
+  // Serve optimized images
+  app.use('/optimized-images', express.static(path.join(process.cwd(), 'public', 'optimized-images')));
 
   // Authentication routes
   app.post('/api/auth/login', async (req, res) => {
