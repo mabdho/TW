@@ -259,7 +259,9 @@ class PerformanceAuditor {
     
     // Check for service worker
     const swFile = path.join(__dirname, 'client/src/sw.js');
-    const swExists = fs.existsSync(swFile) || fs.existsSync(path.join(__dirname, 'public/sw.js'));
+    const swExists = fs.existsSync(swFile) || 
+                     fs.existsSync(path.join(__dirname, 'public/sw.js')) ||
+                     fs.existsSync(path.join(__dirname, 'dist/public/sw.js'));
     
     if (swExists) {
       caching.score += 25;
