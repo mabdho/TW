@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { ImageOptimized } from './ImageOptimized';
 // Optimized icon imports - using lightweight alternatives
 import { 
   CameraIcon, 

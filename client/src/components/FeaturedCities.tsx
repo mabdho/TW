@@ -3,6 +3,8 @@ import { MapPinIcon, ArrowRightIcon, StarIcon, SparklesIcon } from '@/components
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { ImageOptimized } from './ImageOptimized';
+import { CriticalResourceLoader } from './CriticalResourceLoader';
 
 // Featured cities - will be populated with new production cities
 const featuredCities = [
@@ -11,10 +13,14 @@ const featuredCities = [
 ];
 
 const FeaturedCities = () => {
+  // Extract hero images for critical resource preloading
+  const heroImages = featuredCities.map(city => city.imageUrl).filter(Boolean);
+
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+    <CriticalResourceLoader criticalImages={heroImages.slice(0, 4)}>
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             Popular destinations
@@ -31,24 +37,17 @@ const FeaturedCities = () => {
               <Card className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-300 overflow-hidden">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   {city.imageUrl ? (
-                    <picture className="w-full h-full">
-                      <source 
-                        srcSet={city.imageUrl.replace(/fm=webp/g, 'fm=avif')} 
-                        type="image/avif" 
-                      />
-                      <source 
-                        srcSet={city.imageUrl.includes('fm=webp') ? city.imageUrl : `${city.imageUrl}&fm=webp`} 
-                        type="image/webp" 
-                      />
-                      <img 
-                        src={city.imageUrl} 
-                        alt={`Best things to do in ${city.name}, ${city.country} - Featured destination`}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                        width="300"
-                        height="225"
-                      />
-                    </picture>
+                    <ImageOptimized
+                      src={city.imageUrl}
+                      alt={`Best things to do in ${city.name}, ${city.country} - Featured destination`}
+                      width={300}
+                      height={225}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      context="card"
+                      priority={index < 2}
+                      placeholder="shimmer"
+                      onLoad={() => console.log(`Featured city image loaded: ${city.name}`)}
+                    />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200"></div>
                   )}
@@ -81,8 +80,9 @@ const FeaturedCities = () => {
             </Button>
           </a>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </CriticalResourceLoader>
   );
 };
 

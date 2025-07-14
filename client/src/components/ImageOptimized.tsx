@@ -1,9 +1,10 @@
 /**
- * ImageOptimized Component - Advanced image optimization with AVIF/WebP support
- * Implements comprehensive image optimization for sub-2.5s FCP performance
+ * ImageOptimized Component - Enterprise-level image optimization
+ * Implements comprehensive image optimization with CDN integration and performance monitoring
  */
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import ImageOptimizationService from '../services/ImageOptimizationService';
 
 interface ImageOptimizedProps {
   src: string;
@@ -14,9 +15,12 @@ interface ImageOptimizedProps {
   priority?: boolean;
   sizes?: string;
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
-  placeholder?: 'blur' | 'empty';
+  placeholder?: 'blur' | 'empty' | 'shimmer';
+  context?: 'hero' | 'gallery' | 'card' | 'thumbnail';
+  quality?: number;
   onLoad?: () => void;
   onError?: () => void;
+  enableAnalytics?: boolean;
 }
 
 export const ImageOptimized: React.FC<ImageOptimizedProps> = ({
@@ -26,107 +30,204 @@ export const ImageOptimized: React.FC<ImageOptimizedProps> = ({
   height,
   className = '',
   priority = false,
-  sizes = '100vw',
+  sizes,
   objectFit = 'cover',
   placeholder = 'empty',
+  context = 'gallery',
+  quality,
   onLoad,
-  onError
+  onError,
+  enableAnalytics = true
 }) => {
-  // Optimize Unsplash URLs for performance
-  const optimizeImageUrl = (url: string, format: string = 'webp', quality: number = 80): string => {
-    if (!url.includes('unsplash.com')) return url;
-    
-    try {
-      const urlObj = new URL(url);
-      urlObj.searchParams.set('auto', 'format');
-      urlObj.searchParams.set('fit', 'crop');
-      urlObj.searchParams.set('fm', format);
-      urlObj.searchParams.set('q', quality.toString());
-      
-      // Set appropriate width for performance
-      if (width) {
-        urlObj.searchParams.set('w', (width * 2).toString()); // 2x for retina
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [isInView, setIsInView] = useState(priority);
+  const imgRef = useRef<HTMLImageElement>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  
+  const imageService = ImageOptimizationService.getInstance();
+
+  // Initialize intersection observer for lazy loading
+  useEffect(() => {
+    if (priority || !imgRef.current) return;
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setIsInView(true);
+            observerRef.current?.disconnect();
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '100px',
+        threshold: 0.1
       }
-      
-      return urlObj.toString();
-    } catch {
-      return url;
+    );
+
+    if (imgRef.current) {
+      observerRef.current.observe(imgRef.current);
     }
+
+    return () => {
+      observerRef.current?.disconnect();
+    };
+  }, [priority]);
+
+  // Preload critical images
+  useEffect(() => {
+    if (priority && src) {
+      imageService.preloadImage(src, true).catch(() => {
+        // Silently handle preload errors
+      });
+    }
+  }, [priority, src, imageService]);
+
+  // Generate optimized URLs with enterprise service
+  const avifUrl = imageService.generateOptimizedUrl(src, width || 1200, 'avif', quality);
+  const webpUrl = imageService.generateOptimizedUrl(src, width || 1200, 'webp', quality);
+  const jpegUrl = imageService.generateOptimizedUrl(src, width || 1200, 'jpeg', quality);
+
+  // Generate responsive srcSets
+  const avifSrcSet = imageService.generateResponsiveSrcSet(src, 'avif', width || 1920);
+  const webpSrcSet = imageService.generateResponsiveSrcSet(src, 'webp', width || 1920);
+  const jpegSrcSet = imageService.generateResponsiveSrcSet(src, 'jpeg', width || 1920);
+
+  // Generate appropriate sizes attribute
+  const responsiveSizes = sizes || imageService.generateSizesAttribute(context);
+
+  // Generate placeholder styles
+  const getPlaceholderStyle = (): React.CSSProperties => {
+    const baseStyle: React.CSSProperties = {
+      width: width ? `${width}px` : '100%',
+      height: height ? `${height}px` : 'auto',
+      objectFit: objectFit,
+      transition: 'opacity 0.3s ease-in-out, filter 0.3s ease-in-out',
+      opacity: isLoaded ? 1 : 0.7,
+      filter: isLoaded ? 'none' : 'blur(4px)'
+    };
+
+    if (placeholder === 'shimmer') {
+      return {
+        ...baseStyle,
+        background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
+        backgroundSize: '200% 100%',
+        animation: !isLoaded ? 'shimmer 1.5s infinite' : 'none'
+      };
+    } else if (placeholder === 'blur') {
+      return {
+        ...baseStyle,
+        backgroundColor: '#f3f4f6',
+        backgroundImage: 'linear-gradient(45deg, #f3f4f6 25%, transparent 25%, transparent 75%, #f3f4f6 75%, #f3f4f6), linear-gradient(45deg, #f3f4f6 25%, transparent 25%, transparent 75%, #f3f4f6 75%, #f3f4f6)',
+        backgroundSize: '8px 8px',
+        backgroundPosition: '0 0, 4px 4px'
+      };
+    }
+
+    return {
+      ...baseStyle,
+      backgroundColor: '#f3f4f6'
+    };
   };
 
-  // Generate optimized URLs for different formats
-  const avifUrl = optimizeImageUrl(src, 'avif', 75);
-  const webpUrl = optimizeImageUrl(src, 'webp', 80);
-  const jpegUrl = optimizeImageUrl(src, 'jpg', 85);
-
-  // Generate srcSet for responsive images
-  const generateSrcSet = (baseUrl: string, format: string): string => {
-    if (!baseUrl.includes('unsplash.com')) return baseUrl;
-    
-    const widths = [640, 768, 1024, 1280, 1536, 1920];
-    return widths
-      .map(w => `${optimizeImageUrl(baseUrl, format, format === 'avif' ? 70 : 80)} ${w}w`)
-      .join(', ');
+  // Handle load events
+  const handleLoad = () => {
+    setIsLoaded(true);
+    setHasError(false);
+    onLoad?.();
   };
 
-  // Placeholder style for preventing layout shift
-  const placeholderStyle: React.CSSProperties = {
-    backgroundColor: '#f3f4f6',
-    backgroundImage: placeholder === 'blur' ? 
-      'linear-gradient(45deg, #f3f4f6 25%, transparent 25%, transparent 75%, #f3f4f6 75%, #f3f4f6), linear-gradient(45deg, #f3f4f6 25%, transparent 25%, transparent 75%, #f3f4f6 75%, #f3f4f6)' : 
-      undefined,
-    backgroundSize: placeholder === 'blur' ? '8px 8px' : undefined,
-    backgroundPosition: placeholder === 'blur' ? '0 0, 4px 4px' : undefined,
-    width: width ? `${width}px` : '100%',
-    height: height ? `${height}px` : 'auto',
-    objectFit: objectFit,
-    transition: 'opacity 0.2s ease-in-out'
+  const handleError = () => {
+    setHasError(true);
+    setIsLoaded(false);
+    onError?.();
   };
 
   // Common image attributes
   const commonAttributes = {
+    ref: imgRef,
     alt,
     width,
     height,
     className: `${className} ${objectFit === 'cover' ? 'object-cover' : `object-${objectFit}`}`,
     loading: priority ? 'eager' : 'lazy' as const,
     decoding: 'async' as const,
-    style: placeholderStyle,
-    onLoad,
-    onError,
-    sizes
+    style: getPlaceholderStyle(),
+    onLoad: handleLoad,
+    onError: handleError,
+    sizes: responsiveSizes
   };
 
+  // Error fallback
+  if (hasError) {
+    return (
+      <div 
+        className={`${className} bg-gray-200 flex items-center justify-center text-gray-500 text-sm`}
+        style={{ width: width || '100%', height: height || 'auto' }}
+      >
+        Failed to load image
+      </div>
+    );
+  }
+
+  // Don't render image until it's in view (unless priority)
+  if (!isInView) {
+    return (
+      <div 
+        ref={imgRef}
+        className={`${className} bg-gray-100`}
+        style={{ width: width || '100%', height: height || 'auto' }}
+      />
+    );
+  }
+
   return (
-    <picture className="block">
-      {/* AVIF format - best compression */}
-      <source
-        srcSet={generateSrcSet(avifUrl, 'avif')}
-        type="image/avif"
-        sizes={sizes}
-      />
+    <>
+      {/* Add shimmer keyframes */}
+      {placeholder === 'shimmer' && (
+        <style>{`
+          @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+          }
+        `}</style>
+      )}
       
-      {/* WebP format - good compression and compatibility */}
-      <source
-        srcSet={generateSrcSet(webpUrl, 'webp')}
-        type="image/webp"
-        sizes={sizes}
-      />
-      
-      {/* JPEG fallback - universal compatibility */}
-      <img
-        {...commonAttributes}
-        src={jpegUrl}
-        // Performance attributes
-        fetchPriority={priority ? 'high' : 'auto'}
-        // SEO attributes
-        itemProp="image"
-        // Accessibility attributes
-        role="img"
-        // Performance hints
-        data-optimized="true"
-      />
-    </picture>
+      <picture className="block">
+        {/* AVIF format - best compression */}
+        <source
+          srcSet={avifSrcSet}
+          type="image/avif"
+          sizes={responsiveSizes}
+        />
+        
+        {/* WebP format - good compression and compatibility */}
+        <source
+          srcSet={webpSrcSet}
+          type="image/webp"
+          sizes={responsiveSizes}
+        />
+        
+        {/* JPEG fallback - universal compatibility */}
+        <img
+          {...commonAttributes}
+          src={jpegUrl}
+          srcSet={jpegSrcSet}
+          // Performance attributes
+          {...(priority && { fetchPriority: 'high' })}
+          // SEO attributes
+          itemProp="image"
+          // Accessibility attributes
+          role="img"
+          // Performance hints
+          data-optimized="true"
+          data-context={context}
+          data-analytics={enableAnalytics ? 'true' : 'false'}
+        />
+      </picture>
+    </>
   );
 };
 

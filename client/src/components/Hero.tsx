@@ -3,6 +3,8 @@ import { SearchIcon, MapPinIcon, StarIcon, UsersIcon, GlobeIcon, PlaneIcon } fro
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { CriticalResourceLoader } from './CriticalResourceLoader';
+import { ImageOptimized } from './ImageOptimized';
 
 // List of all cities for search functionality with SEO-friendly URLs
 const cities = [

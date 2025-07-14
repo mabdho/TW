@@ -1,121 +1,184 @@
 /**
- * Performance Optimization Hook
- * Monitors and optimizes bundle performance in real-time
+ * Performance optimization hook for TravelWanders
+ * Provides centralized performance monitoring and optimization features
  */
 
-import { useEffect, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import ImageOptimizationService from '../services/ImageOptimizationService';
 
 interface PerformanceMetrics {
-  fcp: number; // First Contentful Paint
-  lcp: number; // Largest Contentful Paint
-  cls: number; // Cumulative Layout Shift
-  fid: number; // First Input Delay
+  fcp: number;
+  lcp: number;
+  fid: number;
+  cls: number;
+  ttfb: number;
   bundleSize: number;
+  imageOptimizationScore: number;
 }
 
-export const usePerformanceOptimization = () => {
-  const measurePerformance = useCallback((): PerformanceMetrics | null => {
-    if (!window.performance) return null;
+interface UsePerformanceOptimizationReturn {
+  metrics: PerformanceMetrics;
+  isOptimized: boolean;
+  preloadCriticalImages: (urls: string[]) => Promise<void>;
+  trackImagePerformance: (url: string, context: string) => void;
+  clearImageCache: () => void;
+  getImageAnalytics: () => any[];
+}
 
-    const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-    const paint = performance.getEntriesByType('paint');
-    
-    const fcp = paint.find(entry => entry.name === 'first-contentful-paint')?.startTime || 0;
-    const lcp = 0; // Would need PerformanceObserver for accurate LCP
-    
-    return {
-      fcp: Math.round(fcp),
-      lcp: Math.round(lcp),
-      cls: 0, // Would need PerformanceObserver
-      fid: 0, // Would need PerformanceObserver
-      bundleSize: navigation.transferSize || 0
+export const usePerformanceOptimization = (): UsePerformanceOptimizationReturn => {
+  const [metrics, setMetrics] = useState<PerformanceMetrics>({
+    fcp: 0,
+    lcp: 0,
+    fid: 0,
+    cls: 0,
+    ttfb: 0,
+    bundleSize: 0,
+    imageOptimizationScore: 0
+  });
+  
+  const imageService = useRef(ImageOptimizationService.getInstance());
+  const [isOptimized, setIsOptimized] = useState(false);
+
+  // Initialize performance monitoring
+  useEffect(() => {
+    const measurePerformance = () => {
+      // First Contentful Paint
+      const fcpEntry = performance.getEntriesByName('first-contentful-paint')[0];
+      const fcp = fcpEntry?.startTime || 0;
+
+      // Largest Contentful Paint
+      let lcp = 0;
+      new PerformanceObserver((entryList) => {
+        const entries = entryList.getEntries();
+        const lastEntry = entries[entries.length - 1];
+        lcp = lastEntry?.startTime || 0;
+      }).observe({ entryTypes: ['largest-contentful-paint'] });
+
+      // First Input Delay
+      let fid = 0;
+      new PerformanceObserver((entryList) => {
+        const entries = entryList.getEntries();
+        entries.forEach((entry) => {
+          if (entry.name === 'first-input') {
+            fid = entry.processingStart - entry.startTime;
+          }
+        });
+      }).observe({ entryTypes: ['first-input'] });
+
+      // Cumulative Layout Shift
+      let cls = 0;
+      new PerformanceObserver((entryList) => {
+        const entries = entryList.getEntries();
+        entries.forEach((entry) => {
+          if (!entry.hadRecentInput) {
+            cls += entry.value;
+          }
+        });
+      }).observe({ entryTypes: ['layout-shift'] });
+
+      // Time to First Byte
+      const navigationEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+      const ttfb = navigationEntry?.responseStart - navigationEntry?.requestStart || 0;
+
+      // Bundle size estimation
+      const resourceEntries = performance.getEntriesByType('resource');
+      const bundleSize = resourceEntries
+        .filter(entry => entry.name.includes('.js') || entry.name.includes('.css'))
+        .reduce((total, entry) => total + (entry.transferSize || 0), 0);
+
+      // Image optimization score
+      const imageOptimizationScore = calculateImageOptimizationScore();
+
+      setMetrics({
+        fcp,
+        lcp,
+        fid,
+        cls,
+        ttfb,
+        bundleSize: Math.round(bundleSize / 1024), // Convert to KB
+        imageOptimizationScore
+      });
+
+      // Determine if performance is optimized
+      const optimized = fcp < 2500 && lcp < 4000 && fid < 100 && cls < 0.1;
+      setIsOptimized(optimized);
+
+      // Log performance metrics
+      console.log('📊 Performance Metrics:', {
+        FCP: `${fcp.toFixed(0)}ms`,
+        LCP: `${lcp.toFixed(0)}ms`,
+        FID: `${fid.toFixed(0)}ms`,
+        CLS: cls.toFixed(3),
+        TTFB: `${ttfb.toFixed(0)}ms`,
+        'Bundle Size': `${Math.round(bundleSize / 1024)}KB`,
+        'Image Score': `${imageOptimizationScore}/100`,
+        'Optimized': optimized ? '✅' : '❌'
+      });
+    };
+
+    // Measure performance after page load
+    if (document.readyState === 'complete') {
+      measurePerformance();
+    } else {
+      window.addEventListener('load', measurePerformance);
+    }
+
+    return () => {
+      window.removeEventListener('load', measurePerformance);
     };
   }, []);
 
-  const optimizeBundleLoading = useCallback(() => {
-    // Preload critical resources
-    const criticalResources = [
-      '/src/components/Navigation.tsx',
-      '/src/components/Hero.tsx',
-      '/src/components/Footer.tsx'
-    ];
-
-    criticalResources.forEach(resource => {
-      const link = document.createElement('link');
-      link.rel = 'modulepreload';
-      link.href = resource;
-      document.head.appendChild(link);
-    });
-
-    // Prefetch likely-to-be-used resources
-    const prefetchResources = [
-      '/src/pages/destinations.tsx',
-      '/src/pages/blogs.tsx'
-    ];
-
-    prefetchResources.forEach(resource => {
-      const link = document.createElement('link');
-      link.rel = 'prefetch';
-      link.href = resource;
-      document.head.appendChild(link);
-    });
-  }, []);
-
-  const enableCriticalResourceHints = useCallback(() => {
-    // Add DNS prefetch for external resources
-    const domains = ['fonts.googleapis.com', 'images.unsplash.com'];
+  // Calculate image optimization score
+  const calculateImageOptimizationScore = (): number => {
+    let score = 0;
     
-    domains.forEach(domain => {
-      const link = document.createElement('link');
-      link.rel = 'dns-prefetch';
-      link.href = `//${domain}`;
-      document.head.appendChild(link);
-    });
+    // Check for lazy loading
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    if (lazyImages.length > 0) score += 30;
+    
+    // Check for modern formats
+    const pictureElements = document.querySelectorAll('picture');
+    if (pictureElements.length > 0) score += 40;
+    
+    // Check for size attributes
+    const imagesWithDimensions = document.querySelectorAll('img[width][height]');
+    if (imagesWithDimensions.length > 0) score += 30;
+    
+    return Math.min(score, 100);
+  };
 
-    // Preconnect to critical domains
-    const preconnectDomains = ['fonts.gstatic.com'];
-    preconnectDomains.forEach(domain => {
-      const link = document.createElement('link');
-      link.rel = 'preconnect';
-      link.href = `//${domain}`;
-      link.crossOrigin = '';
-      document.head.appendChild(link);
-    });
-  }, []);
-
-  const reportMetrics = useCallback(() => {
-    const metrics = measurePerformance();
-    if (metrics) {
-      console.log('📊 Performance Metrics:', {
-        'First Contentful Paint': `${metrics.fcp}ms`,
-        'Bundle Size': `${(metrics.bundleSize / 1024).toFixed(2)} KB`,
-        'Status': metrics.fcp < 1500 ? '✅ Excellent' : metrics.fcp < 2500 ? '⚠️ Good' : '🚨 Needs Optimization'
-      });
-
-      // Auto-optimize if performance is poor
-      if (metrics.fcp > 2500) {
-        console.warn('🚨 Slow FCP detected, applying optimizations...');
-        optimizeBundleLoading();
-      }
+  // Preload critical images
+  const preloadCriticalImages = async (urls: string[]): Promise<void> => {
+    try {
+      await imageService.current.preloadImages(urls, true);
+      console.log('✅ Critical images preloaded:', urls.length);
+    } catch (error) {
+      console.error('❌ Failed to preload critical images:', error);
     }
-  }, [measurePerformance, optimizeBundleLoading]);
+  };
 
-  useEffect(() => {
-    // Initialize performance optimizations
-    enableCriticalResourceHints();
-    
-    // Report metrics after page load
-    const timer = setTimeout(reportMetrics, 1000);
-    
-    return () => clearTimeout(timer);
-  }, [enableCriticalResourceHints, reportMetrics]);
+  // Track image performance
+  const trackImagePerformance = (url: string, context: string): void => {
+    console.log(`📸 Image loaded: ${context} - ${url}`);
+  };
+
+  // Clear image cache
+  const clearImageCache = (): void => {
+    imageService.current.clearCache();
+    console.log('🗑️ Image cache cleared');
+  };
+
+  // Get image analytics
+  const getImageAnalytics = () => {
+    return imageService.current.getAnalytics();
+  };
 
   return {
-    measurePerformance,
-    optimizeBundleLoading,
-    enableCriticalResourceHints,
-    reportMetrics
+    metrics,
+    isOptimized,
+    preloadCriticalImages,
+    trackImagePerformance,
+    clearImageCache,
+    getImageAnalytics
   };
 };
-
-export default usePerformanceOptimization;

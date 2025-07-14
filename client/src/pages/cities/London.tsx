@@ -1,9 +1,16 @@
 import React from 'react';
 import { CityPage } from '../../components/CityPage';
+import { CriticalResourceLoader } from '../../components/CriticalResourceLoader';
 
 export const London: React.FC = () => {
+  const heroImage = "https://images.unsplash.com/photo-1737649766441-a334350d6015?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+  
   return (
-    <CityPage
+    <CriticalResourceLoader 
+      heroImage={heroImage}
+      criticalImages={[heroImage]}
+    >
+      <CityPage
       cityName="London"
       country="United Kingdom"
       title={"15 Best Things to Do in London, United Kingdom (2025 Guide)"}
@@ -398,5 +405,6 @@ Explore the vibrant Borough Market and sample delicious food. Visit Shakespeare'
         }
       }}
     />
+    </CriticalResourceLoader>
   );
 };

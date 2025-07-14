@@ -73,8 +73,10 @@ import { CityPageTemplate } from './templates/CityPageTemplate';
 import { InternalLinks } from './InternalLinks';
 import { CityData, generateRelatedCityLinks, generateContextualLinks } from '../utils/seo';
 import { getAllCitiesData, getAllBlogsData } from '../utils/dataService';
-import { optimizeGalleryImages, generateImageAltText, optimizeImageUrl } from '../utils/imageOptimization';
-import { getRelatedCityLinks, generateInternalLinkingContent } from '../utils/internalLinking';
+import { ImageOptimized } from './ImageOptimized';
+import { CriticalResourceLoader } from './CriticalResourceLoader';
+import { usePerformanceOptimization } from '../hooks/usePerformanceOptimization';
+import { generateInternalLinkingContent } from '../utils/internalLinking';
 import { DiscoveryCards } from './DiscoveryCards';
 import { InteractiveAttractionExplorer } from './InteractiveAttractionExplorer';
 
@@ -174,6 +176,9 @@ export const CityPage: React.FC<CityPageProps> = ({
   // Extract city name and country from title if not provided - MOVED TO TOP
   const extractedCityName = cityName || title.match(/Best Things to Do in ([^,]+)/)?.[1] || title.split(' ')[0];
   const extractedCountry = country || title.match(/([^,]+)$/)?.[1]?.trim() || 'Unknown';
+  
+  // Performance optimization hook
+  const { trackImagePerformance } = usePerformanceOptimization();
 
   // 🔧 HYDRATION FIX: Use consistent data structure for SEO
   const cityData = cityName && country ? {
@@ -186,8 +191,8 @@ export const CityPage: React.FC<CityPageProps> = ({
     })) || []
   } : null;
   
-  // 🔧 SEO IMPROVEMENT: Optimize gallery images with SEO-friendly alt text
-  const optimizedGalleryImages = cityData ? optimizeGalleryImages(galleryImages, cityData.name) : [];
+  // 🔧 SEO IMPROVEMENT: Prepare gallery images for critical loading
+  const galleryImageUrls = galleryImages?.map(img => img.url).filter(Boolean) || [];
   
   // 🔧 SEO IMPROVEMENT: Generate internal linking content
   const internalLinkingContent = generateInternalLinkingContent(extractedCityName);
@@ -211,9 +216,13 @@ export const CityPage: React.FC<CityPageProps> = ({
   };
 
   return (
-    <CityPageTemplate cityData={finalCityData} imageUrl={imageUrl}>
-      <div className="min-h-screen bg-gray-50">
-        <Navigation />
+    <CriticalResourceLoader 
+      heroImage={imageUrl}
+      criticalImages={galleryImageUrls.slice(0, 3)}
+    >
+      <CityPageTemplate cityData={finalCityData} imageUrl={imageUrl}>
+        <div className="min-h-screen bg-gray-50">
+          <Navigation />
       
       {/* Description Section - Mobile First */}
       <div className="bg-white border-b border-gray-200">
@@ -658,8 +667,9 @@ export const CityPage: React.FC<CityPageProps> = ({
         </div>
       </section>
       
-      <Footer />
-    </div>
-    </CityPageTemplate>
+        <Footer />
+      </div>
+      </CityPageTemplate>
+    </CriticalResourceLoader>
   );
 };
