@@ -1,11 +1,27 @@
 import express, { type Request, Response, NextFunction } from "express";
 import session from "express-session";
+import compression from "compression";
+import expressStaticGzip from "express-static-gzip";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { initializeSitemapIndexing } from "./utils/sitemapIndexing";
 
 
 const app = express();
+
+// Performance optimization: Enable gzip/brotli compression for all responses
+app.use(compression({
+  level: 6, // Balanced compression level
+  threshold: 1024, // Only compress files larger than 1KB
+  filter: (req, res) => {
+    // Compress everything except already compressed files
+    if (req.headers['x-no-compression']) {
+      return false;
+    }
+    return compression.filter(req, res);
+  }
+}));
+
 // Increase payload limit for AI-generated content
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: false, limit: '10mb' }));
@@ -65,10 +81,20 @@ app.use((req, res, next) => {
 
 
 
-  // Serve static files from public directory (including blog HTML files)
+  // Serve static files from public directory with advanced compression
   // This needs to be before Vite middleware to prevent it from intercepting
   // BUT we need to exclude index.html so our route handlers can detect bots
-  app.use(express.static('public', {
+  app.use(expressStaticGzip('public', {
+    enableBrotli: true,
+    orderPreference: ['br', 'gz'],
+    setHeaders: (res, path) => {
+      // Cache static assets for 1 year
+      if (path.includes('/assets/')) {
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      } else {
+        res.setHeader('Cache-Control', 'public, max-age=3600'); // 1 hour for HTML
+      }
+    },
     index: false // Prevent serving index.html automatically
   }));
 
