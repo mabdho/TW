@@ -5,7 +5,7 @@ import { FeaturedCities } from '@/components/FeaturedCities';
 import { TravelCategories } from '@/components/TravelCategories';
 import { Footer } from '@/components/Footer';
 import { EnhancedInternalLinks } from '@/components/EnhancedInternalLinks';
-import { structuredDataSchemas } from '@/utils/structuredData';
+import * as structuredDataSchemas from '@/utils/structuredData';
 
 export default function Home() {
   const seoData = {
@@ -28,7 +28,7 @@ export default function Home() {
   const structuredData = [
     structuredDataSchemas.generateOrganizationSchema(),
     structuredDataSchemas.generateWebsiteSchema(),
-    structuredDataSchemas.generateLocalBusinessSchema()
+    structuredDataSchemas.generateTravelAgencySchema()
   ];
 
   return (

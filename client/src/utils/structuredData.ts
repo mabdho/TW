@@ -174,6 +174,139 @@ export const generateBlogSchema = (blogData: {
   "timeRequired": blogData.readTime || "PT5M"
 });
 
+// City Travel Guide schema
+export const generateCityTravelGuideSchema = (cityData: {
+  name: string;
+  country: string;
+  title: string;
+  description: string;
+  attractions?: Array<{
+    name: string;
+    description: string;
+  }>;
+  coordinates?: {
+    latitude: number;
+    longitude: number;
+  };
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "TravelGuide",
+  "name": cityData.title,
+  "description": cityData.description,
+  "about": {
+    "@type": "Place",
+    "name": cityData.name,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": cityData.name,
+      "addressCountry": cityData.country
+    },
+    "geo": cityData.coordinates ? {
+      "@type": "GeoCoordinates",
+      "latitude": cityData.coordinates.latitude,
+      "longitude": cityData.coordinates.longitude
+    } : undefined
+  },
+  "url": `https://travelwanders.com/best-things-to-do-in-${cityData.name.toLowerCase().replace(/\s+/g, '-')}`,
+  "publisher": {
+    "@type": "Organization",
+    "name": "TravelWanders"
+  },
+  "datePublished": new Date().toISOString(),
+  "dateModified": new Date().toISOString(),
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://travelwanders.com/best-things-to-do-in-${cityData.name.toLowerCase().replace(/\s+/g, '-')}`
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "TravelWanders"
+  },
+  "keywords": [`best things to do in ${cityData.name}`, `things to do in ${cityData.name}`, `${cityData.name} travel guide`, `${cityData.name} attractions`, "travel", "destinations"],
+  "touristType": ["Families", "Couples", "Solo Travelers", "Adventure Seekers"],
+  "mentions": cityData.attractions?.map(attraction => ({
+    "@type": "TouristAttraction",
+    "name": attraction.name,
+    "description": attraction.description
+  }))
+});
+
+// Business type detection utility
+export const detectBusinessType = (businessName: string): string => {
+  const name = businessName.toLowerCase();
+  
+  if (name.includes('museum') || name.includes('gallery') || name.includes('exhibition')) {
+    return 'Museum';
+  }
+  if (name.includes('restaurant') || name.includes('dining') || name.includes('cafe') || name.includes('bistro')) {
+    return 'Restaurant';
+  }
+  if (name.includes('hotel') || name.includes('accommodation') || name.includes('lodge')) {
+    return 'LodgingBusiness';
+  }
+  if (name.includes('park') || name.includes('garden') || name.includes('square')) {
+    return 'Park';
+  }
+  if (name.includes('church') || name.includes('cathedral') || name.includes('temple') || name.includes('mosque')) {
+    return 'Church';
+  }
+  if (name.includes('market') || name.includes('shopping') || name.includes('store')) {
+    return 'ShoppingCenter';
+  }
+  if (name.includes('theater') || name.includes('theatre') || name.includes('cinema') || name.includes('performance')) {
+    return 'TheaterGroup';
+  }
+  if (name.includes('bridge') || name.includes('tower') || name.includes('building') || name.includes('palace')) {
+    return 'LandmarksOrHistoricalBuildings';
+  }
+  
+  return 'TouristAttraction';
+};
+
+// Local Business schema
+export const generateLocalBusinessSchema = (business: {
+  name: string;
+  description: string;
+  city: string;
+  country: string;
+  coordinates?: {
+    latitude: number;
+    longitude: number;
+  };
+  rating?: number;
+  reviewCount?: number;
+  priceRange?: string;
+  openingHours?: string;
+  website?: string;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", detectBusinessType(business.name)],
+  "name": business.name,
+  "description": business.description,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": business.city,
+    "addressCountry": business.country
+  },
+  "geo": business.coordinates ? {
+    "@type": "GeoCoordinates",
+    "latitude": business.coordinates.latitude,
+    "longitude": business.coordinates.longitude
+  } : undefined,
+  "aggregateRating": business.rating ? {
+    "@type": "AggregateRating",
+    "ratingValue": business.rating,
+    "reviewCount": business.reviewCount || 100,
+    "bestRating": 5,
+    "worstRating": 1
+  } : undefined,
+  "priceRange": business.priceRange || "$$",
+  "openingHours": business.openingHours || "Mo-Su 09:00-17:00",
+  "url": business.website || `https://travelwanders.com/best-things-to-do-in-${business.city.toLowerCase().replace(/\s+/g, '-')}`,
+  "image": `https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&h=600&fit=crop`,
+  "touristType": ["Families", "Couples", "Solo Travelers"]
+});
+
 // FAQ schema
 export const generateFAQSchema = (faqs: Array<{
   question: string;
@@ -206,8 +339,8 @@ export const generateBreadcrumbSchema = (breadcrumbs: Array<{
   }))
 });
 
-// Local Business schema (for travel agency aspects)
-export const generateLocalBusinessSchema = () => ({
+// Travel Agency schema
+export const generateTravelAgencySchema = () => ({
   "@context": "https://schema.org",
   "@type": "TravelAgency",
   "name": "TravelWanders",
