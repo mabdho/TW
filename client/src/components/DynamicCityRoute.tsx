@@ -12,6 +12,8 @@ const cityMap = {
   // Empty - ready for fresh city additions via admin panel
 
   'london': London,
+
+  'rome': createCityImport('Rome', '../pages/cities/Rome'),
 };
 
 interface DynamicCityRouteProps {

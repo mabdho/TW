@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 
 // Featured cities - will be populated with new production cities
 const featuredCities = [
+  { "name": "Rome", "country": "Italy", "path": "/best-things-to-do-in-rome", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1661964123160-8d049fa07f0c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { "name": "London", "country": "United Kingdom", "path": "/best-things-to-do-in-london", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1737649766441-a334350d6015?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
 ];
 
