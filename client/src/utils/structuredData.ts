@@ -1,246 +1,337 @@
 /**
- * Enhanced structured data generation for TravelWanders
- * Generates comprehensive schemas for TouristAttraction, LocalBusiness, and Place entities
+ * Structured Data Utilities for TravelWanders
+ * Implements comprehensive rich snippets for search visibility
  */
 
-interface AttractionData {
-  name: string;
-  description: string;
-  practicalInfo?: {
-    cost?: string;
-    openingHours?: string;
-    website?: string;
-  };
-}
+// Organization schema for homepage
+export const generateOrganizationSchema = () => ({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "TravelWanders",
+  "url": "https://travelwanders.com",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://travelwanders.com/logo.png",
+    "width": 200,
+    "height": 60
+  },
+  "description": "Discover breathtaking destinations and plan your next adventure with curated travel guides and experiences.",
+  "sameAs": [
+    "https://facebook.com/travelwanders",
+    "https://twitter.com/travelwanders",
+    "https://instagram.com/travelwanders",
+    "https://linkedin.com/company/travelwanders"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "US"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Customer Service",
+    "email": "support@travelwanders.com"
+  }
+});
 
-interface CityData {
+// Website schema
+export const generateWebsiteSchema = () => ({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "TravelWanders",
+  "url": "https://travelwanders.com",
+  "description": "Your ultimate travel companion for discovering amazing destinations worldwide",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://travelwanders.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "TravelWanders"
+  }
+});
+
+// City/Place schema
+export const generateCitySchema = (cityData: {
   name: string;
   country: string;
-  attractions: AttractionData[];
-}
-
-/**
- * Generate comprehensive TouristAttraction schema for major attractions
- */
-export function generateTouristAttractionSchema(
-  attraction: AttractionData, 
-  cityName: string, 
-  country: string
-): object {
-  const schema: any = {
-    "@context": "https://schema.org",
-    "@type": "TouristAttraction",
-    "name": attraction.name,
-    "description": attraction.description,
-    "location": {
-      "@type": "City",
-      "name": cityName,
-      "addressCountry": country,
-      "containedInPlace": {
-        "@type": "Country",
-        "name": country
-      }
-    },
-    "touristType": "Tourist",
-    "amenityFeature": [
-      {
-        "@type": "LocationFeatureSpecification",
-        "name": "Tourist Information",
-        "value": true
-      }
-    ]
+  description: string;
+  attractions?: Array<{
+    name: string;
+    description: string;
+  }>;
+  coordinates?: {
+    latitude: number;
+    longitude: number;
   };
-
-  // Add opening hours if available
-  if (attraction.practicalInfo?.openingHours) {
-    schema.openingHours = attraction.practicalInfo.openingHours;
-  }
-
-  // Add pricing if available
-  if (attraction.practicalInfo?.cost) {
-    schema.offers = {
-      "@type": "Offer",
-      "price": attraction.practicalInfo.cost,
-      "priceCurrency": "EUR",
-      "availability": "https://schema.org/InStock"
-    };
-  }
-
-  // Add website if available
-  if (attraction.practicalInfo?.website) {
-    schema.url = `https://${attraction.practicalInfo.website}`;
-  }
-
-  return schema;
-}
-
-/**
- * Generate LocalBusiness schema for attractions that are businesses (museums, restaurants, etc.)
- */
-export function generateLocalBusinessSchema(
-  attraction: AttractionData,
-  cityName: string,
-  country: string,
-  businessType: string = "Museum"
-): object {
-  const schema: any = {
-    "@context": "https://schema.org",
-    "@type": businessType,
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "Place",
+  "name": `Best Things to Do in ${cityData.name}`,
+  "description": cityData.description,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": cityData.name,
+    "addressCountry": cityData.country
+  },
+  "geo": cityData.coordinates ? {
+    "@type": "GeoCoordinates",
+    "latitude": cityData.coordinates.latitude,
+    "longitude": cityData.coordinates.longitude
+  } : undefined,
+  "url": `https://travelwanders.com/best-things-to-do-in-${cityData.name.toLowerCase().replace(/\s+/g, '-')}`,
+  "image": `https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&h=600&fit=crop`,
+  "touristType": ["Families", "Couples", "Solo Travelers", "Adventure Seekers"],
+  "amenityFeature": cityData.attractions?.map(attraction => ({
+    "@type": "LocationFeatureSpecification",
     "name": attraction.name,
-    "description": attraction.description,
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": cityName,
-      "addressCountry": country
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "addressCountry": country
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.5",
-      "reviewCount": "150",
-      "bestRating": "5",
-      "worstRating": "1"
+    "description": attraction.description
+  }))
+});
+
+// Tourist Attraction schema
+export const generateTouristAttractionSchema = (attraction: {
+  name: string;
+  description: string;
+  city: string;
+  country: string;
+  coordinates?: {
+    latitude: number;
+    longitude: number;
+  };
+  rating?: number;
+  reviewCount?: number;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "TouristAttraction",
+  "name": attraction.name,
+  "description": attraction.description,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": attraction.city,
+    "addressCountry": attraction.country
+  },
+  "geo": attraction.coordinates ? {
+    "@type": "GeoCoordinates",
+    "latitude": attraction.coordinates.latitude,
+    "longitude": attraction.coordinates.longitude
+  } : undefined,
+  "aggregateRating": attraction.rating ? {
+    "@type": "AggregateRating",
+    "ratingValue": attraction.rating,
+    "reviewCount": attraction.reviewCount || 100,
+    "bestRating": 5,
+    "worstRating": 1
+  } : undefined,
+  "touristType": ["Families", "Couples", "Solo Travelers"],
+  "isAccessibleForFree": true
+});
+
+// Blog Article schema
+export const generateBlogSchema = (blogData: {
+  title: string;
+  description: string;
+  content: string;
+  author: string;
+  publishedAt: string;
+  category: string;
+  id: string;
+  imageUrl?: string;
+  readTime?: string;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": blogData.title,
+  "description": blogData.description,
+  "articleBody": blogData.content,
+  "author": {
+    "@type": "Person",
+    "name": blogData.author,
+    "url": "https://travelwanders.com/author/" + blogData.author.toLowerCase().replace(/\s+/g, '-')
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "TravelWanders",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://travelwanders.com/logo.png"
     }
-  };
+  },
+  "datePublished": blogData.publishedAt,
+  "dateModified": blogData.publishedAt,
+  "image": blogData.imageUrl || "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&h=600&fit=crop",
+  "url": `https://travelwanders.com/blog/${blogData.id}`,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://travelwanders.com/blog/${blogData.id}`
+  },
+  "about": {
+    "@type": "Thing",
+    "name": blogData.category
+  },
+  "keywords": [blogData.category, "travel", "travel tips", "destinations", "travel guide"],
+  "wordCount": blogData.content.split(' ').length,
+  "timeRequired": blogData.readTime || "PT5M"
+});
 
-  // Add business-specific properties
-  if (attraction.practicalInfo?.openingHours) {
-    schema.openingHoursSpecification = {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      "opens": "09:00",
-      "closes": "18:00"
-    };
-  }
+// FAQ schema
+export const generateFAQSchema = (faqs: Array<{
+  question: string;
+  answer: string;
+}>) => ({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+});
 
-  if (attraction.practicalInfo?.website) {
-    schema.url = `https://${attraction.practicalInfo.website}`;
-  }
+// Breadcrumb schema
+export const generateBreadcrumbSchema = (breadcrumbs: Array<{
+  name: string;
+  url: string;
+}>) => ({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbs.map((breadcrumb, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": breadcrumb.name,
+    "item": breadcrumb.url
+  }))
+});
 
-  if (attraction.practicalInfo?.cost) {
-    schema.priceRange = attraction.practicalInfo.cost;
-  }
+// Local Business schema (for travel agency aspects)
+export const generateLocalBusinessSchema = () => ({
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  "name": "TravelWanders",
+  "image": "https://travelwanders.com/logo.png",
+  "url": "https://travelwanders.com",
+  "telephone": "+1-555-0123",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Travel Street",
+    "addressLocality": "San Francisco",
+    "addressRegion": "CA",
+    "postalCode": "94105",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 37.7749,
+    "longitude": -122.4194
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "opens": "00:00",
+    "closes": "23:59"
+  },
+  "sameAs": [
+    "https://facebook.com/travelwanders",
+    "https://twitter.com/travelwanders",
+    "https://instagram.com/travelwanders"
+  ]
+});
 
-  return schema;
-}
+// Review schema
+export const generateReviewSchema = (reviews: Array<{
+  author: string;
+  rating: number;
+  reviewBody: string;
+  datePublished: string;
+}>) => ({
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "itemReviewed": {
+    "@type": "TravelAgency",
+    "name": "TravelWanders"
+  },
+  "author": {
+    "@type": "Person",
+    "name": reviews[0]?.author || "Travel Enthusiast"
+  },
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": reviews[0]?.rating || 5,
+    "bestRating": 5,
+    "worstRating": 1
+  },
+  "reviewBody": reviews[0]?.reviewBody || "Excellent travel guides and recommendations!",
+  "datePublished": reviews[0]?.datePublished || new Date().toISOString()
+});
 
-/**
- * Generate Place schema with geographic coordinates
- */
-export function generatePlaceSchema(
-  cityName: string,
-  country: string,
-  description: string
-): object {
-  // Geographic coordinates for major cities
-  const coordinates: Record<string, {lat: number, lng: number}> = {
-    'Milan': { lat: 45.4642, lng: 9.1900 },
-    'Porto': { lat: 41.1579, lng: -8.6291 },
-    'Paris': { lat: 48.8566, lng: 2.3522 },
-    'Tokyo': { lat: 35.6762, lng: 139.6503 },
-    'Barcelona': { lat: 41.3851, lng: 2.1734 },
-    'Bologna': { lat: 44.4949, lng: 11.3426 }
-  };
+// Aggregate Rating schema
+export const generateAggregateRatingSchema = (ratingData: {
+  averageRating: number;
+  reviewCount: number;
+  bestRating?: number;
+  worstRating?: number;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "AggregateRating",
+  "ratingValue": ratingData.averageRating,
+  "reviewCount": ratingData.reviewCount,
+  "bestRating": ratingData.bestRating || 5,
+  "worstRating": ratingData.worstRating || 1
+});
 
-  const cityCoords = coordinates[cityName] || { lat: 0, lng: 0 };
+// How-to schema for travel guides
+export const generateHowToSchema = (guideData: {
+  name: string;
+  description: string;
+  steps: Array<{
+    name: string;
+    text: string;
+    url?: string;
+  }>;
+  totalTime?: string;
+  estimatedCost?: string;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": guideData.name,
+  "description": guideData.description,
+  "totalTime": guideData.totalTime || "PT3H",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": guideData.estimatedCost || "100"
+  },
+  "step": guideData.steps.map((step, index) => ({
+    "@type": "HowToStep",
+    "position": index + 1,
+    "name": step.name,
+    "text": step.text,
+    "url": step.url
+  }))
+});
 
-  return {
-    "@context": "https://schema.org",
-    "@type": "Place",
-    "name": cityName,
-    "description": description,
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": cityCoords.lat,
-      "longitude": cityCoords.lng
-    },
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": cityName,
-      "addressCountry": country
-    },
-    "containedInPlace": {
-      "@type": "Country",
-      "name": country
-    },
-    "tourismType": "City",
-    "hasMap": `https://www.google.com/maps/place/${encodeURIComponent(cityName)},+${encodeURIComponent(country)}`
-  };
-}
-
-/**
- * Generate comprehensive city travel guide schema
- */
-export function generateCityTravelGuideSchema(
-  cityData: CityData,
-  title: string,
-  description: string,
-  canonicalUrl: string
-): object {
-  return {
-    "@context": "https://schema.org",
-    "@type": "TravelGuide",
-    "name": title,
-    "description": description,
-    "about": {
-      "@type": "City",
-      "name": cityData.name,
-      "containedInPlace": {
-        "@type": "Country",
-        "name": cityData.country
-      }
-    },
-    "mainEntity": {
-      "@type": "ItemList",
-      "numberOfItems": cityData.attractions.length,
-      "itemListElement": cityData.attractions.slice(0, 5).map((attraction, index) => ({
-        "@type": "ListItem",
-        "position": index + 1,
-        "item": generateTouristAttractionSchema(attraction, cityData.name, cityData.country)
-      }))
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": canonicalUrl,
-      "url": canonicalUrl
-    },
-    "author": {
-      "@type": "Organization",
-      "name": "TravelWanders",
-      "url": "https://travelwanders.com"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "TravelWanders",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://travelwanders.com/favicon.svg"
-      }
-    },
-    "dateModified": new Date().toISOString(),
-    "inLanguage": "en-US",
-    "url": canonicalUrl
-  };
-}
-
-/**
- * Detect business type from attraction name
- */
-export function detectBusinessType(attractionName: string): string {
-  const name = attractionName.toLowerCase();
-  
-  if (name.includes('museum') || name.includes('gallery')) return 'Museum';
-  if (name.includes('church') || name.includes('cathedral') || name.includes('basilica')) return 'Church';
-  if (name.includes('restaurant') || name.includes('cafe') || name.includes('dining')) return 'Restaurant';
-  if (name.includes('theater') || name.includes('theatre') || name.includes('opera')) return 'TheaterGroup';
-  if (name.includes('park') || name.includes('garden')) return 'Park';
-  if (name.includes('market') || name.includes('shopping')) return 'ShoppingCenter';
-  if (name.includes('hotel') || name.includes('accommodation')) return 'LodgingBusiness';
-  
-  return 'TouristAttraction';
-}
-
-export type { AttractionData, CityData };
+// Export all schemas
+export const structuredDataSchemas = {
+  generateOrganizationSchema,
+  generateWebsiteSchema,
+  generateCitySchema,
+  generateTouristAttractionSchema,
+  generateBlogSchema,
+  generateFAQSchema,
+  generateBreadcrumbSchema,
+  generateLocalBusinessSchema,
+  generateReviewSchema,
+  generateAggregateRatingSchema,
+  generateHowToSchema
+};

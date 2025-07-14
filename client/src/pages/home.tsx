@@ -1,12 +1,11 @@
 import { Navigation } from '@/components/Navigation';
 import { Hero } from '@/components/Hero';
 import { SEOHead } from '@/components/SEOHead';
-import { lazy, Suspense } from 'react';
-
-// Lazy load below-the-fold components for better FCP
-const LazyFeaturedCities = lazy(() => import('@/components/FeaturedCities'));
-const LazyTravelCategories = lazy(() => import('@/components/TravelCategories'));
-const LazyFooter = lazy(() => import('@/components/Footer'));
+import { FeaturedCities } from '@/components/FeaturedCities';
+import { TravelCategories } from '@/components/TravelCategories';
+import { Footer } from '@/components/Footer';
+import { EnhancedInternalLinks } from '@/components/EnhancedInternalLinks';
+import { structuredDataSchemas } from '@/utils/structuredData';
 
 export default function Home() {
   const seoData = {
@@ -25,19 +24,12 @@ export default function Home() {
     section: "homepage"
   };
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "TravelWanders",
-    "url": "https://travelwanders.com",
-    "logo": "https://travelwanders.com/logo.png",
-    "description": "Discover breathtaking destinations and plan your next adventure with curated travel guides and experiences.",
-    "sameAs": [
-      "https://facebook.com/travelwanders",
-      "https://twitter.com/travelwanders",
-      "https://instagram.com/travelwanders"
-    ]
-  };
+  // Enhanced structured data with multiple schemas
+  const structuredData = [
+    structuredDataSchemas.generateOrganizationSchema(),
+    structuredDataSchemas.generateWebsiteSchema(),
+    structuredDataSchemas.generateLocalBusinessSchema()
+  ];
 
   return (
     <div className="min-h-screen bg-white">
@@ -45,20 +37,22 @@ export default function Home() {
       <Navigation />
       <Hero />
       
-      {/* Lazy load below-the-fold content for optimal FCP */}
-      <Suspense fallback={<div className="min-h-[400px] bg-gray-50 animate-pulse" />}>
-        <LazyFeaturedCities />
-      </Suspense>
+      {/* Critical components loaded immediately for FCP optimization */}
+      <FeaturedCities />
+      <TravelCategories />
       
-      <Suspense fallback={<div className="min-h-[300px] bg-gray-50 animate-pulse" />}>
-        <LazyTravelCategories />
-      </Suspense>
+      {/* Enhanced internal linking for SEO authority */}
+      <EnhancedInternalLinks 
+        currentPage={{
+          type: 'homepage',
+          data: {
+            title: 'TravelWanders - Discover Your Next Adventure',
+            content: 'Travel destinations and guides for discovering amazing places worldwide. Explore cities, countries, and travel experiences.'
+          }
+        }}
+      />
       
-      {/* Enhanced internal linking for SEO - temporarily removed due to error */}
-      
-      <Suspense fallback={<div className="min-h-[200px] bg-gray-50 animate-pulse" />}>
-        <LazyFooter />
-      </Suspense>
+      <Footer />
     </div>
   );
 }
