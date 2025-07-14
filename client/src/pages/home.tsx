@@ -4,6 +4,13 @@ import { FeaturedCities } from '@/components/FeaturedCities';
 import { TravelCategories } from '@/components/TravelCategories';
 import { Footer } from '@/components/Footer';
 import { SEOHead } from '@/components/SEOHead';
+import { EnhancedInternalLinks } from '@/components/EnhancedInternalLinks';
+import { lazy, Suspense } from 'react';
+
+// Lazy load below-the-fold components for better FCP
+const LazyFeaturedCities = lazy(() => import('@/components/FeaturedCities'));
+const LazyTravelCategories = lazy(() => import('@/components/TravelCategories'));
+const LazyFooter = lazy(() => import('@/components/Footer'));
 
 export default function Home() {
   const seoData = {
@@ -41,9 +48,21 @@ export default function Home() {
       <SEOHead seoData={seoData} structuredData={structuredData} />
       <Navigation />
       <Hero />
-      <FeaturedCities />
-      <TravelCategories />
-      <Footer />
+      
+      {/* Lazy load below-the-fold content for optimal FCP */}
+      <Suspense fallback={<div className="min-h-[400px] bg-gray-50 animate-pulse" />}>
+        <LazyFeaturedCities />
+      </Suspense>
+      
+      <Suspense fallback={<div className="min-h-[300px] bg-gray-50 animate-pulse" />}>
+        <LazyTravelCategories />
+      </Suspense>
+      
+      {/* Enhanced internal linking for SEO - temporarily removed due to error */}
+      
+      <Suspense fallback={<div className="min-h-[200px] bg-gray-50 animate-pulse" />}>
+        <LazyFooter />
+      </Suspense>
     </div>
   );
 }
