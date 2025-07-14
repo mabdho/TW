@@ -1,6 +1,23 @@
 import * as React from "react"
 import * as ContextMenuPrimitive from "@radix-ui/react-context-menu"
-import { Check, ChevronRight, Circle } from "lucide-react"
+// Lightweight icon replacements for lucide-react
+const Check = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <polyline points="20,6 9,17 4,12"/>
+  </svg>
+);
+
+const ChevronRight = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <polyline points="9,18 15,12 9,6"/>
+  </svg>
+);
+
+const Circle = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <circle cx="12" cy="12" r="10"/>
+  </svg>
+);
 
 import { cn } from "@/lib/utils"
 

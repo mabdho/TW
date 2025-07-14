@@ -1,5 +1,16 @@
 import * as React from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+// Lightweight icon replacements for lucide-react
+const ChevronLeft = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <polyline points="15,18 9,12 15,6"/>
+  </svg>
+);
+
+const ChevronRight = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <polyline points="9,18 15,12 9,6"/>
+  </svg>
+);
 import { DayPicker } from "react-day-picker"
 
 import { cn } from "@/lib/utils"

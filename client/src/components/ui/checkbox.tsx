@@ -1,6 +1,11 @@
 import * as React from "react"
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
-import { Check } from "lucide-react"
+// Lightweight icon replacement for lucide-react
+const Check = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <polyline points="20,6 9,17 4,12"/>
+  </svg>
+);
 
 import { cn } from "@/lib/utils"
 

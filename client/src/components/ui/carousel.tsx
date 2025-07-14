@@ -2,7 +2,20 @@ import * as React from "react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+// Lightweight icon replacements for lucide-react
+const ArrowLeft = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <line x1="19" y1="12" x2="5" y2="12"/>
+    <polyline points="12,19 5,12 12,5"/>
+  </svg>
+);
+
+const ArrowRight = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <line x1="5" y1="12" x2="19" y2="12"/>
+    <polyline points="12,5 19,12 12,19"/>
+  </svg>
+);
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"

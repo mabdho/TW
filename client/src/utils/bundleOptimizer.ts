@@ -1,85 +1,99 @@
 /**
- * Bundle Size Optimization Utilities
- * Advanced code splitting and performance optimization
+ * Bundle Optimization Utilities
+ * Implements dynamic imports and lazy loading for heavy components
  */
 
-// Dynamic imports for large components
-export const loadComponentAsync = async <T>(
-  importFn: () => Promise<{ default: T }>
-): Promise<T> => {
+import { lazy } from 'react';
+
+// Lazy load admin components (only loaded when admin panel is accessed)
+export const LazyAdminPanel = lazy(() => import('../pages/admin'));
+export const LazyBlogDetail = lazy(() => import('../pages/blog-detail'));
+
+// Lazy load heavy UI components
+export const LazyRichTextEditor = lazy(() => import('../components/ui/rich-text-editor.tsx'));
+export const LazyCommand = lazy(() => import('../components/ui/command.tsx'));
+export const LazyCalendar = lazy(() => import('../components/ui/calendar.tsx'));
+export const LazyNavigationMenu = lazy(() => import('../components/ui/navigation-menu.tsx'));
+
+// Lazy load chart components (only for admin analytics)
+export const LazyChart = lazy(() => import('../components/ui/chart.tsx'));
+
+// Dynamic import wrapper for conditional loading
+export const loadComponentOnDemand = async <T>(
+  importFn: () => Promise<{ default: T }>,
+  condition: boolean = true
+): Promise<T | null> => {
+  if (!condition) return null;
+  
   try {
     const module = await importFn();
     return module.default;
   } catch (error) {
-    console.error('Failed to load component:', error);
-    throw error;
+    console.warn('Failed to load component:', error);
+    return null;
   }
-};
-
-// Lazy loading with preloading support
-export const createLazyComponent = <T>(
-  importFn: () => Promise<{ default: T }>,
-  preload = false
-) => {
-  if (preload && typeof window !== 'undefined') {
-    // Preload in idle time
-    requestIdleCallback(() => {
-      importFn().catch(() => {
-        // Silent fail for preloading
-      });
-    });
-  }
-  
-  return React.lazy(importFn);
 };
 
 // Bundle size monitoring
-export const measureBundleSize = () => {
+export const reportBundleSize = () => {
   if (typeof window !== 'undefined' && 'performance' in window) {
     const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-    const resources = performance.getEntriesByType('resource');
+    const loadTime = navigation.loadEventEnd - navigation.fetchStart;
     
-    const jsResources = resources.filter(resource => 
-      resource.name.includes('.js') && !resource.name.includes('hot-update')
-    );
-    
-    console.log('📦 Bundle Analysis:', {
-      totalJS: jsResources.length,
-      totalSize: `${(jsResources.reduce((acc, r) => acc + (r.transferSize || 0), 0) / 1024).toFixed(2)} KB`,
-      loadTime: `${navigation.loadEventEnd - navigation.fetchStart}ms`
+    console.log('📊 Bundle Performance:', {
+      loadTime: `${loadTime}ms`,
+      transferSize: navigation.transferSize ? `${(navigation.transferSize / 1024).toFixed(2)} KB` : 'unknown'
     });
   }
 };
 
-// Code splitting utilities
-export const splitByRoute = {
-  // Pages
-  admin: () => import('../pages/admin'),
-  blogs: () => import('../pages/blogs'),
-  destinations: () => import('../pages/destinations'),
+// Chunk loading strategy
+export const preloadCriticalChunks = () => {
+  // Preload city chunks for common destinations
+  const criticalCities = ['london', 'rome'];
   
-  // Heavy components
-  cityPage: () => import('../components/CityPage'),
-  discoveryCards: () => import('../components/DiscoveryCards'),
-  interactiveExplorer: () => import('../components/InteractiveAttractionExplorer')
+  criticalCities.forEach(city => {
+    const link = document.createElement('link');
+    link.rel = 'modulepreload';
+    link.href = `/src/pages/cities/${city}.tsx`;
+    document.head.appendChild(link);
+  });
 };
 
-// Critical path optimization
-export const optimizeCriticalPath = () => {
-  // Preload critical resources
-  if (typeof document !== 'undefined') {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'script';
-    link.href = '/src/components/Navigation.tsx';
-    document.head.appendChild(link);
+// Performance optimization for images
+export const optimizeImages = () => {
+  // Add intersection observer for lazy loading
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target as HTMLImageElement;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+            observer.unobserve(img);
+          }
+        }
+      });
+    });
+
+    // Observe all images with data-src
+    document.querySelectorAll('img[data-src]').forEach(img => {
+      imageObserver.observe(img);
+    });
   }
 };
 
 export default {
-  loadComponentAsync,
-  createLazyComponent,
-  measureBundleSize,
-  splitByRoute,
-  optimizeCriticalPath
+  LazyAdminPanel,
+  LazyBlogDetail,
+  LazyRichTextEditor,
+  LazyCommand,
+  LazyCalendar,
+  LazyNavigationMenu,
+  LazyChart,
+  loadComponentOnDemand,
+  reportBundleSize,
+  preloadCriticalChunks,
+  optimizeImages
 };

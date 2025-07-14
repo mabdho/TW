@@ -19,7 +19,8 @@ import { Toaster } from '@/components/ui/toaster';
 import { apiRequest } from '@/lib/queryClient';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
-import { RichTextEditor } from '@/components/ui/rich-text-editor';
+// Lazy load heavy components to reduce bundle size
+const RichTextEditor = React.lazy(() => import('@/components/ui/rich-text-editor').then(m => ({ default: m.RichTextEditor })));
 import type { Blog } from '@shared/schema';
 import { useAuth, useLogout } from '@/hooks/useAuth';
 

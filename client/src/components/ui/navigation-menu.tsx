@@ -1,7 +1,12 @@
 import * as React from "react"
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
 import { cva } from "class-variance-authority"
-import { ChevronDown } from "lucide-react"
+// Lightweight icon replacement for lucide-react
+const ChevronDown = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <polyline points="6,9 12,15 18,9"/>
+  </svg>
+);
 
 import { cn } from "@/lib/utils"
 

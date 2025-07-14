@@ -1,6 +1,11 @@
 import * as React from "react"
 import { OTPInput, OTPInputContext } from "input-otp"
-import { Dot } from "lucide-react"
+// Lightweight icon replacement for lucide-react
+const Dot = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <circle cx="12" cy="12" r="6"/>
+  </svg>
+);
 
 import { cn } from "@/lib/utils"
 

@@ -5,113 +5,92 @@
  * Analyzes and optimizes JavaScript bundles for performance
  */
 
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { resolve, join } from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+/**
+ * Analyze bundle composition and size
+ */
 function analyzeBundle() {
-  console.log('🔍 Analyzing bundle composition...\n');
+  console.log('📊 Bundle Analysis Report\n');
   
-  // Find all lucide-react imports
-  const srcDir = path.join(__dirname, '../client/src');
-  const files = getAllFiles(srcDir, ['.tsx', '.ts']);
+  const distPath = resolve(__dirname, '../dist/public');
   
-  let totalIcons = 0;
-  let largeImports = [];
+  if (!existsSync(distPath)) {
+    console.log('❌ No build found. Run npm run build first.');
+    return;
+  }
+
+  const files = getAllFiles(distPath, ['.js', '.css']);
   
-  files.forEach(file => {
-    const content = fs.readFileSync(file, 'utf8');
-    const matches = content.match(/import\s*\{\s*([^}]+)\s*\}\s*from\s*['"']lucide-react['"']/);
-    
-    if (matches) {
-      const icons = matches[1].split(',').map(icon => icon.trim()).filter(Boolean);
-      totalIcons += icons.length;
-      
-      if (icons.length > 10) {
-        largeImports.push({
-          file: file.replace(srcDir, ''),
-          count: icons.length,
-          icons: icons
-        });
-      }
-    }
+  console.log('📈 Asset Sizes:');
+  files.sort((a, b) => b.size - a.size).forEach(file => {
+    const sizeKB = (file.size / 1024).toFixed(2);
+    const status = file.size > 500000 ? '🚨' : file.size > 200000 ? '⚠️' : '✅';
+    console.log(`${status} ${file.name}: ${sizeKB} KB`);
   });
-  
-  console.log(`📊 Bundle Analysis Results:`);
-  console.log(`Total Lucide Icons Imported: ${totalIcons}`);
-  console.log(`Files with 10+ Icon Imports: ${largeImports.length}\n`);
-  
-  if (largeImports.length > 0) {
-    console.log('⚠️  Large Import Files:');
-    largeImports.forEach(item => {
-      console.log(`  ${item.file}: ${item.count} icons`);
-    });
-    console.log('');
-  }
-  
-  // Analyze chunk sizes
-  try {
-    const distPath = path.join(__dirname, '../dist');
-    if (fs.existsSync(distPath)) {
-      const jsFiles = fs.readdirSync(distPath)
-        .filter(file => file.endsWith('.js'))
-        .map(file => {
-          const stats = fs.statSync(path.join(distPath, file));
-          return {
-            name: file,
-            size: stats.size,
-            sizeMB: (stats.size / (1024 * 1024)).toFixed(2)
-          };
-        })
-        .sort((a, b) => b.size - a.size);
-      
-      console.log('📦 Largest JavaScript Chunks:');
-      jsFiles.slice(0, 5).forEach(file => {
-        console.log(`  ${file.name}: ${file.sizeMB} MB`);
-      });
-    }
-  } catch (err) {
-    console.log('ℹ️  Run npm run build first to analyze chunk sizes');
-  }
-}
 
-function getAllFiles(dir, extensions) {
-  const files = [];
-  
-  function traverse(currentDir) {
-    const items = fs.readdirSync(currentDir);
-    
-    items.forEach(item => {
-      const fullPath = path.join(currentDir, item);
-      const stats = fs.statSync(fullPath);
-      
-      if (stats.isDirectory()) {
-        traverse(fullPath);
-      } else if (extensions.some(ext => item.endsWith(ext))) {
-        files.push(fullPath);
-      }
-    });
-  }
-  
-  traverse(dir);
-  return files;
-}
-
-function generateOptimizationReport() {
-  console.log('\n🎯 Optimization Recommendations:');
-  console.log('1. Reduce lucide-react imports in large components');
-  console.log('2. Consider icon consolidation for similar functionality');
-  console.log('3. Implement lazy loading for non-critical components');
-  console.log('4. Use dynamic imports for route-based code splitting');
-  console.log('\n✅ Next Steps:');
-  console.log('- Run this analysis after optimizations');
-  console.log('- Monitor bundle sizes in production');
-  console.log('- Consider implementing icon tree-shaking');
-}
-
-if (require.main === module) {
-  analyzeBundle();
+  console.log('\n📋 Optimization Recommendations:');
   generateOptimizationReport();
 }
 
-module.exports = { analyzeBundle, generateOptimizationReport };
+function getAllFiles(dir, extensions) {
+  const results = [];
+  
+  function traverse(currentDir) {
+    try {
+      const items = require('fs').readdirSync(currentDir);
+      
+      for (const item of items) {
+        const fullPath = join(currentDir, item);
+        const stat = require('fs').statSync(fullPath);
+        
+        if (stat.isDirectory()) {
+          traverse(fullPath);
+        } else if (extensions.some(ext => item.endsWith(ext))) {
+          results.push({
+            name: item,
+            size: stat.size,
+            path: fullPath
+          });
+        }
+      }
+    } catch (error) {
+      console.warn(`Warning: Could not read directory ${currentDir}`);
+    }
+  }
+  
+  traverse(dir);
+  return results;
+}
+
+function generateOptimizationReport() {
+  const recommendations = [
+    '🎯 Replace lucide-react with lightweight SVG icons (saves ~900KB)',
+    '📦 Implement route-based code splitting for city pages',
+    '🔄 Lazy load Radix UI components',
+    '🗜️ Enable Brotli compression',
+    '📱 Implement dynamic imports for mobile components',
+    '🎨 Use CSS-only icons where possible',
+    '📈 Add bundle size monitoring to CI/CD'
+  ];
+  
+  recommendations.forEach(rec => console.log(`   ${rec}`));
+  
+  console.log('\n🎯 Priority Actions:');
+  console.log('   1. Replace lucide-react with LightweightIcons (CRITICAL)');
+  console.log('   2. Implement city page code splitting');
+  console.log('   3. Lazy load admin components');
+}
+
+// Run if called directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  analyzeBundle();
+}
+
+export { analyzeBundle };
