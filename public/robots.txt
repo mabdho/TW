@@ -1,0 +1,37 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://travelwanders.com/sitemap.xml
+
+# Block development files
+Disallow: /admin
+Disallow: /login
+Disallow: /*.json$
+Disallow: /*?*utm_*
+Disallow: /*?*ref=*
+Disallow: /dist/
+Disallow: /node_modules/
+Disallow: /.git/
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1

@@ -9,6 +9,44 @@ import { initializeSitemapIndexing } from "./utils/sitemapIndexing";
 
 const app = express();
 
+// Security headers for enhanced protection
+app.use((req, res, next) => {
+  // Remove X-Powered-By header for security
+  res.removeHeader('X-Powered-By');
+  
+  // Content Security Policy
+  res.setHeader('Content-Security-Policy', 
+    "default-src 'self'; " +
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://replit.com; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+    "font-src 'self' https://fonts.gstatic.com; " +
+    "img-src 'self' data: https: blob:; " +
+    "connect-src 'self' https: wss:; " +
+    "frame-ancestors 'none';"
+  );
+  
+  // Security headers
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  
+  // HSTS header (only in production with HTTPS)
+  if (process.env.NODE_ENV === 'production') {
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+  }
+  
+  // Cache control for static assets
+  if (req.path.includes('/assets/') || req.path.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$/)) {
+    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+  } else if (req.path === '/' || req.path.includes('/api/')) {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  }
+  
+  next();
+});
+
 // Performance optimization: Enable gzip/brotli compression for all responses
 app.use(compression({
   level: 6, // Balanced compression level
