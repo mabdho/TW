@@ -2,7 +2,7 @@ import { useParams } from 'wouter';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeftIcon } from '@/components/icons/LightweightIcons';
 import { getBlogById } from '../blogs';
 import { BlogPageTemplate } from '@/components/templates/BlogPageTemplate';
 import { BlogData } from '@/utils/seo';
@@ -26,7 +26,7 @@ export default function BlogDetailPage() {
                 href="/blogs"
                 className="inline-flex items-center text-green-600 hover:text-green-700 font-medium"
               >
-                <ArrowLeft className="mr-2 h-4 w-4" />
+                <ArrowLeftIcon className="mr-2 h-4 w-4" />
                 Back to Blog
               </a>
             </div>
@@ -55,7 +55,7 @@ export default function BlogDetailPage() {
           href="/blogs"
           className="inline-flex items-center text-green-600 hover:text-green-700 font-medium transition-colors"
         >
-          <ArrowLeft className="mr-2 h-4 w-4" />
+          <ArrowLeftIcon className="mr-2 h-4 w-4" />
           Back to Blog
         </a>
       </div>
@@ -94,7 +94,7 @@ export default function BlogDetailPage() {
             href="/blogs"
             className="inline-flex items-center text-green-600 hover:text-green-700 font-medium transition-colors"
           >
-            <ArrowLeft className="mr-2 h-4 w-4" />
+            <ArrowLeftIcon className="mr-2 h-4 w-4" />
             Back to All Posts
           </a>
           

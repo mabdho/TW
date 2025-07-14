@@ -1,4 +1,4 @@
-import { Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
+import { FacebookIcon, TwitterIcon, InstagramIcon, YoutubeIcon } from '@/components/icons/LightweightIcons';
 import { Button } from '@/components/ui/button';
 
 const Footer = () => {
@@ -20,22 +20,22 @@ const Footer = () => {
               <div className="flex gap-3 sm:gap-4">
                 <a href="https://facebook.com/travelwanders" target="_blank" rel="noopener noreferrer">
                   <Button variant="ghost" size="icon" className="hover:text-primary h-8 w-8 sm:h-10 sm:w-10">
-                    <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
+                    <FacebookIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
                 </a>
                 <a href="https://twitter.com/travelwanders" target="_blank" rel="noopener noreferrer">
                   <Button variant="ghost" size="icon" className="hover:text-primary h-8 w-8 sm:h-10 sm:w-10">
-                    <Twitter className="h-4 w-4 sm:h-5 sm:w-5" />
+                    <TwitterIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
                 </a>
                 <a href="https://instagram.com/travelwanders" target="_blank" rel="noopener noreferrer">
                   <Button variant="ghost" size="icon" className="hover:text-primary h-8 w-8 sm:h-10 sm:w-10">
-                    <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
+                    <InstagramIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
                 </a>
                 <a href="https://youtube.com/travelwanders" target="_blank" rel="noopener noreferrer">
                   <Button variant="ghost" size="icon" className="hover:text-primary h-8 w-8 sm:h-10 sm:w-10">
-                    <Youtube className="h-4 w-4 sm:h-5 sm:w-5" />
+                    <YoutubeIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
                 </a>
               </div>

@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { ArrowRight, MapPin, Clock, Star } from 'lucide-react';
+import { ArrowRightIcon, MapPinIcon, ClockIcon, StarIcon } from '@/components/icons/LightweightIcons';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
@@ -117,7 +117,7 @@ export const EnhancedInternalLinks: React.FC<InternalLinksProps> = ({
           {relatedCities.length > 0 && (
             <div>
               <h3 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-green-600" />
+                <MapPinIcon className="w-5 h-5 text-green-600" />
                 Related Destinations
               </h3>
               <div className="space-y-4">
@@ -132,7 +132,7 @@ export const EnhancedInternalLinks: React.FC<InternalLinksProps> = ({
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                              <MapPin className="w-5 h-5 text-green-600" />
+                              <MapPinIcon className="w-5 h-5 text-green-600" />
                             </div>
                             <div>
                               <h4 className="font-medium text-gray-900 group-hover:text-green-600 transition-colors">
@@ -145,7 +145,7 @@ export const EnhancedInternalLinks: React.FC<InternalLinksProps> = ({
                             <Badge variant="secondary" className="text-xs">
                               {city.continent}
                             </Badge>
-                            <ArrowRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform" />
+                            <ArrowRightIcon className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform" />
                           </div>
                         </div>
                       </CardContent>
@@ -160,7 +160,7 @@ export const EnhancedInternalLinks: React.FC<InternalLinksProps> = ({
           {relatedBlogs.length > 0 && (
             <div>
               <h3 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
-                <Clock className="w-5 h-5 text-blue-600" />
+                <ClockIcon className="w-5 h-5 text-blue-600" />
                 Related Articles
               </h3>
               <div className="space-y-4">
@@ -175,7 +175,7 @@ export const EnhancedInternalLinks: React.FC<InternalLinksProps> = ({
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                              <Clock className="w-5 h-5 text-blue-600" />
+                              <ClockIcon className="w-5 h-5 text-blue-600" />
                             </div>
                             <div>
                               <h4 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
@@ -188,7 +188,7 @@ export const EnhancedInternalLinks: React.FC<InternalLinksProps> = ({
                             <Badge variant="outline" className="text-xs">
                               Article
                             </Badge>
-                            <ArrowRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform" />
+                            <ArrowRightIcon className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform" />
                           </div>
                         </div>
                       </CardContent>
@@ -207,14 +207,14 @@ export const EnhancedInternalLinks: React.FC<InternalLinksProps> = ({
               href="/destinations"
               className="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors"
             >
-              <MapPin className="w-4 h-4 mr-2" />
+              <MapPinIcon className="w-4 h-4 mr-2" />
               Explore All Destinations
             </a>
             <a
               href="/blogs"
               className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
             >
-              <Clock className="w-4 h-4 mr-2" />
+              <ClockIcon className="w-4 h-4 mr-2" />
               Read All Articles
             </a>
           </div>

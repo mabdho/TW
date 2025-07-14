@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { SEOHead } from '@/components/SEOHead';
-import { MapPin, Search, Globe, ArrowRight } from 'lucide-react';
+import { MapPinIcon, SearchIcon, GlobeIcon, ArrowRightIcon } from '@/components/icons/LightweightIcons';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -105,7 +105,7 @@ export default function DestinationsPage() {
             {/* Search Bar */}
             <div className="max-w-md mx-auto mb-8">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                 <Input 
                   placeholder="Search destinations or countries..." 
                   value={searchTerm}
@@ -174,7 +174,7 @@ export default function DestinationsPage() {
                       </Badge>
                     </div>
                     <div className="absolute bottom-3 left-3 text-white">
-                      <Globe className="h-5 w-5" />
+                      <GlobeIcon className="h-5 w-5" />
                     </div>
                   </div>
                   <CardContent className="p-4">
@@ -182,12 +182,12 @@ export default function DestinationsPage() {
                       {city.name}
                     </h3>
                     <div className="flex items-center text-gray-600 mb-3">
-                      <MapPin className="h-4 w-4 mr-1" />
+                      <MapPinIcon className="h-4 w-4 mr-1" />
                       <span className="text-sm">{city.country}</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-green-600 text-sm font-medium">View Guide</span>
-                      <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-green-600 transition-colors" />
+                      <ArrowRightIcon className="h-4 w-4 text-gray-400 group-hover:text-green-600 transition-colors" />
                     </div>
                   </CardContent>
                 </a>
@@ -198,7 +198,7 @@ export default function DestinationsPage() {
           {/* No Results */}
           {filteredCities.length === 0 && (
             <div className="text-center py-16">
-              <Globe className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+              <GlobeIcon className="h-16 w-16 text-gray-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">No destinations found</h3>
               <p className="text-gray-600 mb-6">
                 Try adjusting your search or selecting a different continent.

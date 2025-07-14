@@ -5,7 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 // Optimized lucide-react imports - essential icons only
-import { MapPin, Clock, DollarSign, Globe, Star, Camera } from 'lucide-react';
+import { MapPinIcon, ClockIcon, DollarSignIcon, GlobeIcon, StarIcon, CameraIcon, UsersIcon, InfoIcon } from '@/components/icons/LightweightIcons';
 
 // Lightweight SVG alternatives for UI controls
 const UIIcons = {
@@ -250,7 +250,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                        <MapPin className="w-5 h-5 text-blue-600" />
+                        <MapPinIcon className="w-5 h-5 text-blue-600" />
                       </div>
                       <div>
                         <div className="font-medium text-gray-900">Attractions</div>
@@ -259,7 +259,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
-                        <Star className="w-5 h-5 text-orange-600" />
+                        <StarIcon className="w-5 h-5 text-orange-600" />
                       </div>
                       <div>
                         <div className="font-medium text-gray-900">Top Rated</div>
@@ -302,7 +302,7 @@ export const CityPage: React.FC<CityPageProps> = ({
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
               <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
                 <div className="w-6 h-6 sm:w-8 sm:h-8 bg-orange-100 rounded-full flex items-center justify-center">
-                  <Star className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
+                  <StarIcon className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
                 </div>
                 <div>
                   <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Top Attractions</h2>
@@ -324,7 +324,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                           <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 truncate">{attraction.name}</h3>
                         </div>
                         <div className="flex items-center gap-1 flex-shrink-0">
-                          <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-orange-400 text-orange-400" />
+                          <StarIcon className="w-3 h-3 sm:w-4 sm:h-4 fill-orange-400 text-orange-400" />
                           <span className="text-xs sm:text-sm font-medium text-gray-700">4.{9 - index}</span>
                         </div>
                       </div>
@@ -338,13 +338,13 @@ export const CityPage: React.FC<CityPageProps> = ({
                         {attraction.practicalInfo && (
                           <div className="bg-gray-50 rounded-lg p-3 sm:p-4 space-y-2 sm:space-y-3">
                             <h4 className="font-semibold text-gray-900 mb-2 sm:mb-3 flex items-center gap-2 text-xs sm:text-sm">
-                              <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-gray-500" />
+                              <MapPinIcon className="h-3 w-3 sm:h-4 sm:w-4 text-gray-500" />
                               Practical Information
                             </h4>
                             <div className="grid gap-2 sm:gap-3 text-xs sm:text-sm">
                               {attraction.practicalInfo.openingHours && (
                                 <div className="flex items-start gap-2">
-                                  <Clock className="h-4 w-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                                  <ClockIcon className="h-4 w-4 text-gray-500 mt-0.5 flex-shrink-0" />
                                   <div>
                                     <strong className="text-gray-900">Hours:</strong>
                                     <span className="text-gray-700 ml-2">{attraction.practicalInfo.openingHours}</span>
@@ -353,7 +353,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                               )}
                               {attraction.practicalInfo.cost && (
                                 <div className="flex items-start gap-2">
-                                  <DollarSign className="h-4 w-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                                  <DollarSignIcon className="h-4 w-4 text-gray-500 mt-0.5 flex-shrink-0" />
                                   <div>
                                     <strong className="text-gray-900">Cost:</strong>
                                     <span className="text-gray-700 ml-2">{attraction.practicalInfo.cost}</span>
@@ -362,7 +362,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                               )}
                               {attraction.practicalInfo.howToGetThere && (
                                 <div className="flex items-start gap-2">
-                                  <MapPin className="h-4 w-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                                  <MapPinIcon className="h-4 w-4 text-gray-500 mt-0.5 flex-shrink-0" />
                                   <div>
                                     <strong className="text-gray-900">How to Get There:</strong>
                                     <span className="text-gray-700 ml-2">{attraction.practicalInfo.howToGetThere}</span>
@@ -371,7 +371,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                               )}
                               {attraction.practicalInfo.website && (
                                 <div className="flex items-start gap-2">
-                                  <Globe className="h-4 w-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                                  <GlobeIcon className="h-4 w-4 text-gray-500 mt-0.5 flex-shrink-0" />
                                   <div>
                                     <strong className="text-gray-900">Website:</strong>
                                     <a href={`https://${attraction.practicalInfo.website}`} 
@@ -400,7 +400,7 @@ export const CityPage: React.FC<CityPageProps> = ({
               <div className="flex items-center justify-between mb-4 sm:mb-6">
                 <div className="flex items-center gap-2 sm:gap-3">
                   <div className="w-6 h-6 sm:w-8 sm:h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+                    <MapPinIcon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                   </div>
                   <div>
                     <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">All Attractions</h2>
@@ -420,7 +420,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                         <div className="flex items-start justify-between gap-2 sm:gap-4 mb-2 sm:mb-3">
                           <h3 className="text-base sm:text-lg font-semibold text-gray-900 leading-tight">{attraction.name}</h3>
                           <div className="flex items-center gap-1 flex-shrink-0">
-                            <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-orange-400 text-orange-400" />
+                            <StarIcon className="w-3 h-3 sm:w-4 sm:h-4 fill-orange-400 text-orange-400" />
                             <span className="text-xs sm:text-sm font-medium text-gray-700">4.{Math.floor(Math.random() * 5) + 3}</span>
                           </div>
                         </div>
@@ -431,7 +431,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 text-xs sm:text-sm">
                               {attraction.practicalInfo.openingHours && (
                                 <div className="flex items-center gap-2">
-                                  <Clock className="h-4 w-4 text-gray-500" />
+                                  <ClockIcon className="h-4 w-4 text-gray-500" />
                                   <div>
                                     <div className="font-medium text-gray-900">Hours</div>
                                     <div className="text-gray-600">{attraction.practicalInfo.openingHours}</div>
@@ -440,7 +440,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                               )}
                               {attraction.practicalInfo.cost && (
                                 <div className="flex items-center gap-2">
-                                  <DollarSign className="h-4 w-4 text-gray-500" />
+                                  <DollarSignIcon className="h-4 w-4 text-gray-500" />
                                   <div>
                                     <div className="font-medium text-gray-900">Price</div>
                                     <div className="text-gray-600">{attraction.practicalInfo.cost}</div>
@@ -449,7 +449,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                               )}
                               {attraction.practicalInfo.website && (
                                 <div className="flex items-center gap-2">
-                                  <Globe className="h-4 w-4 text-gray-500" />
+                                  <GlobeIcon className="h-4 w-4 text-gray-500" />
                                   <div>
                                     <div className="font-medium text-gray-900">Website</div>
                                     <a href={`https://${attraction.practicalInfo.website}`} 
@@ -525,7 +525,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                     <div className="bg-green-50 rounded-lg border border-green-200 p-3 sm:p-4">
                       <div className="flex items-center gap-2 mb-2 sm:mb-3">
                         <div className="w-5 h-5 sm:w-6 sm:h-6 bg-green-100 rounded-full flex items-center justify-center">
-                          <Star className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
+                          <StarIcon className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
                         </div>
                         <h3 className="text-base sm:text-lg font-semibold text-gray-900">Where to Stay</h3>
                       </div>
@@ -537,7 +537,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                     <div className="bg-orange-50 rounded-lg border border-orange-200 p-3 sm:p-4">
                       <div className="flex items-center gap-2 mb-2 sm:mb-3">
                         <div className="w-5 h-5 sm:w-6 sm:h-6 bg-orange-100 rounded-full flex items-center justify-center">
-                          <Clock className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600" />
+                          <ClockIcon className="w-3 h-3 sm:w-4 sm:h-4 text-orange-600" />
                         </div>
                         <h3 className="text-base sm:text-lg font-semibold text-gray-900">Best Time to Visit</h3>
                       </div>
@@ -549,7 +549,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                     <div className="bg-purple-50 rounded-lg border border-purple-200 p-3 sm:p-4 md:col-span-2">
                       <div className="flex items-center gap-2 mb-2 sm:mb-3">
                         <div className="w-5 h-5 sm:w-6 sm:h-6 bg-purple-100 rounded-full flex items-center justify-center">
-                          <UIIcons.Users className="w-3 h-3 sm:w-4 sm:h-4 text-purple-600" />
+                          <UsersIcon className="w-3 h-3 sm:w-4 sm:h-4 text-purple-600" />
                         </div>
                         <h3 className="text-base sm:text-lg font-semibold text-gray-900">Suggested Itinerary</h3>
                       </div>
@@ -567,7 +567,7 @@ export const CityPage: React.FC<CityPageProps> = ({
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
                 <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
                   <div className="w-6 h-6 sm:w-8 sm:h-8 bg-indigo-100 rounded-full flex items-center justify-center">
-                    <UIIcons.Info className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
+                    <InfoIcon className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
                   </div>
                   <div>
                     <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">Frequently Asked Questions</h2>

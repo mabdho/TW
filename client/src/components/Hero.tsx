@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, MapPin, Star, Users, Globe, Plane } from 'lucide-react';
+import { SearchIcon, MapPinIcon, StarIcon, UsersIcon, GlobeIcon, PlaneIcon } from '@/components/icons/LightweightIcons';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -56,7 +56,7 @@ export const Hero = () => {
           {/* Trust indicator */}
           <div className="flex justify-center mb-8">
             <Badge className="bg-green-100 text-green-800 border-green-200 hover:bg-green-200 px-4 py-2">
-              <Star className="w-4 h-4 mr-2 fill-current" />
+              <StarIcon className="w-4 h-4 mr-2 fill-current" />
               Trusted by millions of travelers
             </Badge>
           </div>
@@ -77,7 +77,7 @@ export const Hero = () => {
           <div id="search-section" className="bg-white rounded-2xl p-3 shadow-lg border border-gray-200 max-w-2xl mx-auto mb-16 relative">
             <div className="flex gap-3">
               <div className="relative flex-1">
-                <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                <MapPinIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                 <Input 
                   value={searchTerm}
                   onChange={(e) => {
@@ -104,7 +104,7 @@ export const Hero = () => {
                         }}
                         className="w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-3 border-b border-gray-100 last:border-b-0"
                       >
-                        <MapPin className="h-4 w-4 text-gray-400" />
+                        <MapPinIcon className="h-4 w-4 text-gray-400" />
                         <div>
                           <div className="font-medium text-gray-900">{city.name}</div>
                           <div className="text-sm text-gray-500">{city.country}</div>
@@ -119,7 +119,7 @@ export const Hero = () => {
                 onClick={handleSearch}
                 className="h-14 px-8 text-base bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl"
               >
-                <Search className="mr-2 h-5 w-5" />
+                <SearchIcon className="mr-2 h-5 w-5" />
                 Search
               </Button>
             </div>

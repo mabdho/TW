@@ -3,16 +3,23 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-// Optimized imports - essential icons only
+// Optimized imports - using lightweight alternatives
 import { 
-  MapPin, 
-  Clock, 
-  DollarSign, 
-  Star, 
-  Camera,
-  Heart,
-  Search
-} from 'lucide-react';
+  MapPinIcon, 
+  ClockIcon, 
+  DollarSignIcon, 
+  StarIcon, 
+  CameraIcon,
+  HeartIcon,
+  SearchIcon,
+  LeafIcon,
+  MountainIcon,
+  WavesIcon,
+  PaletteIcon,
+  BookOpenIcon,
+  CoffeeIcon,
+  FilterIcon
+} from '@/components/icons/LightweightIcons';
 
 // Lightweight SVG alternatives for category icons
 const CategoryIcons = {
@@ -38,14 +45,9 @@ const CategoryIcons = {
   )
 };
 
-// Additional lightweight icons for filters
-const FilterIcon = ({ className = "" }: { className?: string }) => (
-  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46 22,3"/>
-  </svg>
-);
+// Additional lightweight icons for filters (using imported FilterIcon from LightweightIcons)
 
-const CalendarIcon = ({ className = "" }: { className?: string }) => (
+const LocalCalendarIcon = ({ className = "" }: { className?: string }) => (
   <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
     <line x1="16" y1="2" x2="16" y2="6"/>
@@ -54,43 +56,7 @@ const CalendarIcon = ({ className = "" }: { className?: string }) => (
   </svg>
 );
 
-const BookOpenIcon = ({ className = "" }: { className?: string }) => (
-  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-  </svg>
-);
-
-const LeafIcon = ({ className = "" }: { className?: string }) => (
-  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/>
-    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
-  </svg>
-);
-
-const MountainIcon = ({ className = "" }: { className?: string }) => (
-  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="m8 3 4 8 5-5 5 15H2L8 3z"/>
-  </svg>
-);
-
-const PaletteIcon = ({ className = "" }: { className?: string }) => (
-  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <circle cx="13.5" cy="6.5" r=".5"/>
-    <circle cx="17.5" cy="10.5" r=".5"/>
-    <circle cx="8.5" cy="7.5" r=".5"/>
-    <circle cx="6.5" cy="12.5" r=".5"/>
-    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
-  </svg>
-);
-
-const WavesIcon = ({ className = "" }: { className?: string }) => (
-  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>
-    <path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>
-    <path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>
-  </svg>
-);
+// Removed duplicate definitions - using imported icons from LightweightIcons
 
 const ExternalLinkIcon = ({ className = "" }: { className?: string }) => (
   <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -278,9 +244,9 @@ export const InteractiveAttractionExplorer: React.FC<InteractiveAttractionExplor
 
   const filters = [
     { id: 'all', label: 'All', icon: <FilterIcon className="w-4 h-4" /> },
-    { id: 'free', label: 'Free', icon: <Heart className="w-4 h-4" /> },
-    { id: 'quick', label: 'Quick Visit', icon: <Clock className="w-4 h-4" /> },
-    { id: 'halfday', label: 'Half Day+', icon: <CalendarIcon className="w-4 h-4" /> },
+    { id: 'free', label: 'Free', icon: <HeartIcon className="w-4 h-4" /> },
+    { id: 'quick', label: 'Quick Visit', icon: <ClockIcon className="w-4 h-4" /> },
+    { id: 'halfday', label: 'Half Day+', icon: <LocalCalendarIcon className="w-4 h-4" /> },
     { id: 'indoor', label: 'Indoor', icon: <CategoryIcons.Building className="w-4 h-4" /> },
     { id: 'outdoor', label: 'Outdoor', icon: <LeafIcon className="w-4 h-4" /> },
     { id: 'cultural', label: 'Cultural', icon: <BookOpenIcon className="w-4 h-4" /> },
@@ -292,10 +258,10 @@ export const InteractiveAttractionExplorer: React.FC<InteractiveAttractionExplor
     { id: 'art', label: 'Art', icon: <PaletteIcon className="w-4 h-4" /> },
     { id: 'architecture', label: 'Architecture', icon: <CategoryIcons.Building className="w-4 h-4" /> },
     { id: 'nature', label: 'Nature', icon: <LeafIcon className="w-4 h-4" /> },
-    { id: 'food', label: 'Food', icon: <Coffee className="w-4 h-4" /> },
+    { id: 'food', label: 'Food', icon: <CoffeeIcon className="w-4 h-4" /> },
     { id: 'adventure', label: 'Adventure', icon: <MountainIcon className="w-4 h-4" /> },
     { id: 'relaxation', label: 'Relaxation', icon: <WavesIcon className="w-4 h-4" /> },
-    { id: 'photography', label: 'Photography', icon: <Camera className="w-4 h-4" /> }
+    { id: 'photography', label: 'Photography', icon: <CameraIcon className="w-4 h-4" /> }
   ];
 
   const toggleInterest = (interest: InterestType) => {
@@ -320,7 +286,7 @@ export const InteractiveAttractionExplorer: React.FC<InteractiveAttractionExplor
 
       {/* Search */}
       <div className="relative">
-        <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+        <SearchIcon className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
         <Input
           placeholder="Search attractions..."
           value={searchTerm}
@@ -383,18 +349,18 @@ export const InteractiveAttractionExplorer: React.FC<InteractiveAttractionExplor
                   <CardTitle className="text-lg line-clamp-2">{attraction.name}</CardTitle>
                   {isHighlight && (
                     <Badge className="bg-blue-100 text-blue-700 border-blue-300">
-                      <Star className="w-3 h-3 mr-1" />
+                      <StarIcon className="w-3 h-3 mr-1" />
                       Highlight
                     </Badge>
                   )}
                 </div>
                 <div className="flex gap-2 flex-wrap">
                   <Badge variant="outline" className="text-xs">
-                    <Clock className="w-3 h-3 mr-1" />
+                    <ClockIcon className="w-3 h-3 mr-1" />
                     {timeEstimate === 'quick' ? '30-60 Min' : 'Half Day+'}
                   </Badge>
                   <Badge variant="outline" className="text-xs">
-                    <DollarSign className="w-3 h-3 mr-1" />
+                    <DollarSignIcon className="w-3 h-3 mr-1" />
                     {costLevel === 'free' ? 'Free' : 'Paid'}
                   </Badge>
                 </div>
@@ -425,7 +391,7 @@ export const InteractiveAttractionExplorer: React.FC<InteractiveAttractionExplor
                   <div className="space-y-2 text-xs text-gray-500">
                     {attraction.practicalInfo.howToGetThere && (
                       <div className="flex items-start gap-1">
-                        <MapPin className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                        <MapPinIcon className="w-3 h-3 mt-0.5 flex-shrink-0" />
                         <span className="line-clamp-2">{attraction.practicalInfo.howToGetThere}</span>
                       </div>
                     )}

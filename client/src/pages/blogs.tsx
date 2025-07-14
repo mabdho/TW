@@ -2,7 +2,7 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, Clock, ArrowRight } from 'lucide-react';
+import { CalendarIcon, ClockIcon, ArrowRightIcon } from '@/components/icons/LightweightIcons';
 import { getAllBlogs, getFeaturedBlogs } from '../blogs';
 import { SEOHead } from '@/components/SEOHead';
 import { generateBlogListSEOData, generateBreadcrumbStructuredData } from '@/utils/seo';
@@ -134,11 +134,11 @@ export default function BlogsPage() {
                         {post.category}
                       </Badge>
                       <div className="flex items-center text-gray-500 text-sm">
-                        <Calendar className="h-4 w-4 mr-1" />
+                        <CalendarIcon className="h-4 w-4 mr-1" />
                         {new Date(post.date).toLocaleDateString()}
                       </div>
                       <div className="flex items-center text-gray-500 text-sm">
-                        <Clock className="h-4 w-4 mr-1" />
+                        <ClockIcon className="h-4 w-4 mr-1" />
                         {post.readTime}
                       </div>
                     </div>
@@ -150,7 +150,7 @@ export default function BlogsPage() {
                     </p>
                     <span className="inline-flex items-center text-green-600 hover:text-green-700 font-medium transition-colors">
                       Read Full Article
-                      <ArrowRight className="ml-2 h-4 w-4" />
+                      <ArrowRightIcon className="ml-2 h-4 w-4" />
                     </span>
                   </CardContent>
                 </div>
@@ -181,7 +181,7 @@ export default function BlogsPage() {
                         {post.category}
                       </Badge>
                       <div className="flex items-center text-gray-500 text-sm">
-                        <Clock className="h-3 w-3 mr-1" />
+                        <ClockIcon className="h-3 w-3 mr-1" />
                         {post.readTime}
                       </div>
                     </div>
@@ -193,7 +193,7 @@ export default function BlogsPage() {
                     </p>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center text-gray-500 text-sm">
-                        <Calendar className="h-3 w-3 mr-1" />
+                        <CalendarIcon className="h-3 w-3 mr-1" />
                         {new Date(post.date).toLocaleDateString()}
                       </div>
                       <span className="text-green-600 hover:text-green-700 text-sm font-medium transition-colors">

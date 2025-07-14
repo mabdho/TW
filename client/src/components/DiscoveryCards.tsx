@@ -2,17 +2,19 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-// Optimized icon imports - using essential icons only
+// Optimized icon imports - using lightweight alternatives
 import { 
-  Camera, 
-  MapPin, 
-  Clock, 
-  DollarSign, 
-  Star, 
-  Heart,
-  Eye,
-  Coffee
-} from 'lucide-react';
+  CameraIcon, 
+  MapPinIcon, 
+  ClockIcon, 
+  DollarSignIcon, 
+  StarIcon, 
+  HeartIcon,
+  EyeIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CalendarIcon
+} from '@/components/icons/LightweightIcons';
 
 // Simple SVG icons for less critical elements
 const SimpleIcon = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
@@ -55,23 +57,25 @@ const UtensilsIcon = ({ className = "" }: { className?: string }) => (
   </svg>
 );
 
+const CoffeeIcon = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M6 2V15a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V2"/>
+    <path d="M18 10h4v4a2 2 0 0 1-2 2h-2"/>
+    <path d="M6 2h12"/>
+    <path d="M10 8V6"/>
+    <path d="M14 8V6"/>
+  </svg>
+);
+
 const ZapIcon = ({ className = "" }: { className?: string }) => (
   <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
     <polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/>
   </svg>
 );
 
-const ChevronLeftIcon = ({ className = "" }: { className?: string }) => (
-  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <polyline points="15,18 9,12 15,6"/>
-  </svg>
-);
-
-const ChevronRightIcon = ({ className = "" }: { className?: string }) => (
-  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <polyline points="9,18 15,12 9,6"/>
-  </svg>
-);
+// Use lightweight arrow icons for navigation
+const ChevronLeftIcon = ArrowLeftIcon;
+const ChevronRightIcon = ArrowRightIcon;
 
 interface Attraction {
   name: string;
@@ -464,14 +468,14 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
     },
     {
       title: "Photo Spots",
-      icon: <Camera className="w-5 h-5 text-blue-500" />,
+      icon: <CameraIcon className="w-5 h-5 text-blue-500" />,
       color: "blue", 
       summary: `${photoOps.length} photo opportunities`,
       content: photoOps.slice(0, 4).map((op, index) => (
         <div key={index} className="mb-3 p-3 bg-gradient-to-r from-sky-50/80 to-blue-50/80 dark:from-sky-900/20 dark:to-blue-900/20 rounded-xl border-l-4 border-sky-400 shadow-sm">
           <div className="flex items-start gap-3">
             <div className="p-1 bg-sky-100 dark:bg-sky-800/30 rounded-lg">
-              <Camera className="w-4 h-4 text-sky-600 dark:text-sky-400 flex-shrink-0" />
+              <CameraIcon className="w-4 h-4 text-sky-600 dark:text-sky-400 flex-shrink-0" />
             </div>
             <div className="flex-1">
               <h4 className="font-semibold text-sky-700 dark:text-sky-300 text-sm mb-1">{op.spot}</h4>
@@ -519,7 +523,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
     },
     {
       title: "Time & Budget",
-      icon: <Clock className="w-5 h-5 text-indigo-500" />,
+      icon: <ClockIcon className="w-5 h-5 text-indigo-500" />,
       color: "indigo",
       summary: `Planning guide for ${attractions.length} attractions`,
       content: (
@@ -528,7 +532,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
             <div key={index} className="p-3 bg-gradient-to-r from-violet-50/80 to-purple-50/80 dark:from-violet-900/20 dark:to-purple-900/20 rounded-xl border-l-4 border-violet-400 shadow-sm">
               <div className="flex items-start gap-3">
                 <div className="p-1 bg-violet-100 dark:bg-violet-800/30 rounded-lg">
-                  <Clock className="w-4 h-4 text-violet-600 dark:text-violet-400 flex-shrink-0" />
+                  <ClockIcon className="w-4 h-4 text-violet-600 dark:text-violet-400 flex-shrink-0" />
                 </div>
                 <div className="flex-1">
                   <h4 className="font-semibold text-violet-700 dark:text-violet-300 mb-2 text-sm">
@@ -536,15 +540,15 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
                   </h4>
                   <div className="flex gap-2 flex-wrap">
                     <Badge variant="outline" className="text-xs bg-white/80 border-violet-200">
-                      <Clock className="w-3 h-3 mr-1" />
+                      <ClockIcon className="w-3 h-3 mr-1" />
                       {getTimeEstimate(attr)}
                     </Badge>
                     <Badge variant="outline" className="text-xs bg-white/80 border-violet-200">
-                      <DollarSign className="w-3 h-3 mr-1" />
+                      <DollarSignIcon className="w-3 h-3 mr-1" />
                       {getCostLevel(attr)}
                     </Badge>
                     <Badge variant="outline" className="text-xs bg-white/80 border-violet-200">
-                      <Calendar className="w-3 h-3 mr-1" />
+                      <CalendarIcon className="w-3 h-3 mr-1" />
                       {getSeasonalInfo(attr)}
                     </Badge>
                   </div>
@@ -557,7 +561,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
     },
     {
       title: "Hidden Gems",
-      icon: <Eye className="w-5 h-5 text-pink-500" />,
+      icon: <EyeIcon className="w-5 h-5 text-pink-500" />,
       color: "pink",
       summary: `${attractions.filter(attr => 
         attr.description.toLowerCase().includes('hidden') || 
@@ -576,7 +580,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
             <div key={index} className="p-3 bg-gradient-to-r from-rose-50/80 to-pink-50/80 dark:from-rose-900/20 dark:to-pink-900/20 rounded-xl border-l-4 border-rose-400 shadow-sm">
               <div className="flex items-start gap-3">
                 <div className="p-1 bg-rose-100 dark:bg-rose-800/30 rounded-lg">
-                  <Eye className="w-4 h-4 text-rose-600 dark:text-rose-400 flex-shrink-0" />
+                  <EyeIcon className="w-4 h-4 text-rose-600 dark:text-rose-400 flex-shrink-0" />
                 </div>
                 <div className="flex-1">
                   <h4 className="font-semibold text-rose-700 dark:text-rose-300 mb-1 text-sm">
@@ -597,7 +601,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
           ).length === 0 && (
             <div className="text-center p-4">
               <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg inline-block">
-                <Eye className="w-6 h-6 text-gray-400 mx-auto mb-2" />
+                <EyeIcon className="w-6 h-6 text-gray-400 mx-auto mb-2" />
               </div>
               <p className="text-xs text-gray-500 italic">Explore beyond the highlights!</p>
             </div>
@@ -607,7 +611,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
     },
     {
       title: "Dining",
-      icon: <Coffee className="w-5 h-5 text-orange-600" />,
+      icon: <CoffeeIcon className="w-5 h-5 text-orange-600" />,
       color: "orange",
       summary: `${diningOptions.length} dining options`,
       content: (
@@ -657,7 +661,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
             </>
           ) : (
             <div className="text-center p-4">
-              <Coffee className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+              <CoffeeIcon className="w-8 h-8 text-gray-400 mx-auto mb-2" />
               <p className="text-xs text-gray-500 italic">
                 Discover local dining!
               </p>

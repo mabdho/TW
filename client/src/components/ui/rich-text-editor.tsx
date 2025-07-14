@@ -1,16 +1,16 @@
 import React, { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { 
-  Bold, 
-  Italic, 
-  Underline, 
-  AlignLeft, 
-  AlignCenter, 
-  AlignRight,
-  List,
-  ListOrdered,
-  Type
-} from 'lucide-react';
+  BoldIcon, 
+  ItalicIcon, 
+  UnderlineIcon, 
+  AlignLeftIcon, 
+  AlignCenterIcon, 
+  AlignRightIcon,
+  ListIcon,
+  ListOrderedIcon,
+  TypeIcon
+} from '@/components/icons/LightweightIcons';
 
 interface RichTextEditorProps {
   value: string;
@@ -113,7 +113,7 @@ export function RichTextEditor({ value, onChange, placeholder, className }: Rich
           onClick={() => formatText('bold')}
           className="h-8 w-8 p-0"
         >
-          <Bold className="h-4 w-4" />
+          <BoldIcon className="h-4 w-4" />
         </Button>
         <Button
           type="button"
@@ -122,7 +122,7 @@ export function RichTextEditor({ value, onChange, placeholder, className }: Rich
           onClick={() => formatText('italic')}
           className="h-8 w-8 p-0"
         >
-          <Italic className="h-4 w-4" />
+          <ItalicIcon className="h-4 w-4" />
         </Button>
         <Button
           type="button"
@@ -131,7 +131,7 @@ export function RichTextEditor({ value, onChange, placeholder, className }: Rich
           onClick={() => formatText('underline')}
           className="h-8 w-8 p-0"
         >
-          <Underline className="h-4 w-4" />
+          <UnderlineIcon className="h-4 w-4" />
         </Button>
 
         <div className="w-px h-6 bg-gray-300 mx-1" />
@@ -144,7 +144,7 @@ export function RichTextEditor({ value, onChange, placeholder, className }: Rich
           onClick={() => formatText('justifyLeft')}
           className="h-8 w-8 p-0"
         >
-          <AlignLeft className="h-4 w-4" />
+          <AlignLeftIcon className="h-4 w-4" />
         </Button>
         <Button
           type="button"
@@ -153,7 +153,7 @@ export function RichTextEditor({ value, onChange, placeholder, className }: Rich
           onClick={() => formatText('justifyCenter')}
           className="h-8 w-8 p-0"
         >
-          <AlignCenter className="h-4 w-4" />
+          <AlignCenterIcon className="h-4 w-4" />
         </Button>
         <Button
           type="button"
@@ -162,7 +162,7 @@ export function RichTextEditor({ value, onChange, placeholder, className }: Rich
           onClick={() => formatText('justifyRight')}
           className="h-8 w-8 p-0"
         >
-          <AlignRight className="h-4 w-4" />
+          <AlignRightIcon className="h-4 w-4" />
         </Button>
 
         <div className="w-px h-6 bg-gray-300 mx-1" />
@@ -175,7 +175,7 @@ export function RichTextEditor({ value, onChange, placeholder, className }: Rich
           onClick={() => formatText('insertUnorderedList')}
           className="h-8 w-8 p-0"
         >
-          <List className="h-4 w-4" />
+          <ListIcon className="h-4 w-4" />
         </Button>
         <Button
           type="button"
@@ -184,7 +184,7 @@ export function RichTextEditor({ value, onChange, placeholder, className }: Rich
           onClick={() => formatText('insertOrderedList')}
           className="h-8 w-8 p-0"
         >
-          <ListOrdered className="h-4 w-4" />
+          <ListOrderedIcon className="h-4 w-4" />
         </Button>
 
         <div className="w-px h-6 bg-gray-300 mx-1" />

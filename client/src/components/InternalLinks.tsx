@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, MapPin, BookOpen, Compass } from 'lucide-react';
+import { ArrowRightIcon, MapPinIcon, BookOpenIcon, CompassIcon } from '@/components/icons/LightweightIcons';
 import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
 import { InternalLink } from '@/utils/seo';
@@ -14,13 +14,13 @@ interface InternalLinksProps {
 const getIconForType = (type: string) => {
   switch (type) {
     case 'city':
-      return <MapPin className="h-4 w-4" />;
+      return <MapPinIcon className="h-4 w-4" />;
     case 'blog':
-      return <BookOpen className="h-4 w-4" />;
+      return <BookOpenIcon className="h-4 w-4" />;
     case 'category':
-      return <Compass className="h-4 w-4" />;
+      return <CompassIcon className="h-4 w-4" />;
     default:
-      return <ArrowRight className="h-4 w-4" />;
+      return <ArrowRightIcon className="h-4 w-4" />;
   }
 };
 

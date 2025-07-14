@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MapPin, ArrowRight, Star, Search } from 'lucide-react';
+import { MapPinIcon, ArrowRightIcon, StarIcon, SearchIcon } from '@/components/icons/LightweightIcons';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';

@@ -1,4 +1,4 @@
-import { Clock, ArrowRight } from 'lucide-react';
+import { ClockIcon, ArrowRightIcon } from '@/components/icons/LightweightIcons';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { getLatestBlogsForHomePage } from '../blogs';
@@ -29,7 +29,7 @@ const TravelCategories = () => {
               className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
             >
               Visit Blog Page
-              <ArrowRight className="ml-2 h-4 w-4" />
+              <ArrowRightIcon className="ml-2 h-4 w-4" />
             </a>
           </div>
         )}
@@ -80,7 +80,7 @@ const TravelCategories = () => {
                         </Badge>
                         
                         <div className="flex items-center text-gray-500 text-sm">
-                          <Clock className="h-4 w-4 mr-1" />
+                          <ClockIcon className="h-4 w-4 mr-1" />
                           {blog.readTime}
                         </div>
                         <div className="flex items-center text-gray-500 text-sm">
@@ -102,7 +102,7 @@ const TravelCategories = () => {
                       <div className="flex items-center justify-between">
                         <span className="inline-flex items-center text-green-600 hover:text-green-700 font-medium transition-colors text-sm">
                           Read Full Article
-                          <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-all duration-200" />
+                          <ArrowRightIcon className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-all duration-200" />
                         </span>
                       </div>
                     </CardContent>
@@ -118,7 +118,7 @@ const TravelCategories = () => {
                 className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
               >
                 View All Travel Stories
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRightIcon className="ml-2 h-4 w-4" />
               </a>
             </div>
           </>

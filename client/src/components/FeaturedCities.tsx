@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MapPin, ArrowRight, Star, Sparkles } from 'lucide-react';
+import { MapPinIcon, ArrowRightIcon, StarIcon, SparklesIcon } from '@/components/icons/LightweightIcons';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -59,11 +59,11 @@ const FeaturedCities = () => {
                         {city.name}
                       </h3>
                       <p className="text-sm text-gray-600 flex items-center gap-1 mt-1">
-                        <MapPin className="w-3 h-3" />
+                        <MapPinIcon className="w-3 h-3" />
                         {city.country}
                       </p>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRightIcon className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </CardContent>
               </Card>
@@ -76,7 +76,7 @@ const FeaturedCities = () => {
           <a href="/destinations">
             <Button className="bg-green-600 hover:bg-green-700 text-white font-medium px-8 py-3 text-base">
               View all destinations
-              <ArrowRight className="ml-2 h-4 w-4" />
+              <ArrowRightIcon className="ml-2 h-4 w-4" />
             </Button>
           </a>
         </div>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { MenuIcon, XIcon } from '@/components/icons/LightweightIcons';
 import { Button } from '@/components/ui/button';
 
 const scrollToSection = (sectionId: string) => {
@@ -51,7 +51,7 @@ export const Navigation = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="h-10 w-10 text-gray-700"
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? <XIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
             </Button>
           </div>
         </div>
