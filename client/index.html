@@ -23,12 +23,12 @@
     
     <!-- Critical CSS - Inline above-the-fold styles -->
     <style>
-      /* Critical CSS for immediate rendering */
+      /* Performance-optimized critical CSS */
       *, ::before, ::after {
         box-sizing: border-box;
         border-width: 0;
         border-style: solid;
-        border-color: hsl(220 15% 88%);
+        border-color: #e5e7eb;
       }
       
       html {
@@ -36,25 +36,35 @@
         -webkit-text-size-adjust: 100%;
         -moz-tab-size: 4;
         tab-size: 4;
-        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        /* Optimize scrolling performance */
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
       
       body {
         margin: 0;
         line-height: inherit;
-        background-color: hsl(0 0% 100%);
-        color: hsl(220 15% 15%);
-        /* Prevent any transition effects and optimize initial render */
+        background-color: #ffffff;
+        color: #1f2937;
+        /* Critical performance optimizations */
         transition: none !important;
         visibility: visible !important;
         opacity: 1 !important;
+        /* Optimize painting and compositing */
+        will-change: auto;
+        transform: translateZ(0);
       }
       
       #root {
         min-height: 100vh;
+        /* Optimize for GPU acceleration */
+        transform: translateZ(0);
+        will-change: auto;
       }
       
-      /* Navigation critical styles */
+      /* Navigation critical styles - optimized for performance */
       .nav-container {
         position: fixed;
         top: 0;
@@ -63,61 +73,95 @@
         z-index: 50;
         background-color: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(8px);
-        border-bottom: 1px solid hsl(220 15% 88%);
+        border-bottom: 1px solid #e5e7eb;
+        /* GPU acceleration */
+        transform: translateZ(0);
+        will-change: auto;
       }
       
-      /* Hero section critical styles */
+      /* Hero section critical styles - optimized */
       .hero-section {
         min-height: 100vh;
-        background: linear-gradient(135deg, hsl(210 100% 45%) 0%, hsl(25 95% 60%) 100%);
+        background: linear-gradient(135deg, #3b82f6 0%, #f59e0b 100%);
         display: flex;
         align-items: center;
         justify-content: center;
         color: white;
+        /* Optimize background rendering */
+        background-attachment: fixed;
+        will-change: auto;
       }
       
-      /* No loading animations to prevent flash */
-      
-      /* Typography critical styles */
-      .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
-      .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+      /* Typography critical styles - performance optimized */
+      .text-4xl { font-size: 2.25rem; line-height: 2.5rem; font-display: swap; }
+      .text-xl { font-size: 1.25rem; line-height: 1.75rem; font-display: swap; }
       .font-bold { font-weight: 700; }
       .font-medium { font-weight: 500; }
       
-      /* Layout critical styles */
-      .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+      /* Layout critical styles - optimized */
+      .container { 
+        width: 100%; 
+        max-width: 1200px; 
+        margin: 0 auto; 
+        padding: 0 1rem; 
+        contain: layout style paint;
+      }
       .flex { display: flex; }
       .items-center { align-items: center; }
       .justify-between { justify-content: space-between; }
       .text-center { text-align: center; }
       
-      /* Button critical styles */
+      /* Button critical styles - performance optimized */
       .btn-primary {
-        background-color: hsl(210 100% 45%);
+        background-color: #3b82f6;
         color: white;
         padding: 0.75rem 1.5rem;
         border-radius: 0.75rem;
         border: none;
         cursor: pointer;
-        transition: all 0.2s;
+        transition: background-color 0.15s ease;
+        will-change: background-color;
       }
       
       .btn-primary:hover {
-        background-color: hsl(210 100% 35%);
+        background-color: #2563eb;
+      }
+      
+      /* Prevent layout shifts */
+      img, video {
+        max-width: 100%;
+        height: auto;
+      }
+      
+      /* Optimize text rendering */
+      h1, h2, h3, h4, h5, h6 {
+        text-rendering: optimizeSpeed;
+      }
+      
+      /* Reduce paint complexity */
+      .card {
+        contain: layout style paint;
       }
     </style>
     
-    <!-- Preload critical resources -->
+    <!-- Critical resource preloading for performance -->
     <link rel="preload" href="/src/main.tsx" as="script" crossorigin>
+    <link rel="modulepreload" href="/src/App.tsx">
+    <link rel="modulepreload" href="/src/pages/home.tsx">
     
-    <!-- Preconnect to external domains -->
+    <!-- DNS prefetch for external domains -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//images.unsplash.com">
+    
+    <!-- Preconnect to critical external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com">
     
-    <!-- Load fonts with display=swap for faster rendering -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    <!-- Optimized font loading with resource hints -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
   </head>
   <body>
     <div id="root"></div>

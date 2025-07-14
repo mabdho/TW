@@ -5,23 +5,31 @@ import { lazy, Suspense } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import "./index.css";
 
-// Lazy load the main App component for code splitting
-const App = lazy(() => import("./App"));
+// Performance monitoring
+const perfStart = performance.now();
 
-// No loading fallback - let the static HTML loader handle it
+// Preload App component immediately for faster rendering
+const AppPromise = import("./App");
+const App = lazy(() => AppPromise);
+
+// Critical path optimization - no loading fallback
 const AppLoadingFallback = () => null;
 
-// Use requestIdleCallback for non-critical initialization
-const scheduleNonCriticalWork = (callback: () => void) => {
-  if ('requestIdleCallback' in window) {
-    (window as any).requestIdleCallback(callback);
+// Performance-optimized scheduling
+const scheduleOptimizedWork = (callback: () => void, delay: number = 0) => {
+  if (delay === 0) {
+    callback();
+  } else if ('requestIdleCallback' in window) {
+    (window as any).requestIdleCallback(callback, { timeout: delay });
   } else {
-    setTimeout(callback, 1);
+    setTimeout(callback, delay);
   }
 };
 
-// Hide the initial loader and render React app
+// Create root and render immediately
 const root = createRoot(document.getElementById("root")!);
+
+// Immediate render for fastest FCP
 root.render(
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
@@ -31,6 +39,26 @@ root.render(
     </HelmetProvider>
   </QueryClientProvider>
 );
+
+// Track performance
+const initTime = performance.now() - perfStart;
+console.log(`React initialization: ${Math.round(initTime)}ms`);
+
+// Defer non-critical work
+scheduleOptimizedWork(() => {
+  // Preload critical pages
+  import("./pages/home");
+  import("./pages/destinations");
+  
+  // Monitor Core Web Vitals
+  new PerformanceObserver((list) => {
+    for (const entry of list.getEntries()) {
+      if (entry.name === 'first-contentful-paint') {
+        console.log(`FCP: ${Math.round(entry.startTime)}ms`);
+      }
+    }
+  }).observe({ entryTypes: ['paint'] });
+}, 100);
 
 // No loader removal needed since there's no loader
 
