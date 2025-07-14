@@ -76,17 +76,14 @@ export const ImageOptimized: React.FC<ImageOptimizedProps> = ({
     };
   }, [priority]);
 
-  // Only preload if not already preloaded by CriticalResourceLoader
-  useEffect(() => {
-    if (priority && src) {
-      // Check if image is already preloaded using the service tracker
-      if (!imageService.isPreloaded(src)) {
-        imageService.preloadImage(src, true).catch(() => {
-          // Silently handle preload errors
-        });
-      }
-    }
-  }, [priority, src, imageService]);
+  // Disable individual preloading entirely for priority images
+  // to prevent duplicate requests - rely on CriticalResourceLoader
+  // useEffect(() => {
+  //   if (priority && src) {
+  //     // Individual preloading disabled to prevent duplicates
+  //     // CriticalResourceLoader handles this globally
+  //   }
+  // }, [priority, src, imageService, width]);
 
   // Generate optimized URLs with enterprise service
   const avifUrl = imageService.generateOptimizedUrl(src, width || 1200, 'avif', quality);
@@ -219,7 +216,7 @@ export const ImageOptimized: React.FC<ImageOptimizedProps> = ({
           src={jpegUrl}
           srcSet={jpegSrcSet}
           // Performance attributes
-          {...(priority && { fetchPriority: 'high' })}
+          {...(priority && { fetchpriority: 'high' })}
           // SEO attributes
           itemProp="image"
           // Accessibility attributes

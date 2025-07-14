@@ -147,15 +147,27 @@ export const usePerformanceOptimization = (): UsePerformanceOptimizationReturn =
     return Math.min(score, 100);
   };
 
-  // Preload critical images
+  // Simplified preload - minimal strategy to reduce duplicates
   const preloadCriticalImages = async (urls: string[]): Promise<void> => {
     try {
-      await imageService.current.preloadImages(urls, true);
-      console.log('✅ Critical images preloaded:', urls.length);
+      // Preload only the first 2 images and only in WebP format
+      // This reduces the number of requests while still optimizing above-the-fold content
+      const limitedUrls = urls.slice(0, 2);
+      const webpUrls: string[] = [];
+      
+      limitedUrls.forEach(url => {
+        const webpUrl = imageService.current.generateOptimizedUrl(url, 1200, 'webp');
+        webpUrls.push(webpUrl);
+      });
+      
+      await imageService.current.preloadImages(webpUrls, true);
+      console.log(`✅ Critical images preloaded (WebP, limited to 2):`, limitedUrls.length);
     } catch (error) {
       console.error('❌ Failed to preload critical images:', error);
     }
   };
+
+
 
   // Track image performance
   const trackImagePerformance = (url: string, context: string): void => {

@@ -19,16 +19,13 @@ export const CriticalResourceLoader: React.FC<CriticalResourceLoaderProps> = ({
 }) => {
   const { preloadCriticalImages } = usePerformanceOptimization();
 
+  // Minimal preloading - only hero image to reduce duplicates
   useEffect(() => {
-    const imagesToPreload = [
-      ...(heroImage ? [heroImage] : []),
-      ...criticalImages
-    ];
-
-    if (imagesToPreload.length > 0) {
-      preloadCriticalImages(imagesToPreload);
+    if (heroImage) {
+      // Only preload the hero image (most critical above-the-fold image)
+      preloadCriticalImages([heroImage]);
     }
-  }, [criticalImages, heroImage, preloadCriticalImages]);
+  }, [heroImage, preloadCriticalImages]);
 
   // Add DNS prefetch and preconnect hints
   useEffect(() => {
