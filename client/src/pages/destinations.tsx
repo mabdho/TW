@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { CriticalResourceLoader } from '@/components/CriticalResourceLoader';
+import { ImageOptimized } from '@/components/ImageOptimized';
 
 const cities = [
   // Cities cleared - ready for fresh production content,
@@ -86,8 +88,15 @@ export default function DestinationsPage() {
     count: continent === "All" ? cities.length : cities.filter(city => city.continent === continent).length
   }));
 
+  // Get critical images for preloading (first 6 cities with images)
+  const criticalImages = cities
+    .filter(city => city.imageUrl)
+    .slice(0, 6)
+    .map(city => city.imageUrl);
+
   return (
-    <div className="min-h-screen bg-white">
+    <CriticalResourceLoader criticalImages={criticalImages}>
+      <div className="min-h-screen bg-white">
       <SEOHead seoData={seoData} structuredData={structuredData} />
       <Navigation />
       
@@ -239,6 +248,7 @@ export default function DestinationsPage() {
       </section>
 
       <Footer />
-    </div>
+      </div>
+    </CriticalResourceLoader>
   );
 }

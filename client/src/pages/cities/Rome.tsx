@@ -1,9 +1,16 @@
 import React from 'react';
 import { CityPage } from '../../components/CityPage';
+import { CriticalResourceLoader } from '../../components/CriticalResourceLoader';
 
 export const Rome: React.FC = () => {
+  const heroImage = "https://plus.unsplash.com/premium_photo-1661964123160-8d049fa07f0c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+  
   return (
-    <CityPage
+    <CriticalResourceLoader 
+      heroImage={heroImage}
+      criticalImages={[heroImage]}
+    >
+      <CityPage
       cityName="Rome"
       country="Italy"
       title={"15 Best Things to Do in Rome, Italy (2025 Guide)"}
@@ -427,5 +434,6 @@ Visit the Borghese Gallery and Museum (book in advance!). Spend the afternoon ex
         }
       }}
     />
+    </CriticalResourceLoader>
   );
 };

@@ -6,6 +6,8 @@ import { CalendarIcon, ClockIcon, ArrowRightIcon } from '@/components/icons/Ligh
 import { getAllBlogs, getFeaturedBlogs } from '../blogs';
 import { SEOHead } from '@/components/SEOHead';
 import { generateBlogListSEOData, generateBreadcrumbStructuredData } from '@/utils/seo';
+import { CriticalResourceLoader } from '@/components/CriticalResourceLoader';
+import { ImageOptimized } from '@/components/ImageOptimized';
 
 export default function BlogsPage() {
   // Get blogs from file system
@@ -58,8 +60,15 @@ export default function BlogsPage() {
     }))
   };
 
+  // Get critical images for preloading (first 4 blog images)
+  const criticalImages = blogPosts
+    .filter(post => post.imageUrl)
+    .slice(0, 4)
+    .map(post => post.imageUrl);
+
   return (
-    <div className="min-h-screen bg-white">
+    <CriticalResourceLoader criticalImages={criticalImages}>
+      <div className="min-h-screen bg-white">
       <SEOHead 
         seoData={seoData} 
         structuredData={blogListStructuredData}
@@ -301,6 +310,7 @@ export default function BlogsPage() {
       </section>
 
       <Footer />
-    </div>
+      </div>
+    </CriticalResourceLoader>
   );
 }
