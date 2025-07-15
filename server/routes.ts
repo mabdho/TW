@@ -1274,6 +1274,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       let contentData;
+      
+      // STEP 1: Check if HTML file exists as source of truth (for all modes)
+      const htmlDirPath = path.join(process.cwd(), 'dist', 'public', `best-things-to-do-in-${city.toLowerCase()}`);
+      const htmlFilePath = path.join(htmlDirPath, 'index.html');
+      let htmlSourceData = null;
 
       if (generationMode === 'manual') {
         if (!manualJson) {
@@ -1290,18 +1295,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
           return res.status(400).json({ error: 'Invalid JSON format in manual data' });
         }
       } else {
-
-      // STEP 1: Check if HTML file exists as source of truth
-      const htmlDirPath = path.join(process.cwd(), 'dist', 'public', `best-things-to-do-in-${city.toLowerCase()}`);
-      const htmlFilePath = path.join(htmlDirPath, 'index.html');
-      let htmlSourceData = null;
-      
-      if (existsSync(htmlFilePath)) {
-        console.log(`📄 Found existing HTML file for ${city}, using as source of truth`);
-        htmlSourceData = extractHtmlSourceOfTruth(htmlFilePath);
-      } else {
-        console.log(`📄 No existing HTML file found for ${city}, generating new content`);
-      }
+        // Check for existing HTML file for AI generation mode
+        if (existsSync(htmlFilePath)) {
+          console.log(`📄 Found existing HTML file for ${city}, using as source of truth`);
+          htmlSourceData = extractHtmlSourceOfTruth(htmlFilePath);
+        } else {
+          console.log(`📄 No existing HTML file found for ${city}, generating new content`);
+        }
 
       // Generate content using Gemini with fallback
         let model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
