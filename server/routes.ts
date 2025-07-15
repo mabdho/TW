@@ -39,7 +39,16 @@ import {
   batchOptimizeImages,
   getOptimizationStats
 } from './routes/imageOptimization';
-import { HydrationEnforcement, validateCityHydration, validateBlogHydration, runHydrationAudit } from './hydration-hooks';
+import { 
+  preGenerationHook, 
+  postGenerationHook, 
+  validateHydrationBeforeGeneration, 
+  enforceHydrationAfterGeneration,
+  generateHydrationCompliantDescription,
+  generateHydrationCompliantTitle,
+  generateHydrationCompliantH1,
+  runHydrationAudit
+} from './hydration-hooks';
 
 // Helper function to regenerate static HTML files
 async function regenerateStaticFiles() {
@@ -1708,9 +1717,23 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       // Enforce hydration compliance for the new city
       console.log('🔒 Enforcing hydration compliance for new city...');
       try {
-        await HydrationEnforcement.enforceForCity({ name: city, country });
-        const hydrationValid = await validateCityHydration(city);
-        console.log(`✅ Hydration compliance enforced for ${city}: ${hydrationValid ? 'PASS' : 'NEEDS ATTENTION'}`);
+        // Run pre-generation validation
+        const preValidation = await preGenerationHook('city', { cityName: city, country });
+        console.log(`✅ Pre-generation validation for ${city}: ${preValidation ? 'PASS' : 'NEEDS ATTENTION'}`);
+        
+        // Run post-generation validation if HTML file exists
+        const htmlPath = `dist/public/best-things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}.html`;
+        if (existsSync(htmlPath)) {
+          await postGenerationHook('city', { cityName: city, country }, htmlPath);
+          console.log(`✅ Post-generation validation for ${city}: COMPLETED`);
+        }
+        
+        // Import and run hydration enforcement
+        const { HydrationEnforcer } = await import('../scripts/hydration-enforcement.js');
+        const enforcer = new HydrationEnforcer();
+        await enforcer.enforceHTMLGeneration('city', { cityName: city, country });
+        console.log(`✅ Hydration enforcement completed for ${city}`);
+        
       } catch (hydrationError) {
         console.warn('⚠️  Hydration enforcement warning:', hydrationError.message);
       }
@@ -2161,9 +2184,23 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       // Enforce hydration compliance for the new blog
       console.log('🔒 Enforcing hydration compliance for new blog...');
       try {
-        await HydrationEnforcement.enforceForBlog({ id: blogId, title, excerpt, category });
-        const hydrationValid = await validateBlogHydration({ id: blogId, title });
-        console.log(`✅ Blog hydration compliance enforced for "${title}": ${hydrationValid ? 'PASS' : 'NEEDS ATTENTION'}`);
+        // Run pre-generation validation
+        const preValidation = await preGenerationHook('blog', { id: blogId, title, excerpt, category });
+        console.log(`✅ Pre-generation validation for blog "${title}": ${preValidation ? 'PASS' : 'NEEDS ATTENTION'}`);
+        
+        // Run post-generation validation if HTML file exists
+        const htmlPath = `dist/public/blog/${blogId}.html`;
+        if (existsSync(htmlPath)) {
+          await postGenerationHook('blog', { id: blogId, title, excerpt, category }, htmlPath);
+          console.log(`✅ Post-generation validation for blog "${title}": COMPLETED`);
+        }
+        
+        // Import and run hydration enforcement
+        const { HydrationEnforcer } = await import('../scripts/hydration-enforcement.js');
+        const enforcer = new HydrationEnforcer();
+        await enforcer.enforceHTMLGeneration('blog', { id: blogId, title, excerpt, category });
+        console.log(`✅ Hydration enforcement completed for blog "${title}"`);
+        
       } catch (hydrationError) {
         console.warn('⚠️  Blog hydration enforcement warning:', hydrationError.message);
       }
@@ -2467,6 +2504,181 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       res.status(500).json({
         success: false,
         error: 'Failed to run hydration audit',
+        details: error.message
+      });
+    }
+  });
+
+  // Comprehensive hydration enforcement API endpoints
+  app.post('/api/admin/hydration-enforcement', requireAdmin, async (req, res) => {
+    try {
+      const { pageType, pageData } = req.body;
+      
+      if (!pageType || !pageData) {
+        return res.status(400).json({
+          error: 'Page type and data are required',
+          example: {
+            pageType: 'city',
+            pageData: { cityName: 'London', country: 'United Kingdom' }
+          }
+        });
+      }
+      
+      // Import the hydration enforcement system
+      const { HydrationEnforcer } = await import('../scripts/hydration-enforcement.js');
+      const enforcer = new HydrationEnforcer();
+      
+      // Run enforcement for the specified page
+      await enforcer.enforceHTMLGeneration(pageType, pageData);
+      
+      res.json({
+        success: true,
+        message: `Hydration enforcement completed for ${pageType}: ${pageData.cityName || pageData.id || pageData.title}`,
+        pageType,
+        pageData,
+        timestamp: new Date().toISOString()
+      });
+      
+    } catch (error) {
+      console.error('Hydration enforcement error:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Failed to enforce hydration compliance',
+        details: error.message
+      });
+    }
+  });
+
+  // Batch hydration enforcement for all pages
+  app.post('/api/admin/hydration-enforcement-batch', requireAdmin, async (req, res) => {
+    try {
+      const { HydrationEnforcer } = await import('../scripts/hydration-enforcement.js');
+      const enforcer = new HydrationEnforcer();
+      
+      // Enforce hydration for all existing city pages
+      const cityPages = ['London', 'Rome', 'Edinburgh'];
+      const results = [];
+      
+      for (const cityName of cityPages) {
+        try {
+          await enforcer.enforceHTMLGeneration('city', { cityName, country: 'Auto-detected' });
+          results.push({ cityName, status: 'success' });
+        } catch (error) {
+          results.push({ cityName, status: 'error', error: error.message });
+        }
+      }
+      
+      // Generate enforcement report
+      enforcer.generateEnforcementReport();
+      
+      res.json({
+        success: true,
+        message: 'Batch hydration enforcement completed',
+        results,
+        totalPages: cityPages.length,
+        successCount: results.filter(r => r.status === 'success').length,
+        errorCount: results.filter(r => r.status === 'error').length,
+        timestamp: new Date().toISOString()
+      });
+      
+    } catch (error) {
+      console.error('Batch hydration enforcement error:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Failed to run batch hydration enforcement',
+        details: error.message
+      });
+    }
+  });
+
+  // Hydration compliance checker API
+  app.post('/api/admin/hydration-compliance-check', requireAdmin, async (req, res) => {
+    try {
+      const { pageType, autoFix } = req.body;
+      
+      const { HydrationComplianceChecker } = await import('../scripts/hydration-compliance-checker.js');
+      const checker = new HydrationComplianceChecker();
+      
+      // Run compliance check
+      const isCompliant = await checker.runFullAudit();
+      
+      // Auto-fix if requested and issues found
+      if (autoFix && !isCompliant) {
+        await checker.autoFixIssues();
+      }
+      
+      // Generate compliance report
+      checker.generateComplianceReport();
+      
+      res.json({
+        success: true,
+        compliant: isCompliant,
+        message: isCompliant ? 'Perfect hydration compliance verified' : 'Issues detected and logged',
+        autoFixApplied: autoFix && !isCompliant,
+        timestamp: new Date().toISOString()
+      });
+      
+    } catch (error) {
+      console.error('Hydration compliance check error:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Failed to run hydration compliance check',
+        details: error.message
+      });
+    }
+  });
+
+  // Real-time hydration validation for new content
+  app.post('/api/admin/validate-hydration', requireAdmin, async (req, res) => {
+    try {
+      const { pageType, pageData } = req.body;
+      
+      if (!pageType || !pageData) {
+        return res.status(400).json({
+          error: 'Page type and data are required'
+        });
+      }
+      
+      // Run pre-generation validation
+      const preValidation = await validateHydrationBeforeGeneration(pageType, pageData);
+      
+      if (!preValidation) {
+        return res.status(400).json({
+          success: false,
+          error: 'Pre-generation validation failed',
+          stage: 'pre-generation'
+        });
+      }
+      
+      // Run post-generation validation (if HTML file exists)
+      let postValidation = true;
+      try {
+        const htmlPath = pageType === 'city' 
+          ? `dist/public/best-things-to-do-in-${pageData.cityName.toLowerCase()}.html`
+          : `dist/public/blog/${pageData.id}.html`;
+        
+        if (existsSync(htmlPath)) {
+          await enforceHydrationAfterGeneration(pageType, pageData, htmlPath);
+        }
+      } catch (error) {
+        postValidation = false;
+        console.warn('Post-generation validation warning:', error.message);
+      }
+      
+      res.json({
+        success: true,
+        preValidation,
+        postValidation,
+        message: 'Hydration validation completed',
+        pageType,
+        timestamp: new Date().toISOString()
+      });
+      
+    } catch (error) {
+      console.error('Hydration validation error:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Failed to validate hydration',
         details: error.message
       });
     }
