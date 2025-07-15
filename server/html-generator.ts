@@ -2573,10 +2573,7 @@ export function generateHomePageHTML(): string {
           ⭐ Trusted by millions of travelers
         </div>
         
-        <h1 class="hero-title">
-          Explore the world with
-          <span class="hero-gradient-text">confidence</span>
-        </h1>
+        <h1 class="hero-title">Explore the world with <span class="hero-gradient-text">confidence</span></h1>
         
         <p class="hero-subtitle">
           Get trusted reviews, insider tips, and comprehensive guides for destinations worldwide.
