@@ -88,7 +88,7 @@ export const SmartInternalLinks: React.FC<SmartInternalLinksProps> = ({
     return (
       <div className={`smart-internal-links ${className}`}>
         <div className="smart-links-container">
-          <h3 className="smart-links-title">You might also like</h3>
+          <h3 className="smart-links-title">You may also like</h3>
           <div className="smart-links-grid">
             {Array.from({ length: 3 }, (_, i) => (
               <div key={i} className="smart-link-skeleton"></div>
@@ -106,12 +106,11 @@ export const SmartInternalLinks: React.FC<SmartInternalLinksProps> = ({
   return (
     <div className={`smart-internal-links ${className}`}>
       <div className="smart-links-container">
-        <h3 className="smart-links-title">You might also like</h3>
+        <h3 className="smart-links-title">You may also like</h3>
         <div className="smart-links-grid">
           {links.map((link, index) => (
             <Link key={link.url} href={link.url} className="smart-link-card">
               <div className="smart-link-header">
-                <span className="smart-link-icon">{getTypeIcon(link.type)}</span>
                 <span className="smart-link-type">{getTypeLabel(link.type)}</span>
               </div>
               <h4 className="smart-link-title">{link.title}</h4>

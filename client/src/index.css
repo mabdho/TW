@@ -75,7 +75,7 @@
 
   /* Smart Internal Links Styles */
   .smart-internal-links {
-    margin: 2rem 0;
+    margin: 3rem 0;
     padding: 0;
     background: transparent;
   }
@@ -88,8 +88,10 @@
     font-size: 1.5rem;
     font-weight: 600;
     color: #1f2937;
-    margin-bottom: 1.5rem;
-    text-align: center;
+    margin-bottom: 2rem;
+    text-align: left;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.75rem;
   }
 
   .smart-links-grid {
@@ -102,45 +104,43 @@
 
   .smart-link-card {
     display: block;
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
+    background: transparent;
+    border: none;
+    border-left: 3px solid #e5e7eb;
+    border-radius: 0;
     padding: 1.5rem;
     text-decoration: none;
     color: inherit;
     transition: all 0.3s ease;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
     position: relative;
     overflow: hidden;
   }
 
   .smart-link-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    border-color: #10b981;
+    transform: none;
+    box-shadow: none;
+    border-left-color: #10b981;
+    padding-left: 2rem;
+    background: rgba(16, 185, 129, 0.02);
   }
 
   .smart-link-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-bottom: 1rem;
-  }
-
-  .smart-link-icon {
-    font-size: 1.5rem;
-    line-height: 1;
   }
 
   .smart-link-type {
     background: #f3f4f6;
-    color: #374151;
-    padding: 0.25rem 0.75rem;
-    border-radius: 999px;
+    color: #6b7280;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
     font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.05em;
   }
 
   .smart-link-title {
@@ -165,7 +165,8 @@
 
   .smart-link-skeleton {
     background: #f3f4f6;
-    border-radius: 12px;
+    border-radius: 0;
+    border-left: 3px solid #e5e7eb;
     height: 120px;
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }

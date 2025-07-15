@@ -638,20 +638,23 @@ export class EnterpriseInterlinking {
     }
     
     const linkItems = links.map(link => `
-      <li>
-        <a href="${link.url}" class="internal-link">
-          <span class="link-title">${link.title}</span>
-          <span class="link-type">${this.getTypeLabel(link.type)}</span>
-        </a>
-      </li>
+      <a href="${link.url}" class="smart-link-card">
+        <div class="smart-link-header">
+          <span class="smart-link-type">${this.getTypeLabel(link.type)}</span>
+        </div>
+        <h4 class="smart-link-title">${link.title}</h4>
+        ${link.country ? `<p class="smart-link-location">${link.country}</p>` : ''}
+      </a>
     `).join('');
     
     return `
-      <div class="internal-links-section">
-        <h3>Related Content</h3>
-        <ul class="internal-links-list">
-          ${linkItems}
-        </ul>
+      <div class="smart-internal-links">
+        <div class="smart-links-container">
+          <h3 class="smart-links-title">You may also like</h3>
+          <div class="smart-links-grid">
+            ${linkItems}
+          </div>
+        </div>
       </div>
     `;
   }
