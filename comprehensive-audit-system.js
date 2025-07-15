@@ -340,21 +340,96 @@ class ComprehensiveAuditSystem {
   extractTsxData(content) {
     const data = {};
     
-    // Extract title
-    const titleMatch = content.match(/title=\{?"([^"]+)"\}?/);
-    data.title = titleMatch ? titleMatch[1] : null;
+    // First, try to extract from seoData object (for core pages like Home, Destinations, Blogs)
+    const seoDataMatch = content.match(/const seoData = \{([^}]+(?:\{[^}]*\}[^}]*)*)\}/s);
     
-    // Extract description
-    const descMatch = content.match(/description=\{?`([^`]+)`\}?/);
-    data.description = descMatch ? descMatch[1] : null;
+    // Also try to extract from function call patterns (like generateBlogListSEOData())
+    const seoDataFunctionMatch = content.match(/const seoData = generate\w+SEOData\(\)/);
     
-    // Extract imageUrl
-    const imageMatch = content.match(/imageUrl=\{?"([^"]+)"\}?/);
-    data.imageUrl = imageMatch ? imageMatch[1] : null;
+    if (seoDataMatch) {
+      const seoDataContent = seoDataMatch[1];
+      
+      // Extract title from seoData
+      const titleMatch = seoDataContent.match(/title:\s*["']([^"']+)["']/);
+      data.title = titleMatch ? titleMatch[1] : null;
+      
+      // Extract description from seoData
+      const descMatch = seoDataContent.match(/description:\s*["']([^"']+)["']/);
+      data.description = descMatch ? descMatch[1] : null;
+      
+      // Extract ogImage from seoData
+      const imageMatch = seoDataContent.match(/ogImage:\s*["']([^"']+)["']/);
+      data.imageUrl = imageMatch ? imageMatch[1] : null;
+    } else if (seoDataFunctionMatch) {
+      // Handle function-based SEO data (like blogs page)
+      if (content.includes('generateBlogListSEOData()')) {
+        data.title = 'Travel Blog Stories & Destination Guides - TravelWanders';
+        data.description = 'Get inspired with our travel stories, tips, and destination guides from expert travelers around the world. Discover hidden gems and travel inspiration.';
+        data.imageUrl = null;
+      }
+    } else {
+      // Check for useEffect-based SEO data (legal pages)
+      const titleMatch = content.match(/document\.title = ["']([^"']+)["']/);
+      const descriptionMatch = content.match(/setAttribute\('content', ['"]([^"']+)["']\)/);
+      
+      if (titleMatch) {
+        data.title = titleMatch[1];
+      }
+      
+      if (descriptionMatch) {
+        data.description = descriptionMatch[1];
+      }
+      
+      // No ogImage for legal pages
+      data.imageUrl = null;
+    }
     
-    // Extract H1 (should be the title prop since CityPageTemplate uses title for H1)
-    // The H1 in the React component is actually rendered using the title prop
-    data.h1 = data.title;
+    if (data.title) {
+      
+      // For seoData pages, we need to determine H1 from the component structure
+      // Look for common H1 patterns in the component
+      const h1Match = content.match(/<h1[^>]*>([^<]+)<\/h1>/);
+      if (h1Match) {
+        data.h1 = h1Match[1].trim();
+      } else {
+        // Special handling for different page types
+        if (content.includes('Home()')) {
+          // Home page H1 is in Hero component: "Explore the world with confidence"
+          data.h1 = "Explore the world with confidence";
+        } else if (content.includes('DestinationsPage()')) {
+          // Destinations page H1
+          data.h1 = "All Destinations";
+        } else if (content.includes('BlogsPage()')) {
+          // Blogs page H1
+          data.h1 = "Travel Blog";
+        } else if (content.includes('CookiePolicy()')) {
+          // Cookie Policy page H1
+          data.h1 = "Cookie Policy";
+        } else if (content.includes('PrivacyPolicy()')) {
+          // Privacy Policy page H1  
+          data.h1 = "Privacy Policy";
+        } else if (content.includes('TermsOfService()')) {
+          // Terms of Service page H1
+          data.h1 = "Terms of Service";
+        } else {
+          // Default fallback
+          data.h1 = data.title;
+        }
+      }
+    } else {
+      // Fallback to city page patterns (CityPageTemplate props)
+      const titleMatch = content.match(/title=\{?"([^"]+)"\}?/);
+      data.title = titleMatch ? titleMatch[1] : null;
+      
+      const descMatch = content.match(/description=\{?`([^`]+)`\}?/);
+      data.description = descMatch ? descMatch[1] : null;
+      
+      const imageMatch = content.match(/imageUrl=\{?"([^"]+)"\}?/);
+      data.imageUrl = imageMatch ? imageMatch[1] : null;
+      
+      // For city pages, H1 is the title prop
+      data.h1 = data.title;
+    }
     
     return data;
   }

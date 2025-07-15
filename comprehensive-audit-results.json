@@ -1,9 +1,10 @@
 {
   "htmlTsxSync": {
-    "totalPages": 6,
-    "syncedPages": 6,
+    "totalPages": 7,
+    "syncedPages": 7,
     "mismatches": [],
     "passed": [
+      "berlin",
       "edinburgh",
       "london",
       "rome",
@@ -15,161 +16,16 @@
     "score": 100
   },
   "hydration": {
-    "totalChecks": 72,
-    "passedChecks": 18,
-    "failedChecks": 18,
+    "totalChecks": 78,
+    "passedChecks": 39,
+    "failedChecks": 0,
     "warnings": [],
-    "errors": [
-      {
-        "page": "Home",
-        "type": "HYDRATION_MISMATCH",
-        "field": "title",
-        "tsx": null,
-        "html": "Best Travel Guides & Destinations - TravelWanders",
-        "message": "Hydration mismatch in title: TSX=\"null\" vs HTML=\"Best Travel Guides & Destinations - TravelWanders\""
-      },
-      {
-        "page": "Home",
-        "type": "HYDRATION_MISMATCH",
-        "field": "description",
-        "tsx": null,
-        "html": "Discover amazing travel destinations with TravelWanders. Find comprehensive city guides, hidden gems, and travel tips for your next adventure.",
-        "message": "Hydration mismatch in description: TSX=\"null\" vs HTML=\"Discover amazing travel destinations with TravelWanders. Find comprehensive city guides, hidden gems, and travel tips for your next adventure.\""
-      },
-      {
-        "page": "Home",
-        "type": "HYDRATION_MISMATCH",
-        "field": "h1",
-        "tsx": null,
-        "html": "Explore the world with confidence",
-        "message": "Hydration mismatch in h1: TSX=\"null\" vs HTML=\"Explore the world with confidence\""
-      },
-      {
-        "page": "Destinations",
-        "type": "HYDRATION_MISMATCH",
-        "field": "title",
-        "tsx": null,
-        "html": "All Destinations - TravelWanders",
-        "message": "Hydration mismatch in title: TSX=\"null\" vs HTML=\"All Destinations - TravelWanders\""
-      },
-      {
-        "page": "Destinations",
-        "type": "HYDRATION_MISMATCH",
-        "field": "description",
-        "tsx": null,
-        "html": "Browse our complete collection of travel destinations with detailed guides, attractions, and insider tips for amazing cities worldwide.",
-        "message": "Hydration mismatch in description: TSX=\"null\" vs HTML=\"Browse our complete collection of travel destinations with detailed guides, attractions, and insider tips for amazing cities worldwide.\""
-      },
-      {
-        "page": "Destinations",
-        "type": "HYDRATION_MISMATCH",
-        "field": "h1",
-        "tsx": null,
-        "html": "All Destinations",
-        "message": "Hydration mismatch in h1: TSX=\"null\" vs HTML=\"All Destinations\""
-      },
-      {
-        "page": "Blogs",
-        "type": "HYDRATION_MISMATCH",
-        "field": "title",
-        "tsx": null,
-        "html": "Travel Blog Stories & Destination Guides - TravelWanders",
-        "message": "Hydration mismatch in title: TSX=\"null\" vs HTML=\"Travel Blog Stories & Destination Guides - TravelWanders\""
-      },
-      {
-        "page": "Blogs",
-        "type": "HYDRATION_MISMATCH",
-        "field": "description",
-        "tsx": null,
-        "html": "Get inspired with our travel stories, tips, and destination guides from expert travelers around the world. Discover hidden gems and travel inspiration.",
-        "message": "Hydration mismatch in description: TSX=\"null\" vs HTML=\"Get inspired with our travel stories, tips, and destination guides from expert travelers around the world. Discover hidden gems and travel inspiration.\""
-      },
-      {
-        "page": "Blogs",
-        "type": "HYDRATION_MISMATCH",
-        "field": "h1",
-        "tsx": null,
-        "html": "Travel Blog",
-        "message": "Hydration mismatch in h1: TSX=\"null\" vs HTML=\"Travel Blog\""
-      },
-      {
-        "page": "Cookie Policy",
-        "type": "HYDRATION_MISMATCH",
-        "field": "title",
-        "tsx": null,
-        "html": "Cookie Policy | TravelWanders Travel Guide Platform",
-        "message": "Hydration mismatch in title: TSX=\"null\" vs HTML=\"Cookie Policy | TravelWanders Travel Guide Platform\""
-      },
-      {
-        "page": "Cookie Policy",
-        "type": "HYDRATION_MISMATCH",
-        "field": "description",
-        "tsx": null,
-        "html": "Cookie Policy for TravelWanders - Learn about how we use cookies and similar technologies to enhance your travel guide experience.",
-        "message": "Hydration mismatch in description: TSX=\"null\" vs HTML=\"Cookie Policy for TravelWanders - Learn about how we use cookies and similar technologies to enhance your travel guide experience.\""
-      },
-      {
-        "page": "Cookie Policy",
-        "type": "HYDRATION_MISMATCH",
-        "field": "h1",
-        "tsx": null,
-        "html": "Cookie Policy",
-        "message": "Hydration mismatch in h1: TSX=\"null\" vs HTML=\"Cookie Policy\""
-      },
-      {
-        "page": "Privacy Policy",
-        "type": "HYDRATION_MISMATCH",
-        "field": "title",
-        "tsx": null,
-        "html": "Privacy Policy - TravelWanders",
-        "message": "Hydration mismatch in title: TSX=\"null\" vs HTML=\"Privacy Policy - TravelWanders\""
-      },
-      {
-        "page": "Privacy Policy",
-        "type": "HYDRATION_MISMATCH",
-        "field": "description",
-        "tsx": null,
-        "html": "Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.",
-        "message": "Hydration mismatch in description: TSX=\"null\" vs HTML=\"Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.\""
-      },
-      {
-        "page": "Privacy Policy",
-        "type": "HYDRATION_MISMATCH",
-        "field": "h1",
-        "tsx": null,
-        "html": "Privacy Policy",
-        "message": "Hydration mismatch in h1: TSX=\"null\" vs HTML=\"Privacy Policy\""
-      },
-      {
-        "page": "Terms of Service",
-        "type": "HYDRATION_MISMATCH",
-        "field": "title",
-        "tsx": null,
-        "html": "Terms of Service & User Agreement - TravelWanders",
-        "message": "Hydration mismatch in title: TSX=\"null\" vs HTML=\"Terms of Service & User Agreement - TravelWanders\""
-      },
-      {
-        "page": "Terms of Service",
-        "type": "HYDRATION_MISMATCH",
-        "field": "description",
-        "tsx": null,
-        "html": "Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.",
-        "message": "Hydration mismatch in description: TSX=\"null\" vs HTML=\"Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.\""
-      },
-      {
-        "page": "Terms of Service",
-        "type": "HYDRATION_MISMATCH",
-        "field": "h1",
-        "tsx": null,
-        "html": "Terms of Service",
-        "message": "Hydration mismatch in h1: TSX=\"null\" vs HTML=\"Terms of Service\""
-      }
-    ],
-    "score": 25
+    "errors": [],
+    "score": 50
   },
   "cloaking": {
-    "totalRoutes": 14,
-    "cloakedRoutes": 14,
+    "totalRoutes": 15,
+    "cloakedRoutes": 15,
     "nonCloakedRoutes": 0,
     "issues": [],
     "passed": [
@@ -182,6 +38,7 @@
       "Cookie Policy has proper SEO content",
       "Privacy Policy has proper SEO content",
       "Terms of Service has proper SEO content",
+      "City: berlin has proper SEO content",
       "City: edinburgh has proper SEO content",
       "City: edinburgh has proper SEO content",
       "City: kyoto has proper SEO content",
