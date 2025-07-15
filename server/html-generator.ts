@@ -1882,22 +1882,50 @@ export function generateHomePageHTML(): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TravelWanders - Discover Amazing Destinations & Travel Guides</title>
-  <meta name="description" content="Discover the best travel destinations, attractions, and experiences with TravelWanders. Your ultimate guide to exploring the world with comprehensive city guides and travel tips.">
+  <title>Best Travel Guides & Destinations - TravelWanders</title>
+  <meta name="description" content="Discover amazing travel destinations with TravelWanders. Find comprehensive city guides, hidden gems, and travel tips for your next adventure.">
   
   <!-- SEO Meta Tags -->
-  <meta property="og:title" content="TravelWanders - Discover Amazing Destinations & Travel Guides">
-  <meta property="og:description" content="Discover the best travel destinations, attractions, and experiences with TravelWanders. Your ultimate guide to exploring the world with comprehensive city guides and travel tips.">
+  <meta property="og:title" content="Best Travel Guides & Destinations - TravelWanders">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&h=630">
+  <meta property="og:description" content="Discover amazing travel destinations with TravelWanders. Find comprehensive city guides, hidden gems, and travel tips for your next adventure.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://travelwanders.com/">
   <meta property="og:site_name" content="TravelWanders">
   
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="TravelWanders - Discover Amazing Destinations & Travel Guides">
-  <meta name="twitter:description" content="Discover the best travel destinations, attractions, and experiences with TravelWanders. Your ultimate guide to exploring the world with comprehensive city guides and travel tips.">
+  <meta name="twitter:title" content="Best Travel Guides & Destinations - TravelWanders">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&h=630">
+  <meta name="twitter:description" content="Discover amazing travel destinations with TravelWanders. Find comprehensive city guides, hidden gems, and travel tips for your next adventure.">
   
   <link rel="canonical" href="https://travelwanders.com/">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  
+  <!-- Performance optimization tags -->
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="dns-prefetch" href="https://images.unsplash.com">
+  <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "TravelWanders",
+    "url": "https://travelwanders.com",
+    "description": "Discover amazing travel destinations with TravelWanders. Find comprehensive city guides, hidden gems, and travel tips for your next adventure.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://travelwanders.com/destinations?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    },
+    "sameAs": [
+      "https://facebook.com/travelwanders",
+      "https://twitter.com/travelwanders",
+      "https://instagram.com/travelwanders"
+    ]
+  }
+  </script>
   
   <style>
     ${generateCommonStyles()}
@@ -2173,6 +2201,8 @@ export function generateHomePageHTML(): string {
 }
 
 export function generateDestinationsPageHTML(): string {
+  const cities = readCityDataFromComponents();
+  
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -2183,6 +2213,7 @@ export function generateDestinationsPageHTML(): string {
   
   <!-- SEO Meta Tags -->
   <meta property="og:title" content="All Destinations - TravelWanders">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&w=1200&h=630">
   <meta property="og:description" content="Browse our complete collection of travel destinations with detailed guides, attractions, and insider tips for amazing cities worldwide.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://travelwanders.com/destinations">
@@ -2190,10 +2221,42 @@ export function generateDestinationsPageHTML(): string {
   
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="All Destinations - TravelWanders">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&w=1200&h=630">
   <meta name="twitter:description" content="Browse our complete collection of travel destinations with detailed guides, attractions, and insider tips for amazing cities worldwide.">
   
   <link rel="canonical" href="https://travelwanders.com/destinations">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  
+  <!-- Performance optimization tags -->
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="dns-prefetch" href="https://images.unsplash.com">
+  <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Travel Destinations Directory",
+    "url": "https://travelwanders.com/destinations",
+    "description": "Explore our comprehensive directory of travel destinations. Find detailed guides for cities around the world with attractions, tips, and local insights.",
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": ${cities.length},
+      "itemListElement": [
+        ${cities.slice(0, 10).map((city, index) => `{
+          "@type": "ListItem",
+          "position": ${index + 1},
+          "item": {
+            "@type": "TravelAction",
+            "name": "${city.name}",
+            "url": "https://travelwanders.com${city.route}"
+          }
+        }`).join(',\n        ')}
+      ]
+    }
+  }
+  </script>
   
   <style>
     ${generateCommonStyles()}
@@ -2230,22 +2293,45 @@ export function generateBlogsPageHTML(): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Blog - TravelWanders</title>
-  <meta name="description" content="Get inspired with our travel stories, tips, and destination guides from expert travelers around the world.">
+  <title>Travel Blog Stories & Destination Guides - TravelWanders</title>
+  <meta name="description" content="Get inspired with our travel stories, tips, and destination guides from expert travelers around the world. Discover hidden gems and travel inspiration.">
   
   <!-- SEO Meta Tags -->
-  <meta property="og:title" content="Travel Blog - TravelWanders">
-  <meta property="og:description" content="Get inspired with our travel stories, tips, and destination guides from expert travelers around the world.">
+  <meta property="og:title" content="Travel Blog Stories & Destination Guides - TravelWanders">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&h=630">
+  <meta property="og:description" content="Get inspired with our travel stories, tips, and destination guides from expert travelers around the world. Discover hidden gems and travel inspiration.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://travelwanders.com/blogs">
   <meta property="og:site_name" content="TravelWanders">
   
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Travel Blog - TravelWanders">
-  <meta name="twitter:description" content="Get inspired with our travel stories, tips, and destination guides from expert travelers around the world.">
+  <meta name="twitter:title" content="Travel Blog Stories & Destination Guides - TravelWanders">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&h=630">
+  <meta name="twitter:description" content="Get inspired with our travel stories, tips, and destination guides from expert travelers around the world. Discover hidden gems and travel inspiration.">
   
   <link rel="canonical" href="https://travelwanders.com/blogs">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  
+  <!-- Performance optimization tags -->
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="dns-prefetch" href="https://images.unsplash.com">
+  <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "TravelWanders Blog",
+    "url": "https://travelwanders.com/blogs",
+    "description": "Get inspired with our travel stories, tips, and destination guides from expert travelers around the world. Discover hidden gems and travel inspiration.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "TravelWanders",
+      "url": "https://travelwanders.com"
+    }
+  }
+  </script>
   
   <style>
     ${generateCommonStyles()}
@@ -2428,7 +2514,7 @@ function generateLatestBlogsHTML(): string {
     const blogCardsHTML = latestBlogs.map(blog => `
       <div style="background: white; border: 1px solid #e5e7eb; border-radius: 0.75rem; overflow: hidden; transition: all 0.3s ease; margin-bottom: 1.5rem;">
         <div style="height: 12rem; background: linear-gradient(135deg, #059669 0%, #3b82f6 100%); position: relative;">
-          ${blog.imageUrl ? `<img src="${blog.imageUrl}" alt="${blog.title}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;">` : ''}
+          ${blog.imageUrl ? `<img src="${blog.imageUrl}" alt="${blog.title}" width="400" height="200" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;">` : ''}
           ${blog.featured ? '<div style="position: absolute; top: 1rem; left: 1rem; background: #ea580c; color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 500;">Featured</div>' : ''}
         </div>
         <div style="padding: 1.5rem;">
@@ -3372,18 +3458,46 @@ export function generatePrivacyPolicyHTML(): string {
   <meta name="description" content="Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.">
   
   <!-- SEO Meta Tags -->
-  <meta property="og:title" content="Privacy Policy - TravelWanders">
+  <meta property="og:title" content="Privacy Policy & Data Protection - TravelWanders">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&h=630">
   <meta property="og:description" content="Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://travelwanders.com/privacy-policy">
   <meta property="og:site_name" content="TravelWanders">
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Privacy Policy - TravelWanders">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Privacy Policy & Data Protection - TravelWanders">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&h=630">
   <meta name="twitter:description" content="Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.">
   
   <link rel="canonical" href="https://travelwanders.com/privacy-policy">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  
+  <!-- Performance optimization tags -->
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="dns-prefetch" href="https://images.unsplash.com">
+  <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Privacy Policy",
+    "url": "https://travelwanders.com/privacy-policy",
+    "description": "Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "TravelWanders",
+      "url": "https://travelwanders.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "TravelWanders",
+      "url": "https://travelwanders.com"
+    }
+  }
+  </script>
   
   <style>
     ${generateCommonStyles()}
@@ -3567,22 +3681,50 @@ export function generateTermsOfServiceHTML(): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terms of Service - TravelWanders</title>
+  <title>Terms of Service & User Agreement - TravelWanders</title>
   <meta name="description" content="Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.">
   
   <!-- SEO Meta Tags -->
-  <meta property="og:title" content="Terms of Service - TravelWanders">
+  <meta property="og:title" content="Terms of Service & User Agreement - TravelWanders">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&h=630">
   <meta property="og:description" content="Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://travelwanders.com/terms-of-service">
   <meta property="og:site_name" content="TravelWanders">
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Terms of Service - TravelWanders">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Terms of Service & User Agreement - TravelWanders">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&h=630">
   <meta name="twitter:description" content="Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.">
   
   <link rel="canonical" href="https://travelwanders.com/terms-of-service">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  
+  <!-- Performance optimization tags -->
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="dns-prefetch" href="https://images.unsplash.com">
+  <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Terms of Service",
+    "url": "https://travelwanders.com/terms-of-service",
+    "description": "Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "TravelWanders",
+      "url": "https://travelwanders.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "TravelWanders",
+      "url": "https://travelwanders.com"
+    }
+  }
+  </script>
   
   <style>
     ${generateCommonStyles()}
