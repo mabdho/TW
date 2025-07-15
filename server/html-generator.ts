@@ -371,13 +371,23 @@ const pageStyles = `
     position: relative;
     height: 60vh;
     min-height: 400px;
-    background-size: cover;
-    background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
   }
 
   .hero-overlay {
@@ -1275,9 +1285,17 @@ export function generateCompleteHTML(cityData: CityData): string {
   
   const heroStyle = `background-image: url('${cityData.imageUrl || ''}');`;
   
-  // Create hero section with proper title and badges like React component
+  // Create hero section with proper image and alt text
   const heroHTML = `
-    <div class="hero-section" style="${heroStyle}">
+    <div class="hero-section">
+      ${cityData.imageUrl ? `
+        <img src="${cityData.imageUrl}" 
+             alt="Best things to do in ${cityData.cityName}, ${cityData.country} - Travel guide showing top attractions and experiences"
+             class="hero-image"
+             loading="eager"
+             width="1200" 
+             height="600">
+      ` : ''}
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <div class="hero-breadcrumb">
@@ -1504,9 +1522,9 @@ export function generateCompleteHTML(cityData: CityData): string {
     </section>
   ` : '';
 
-  // Generate tab-based content structure
-  const overviewContent = `
-    <div class="tab-content active" id="overview">
+  // Generate static content structure for search engines (no tabs)
+  const staticContent = `
+    <div class="main-content-wrapper">
       <div class="container">
         ${cityData.description ? `
         <section class="section">
@@ -1515,13 +1533,73 @@ export function generateCompleteHTML(cityData: CityData): string {
           </div>
         </section>
         ` : ''}
+        
         <section class="section">
           <h2 class="section-title">✨ Highlights</h2>
           <div class="highlights-grid">
             ${highlightsHTML}
           </div>
         </section>
+        
         ${discoveryCardsHTML}
+        
+        <section class="section">
+          <h2 class="section-title">🏆 Top Attractions</h2>
+          <div class="attractions-grid">
+            ${topAttractionsHTML}
+          </div>
+        </section>
+        
+        <section class="section">
+          <h2 class="section-title">🎯 All Attractions</h2>
+          <div class="attractions-grid">
+            ${allAttractionsHTML}
+          </div>
+        </section>
+        
+        ${cityData.logistics ? `
+        <section class="section">
+          <h2 class="section-title">📋 Plan Your Trip</h2>
+          <div class="logistics-grid">
+            ${cityData.logistics.gettingAround ? `
+              <div class="logistics-card">
+                <h3>🚌 Getting Around</h3>
+                <div class="logistics-content">${cityData.logistics.gettingAround.replace(/#{1,6}\s/g, '').replace(/\n/g, '<br>')}</div>
+              </div>
+            ` : ''}
+            ${cityData.logistics.whereToStay ? `
+              <div class="logistics-card">
+                <h3>🏨 Where to Stay</h3>
+                <div class="logistics-content">${cityData.logistics.whereToStay.replace(/#{1,6}\s/g, '').replace(/\n/g, '<br>')}</div>
+              </div>
+            ` : ''}
+            ${cityData.logistics.bestTimeToVisit ? `
+              <div class="logistics-card">
+                <h3>📅 Best Time to Visit</h3>
+                <div class="logistics-content">${cityData.logistics.bestTimeToVisit.replace(/#{1,6}\s/g, '').replace(/\n/g, '<br>')}</div>
+              </div>
+            ` : ''}
+            ${cityData.logistics.suggestedItinerary ? `
+              <div class="logistics-card">
+                <h3>🎯 Suggested Itinerary</h3>
+                <div class="logistics-content">${cityData.logistics.suggestedItinerary.replace(/#{1,6}\s/g, '').replace(/\n/g, '<br>')}</div>
+              </div>
+            ` : ''}
+          </div>
+        </section>
+        ` : ''}
+        
+        ${cityData.faqs && cityData.faqs.length > 0 ? `
+        <section class="section">
+          <h2 class="section-title">❓ Frequently Asked Questions</h2>
+          ${cityData.faqs.map(faq => 
+            `<div class="faq-item">
+              <div class="faq-question">${faq.question}</div>
+              <div class="faq-answer">${faq.answer}</div>
+            </div>`
+          ).join('')}
+        </section>
+        ` : ''}
         
         <!-- Intelligent Internal Links Section for SEO -->
         <section class="section">
@@ -1608,23 +1686,7 @@ export function generateCompleteHTML(cityData: CityData): string {
     </div>
   ` : '';
 
-  const faqsHTML = cityData.faqs ? cityData.faqs.map(faq => 
-    `<div class="faq-item">
-      <div class="faq-question">${faq.question}</div>
-      <div class="faq-answer">${faq.answer}</div>
-    </div>`
-  ).join('') : '';
-  
-  const faqsContent = cityData.faqs && cityData.faqs.length > 0 ? `
-    <div class="tab-content" id="faqs">
-      <div class="container">
-        <section class="section">
-          <h2 class="section-title">❓ Frequently Asked Questions</h2>
-          ${faqsHTML}
-        </section>
-      </div>
-    </div>
-  ` : '';
+
 
   // Complete HTML structure with tabbed navigation matching React CityPage component
   return `<!DOCTYPE html>
@@ -1634,7 +1696,6 @@ export function generateCompleteHTML(cityData: CityData): string {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${seoTitle}</title>
     <meta name="description" content="${seoDescription}">
-    <meta name="keywords" content="${cityData.tags && cityData.tags.length > 0 ? cityData.tags.join(', ') + ', ' : ''}things to do in ${cityData.cityName}, ${cityData.cityName} travel guide, ${cityData.cityName} attractions, ${cityData.cityName} ${cityData.country}">
     <meta name="robots" content="index, follow">
     <meta name="author" content="${cityData.author || 'TravelWanders'}">
     ${cityData.lastUpdated ? `<meta name="last-modified" content="${cityData.lastUpdated}">` : ''}
@@ -1647,6 +1708,7 @@ export function generateCompleteHTML(cityData: CityData): string {
     <meta property="og:image" content="${cityData.imageUrl}">
     <meta property="og:url" content="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
     <meta property="og:type" content="article">
+    <meta property="og:site_name" content="TravelWanders">
     ${cityData.author ? `<meta property="article:author" content="${cityData.author}">` : ''}
     
     <!-- Twitter Card tags -->
@@ -1654,23 +1716,67 @@ export function generateCompleteHTML(cityData: CityData): string {
     <meta name="twitter:title" content="${seoTitle}">
     <meta name="twitter:description" content="${seoDescription}">
     <meta name="twitter:image" content="${cityData.imageUrl}">
+    <meta name="twitter:site" content="@TravelWanders">
     
-    <!-- Structured Data -->
+    <!-- Structured Data - WebPage with TravelDestination mainEntity -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "TouristAttraction",
-      "name": "${cityData.cityName} Travel Guide",
+      "@type": "WebPage",
+      "name": "${seoTitle}",
       "description": "${seoDescription}",
-      "image": "${cityData.imageUrl}",
       "url": "https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}",
       ${cityData.publishedDate ? `"datePublished": "${cityData.publishedDate}",` : ''}
       ${cityData.lastUpdated ? `"dateModified": "${cityData.lastUpdated}",` : ''}
       ${cityData.author ? `"author": {"@type": "Person", "name": "${cityData.author}"},` : ''}
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "${cityData.cityName}",
-        "addressCountry": "${cityData.country}"
+      "publisher": {
+        "@type": "Organization",
+        "name": "TravelWanders",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://travelwanders.com/favicon.svg"
+        }
+      },
+      "mainEntity": {
+        "@type": "TravelDestination",
+        "name": "${cityData.cityName}",
+        "description": "${seoDescription}",
+        "image": "${cityData.imageUrl}",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "${cityData.cityName}",
+          "addressCountry": "${cityData.country}"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "0",
+          "longitude": "0"
+        },
+        "touristType": "leisure",
+        "hasMap": "https://www.google.com/maps/search/${encodeURIComponent(cityData.cityName + ', ' + cityData.country)}"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://travelwanders.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Destinations",
+            "item": "https://travelwanders.com/destinations"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "${cityData.cityName}",
+            "item": "https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}"
+          }
+        ]
       }
     }
     </script>
@@ -1694,25 +1800,8 @@ export function generateCompleteHTML(cityData: CityData): string {
     <div id="root" class="main-content">
         ${heroHTML}
         
-        <!-- Tab Navigation -->
-        <div class="tabs-container">
-          <div class="tabs-list">
-            <button class="tab-trigger active" onclick="showTab('overview')">Overview</button>
-            <button class="tab-trigger" onclick="showTab('top-attractions')">Top Attractions</button>
-            <button class="tab-trigger" onclick="showTab('all-attractions')">All Attractions</button>
-            <button class="tab-trigger" onclick="showTab('interactive-explorer')">Interactive Explorer</button>
-            <button class="tab-trigger" onclick="showTab('plan-trip')">Plan Your Trip</button>
-            ${cityData.faqs && cityData.faqs.length > 0 ? '<button class="tab-trigger" onclick="showTab(\'faqs\')">FAQs</button>' : ''}
-          </div>
-        </div>
-        
-        <!-- Tab Contents -->
-        ${overviewContent}
-        ${topAttractionsContent}
-        ${allAttractionsContent}
-        ${interactiveExplorerContent}
-        ${planTripContent}
-        ${faqsContent}
+        <!-- Static Content for Search Engines -->
+        ${staticContent}
         
         <!-- Footer -->
         <footer class="footer">
