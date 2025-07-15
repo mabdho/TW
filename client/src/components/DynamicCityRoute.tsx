@@ -32,6 +32,8 @@ const cityMap = {
   'san-francisco': createCityImport('SanFrancisco', '../pages/cities/SanFrancisco'),
 
   'são-paulo': createCityImport('SãoPaulo', '../pages/cities/SãoPaulo'),
+
+  'san-diego': createCityImport('SanDiego', '../pages/cities/SanDiego'),
 };
 
 interface DynamicCityRouteProps {

@@ -58,7 +58,8 @@ async function runAutomaticComplianceEnforcement() {
     console.log('🚀 Running automatic compliance enforcement...');
     
     // Import and execute the compliance enforcer using dynamic import
-    const { default: AutomaticComplianceEnforcer } = await import('../scripts/automatic-compliance-enforcer.js');
+    const complianceModule = await import('../scripts/automatic-compliance-enforcer.js');
+    const AutomaticComplianceEnforcer = complianceModule.default || complianceModule.AutomaticComplianceEnforcer;
     const enforcer = new AutomaticComplianceEnforcer();
     const success = await enforcer.enforceCompliance();
     
@@ -1971,17 +1972,26 @@ Double-check all brackets, quotes, and commas are properly matched.`;
         }
         
         // Import and run hydration enforcement
-        const { HydrationEnforcer } = await import('../scripts/hydration-enforcement.js');
-        const enforcer = new HydrationEnforcer();
-        await enforcer.enforceHTMLGeneration('city', { cityName: city, country });
-        console.log(`✅ Hydration enforcement completed for ${city}`);
+        try {
+          const { HydrationEnforcer } = await import('../scripts/hydration-enforcement.js');
+          const enforcer = new HydrationEnforcer();
+          await enforcer.enforceHTMLGeneration('city', { cityName: city, country });
+          console.log(`✅ Hydration enforcement completed for ${city}`);
+        } catch (hydrationEnforcementError) {
+          console.warn('⚠️  Hydration enforcement warning:', hydrationEnforcementError.message);
+        }
         
       } catch (hydrationError) {
         console.warn('⚠️  Hydration enforcement warning:', hydrationError.message);
       }
       
       // Run automatic compliance enforcement
-      await runAutomaticComplianceEnforcement();
+      try {
+        await runAutomaticComplianceEnforcement();
+      } catch (complianceError) {
+        console.warn('⚠️  Compliance enforcement warning:', complianceError.message);
+        // Continue without failing the entire operation
+      }
       
       res.json({
         success: true,

@@ -39,6 +39,11 @@ export const CITY_NAME_MAPPINGS: Record<string, CityNameMapping> = {
     tsxName: 'LasVegas',
     htmlName: 'las-vegas',
     displayName: 'Las Vegas'
+  },
+  'san-diego': {
+    tsxName: 'SanDiego',
+    htmlName: 'san-diego',
+    displayName: 'San Diego'
   }
 };
 

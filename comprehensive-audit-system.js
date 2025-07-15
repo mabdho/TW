@@ -226,7 +226,13 @@ class ComprehensiveAuditSystem {
    */
   extractCityNameFromTsx(tsxFile) {
     const filename = path.basename(tsxFile, '.tsx');
-    return filename.toLowerCase();
+    
+    // Convert PascalCase to kebab-case for proper HTML matching
+    return filename
+      .replace(/([A-Z])/g, (match, letter, index) => {
+        return index === 0 ? letter.toLowerCase() : '-' + letter.toLowerCase();
+      })
+      .replace(/^-/, '');
   }
 
   /**
@@ -286,11 +292,12 @@ class ComprehensiveAuditSystem {
     
     // Handle special cases for city name mapping
     const cityNameMappings = {
-      'san-francisco': 'sanfrancisco',
-      'new-york': 'newyork',
-      'los-angeles': 'losangeles',
-      'las-vegas': 'lasvegas',
-      'são-paulo': 'sãopaulo'
+      'san-francisco': 'san-francisco',
+      'new-york': 'new-york',
+      'los-angeles': 'los-angeles',
+      'las-vegas': 'las-vegas',
+      'são-paulo': 'são-paulo',
+      'san-diego': 'san-diego'
     };
     
     const mappedName = cityNameMappings[cityName];
