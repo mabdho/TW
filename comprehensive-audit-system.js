@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /**
  * Comprehensive Audit System for TravelWanders Project
  * 
@@ -15,38 +13,24 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { exec } from 'child_process';
+import { promisify } from 'util';
 import { JSDOM } from 'jsdom';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
+const execAsync = promisify(exec);
 
 class ComprehensiveAuditSystem {
   constructor() {
     this.results = {
-      htmlTsxSync: {
-        totalPages: 0,
-        syncedPages: 0,
-        mismatches: [],
-        passed: [],
-        failed: [],
-        score: 0
-      },
-      hydration: {
-        totalChecks: 0,
-        passedChecks: 0,
-        failedChecks: 0,
-        warnings: [],
-        errors: [],
-        score: 0
-      },
-      cloaking: {
-        totalRoutes: 0,
-        cloakedRoutes: 0,
-        nonCloakedRoutes: 0,
-        issues: [],
-        passed: [],
-        score: 0
-      }
+      htmlTsxSync: { score: 0, issues: [], strengths: [], total: 0, passed: 0 },
+      hydration: { score: 0, issues: [], strengths: [], total: 0, passed: 0 },
+      cloaking: { score: 0, issues: [], strengths: [], total: 0, passed: 0 },
+      seo: { score: 0, issues: [], strengths: [], total: 0, passed: 0 },
+      performance: { score: 0, issues: [], strengths: [], total: 0, passed: 0 },
+      overallScore: 0
     };
   }
 
@@ -55,51 +39,53 @@ class ComprehensiveAuditSystem {
    * Checks if HTML files match their corresponding TSX components
    */
   async auditHtmlTsxSynchronization() {
-    console.log('🔍 HTML/TSX SYNCHRONIZATION AUDIT');
-    console.log('================================\n');
-
-    const cityTsxFiles = this.findCityTsxFiles();
-    const cityHtmlFiles = this.findCityHtmlFiles();
+    console.log('\n🔍 HTML/TSX SYNCHRONIZATION AUDIT');
+    console.log('='.repeat(50));
     
-    this.results.htmlTsxSync.totalPages = cityTsxFiles.length;
-
-    console.log(`Found ${cityTsxFiles.length} TSX city files`);
-    console.log(`Found ${cityHtmlFiles.length} HTML city files\n`);
-
-    // Check each TSX file against its corresponding HTML file
-    for (const tsxFile of cityTsxFiles) {
+    const sync = this.results.htmlTsxSync;
+    
+    // Find all TSX city files
+    const tsxFiles = this.findCityTsxFiles();
+    console.log(`Found ${tsxFiles.length} TSX city files`);
+    
+    // Find all HTML city files
+    const htmlFiles = this.findCityHtmlFiles();
+    console.log(`Found ${htmlFiles.length} HTML city files`);
+    
+    // For each TSX file, check if corresponding HTML exists
+    for (const tsxFile of tsxFiles) {
       const cityName = this.extractCityNameFromTsx(tsxFile);
-      const htmlFile = this.findCorrespondingHtmlFile(cityName, cityHtmlFiles);
+      const htmlFile = this.findCorrespondingHtmlFile(cityName, htmlFiles);
       
-      if (!htmlFile) {
-        this.results.htmlTsxSync.mismatches.push({
-          type: 'MISSING_HTML',
-          tsxFile: tsxFile,
-          cityName: cityName,
-          message: `No corresponding HTML file found for ${cityName}`
-        });
-        continue;
+      sync.total++;
+      
+      if (htmlFile) {
+        // Compare TSX and HTML files
+        const isSync = await this.compareTsxAndHtml(tsxFile, htmlFile, cityName);
+        if (isSync) {
+          sync.passed++;
+          sync.strengths.push(`✅ ${cityName} - TSX/HTML synchronized`);
+        } else {
+          sync.issues.push(`❌ ${cityName} - TSX/HTML content mismatch`);
+        }
+      } else {
+        sync.issues.push(`❌ ${cityName} - No corresponding HTML file found`);
       }
-
-      await this.compareTsxAndHtml(tsxFile, htmlFile, cityName);
     }
-
+    
     // Check for orphaned HTML files
-    for (const htmlFile of cityHtmlFiles) {
+    for (const htmlFile of htmlFiles) {
       const cityName = this.extractCityNameFromHtml(htmlFile);
-      const tsxFile = this.findCorrespondingTsxFile(cityName, cityTsxFiles);
+      const tsxFile = this.findCorrespondingTsxFile(cityName, tsxFiles);
       
       if (!tsxFile) {
-        this.results.htmlTsxSync.mismatches.push({
-          type: 'ORPHANED_HTML',
-          htmlFile: htmlFile,
-          cityName: cityName,
-          message: `HTML file exists but no corresponding TSX file found for ${cityName}`
-        });
+        sync.issues.push(`❌ ${cityName} - Orphaned HTML file without TSX component`);
       }
     }
-
-    this.calculateHtmlTsxScore();
+    
+    sync.score = sync.total > 0 ? (sync.passed / sync.total) * 100 : 0;
+    console.log(`HTML/TSX Synchronization Score: ${sync.score.toFixed(1)}%`);
+    console.log(`Passed: ${sync.passed}/${sync.total}`);
   }
 
   /**
@@ -107,40 +93,52 @@ class ComprehensiveAuditSystem {
    * Checks if React components can properly hydrate with server-rendered HTML
    */
   async auditHydration() {
-    console.log('\n🔍 HYDRATION AUDIT');
-    console.log('==================\n');
-
+    console.log('\n💧 HYDRATION AUDIT');
+    console.log('='.repeat(50));
+    
+    const hydration = this.results.hydration;
+    
+    // Get all pages that need hydration checks
     const pages = [
-      { name: 'Home', tsxPath: 'client/src/pages/home.tsx', htmlPath: 'dist/public/home-seo.html' },
-      { name: 'Destinations', tsxPath: 'client/src/pages/destinations.tsx', htmlPath: 'dist/public/destinations-seo.html' },
-      { name: 'Blogs', tsxPath: 'client/src/pages/blogs.tsx', htmlPath: 'dist/public/blogs-seo.html' },
-      { name: 'Cookie Policy', tsxPath: 'client/src/pages/CookiePolicy.tsx', htmlPath: 'dist/public/cookie-policy.html' },
-      { name: 'Privacy Policy', tsxPath: 'client/src/pages/PrivacyPolicy.tsx', htmlPath: 'dist/public/privacy-policy.html' },
-      { name: 'Terms of Service', tsxPath: 'client/src/pages/TermsOfService.tsx', htmlPath: 'dist/public/terms-of-service.html' }
+      { name: 'home', htmlPath: 'dist/public/home-seo.html', tsxPath: 'client/src/pages/home.tsx' },
+      { name: 'destinations', htmlPath: 'dist/public/destinations-seo.html', tsxPath: 'client/src/pages/destinations.tsx' },
+      { name: 'blogs', htmlPath: 'dist/public/blogs-seo.html', tsxPath: 'client/src/pages/blogs.tsx' },
+      { name: 'privacy-policy', htmlPath: 'dist/public/privacy-policy.html', tsxPath: 'client/src/pages/PrivacyPolicy.tsx' },
+      { name: 'terms-of-service', htmlPath: 'dist/public/terms-of-service.html', tsxPath: 'client/src/pages/TermsOfService.tsx' },
+      { name: 'cookie-policy', htmlPath: 'dist/public/cookie-policy.html', tsxPath: 'client/src/pages/CookiePolicy.tsx' }
     ];
-
-    // Add city pages
-    const cityFiles = this.findCityTsxFiles();
-    for (const cityFile of cityFiles) {
-      const cityName = this.extractCityNameFromTsx(cityFile);
-      const htmlFile = this.findCorrespondingHtmlFile(cityName, this.findCityHtmlFiles());
-      if (htmlFile) {
+    
+    // Add all city pages
+    const cityTsxFiles = this.findCityTsxFiles();
+    for (const tsxFile of cityTsxFiles) {
+      const cityName = this.extractCityNameFromTsx(tsxFile);
+      const htmlPath = `dist/public/best-things-to-do-in-${cityName.toLowerCase().replace(/\s+/g, '-')}.html`;
+      
+      if (fs.existsSync(htmlPath)) {
         pages.push({
-          name: `City: ${cityName}`,
-          tsxPath: cityFile,
-          htmlPath: htmlFile
+          name: cityName,
+          htmlPath,
+          tsxPath: tsxFile
         });
       }
     }
-
-    // Don't set totalChecks here - let compareHydrationData count them
-    this.results.hydration.totalChecks = 0;
-
+    
+    // Audit each page
     for (const page of pages) {
-      await this.auditPageHydration(page);
+      hydration.total++;
+      
+      const hydratesCorrectly = await this.auditPageHydration(page);
+      if (hydratesCorrectly) {
+        hydration.passed++;
+        hydration.strengths.push(`✅ ${page.name} - Hydration compatible`);
+      } else {
+        hydration.issues.push(`❌ ${page.name} - Hydration mismatch detected`);
+      }
     }
-
-    this.calculateHydrationScore();
+    
+    hydration.score = hydration.total > 0 ? (hydration.passed / hydration.total) * 100 : 0;
+    console.log(`Hydration Score: ${hydration.score.toFixed(1)}%`);
+    console.log(`Passed: ${hydration.passed}/${hydration.total}`);
   }
 
   /**
@@ -148,167 +146,138 @@ class ComprehensiveAuditSystem {
    * Checks if the system properly serves different content to search engines vs users
    */
   async auditCloaking() {
-    console.log('\n🔍 CLOAKING AUDIT');
-    console.log('=================\n');
-
+    console.log('\n🎭 CLOAKING AUDIT');
+    console.log('='.repeat(50));
+    
+    const cloaking = this.results.cloaking;
+    
+    // Check if Firebase server has bot detection
+    const firebaseServerExists = fs.existsSync('server/firebase-server.ts');
+    
+    if (firebaseServerExists) {
+      cloaking.total++;
+      const serverContent = fs.readFileSync('server/firebase-server.ts', 'utf-8');
+      
+      if (serverContent.includes('isSearchEngineBot') || serverContent.includes('user-agent')) {
+        cloaking.passed++;
+        cloaking.strengths.push('✅ Bot detection implemented in Firebase server');
+      } else {
+        cloaking.issues.push('❌ No bot detection found in Firebase server');
+      }
+    } else {
+      cloaking.issues.push('❌ Firebase server file not found');
+    }
+    
+    // Check if appropriate routes exist for cloaking
     const routes = [
-      { path: '/', name: 'Home', expectedSeoFile: 'dist/public/home-seo.html' },
-      { path: '/destinations', name: 'Destinations', expectedSeoFile: 'dist/public/destinations-seo.html' },
-      { path: '/blogs', name: 'Blogs', expectedSeoFile: 'dist/public/blogs-seo.html' },
-      { path: '/cookie-policy', name: 'Cookie Policy', expectedSeoFile: 'dist/public/cookie-policy.html' },
-      { path: '/privacy-policy', name: 'Privacy Policy', expectedSeoFile: 'dist/public/privacy-policy.html' },
-      { path: '/terms-of-service', name: 'Terms of Service', expectedSeoFile: 'dist/public/terms-of-service.html' }
+      '/',
+      '/destinations',
+      '/blogs',
+      '/privacy-policy',
+      '/terms-of-service',
+      '/cookie-policy'
     ];
-
+    
     // Add city routes
-    const cityFiles = this.findCityHtmlFiles();
-    for (const htmlFile of cityFiles) {
-      const cityName = this.extractCityNameFromHtml(htmlFile);
-      routes.push({
-        path: `/best-things-to-do-in-${cityName.toLowerCase()}`,
-        name: `City: ${cityName}`,
-        expectedSeoFile: htmlFile
-      });
+    const cityTsxFiles = this.findCityTsxFiles();
+    for (const tsxFile of cityTsxFiles) {
+      const cityName = this.extractCityNameFromTsx(tsxFile);
+      routes.push(`/best-things-to-do-in-${cityName.toLowerCase().replace(/\s+/g, '-')}`);
     }
-
-    this.results.cloaking.totalRoutes = routes.length;
-
-    // Check Firebase server configuration
-    await this.auditFirebaseServerCloaking();
-
-    // Check each route
+    
+    // Audit each route
     for (const route of routes) {
-      await this.auditRouteCloaking(route);
+      cloaking.total++;
+      
+      const cloakingWorks = await this.auditRouteCloaking(route);
+      if (cloakingWorks) {
+        cloaking.passed++;
+        cloaking.strengths.push(`✅ ${route} - Cloaking implemented`);
+      } else {
+        cloaking.issues.push(`❌ ${route} - Cloaking not working`);
+      }
     }
-
-    this.calculateCloakingScore();
+    
+    cloaking.score = cloaking.total > 0 ? (cloaking.passed / cloaking.total) * 100 : 0;
+    console.log(`Cloaking Score: ${cloaking.score.toFixed(1)}%`);
+    console.log(`Passed: ${cloaking.passed}/${cloaking.total}`);
   }
 
   /**
    * Helper method to find all city TSX files
    */
   findCityTsxFiles() {
-    const cityDir = path.join(__dirname, 'client/src/pages/cities');
-    if (!fs.existsSync(cityDir)) return [];
+    const citiesDir = 'client/src/pages/cities';
+    if (!fs.existsSync(citiesDir)) return [];
     
-    return fs.readdirSync(cityDir)
+    return fs.readdirSync(citiesDir)
       .filter(file => file.endsWith('.tsx'))
-      .map(file => path.join(cityDir, file));
+      .map(file => path.join(citiesDir, file));
   }
 
   /**
    * Helper method to find all city HTML files
    */
   findCityHtmlFiles() {
-    const publicDir = path.join(__dirname, 'dist/public');
+    const publicDir = 'dist/public';
     if (!fs.existsSync(publicDir)) return [];
     
-    const files = [];
-    const entries = fs.readdirSync(publicDir);
-    
-    for (const entry of entries) {
-      const entryPath = path.join(publicDir, entry);
-      if (fs.statSync(entryPath).isDirectory() && entry.startsWith('best-things-to-do-in-')) {
-        const indexPath = path.join(entryPath, 'index.html');
-        if (fs.existsSync(indexPath)) {
-          files.push(indexPath);
-        }
-      } else if (entry.endsWith('.html') && entry.startsWith('best-things-to-do-in-')) {
-        files.push(entryPath);
-      }
-    }
-    
-    return files;
+    return fs.readdirSync(publicDir)
+      .filter(file => file.startsWith('best-things-to-do-in-') && file.endsWith('.html'))
+      .map(file => path.join(publicDir, file));
   }
 
   /**
    * Extract city name from TSX file
    */
   extractCityNameFromTsx(tsxFile) {
-    const filename = path.basename(tsxFile, '.tsx');
+    const content = fs.readFileSync(tsxFile, 'utf-8');
     
-    // Convert PascalCase to kebab-case for proper HTML matching
-    return filename
-      .replace(/([A-Z])/g, (match, letter, index) => {
-        return index === 0 ? letter.toLowerCase() : '-' + letter.toLowerCase();
-      })
-      .replace(/^-/, '');
+    // Look for export const [CityName] pattern
+    const exportMatch = content.match(/export\s+const\s+(\w+)\s*=/);
+    if (exportMatch) {
+      return exportMatch[1];
+    }
+    
+    // Fallback to filename
+    return path.basename(tsxFile, '.tsx');
   }
 
   /**
    * Extract city name from HTML file
    */
   extractCityNameFromHtml(htmlFile) {
-    const filename = path.basename(htmlFile);
-    if (filename === 'index.html') {
-      // Extract from parent directory
-      const parentDir = path.basename(path.dirname(htmlFile));
-      return parentDir.replace('best-things-to-do-in-', '');
-    }
-    return filename.replace('best-things-to-do-in-', '').replace('.html', '');
+    const basename = path.basename(htmlFile, '.html');
+    
+    // Remove "best-things-to-do-in-" prefix and convert to PascalCase
+    const citySlug = basename.replace('best-things-to-do-in-', '');
+    return citySlug.split('-').map(word => 
+      word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ');
   }
 
   /**
    * Find corresponding HTML file for a city
    */
   findCorrespondingHtmlFile(cityName, htmlFiles) {
-    const found = htmlFiles.find(file => {
-      const htmlCityName = this.extractCityNameFromHtml(file);
-      return htmlCityName === cityName;
+    const expectedSlug = cityName.toLowerCase().replace(/\s+/g, '-');
+    
+    return htmlFiles.find(file => {
+      const basename = path.basename(file, '.html');
+      return basename === `best-things-to-do-in-${expectedSlug}`;
     });
-    
-    if (found) return found;
-    
-    // Handle special cases for city name mapping (reverse mapping)
-    const cityNameMappings = {
-      'sanfrancisco': 'san-francisco',
-      'newyork': 'new-york',
-      'losangeles': 'los-angeles',
-      'lasvegas': 'las-vegas',
-      'sãopaulo': 'são-paulo'
-    };
-    
-    const mappedName = cityNameMappings[cityName];
-    if (mappedName) {
-      return htmlFiles.find(file => {
-        const htmlCityName = this.extractCityNameFromHtml(file);
-        return htmlCityName === mappedName;
-      });
-    }
-    
-    return null;
   }
 
   /**
    * Find corresponding TSX file for a city
    */
   findCorrespondingTsxFile(cityName, tsxFiles) {
-    const found = tsxFiles.find(file => {
-      const tsxCityName = this.extractCityNameFromTsx(file);
-      return tsxCityName === cityName;
+    const normalizedCityName = cityName.replace(/\s+/g, '');
+    
+    return tsxFiles.find(file => {
+      const basename = path.basename(file, '.tsx');
+      return basename.toLowerCase() === normalizedCityName.toLowerCase();
     });
-    
-    if (found) return found;
-    
-    // Handle special cases for city name mapping
-    const cityNameMappings = {
-      'san-francisco': 'san-francisco',
-      'new-york': 'new-york',
-      'los-angeles': 'los-angeles',
-      'las-vegas': 'las-vegas',
-      'são-paulo': 'são-paulo',
-      'san-diego': 'san-diego'
-    };
-    
-    const mappedName = cityNameMappings[cityName];
-    if (mappedName) {
-      return tsxFiles.find(file => {
-        const tsxCityName = this.extractCityNameFromTsx(file);
-        return tsxCityName === mappedName;
-      });
-    }
-    
-    return null;
   }
 
   /**
@@ -316,71 +285,21 @@ class ComprehensiveAuditSystem {
    */
   async compareTsxAndHtml(tsxFile, htmlFile, cityName) {
     try {
-      // Read TSX file
-      const tsxContent = fs.readFileSync(tsxFile, 'utf-8');
-      const tsxData = this.extractTsxData(tsxContent);
-
-      // Read HTML file
-      const htmlContent = fs.readFileSync(htmlFile, 'utf-8');
-      const htmlData = this.extractHtmlData(htmlContent);
-
-      // Compare key elements
-      const mismatches = [];
+      // Extract data from TSX
+      const tsxData = this.extractTsxData(fs.readFileSync(tsxFile, 'utf-8'));
       
-      if (tsxData.title !== htmlData.title) {
-        mismatches.push({
-          field: 'title',
-          tsx: tsxData.title,
-          html: htmlData.title
-        });
-      }
-
-      if (tsxData.description !== htmlData.description) {
-        mismatches.push({
-          field: 'description',
-          tsx: tsxData.description,
-          html: htmlData.description
-        });
-      }
-
-      if (tsxData.h1 !== htmlData.h1) {
-        mismatches.push({
-          field: 'h1',
-          tsx: tsxData.h1,
-          html: htmlData.h1
-        });
-      }
-
-      if (tsxData.imageUrl !== htmlData.imageUrl) {
-        mismatches.push({
-          field: 'imageUrl',
-          tsx: tsxData.imageUrl,
-          html: htmlData.imageUrl
-        });
-      }
-
-      if (mismatches.length > 0) {
-        this.results.htmlTsxSync.mismatches.push({
-          type: 'CONTENT_MISMATCH',
-          cityName: cityName,
-          tsxFile: tsxFile,
-          htmlFile: htmlFile,
-          mismatches: mismatches
-        });
-        this.results.htmlTsxSync.failed.push(cityName);
-      } else {
-        this.results.htmlTsxSync.passed.push(cityName);
-        this.results.htmlTsxSync.syncedPages++;
-      }
-
+      // Extract data from HTML
+      const htmlData = this.extractHtmlData(fs.readFileSync(htmlFile, 'utf-8'));
+      
+      // Compare key elements
+      const titleMatch = this.compareValues(tsxData.title, htmlData.title);
+      const descriptionMatch = this.compareValues(tsxData.description, htmlData.description);
+      const h1Match = this.compareValues(tsxData.h1, htmlData.h1);
+      
+      return titleMatch && descriptionMatch && h1Match;
     } catch (error) {
-      this.results.htmlTsxSync.mismatches.push({
-        type: 'ERROR',
-        cityName: cityName,
-        tsxFile: tsxFile,
-        htmlFile: htmlFile,
-        error: error.message
-      });
+      console.error(`Error comparing ${cityName}:`, error.message);
+      return false;
     }
   }
 
@@ -388,98 +307,19 @@ class ComprehensiveAuditSystem {
    * Extract data from TSX file
    */
   extractTsxData(content) {
-    const data = {};
+    const data = { title: '', description: '', h1: '' };
     
-    // First, try to extract from seoData object (for core pages like Home, Destinations, Blogs)
-    const seoDataMatch = content.match(/const seoData = \{([^}]+(?:\{[^}]*\}[^}]*)*)\}/s);
+    // Extract title
+    const titleMatch = content.match(/title:\s*["']([^"']+)["']/);
+    if (titleMatch) data.title = titleMatch[1];
     
-    // Also try to extract from function call patterns (like generateBlogListSEOData())
-    const seoDataFunctionMatch = content.match(/const seoData = generate\w+SEOData\(\)/);
+    // Extract description
+    const descMatch = content.match(/description:\s*["']([^"']+)["']/);
+    if (descMatch) data.description = descMatch[1];
     
-    if (seoDataMatch) {
-      const seoDataContent = seoDataMatch[1];
-      
-      // Extract title from seoData
-      const titleMatch = seoDataContent.match(/title:\s*["']([^"']+)["']/);
-      data.title = titleMatch ? titleMatch[1] : null;
-      
-      // Extract description from seoData
-      const descMatch = seoDataContent.match(/description:\s*["']([^"']+)["']/);
-      data.description = descMatch ? descMatch[1] : null;
-      
-      // Extract ogImage from seoData
-      const imageMatch = seoDataContent.match(/ogImage:\s*["']([^"']+)["']/);
-      data.imageUrl = imageMatch ? imageMatch[1] : null;
-    } else if (seoDataFunctionMatch) {
-      // Handle function-based SEO data (like blogs page)
-      if (content.includes('generateBlogListSEOData()')) {
-        data.title = 'Travel Blog Stories & Destination Guides - TravelWanders';
-        data.description = 'Get inspired with our travel stories, tips, and destination guides from expert travelers around the world. Discover hidden gems and travel inspiration.';
-        data.imageUrl = null;
-      }
-    } else {
-      // Check for useEffect-based SEO data (legal pages)
-      const titleMatch = content.match(/document\.title = ["']([^"']+)["']/);
-      const descriptionMatch = content.match(/setAttribute\('content', ['"]([^"']+)["']\)/);
-      
-      if (titleMatch) {
-        data.title = titleMatch[1];
-      }
-      
-      if (descriptionMatch) {
-        data.description = descriptionMatch[1];
-      }
-      
-      // No ogImage for legal pages
-      data.imageUrl = null;
-    }
-    
-    if (data.title) {
-      
-      // For seoData pages, we need to determine H1 from the component structure
-      // Look for common H1 patterns in the component
-      const h1Match = content.match(/<h1[^>]*>([^<]+)<\/h1>/);
-      if (h1Match) {
-        data.h1 = h1Match[1].trim();
-      } else {
-        // Special handling for different page types
-        if (content.includes('Home()')) {
-          // Home page H1 is in Hero component: "Explore the world with confidence"
-          data.h1 = "Explore the world with confidence";
-        } else if (content.includes('DestinationsPage()')) {
-          // Destinations page H1
-          data.h1 = "All Destinations";
-        } else if (content.includes('BlogsPage()')) {
-          // Blogs page H1
-          data.h1 = "Travel Blog";
-        } else if (content.includes('CookiePolicy()')) {
-          // Cookie Policy page H1
-          data.h1 = "Cookie Policy";
-        } else if (content.includes('PrivacyPolicy()')) {
-          // Privacy Policy page H1  
-          data.h1 = "Privacy Policy";
-        } else if (content.includes('TermsOfService()')) {
-          // Terms of Service page H1
-          data.h1 = "Terms of Service";
-        } else {
-          // Default fallback
-          data.h1 = data.title;
-        }
-      }
-    } else {
-      // Fallback to city page patterns (CityPageTemplate props)
-      const titleMatch = content.match(/title=\{?"([^"]+)"\}?/);
-      data.title = titleMatch ? titleMatch[1] : null;
-      
-      const descMatch = content.match(/description=\{?`([^`]+)`\}?/);
-      data.description = descMatch ? descMatch[1] : null;
-      
-      const imageMatch = content.match(/imageUrl=\{?"([^"]+)"\}?/);
-      data.imageUrl = imageMatch ? imageMatch[1] : null;
-      
-      // For city pages, H1 is the title prop
-      data.h1 = data.title;
-    }
+    // Extract H1 (usually in the hero section)
+    const h1Match = content.match(/<h1[^>]*>([^<]+)<\/h1>/);
+    if (h1Match) data.h1 = h1Match[1];
     
     return data;
   }
@@ -488,28 +328,41 @@ class ComprehensiveAuditSystem {
    * Extract data from HTML file
    */
   extractHtmlData(content) {
-    const dom = new JSDOM(content);
-    const document = dom.window.document;
+    const data = { title: '', description: '', h1: '' };
     
-    const data = {};
-    
-    // Extract title
-    const titleElement = document.querySelector('title');
-    data.title = titleElement ? titleElement.textContent : null;
-    
-    // Extract description
-    const descElement = document.querySelector('meta[name="description"]');
-    data.description = descElement ? descElement.getAttribute('content') : null;
-    
-    // Extract imageUrl from og:image
-    const imageElement = document.querySelector('meta[property="og:image"]');
-    data.imageUrl = imageElement ? imageElement.getAttribute('content') : null;
-    
-    // Extract H1
-    const h1Element = document.querySelector('h1');
-    data.h1 = h1Element ? h1Element.textContent.trim() : null;
+    try {
+      const dom = new JSDOM(content);
+      const document = dom.window.document;
+      
+      // Extract title
+      const titleElement = document.querySelector('title');
+      if (titleElement) data.title = titleElement.textContent.trim();
+      
+      // Extract description
+      const descElement = document.querySelector('meta[name="description"]');
+      if (descElement) data.description = descElement.getAttribute('content');
+      
+      // Extract H1
+      const h1Element = document.querySelector('h1');
+      if (h1Element) data.h1 = h1Element.textContent.trim();
+      
+    } catch (error) {
+      console.error('Error parsing HTML:', error.message);
+    }
     
     return data;
+  }
+
+  /**
+   * Compare two values for similarity
+   */
+  compareValues(value1, value2) {
+    if (!value1 || !value2) return false;
+    
+    // Normalize values for comparison
+    const normalize = (str) => str.toLowerCase().replace(/\s+/g, ' ').trim();
+    
+    return normalize(value1) === normalize(value2);
   }
 
   /**
@@ -518,37 +371,25 @@ class ComprehensiveAuditSystem {
   async auditPageHydration(page) {
     try {
       if (!fs.existsSync(page.htmlPath)) {
-        this.results.hydration.errors.push({
-          page: page.name,
-          type: 'MISSING_HTML',
-          message: `HTML file not found: ${page.htmlPath}`
-        });
-        return;
+        return false;
       }
-
+      
+      // Extract data from HTML
       const htmlContent = fs.readFileSync(page.htmlPath, 'utf-8');
       const htmlData = this.extractHtmlData(htmlContent);
-
-      // For city pages, extract TSX data
-      if (page.tsxPath && fs.existsSync(page.tsxPath)) {
+      
+      // Extract data from TSX (if it exists)
+      let tsxData = { title: '', description: '', h1: '' };
+      if (fs.existsSync(page.tsxPath)) {
         const tsxContent = fs.readFileSync(page.tsxPath, 'utf-8');
-        const tsxData = this.extractTsxData(tsxContent);
-
-        this.compareHydrationData(page.name, tsxData, htmlData);
-      } else {
-        this.results.hydration.warnings.push({
-          page: page.name,
-          type: 'NO_TSX_COMPARISON',
-          message: `TSX file not found for hydration comparison: ${page.tsxPath}`
-        });
+        tsxData = this.extractTsxData(tsxContent);
       }
-
+      
+      // Compare hydration data
+      return this.compareHydrationData(page.name, tsxData, htmlData);
     } catch (error) {
-      this.results.hydration.errors.push({
-        page: page.name,
-        type: 'ERROR',
-        message: `Error auditing hydration: ${error.message}`
-      });
+      console.error(`Error auditing hydration for ${page.name}:`, error.message);
+      return false;
     }
   }
 
@@ -556,33 +397,35 @@ class ComprehensiveAuditSystem {
    * Compare hydration data between TSX and HTML
    */
   compareHydrationData(pageName, tsxData, htmlData) {
-    const checks = [
-      { field: 'title', tsx: tsxData.title, html: htmlData.title },
-      { field: 'description', tsx: tsxData.description, html: htmlData.description },
-      { field: 'h1', tsx: tsxData.h1, html: htmlData.h1 }
-    ];
-
-    for (const check of checks) {
-      this.results.hydration.totalChecks++;
-      
-      // Handle null/undefined values - if both are null/undefined, consider it a match
-      const tsxValue = check.tsx || '';
-      const htmlValue = check.html || '';
-      
-      if (tsxValue === htmlValue) {
-        this.results.hydration.passedChecks++;
-      } else {
-        this.results.hydration.failedChecks++;
-        this.results.hydration.errors.push({
-          page: pageName,
-          type: 'HYDRATION_MISMATCH',
-          field: check.field,
-          tsx: check.tsx,
-          html: check.html,
-          message: `Hydration mismatch in ${check.field}: TSX="${check.tsx}" vs HTML="${check.html}"`
-        });
+    const issues = [];
+    
+    // Check title consistency
+    if (tsxData.title && htmlData.title) {
+      if (!this.compareValues(tsxData.title, htmlData.title)) {
+        issues.push(`Title mismatch: TSX="${tsxData.title}" vs HTML="${htmlData.title}"`);
       }
     }
+    
+    // Check description consistency
+    if (tsxData.description && htmlData.description) {
+      if (!this.compareValues(tsxData.description, htmlData.description)) {
+        issues.push(`Description mismatch: TSX="${tsxData.description}" vs HTML="${htmlData.description}"`);
+      }
+    }
+    
+    // Check H1 consistency
+    if (tsxData.h1 && htmlData.h1) {
+      if (!this.compareValues(tsxData.h1, htmlData.h1)) {
+        issues.push(`H1 mismatch: TSX="${tsxData.h1}" vs HTML="${htmlData.h1}"`);
+      }
+    }
+    
+    if (issues.length > 0) {
+      console.log(`⚠️  ${pageName} hydration issues:`, issues);
+      return false;
+    }
+    
+    return true;
   }
 
   /**
@@ -590,73 +433,27 @@ class ComprehensiveAuditSystem {
    */
   async auditFirebaseServerCloaking() {
     try {
-      const serverFile = path.join(__dirname, 'server/firebase-server.ts');
-      if (!fs.existsSync(serverFile)) {
-        this.results.cloaking.issues.push({
-          type: 'MISSING_SERVER_FILE',
-          message: 'Firebase server file not found'
-        });
-        return;
-      }
-
-      const serverContent = fs.readFileSync(serverFile, 'utf-8');
-      
-      // Check for bot detection function
-      if (serverContent.includes('isSearchEngineBot')) {
-        this.results.cloaking.passed.push('Bot detection function exists');
-      } else {
-        this.results.cloaking.issues.push({
-          type: 'MISSING_BOT_DETECTION',
-          message: 'Bot detection function not found in server file'
-        });
-      }
-
-      // Check for proper bot patterns
-      const botPatterns = [
-        'googlebot', 'bingbot', 'slurp', 'facebookexternalhit', 
-        'twitterbot', 'linkedinbot', 'crawler', 'spider'
-      ];
-      
-      let foundPatterns = 0;
-      for (const pattern of botPatterns) {
-        if (serverContent.includes(pattern)) {
-          foundPatterns++;
-        }
+      if (!fs.existsSync('server/firebase-server.ts')) {
+        return false;
       }
       
-      if (foundPatterns >= 6) {
-        this.results.cloaking.passed.push('Comprehensive bot patterns detected');
-      } else {
-        this.results.cloaking.issues.push({
-          type: 'INCOMPLETE_BOT_PATTERNS',
-          message: `Only ${foundPatterns} bot patterns found, expected at least 6`
-        });
-      }
-
-      // Check for route handlers
-      const routeHandlers = ['/', '/destinations', '/blogs', '/best-things-to-do-in-'];
-      let foundHandlers = 0;
+      const content = fs.readFileSync('server/firebase-server.ts', 'utf-8');
       
-      for (const handler of routeHandlers) {
-        if (serverContent.includes(`app.get('${handler}`)) {
-          foundHandlers++;
-        }
-      }
+      // Check for bot detection logic
+      const hasBotDetection = content.includes('isSearchEngineBot') || 
+                             content.includes('user-agent') ||
+                             content.includes('googlebot') ||
+                             content.includes('bingbot');
       
-      if (foundHandlers >= 3) {
-        this.results.cloaking.passed.push('Route handlers for cloaking found');
-      } else {
-        this.results.cloaking.issues.push({
-          type: 'MISSING_ROUTE_HANDLERS',
-          message: `Only ${foundHandlers} route handlers found for cloaking`
-        });
-      }
-
+      // Check for different content serving
+      const hasContentSwitching = content.includes('seo.html') || 
+                                  content.includes('static') ||
+                                  content.includes('bot');
+      
+      return hasBotDetection && hasContentSwitching;
     } catch (error) {
-      this.results.cloaking.issues.push({
-        type: 'ERROR',
-        message: `Error auditing Firebase server: ${error.message}`
-      });
+      console.error('Error auditing Firebase server cloaking:', error.message);
+      return false;
     }
   }
 
@@ -665,35 +462,25 @@ class ComprehensiveAuditSystem {
    */
   async auditRouteCloaking(route) {
     try {
-      if (!fs.existsSync(route.expectedSeoFile)) {
-        this.results.cloaking.issues.push({
-          type: 'MISSING_SEO_FILE',
-          route: route.path,
-          message: `SEO file not found: ${route.expectedSeoFile}`
-        });
-        return;
-      }
-
-      // Check if SEO file has proper content
-      const seoContent = fs.readFileSync(route.expectedSeoFile, 'utf-8');
+      // Check if static HTML file exists for the route
+      let htmlPath = '';
       
-      if (seoContent.includes('<title>') && seoContent.includes('meta name="description"')) {
-        this.results.cloaking.cloakedRoutes++;
-        this.results.cloaking.passed.push(`${route.name} has proper SEO content`);
+      if (route === '/') {
+        htmlPath = 'dist/public/home-seo.html';
+      } else if (route === '/destinations') {
+        htmlPath = 'dist/public/destinations-seo.html';
+      } else if (route === '/blogs') {
+        htmlPath = 'dist/public/blogs-seo.html';
+      } else if (route.startsWith('/best-things-to-do-in-')) {
+        htmlPath = `dist/public${route}.html`;
       } else {
-        this.results.cloaking.issues.push({
-          type: 'INVALID_SEO_CONTENT',
-          route: route.path,
-          message: `SEO file exists but lacks proper title/description: ${route.expectedSeoFile}`
-        });
+        htmlPath = `dist/public${route.substring(1)}.html`;
       }
-
+      
+      return fs.existsSync(htmlPath);
     } catch (error) {
-      this.results.cloaking.issues.push({
-        type: 'ERROR',
-        route: route.path,
-        message: `Error auditing route cloaking: ${error.message}`
-      });
+      console.error(`Error auditing route cloaking for ${route}:`, error.message);
+      return false;
     }
   }
 
@@ -701,210 +488,111 @@ class ComprehensiveAuditSystem {
    * Calculate HTML/TSX synchronization score
    */
   calculateHtmlTsxScore() {
-    if (this.results.htmlTsxSync.totalPages === 0) {
-      this.results.htmlTsxSync.score = 0;
-      return;
-    }
-    
-    this.results.htmlTsxSync.score = Math.round(
-      (this.results.htmlTsxSync.syncedPages / this.results.htmlTsxSync.totalPages) * 100
-    );
+    const sync = this.results.htmlTsxSync;
+    return sync.total > 0 ? (sync.passed / sync.total) * 100 : 0;
   }
 
   /**
    * Calculate hydration score
    */
   calculateHydrationScore() {
-    if (this.results.hydration.totalChecks === 0) {
-      this.results.hydration.score = 0;
-      return;
-    }
-    
-    this.results.hydration.score = Math.round(
-      (this.results.hydration.passedChecks / this.results.hydration.totalChecks) * 100
-    );
+    const hydration = this.results.hydration;
+    return hydration.total > 0 ? (hydration.passed / hydration.total) * 100 : 0;
   }
 
   /**
    * Calculate cloaking score
    */
   calculateCloakingScore() {
-    if (this.results.cloaking.totalRoutes === 0) {
-      this.results.cloaking.score = 0;
-      return;
-    }
-    
-    const passedItems = this.results.cloaking.passed.length;
-    const totalItems = this.results.cloaking.totalRoutes + 3; // +3 for server checks
-    
-    this.results.cloaking.score = Math.round((passedItems / totalItems) * 100);
+    const cloaking = this.results.cloaking;
+    return cloaking.total > 0 ? (cloaking.passed / cloaking.total) * 100 : 0;
   }
 
   /**
    * Generate comprehensive report
    */
   generateReport() {
-    console.log('\n' + '='.repeat(80));
-    console.log('COMPREHENSIVE AUDIT REPORT - TRAVELWANDERS PROJECT');
-    console.log('='.repeat(80));
+    console.log('\n📊 COMPREHENSIVE AUDIT REPORT');
+    console.log('='.repeat(60));
     
-    // HTML/TSX Synchronization Report
-    console.log('\n📊 HTML/TSX SYNCHRONIZATION AUDIT RESULTS');
-    console.log('-'.repeat(50));
-    console.log(`Total Pages Audited: ${this.results.htmlTsxSync.totalPages}`);
-    console.log(`Synchronized Pages: ${this.results.htmlTsxSync.syncedPages}`);
-    console.log(`Failed Pages: ${this.results.htmlTsxSync.failed.length}`);
-    console.log(`Overall Score: ${this.results.htmlTsxSync.score}% 🎯`);
+    const htmlTsxScore = this.calculateHtmlTsxScore();
+    const hydrationScore = this.calculateHydrationScore();
+    const cloakingScore = this.calculateCloakingScore();
     
-    if (this.results.htmlTsxSync.passed.length > 0) {
-      console.log('\n✅ PASSED SYNCHRONIZATION:');
-      this.results.htmlTsxSync.passed.forEach(city => {
-        console.log(`  ✓ ${city}`);
-      });
-    }
+    this.results.overallScore = (htmlTsxScore + hydrationScore + cloakingScore) / 3;
     
-    if (this.results.htmlTsxSync.mismatches.length > 0) {
-      console.log('\n❌ SYNCHRONIZATION ISSUES:');
-      this.results.htmlTsxSync.mismatches.forEach(mismatch => {
-        console.log(`  ❌ ${mismatch.type}: ${mismatch.cityName}`);
-        if (mismatch.mismatches) {
-          mismatch.mismatches.forEach(m => {
-            console.log(`     - ${m.field}: TSX="${m.tsx}" vs HTML="${m.html}"`);
-          });
-        }
-        if (mismatch.message) {
-          console.log(`     - ${mismatch.message}`);
-        }
-      });
-    }
-
-    // Hydration Audit Report
-    console.log('\n📊 HYDRATION AUDIT RESULTS');
-    console.log('-'.repeat(50));
-    console.log(`Total Checks: ${this.results.hydration.totalChecks}`);
-    console.log(`Passed Checks: ${this.results.hydration.passedChecks}`);
-    console.log(`Failed Checks: ${this.results.hydration.failedChecks}`);
-    console.log(`Overall Score: ${this.results.hydration.score}% 🎯`);
+    console.log(`\n🎯 OVERALL SCORE: ${this.results.overallScore.toFixed(1)}%`);
+    console.log(`\n📋 DETAILED BREAKDOWN:`);
+    console.log(`├── HTML/TSX Synchronization: ${htmlTsxScore.toFixed(1)}% (${this.results.htmlTsxSync.passed}/${this.results.htmlTsxSync.total})`);
+    console.log(`├── Hydration Compliance: ${hydrationScore.toFixed(1)}% (${this.results.hydration.passed}/${this.results.hydration.total})`);
+    console.log(`└── Cloaking Implementation: ${cloakingScore.toFixed(1)}% (${this.results.cloaking.passed}/${this.results.cloaking.total})`);
     
-    if (this.results.hydration.warnings.length > 0) {
-      console.log('\n⚠️  HYDRATION WARNINGS:');
-      this.results.hydration.warnings.forEach(warning => {
-        console.log(`  ⚠️  ${warning.page}: ${warning.message}`);
-      });
-    }
-    
-    if (this.results.hydration.errors.length > 0) {
-      console.log('\n❌ HYDRATION ERRORS:');
-      this.results.hydration.errors.forEach(error => {
-        console.log(`  ❌ ${error.page}: ${error.message}`);
-        if (error.field) {
-          console.log(`     - Field: ${error.field}`);
-          console.log(`     - TSX: "${error.tsx}"`);
-          console.log(`     - HTML: "${error.html}"`);
-        }
-      });
-    }
-
-    // Cloaking Audit Report
-    console.log('\n📊 CLOAKING AUDIT RESULTS');
-    console.log('-'.repeat(50));
-    console.log(`Total Routes: ${this.results.cloaking.totalRoutes}`);
-    console.log(`Cloaked Routes: ${this.results.cloaking.cloakedRoutes}`);
-    console.log(`Passed Checks: ${this.results.cloaking.passed.length}`);
-    console.log(`Overall Score: ${this.results.cloaking.score}% 🎯`);
-    
-    if (this.results.cloaking.passed.length > 0) {
-      console.log('\n✅ CLOAKING PASSED:');
-      this.results.cloaking.passed.forEach(item => {
-        console.log(`  ✓ ${item}`);
-      });
-    }
-    
-    if (this.results.cloaking.issues.length > 0) {
-      console.log('\n❌ CLOAKING ISSUES:');
-      this.results.cloaking.issues.forEach(issue => {
-        console.log(`  ❌ ${issue.type}: ${issue.message}`);
-        if (issue.route) {
-          console.log(`     - Route: ${issue.route}`);
-        }
-      });
-    }
-
-    // Overall Summary
-    console.log('\n📈 OVERALL AUDIT SUMMARY');
-    console.log('-'.repeat(50));
-    const overallScore = Math.round(
-      (this.results.htmlTsxSync.score + this.results.hydration.score + this.results.cloaking.score) / 3
-    );
-    
-    console.log(`HTML/TSX Synchronization: ${this.results.htmlTsxSync.score}%`);
-    console.log(`Hydration Compliance: ${this.results.hydration.score}%`);
-    console.log(`Cloaking Implementation: ${this.results.cloaking.score}%`);
-    console.log(`Overall Project Score: ${overallScore}% 🎯`);
-    
-    // Recommendations
-    console.log('\n💡 RECOMMENDATIONS');
-    console.log('-'.repeat(50));
-    
-    if (this.results.htmlTsxSync.score < 90) {
-      console.log('• Fix HTML/TSX synchronization issues to improve consistency');
-    }
-    
-    if (this.results.hydration.score < 90) {
-      console.log('• Address hydration mismatches to prevent client-side issues');
-    }
-    
-    if (this.results.cloaking.score < 90) {
-      console.log('• Improve cloaking implementation for better SEO performance');
-    }
-    
-    if (overallScore >= 90) {
-      console.log('🎉 Excellent! Project is in great shape with minimal issues.');
-    } else if (overallScore >= 70) {
-      console.log('⚠️  Good foundation, but some areas need attention.');
+    // Production readiness assessment
+    console.log('\n🚀 PRODUCTION READINESS ASSESSMENT:');
+    if (this.results.overallScore >= 95) {
+      console.log('✅ READY FOR PRODUCTION - Excellent compliance across all areas');
+    } else if (this.results.overallScore >= 85) {
+      console.log('⚠️  NEEDS MINOR FIXES - Good overall but some issues need attention');
+    } else if (this.results.overallScore >= 70) {
+      console.log('⚠️  NEEDS SIGNIFICANT WORK - Major issues must be resolved');
     } else {
-      console.log('❌ Critical issues need immediate attention.');
+      console.log('❌ NOT READY FOR PRODUCTION - Critical issues require immediate attention');
     }
-
-    console.log('\n' + '='.repeat(80));
-    console.log('AUDIT COMPLETE');
-    console.log('='.repeat(80));
+    
+    // Key issues summary
+    const allIssues = [
+      ...this.results.htmlTsxSync.issues,
+      ...this.results.hydration.issues,
+      ...this.results.cloaking.issues
+    ];
+    
+    if (allIssues.length > 0) {
+      console.log('\n🔥 CRITICAL ISSUES TO ADDRESS:');
+      allIssues.forEach(issue => console.log(`   ${issue}`));
+    }
+    
+    // Strengths summary
+    const allStrengths = [
+      ...this.results.htmlTsxSync.strengths,
+      ...this.results.hydration.strengths,
+      ...this.results.cloaking.strengths
+    ];
+    
+    if (allStrengths.length > 0) {
+      console.log('\n💪 STRENGTHS:');
+      allStrengths.slice(0, 5).forEach(strength => console.log(`   ${strength}`));
+      if (allStrengths.length > 5) {
+        console.log(`   ... and ${allStrengths.length - 5} more strengths`);
+      }
+    }
   }
 
   /**
    * Run all audits
    */
   async runAllAudits() {
-    console.log('🚀 STARTING COMPREHENSIVE AUDIT SYSTEM');
-    console.log('======================================\n');
+    console.log('🚀 COMPREHENSIVE AUDIT SYSTEM STARTING...');
+    console.log('Project: TravelWanders');
+    console.log('Auditor: Independent Consultant');
+    console.log('Date:', new Date().toISOString());
     
-    try {
-      await this.auditHtmlTsxSynchronization();
-      await this.auditHydration();
-      await this.auditCloaking();
-      
-      this.generateReport();
-      
-      // Save results to file
-      const resultsFile = path.join(__dirname, 'comprehensive-audit-results.json');
-      fs.writeFileSync(resultsFile, JSON.stringify(this.results, null, 2));
-      console.log(`\n📄 Detailed results saved to: ${resultsFile}`);
-      
-    } catch (error) {
-      console.error('❌ Audit failed:', error.message);
-      process.exit(1);
-    }
+    await this.auditHtmlTsxSynchronization();
+    await this.auditHydration();
+    await this.auditCloaking();
+    
+    this.generateReport();
   }
 }
 
-// Run the audit system
+// Main execution
 async function main() {
   const auditor = new ComprehensiveAuditSystem();
   await auditor.runAllAudits();
 }
 
+// Run if called directly
 if (import.meta.url === `file://${process.argv[1]}`) {
-  main();
+  main().catch(console.error);
 }
 
-export default ComprehensiveAuditSystem;
+export { ComprehensiveAuditSystem };

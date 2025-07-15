@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /**
  * Comprehensive SEO Audit for TravelWanders
  * Checks all SEO best practices and compliance
@@ -7,9 +5,7 @@
 
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+import { JSDOM } from 'jsdom';
 
 class SEOAuditor {
   constructor() {
@@ -17,15 +13,15 @@ class SEOAuditor {
       technicalSEO: { score: 0, issues: [], strengths: [] },
       onPageSEO: { score: 0, issues: [], strengths: [] },
       structuredData: { score: 0, issues: [], strengths: [] },
-      performance: { score: 0, issues: [], strengths: [] },
+      performanceSEO: { score: 0, issues: [], strengths: [] },
       mobileSEO: { score: 0, issues: [], strengths: [] },
       overallScore: 0
     };
   }
 
   async auditSEO() {
-    console.log('🔍 COMPREHENSIVE SEO AUDIT - TravelWanders');
-    console.log('='.repeat(60));
+    console.log('\n🔍 COMPREHENSIVE SEO AUDIT');
+    console.log('='.repeat(50));
     
     await this.auditTechnicalSEO();
     await this.auditOnPageSEO();
@@ -44,60 +40,60 @@ class SEOAuditor {
     const tech = this.results.technicalSEO;
     
     // Check robots.txt
-    const robotsExists = fs.existsSync(path.join(__dirname, 'public/robots.txt')) ||
-                        fs.existsSync(path.join(__dirname, 'dist/public/robots.txt')) ||
-                        fs.existsSync(path.join(__dirname, 'client/dist/public/robots.txt'));
-    
+    const robotsExists = fs.existsSync('dist/public/robots.txt') || fs.existsSync('public/robots.txt');
     if (robotsExists) {
-      tech.score += 10;
+      tech.score += 15;
       tech.strengths.push('✅ Robots.txt found');
+      
+      // Check robots.txt content
+      const robotsPath = fs.existsSync('dist/public/robots.txt') ? 'dist/public/robots.txt' : 'public/robots.txt';
+      const robotsContent = fs.readFileSync(robotsPath, 'utf-8');
+      
+      if (robotsContent.includes('Sitemap:')) {
+        tech.score += 5;
+        tech.strengths.push('✅ Sitemap reference in robots.txt');
+      }
     } else {
       tech.issues.push('❌ Robots.txt missing - critical for search engine crawling');
     }
     
     // Check sitemap.xml
-    const sitemapExists = fs.existsSync(path.join(__dirname, 'public/sitemap.xml')) ||
-                         fs.existsSync(path.join(__dirname, 'dist/public/sitemap.xml')) ||
-                         fs.existsSync(path.join(__dirname, 'client/dist/public/sitemap.xml'));
-    
+    const sitemapExists = fs.existsSync('dist/public/sitemap.xml') || fs.existsSync('public/sitemap.xml');
     if (sitemapExists) {
       tech.score += 15;
       tech.strengths.push('✅ Sitemap.xml found');
+      
+      // Check sitemap content
+      const sitemapPath = fs.existsSync('dist/public/sitemap.xml') ? 'dist/public/sitemap.xml' : 'public/sitemap.xml';
+      const sitemapContent = fs.readFileSync(sitemapPath, 'utf-8');
+      
+      if (sitemapContent.includes('<urlset')) {
+        tech.score += 5;
+        tech.strengths.push('✅ Valid XML sitemap structure');
+      }
     } else {
       tech.issues.push('❌ Sitemap.xml missing - critical for search engine indexing');
     }
     
-    // Check canonical URLs
-    const seoUtils = path.join(__dirname, 'client/src/utils/seo.ts');
+    // Check canonical URLs implementation
+    const seoUtils = 'client/src/utils/seo.ts';
     if (fs.existsSync(seoUtils)) {
       const seoContent = fs.readFileSync(seoUtils, 'utf-8');
       if (seoContent.includes('canonical')) {
-        tech.score += 15;
+        tech.score += 10;
         tech.strengths.push('✅ Canonical URL implementation found');
       }
     }
     
-    // Check SSL/HTTPS
-    const indexHtml = fs.readFileSync(path.join(__dirname, 'client/index.html'), 'utf-8');
-    if (indexHtml.includes('https://')) {
+    // Check for 404 handling
+    const notFoundExists = fs.existsSync('client/src/pages/not-found.tsx');
+    if (notFoundExists) {
       tech.score += 10;
-      tech.strengths.push('✅ HTTPS URLs detected');
-    }
-    
-    // Check meta viewport
-    if (indexHtml.includes('name="viewport"')) {
-      tech.score += 10;
-      tech.strengths.push('✅ Viewport meta tag present');
-    }
-    
-    // Check favicon
-    if (indexHtml.includes('favicon')) {
-      tech.score += 5;
-      tech.strengths.push('✅ Favicon implemented');
+      tech.strengths.push('✅ 404 error handling implemented');
     }
     
     // Check URL structure
-    const appFile = path.join(__dirname, 'client/src/App.tsx');
+    const appFile = 'client/src/App.tsx';
     if (fs.existsSync(appFile)) {
       const appContent = fs.readFileSync(appFile, 'utf-8');
       if (appContent.includes('best-things-to-do-in-')) {
@@ -106,247 +102,199 @@ class SEOAuditor {
       }
     }
     
-    // Check for 404 handling
-    if (fs.existsSync(appFile)) {
-      const appContent = fs.readFileSync(appFile, 'utf-8');
-      if (appContent.includes('NotFound') || appContent.includes('404')) {
-        tech.score += 10;
-        tech.strengths.push('✅ 404 error handling implemented');
-      }
+    // Check HTTPS configuration
+    const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
+    if (packageJson.homepage && packageJson.homepage.startsWith('https://')) {
+      tech.score += 10;
+      tech.strengths.push('✅ HTTPS configuration detected');
     }
     
-    // Check loading speed optimizations
-    if (indexHtml.includes('preload') || indexHtml.includes('prefetch')) {
+    // Check for service worker
+    const swExists = fs.existsSync('public/sw.js') || fs.existsSync('dist/public/sw.js');
+    if (swExists) {
       tech.score += 10;
-      tech.strengths.push('✅ Resource preloading implemented');
+      tech.strengths.push('✅ Service worker implemented');
     }
     
     console.log(`Technical SEO Score: ${tech.score}/100`);
   }
 
   async auditOnPageSEO() {
-    console.log('\n📝 ON-PAGE SEO AUDIT');
+    console.log('\n📄 ON-PAGE SEO AUDIT');
     console.log('-'.repeat(30));
     
     const onPage = this.results.onPageSEO;
     
-    const indexHtml = fs.readFileSync(path.join(__dirname, 'client/index.html'), 'utf-8');
+    // Check HTML files for SEO elements
+    const htmlFiles = this.findHTMLFiles();
+    let totalPages = 0;
+    let pagesWithProperSEO = 0;
     
-    // Check title tag
-    if (indexHtml.includes('<title>') && indexHtml.includes('TravelWanders')) {
-      onPage.score += 15;
-      onPage.strengths.push('✅ Title tag present and branded');
-    } else {
-      onPage.issues.push('❌ Title tag missing or improperly formatted');
-    }
-    
-    // Check meta description
-    const descMatch = indexHtml.match(/name="description" content="([^"]+)"/);
-    if (descMatch) {
-      const description = descMatch[1];
-      if (description.length >= 120 && description.length <= 160) {
-        onPage.score += 15;
-        onPage.strengths.push('✅ Meta description optimal length');
-      } else if (description.length > 0) {
-        onPage.score += 10;
-        onPage.issues.push(`⚠️ Meta description length: ${description.length} chars (optimal: 120-160)`);
+    for (const htmlFile of htmlFiles) {
+      totalPages++;
+      const htmlContent = fs.readFileSync(htmlFile, 'utf-8');
+      const dom = new JSDOM(htmlContent);
+      const document = dom.window.document;
+      
+      let pageScore = 0;
+      const pageName = path.basename(htmlFile);
+      
+      // Check title tag
+      const titleElement = document.querySelector('title');
+      if (titleElement && titleElement.textContent.trim().length > 0) {
+        pageScore += 20;
+        if (titleElement.textContent.length <= 60) {
+          pageScore += 10;
+        }
       }
-    } else {
-      onPage.issues.push('❌ Meta description missing');
-    }
-    
-    // Check keywords meta tag
-    if (indexHtml.includes('name="keywords"')) {
-      onPage.score += 10;
-      onPage.strengths.push('✅ Keywords meta tag present');
-    }
-    
-    // Check Open Graph tags
-    const ogTags = ['og:title', 'og:description', 'og:type', 'og:image'];
-    const foundOgTags = ogTags.filter(tag => indexHtml.includes(tag));
-    
-    if (foundOgTags.length === ogTags.length) {
-      onPage.score += 20;
-      onPage.strengths.push('✅ Complete Open Graph implementation');
-    } else if (foundOgTags.length > 0) {
-      onPage.score += 10;
-      onPage.issues.push(`⚠️ Partial Open Graph: ${foundOgTags.length}/${ogTags.length} tags`);
-    }
-    
-    // Check Twitter Cards
-    if (indexHtml.includes('twitter:card') && indexHtml.includes('twitter:title')) {
-      onPage.score += 15;
-      onPage.strengths.push('✅ Twitter Cards implemented');
-    } else {
-      onPage.issues.push('❌ Twitter Cards missing');
-    }
-    
-    // Check heading structure
-    const homeFile = path.join(__dirname, 'client/src/pages/home.tsx');
-    if (fs.existsSync(homeFile)) {
-      const homeContent = fs.readFileSync(homeFile, 'utf-8');
-      if (homeContent.includes('h1') || homeContent.includes('h2')) {
-        onPage.score += 10;
-        onPage.strengths.push('✅ Heading structure implemented');
+      
+      // Check meta description
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc && metaDesc.getAttribute('content')) {
+        pageScore += 20;
+        const descLength = metaDesc.getAttribute('content').length;
+        if (descLength >= 120 && descLength <= 160) {
+          pageScore += 10;
+        }
+      }
+      
+      // Check H1 tag
+      const h1Elements = document.querySelectorAll('h1');
+      if (h1Elements.length === 1) {
+        pageScore += 15;
+      } else if (h1Elements.length > 1) {
+        pageScore += 5; // Partial credit for having H1s
+      }
+      
+      // Check heading hierarchy
+      const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      if (headings.length > 3) {
+        pageScore += 10;
+      }
+      
+      // Check image alt text
+      const images = document.querySelectorAll('img');
+      let imagesWithAlt = 0;
+      images.forEach(img => {
+        if (img.getAttribute('alt')) {
+          imagesWithAlt++;
+        }
+      });
+      
+      if (images.length > 0) {
+        const altTextScore = (imagesWithAlt / images.length) * 15;
+        pageScore += altTextScore;
+      }
+      
+      if (pageScore >= 70) {
+        pagesWithProperSEO++;
+        onPage.strengths.push(`✅ ${pageName} - Good on-page SEO`);
+      } else {
+        onPage.issues.push(`❌ ${pageName} - Poor on-page SEO (${pageScore}/100)`);
       }
     }
     
-    // Check internal linking
-    const internalLinkFile = path.join(__dirname, 'client/src/utils/internalLinking.ts');
-    if (fs.existsSync(internalLinkFile)) {
-      onPage.score += 15;
-      onPage.strengths.push('✅ Internal linking system implemented');
-    } else {
-      onPage.issues.push('❌ Internal linking system missing');
-    }
-    
-    console.log(`On-Page SEO Score: ${onPage.score}/100`);
+    onPage.score = totalPages > 0 ? (pagesWithProperSEO / totalPages) * 100 : 0;
+    console.log(`On-Page SEO Score: ${onPage.score.toFixed(1)}%`);
+    console.log(`Pages with good SEO: ${pagesWithProperSEO}/${totalPages}`);
   }
 
   async auditStructuredData() {
-    console.log('\n📊 STRUCTURED DATA AUDIT');
+    console.log('\n🏗️ STRUCTURED DATA AUDIT');
     console.log('-'.repeat(30));
     
     const structured = this.results.structuredData;
     
-    // Check for structured data utilities
-    const structuredDataFile = path.join(__dirname, 'client/src/utils/structuredData.ts');
-    if (fs.existsSync(structuredDataFile)) {
-      const structuredContent = fs.readFileSync(structuredDataFile, 'utf-8');
+    // Check HTML files for structured data
+    const htmlFiles = this.findHTMLFiles();
+    let totalPages = 0;
+    let pagesWithStructuredData = 0;
+    
+    for (const htmlFile of htmlFiles) {
+      totalPages++;
+      const htmlContent = fs.readFileSync(htmlFile, 'utf-8');
       
-      // Check for different schema types
-      const schemas = [
-        'Organization',
-        'Website', 
-        'BreadcrumbList',
-        'TouristAttraction',
-        'LocalBusiness',
-        'Article',
-        'BlogPosting'
-      ];
+      let hasStructuredData = false;
       
-      const foundSchemas = schemas.filter(schema => 
-        structuredContent.includes(schema)
-      );
+      // Check for JSON-LD
+      if (htmlContent.includes('application/ld+json')) {
+        hasStructuredData = true;
+        structured.strengths.push(`✅ ${path.basename(htmlFile)} - JSON-LD structured data found`);
+      }
       
-      if (foundSchemas.length >= 5) {
-        structured.score += 30;
-        structured.strengths.push(`✅ Rich structured data: ${foundSchemas.length} schema types`);
-      } else if (foundSchemas.length >= 3) {
-        structured.score += 20;
-        structured.strengths.push(`✅ Good structured data: ${foundSchemas.length} schema types`);
-      } else if (foundSchemas.length > 0) {
-        structured.score += 10;
-        structured.issues.push(`⚠️ Limited structured data: ${foundSchemas.length} schema types`);
+      // Check for OpenGraph tags
+      if (htmlContent.includes('og:title') && htmlContent.includes('og:description')) {
+        hasStructuredData = true;
+        structured.strengths.push(`✅ ${path.basename(htmlFile)} - OpenGraph tags found`);
       }
-    } else {
-      structured.issues.push('❌ Structured data utilities missing');
-    }
-    
-    // Check for JSON-LD implementation
-    const seoHeadFile = path.join(__dirname, 'client/src/components/SEOHead.tsx');
-    if (fs.existsSync(seoHeadFile)) {
-      const seoHeadContent = fs.readFileSync(seoHeadFile, 'utf-8');
-      if (seoHeadContent.includes('application/ld+json')) {
-        structured.score += 25;
-        structured.strengths.push('✅ JSON-LD structured data implementation');
+      
+      // Check for Twitter Cards
+      if (htmlContent.includes('twitter:card')) {
+        hasStructuredData = true;
+        structured.strengths.push(`✅ ${path.basename(htmlFile)} - Twitter Cards found`);
+      }
+      
+      if (hasStructuredData) {
+        pagesWithStructuredData++;
+      } else {
+        structured.issues.push(`❌ ${path.basename(htmlFile)} - No structured data found`);
       }
     }
     
-    // Check for breadcrumb implementation
-    if (fs.existsSync(seoHeadFile)) {
-      const seoHeadContent = fs.readFileSync(seoHeadFile, 'utf-8');
-      if (seoHeadContent.includes('breadcrumb')) {
-        structured.score += 20;
-        structured.strengths.push('✅ Breadcrumb structured data');
-      }
-    }
-    
-    // Check for FAQ schema
-    if (fs.existsSync(seoHeadFile)) {
-      const seoHeadContent = fs.readFileSync(seoHeadFile, 'utf-8');
-      if (seoHeadContent.includes('faq')) {
-        structured.score += 15;
-        structured.strengths.push('✅ FAQ structured data');
-      }
-    }
-    
-    // Check city pages for TouristAttraction schema
-    const cityFiles = ['client/src/pages/cities'];
-    if (fs.existsSync(path.join(__dirname, cityFiles[0]))) {
-      structured.score += 10;
-      structured.strengths.push('✅ City pages with potential TouristAttraction schema');
-    }
-    
-    console.log(`Structured Data Score: ${structured.score}/100`);
+    structured.score = totalPages > 0 ? (pagesWithStructuredData / totalPages) * 100 : 0;
+    console.log(`Structured Data Score: ${structured.score.toFixed(1)}%`);
+    console.log(`Pages with structured data: ${pagesWithStructuredData}/${totalPages}`);
   }
 
   async auditPerformanceSEO() {
     console.log('\n⚡ PERFORMANCE SEO AUDIT');
     console.log('-'.repeat(30));
     
-    const perf = this.results.performance;
+    const performance = this.results.performanceSEO;
     
-    const indexHtml = fs.readFileSync(path.join(__dirname, 'client/index.html'), 'utf-8');
-    
-    // Check critical CSS
-    if (indexHtml.includes('<style>') && indexHtml.includes('critical')) {
-      perf.score += 20;
-      perf.strengths.push('✅ Critical CSS inlined');
-    } else {
-      perf.issues.push('❌ Critical CSS not inlined');
-    }
-    
-    // Check preloading
-    const preloadCount = (indexHtml.match(/rel="preload"/g) || []).length;
-    if (preloadCount >= 3) {
-      perf.score += 15;
-      perf.strengths.push(`✅ Resource preloading: ${preloadCount} resources`);
-    } else if (preloadCount > 0) {
-      perf.score += 10;
-      perf.issues.push(`⚠️ Limited preloading: ${preloadCount} resources`);
-    }
-    
-    // Check DNS prefetch
-    if (indexHtml.includes('dns-prefetch')) {
-      perf.score += 10;
-      perf.strengths.push('✅ DNS prefetch implemented');
-    }
-    
-    // Check preconnect
-    if (indexHtml.includes('preconnect')) {
-      perf.score += 10;
-      perf.strengths.push('✅ Preconnect implemented');
-    }
-    
-    // Check lazy loading
-    const appFile = path.join(__dirname, 'client/src/App.tsx');
-    if (fs.existsSync(appFile)) {
-      const appContent = fs.readFileSync(appFile, 'utf-8');
-      if (appContent.includes('lazy(')) {
-        perf.score += 15;
-        perf.strengths.push('✅ Lazy loading implemented');
+    // Check for performance optimizations
+    const indexHtml = this.findIndexHtml();
+    if (indexHtml) {
+      const content = fs.readFileSync(indexHtml, 'utf-8');
+      
+      // Check for preload hints
+      if (content.includes('rel="preload"')) {
+        performance.score += 20;
+        performance.strengths.push('✅ Resource preloading implemented');
+      }
+      
+      // Check for prefetch hints
+      if (content.includes('rel="prefetch"')) {
+        performance.score += 10;
+        performance.strengths.push('✅ Resource prefetching implemented');
+      }
+      
+      // Check for preconnect hints
+      if (content.includes('rel="preconnect"')) {
+        performance.score += 15;
+        performance.strengths.push('✅ DNS preconnect implemented');
+      }
+      
+      // Check for font optimization
+      if (content.includes('font-display:swap') || content.includes('&display=swap')) {
+        performance.score += 15;
+        performance.strengths.push('✅ Font optimization implemented');
+      }
+      
+      // Check for image optimization
+      if (content.includes('loading="lazy"')) {
+        performance.score += 20;
+        performance.strengths.push('✅ Image lazy loading implemented');
+      }
+      
+      // Check for minification
+      if (content.includes('<script') && !content.includes('  ') && content.length > 1000) {
+        performance.score += 20;
+        performance.strengths.push('✅ HTML minification detected');
       }
     }
     
-    // Check image optimization
-    const imageOptFile = path.join(__dirname, 'client/src/utils/imageOptimization.ts');
-    if (fs.existsSync(imageOptFile)) {
-      perf.score += 15;
-      perf.strengths.push('✅ Image optimization utilities');
-    }
-    
-    // Check compression
-    const viteConfig = path.join(__dirname, 'vite.config.ts');
-    if (fs.existsSync(viteConfig)) {
-      const viteContent = fs.readFileSync(viteConfig, 'utf-8');
-      if (viteContent.includes('compression')) {
-        perf.score += 15;
-        perf.strengths.push('✅ Asset compression configured');
-      }
-    }
-    
-    console.log(`Performance SEO Score: ${perf.score}/100`);
+    console.log(`Performance SEO Score: ${performance.score}/100`);
   }
 
   async auditMobileSEO() {
@@ -355,141 +303,138 @@ class SEOAuditor {
     
     const mobile = this.results.mobileSEO;
     
-    const indexHtml = fs.readFileSync(path.join(__dirname, 'client/index.html'), 'utf-8');
-    
-    // Check viewport meta tag
-    const viewportMatch = indexHtml.match(/name="viewport" content="([^"]+)"/);
-    if (viewportMatch) {
-      const viewport = viewportMatch[1];
-      if (viewport.includes('width=device-width') && viewport.includes('initial-scale=1')) {
-        mobile.score += 25;
-        mobile.strengths.push('✅ Proper viewport configuration');
+    // Check for viewport meta tag
+    const indexHtml = this.findIndexHtml();
+    if (indexHtml) {
+      const content = fs.readFileSync(indexHtml, 'utf-8');
+      
+      if (content.includes('name="viewport"')) {
+        mobile.score += 30;
+        mobile.strengths.push('✅ Viewport meta tag found');
+        
+        // Check viewport content
+        const viewportMatch = content.match(/name="viewport"\s+content="([^"]+)"/);
+        if (viewportMatch && viewportMatch[1].includes('width=device-width')) {
+          mobile.score += 20;
+          mobile.strengths.push('✅ Proper viewport configuration');
+        }
       } else {
-        mobile.score += 15;
-        mobile.issues.push('⚠️ Viewport configuration could be improved');
+        mobile.issues.push('❌ Viewport meta tag missing');
       }
-    } else {
-      mobile.issues.push('❌ Viewport meta tag missing');
-    }
-    
-    // Check mobile-friendly meta tags
-    if (indexHtml.includes('mobile-web-app-capable')) {
-      mobile.score += 10;
-      mobile.strengths.push('✅ Mobile app meta tags present');
-    }
-    
-    // Check theme color
-    if (indexHtml.includes('theme-color')) {
-      mobile.score += 10;
-      mobile.strengths.push('✅ Theme color defined');
-    }
-    
-    // Check responsive design implementation
-    const tailwindConfig = path.join(__dirname, 'tailwind.config.ts');
-    if (fs.existsSync(tailwindConfig)) {
-      mobile.score += 20;
-      mobile.strengths.push('✅ Responsive framework (Tailwind) detected');
-    }
-    
-    // Check touch-friendly interactions
-    if (indexHtml.includes('touch') || indexHtml.includes('tap')) {
-      mobile.score += 15;
-      mobile.strengths.push('✅ Touch-friendly optimizations');
-    }
-    
-    // Check font loading optimization
-    if (indexHtml.includes('font-display') || indexHtml.includes('display=swap')) {
-      mobile.score += 10;
-      mobile.strengths.push('✅ Font loading optimized');
-    }
-    
-    // Check critical CSS for mobile
-    if (indexHtml.includes('mobile') || indexHtml.includes('responsive')) {
-      mobile.score += 10;
-      mobile.strengths.push('✅ Mobile-specific optimizations detected');
+      
+      // Check for responsive design hints
+      if (content.includes('responsive') || content.includes('mobile-first')) {
+        mobile.score += 15;
+        mobile.strengths.push('✅ Responsive design detected');
+      }
+      
+      // Check Tailwind CSS (responsive framework)
+      if (content.includes('tailwind')) {
+        mobile.score += 20;
+        mobile.strengths.push('✅ Responsive CSS framework detected');
+      }
+      
+      // Check for touch-friendly elements
+      if (content.includes('touch') || content.includes('mobile')) {
+        mobile.score += 15;
+        mobile.strengths.push('✅ Touch-friendly elements detected');
+      }
     }
     
     console.log(`Mobile SEO Score: ${mobile.score}/100`);
   }
 
-  calculateOverallScore() {
-    const scores = Object.values(this.results)
-      .filter(r => typeof r === 'object' && 'score' in r)
-      .map(r => r.score);
+  findHTMLFiles() {
+    const htmlFiles = [];
     
-    this.results.overallScore = Math.round(
-      scores.reduce((sum, score) => sum + score, 0) / scores.length
-    );
-  }
-
-  generateSEOReport() {
-    console.log('\n' + '='.repeat(60));
-    console.log('🎯 COMPREHENSIVE SEO AUDIT RESULTS');
-    console.log('='.repeat(60));
-    
-    console.log(`\n🏆 OVERALL SEO SCORE: ${this.results.overallScore}/100`);
-    
-    const getGrade = (score) => {
-      if (score >= 90) return '🥇 A+ (Excellent)';
-      if (score >= 80) return '🥈 A (Very Good)';
-      if (score >= 70) return '🥉 B+ (Good)';
-      if (score >= 60) return '📈 B (Fair)';
-      return '⚠️ C (Needs Improvement)';
-    };
-    
-    console.log(`SEO Grade: ${getGrade(this.results.overallScore)}\n`);
-    
-    // Detailed breakdown
-    Object.entries(this.results).forEach(([category, data]) => {
-      if (typeof data === 'object' && 'score' in data) {
-        console.log(`\n📋 ${category.toUpperCase().replace(/([A-Z])/g, ' $1').trim()}: ${data.score}/100`);
-        
-        if (data.strengths.length > 0) {
-          console.log('  Strengths:');
-          data.strengths.forEach(strength => console.log(`    ${strength}`));
+    // Check dist/public directory
+    if (fs.existsSync('dist/public')) {
+      const files = fs.readdirSync('dist/public');
+      files.forEach(file => {
+        if (file.endsWith('.html')) {
+          htmlFiles.push(path.join('dist/public', file));
         }
-        
-        if (data.issues.length > 0) {
-          console.log('  Issues:');
-          data.issues.forEach(issue => console.log(`    ${issue}`));
-        }
-      }
-    });
-    
-    // Critical SEO recommendations
-    console.log('\n🚀 CRITICAL SEO RECOMMENDATIONS:');
-    const allIssues = Object.values(this.results)
-      .filter(r => typeof r === 'object' && 'issues' in r)
-      .flatMap(r => r.issues)
-      .filter(issue => issue.includes('❌'));
-    
-    if (allIssues.length === 0) {
-      console.log('   🎉 Excellent! No critical SEO issues found.');
-    } else {
-      allIssues.slice(0, 5).forEach((issue, i) => {
-        console.log(`   ${i + 1}. ${issue}`);
       });
     }
     
-    // SEO best practices summary
-    console.log('\n📚 SEO BEST PRACTICES STATUS:');
-    const practiceChecks = [
-      { name: 'Technical SEO Foundation', score: this.results.technicalSEO.score },
-      { name: 'Content Optimization', score: this.results.onPageSEO.score },
-      { name: 'Rich Snippets', score: this.results.structuredData.score },
-      { name: 'Performance Optimization', score: this.results.performance.score },
-      { name: 'Mobile-First SEO', score: this.results.mobileSEO.score }
+    // Check public directory
+    if (fs.existsSync('public')) {
+      const files = fs.readdirSync('public');
+      files.forEach(file => {
+        if (file.endsWith('.html')) {
+          htmlFiles.push(path.join('public', file));
+        }
+      });
+    }
+    
+    return htmlFiles;
+  }
+
+  findIndexHtml() {
+    const possiblePaths = [
+      'client/index.html',
+      'index.html',
+      'public/index.html',
+      'dist/index.html'
     ];
     
-    practiceChecks.forEach(practice => {
-      const status = practice.score >= 80 ? '✅' : practice.score >= 60 ? '⚠️' : '❌';
-      console.log(`   ${status} ${practice.name}: ${practice.score}%`);
-    });
+    for (const path of possiblePaths) {
+      if (fs.existsSync(path)) {
+        return path;
+      }
+    }
     
-    console.log('\n' + '='.repeat(60));
+    return null;
+  }
+
+  calculateOverallScore() {
+    const scores = [
+      this.results.technicalSEO.score,
+      this.results.onPageSEO.score,
+      this.results.structuredData.score,
+      this.results.performanceSEO.score,
+      this.results.mobileSEO.score
+    ];
+    
+    this.results.overallScore = scores.reduce((sum, score) => sum + score, 0) / scores.length;
+  }
+
+  generateSEOReport() {
+    console.log('\n📊 SEO AUDIT SUMMARY');
+    console.log('='.repeat(50));
+    console.log(`Overall SEO Score: ${this.results.overallScore.toFixed(1)}%`);
+    console.log(`├── Technical SEO: ${this.results.technicalSEO.score}/100`);
+    console.log(`├── On-Page SEO: ${this.results.onPageSEO.score.toFixed(1)}%`);
+    console.log(`├── Structured Data: ${this.results.structuredData.score.toFixed(1)}%`);
+    console.log(`├── Performance SEO: ${this.results.performanceSEO.score}/100`);
+    console.log(`└── Mobile SEO: ${this.results.mobileSEO.score}/100`);
+    
+    // SEO Grade
+    let grade = 'F';
+    if (this.results.overallScore >= 90) grade = 'A+';
+    else if (this.results.overallScore >= 80) grade = 'A';
+    else if (this.results.overallScore >= 70) grade = 'B';
+    else if (this.results.overallScore >= 60) grade = 'C';
+    else if (this.results.overallScore >= 50) grade = 'D';
+    
+    console.log(`\n🎯 SEO Grade: ${grade}`);
+    
+    // Critical issues
+    const allIssues = [
+      ...this.results.technicalSEO.issues,
+      ...this.results.onPageSEO.issues,
+      ...this.results.structuredData.issues,
+      ...this.results.performanceSEO.issues,
+      ...this.results.mobileSEO.issues
+    ];
+    
+    if (allIssues.length > 0) {
+      console.log('\n🚨 Critical SEO Issues:');
+      allIssues.forEach(issue => console.log(`   ${issue}`));
+    }
+    
+    return this.results;
   }
 }
 
-// Run the SEO audit
-const seoAuditor = new SEOAuditor();
-seoAuditor.auditSEO().catch(console.error);
+export { SEOAuditor };
