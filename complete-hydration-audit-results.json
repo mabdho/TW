@@ -1,7 +1,7 @@
 {
   "staticAudit": {
-    "totalPages": 9,
-    "pagesPassed": 9,
+    "totalPages": 10,
+    "pagesPassed": 10,
     "pagesFailed": 0,
     "checksCompliance": 100,
     "status": "perfect"
@@ -10,7 +10,7 @@
     "status": "skipped",
     "reason": "Puppeteer not installed - install with: npm install puppeteer"
   },
-  "timestamp": "2025-07-15T12:48:05.902Z",
+  "timestamp": "2025-07-15T14:11:29.604Z",
   "status": "perfect",
   "basicAudit": {
     "passed": 9,

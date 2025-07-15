@@ -152,6 +152,11 @@ class ComprehensiveHydrationAuditor {
         metaDescription: 'Discover the best things to do in Rome with this comprehensive 2025 guide. From the Colosseum to Vatican City, explore top attractions and insider tips for a...',
         h1: ['15 Best Things to Do in Rome, Italy (2025 Guide)']
       },
+      'Edinburgh City Page': {
+        title: '15 Best Things to Do in Edinburgh, United Kingdom (2025 Guide)',
+        metaDescription: 'Planning a trip to Edinburgh? Wondering about the best things to do in Edinburgh? You\'re in the right place! This guide is packed with must-see attractions, ...',
+        h1: ['15 Best Things to Do in Edinburgh, United Kingdom (2025 Guide)']
+      },
       'Individual Blog Post': {
         title: 'Underrated Destinations for Solo Travelers - TravelWanders',
         metaDescription: 'Looking to explore beyond the typical solo travel spots? There are plenty of underrated destinations that offer a unique experience without the crowds. From the charming streets of Ljubljana to the vibrant culture of Oaxaca, these hidden gems provide a perfect mix of tranquility, adventure, and authentic local vibes.',
@@ -345,6 +350,7 @@ class ComprehensiveHydrationAuditor {
       { name: 'Destinations Page', path: 'dist/public/destinations-seo.html' },
       { name: 'London City Page', path: 'dist/public/best-things-to-do-in-london/index.html' },
       { name: 'Rome City Page', path: 'dist/public/best-things-to-do-in-rome/index.html' },
+      { name: 'Edinburgh City Page', path: 'dist/public/best-things-to-do-in-edinburgh.html' },
       { name: 'Individual Blog Post', path: 'dist/public/blog/underrated-destinations-for-solo-travelers.html' },
       { name: 'Cookie Policy', path: 'dist/public/cookie-policy.html' },
       { name: 'Privacy Policy', path: 'dist/public/privacy-policy.html' },

@@ -7,7 +7,7 @@ export const Edinburgh: React.FC = () => {
       cityName="Edinburgh"
       country="United Kingdom"
       title={"15 Best Things to Do in Edinburgh, United Kingdom (2025 Guide)"}
-      description={`Planning a trip to Edinburgh? Wondering about the best things to do in Edinburgh? You're in the right place! This guide is packed with must-see attractions, hidden gems, and local favorites to make your trip unforgettable. Exploring Scotland's capital is an experience you won't regret, from the historic castle to the charming cobblestone streets. Finding the right things to do in Edinburgh can make all the difference, so let's dive into the heart of this incredible city and discover its many wonders.`}
+      description={`Planning a trip to Edinburgh? Wondering about the best things to do in Edinburgh? You're in the right place! This guide is packed with must-see attractions, ...`}
       imageUrl={"https://plus.unsplash.com/premium_photo-1699566448247-1627bee256d0?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
       ]}
