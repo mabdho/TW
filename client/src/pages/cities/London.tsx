@@ -14,7 +14,7 @@ export const London: React.FC = () => {
       cityName="London"
       country="United Kingdom"
       title={"15 Best Things to Do in London, United Kingdom (2025 Guide)"}
-      description={`Planning a trip to London and wondering what to do? This guide highlights the best things to do in London, from iconic landmarks to hidden gems. London offers a diverse range of experiences, and narrowing down the 'must-sees' can feel overwhelming. This London travel guide is designed to help you explore London like a local, suggesting experiences you won't find in typical tourist brochures. Discover the top attractions in London, the best time to visit them, and insider tips to make your trip unforgettable. Of course, there are countless things to do in London, but this carefully curated selection provides a fantastic starting point.`}
+      description={`Discover the best things to do in London with this comprehensive 2025 guide. From iconic Tower of London to hidden gems, explore top attractions and insider tips for an unforgettable London experience.`}
       imageUrl={"https://images.unsplash.com/photo-1737649766441-a334350d6015?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
       ]}

@@ -14,7 +14,7 @@ export const Rome: React.FC = () => {
       cityName="Rome"
       country="Italy"
       title={"15 Best Things to Do in Rome, Italy (2025 Guide)"}
-      description={`Planning a trip to Rome? You're in for a treat! Figuring out the best things to do in Rome can seem daunting, given the city's incredible history and vibrant culture. This Rome travel guide will help you navigate the must-see places, hidden gems, and culinary delights. We'll explore ancient ruins, stunning churches, and of course, delicious food. Discovering all the things to do in Rome is an adventure in itself, and I think this guide will get you started on an unforgettable journey. Whether you're a first-time visitor or a seasoned traveler, there's always something new to discover in this captivating city.`}
+      description={`Discover the best things to do in Rome with this comprehensive 2025 guide. From the Colosseum to Vatican City, explore top attractions and insider tips for an unforgettable Rome experience.`}
       imageUrl={"https://plus.unsplash.com/premium_photo-1661964123160-8d049fa07f0c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
       ]}

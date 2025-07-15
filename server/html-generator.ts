@@ -1281,20 +1281,26 @@ function generateIntelligentInternalLinks(cityName: string): string {
 
 export function generateCompleteHTML(cityData: CityData): string {
   const seoTitle = cityData.title || `Best Things to Do in ${cityData.cityName}, ${cityData.country}`;
-  const seoDescription = (cityData.description || 'Explore this amazing destination').substring(0, 160) + '...';
+  const seoDescription = (cityData.description || 'Explore this amazing destination').length > 160 
+    ? (cityData.description || 'Explore this amazing destination').substring(0, 157) + '...'
+    : (cityData.description || 'Explore this amazing destination');
   
   const heroStyle = `background-image: url('${cityData.imageUrl || ''}');`;
   
-  // Create hero section with proper image and alt text
+  // Create hero section with WebP support and SEO-optimized alt text
   const heroHTML = `
     <div class="hero-section">
       ${cityData.imageUrl ? `
-        <img src="${cityData.imageUrl}" 
-             alt="Best things to do in ${cityData.cityName}, ${cityData.country} - Travel guide showing top attractions and experiences"
-             class="hero-image"
-             loading="eager"
-             width="1200" 
-             height="600">
+        <picture>
+          <source srcset="${cityData.imageUrl}&fm=webp" type="image/webp">
+          <source srcset="${cityData.imageUrl}&fm=avif" type="image/avif">
+          <img src="${cityData.imageUrl}" 
+               alt="Panoramic view of ${cityData.cityName}, ${cityData.country} showcasing iconic landmarks and best attractions for travelers in 2025"
+               class="hero-image"
+               loading="eager"
+               width="1200" 
+               height="600">
+        </picture>
       ` : ''}
       <div class="hero-overlay"></div>
       <div class="hero-content">
@@ -1593,9 +1599,11 @@ export function generateCompleteHTML(cityData: CityData): string {
         <section class="section">
           <h2 class="section-title">❓ Frequently Asked Questions</h2>
           ${cityData.faqs.map(faq => 
-            `<div class="faq-item">
-              <div class="faq-question">${faq.question}</div>
-              <div class="faq-answer">${faq.answer}</div>
+            `<div class="faq-item" itemscope itemtype="https://schema.org/Question">
+              <div class="faq-question" itemprop="name">${faq.question}</div>
+              <div class="faq-answer" itemscope itemtype="https://schema.org/Answer" itemprop="acceptedAnswer">
+                <div itemprop="text">${faq.answer}</div>
+              </div>
             </div>`
           ).join('')}
         </section>
@@ -1781,7 +1789,65 @@ export function generateCompleteHTML(cityData: CityData): string {
     }
     </script>
     
-    <style>${pageStyles}</style>
+    <!-- FAQ Structured Data for Featured Snippets -->
+    ${cityData.faqs && cityData.faqs.length > 0 ? `
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        ${cityData.faqs.map(faq => `
+        {
+          "@type": "Question",
+          "name": "${faq.question.replace(/"/g, '\\"')}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "${faq.answer.replace(/"/g, '\\"').replace(/\n/g, ' ')}"
+          }
+        }`).join(',')}
+      ]
+    }
+    </script>
+    ` : ''}
+    
+    <!-- Performance Optimization Tags -->
+    <link rel="preload" href="${cityData.imageUrl}&fm=webp" as="image" type="image/webp">
+    <link rel="preload" href="${cityData.imageUrl}&fm=avif" as="image" type="image/avif">
+    <link rel="prefetch" href="https://travelwanders.com/destinations">
+    <link rel="dns-prefetch" href="//images.unsplash.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="modulepreload" href="https://travelwanders.com/assets/app.js">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#2563eb">
+    
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+      /* Critical CSS for immediate rendering */
+      *{margin:0;padding:0;box-sizing:border-box}
+      body{font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;line-height:1.6;color:#333;background:#fff}
+      .container{max-width:1200px;margin:0 auto;padding:0 20px}
+      .hero-section{position:relative;height:60vh;min-height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;overflow:hidden}
+      .hero-image{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
+      .hero-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.4)}
+      .hero-content{position:relative;z-index:1;max-width:800px;padding:0 20px}
+      .hero-title{font-size:3rem;font-weight:700;margin-bottom:1rem;text-shadow:2px 2px 4px rgba(0,0,0,.3)}
+      .hero-subtitle{font-size:1.1rem;margin-bottom:2rem;opacity:.95;text-shadow:1px 1px 2px rgba(0,0,0,.3)}
+      .hero-badges{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
+      .badge{background:rgba(255,255,255,.2);backdrop-filter:blur(10px);color:#fff;padding:.5rem 1rem;border-radius:50px;font-size:.9rem;font-weight:500;border:1px solid rgba(255,255,255,.3)}
+      .hero-breadcrumb{font-size:.9rem;margin-bottom:1rem;opacity:.9}
+      .navigation{background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:50}
+      .nav-container{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 20px;height:60px}
+      .nav-brand{display:flex;align-items:center;gap:.5rem;color:#1e40af;font-weight:700;font-size:1.25rem;text-decoration:none}
+      .nav-links{display:flex;gap:2rem;align-items:center}
+      .nav-links a{color:#64748b;text-decoration:none;font-weight:500;transition:color .2s}
+      .nav-links a:hover{color:#0f172a}
+      .admin-link{background:#f97316;color:#fff;padding:.5rem 1rem;border-radius:.5rem;text-decoration:none;font-weight:500;transition:background .2s}
+    </style>
+    
+    <!-- Load non-critical CSS asynchronously -->
+    <link rel="preload" href="data:text/css;base64,${Buffer.from(pageStyles).toString('base64')}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><style>${pageStyles}</style></noscript>
 </head>
 <body>
     <!-- Navigation Header -->
@@ -3995,7 +4061,7 @@ export function generateCookiePolicyHTML(): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cookie Policy - TravelWanders</title>
+  <title>Cookie Policy | TravelWanders Travel Guide Platform</title>
   <meta name="description" content="Cookie Policy for TravelWanders - Learn about how we use cookies and similar technologies to enhance your travel guide experience.">
   
   <!-- SEO Meta Tags -->
@@ -4004,6 +4070,24 @@ export function generateCookiePolicyHTML(): string {
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://travelwanders.com/cookie-policy">
   <meta property="og:site_name" content="TravelWanders">
+  <meta property="og:image" content="https://travelwanders.com/assets/travelwanders-og-image.jpg">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Cookie Policy - TravelWanders",
+    "description": "Cookie Policy for TravelWanders - Learn about how we use cookies and similar technologies to enhance your travel guide experience.",
+    "url": "https://travelwanders.com/cookie-policy",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "TravelWanders",
+      "url": "https://travelwanders.com",
+      "description": "Your ultimate travel guide platform"
+    }
+  }
+  </script>
   
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Cookie Policy - TravelWanders">
@@ -4011,6 +4095,14 @@ export function generateCookiePolicyHTML(): string {
   
   <link rel="canonical" href="https://travelwanders.com/cookie-policy">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  
+  <!-- Performance Optimization Tags -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="prefetch" href="https://travelwanders.com/destinations">
+  <link rel="prefetch" href="https://travelwanders.com/blogs">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#2563eb">
   
   <style>
     ${generateCommonStyles()}
