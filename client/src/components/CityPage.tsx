@@ -225,6 +225,33 @@ export const CityPage: React.FC<CityPageProps> = ({
       <CityPageTemplate cityData={finalCityData} imageUrl={imageUrl} title={title}>
         <div className="min-h-screen bg-gray-50">
           <Navigation />
+          
+          {/* Breadcrumb Navigation for SEO */}
+          <div className="bg-white border-b border-gray-200">
+            <div className="container mx-auto px-4 py-2">
+              <nav className="flex items-center text-sm text-gray-600" aria-label="Breadcrumb">
+                <ol className="flex items-center space-x-2">
+                  <li>
+                    <a href="/" className="text-green-600 hover:text-green-700 font-medium">Home</a>
+                  </li>
+                  <li>
+                    <UIIcons.ChevronRight className="w-4 h-4 text-gray-400" />
+                  </li>
+                  <li>
+                    <a href="/destinations" className="text-green-600 hover:text-green-700 font-medium">Destinations</a>
+                  </li>
+                  <li>
+                    <UIIcons.ChevronRight className="w-4 h-4 text-gray-400" />
+                  </li>
+                  <li>
+                    <span className="text-gray-900 font-medium" aria-current="page">
+                      {extractedCityName}, {extractedCountry}
+                    </span>
+                  </li>
+                </ol>
+              </nav>
+            </div>
+          </div>
       
       {/* Description Section - Mobile First */}
       <div className="bg-white border-b border-gray-200">

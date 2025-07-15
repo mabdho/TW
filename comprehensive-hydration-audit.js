@@ -144,12 +144,12 @@ class ComprehensiveHydrationAuditor {
       },
       'London City Page': {
         title: '15 Best Things to Do in London, United Kingdom (2025 Guide)',
-        metaDescription: 'Discover the best things to do in London with this comprehensive 2025 guide. From iconic Tower of London to hidden gems, explore top attractions and insider ...',
+        metaDescription: 'Discover the best things to do in London with this comprehensive 2025 guide. From iconic Tower of London to hidden gems, explore top attractions and',
         h1: ['15 Best Things to Do in London, United Kingdom (2025 Guide)']
       },
       'Rome City Page': {
         title: '15 Best Things to Do in Rome, Italy (2025 Guide)',
-        metaDescription: 'Discover the best things to do in Rome with this comprehensive 2025 guide. From the Colosseum to Vatican City, explore top attractions and insider tips for a...',
+        metaDescription: 'Discover the best things to do in Rome with this comprehensive 2025 guide. From the Colosseum to Vatican City, explore top attractions and insider tips for',
         h1: ['15 Best Things to Do in Rome, Italy (2025 Guide)']
       },
       'Edinburgh City Page': {

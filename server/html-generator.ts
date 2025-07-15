@@ -1403,135 +1403,8 @@ function generateDiscoveryTagsHTML(discoveryTags: any): string {
   `;
 }
 
-// Generate complete HTML page matching CityPage React component structure
-// Intelligent internal linking system matching the TSX component functionality
-const CITY_LINKS = [
-  {
-    name: 'Milan',
-    url: '/best-things-to-do-in-milan',
-    country: 'Italy',
-    keywords: ['fashion', 'design', 'cathedral', 'opera', 'italy', 'duomo', 'scala', 'gothic', 'architecture']
-  },
-  {
-    name: 'Porto',
-    url: '/best-things-to-do-in-porto', 
-    country: 'Portugal',
-    keywords: ['port wine', 'douro', 'portugal', 'azulejo', 'tiles', 'river', 'unesco', 'historic']
-  },
-  {
-    name: 'Venice',
-    url: '/best-things-to-do-in-venice',
-    country: 'Italy',
-    keywords: ['canals', 'gondola', 'italy', 'bridges', 'piazza', 'san marco', 'romantic', 'islands']
-  },
-  {
-    name: 'Berlin',
-    url: '/best-things-to-do-in-berlin',
-    country: 'Germany',
-    keywords: ['history', 'wall', 'germany', 'museums', 'culture', 'art', 'nightlife', 'brandenburg']
-  },
-  {
-    name: 'Bologna',
-    url: '/best-things-to-do-in-bologna',
-    country: 'Italy',
-    keywords: ['food', 'university', 'italy', 'towers', 'cuisine', 'medieval', 'pasta', 'emilia-romagna']
-  },
-  {
-    name: 'Zurich',
-    url: '/best-things-to-do-in-zurich',
-    country: 'Switzerland',
-    keywords: ['lakes', 'mountains', 'switzerland', 'banks', 'chocolate', 'old town', 'alpine', 'luxury']
-  }
-];
-
-function getRelatedCityLinks(currentCityName: string, maxLinks: number = 3) {
-  const currentCity = CITY_LINKS.find(city => city.name.toLowerCase() === currentCityName.toLowerCase());
-  
-  if (!currentCity) {
-    return CITY_LINKS.slice(0, maxLinks);
-  }
-  
-  // Score cities based on shared keywords and same country
-  const scoredCities = CITY_LINKS
-    .filter(city => city.name.toLowerCase() !== currentCityName.toLowerCase())
-    .map(city => {
-      let score = 0;
-      
-      // Higher score for same country
-      if (city.country === currentCity.country) {
-        score += 3;
-      }
-      
-      // Score for shared keywords
-      const sharedKeywords = city.keywords.filter(keyword => 
-        currentCity.keywords.some(currentKeyword => 
-          currentKeyword.includes(keyword) || keyword.includes(currentKeyword)
-        )
-      );
-      score += sharedKeywords.length;
-      
-      return { ...city, score };
-    })
-    .sort((a, b) => b.score - a.score);
-    
-  return scoredCities.slice(0, maxLinks);
-}
-
-function generateIntelligentInternalLinks(cityName: string): string {
-  const relatedCities = getRelatedCityLinks(cityName, 3);
-  
-  return `
-    <div class="intelligent-links-container">
-      ${relatedCities.map(city => `
-        <a href="https://travelwanders.com${city.url}" class="internal-link-card">
-          <div class="internal-link-content">
-            <div class="internal-link-header">
-              <span class="internal-link-icon">📍</span>
-              <span class="internal-link-badge">Destination</span>
-            </div>
-            <h3 class="internal-link-title">Best Attractions & Things to Do in ${city.name}</h3>
-            <div class="internal-link-country">${city.country}</div>
-            <div class="internal-link-action">
-              <span>Discover ${city.name} Travel Guide</span>
-              <span class="internal-link-arrow">→</span>
-            </div>
-          </div>
-        </a>
-      `).join('')}
-      
-      <!-- Additional site links -->
-      <a href="https://travelwanders.com/destinations" class="internal-link-card">
-        <div class="internal-link-content">
-          <div class="internal-link-header">
-            <span class="internal-link-icon">🌍</span>
-            <span class="internal-link-badge">Category</span>
-          </div>
-          <h3 class="internal-link-title">Browse All European Destinations</h3>
-          <div class="internal-link-country">170+ Cities Worldwide</div>
-          <div class="internal-link-action">
-            <span>Explore All Travel Destinations</span>
-            <span class="internal-link-arrow">→</span>
-          </div>
-        </div>
-      </a>
-      
-      <a href="https://travelwanders.com/blogs" class="internal-link-card">
-        <div class="internal-link-content">
-          <div class="internal-link-header">
-            <span class="internal-link-icon">📚</span>
-            <span class="internal-link-badge">Blog</span>
-          </div>
-          <h3 class="internal-link-title">Travel Stories & City Guides</h3>
-          <div class="internal-link-country">Expert Travel Tips</div>
-          <div class="internal-link-action">
-            <span>Read Travel Inspiration Blog</span>
-            <span class="internal-link-arrow">→</span>
-          </div>
-        </div>
-      </a>
-    </div>
-  `;
-}
+// Internal links removed per user request to avoid SEO penalties
+// This functionality is now disabled to maintain compliance
 
 export function generateCompleteHTML(cityData: CityData): string {
   const seoTitle = cityData.title || `Best Things to Do in ${cityData.cityName}, ${cityData.country}`;
@@ -1886,16 +1759,7 @@ export function generateCompleteHTML(cityData: CityData): string {
         </section>
         ` : ''}
         
-        <!-- Intelligent Internal Links Section for SEO -->
-        <section class="section">
-          <h2 class="section-title">🔗 Explore More ${cityData.country} and European Destinations</h2>
-          <div class="internal-links-description">
-            <p>Ready to discover more incredible destinations? Check out our comprehensive travel guides for other amazing cities in ${cityData.country} and Europe. Each guide includes detailed attraction information, local insights, and practical travel tips.</p>
-          </div>
-          <div class="internal-links-grid">
-            ${generateIntelligentInternalLinks(cityData.cityName)}
-          </div>
-        </section>
+        <!-- Internal links removed to avoid SEO penalties -->
       </div>
     </div>
   `;
@@ -2113,6 +1977,43 @@ export function generateCompleteHTML(cityData: CityData): string {
     }
     </script>
     ` : ''}
+    
+    <!-- Breadcrumb Navigation Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "WebPage",
+            "@id": "https://travelwanders.com/",
+            "name": "Home"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "WebPage",
+            "@id": "https://travelwanders.com/destinations",
+            "name": "Destinations"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "WebPage",
+            "@id": "https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}",
+            "name": "${cityData.cityName}, ${cityData.country}"
+          }
+        }
+      ]
+    }
+    </script>
     
     <!-- Performance Optimization Tags for Core Web Vitals -->
     <link rel="preload" href="${cityData.imageUrl}&fm=avif&w=1920&fit=crop&auto=format" as="image" type="image/avif" fetchpriority="high">
