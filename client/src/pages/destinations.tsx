@@ -39,8 +39,8 @@ export default function DestinationsPage() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const seoData = {
-    title: "Travel Destinations - Explore Amazing Places | TravelWanders",
-    description: "Browse our comprehensive collection of travel destinations worldwide. Find your next adventure with detailed city guides, attractions, and travel tips.",
+    title: "All Destinations - TravelWanders",
+    description: "Browse our complete collection of travel destinations with detailed guides, attractions, and insider tips for amazing cities worldwide.",
     keywords: "travel destinations, city guides, travel planning, vacation spots, tourist attractions, world travel, destination guides",
     canonicalUrl: "https://travelwanders.com/destinations",
     slug: "destinations",
