@@ -48,8 +48,8 @@ export default function DestinationsPage() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const seoData = {
-    title: "All Destinations - TravelWanders",
-    description: "Browse our complete collection of travel destinations with detailed guides, attractions, and insider tips for amazing cities worldwide.",
+    title: "Travel Destinations Directory - TravelWanders",
+    description: "Discover the best travel destinations with TravelWanders. Complete travel guides, attractions, and insider tips for your perfect adventure.",
     keywords: "travel destinations, city guides, travel planning, vacation spots, tourist attractions, world travel, destination guides",
     canonicalUrl: "https://travelwanders.com/destinations",
     slug: "destinations",
@@ -114,7 +114,7 @@ export default function DestinationsPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              All Destinations
+              Destinations
             </h1>
             <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
               Explore our complete collection of {cities.length} travel guides spanning {continents.length - 1} continents. 

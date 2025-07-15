@@ -1,3 +1,32 @@
+
+// Enhanced bot detection for comprehensive cloaking
+const isSearchEngineBot = (userAgent) => {
+  if (!userAgent) return false;
+  
+  const botPatterns = [
+    /googlebot/i,
+    /bingbot/i,
+    /slurp/i,
+    /duckduckbot/i,
+    /baiduspider/i,
+    /yandexbot/i,
+    /facebookexternalhit/i,
+    /twitterbot/i,
+    /linkedinbot/i,
+    /whatsapp/i,
+    /telegrambot/i,
+    /discordbot/i,
+    /applebot/i,
+    /crawler/i,
+    /spider/i,
+    /bot/i,
+    /archiver/i,
+    /scraper/i
+  ];
+  
+  return botPatterns.some(pattern => pattern.test(userAgent));
+};
+
 import { onRequest } from 'firebase-functions/v2/https';
 import express, { type Request, Response, NextFunction } from "express";
 import session from "express-session";

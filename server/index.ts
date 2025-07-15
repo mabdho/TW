@@ -5,6 +5,8 @@ import expressStaticGzip from "express-static-gzip";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { initializeSitemapIndexing } from "./utils/sitemapIndexing";
+import fs from "fs";
+import path from "path";
 
 
 const app = express();
@@ -117,7 +119,7 @@ app.use((req, res, next) => {
     throw err;
   });
 
-
+  
 
   // Serve static files from public directory with advanced compression
   // This needs to be before Vite middleware to prevent it from intercepting
