@@ -40,11 +40,11 @@ class AutomaticComplianceEnforcer {
         this.auditResults = JSON.parse(fs.readFileSync(resultsPath, 'utf8'));
       }
 
-      // Check if acceptable compliance is achieved (95%+ is considered good)
+      // Check if 100% compliance is achieved
       const overallScore = this.calculateOverallScore();
       
-      if (overallScore >= 95) {
-        console.log(`✅ ${overallScore}% COMPLIANCE MAINTAINED - Acceptable level`);
+      if (overallScore === 100) {
+        console.log('✅ 100% COMPLIANCE MAINTAINED - Perfect compliance achieved');
         this.logSuccess();
         return true;
       }
@@ -60,8 +60,8 @@ class AutomaticComplianceEnforcer {
       const newResults = JSON.parse(fs.readFileSync(resultsPath, 'utf8'));
       const newScore = this.calculateOverallScore(newResults);
       
-      if (newScore >= 95) {
-        console.log(`✅ ${newScore}% COMPLIANCE RESTORED - Acceptable level`);
+      if (newScore === 100) {
+        console.log('✅ 100% COMPLIANCE RESTORED - Perfect compliance achieved');
         this.logSuccess();
         return true;
       } else {

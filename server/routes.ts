@@ -1763,8 +1763,15 @@ Double-check all brackets, quotes, and commas are properly matched.`;
       }
       } // Close the else block for AI generation
 
-      // Generate the React component file
-      const cityFileName = city.replace(/\s+/g, '');
+      // Generate the React component file using standardized naming
+      const { getCityNameVariations, addCityMapping } = await import('./utils/city-name-mapping');
+      const cityMapping = getCityNameVariations(city);
+      
+      // Add city to mapping system for future reference
+      addCityMapping(city, country);
+      
+      // Use standardized city filename to ensure compliance
+      const cityFileName = cityMapping.tsx;
       
       // Override contentData with HTML source data if available
       if (htmlSourceData) {
@@ -1795,8 +1802,8 @@ Double-check all brackets, quotes, and commas are properly matched.`;
       const dynamicRoutePath = path.join(process.cwd(), 'client', 'src', 'components', 'DynamicCityRoute.tsx');
       const dynamicContent = await fs.readFile(dynamicRoutePath, 'utf-8');
       
-      const routePath = city.toLowerCase().replace(/\s+/g, '-');
-      const cityMapping = `  '${routePath}': createCityImport('${cityFileName}', '../pages/cities/${cityFileName}'),`;
+      const routePath = cityMapping.html;
+      const cityMappingEntry = `  '${routePath}': createCityImport('${cityFileName}', '../pages/cities/${cityFileName}'),`;
       
       if (!dynamicContent.includes(`'${routePath}':`)) {
         // Find the cityMap object and add the new mapping
@@ -1806,7 +1813,7 @@ Double-check all brackets, quotes, and commas are properly matched.`;
         const beforeCityMap = dynamicContent.slice(0, cityMapEnd);
         const afterCityMap = dynamicContent.slice(cityMapEnd);
         
-        const updatedDynamicContent = beforeCityMap + '\n' + cityMapping + '\n' + afterCityMap;
+        const updatedDynamicContent = beforeCityMap + '\n' + cityMappingEntry + '\n' + afterCityMap;
         
         await fs.writeFile(dynamicRoutePath, updatedDynamicContent);
         console.log(`Updated DynamicCityRoute.tsx with ${cityFileName} dynamic import`);
@@ -1816,8 +1823,8 @@ Double-check all brackets, quotes, and commas are properly matched.`;
       const cityDirectoryPath = path.join(process.cwd(), 'client', 'src', 'components', 'CityDirectory.tsx');
       const cityDirectoryContent = await fs.readFile(cityDirectoryPath, 'utf-8');
       
-      // Create city entry with correct SEO-friendly URL format and imageUrl
-      const cityEntry = `  { "name": "${city}", "country": "${country}", "path": "/best-things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}", "continent": "${continent}"${heroImageUrl ? `, "imageUrl": "${heroImageUrl}"` : ''} }`;
+      // Create city entry with correct SEO-friendly URL format and imageUrl using standardized naming
+      const cityEntry = `  { "name": "${city}", "country": "${country}", "path": "/best-things-to-do-in-${cityMapping.html}", "continent": "${continent}"${heroImageUrl ? `, "imageUrl": "${heroImageUrl}"` : ''} }`;
       
       // Check if city already exists
       if (!cityDirectoryContent.includes(`"name": "${city}"`)) {
@@ -1873,7 +1880,7 @@ Double-check all brackets, quotes, and commas are properly matched.`;
         const featuredCitiesMatch = featuredCitiesContent.match(/const featuredCities = \[([\s\S]*?)\];/);
         if (featuredCitiesMatch) {
           const currentFeaturedCities = featuredCitiesMatch[1];
-          const newCityEntry = `  { "name": "${city}", "country": "${country}", "path": "/best-things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}", "continent": "${continent}", "imageUrl": "${heroImageUrl || ''}" }`;
+          const newCityEntry = `  { "name": "${city}", "country": "${country}", "path": "/best-things-to-do-in-${cityMapping.html}", "continent": "${continent}", "imageUrl": "${heroImageUrl || ''}" }`;
           
           // Add new city to the beginning and keep only 8 cities
           const lines = currentFeaturedCities.split('\n').filter(line => line.trim().startsWith('{ "name"'));
@@ -1906,8 +1913,8 @@ Double-check all brackets, quotes, and commas are properly matched.`;
           // Generate complete HTML using Firebase Functions system
           const completeHTML = generateCompleteHTML(cityData);
           
-          // Save the HTML file to correct deployment directory
-          const htmlFileName = `best-things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}.html`;
+          // Save the HTML file to correct deployment directory using standardized naming
+          const htmlFileName = `best-things-to-do-in-${cityMapping.html}.html`;
           const { saveHtmlFile } = await import('./html-generator');
           const htmlFilePath = await saveHtmlFile(htmlFileName, completeHTML);
           htmlGenerated = true;
@@ -1957,7 +1964,7 @@ Double-check all brackets, quotes, and commas are properly matched.`;
         console.log(`✅ Pre-generation validation for ${city}: ${preValidation ? 'PASS' : 'NEEDS ATTENTION'}`);
         
         // Run post-generation validation if HTML file exists
-        const htmlPath = `dist/public/best-things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}.html`;
+        const htmlPath = `dist/public/best-things-to-do-in-${cityMapping.html}.html`;
         if (existsSync(htmlPath)) {
           await postGenerationHook('city', { cityName: city, country }, htmlPath);
           console.log(`✅ Post-generation validation for ${city}: COMPLETED`);

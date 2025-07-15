@@ -1,21 +1,8 @@
 {
   "htmlTsxSync": {
     "totalPages": 9,
-    "syncedPages": 8,
-    "mismatches": [
-      {
-        "type": "MISSING_HTML",
-        "tsxFile": "/home/runner/workspace/client/src/pages/cities/SãoPaulo.tsx",
-        "cityName": "sãopaulo",
-        "message": "No corresponding HTML file found for sãopaulo"
-      },
-      {
-        "type": "ORPHANED_HTML",
-        "htmlFile": "/home/runner/workspace/dist/public/best-things-to-do-in-são-paulo.html",
-        "cityName": "são-paulo",
-        "message": "HTML file exists but no corresponding TSX file found for são-paulo"
-      }
-    ],
+    "syncedPages": 9,
+    "mismatches": [],
     "passed": [
       "berlin",
       "edinburgh",
@@ -23,15 +10,16 @@
       "rome",
       "sanfrancisco",
       "seoul",
+      "sãopaulo",
       "tokyo",
       "kyoto"
     ],
     "failed": [],
-    "score": 89
+    "score": 100
   },
   "hydration": {
-    "totalChecks": 42,
-    "passedChecks": 42,
+    "totalChecks": 45,
+    "passedChecks": 45,
     "failedChecks": 0,
     "warnings": [],
     "errors": [],

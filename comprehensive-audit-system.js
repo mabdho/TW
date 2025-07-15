@@ -258,7 +258,8 @@ class ComprehensiveAuditSystem {
       'sanfrancisco': 'san-francisco',
       'newyork': 'new-york',
       'losangeles': 'los-angeles',
-      'lasvegas': 'las-vegas'
+      'lasvegas': 'las-vegas',
+      'sãopaulo': 'são-paulo'
     };
     
     const mappedName = cityNameMappings[cityName];
@@ -288,7 +289,8 @@ class ComprehensiveAuditSystem {
       'san-francisco': 'sanfrancisco',
       'new-york': 'newyork',
       'los-angeles': 'losangeles',
-      'las-vegas': 'lasvegas'
+      'las-vegas': 'lasvegas',
+      'são-paulo': 'sãopaulo'
     };
     
     const mappedName = cityNameMappings[cityName];
