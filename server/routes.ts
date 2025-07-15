@@ -39,6 +39,7 @@ import {
   batchOptimizeImages,
   getOptimizationStats
 } from './routes/imageOptimization';
+import { HydrationEnforcement, validateCityHydration, validateBlogHydration, runHydrationAudit } from './hydration-hooks';
 
 // Helper function to regenerate static HTML files
 async function regenerateStaticFiles() {
@@ -1704,6 +1705,16 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
         console.error('❌ Error regenerating destinations page:', destError);
       }
       
+      // Enforce hydration compliance for the new city
+      console.log('🔒 Enforcing hydration compliance for new city...');
+      try {
+        await HydrationEnforcement.enforceForCity({ name: city, country });
+        const hydrationValid = await validateCityHydration(city);
+        console.log(`✅ Hydration compliance enforced for ${city}: ${hydrationValid ? 'PASS' : 'NEEDS ATTENTION'}`);
+      } catch (hydrationError) {
+        console.warn('⚠️  Hydration enforcement warning:', hydrationError.message);
+      }
+      
       res.json({
         success: true,
         cityName: cityFileName,
@@ -2147,6 +2158,16 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       console.log('🔄 Regenerating static HTML files after new blog creation...');
       const regenerationSuccess = await regenerateStaticFiles();
 
+      // Enforce hydration compliance for the new blog
+      console.log('🔒 Enforcing hydration compliance for new blog...');
+      try {
+        await HydrationEnforcement.enforceForBlog({ id: blogId, title, excerpt, category });
+        const hydrationValid = await validateBlogHydration({ id: blogId, title });
+        console.log(`✅ Blog hydration compliance enforced for "${title}": ${hydrationValid ? 'PASS' : 'NEEDS ATTENTION'}`);
+      } catch (hydrationError) {
+        console.warn('⚠️  Blog hydration enforcement warning:', hydrationError.message);
+      }
+
       res.json({
         success: true,
         blogId,
@@ -2431,6 +2452,25 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
   // Sitemap indexing routes
   app.post('/api/seo/submit/sitemap', submitSitemapManually);
   app.get('/api/seo/indexing/status', getSitemapIndexingStatusRoute);
+
+  // Add hydration audit endpoint for testing
+  app.get('/api/admin/hydration-audit', requireAdmin, async (req, res) => {
+    try {
+      const auditResult = await runHydrationAudit();
+      res.json({
+        success: auditResult.success,
+        compliance: auditResult.success ? '100%' : 'Issues detected',
+        details: auditResult.details,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        error: 'Failed to run hydration audit',
+        details: error.message
+      });
+    }
+  });
 
   const httpServer = createServer(app);
   return httpServer;

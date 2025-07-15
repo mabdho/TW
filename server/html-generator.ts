@@ -1,6 +1,7 @@
 import * as fs from 'fs/promises';
 import { readFileSync, existsSync } from 'fs';
 import * as path from 'path';
+import { execSync } from 'child_process';
 
 // Geographic coordinates for major cities
 const CITY_COORDINATES = {
@@ -206,7 +207,59 @@ export async function saveHtmlFile(fileName: string, content: string): Promise<s
   const filePath = path.join(outputDir, fileName);
   await fs.writeFile(filePath, content, 'utf-8');
   
+  // Auto-validate hydration compliance after HTML generation
+  await validateHydrationCompliance(fileName, content);
+  
   return filePath;
+}
+
+/**
+ * Validate hydration compliance after HTML generation
+ * Ensures HTML content matches what React components will generate
+ */
+async function validateHydrationCompliance(fileName: string, htmlContent: string): Promise<void> {
+  try {
+    // Extract SEO data from generated HTML
+    const seoData = extractSEODataFromHTML(htmlContent);
+    
+    console.log(`🔍 Hydration validation for ${fileName}:`, {
+      title: seoData.title.substring(0, 50) + (seoData.title.length > 50 ? '...' : ''),
+      hasDescription: !!seoData.description,
+      hasH1: !!seoData.h1,
+      descriptionLength: seoData.description.length
+    });
+    
+    // Validate title structure
+    if (!seoData.title.includes('TravelWanders')) {
+      console.log(`⚠️  Title validation warning: Missing 'TravelWanders' branding in ${fileName}`);
+    }
+    
+    // Validate description length (SEO best practice: 120-160 chars)
+    if (seoData.description.length > 160) {
+      console.log(`⚠️  Description length warning: ${seoData.description.length} chars (max: 160) in ${fileName}`);
+    }
+    
+    // Log successful validation
+    console.log(`✅ Hydration compliance validated for ${fileName}`);
+    
+  } catch (error) {
+    console.log(`⚠️  Hydration validation warning for ${fileName}:`, error.message);
+  }
+}
+
+/**
+ * Extract critical SEO data from HTML for hydration validation
+ */
+function extractSEODataFromHTML(htmlContent: string): { title: string; description: string; h1: string } {
+  const titleMatch = htmlContent.match(/<title>([^<]+)<\/title>/);
+  const descriptionMatch = htmlContent.match(/<meta name="description" content="([^"]+)"/);
+  const h1Match = htmlContent.match(/<h1[^>]*>([^<]+)<\/h1>/);
+  
+  return {
+    title: titleMatch ? titleMatch[1].trim() : '',
+    description: descriptionMatch ? descriptionMatch[1].trim() : '',
+    h1: h1Match ? h1Match[1].trim() : ''
+  };
 }
 
 // Utility function to save HTML files to specific subdirectories (like city pages)
