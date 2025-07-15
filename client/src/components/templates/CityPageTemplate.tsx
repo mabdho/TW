@@ -10,8 +10,8 @@ import { CityData, generateCitySEOData, generateCityStructuredData, generateBrea
 import { InternalLinks } from '../InternalLinks';
 import { getAllCitiesData, getAllBlogsData } from '../../utils/dataService';
 import { generatePlaceSchema } from '../../utils/geoData';
-import { generateCityTravelGuideSchema, generateTouristAttractionSchema, detectBusinessType, generateLocalBusinessSchema } from '../../utils/structuredData';
-import { generateCityMetaTags, generateOptimizedMetaDescription, generateEnhancedStructuredData } from '../../utils/seoOptimization';
+import { generateCityTravelGuideSchema, generateTouristAttractionSchema, detectBusinessType, generateLocalBusinessSchema, generateArticleSchema } from '../../utils/structuredData';
+import { generateCityMetaTags, generateOptimizedMetaDescription, generateEnhancedStructuredData, generateCityHeroAltText } from '../../utils/seoOptimization';
 import { getCityGradientClass } from '../../utils/cityGradients';
 
 interface CityPageTemplateProps {
@@ -41,8 +41,21 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
     seoData.title = title;
   }
   
-  // Generate structured data for city page
+  // Generate structured data for city page (Article schema to match HTML source)
   const structuredData = generateCityStructuredData(cityData, seoData);
+  
+  // Generate Article schema to match HTML source of truth
+  const articleSchema = generateArticleSchema({
+    name: cityData.name,
+    country: cityData.country,
+    description: seoData.description,
+    imageUrl: imageUrl || cityData.imageUrl || '',
+    canonicalUrl: seoData.canonicalUrl,
+    author: cityData.author,
+    publishedDate: cityData.publishedDate,
+    lastUpdated: cityData.lastUpdated,
+    attractions: cityData.attractions
+  });
   
   // Generate breadcrumb data
   const breadcrumbData = generateBreadcrumbStructuredData([
@@ -71,6 +84,7 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
     <BasePageTemplate
       seoData={seoData}
       structuredData={structuredData}
+      articleSchema={articleSchema}
       breadcrumbData={breadcrumbData}
       faqData={faqData}
       className={className}
@@ -125,7 +139,7 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
               />
               <img 
                 src={`${imageUrl.split('?')[0]}?auto=format&fit=crop&w=1920&fm=jpg&q=80`}
-                alt={`${cityData.name} ${cityData.country} travel guide - discover historic landmarks, cultural attractions, and scenic views in this comprehensive destination overview`}
+                alt={generateCityHeroAltText(cityData.name, cityData.country)}
                 className="absolute inset-0 w-full h-full object-cover"
                 loading="eager"
                 width="1920"

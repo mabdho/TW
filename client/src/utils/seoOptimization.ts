@@ -111,6 +111,7 @@ export function generateCityMetaTags(config: SEOConfig): MetaTag[] {
 
 /**
  * Generate enhanced alt text for attraction images
+ * Updated to match HTML source of truth implementation
  */
 export function generateEnhancedAltText(
   attractionName: string,
@@ -118,18 +119,23 @@ export function generateEnhancedAltText(
   country: string,
   context: 'hero' | 'gallery' | 'card' = 'gallery'
 ): string {
-  const baseContext = `${attractionName} in ${cityName}, ${country}`;
-  
   switch (context) {
     case 'hero':
-      return `${baseContext} - iconic landmark and must-visit attraction showcasing architectural beauty and cultural significance`;
+      return `Best things to do in ${cityName}, ${country} - Panoramic view showcasing iconic landmarks and top attractions for travelers in 2025`;
     case 'gallery':
-      return `${baseContext} - detailed view of historic architecture, cultural heritage, and visitor experience`;
+      return `${attractionName} in ${cityName}, ${country} - Must-visit attraction with architectural beauty and cultural significance for travelers`;
     case 'card':
-      return `${baseContext} - popular tourist destination and top-rated attraction for travelers`;
+      return `${attractionName} in ${cityName}, ${country} - Popular tourist destination and top-rated attraction with visitor reviews and photos`;
     default:
-      return `${baseContext} - travel photography showcasing destination highlights and cultural landmarks`;
+      return `${attractionName} in ${cityName}, ${country} - Travel photography showcasing destination highlights and cultural landmarks`;
   }
+}
+
+/**
+ * Generate city-specific enhanced alt text for hero images
+ */
+export function generateCityHeroAltText(cityName: string, country: string): string {
+  return `Best things to do in ${cityName}, ${country} - Panoramic view showcasing iconic landmarks and top attractions for travelers in 2025`;
 }
 
 /**

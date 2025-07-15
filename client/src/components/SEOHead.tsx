@@ -9,11 +9,12 @@ import { SEOData } from '../utils/seo';
 interface SEOHeadProps {
   seoData: SEOData;
   structuredData?: object;
+  articleSchema?: object;
   breadcrumbData?: object;
   faqData?: object;
 }
 
-export const SEOHead: React.FC<SEOHeadProps> = ({ seoData, structuredData, breadcrumbData, faqData }) => {
+export const SEOHead: React.FC<SEOHeadProps> = ({ seoData, structuredData, articleSchema, breadcrumbData, faqData }) => {
   const {
     title,
     description,
@@ -133,7 +134,19 @@ export const SEOHead: React.FC<SEOHeadProps> = ({ seoData, structuredData, bread
       }
       faqScript.textContent = JSON.stringify(faqData);
     }
-  }, [title, description, keywords, canonicalUrl, ogImage, ogType, author, publishedTime, modifiedTime, section, tags, structuredData, breadcrumbData, faqData]);
+    
+    // Article Schema (matches HTML source of truth)
+    if (articleSchema) {
+      let articleScript = document.getElementById('article-schema');
+      if (!articleScript) {
+        articleScript = document.createElement('script');
+        articleScript.id = 'article-schema';
+        articleScript.type = 'application/ld+json';
+        document.head.appendChild(articleScript);
+      }
+      articleScript.textContent = JSON.stringify(articleSchema);
+    }
+  }, [title, description, keywords, canonicalUrl, ogImage, ogType, author, publishedTime, modifiedTime, section, tags, structuredData, breadcrumbData, faqData, articleSchema]);
 
   return null;
 };

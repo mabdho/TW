@@ -1,7 +1,56 @@
 /**
  * Structured Data Utilities for TravelWanders
  * Implements comprehensive rich snippets for search visibility
+ * Updated to match HTML source of truth for Article schema
  */
+
+// Article schema for city travel guides (matches HTML implementation)
+export const generateArticleSchema = (cityData: {
+  name: string;
+  country: string;
+  description: string;
+  imageUrl: string;
+  canonicalUrl: string;
+  author?: string;
+  publishedDate?: string;
+  lastUpdated?: string;
+  attractions?: Array<{name: string; description: string}>;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": `${cityData.attractions?.length || 15} Best Things to Do in ${cityData.name}, ${cityData.country} (2025 Guide)`,
+  "description": cityData.description,
+  "url": cityData.canonicalUrl,
+  "image": {
+    "@type": "ImageObject",
+    "url": cityData.imageUrl,
+    "width": 1920,
+    "height": 960
+  },
+  "datePublished": cityData.publishedDate || "2025-01-15T10:00:00Z",
+  "dateModified": cityData.lastUpdated || "2025-01-15T10:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": cityData.author || "TravelWanders Editorial Team"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "TravelWanders",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://travelwanders.com/favicon.svg",
+      "width": 60,
+      "height": 60
+    }
+  },
+  "articleSection": "Travel Guides",
+  "keywords": `best things to do in ${cityData.name}, ${cityData.name} attractions, ${cityData.name} travel guide, things to do ${cityData.name}, ${cityData.country} travel, visit ${cityData.name}, ${cityData.name} ${cityData.country}`,
+  "wordCount": 1200,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": cityData.canonicalUrl
+  }
+});
 
 // Organization schema for homepage
 export const generateOrganizationSchema = () => ({

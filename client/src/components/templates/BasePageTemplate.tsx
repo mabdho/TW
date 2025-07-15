@@ -10,6 +10,7 @@ import { SEOData } from '../../utils/seo';
 interface BasePageTemplateProps {
   seoData: SEOData;
   structuredData?: object;
+  articleSchema?: object;
   breadcrumbData?: object;
   faqData?: object;
   children: React.ReactNode;
@@ -19,6 +20,7 @@ interface BasePageTemplateProps {
 export const BasePageTemplate: React.FC<BasePageTemplateProps> = ({
   seoData,
   structuredData,
+  articleSchema,
   breadcrumbData,
   faqData,
   children,
@@ -46,6 +48,7 @@ export const BasePageTemplate: React.FC<BasePageTemplateProps> = ({
       <SEOHead
         seoData={seoData}
         structuredData={structuredData}
+        articleSchema={articleSchema}
         breadcrumbData={breadcrumbData}
         faqData={faqData}
       />
