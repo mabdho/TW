@@ -1106,7 +1106,7 @@ const pageStyles = `
     border-radius: 0;
     padding: 1.5rem;
     text-decoration: none;
-    color: inherit;
+    color: #1f2937;
     transition: all 0.3s ease;
     box-shadow: none;
     position: relative;
@@ -1142,18 +1142,18 @@ const pageStyles = `
   .smart-link-title {
     font-size: 1.125rem;
     font-weight: 600;
-    color: #1f2937;
+    color: #1f2937 !important;
     margin: 0 0 0.5rem 0;
     line-height: 1.4;
     transition: color 0.3s ease;
   }
 
   .smart-link-card:hover .smart-link-title {
-    color: #10b981;
+    color: #10b981 !important;
   }
 
   .smart-link-location {
-    color: #6b7280;
+    color: #6b7280 !important;
     font-size: 0.875rem;
     margin: 0;
     font-weight: 500;
