@@ -56,13 +56,21 @@ import { execSync } from 'child_process';
 async function runAutomaticComplianceEnforcement() {
   try {
     console.log('🚀 Running automatic compliance enforcement...');
-    execSync('node scripts/automatic-compliance-enforcer.js', { 
-      cwd: process.cwd(), 
-      stdio: 'inherit' 
-    });
+    
+    // Import and execute the compliance enforcer using dynamic import
+    const { default: AutomaticComplianceEnforcer } = await import('../scripts/automatic-compliance-enforcer.js');
+    const enforcer = new AutomaticComplianceEnforcer();
+    const success = await enforcer.enforceCompliance();
+    
+    if (!success) {
+      throw new Error('Compliance enforcement failed');
+    }
+    
     console.log('✅ Compliance enforcement completed');
+    return true;
   } catch (error) {
     console.error('❌ Compliance enforcement failed:', error.message);
+    throw error;
   }
 }
 

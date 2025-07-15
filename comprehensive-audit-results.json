@@ -1,13 +1,14 @@
 {
   "htmlTsxSync": {
-    "totalPages": 7,
-    "syncedPages": 7,
+    "totalPages": 8,
+    "syncedPages": 8,
     "mismatches": [],
     "passed": [
       "berlin",
       "edinburgh",
       "london",
       "rome",
+      "sanfrancisco",
       "seoul",
       "tokyo",
       "kyoto"
@@ -16,16 +17,16 @@
     "score": 100
   },
   "hydration": {
-    "totalChecks": 39,
-    "passedChecks": 39,
+    "totalChecks": 42,
+    "passedChecks": 42,
     "failedChecks": 0,
     "warnings": [],
     "errors": [],
     "score": 100
   },
   "cloaking": {
-    "totalRoutes": 15,
-    "cloakedRoutes": 15,
+    "totalRoutes": 16,
+    "cloakedRoutes": 16,
     "nonCloakedRoutes": 0,
     "issues": [],
     "passed": [
@@ -44,6 +45,7 @@
       "City: kyoto has proper SEO content",
       "City: london has proper SEO content",
       "City: rome has proper SEO content",
+      "City: san-francisco has proper SEO content",
       "City: seoul has proper SEO content",
       "City: seoul has proper SEO content",
       "City: tokyo has proper SEO content"

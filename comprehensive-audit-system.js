@@ -246,20 +246,60 @@ class ComprehensiveAuditSystem {
    * Find corresponding HTML file for a city
    */
   findCorrespondingHtmlFile(cityName, htmlFiles) {
-    return htmlFiles.find(file => {
+    const found = htmlFiles.find(file => {
       const htmlCityName = this.extractCityNameFromHtml(file);
       return htmlCityName === cityName;
     });
+    
+    if (found) return found;
+    
+    // Handle special cases for city name mapping (reverse mapping)
+    const cityNameMappings = {
+      'sanfrancisco': 'san-francisco',
+      'newyork': 'new-york',
+      'losangeles': 'los-angeles',
+      'lasvegas': 'las-vegas'
+    };
+    
+    const mappedName = cityNameMappings[cityName];
+    if (mappedName) {
+      return htmlFiles.find(file => {
+        const htmlCityName = this.extractCityNameFromHtml(file);
+        return htmlCityName === mappedName;
+      });
+    }
+    
+    return null;
   }
 
   /**
    * Find corresponding TSX file for a city
    */
   findCorrespondingTsxFile(cityName, tsxFiles) {
-    return tsxFiles.find(file => {
+    const found = tsxFiles.find(file => {
       const tsxCityName = this.extractCityNameFromTsx(file);
       return tsxCityName === cityName;
     });
+    
+    if (found) return found;
+    
+    // Handle special cases for city name mapping
+    const cityNameMappings = {
+      'san-francisco': 'sanfrancisco',
+      'new-york': 'newyork',
+      'los-angeles': 'losangeles',
+      'las-vegas': 'lasvegas'
+    };
+    
+    const mappedName = cityNameMappings[cityName];
+    if (mappedName) {
+      return tsxFiles.find(file => {
+        const tsxCityName = this.extractCityNameFromTsx(file);
+        return tsxCityName === mappedName;
+      });
+    }
+    
+    return null;
   }
 
   /**

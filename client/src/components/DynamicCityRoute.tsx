@@ -28,6 +28,8 @@ const cityMap = {
   'kyoto': createCityImport('kyoto', '../pages/cities/kyoto'),
 
   'berlin': createCityImport('Berlin', '../pages/cities/Berlin'),
+
+  'san-francisco': createCityImport('SanFrancisco', '../pages/cities/SanFrancisco'),
 };
 
 interface DynamicCityRouteProps {
