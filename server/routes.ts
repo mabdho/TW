@@ -1229,7 +1229,7 @@ Generate content with this EXACT structure in valid JSON format:
 
 {
   "metaTitle": "Best Things to Do in ${city}, ${country} (2025 Guide)",
-  "metaDescription": "Discover the best things to do in ${city} — top attractions, hidden gems, and food spots. Complete ${city} travel guide. (MUST naturally include 'best things to do in ${city}' AND 'things to do in ${city}', stay under 160 characters)",
+  "metaDescription": "Discover the best things to do in ${city} — top attractions, hidden gems, and food spots. Complete ${city} travel guide. (MUST naturally include 'best things to do in ${city}' AND 'things to do in ${city}', MAXIMUM 155 characters - count carefully and ensure it never exceeds this limit)",
   "slug": "things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}",
   "description": "A meta-style introduction (150–200 words) that uses the exact phrase 'Best Things to Do in ${city}' and 'Things to do in ${city}' naturally in the first 1–2 sentences. Write in a human, engaging tone with varied sentence structure and subtle imperfections that feel authentic.",
   "highlights": ["5–6 one-line must-see places"],
@@ -1331,6 +1331,8 @@ Generate 8-12 detailed attractions. MANDATORY: Include 2-3 dining-related attrac
 - For dining attractions: describe ambiance, signature dishes, pricing, local food culture
 - KEEP DESCRIPTIONS CONCISE (150-200 words max per attraction to prevent JSON truncation)
 - MANDATORY: Structure all content with appropriate ## and ### headings for readability
+
+CRITICAL META DESCRIPTION REQUIREMENT: The metaDescription MUST be exactly 155 characters or less. Count each character carefully. If it exceeds 155, shorten it by removing words, not truncating mid-sentence. This prevents HTML-TSX synchronization issues.
 
 CRITICAL: All insider tips must be ACTIONABLE and CONTEXTUAL. Instead of generic tips like "visit early", provide specific details like "visit at 7:30 AM when locals arrive for morning coffee" or "enter through the side door on Via XX to avoid tourist crowds" or "ask for the unmarked 'local menu' available only in Italian". Every tip should include WHO, WHAT, WHERE, WHEN, and WHY.
 
