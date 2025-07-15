@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { CriticalResourceLoader } from '@/components/CriticalResourceLoader';
 import { ImageOptimized } from '@/components/ImageOptimized';
+import { EnterpriseInternalLinks } from '@/components/EnterpriseInternalLinks';
 
 const cities = [
   // Cities cleared - ready for fresh production content,
@@ -247,6 +248,19 @@ export default function DestinationsPage() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Enterprise Internal Links Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <EnterpriseInternalLinks 
+            currentPageUrl="/destinations"
+            pageType="destination"
+            maxLinks={8}
+            showRelatedContent={true}
+            className="bg-white border border-gray-200 rounded-lg shadow-sm"
+          />
         </div>
       </section>
 

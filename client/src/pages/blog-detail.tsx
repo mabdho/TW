@@ -6,6 +6,7 @@ import { ArrowLeftIcon } from '@/components/icons/LightweightIcons';
 import { getBlogById } from '../blogs';
 import { BlogPageTemplate } from '@/components/templates/BlogPageTemplate';
 import { BlogData } from '@/utils/seo';
+import { EnterpriseInternalLinks } from '@/components/EnterpriseInternalLinks';
 
 export default function BlogDetailPage() {
   const { id } = useParams();
@@ -86,6 +87,17 @@ export default function BlogDetailPage() {
         className="text-gray-700 leading-relaxed"
         dangerouslySetInnerHTML={{ __html: blog.content }}
       />
+
+      {/* Enterprise Internal Links Section */}
+      <div className="mt-12 pt-8 border-t border-gray-200">
+        <EnterpriseInternalLinks 
+          currentPageUrl={`/blog/${blog.id}`}
+          pageType="blog"
+          maxLinks={6}
+          showRelatedContent={true}
+          className="bg-gray-50 border border-gray-200 rounded-lg"
+        />
+      </div>
 
       {/* Back Navigation */}
       <div className="mt-12 pt-8 border-t border-gray-200">

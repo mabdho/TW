@@ -49,6 +49,7 @@ import {
   generateHydrationCompliantH1,
   runHydrationAudit
 } from './hydration-hooks';
+import { interlinkingSystem } from './utils/interlinking';
 
 // Helper function to regenerate static HTML files
 async function regenerateStaticFiles() {
@@ -2682,6 +2683,71 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
         success: false,
         error: 'Failed to validate hydration',
         details: error.message
+      });
+    }
+  });
+
+  // Enterprise Internal Links API
+  app.post('/api/internal-links', async (req, res) => {
+    try {
+      const { currentPageUrl, pageType, maxLinks = 6 } = req.body;
+      
+      if (!currentPageUrl || !pageType) {
+        return res.status(400).json({
+          error: 'Current page URL and page type are required'
+        });
+      }
+      
+      // Refresh interlinking system to ensure latest content
+      interlinkingSystem.refresh();
+      
+      // Generate internal links
+      const links = interlinkingSystem.generateInternalLinks(currentPageUrl, pageType);
+      
+      // Get statistics
+      const stats = interlinkingSystem.getStatistics();
+      
+      res.json({
+        success: true,
+        links,
+        stats,
+        config: {
+          maxLinks,
+          pageType,
+          currentPageUrl
+        },
+        timestamp: new Date().toISOString()
+      });
+      
+    } catch (error) {
+      console.error('Internal links error:', error);
+      res.status(500).json({
+        error: 'Failed to generate internal links',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  // Internal links statistics endpoint
+  app.get('/api/internal-links/stats', (req, res) => {
+    try {
+      interlinkingSystem.refresh();
+      const stats = interlinkingSystem.getStatistics();
+      const allPages = interlinkingSystem.getAllPages();
+      
+      res.json({
+        success: true,
+        stats,
+        sampleLinks: allPages.slice(0, 10), // Show first 10 pages as sample
+        totalPages: allPages.length,
+        timestamp: new Date().toISOString()
+      });
+      
+    } catch (error) {
+      console.error('Internal links stats error:', error);
+      res.status(500).json({
+        error: 'Failed to get internal links statistics',
+        details: error instanceof Error ? error.message : 'Unknown error'
       });
     }
   });

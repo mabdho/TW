@@ -8,6 +8,7 @@ import { SEOHead } from '@/components/SEOHead';
 import { generateBlogListSEOData, generateBreadcrumbStructuredData } from '@/utils/seo';
 import { CriticalResourceLoader } from '@/components/CriticalResourceLoader';
 import { ImageOptimized } from '@/components/ImageOptimized';
+import { EnterpriseInternalLinks } from '@/components/EnterpriseInternalLinks';
 
 export default function BlogsPage() {
   // Get blogs from file system
@@ -306,6 +307,19 @@ export default function BlogsPage() {
               </div>
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* Enterprise Internal Links Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <EnterpriseInternalLinks 
+            currentPageUrl="/blogs"
+            pageType="blog"
+            maxLinks={8}
+            showRelatedContent={true}
+            className="bg-white border border-gray-200 rounded-lg shadow-sm"
+          />
         </div>
       </section>
 
