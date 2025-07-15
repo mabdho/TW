@@ -1,8 +1,21 @@
 {
   "htmlTsxSync": {
-    "totalPages": 8,
+    "totalPages": 9,
     "syncedPages": 8,
-    "mismatches": [],
+    "mismatches": [
+      {
+        "type": "MISSING_HTML",
+        "tsxFile": "/home/runner/workspace/client/src/pages/cities/SãoPaulo.tsx",
+        "cityName": "sãopaulo",
+        "message": "No corresponding HTML file found for sãopaulo"
+      },
+      {
+        "type": "ORPHANED_HTML",
+        "htmlFile": "/home/runner/workspace/dist/public/best-things-to-do-in-são-paulo.html",
+        "cityName": "são-paulo",
+        "message": "HTML file exists but no corresponding TSX file found for são-paulo"
+      }
+    ],
     "passed": [
       "berlin",
       "edinburgh",
@@ -14,7 +27,7 @@
       "kyoto"
     ],
     "failed": [],
-    "score": 100
+    "score": 89
   },
   "hydration": {
     "totalChecks": 42,
@@ -25,8 +38,8 @@
     "score": 100
   },
   "cloaking": {
-    "totalRoutes": 16,
-    "cloakedRoutes": 16,
+    "totalRoutes": 17,
+    "cloakedRoutes": 17,
     "nonCloakedRoutes": 0,
     "issues": [],
     "passed": [
@@ -48,6 +61,7 @@
       "City: san-francisco has proper SEO content",
       "City: seoul has proper SEO content",
       "City: seoul has proper SEO content",
+      "City: são-paulo has proper SEO content",
       "City: tokyo has proper SEO content"
     ],
     "score": 100
