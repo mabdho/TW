@@ -418,8 +418,8 @@ export function generateBlogSEOData(blogData: BlogData, baseUrl?: string): SEODa
  */
 export function generateBlogListSEOData(baseUrl?: string): SEOData {
   const seoData: SEOData = {
-    title: 'Travel Blog - Stories, Tips & Destination Guides | TravelWanders',
-    description: 'Discover expert travel tips, destination guides, and inspiring stories from around the world. Get insider advice for your next adventure with TravelWanders.',
+    title: 'Travel Blog Stories & Destination Guides - TravelWanders',
+    description: 'Get inspired with our travel stories, tips, and destination guides from expert travelers around the world. Discover hidden gems and travel inspiration.',
     keywords: 'travel blog, travel tips, destination guides, travel stories, travel advice, travel inspiration, travel experiences',
     canonicalUrl: `${baseUrl || 'https://travelwanders.com'}/blogs`,
     slug: 'blogs',

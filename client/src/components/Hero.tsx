@@ -63,10 +63,10 @@ export const Hero = () => {
             </Badge>
           </div>
 
-          {/* Modern headline */}
+          {/* Modern headline - matches HTML exactly */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
             Explore the world with
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-orange-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-orange-500">
               confidence
             </span>
           </h1>
