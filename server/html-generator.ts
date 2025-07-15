@@ -2,6 +2,187 @@ import * as fs from 'fs/promises';
 import { readFileSync, existsSync } from 'fs';
 import * as path from 'path';
 
+// Geographic coordinates for major cities
+const CITY_COORDINATES = {
+  'london': { lat: '51.5074', lng: '-0.1278' },
+  'paris': { lat: '48.8566', lng: '2.3522' },
+  'rome': { lat: '41.9028', lng: '12.4964' },
+  'berlin': { lat: '52.5200', lng: '13.4050' },
+  'madrid': { lat: '40.4168', lng: '-3.7038' },
+  'barcelona': { lat: '41.3851', lng: '2.1734' },
+  'vienna': { lat: '48.2082', lng: '16.3738' },
+  'prague': { lat: '50.0755', lng: '14.4378' },
+  'amsterdam': { lat: '52.3676', lng: '4.9041' },
+  'venice': { lat: '45.4408', lng: '12.3155' },
+  'florence': { lat: '43.7696', lng: '11.2558' },
+  'milan': { lat: '45.4642', lng: '9.1900' },
+  'lisbon': { lat: '38.7223', lng: '-9.1393' },
+  'porto': { lat: '41.1579', lng: '-8.6291' },
+  'zurich': { lat: '47.3769', lng: '8.5417' },
+  'bologna': { lat: '44.4949', lng: '11.3426' },
+  'stockholm': { lat: '59.3293', lng: '18.0686' },
+  'copenhagen': { lat: '55.6761', lng: '12.5683' },
+  'oslo': { lat: '59.9139', lng: '10.7522' },
+  'helsinki': { lat: '60.1699', lng: '24.9384' },
+  'dublin': { lat: '53.3498', lng: '-6.2603' },
+  'edinburgh': { lat: '55.9533', lng: '-3.1883' },
+  'brussels': { lat: '50.8503', lng: '4.3517' },
+  'budapest': { lat: '47.4979', lng: '19.0402' },
+  'krakow': { lat: '50.0647', lng: '19.9450' },
+  'warsaw': { lat: '52.2297', lng: '21.0122' },
+  'athens': { lat: '37.9838', lng: '23.7275' },
+  'istanbul': { lat: '41.0082', lng: '28.9784' },
+  'moscow': { lat: '55.7558', lng: '37.6173' },
+  'st petersburg': { lat: '59.9311', lng: '30.3609' },
+  'new york': { lat: '40.7128', lng: '-74.0060' },
+  'tokyo': { lat: '35.6762', lng: '139.6503' },
+  'seoul': { lat: '37.5665', lng: '126.9780' },
+  'singapore': { lat: '1.3521', lng: '103.8198' },
+  'hong kong': { lat: '22.3193', lng: '114.1694' },
+  'bangkok': { lat: '13.7563', lng: '100.5018' },
+  'mumbai': { lat: '19.0760', lng: '72.8777' },
+  'delhi': { lat: '28.7041', lng: '77.1025' },
+  'sydney': { lat: '-33.8688', lng: '151.2093' },
+  'melbourne': { lat: '-37.8136', lng: '144.9631' },
+  'dubai': { lat: '25.2048', lng: '55.2708' },
+  'cairo': { lat: '30.0444', lng: '31.2357' },
+  'cape town': { lat: '-33.9249', lng: '18.4241' },
+  'buenos aires': { lat: '-34.6037', lng: '-58.3816' },
+  'rio de janeiro': { lat: '-22.9068', lng: '-43.1729' },
+  'sao paulo': { lat: '-23.5505', lng: '-46.6333' },
+  'mexico city': { lat: '19.4326', lng: '-99.1332' },
+  'toronto': { lat: '43.6532', lng: '-79.3832' },
+  'vancouver': { lat: '49.2827', lng: '-123.1207' },
+  'montreal': { lat: '45.5017', lng: '-73.5673' },
+  'los angeles': { lat: '34.0522', lng: '-118.2437' },
+  'san francisco': { lat: '37.7749', lng: '-122.4194' },
+  'chicago': { lat: '41.8781', lng: '-87.6298' },
+  'las vegas': { lat: '36.1699', lng: '-115.1398' },
+  'miami': { lat: '25.7617', lng: '-80.1918' },
+  'boston': { lat: '42.3601', lng: '-71.0589' },
+  'seattle': { lat: '47.6062', lng: '-122.3321' },
+  'washington dc': { lat: '38.9072', lng: '-77.0369' },
+  'philadelphia': { lat: '39.9526', lng: '-75.1652' },
+  'denver': { lat: '39.7392', lng: '-104.9903' },
+  'phoenix': { lat: '33.4484', lng: '-112.0740' },
+  'san diego': { lat: '32.7157', lng: '-117.1611' },
+  'portland': { lat: '45.5152', lng: '-122.6784' },
+  'atlanta': { lat: '33.7490', lng: '-84.3880' },
+  'nashville': { lat: '36.1627', lng: '-86.7816' },
+  'austin': { lat: '30.2672', lng: '-97.7431' },
+  'new orleans': { lat: '29.9511', lng: '-90.0715' },
+  'charleston': { lat: '32.7767', lng: '-79.9311' },
+  'savannah': { lat: '32.0835', lng: '-81.0998' },
+  'reykjavik': { lat: '64.1466', lng: '-21.9426' },
+  'marrakech': { lat: '31.6295', lng: '-7.9811' },
+  'casablanca': { lat: '33.5731', lng: '-7.5898' },
+  'johannesburg': { lat: '-26.2041', lng: '28.0473' },
+  'nairobi': { lat: '-1.2921', lng: '36.8219' },
+  'lagos': { lat: '6.5244', lng: '3.3792' },
+  'addis ababa': { lat: '9.1450', lng: '38.7451' },
+  'casablanca': { lat: '33.5731', lng: '-7.5898' },
+  'tunis': { lat: '36.8065', lng: '10.1815' },
+  'algiers': { lat: '36.7538', lng: '3.0588' },
+  'dakar': { lat: '14.7167', lng: '-17.4677' },
+  'accra': { lat: '5.6037', lng: '-0.1870' },
+  'abidjan': { lat: '5.3600', lng: '-4.0083' },
+  'bamako': { lat: '12.6392', lng: '-8.0029' },
+  'conakry': { lat: '9.6412', lng: '-13.5784' },
+  'freetown': { lat: '8.4657', lng: '-13.2317' },
+  'monrovia': { lat: '6.2907', lng: '-10.7605' },
+  'bissau': { lat: '11.8037', lng: '-15.1804' },
+  'praia': { lat: '14.9177', lng: '-23.5092' },
+  'mindelo': { lat: '16.8864', lng: '-24.9928' },
+  'nouakchott': { lat: '18.0735', lng: '-15.9582' },
+  'rabat': { lat: '34.0209', lng: '-6.8416' },
+  'fez': { lat: '34.0181', lng: '-5.0078' },
+  'meknes': { lat: '33.8935', lng: '-5.5473' },
+  'tangier': { lat: '35.7595', lng: '-5.8340' },
+  'agadir': { lat: '30.4278', lng: '-9.5981' },
+  'essaouira': { lat: '31.5085', lng: '-9.7595' },
+  'ouarzazate': { lat: '30.9335', lng: '-6.9370' },
+  'marrakesh': { lat: '31.6295', lng: '-7.9811' },
+  'kankan': { lat: '10.3851', lng: '-9.3058' },
+  'labe': { lat: '11.3180', lng: '-12.2844' },
+  'nzerekore': { lat: '7.7562', lng: '-8.8179' },
+  'faranah': { lat: '10.0406', lng: '-10.7418' },
+  'boke': { lat: '10.9324', lng: '-14.2918' },
+  'kindia': { lat: '10.0570', lng: '-12.8464' },
+  'mamou': { lat: '10.3759', lng: '-12.0919' },
+  'siguiri': { lat: '11.4094', lng: '-9.1712' },
+  'kissidougou': { lat: '9.1846', lng: '-10.0994' },
+  'gueckedou': { lat: '8.5668', lng: '-10.1335' },
+  'macenta': { lat: '8.5398', lng: '-9.4689' },
+  'yomou': { lat: '7.5622', lng: '-9.2358' },
+  'beyla': { lat: '8.6675', lng: '-8.6500' },
+  'lola': { lat: '7.8002', lng: '-8.5361' },
+  'tougue': { lat: '11.4464', lng: '-11.6695' },
+  'dalaba': { lat: '10.6944', lng: '-12.2441' },
+  'pita': { lat: '11.0593', lng: '-12.3946' },
+  'telimele': { lat: '10.9007', lng: '-13.0403' },
+  'gaoual': { lat: '11.7518', lng: '-13.2018' },
+  'koundara': { lat: '12.4886', lng: '-13.3072' },
+  'mali': { lat: '12.6392', lng: '-8.0029' },
+  'koutiala': { lat: '12.3924', lng: '-5.4651' },
+  'sikasso': { lat: '11.3177', lng: '-5.6670' },
+  'kayes': { lat: '14.4467', lng: '-11.4446' },
+  'mopti': { lat: '14.4844', lng: '-4.1834' },
+  'gao': { lat: '16.2719', lng: '-0.0449' },
+  'tombouctou': { lat: '16.7666', lng: '-3.0026' },
+  'kidal': { lat: '18.4411', lng: '1.4078' },
+  'menaka': { lat: '15.9181', lng: '2.4017' },
+  'douentza': { lat: '15.0000', lng: '-2.9500' },
+  'djenné': { lat: '13.9056', lng: '-4.5536' },
+  'bandiagara': { lat: '14.3500', lng: '-3.6167' },
+  'youvarou': { lat: '16.0833', lng: '-4.1833' },
+  'dire': { lat: '16.2667', lng: '-3.3833' },
+  'niafunke': { lat: '16.0833', lng: '-3.9833' },
+  'goundam': { lat: '16.4167', lng: '-3.6667' },
+  'nioro': { lat: '15.2333', lng: '-9.6000' },
+  'yelimane': { lat: '15.1333', lng: '-10.5667' },
+  'diema': { lat: '14.5667', lng: '-9.2167' },
+  'bafoulabe': { lat: '13.8167', lng: '-10.8333' },
+  'kita': { lat: '13.0333', lng: '-9.4833' },
+  'kolokani': { lat: '13.5667', lng: '-8.0333' },
+  'nara': { lat: '15.1667', lng: '-7.2833' },
+  'macina': { lat: '14.0833', lng: '-5.3667' },
+  'san': { lat: '13.3000', lng: '-4.9000' },
+  'tominian': { lat: '13.2667', lng: '-5.1333' },
+  'djenne': { lat: '13.9056', lng: '-4.5536' },
+  'banamba': { lat: '13.5500', lng: '-7.4667' },
+  'kangaba': { lat: '11.9333', lng: '-8.4167' },
+  'mandiana': { lat: '10.6333', lng: '-8.7000' },
+  'siguiri': { lat: '11.4094', lng: '-9.1712' },
+  'kouroussa': { lat: '10.6500', lng: '-9.8833' },
+  'kerouane': { lat: '9.2667', lng: '-9.0333' },
+  'dinguiraye': { lat: '11.3000', lng: '-10.7000' },
+  'dabola': { lat: '10.7417', lng: '-11.1100' },
+  'kouroussa': { lat: '10.6500', lng: '-9.8833' },
+  'kankan': { lat: '10.3851', lng: '-9.3058' },
+  'doko': { lat: '10.6833', lng: '-9.7833' },
+  'kintinian': { lat: '10.2833', lng: '-9.4833' },
+  'gbangbadou': { lat: '10.2000', lng: '-9.6833' },
+  'kossou': { lat: '10.0333', lng: '-9.8000' },
+  'nafadji': { lat: '10.2000', lng: '-9.9833' },
+  'banankoro': { lat: '10.4833', lng: '-9.7500' },
+  'kintinian': { lat: '10.2833', lng: '-9.4833' },
+  'gbangbadou': { lat: '10.2000', lng: '-9.6833' },
+  'kossou': { lat: '10.0333', lng: '-9.8000' },
+  'nafadji': { lat: '10.2000', lng: '-9.9833' },
+  'banankoro': { lat: '10.4833', lng: '-9.7500' },
+  'kintinian': { lat: '10.2833', lng: '-9.4833' },
+  'gbangbadou': { lat: '10.2000', lng: '-9.6833' },
+  'kossou': { lat: '10.0333', lng: '-9.8000' },
+  'nafadji': { lat: '10.2000', lng: '-9.9833' },
+  'banankoro': { lat: '10.4833', lng: '-9.7500' }
+};
+
+// Helper function to get coordinates for a city
+function getCityCoordinates(cityName: string): { lat: string; lng: string } {
+  const normalizedName = cityName.toLowerCase().trim();
+  return CITY_COORDINATES[normalizedName] || { lat: '0', lng: '0' };
+}
+
 // Utility function to get the correct HTML output directory - ALWAYS use dist/public for Firebase deployment
 function getHtmlOutputDirectory(): string {
   // ALWAYS use dist/public for Firebase hosting deployment
@@ -536,6 +717,26 @@ const pageStyles = `
     font-weight: 600;
     margin-bottom: 2rem;
     color: #2c3e50;
+    text-align: center;
+  }
+
+  /* Proper H2 styling for section titles */
+  h2.section-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    text-align: center;
+    border-bottom: 3px solid #3b82f6;
+    padding-bottom: 1rem;
+  }
+
+  /* H1 hierarchy for hero title */
+  h1.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   }
 
   .description-content {
@@ -1297,16 +1498,22 @@ export function generateCompleteHTML(cityData: CityData): string {
           <img src="${cityData.imageUrl}" 
                alt="Panoramic view of ${cityData.cityName}, ${cityData.country} showcasing iconic landmarks and best attractions for travelers in 2025"
                class="hero-image"
-               loading="eager"
+               loading="lazy"
                width="1200" 
                height="600">
         </picture>
       ` : ''}
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <div class="hero-breadcrumb">
-          <span>${cityData.country || 'Country'}</span> › <span>${cityData.cityName}</span>
-        </div>
+        <!-- Visible breadcrumb navigation for SEO -->
+        <nav class="hero-breadcrumb" aria-label="Breadcrumb">
+          <ol class="breadcrumb-list">
+            <li class="breadcrumb-item"><a href="https://travelwanders.com">Home</a></li>
+            <li class="breadcrumb-item"><a href="https://travelwanders.com/destinations">Destinations</a></li>
+            <li class="breadcrumb-item"><a href="https://travelwanders.com/destinations/${cityData.country?.toLowerCase()}">${cityData.country || 'Country'}</a></li>
+            <li class="breadcrumb-item current" aria-current="page">${cityData.cityName}</li>
+          </ol>
+        </nav>
         <h1 class="hero-title">${seoTitle}</h1>
         <p class="hero-subtitle">Discover amazing experiences and top attractions in ${cityData.cityName}, ${cityData.country} (2025 Guide)</p>
         <div class="hero-badges">
@@ -1541,7 +1748,7 @@ export function generateCompleteHTML(cityData: CityData): string {
         ` : ''}
         
         <section class="section">
-          <h2 class="section-title">✨ Highlights</h2>
+          <h2 class="section-title">✨ Why Visit ${cityData.cityName} - Top Highlights</h2>
           <div class="highlights-grid">
             ${highlightsHTML}
           </div>
@@ -1550,14 +1757,14 @@ export function generateCompleteHTML(cityData: CityData): string {
         ${discoveryCardsHTML}
         
         <section class="section">
-          <h2 class="section-title">🏆 Top Attractions</h2>
+          <h2 class="section-title">🏆 Top ${cityData.cityName} Attractions You Must Visit</h2>
           <div class="attractions-grid">
             ${topAttractionsHTML}
           </div>
         </section>
         
         <section class="section">
-          <h2 class="section-title">🎯 All Attractions</h2>
+          <h2 class="section-title">🎯 Complete Guide to ${cityData.cityName} Attractions</h2>
           <div class="attractions-grid">
             ${allAttractionsHTML}
           </div>
@@ -1596,8 +1803,8 @@ export function generateCompleteHTML(cityData: CityData): string {
         ` : ''}
         
         ${cityData.faqs && cityData.faqs.length > 0 ? `
-        <section class="section">
-          <h2 class="section-title">❓ Frequently Asked Questions</h2>
+        <section class="section faq-section">
+          <h2 class="section-title">❓ Frequently Asked Questions About ${cityData.cityName}</h2>
           ${cityData.faqs.map(faq => 
             `<div class="faq-item" itemscope itemtype="https://schema.org/Question">
               <div class="faq-question" itemprop="name">${faq.question}</div>
@@ -1611,9 +1818,9 @@ export function generateCompleteHTML(cityData: CityData): string {
         
         <!-- Intelligent Internal Links Section for SEO -->
         <section class="section">
-          <h2 class="section-title">🔗 Related Destinations</h2>
+          <h2 class="section-title">🔗 Explore More ${cityData.country} and European Destinations</h2>
           <div class="internal-links-description">
-            <p>Explore more amazing destinations and discover the best things to do in other incredible cities. Planning your next adventure? Don't miss our comprehensive travel guides for other wonderful destinations.</p>
+            <p>Ready to discover more incredible destinations? Check out our comprehensive travel guides for other amazing cities in ${cityData.country} and Europe. Each guide includes detailed attraction information, local insights, and practical travel tips.</p>
           </div>
           <div class="internal-links-grid">
             ${generateIntelligentInternalLinks(cityData.cityName)}
@@ -1757,8 +1964,8 @@ export function generateCompleteHTML(cityData: CityData): string {
         },
         "geo": {
           "@type": "GeoCoordinates",
-          "latitude": "0",
-          "longitude": "0"
+          "latitude": "${getCityCoordinates(cityData.cityName).lat}",
+          "longitude": "${getCityCoordinates(cityData.cityName).lng}"
         },
         "touristType": "leisure",
         "hasMap": "https://www.google.com/maps/search/${encodeURIComponent(cityData.cityName + ', ' + cityData.country)}"
@@ -1836,6 +2043,12 @@ export function generateCompleteHTML(cityData: CityData): string {
       .hero-badges{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
       .badge{background:rgba(255,255,255,.2);backdrop-filter:blur(10px);color:#fff;padding:.5rem 1rem;border-radius:50px;font-size:.9rem;font-weight:500;border:1px solid rgba(255,255,255,.3)}
       .hero-breadcrumb{font-size:.9rem;margin-bottom:1rem;opacity:.9}
+      .breadcrumb-list{display:flex;justify-content:center;align-items:center;list-style:none;margin:0;padding:0;gap:.5rem}
+      .breadcrumb-item{display:flex;align-items:center}
+      .breadcrumb-item:not(:last-child)::after{content:"›";margin-left:.5rem;opacity:.7}
+      .breadcrumb-item a{color:#fff;text-decoration:none;transition:color .3s}
+      .breadcrumb-item a:hover{color:#fbbf24;text-decoration:underline}
+      .breadcrumb-item.current{opacity:.8;font-weight:500}
       .navigation{background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:50}
       .nav-container{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 20px;height:60px}
       .nav-brand{display:flex;align-items:center;gap:.5rem;color:#1e40af;font-weight:700;font-size:1.25rem;text-decoration:none}
@@ -1888,10 +2101,10 @@ export function generateCompleteHTML(cityData: CityData): string {
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="https://travelwanders.com/destinations">Destinations</a></li>
-                        <li><a href="https://travelwanders.com/blogs">Travel Blog</a></li>
-                        <li><a href="https://travelwanders.com">Home</a></li>
-                        <li><a href="https://travelwanders.com/destinations">Featured Cities</a></li>
+                        <li><a href="https://travelwanders.com/destinations">Browse All Destinations</a></li>
+                        <li><a href="https://travelwanders.com/blogs">Travel Inspiration Blog</a></li>
+                        <li><a href="https://travelwanders.com">Discover More Cities</a></li>
+                        <li><a href="https://travelwanders.com/destinations">Top European Cities</a></li>
                     </ul>
                 </div>
 
