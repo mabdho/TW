@@ -29,8 +29,8 @@ export interface InterlinkingConfig {
 export class EnterpriseInterlinking {
   private allLinks: LinkData[] = [];
   private config: InterlinkingConfig = {
-    maxLinks: 6,
-    minRelevanceScore: 0.3,
+    maxLinks: 3,
+    minRelevanceScore: 0.4,
     prioritizeRecent: true,
     includeRelatedCountries: true,
     includeCrossContent: true
@@ -430,56 +430,105 @@ export class EnterpriseInterlinking {
   }
 
   /**
-   * Calculate relevance score between two pages
+   * Calculate smart relevance score between two pages for optimal crawling
    */
   private calculateRelevanceScore(sourcePage: LinkData, targetPage: LinkData): number {
     let score = 0;
     
-    // Same type bonus
-    if (sourcePage.type === targetPage.type) {
-      score += 0.3;
-    }
-    
-    // Same country bonus (for cities)
+    // Priority 1: Same country gets highest score (creates strong geographic clusters)
     if (sourcePage.country && targetPage.country && sourcePage.country === targetPage.country) {
-      score += 0.4;
+      score += 0.6;
     }
     
-    // Same continent bonus
-    if (sourcePage.continent && targetPage.continent && sourcePage.continent === targetPage.continent) {
-      score += 0.2;
+    // Priority 2: Cross-content linking (city ↔ blog) creates web-like structure
+    if (this.config.includeCrossContent) {
+      if ((sourcePage.type === 'city' && targetPage.type === 'blog') ||
+          (sourcePage.type === 'blog' && targetPage.type === 'city')) {
+        score += 0.5;
+        
+        // Extra boost for location-based cross-content connections
+        if (this.hasLocationKeywordMatch(sourcePage, targetPage)) {
+          score += 0.2;
+        }
+      }
     }
     
-    // Same category bonus (for blogs)
-    if (sourcePage.category && targetPage.category && sourcePage.category === targetPage.category) {
-      score += 0.3;
-    }
-    
-    // Keyword matching
+    // Priority 3: Enhanced keyword matching with location emphasis
     const sourceKeywords = sourcePage.keywords || [];
     const targetKeywords = targetPage.keywords || [];
     
     let keywordMatches = 0;
+    let locationMatches = 0;
+    
     for (const keyword of sourceKeywords) {
-      if (targetKeywords.some(targetKeyword => 
+      const hasMatch = targetKeywords.some(targetKeyword => 
         targetKeyword.includes(keyword) || keyword.includes(targetKeyword)
-      )) {
+      );
+      
+      if (hasMatch) {
         keywordMatches++;
+        
+        // Boost for location-related keywords
+        if (this.isLocationKeyword(keyword)) {
+          locationMatches++;
+        }
       }
     }
     
-    const keywordScore = Math.min(keywordMatches / Math.max(sourceKeywords.length, 1), 1) * 0.5;
-    score += keywordScore;
+    const keywordScore = Math.min(keywordMatches / Math.max(sourceKeywords.length, 1), 1) * 0.4;
+    const locationScore = Math.min(locationMatches / Math.max(sourceKeywords.length, 1), 1) * 0.3;
+    score += keywordScore + locationScore;
     
-    // Cross-content type bonus (city to blog, blog to city)
-    if (this.config.includeCrossContent) {
-      if ((sourcePage.type === 'city' && targetPage.type === 'blog') ||
-          (sourcePage.type === 'blog' && targetPage.type === 'city')) {
-        score += 0.1;
-      }
+    // Priority 4: Same continent bonus
+    if (sourcePage.continent && targetPage.continent && sourcePage.continent === targetPage.continent) {
+      score += 0.2;
+    }
+    
+    // Priority 5: Same category bonus for blogs
+    if (sourcePage.category && targetPage.category && sourcePage.category === targetPage.category) {
+      score += 0.3;
+    }
+    
+    // Priority 6: Same type bonus (but lower priority to encourage cross-linking)
+    if (sourcePage.type === targetPage.type) {
+      score += 0.1;
     }
     
     return Math.min(score, 1);
+  }
+  
+  /**
+   * Check if two pages have location-based keyword matches
+   */
+  private hasLocationKeywordMatch(sourcePage: LinkData, targetPage: LinkData): boolean {
+    const sourceKeywords = sourcePage.keywords || [];
+    const targetKeywords = targetPage.keywords || [];
+    
+    for (const keyword of sourceKeywords) {
+      if (this.isLocationKeyword(keyword)) {
+        const hasMatch = targetKeywords.some(targetKeyword => 
+          targetKeyword.includes(keyword) || keyword.includes(targetKeyword)
+        );
+        if (hasMatch) return true;
+      }
+    }
+    
+    return false;
+  }
+  
+  /**
+   * Check if a keyword is location-related
+   */
+  private isLocationKeyword(keyword: string): boolean {
+    const locationKeywords = [
+      'travel', 'destination', 'visit', 'guide', 'attractions', 'city', 'country',
+      'europe', 'asia', 'america', 'africa', 'australia', 'tourism', 'things to do',
+      'best', 'explore', 'discover', 'culture', 'history', 'food', 'restaurant',
+      'hotel', 'accommodation', 'transport', 'flight', 'train', 'museum', 'park',
+      'beach', 'mountain', 'historic', 'architecture', 'shopping', 'nightlife'
+    ];
+    
+    return locationKeywords.some(loc => keyword.toLowerCase().includes(loc));
   }
 
   /**

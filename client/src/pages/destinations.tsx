@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { CriticalResourceLoader } from '@/components/CriticalResourceLoader';
 import { ImageOptimized } from '@/components/ImageOptimized';
-import { EnterpriseInternalLinks } from '@/components/EnterpriseInternalLinks';
+import { SmartInternalLinks } from '@/components/SmartInternalLinks';
 
 const cities = [
   // Cities cleared - ready for fresh production content,
@@ -33,7 +33,8 @@ const cities = [
   { "name": "Rome", "country": "Italy", "path": "/best-things-to-do-in-rome", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1661964123160-8d049fa07f0c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { "name": "Edinburgh", "country": "United Kingdom", "path": "/best-things-to-do-in-edinburgh", "continent": "Europe", "imageUrl": "https://plus.unsplash.com/premium_photo-1699566448247-1627bee256d0?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { "name": "Seoul", "country": "South Korea", "path": "/best-things-to-do-in-seoul", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1595817986621-2b7d9ffd3f25?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { "name": "Tokyo", "country": "Japan", "path": "/best-things-to-do-in-tokyo", "continent": "Asia", "imageUrl": "https://plus.unsplash.com/premium_photo-1661914240950-b0124f20a5c1?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8VG9reW98ZW58MHx8MHx8fDA%3D" }
+  { "name": "Tokyo", "country": "Japan", "path": "/best-things-to-do-in-tokyo", "continent": "Asia", "imageUrl": "https://plus.unsplash.com/premium_photo-1661914240950-b0124f20a5c1?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8VG9reW98ZW58MHx8MHx8fDA%3D" },
+  { "name": "kyoto", "country": "Japan", "path": "/best-things-to-do-in-kyoto", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
 ];
 
 const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America", "South America"];
@@ -251,16 +252,16 @@ export default function DestinationsPage() {
         </div>
       </section>
 
-      {/* Enterprise Internal Links Section */}
+      {/* Smart Internal Links Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <EnterpriseInternalLinks 
-            currentPageUrl="/destinations"
-            pageType="destination"
-            maxLinks={8}
-            showRelatedContent={true}
-            className="bg-white border border-gray-200 rounded-lg shadow-sm"
-          />
+          <div className="max-w-5xl mx-auto">
+            <SmartInternalLinks 
+              currentPageUrl="/destinations"
+              pageType="destination"
+              className=""
+            />
+          </div>
         </div>
       </section>
 

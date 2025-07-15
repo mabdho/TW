@@ -70,7 +70,7 @@ const UIIcons = {
 import { Navigation } from './Navigation';
 import { Footer } from './Footer';
 import { CityPageTemplate } from './templates/CityPageTemplate';
-import { EnterpriseInternalLinks } from './EnterpriseInternalLinks';
+import { SmartInternalLinks } from './SmartInternalLinks';
 import { CityData, generateRelatedCityLinks, generateContextualLinks } from '../utils/seo';
 import { getAllCitiesData, getAllBlogsData } from '../utils/dataService';
 import { ImageOptimized } from './ImageOptimized';
@@ -688,16 +688,14 @@ export const CityPage: React.FC<CityPageProps> = ({
         </Suspense>
       </div>
       
-      {/* Enterprise Internal Links Section - SEO-optimized cross-linking */}
+      {/* Smart Internal Links Section - SEO-optimized cross-linking */}
       <section className="bg-gray-50 border-t border-gray-200">
         <div className="container mx-auto px-4 py-8">
-          <div className="max-w-4xl mx-auto">
-            <EnterpriseInternalLinks 
+          <div className="max-w-5xl mx-auto">
+            <SmartInternalLinks 
               currentPageUrl={`/best-things-to-do-in-${cityName.toLowerCase().replace(/\s+/g, '-')}`}
               pageType="city"
-              maxLinks={6}
-              showRelatedContent={true}
-              className="bg-transparent border-0 p-0"
+              className=""
             />
           </div>
         </div>
