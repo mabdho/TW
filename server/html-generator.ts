@@ -1535,9 +1535,14 @@ function generateIntelligentInternalLinks(cityName: string): string {
 
 export function generateCompleteHTML(cityData: CityData): string {
   const seoTitle = cityData.title || `Best Things to Do in ${cityData.cityName}, ${cityData.country}`;
-  const seoDescription = (cityData.description || 'Explore this amazing destination').length > 160 
-    ? (cityData.description || 'Explore this amazing destination').substring(0, 157) + '...'
-    : (cityData.description || 'Explore this amazing destination');
+  
+  // Fix meta description - ensure under 155 characters without truncation ellipsis
+  let seoDescription = cityData.description || `Discover the best things to do in ${cityData.cityName}, ${cityData.country}. Complete travel guide with top attractions, insider tips, and essential information for your perfect ${cityData.cityName} adventure.`;
+  if (seoDescription.length > 155) {
+    // Find the last complete sentence or phrase that fits within 155 characters
+    const lastSpace = seoDescription.lastIndexOf(' ', 155);
+    seoDescription = seoDescription.substring(0, lastSpace > 100 ? lastSpace : 155);
+  }
   
   const heroStyle = `background-image: url('${cityData.imageUrl || ''}');`;
   
@@ -1546,14 +1551,16 @@ export function generateCompleteHTML(cityData: CityData): string {
     <div class="hero-section">
       ${cityData.imageUrl ? `
         <picture>
-          <source srcset="${cityData.imageUrl}&fm=webp" type="image/webp">
-          <source srcset="${cityData.imageUrl}&fm=avif" type="image/avif">
-          <img src="${cityData.imageUrl}" 
-               alt="Panoramic view of ${cityData.cityName}, ${cityData.country} showcasing iconic landmarks and best attractions for travelers in 2025"
+          <source srcset="${cityData.imageUrl}&fm=avif&w=1920&fit=crop&auto=format" type="image/avif">
+          <source srcset="${cityData.imageUrl}&fm=webp&w=1920&fit=crop&auto=format" type="image/webp">
+          <img src="${cityData.imageUrl}&w=1920&fit=crop&auto=format&fm=jpg" 
+               alt="Best things to do in ${cityData.cityName}, ${cityData.country} - Panoramic view showcasing iconic landmarks and top attractions for travelers in 2025"
                class="hero-image"
-               loading="lazy"
-               width="1200" 
-               height="600">
+               loading="eager"
+               width="1920" 
+               height="960"
+               fetchpriority="high"
+               decoding="async">
         </picture>
       ` : ''}
       <div class="hero-overlay"></div>
@@ -1596,7 +1603,7 @@ export function generateCompleteHTML(cityData: CityData): string {
     </div>`
   ).join('');
 
-  const allAttractionsHTML = cityData.attractions.map(attraction => 
+  const allAttractionsHTML = cityData.attractions.map((attraction, index) => 
     `<div class="attraction-card">
       <div class="attraction-content">
         <h3 class="attraction-name">${attraction.name || 'Unnamed Attraction'}</h3>
@@ -1964,11 +1971,20 @@ export function generateCompleteHTML(cityData: CityData): string {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${seoTitle}</title>
     <meta name="description" content="${seoDescription}">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="author" content="${cityData.author || 'TravelWanders'}">
+    <meta name="language" content="en">
+    <meta name="geo.region" content="${cityData.country}">
+    <meta name="geo.placename" content="${cityData.cityName}">
+    <meta name="geo.position" content="${getCityCoordinates(cityData.cityName).lat};${getCityCoordinates(cityData.cityName).lng}">
+    <meta name="ICBM" content="${getCityCoordinates(cityData.cityName).lat}, ${getCityCoordinates(cityData.cityName).lng}">
     ${cityData.lastUpdated ? `<meta name="last-modified" content="${cityData.lastUpdated}">` : ''}
     ${cityData.publishedDate ? `<meta name="article:published_time" content="${cityData.publishedDate}">` : ''}
     <link rel="canonical" href="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
+    
+    <!-- Hreflang for international SEO (future multilingual support) -->
+    <link rel="alternate" hreflang="en" href="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
+    <link rel="alternate" hreflang="x-default" href="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
     
     <!-- Open Graph tags -->
     <meta property="og:title" content="${seoTitle}">
@@ -1986,26 +2002,39 @@ export function generateCompleteHTML(cityData: CityData): string {
     <meta name="twitter:image" content="${cityData.imageUrl}">
     <meta name="twitter:site" content="@TravelWanders">
     
-    <!-- Structured Data - WebPage with TravelDestination mainEntity -->
+    <!-- Structured Data - Article Schema for Travel Guide -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "${seoTitle}",
+      "@type": "Article",
+      "headline": "${seoTitle}",
       "description": "${seoDescription}",
       "url": "https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}",
-      ${cityData.publishedDate ? `"datePublished": "${cityData.publishedDate}",` : ''}
-      ${cityData.lastUpdated ? `"dateModified": "${cityData.lastUpdated}",` : ''}
-      ${cityData.author ? `"author": {"@type": "Person", "name": "${cityData.author}"},` : ''}
+      "image": {
+        "@type": "ImageObject",
+        "url": "${cityData.imageUrl}",
+        "width": 1920,
+        "height": 960
+      },
+      ${cityData.publishedDate ? `"datePublished": "${cityData.publishedDate}",` : '"datePublished": "2025-01-15T10:00:00Z",'}
+      ${cityData.lastUpdated ? `"dateModified": "${cityData.lastUpdated}",` : '"dateModified": "2025-01-15T10:00:00Z",'}
+      "author": {
+        "@type": "Person",
+        "name": "${cityData.author || 'TravelWanders Editorial Team'}"
+      },
       "publisher": {
         "@type": "Organization",
         "name": "TravelWanders",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://travelwanders.com/favicon.svg"
+          "url": "https://travelwanders.com/favicon.svg",
+          "width": 60,
+          "height": 60
         }
       },
-      "mainEntity": {
+      "articleSection": "Travel Guides",
+      "keywords": "best things to do in ${cityData.cityName}, ${cityData.cityName} attractions, ${cityData.cityName} travel guide, things to do ${cityData.cityName}, ${cityData.country} travel",
+      "about": {
         "@type": "TravelDestination",
         "name": "${cityData.cityName}",
         "description": "${seoDescription}",
@@ -2070,9 +2099,9 @@ export function generateCompleteHTML(cityData: CityData): string {
     </script>
     ` : ''}
     
-    <!-- Performance Optimization Tags -->
-    <link rel="preload" href="${cityData.imageUrl}&fm=webp" as="image" type="image/webp">
-    <link rel="preload" href="${cityData.imageUrl}&fm=avif" as="image" type="image/avif">
+    <!-- Performance Optimization Tags for Core Web Vitals -->
+    <link rel="preload" href="${cityData.imageUrl}&fm=avif&w=1920&fit=crop&auto=format" as="image" type="image/avif" fetchpriority="high">
+    <link rel="preload" href="${cityData.imageUrl}&fm=webp&w=1920&fit=crop&auto=format" as="image" type="image/webp">
     <link rel="prefetch" href="https://travelwanders.com/destinations">
     <link rel="dns-prefetch" href="//images.unsplash.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2081,34 +2110,43 @@ export function generateCompleteHTML(cityData: CityData): string {
     <meta name="format-detection" content="telephone=no">
     <meta name="theme-color" content="#2563eb">
     
-    <!-- Critical CSS for above-the-fold content -->
+    <!-- Critical Web Vitals Optimization -->
+    <link rel="preload" as="style" href="data:text/css;base64,Ym9keXtmb250LWZhbWlseTpJbnRlcn0=">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    
+    <!-- Critical CSS for above-the-fold content - Optimized for Core Web Vitals -->
     <style>
-      /* Critical CSS for immediate rendering */
+      /* Critical CSS for immediate rendering - Compressed for LCP optimization */
       *{margin:0;padding:0;box-sizing:border-box}
-      body{font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;line-height:1.6;color:#333;background:#fff}
+      body{font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;line-height:1.6;color:#333;background:#fff;font-display:swap}
       .container{max-width:1200px;margin:0 auto;padding:0 20px}
-      .hero-section{position:relative;height:60vh;min-height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;overflow:hidden}
-      .hero-image{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
+      .hero-section{position:relative;height:60vh;min-height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;overflow:hidden;contain:layout style paint}
+      .hero-image{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;will-change:transform}
       .hero-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.4)}
       .hero-content{position:relative;z-index:1;max-width:800px;padding:0 20px}
-      .hero-title{font-size:3rem;font-weight:700;margin-bottom:1rem;text-shadow:2px 2px 4px rgba(0,0,0,.3)}
-      .hero-subtitle{font-size:1.1rem;margin-bottom:2rem;opacity:.95;text-shadow:1px 1px 2px rgba(0,0,0,.3)}
+      .hero-title{font-size:clamp(2rem,5vw,3rem);font-weight:700;margin-bottom:1rem;text-shadow:2px 2px 4px rgba(0,0,0,.3);line-height:1.2}
+      .hero-subtitle{font-size:clamp(.9rem,2.5vw,1.1rem);margin-bottom:2rem;opacity:.95;text-shadow:1px 1px 2px rgba(0,0,0,.3)}
       .hero-badges{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
       .badge{background:rgba(255,255,255,.2);backdrop-filter:blur(10px);color:#fff;padding:.5rem 1rem;border-radius:50px;font-size:.9rem;font-weight:500;border:1px solid rgba(255,255,255,.3)}
       .hero-breadcrumb{font-size:.9rem;margin-bottom:1rem;opacity:.9}
-      .breadcrumb-list{display:flex;justify-content:center;align-items:center;list-style:none;margin:0;padding:0;gap:.5rem}
+      .breadcrumb-list{display:flex;justify-content:center;align-items:center;list-style:none;margin:0;padding:0;gap:.5rem;flex-wrap:wrap}
       .breadcrumb-item{display:flex;align-items:center}
       .breadcrumb-item:not(:last-child)::after{content:"›";margin-left:.5rem;opacity:.7}
       .breadcrumb-item a{color:#fff;text-decoration:none;transition:color .3s}
       .breadcrumb-item a:hover{color:#fbbf24;text-decoration:underline}
       .breadcrumb-item.current{opacity:.8;font-weight:500}
-      .navigation{background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:50}
+      .navigation{background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:50;contain:layout style}
       .nav-container{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 20px;height:60px}
       .nav-brand{display:flex;align-items:center;gap:.5rem;color:#1e40af;font-weight:700;font-size:1.25rem;text-decoration:none}
       .nav-links{display:flex;gap:2rem;align-items:center}
       .nav-links a{color:#64748b;text-decoration:none;font-weight:500;transition:color .2s}
       .nav-links a:hover{color:#0f172a}
       .admin-link{background:#f97316;color:#fff;padding:.5rem 1rem;border-radius:.5rem;text-decoration:none;font-weight:500;transition:background .2s}
+      img{height:auto;max-width:100%}
+      /* Prevent layout shift */
+      @media (max-width:768px){.nav-links{display:none}.hero-title{font-size:2rem}.breadcrumb-list{font-size:.8rem}}
     </style>
     
     <!-- Load non-critical CSS asynchronously -->
@@ -2165,10 +2203,10 @@ export function generateCompleteHTML(cityData: CityData): string {
                 <div class="footer-section">
                     <h3>Plan Your ${cityData.country} Adventure</h3>
                     <ul>
-                        <li><a href="https://travelwanders.com/destinations">Browse ${cityData.country} Destinations Guide</a></li>
-                        <li><a href="https://travelwanders.com/blogs">Read ${cityData.cityName} Travel Stories</a></li>
-                        <li><a href="https://travelwanders.com/destinations">Plan Your European City Break</a></li>
-                        <li><a href="https://travelwanders.com/destinations">Discover Hidden Gems in ${cityData.country}</a></li>
+                        <li><a href="https://travelwanders.com/destinations" title="Browse comprehensive ${cityData.country} travel destinations and city guides">Browse ${cityData.country} Destinations Guide</a></li>
+                        <li><a href="https://travelwanders.com/blogs" title="Read expert travel stories and insider tips for ${cityData.cityName}">Read ${cityData.cityName} Travel Stories</a></li>
+                        <li><a href="https://travelwanders.com/destinations" title="Plan your perfect European city break with our comprehensive travel guides">Plan Your European City Break</a></li>
+                        <li><a href="https://travelwanders.com/destinations" title="Discover hidden gems and local secrets in ${cityData.country}">Discover Hidden Gems in ${cityData.country}</a></li>
                     </ul>
                 </div>
 
