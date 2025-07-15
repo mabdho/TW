@@ -1145,6 +1145,87 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Function to reconstruct JSON from malformed text
+  function reconstructJSONFromText(text: string): string | null {
+    try {
+      // Extract key-value pairs using regex patterns
+      const jsonStart = text.indexOf('{');
+      const jsonEnd = text.lastIndexOf('}');
+      
+      if (jsonStart === -1 || jsonEnd === -1) return null;
+      
+      let content = text.substring(jsonStart, jsonEnd + 1);
+      
+      // Basic reconstruction - this is a simplified approach
+      // In a real scenario, you'd need more sophisticated parsing
+      content = content
+        .replace(/\n/g, ' ')
+        .replace(/\t/g, ' ')
+        .replace(/\s+/g, ' ')
+        .replace(/,(\s*[}\]])/g, '$1') // Remove trailing commas
+        .replace(/([{,]\s*)(\w+):/g, '$1"$2":') // Quote unquoted keys
+        .replace(/:\s*([^",{\[\s]+)(?=\s*[,}])/g, ': "$1"') // Quote unquoted string values
+        .replace(/\\/g, '\\\\') // Escape backslashes
+        .replace(/"/g, '\\"') // Escape quotes
+        .replace(/\\"/g, '"') // Fix over-escaped quotes
+        .trim();
+      
+      return content;
+    } catch (error) {
+      console.error('JSON reconstruction failed:', error);
+      return null;
+    }
+  }
+
+  // Function to validate and fix JSON
+  function validateAndFixJSON(jsonString: string): { valid: boolean; fixed?: string; error?: string } {
+    try {
+      // Try parsing as-is first
+      JSON.parse(jsonString);
+      return { valid: true, fixed: jsonString };
+    } catch (error) {
+      // Try to fix common JSON issues
+      let fixed = jsonString
+        .replace(/,(\s*[}\]])/g, '$1') // Remove trailing commas
+        .replace(/([^"\\])\n/g, '$1 ') // Replace newlines not in strings
+        .replace(/\s+/g, ' ') // Normalize whitespace
+        .replace(/([^\\])\\(?!["\\/bfnrt])/g, '$1\\\\') // Fix invalid escape sequences
+        .replace(/[\u0000-\u0008\u000B-\u000C\u000E-\u001F\u007F]/g, '') // Remove control chars
+        .replace(/([^\\])"/g, '$1\\"') // Fix unescaped quotes in strings
+        .replace(/"\s*:\s*([^",}\]]+)(?=[,}\]])/g, '": "$1"') // Quote unquoted values
+        .trim();
+      
+      // Try to fix bracket mismatches
+      let openBraces = (fixed.match(/\{/g) || []).length;
+      let closeBraces = (fixed.match(/\}/g) || []).length;
+      let openBrackets = (fixed.match(/\[/g) || []).length;
+      let closeBrackets = (fixed.match(/\]/g) || []).length;
+      
+      // Add missing closing braces
+      while (openBraces > closeBraces) {
+        fixed += '}';
+        closeBraces++;
+      }
+      
+      // Add missing closing brackets
+      while (openBrackets > closeBrackets) {
+        fixed += ']';
+        closeBrackets++;
+      }
+      
+      try {
+        JSON.parse(fixed);
+        return { valid: true, fixed };
+      } catch (finalError) {
+        return { 
+          valid: false, 
+          error: finalError.message,
+          fixed 
+        };
+      }
+    }
+  }
+
   // Function to extract HTML data as source of truth
   function extractHtmlSourceOfTruth(htmlFilePath: string): any {
     try {
@@ -1458,6 +1539,18 @@ Ensure the Gemini model follows these rules:
 
 ✅ Must be parseable with JSON.parse()
 
+CRITICAL JSON VALIDATION RULES:
+1. Every opening { must have a closing }
+2. Every opening [ must have a closing ]
+3. Every opening " must have a closing "
+4. No trailing commas before } or ]
+5. No unescaped quotes inside strings
+6. No unescaped backslashes inside strings
+7. Use \\n for line breaks in strings, not actual line breaks
+8. Use \\" for quotes inside strings
+9. Boolean values must be lowercase: true, false (not True, False)
+10. All numbers must be valid JSON numbers (no leading zeros)
+
 CRITICAL: Your response MUST be ONLY a JSON object. Do NOT include:
 - Any text before the opening {
 - Any text after the closing }
@@ -1469,7 +1562,8 @@ CRITICAL: Your response MUST be ONLY a JSON object. Do NOT include:
 Your response must start immediately with { and end with }. Nothing else.
 All text content must be clean, readable text without any markdown formatting.
 
-VERIFY your JSON is complete before responding. The response MUST be parseable by JSON.parse().`;
+VERIFY your JSON is complete before responding. Test it with JSON.parse() mentally.
+Double-check all brackets, quotes, and commas are properly matched.`;
 
       let result;
       try {
@@ -1577,34 +1671,72 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
       // Try parsing each candidate
       let parseError;
       for (let i = 0; i < jsonCandidates.length; i++) {
-        try {
-          const candidate = jsonCandidates[i];
-          console.log(`Trying JSON candidate ${i + 1}:`, candidate.substring(0, 200));
-          contentData = JSON.parse(candidate);
-          console.log('Successfully parsed JSON with candidate', i + 1);
-          // Clean all content data to remove markdown formatting
-          contentData = cleanContentData(contentData);
-          break;
-        } catch (error) {
-          console.log(`Candidate ${i + 1} failed:`, error.message);
-          parseError = error;
+        const candidate = jsonCandidates[i];
+        console.log(`Trying JSON candidate ${i + 1}:`, candidate.substring(0, 200));
+        
+        // Use validation function to fix JSON
+        const validationResult = validateAndFixJSON(candidate);
+        
+        if (validationResult.valid && validationResult.fixed) {
+          try {
+            contentData = JSON.parse(validationResult.fixed);
+            console.log('Successfully parsed JSON with candidate', i + 1);
+            // Clean all content data to remove markdown formatting
+            contentData = cleanContentData(contentData);
+            break;
+          } catch (error) {
+            console.log(`Candidate ${i + 1} parsing failed after fix:`, error.message);
+            parseError = error;
+          }
+        } else {
+          console.log(`Candidate ${i + 1} validation failed:`, validationResult.error);
+          parseError = { message: validationResult.error };
         }
       }
       
-      // If all candidates failed, return detailed error
+      // If all candidates failed, try one last time with a more aggressive fix
       if (!contentData) {
-        console.error('All JSON parsing attempts failed');
-        console.error('Original response:', generatedText);
-        console.error('Cleaned response:', cleaned);
-        console.error('Last parse error:', parseError?.message);
+        console.log('All initial candidates failed. Attempting aggressive JSON reconstruction...');
         
-        return res.status(500).json({ 
-          error: 'Gemini returned malformed JSON after multiple parsing attempts', 
-          details: parseError?.message || 'Unknown parsing error',
-          responsePreview: cleaned.substring(0, 800),
-          fullResponse: generatedText.length > 2000 ? generatedText.substring(0, 2000) + '...' : generatedText,
-          candidatesCount: jsonCandidates.length
-        });
+        // Try to reconstruct JSON from scratch using regex patterns
+        const reconstructedJson = reconstructJSONFromText(generatedText);
+        if (reconstructedJson) {
+          try {
+            contentData = JSON.parse(reconstructedJson);
+            console.log('Successfully reconstructed and parsed JSON');
+            contentData = cleanContentData(contentData);
+          } catch (error) {
+            console.log('Reconstructed JSON also failed:', error.message);
+          }
+        }
+        
+        // If still no success, return detailed error
+        if (!contentData) {
+          console.error('All JSON parsing attempts failed');
+          console.error('Original response:', generatedText);
+          console.error('Cleaned response:', cleaned);
+          console.error('Last parse error:', parseError?.message);
+          
+          // Try to identify the specific error location
+          if (parseError?.message.includes('position')) {
+            const position = parseError.message.match(/position (\d+)/)?.[1];
+            if (position) {
+              const pos = parseInt(position);
+              console.error('Error context:', cleaned.substring(Math.max(0, pos - 50), pos + 50));
+              console.error('Character at error:', cleaned.charAt(pos));
+            }
+          }
+          
+          return res.status(500).json({ 
+            error: 'Gemini returned malformed JSON after multiple parsing attempts', 
+            details: parseError?.message || 'Unknown parsing error',
+            responsePreview: cleaned.substring(0, 800),
+            fullResponse: generatedText.length > 2000 ? generatedText.substring(0, 2000) + '...' : generatedText,
+            candidatesCount: jsonCandidates.length,
+            errorPosition: parseError?.message.match(/position (\d+)/)?.[1] || 'unknown',
+            suggestion: 'Try using manual JSON mode instead of AI generation'
+          });
+        }
       }
       } // Close the else block for AI generation
 
