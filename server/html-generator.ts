@@ -2043,7 +2043,12 @@ export function generateCompleteHTML(cityData: CityData): string {
         }
       },
       "articleSection": "Travel Guides",
-      "keywords": "best things to do in ${cityData.cityName}, ${cityData.cityName} attractions, ${cityData.cityName} travel guide, things to do ${cityData.cityName}, ${cityData.country} travel",
+      "keywords": "best things to do in ${cityData.cityName}, ${cityData.cityName} attractions, ${cityData.cityName} travel guide, things to do ${cityData.cityName}, ${cityData.country} travel, visit ${cityData.cityName}, ${cityData.cityName} ${cityData.country}",
+      "wordCount": ${cityData.attractions?.length ? cityData.attractions.length * 150 : 1500},
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}"
+      },
       "about": {
         "@type": "TravelDestination",
         "name": "${cityData.cityName}",

@@ -125,7 +125,7 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
               />
               <img 
                 src={`${imageUrl.split('?')[0]}?auto=format&fit=crop&w=1920&fm=jpg&q=80`}
-                alt={`Best things to do in ${cityData.name}, ${cityData.country} - travel guide hero image featuring top attractions and city overview`}
+                alt={`${cityData.name} ${cityData.country} travel guide - discover historic landmarks, cultural attractions, and scenic views in this comprehensive destination overview`}
                 className="absolute inset-0 w-full h-full object-cover"
                 loading="eager"
                 width="1920"
@@ -179,6 +179,55 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
               seoData.description,
               seoData.canonicalUrl
             ))
+          }}
+        />
+        
+        {/* Article schema for blog-style travel guide content */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              "headline": seoData.title,
+              "description": seoData.description,
+              "author": {
+                "@type": "Person",
+                "name": "TravelWanders Team"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "TravelWanders",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://travelwanders.com/favicon.svg"
+                }
+              },
+              "datePublished": new Date().toISOString(),
+              "dateModified": new Date().toISOString(),
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": seoData.canonicalUrl
+              },
+              "image": {
+                "@type": "ImageObject",
+                "url": imageUrl || `https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&h=600&fit=crop`,
+                "width": 1200,
+                "height": 630
+              },
+              "articleSection": "Travel Guide",
+              "keywords": [`best things to do in ${cityData.name}`, `${cityData.name} travel guide`, `${cityData.name} attractions`, `visit ${cityData.name}`, `${cityData.name} ${cityData.country}`],
+              "url": seoData.canonicalUrl,
+              "wordCount": cityData.attractions?.length ? cityData.attractions.length * 150 : 1500,
+              "about": {
+                "@type": "Place",
+                "name": cityData.name,
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressCountry": cityData.country
+                }
+              }
+            })
           }}
         />
         

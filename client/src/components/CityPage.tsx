@@ -79,6 +79,8 @@ import { usePerformanceOptimization } from '../hooks/usePerformanceOptimization'
 import { generateInternalLinkingContent } from '../utils/internalLinking';
 import { DiscoveryCards } from './DiscoveryCards';
 import { InteractiveAttractionExplorer } from './InteractiveAttractionExplorer';
+import { ContextualLinks } from './ContextualLinks';
+import { generateEnhancedAltText } from '../utils/seoOptimization';
 
 interface Attraction {
   name: string;
@@ -232,6 +234,15 @@ export const CityPage: React.FC<CityPageProps> = ({
               <p className="text-sm leading-relaxed sm:text-base sm:leading-relaxed lg:text-lg text-gray-600 max-w-4xl">
                 {description}
               </p>
+              
+              {/* Enhanced contextual internal links for SEO */}
+              <ContextualLinks
+                cityName={extractedCityName}
+                country={extractedCountry}
+                attractions={attractions.slice(0, 3).map(a => a.name)}
+                context="inline"
+                className="mt-4"
+              />
             </div>
           </div>
         </div>
@@ -599,6 +610,16 @@ export const CityPage: React.FC<CityPageProps> = ({
                       <p className="text-gray-700 leading-relaxed text-xs sm:text-sm whitespace-pre-line">{logistics.suggestedItinerary}</p>
                     </div>
                   )}
+                </div>
+                
+                {/* Additional contextual links for travel planning */}
+                <div className="mt-8">
+                  <ContextualLinks
+                    cityName={extractedCityName}
+                    country={extractedCountry}
+                    attractions={attractions.slice(0, 3).map(a => a.name)}
+                    context="sidebar"
+                  />
                 </div>
               </div>
             </TabsContent>

@@ -110,6 +110,80 @@ export function generateCityMetaTags(config: SEOConfig): MetaTag[] {
 }
 
 /**
+ * Generate enhanced alt text for attraction images
+ */
+export function generateEnhancedAltText(
+  attractionName: string,
+  cityName: string,
+  country: string,
+  context: 'hero' | 'gallery' | 'card' = 'gallery'
+): string {
+  const baseContext = `${attractionName} in ${cityName}, ${country}`;
+  
+  switch (context) {
+    case 'hero':
+      return `${baseContext} - iconic landmark and must-visit attraction showcasing architectural beauty and cultural significance`;
+    case 'gallery':
+      return `${baseContext} - detailed view of historic architecture, cultural heritage, and visitor experience`;
+    case 'card':
+      return `${baseContext} - popular tourist destination and top-rated attraction for travelers`;
+    default:
+      return `${baseContext} - travel photography showcasing destination highlights and cultural landmarks`;
+  }
+}
+
+/**
+ * Generate contextual internal links for content
+ */
+export function generateContextualInternalLinks(
+  cityName: string,
+  country: string,
+  attractions: string[] = []
+): Array<{text: string; url: string; context: string}> {
+  const links = [];
+  
+  // Add destination-specific links
+  links.push({
+    text: `More destinations in ${country}`,
+    url: `/destinations?country=${country.toLowerCase()}`,
+    context: 'country-destinations'
+  });
+  
+  // Add travel planning links
+  links.push({
+    text: `${cityName} travel tips and planning guide`,
+    url: `/travel-tips/${cityName.toLowerCase()}`,
+    context: 'travel-planning'
+  });
+  
+  // Add attraction-specific links
+  if (attractions.length > 0) {
+    const mainAttraction = attractions[0];
+    links.push({
+      text: `Complete guide to ${mainAttraction}`,
+      url: `/attractions/${mainAttraction.toLowerCase().replace(/\s+/g, '-')}`,
+      context: 'attraction-guide'
+    });
+  }
+  
+  // Add seasonal travel links
+  links.push({
+    text: `Best time to visit ${cityName}`,
+    url: `/when-to-visit/${cityName.toLowerCase()}`,
+    context: 'seasonal-travel'
+  });
+  
+  // Add accommodation links
+  links.push({
+    text: `Where to stay in ${cityName}`,
+    url: `/accommodation/${cityName.toLowerCase()}`,
+    context: 'accommodation'
+  });
+  
+  return links;
+}
+
+/**
  * Get coordinates for major cities (for geo meta tags)
  */
 function getCoordinates(cityName: string): string {
