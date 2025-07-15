@@ -206,10 +206,25 @@ async function autoFixReactComponent(pageType: string, pageData: any, htmlSeoDat
     
     if (pageType === 'city') {
       const cityName = pageData.cityName;
-      const componentPath = path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityName}.tsx`);
       
-      if (!fs.existsSync(componentPath)) {
-        console.warn(`⚠️  City component not found: ${componentPath}`);
+      // Try multiple possible file naming patterns
+      const possiblePaths = [
+        path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityName}.tsx`),
+        path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityName.replace(/\s+/g, '')}.tsx`),
+        path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityName.replace(/\s+/g, '-')}.tsx`),
+        path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityName.charAt(0).toUpperCase() + cityName.slice(1).replace(/\s+/g, '')}.tsx`)
+      ];
+      
+      let componentPath = null;
+      for (const possiblePath of possiblePaths) {
+        if (fs.existsSync(possiblePath)) {
+          componentPath = possiblePath;
+          break;
+        }
+      }
+      
+      if (!componentPath) {
+        console.warn(`⚠️  City component not found. Tried paths:`, possiblePaths.map(p => path.basename(p)));
         return;
       }
       
