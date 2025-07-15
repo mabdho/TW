@@ -1436,10 +1436,10 @@ function generateIntelligentInternalLinks(cityName: string): string {
               <span class="internal-link-icon">📍</span>
               <span class="internal-link-badge">Destination</span>
             </div>
-            <h3 class="internal-link-title">Best Things to Do in ${city.name}</h3>
+            <h3 class="internal-link-title">Best Attractions & Things to Do in ${city.name}</h3>
             <div class="internal-link-country">${city.country}</div>
             <div class="internal-link-action">
-              <span>Explore Destination</span>
+              <span>Discover ${city.name} Travel Guide</span>
               <span class="internal-link-arrow">→</span>
             </div>
           </div>
@@ -1453,10 +1453,10 @@ function generateIntelligentInternalLinks(cityName: string): string {
             <span class="internal-link-icon">🌍</span>
             <span class="internal-link-badge">Category</span>
           </div>
-          <h3 class="internal-link-title">All Destinations</h3>
-          <div class="internal-link-country">Travel Guides</div>
+          <h3 class="internal-link-title">Browse All European Destinations</h3>
+          <div class="internal-link-country">170+ Cities Worldwide</div>
           <div class="internal-link-action">
-            <span>Browse Category</span>
+            <span>Explore All Travel Destinations</span>
             <span class="internal-link-arrow">→</span>
           </div>
         </div>
@@ -1468,10 +1468,10 @@ function generateIntelligentInternalLinks(cityName: string): string {
             <span class="internal-link-icon">📚</span>
             <span class="internal-link-badge">Blog</span>
           </div>
-          <h3 class="internal-link-title">Travel Tips & Guides</h3>
-          <div class="internal-link-country">Expert Advice</div>
+          <h3 class="internal-link-title">Travel Stories & City Guides</h3>
+          <div class="internal-link-country">Expert Travel Tips</div>
           <div class="internal-link-action">
-            <span>Read Articles</span>
+            <span>Read Travel Inspiration Blog</span>
             <span class="internal-link-arrow">→</span>
           </div>
         </div>
@@ -2068,10 +2068,10 @@ export function generateCompleteHTML(cityData: CityData): string {
         <div class="nav-container">
             <a href="https://travelwanders.com" class="nav-logo">TravelWanders</a>
             <ul class="nav-links">
-                <li><a href="https://travelwanders.com" class="nav-link">Home</a></li>
-                <li><a href="https://travelwanders.com/destinations" class="nav-link">Destinations</a></li>
-                <li><a href="https://travelwanders.com/blogs" class="nav-link">Blogs</a></li>
-                <li><a href="https://travelwanders.com/destinations" class="nav-cta">Get Started</a></li>
+                <li><a href="https://travelwanders.com" class="nav-link">Travel Home</a></li>
+                <li><a href="https://travelwanders.com/destinations" class="nav-link">Explore Destinations</a></li>
+                <li><a href="https://travelwanders.com/blogs" class="nav-link">${cityData.cityName} Travel Blogs</a></li>
+                <li><a href="https://travelwanders.com/destinations" class="nav-cta">Start Planning Trip</a></li>
             </ul>
         </div>
     </nav>
@@ -2101,21 +2101,21 @@ export function generateCompleteHTML(cityData: CityData): string {
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="https://travelwanders.com/destinations">Browse All Destinations</a></li>
-                        <li><a href="https://travelwanders.com/blogs">Travel Inspiration Blog</a></li>
-                        <li><a href="https://travelwanders.com">Discover More Cities</a></li>
-                        <li><a href="https://travelwanders.com/destinations">Top European Cities</a></li>
+                        <li><a href="https://travelwanders.com/destinations">Explore More ${cityData.country} Cities</a></li>
+                        <li><a href="https://travelwanders.com/blogs">${cityData.cityName} Travel Blogs & Guides</a></li>
+                        <li><a href="https://travelwanders.com">Discover Amazing European Destinations</a></li>
+                        <li><a href="https://travelwanders.com/destinations">Best Things to Do in Top Cities</a></li>
                     </ul>
                 </div>
 
                 <!-- Get Started -->
                 <div class="footer-section">
-                    <h3>Get Started</h3>
+                    <h3>Plan Your ${cityData.country} Adventure</h3>
                     <ul>
-                        <li><a href="https://travelwanders.com/destinations">Browse Destinations</a></li>
-                        <li><a href="https://travelwanders.com/blogs">Travel Inspiration</a></li>
-                        <li><a href="https://travelwanders.com/destinations">Plan Your Trip</a></li>
-                        <li><a href="https://travelwanders.com/destinations">Discover Places</a></li>
+                        <li><a href="https://travelwanders.com/destinations">Browse ${cityData.country} Destinations Guide</a></li>
+                        <li><a href="https://travelwanders.com/blogs">Read ${cityData.cityName} Travel Stories</a></li>
+                        <li><a href="https://travelwanders.com/destinations">Plan Your European City Break</a></li>
+                        <li><a href="https://travelwanders.com/destinations">Discover Hidden Gems in ${cityData.country}</a></li>
                     </ul>
                 </div>
 
