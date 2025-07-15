@@ -1106,7 +1106,7 @@ const pageStyles = `
     border-radius: 0;
     padding: 1.5rem;
     text-decoration: none;
-    color: #1f2937;
+    color: #111827 !important;
     transition: all 0.3s ease;
     box-shadow: none;
     position: relative;
@@ -1129,20 +1129,20 @@ const pageStyles = `
   }
 
   .smart-link-type {
-    background: #f3f4f6;
-    color: #6b7280;
+    background: #f3f4f6 !important;
+    color: #4b5563 !important;
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
     font-size: 0.75rem;
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
 
   .smart-link-title {
     font-size: 1.125rem;
-    font-weight: 600;
-    color: #1f2937 !important;
+    font-weight: 700;
+    color: #111827 !important;
     margin: 0 0 0.5rem 0;
     line-height: 1.4;
     transition: color 0.3s ease;
@@ -1153,10 +1153,10 @@ const pageStyles = `
   }
 
   .smart-link-location {
-    color: #6b7280 !important;
+    color: #4b5563 !important;
     font-size: 0.875rem;
     margin: 0;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   /* Legacy internal links styles for backward compatibility */
