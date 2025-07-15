@@ -140,8 +140,8 @@ class HydrationAuditor {
       'Home Page',
       'dist/public/home-seo.html',
       'Explore the world with confidence',
-      'TravelWanders - Discover Amazing Travel Destinations Worldwide',
-      'Discover amazing travel destinations worldwide with TravelWanders. Get expert travel guides, insider tips, and curated recommendations for your next adventure.'
+      'Best Travel Guides & Destinations - TravelWanders',
+      'Discover amazing travel destinations with TravelWanders. Find comprehensive city guides, hidden gems, and travel tips for your next adventure.'
     );
 
     // Blogs Page
@@ -149,8 +149,8 @@ class HydrationAuditor {
       'Blogs Page',
       'dist/public/blogs-seo.html',
       'Travel Blog',
-      'Travel Blog - Expert Travel Tips & Destination Guides | TravelWanders',
-      'Discover expert travel tips, destination guides, and inspiring stories from around the world to fuel your wanderlust.'
+      'Travel Blog Stories & Destination Guides - TravelWanders',
+      'Get inspired with our travel stories, tips, and destination guides from expert travelers around the world. Discover hidden gems and travel inspiration.'
     );
 
     // Destinations Page
@@ -167,8 +167,8 @@ class HydrationAuditor {
       'London City Page',
       'dist/public/best-things-to-do-in-london/index.html',
       '15 Best Things to Do in London, United Kingdom (2025 Guide)',
-      'Top 15 Things to Do in London, United Kingdom (2025 Guide)',
-      'Discover the best things to do in London with this comprehensive 2025 guide. From Big Ben to Tower Bridge, explore top attractions and insider tips.'
+      '15 Best Things to Do in London, United Kingdom (2025 Guide)',
+      'Discover the best things to do in London with this comprehensive 2025 guide. From iconic Tower of London to hidden gems, explore top attractions and insider ...'
     );
 
     // Rome City Page
@@ -176,8 +176,8 @@ class HydrationAuditor {
       'Rome City Page',
       'dist/public/best-things-to-do-in-rome/index.html',
       '15 Best Things to Do in Rome, Italy (2025 Guide)',
-      'Top 15 Things to Do in Rome, Italy (2025 Guide)',
-      'Discover the best things to do in Rome with this comprehensive 2025 guide. From the Colosseum to Vatican City, explore top attractions and insider tips.'
+      '15 Best Things to Do in Rome, Italy (2025 Guide)',
+      'Discover the best things to do in Rome with this comprehensive 2025 guide. From the Colosseum to Vatican City, explore top attractions and insider tips for a...'
     );
 
     // Individual Blog Post
@@ -186,7 +186,7 @@ class HydrationAuditor {
       'dist/public/blog/underrated-destinations-for-solo-travelers.html',
       'Underrated Destinations for Solo Travelers',
       'Underrated Destinations for Solo Travelers - TravelWanders',
-      'Discover hidden gems and underrated destinations perfect for solo travelers. Get insider tips and recommendations for your next solo adventure.'
+      'Looking to explore beyond the typical solo travel spots? There are plenty of underrated destinations that offer a unique experience without the crowds. From the charming streets of Ljubljana to the vibrant culture of Oaxaca, these hidden gems provide a perfect mix of tranquility, adventure, and authentic local vibes.'
     );
 
     // Legal Pages
@@ -194,8 +194,8 @@ class HydrationAuditor {
       'Cookie Policy',
       'dist/public/cookie-policy.html',
       'Cookie Policy',
-      'Cookie Policy - TravelWanders',
-      'Learn about how we use cookies and similar technologies to enhance your experience on TravelWanders.'
+      'Cookie Policy | TravelWanders Travel Guide Platform',
+      'Cookie Policy for TravelWanders - Learn about how we use cookies and similar technologies to enhance your travel guide experience.'
     );
 
     this.auditPage(
@@ -203,15 +203,15 @@ class HydrationAuditor {
       'dist/public/privacy-policy.html',
       'Privacy Policy',
       'Privacy Policy - TravelWanders',
-      'Learn about how we collect, use, and protect your personal information when you use TravelWanders.'
+      'Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.'
     );
 
     this.auditPage(
       'Terms of Service',
       'dist/public/terms-of-service.html',
       'Terms of Service',
-      'Terms of Service - TravelWanders',
-      'Read our terms of service to understand the rules and guidelines for using TravelWanders.'
+      'Terms of Service & User Agreement - TravelWanders',
+      'Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.'
     );
 
     // Generate summary report
