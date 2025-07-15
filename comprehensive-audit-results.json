@@ -1,0 +1,349 @@
+{
+  "htmlTsxSync": {
+    "totalPages": 6,
+    "syncedPages": 0,
+    "mismatches": [
+      {
+        "type": "CONTENT_MISMATCH",
+        "cityName": "edinburgh",
+        "tsxFile": "/home/runner/workspace/client/src/pages/cities/Edinburgh.tsx",
+        "htmlFile": "/home/runner/workspace/dist/public/best-things-to-do-in-edinburgh/index.html",
+        "mismatches": [
+          {
+            "field": "description",
+            "tsx": "Planning a trip to Edinburgh? Wondering about the best things to do in Edinburgh? You're in the right place! This guide is packed with must-see attractions, ...",
+            "html": "Planning a trip to Edinburgh? Wondering about the best things to do in Edinburgh? You're in the right place! This guide is packed with must-see"
+          },
+          {
+            "field": "h1",
+            "tsx": "Edinburgh",
+            "html": "15 Best Things to Do in Edinburgh, United Kingdom (2025 Guide)"
+          }
+        ]
+      },
+      {
+        "type": "CONTENT_MISMATCH",
+        "cityName": "london",
+        "tsxFile": "/home/runner/workspace/client/src/pages/cities/London.tsx",
+        "htmlFile": "/home/runner/workspace/dist/public/best-things-to-do-in-london/index.html",
+        "mismatches": [
+          {
+            "field": "h1",
+            "tsx": "London",
+            "html": "15 Best Things to Do in London, United Kingdom (2025 Guide)"
+          }
+        ]
+      },
+      {
+        "type": "CONTENT_MISMATCH",
+        "cityName": "rome",
+        "tsxFile": "/home/runner/workspace/client/src/pages/cities/Rome.tsx",
+        "htmlFile": "/home/runner/workspace/dist/public/best-things-to-do-in-rome/index.html",
+        "mismatches": [
+          {
+            "field": "h1",
+            "tsx": "Rome",
+            "html": "15 Best Things to Do in Rome, Italy (2025 Guide)"
+          }
+        ]
+      },
+      {
+        "type": "CONTENT_MISMATCH",
+        "cityName": "seoul",
+        "tsxFile": "/home/runner/workspace/client/src/pages/cities/Seoul.tsx",
+        "htmlFile": "/home/runner/workspace/dist/public/best-things-to-do-in-seoul/index.html",
+        "mismatches": [
+          {
+            "field": "description",
+            "tsx": "Planning a trip to Seoul? You're in for a treat! This guide highlights the best things to do in Seoul, from exploring ancient palaces to indulging in the vib...",
+            "html": "Planning a trip to Seoul? You're in for a treat! This guide highlights the best things to do in Seoul, from exploring ancient palaces to indulging in the"
+          },
+          {
+            "field": "h1",
+            "tsx": "Seoul",
+            "html": "15 Best Things to Do in Seoul, South Korea (2025 Guide)"
+          }
+        ]
+      },
+      {
+        "type": "CONTENT_MISMATCH",
+        "cityName": "tokyo",
+        "tsxFile": "/home/runner/workspace/client/src/pages/cities/Tokyo.tsx",
+        "htmlFile": "/home/runner/workspace/dist/public/best-things-to-do-in-tokyo.html",
+        "mismatches": [
+          {
+            "field": "h1",
+            "tsx": "Tokyo",
+            "html": "15 Best Things to Do in Tokyo, Japan (2025 Guide)"
+          }
+        ]
+      },
+      {
+        "type": "CONTENT_MISMATCH",
+        "cityName": "kyoto",
+        "tsxFile": "/home/runner/workspace/client/src/pages/cities/kyoto.tsx",
+        "htmlFile": "/home/runner/workspace/dist/public/best-things-to-do-in-kyoto.html",
+        "mismatches": [
+          {
+            "field": "h1",
+            "tsx": "kyoto",
+            "html": "15 Best Things to Do in kyoto, Japan (2025 Guide)"
+          }
+        ]
+      }
+    ],
+    "passed": [],
+    "failed": [
+      "edinburgh",
+      "london",
+      "rome",
+      "seoul",
+      "tokyo",
+      "kyoto"
+    ],
+    "score": 0
+  },
+  "hydration": {
+    "totalChecks": 72,
+    "passedChecks": 10,
+    "failedChecks": 26,
+    "warnings": [],
+    "errors": [
+      {
+        "page": "Home",
+        "type": "HYDRATION_MISMATCH",
+        "field": "title",
+        "tsx": null,
+        "html": "Best Travel Guides & Destinations - TravelWanders",
+        "message": "Hydration mismatch in title: TSX=\"null\" vs HTML=\"Best Travel Guides & Destinations - TravelWanders\""
+      },
+      {
+        "page": "Home",
+        "type": "HYDRATION_MISMATCH",
+        "field": "description",
+        "tsx": null,
+        "html": "Discover amazing travel destinations with TravelWanders. Find comprehensive city guides, hidden gems, and travel tips for your next adventure.",
+        "message": "Hydration mismatch in description: TSX=\"null\" vs HTML=\"Discover amazing travel destinations with TravelWanders. Find comprehensive city guides, hidden gems, and travel tips for your next adventure.\""
+      },
+      {
+        "page": "Home",
+        "type": "HYDRATION_MISMATCH",
+        "field": "h1",
+        "tsx": null,
+        "html": "Explore the world with confidence",
+        "message": "Hydration mismatch in h1: TSX=\"null\" vs HTML=\"Explore the world with confidence\""
+      },
+      {
+        "page": "Destinations",
+        "type": "HYDRATION_MISMATCH",
+        "field": "title",
+        "tsx": null,
+        "html": "All Destinations - TravelWanders",
+        "message": "Hydration mismatch in title: TSX=\"null\" vs HTML=\"All Destinations - TravelWanders\""
+      },
+      {
+        "page": "Destinations",
+        "type": "HYDRATION_MISMATCH",
+        "field": "description",
+        "tsx": null,
+        "html": "Browse our complete collection of travel destinations with detailed guides, attractions, and insider tips for amazing cities worldwide.",
+        "message": "Hydration mismatch in description: TSX=\"null\" vs HTML=\"Browse our complete collection of travel destinations with detailed guides, attractions, and insider tips for amazing cities worldwide.\""
+      },
+      {
+        "page": "Destinations",
+        "type": "HYDRATION_MISMATCH",
+        "field": "h1",
+        "tsx": null,
+        "html": "All Destinations",
+        "message": "Hydration mismatch in h1: TSX=\"null\" vs HTML=\"All Destinations\""
+      },
+      {
+        "page": "Blogs",
+        "type": "HYDRATION_MISMATCH",
+        "field": "title",
+        "tsx": null,
+        "html": "Travel Blog Stories & Destination Guides - TravelWanders",
+        "message": "Hydration mismatch in title: TSX=\"null\" vs HTML=\"Travel Blog Stories & Destination Guides - TravelWanders\""
+      },
+      {
+        "page": "Blogs",
+        "type": "HYDRATION_MISMATCH",
+        "field": "description",
+        "tsx": null,
+        "html": "Get inspired with our travel stories, tips, and destination guides from expert travelers around the world. Discover hidden gems and travel inspiration.",
+        "message": "Hydration mismatch in description: TSX=\"null\" vs HTML=\"Get inspired with our travel stories, tips, and destination guides from expert travelers around the world. Discover hidden gems and travel inspiration.\""
+      },
+      {
+        "page": "Blogs",
+        "type": "HYDRATION_MISMATCH",
+        "field": "h1",
+        "tsx": null,
+        "html": "Travel Blog",
+        "message": "Hydration mismatch in h1: TSX=\"null\" vs HTML=\"Travel Blog\""
+      },
+      {
+        "page": "Cookie Policy",
+        "type": "HYDRATION_MISMATCH",
+        "field": "title",
+        "tsx": null,
+        "html": "Cookie Policy | TravelWanders Travel Guide Platform",
+        "message": "Hydration mismatch in title: TSX=\"null\" vs HTML=\"Cookie Policy | TravelWanders Travel Guide Platform\""
+      },
+      {
+        "page": "Cookie Policy",
+        "type": "HYDRATION_MISMATCH",
+        "field": "description",
+        "tsx": null,
+        "html": "Cookie Policy for TravelWanders - Learn about how we use cookies and similar technologies to enhance your travel guide experience.",
+        "message": "Hydration mismatch in description: TSX=\"null\" vs HTML=\"Cookie Policy for TravelWanders - Learn about how we use cookies and similar technologies to enhance your travel guide experience.\""
+      },
+      {
+        "page": "Cookie Policy",
+        "type": "HYDRATION_MISMATCH",
+        "field": "h1",
+        "tsx": null,
+        "html": "Cookie Policy",
+        "message": "Hydration mismatch in h1: TSX=\"null\" vs HTML=\"Cookie Policy\""
+      },
+      {
+        "page": "Privacy Policy",
+        "type": "HYDRATION_MISMATCH",
+        "field": "title",
+        "tsx": null,
+        "html": "Privacy Policy - TravelWanders",
+        "message": "Hydration mismatch in title: TSX=\"null\" vs HTML=\"Privacy Policy - TravelWanders\""
+      },
+      {
+        "page": "Privacy Policy",
+        "type": "HYDRATION_MISMATCH",
+        "field": "description",
+        "tsx": null,
+        "html": "Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.",
+        "message": "Hydration mismatch in description: TSX=\"null\" vs HTML=\"Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.\""
+      },
+      {
+        "page": "Privacy Policy",
+        "type": "HYDRATION_MISMATCH",
+        "field": "h1",
+        "tsx": null,
+        "html": "Privacy Policy",
+        "message": "Hydration mismatch in h1: TSX=\"null\" vs HTML=\"Privacy Policy\""
+      },
+      {
+        "page": "Terms of Service",
+        "type": "HYDRATION_MISMATCH",
+        "field": "title",
+        "tsx": null,
+        "html": "Terms of Service & User Agreement - TravelWanders",
+        "message": "Hydration mismatch in title: TSX=\"null\" vs HTML=\"Terms of Service & User Agreement - TravelWanders\""
+      },
+      {
+        "page": "Terms of Service",
+        "type": "HYDRATION_MISMATCH",
+        "field": "description",
+        "tsx": null,
+        "html": "Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.",
+        "message": "Hydration mismatch in description: TSX=\"null\" vs HTML=\"Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.\""
+      },
+      {
+        "page": "Terms of Service",
+        "type": "HYDRATION_MISMATCH",
+        "field": "h1",
+        "tsx": null,
+        "html": "Terms of Service",
+        "message": "Hydration mismatch in h1: TSX=\"null\" vs HTML=\"Terms of Service\""
+      },
+      {
+        "page": "City: edinburgh",
+        "type": "HYDRATION_MISMATCH",
+        "field": "description",
+        "tsx": "Planning a trip to Edinburgh? Wondering about the best things to do in Edinburgh? You're in the right place! This guide is packed with must-see attractions, ...",
+        "html": "Planning a trip to Edinburgh? Wondering about the best things to do in Edinburgh? You're in the right place! This guide is packed with must-see",
+        "message": "Hydration mismatch in description: TSX=\"Planning a trip to Edinburgh? Wondering about the best things to do in Edinburgh? You're in the right place! This guide is packed with must-see attractions, ...\" vs HTML=\"Planning a trip to Edinburgh? Wondering about the best things to do in Edinburgh? You're in the right place! This guide is packed with must-see\""
+      },
+      {
+        "page": "City: edinburgh",
+        "type": "HYDRATION_MISMATCH",
+        "field": "h1",
+        "tsx": "Edinburgh",
+        "html": "15 Best Things to Do in Edinburgh, United Kingdom (2025 Guide)",
+        "message": "Hydration mismatch in h1: TSX=\"Edinburgh\" vs HTML=\"15 Best Things to Do in Edinburgh, United Kingdom (2025 Guide)\""
+      },
+      {
+        "page": "City: london",
+        "type": "HYDRATION_MISMATCH",
+        "field": "h1",
+        "tsx": "London",
+        "html": "15 Best Things to Do in London, United Kingdom (2025 Guide)",
+        "message": "Hydration mismatch in h1: TSX=\"London\" vs HTML=\"15 Best Things to Do in London, United Kingdom (2025 Guide)\""
+      },
+      {
+        "page": "City: rome",
+        "type": "HYDRATION_MISMATCH",
+        "field": "h1",
+        "tsx": "Rome",
+        "html": "15 Best Things to Do in Rome, Italy (2025 Guide)",
+        "message": "Hydration mismatch in h1: TSX=\"Rome\" vs HTML=\"15 Best Things to Do in Rome, Italy (2025 Guide)\""
+      },
+      {
+        "page": "City: seoul",
+        "type": "HYDRATION_MISMATCH",
+        "field": "description",
+        "tsx": "Planning a trip to Seoul? You're in for a treat! This guide highlights the best things to do in Seoul, from exploring ancient palaces to indulging in the vib...",
+        "html": "Planning a trip to Seoul? You're in for a treat! This guide highlights the best things to do in Seoul, from exploring ancient palaces to indulging in the",
+        "message": "Hydration mismatch in description: TSX=\"Planning a trip to Seoul? You're in for a treat! This guide highlights the best things to do in Seoul, from exploring ancient palaces to indulging in the vib...\" vs HTML=\"Planning a trip to Seoul? You're in for a treat! This guide highlights the best things to do in Seoul, from exploring ancient palaces to indulging in the\""
+      },
+      {
+        "page": "City: seoul",
+        "type": "HYDRATION_MISMATCH",
+        "field": "h1",
+        "tsx": "Seoul",
+        "html": "15 Best Things to Do in Seoul, South Korea (2025 Guide)",
+        "message": "Hydration mismatch in h1: TSX=\"Seoul\" vs HTML=\"15 Best Things to Do in Seoul, South Korea (2025 Guide)\""
+      },
+      {
+        "page": "City: tokyo",
+        "type": "HYDRATION_MISMATCH",
+        "field": "h1",
+        "tsx": "Tokyo",
+        "html": "15 Best Things to Do in Tokyo, Japan (2025 Guide)",
+        "message": "Hydration mismatch in h1: TSX=\"Tokyo\" vs HTML=\"15 Best Things to Do in Tokyo, Japan (2025 Guide)\""
+      },
+      {
+        "page": "City: kyoto",
+        "type": "HYDRATION_MISMATCH",
+        "field": "h1",
+        "tsx": "kyoto",
+        "html": "15 Best Things to Do in kyoto, Japan (2025 Guide)",
+        "message": "Hydration mismatch in h1: TSX=\"kyoto\" vs HTML=\"15 Best Things to Do in kyoto, Japan (2025 Guide)\""
+      }
+    ],
+    "score": 14
+  },
+  "cloaking": {
+    "totalRoutes": 14,
+    "cloakedRoutes": 14,
+    "nonCloakedRoutes": 0,
+    "issues": [],
+    "passed": [
+      "Bot detection function exists",
+      "Comprehensive bot patterns detected",
+      "Route handlers for cloaking found",
+      "Home has proper SEO content",
+      "Destinations has proper SEO content",
+      "Blogs has proper SEO content",
+      "Cookie Policy has proper SEO content",
+      "Privacy Policy has proper SEO content",
+      "Terms of Service has proper SEO content",
+      "City: edinburgh has proper SEO content",
+      "City: edinburgh has proper SEO content",
+      "City: kyoto has proper SEO content",
+      "City: london has proper SEO content",
+      "City: rome has proper SEO content",
+      "City: seoul has proper SEO content",
+      "City: seoul has proper SEO content",
+      "City: tokyo has proper SEO content"
+    ],
+    "score": 100
+  }
+}
