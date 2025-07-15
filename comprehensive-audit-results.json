@@ -16,12 +16,12 @@
     "score": 100
   },
   "hydration": {
-    "totalChecks": 78,
+    "totalChecks": 39,
     "passedChecks": 39,
     "failedChecks": 0,
     "warnings": [],
     "errors": [],
-    "score": 50
+    "score": 100
   },
   "cloaking": {
     "totalRoutes": 15,

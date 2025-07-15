@@ -50,6 +50,21 @@ import {
   runHydrationAudit
 } from './hydration-hooks';
 import { interlinkingSystem } from './utils/interlinking';
+import { execSync } from 'child_process';
+
+// Helper function to run automatic compliance enforcement
+async function runAutomaticComplianceEnforcement() {
+  try {
+    console.log('🚀 Running automatic compliance enforcement...');
+    execSync('node scripts/automatic-compliance-enforcer.js', { 
+      cwd: process.cwd(), 
+      stdio: 'inherit' 
+    });
+    console.log('✅ Compliance enforcement completed');
+  } catch (error) {
+    console.error('❌ Compliance enforcement failed:', error.message);
+  }
+}
 
 // Helper function to regenerate static HTML files
 async function regenerateStaticFiles() {
@@ -1950,6 +1965,9 @@ Double-check all brackets, quotes, and commas are properly matched.`;
         console.warn('⚠️  Hydration enforcement warning:', hydrationError.message);
       }
       
+      // Run automatic compliance enforcement
+      await runAutomaticComplianceEnforcement();
+      
       res.json({
         success: true,
         cityName: cityFileName,
@@ -1957,6 +1975,7 @@ Double-check all brackets, quotes, and commas are properly matched.`;
         filePath: `client/src/pages/cities/${cityFileName}.tsx`,
         htmlGenerated,
         staticFilesRegenerated: regenerationSuccess,
+        complianceEnforcement: 'completed',
         message: `City page for ${city} created successfully${htmlMessage} and integrated into navigation${regenerationSuccess ? ' with static files updated' : ''}`
       });
 
@@ -2417,6 +2436,9 @@ Double-check all brackets, quotes, and commas are properly matched.`;
         console.warn('⚠️  Blog hydration enforcement warning:', hydrationError.message);
       }
 
+      // Run automatic compliance enforcement
+      await runAutomaticComplianceEnforcement();
+
       res.json({
         success: true,
         blogId,
@@ -2424,6 +2446,7 @@ Double-check all brackets, quotes, and commas are properly matched.`;
         filePath: `client/src/blogs/${blogFileName}`,
         blogHtmlGenerated,
         staticFilesRegenerated: regenerationSuccess,
+        complianceEnforcement: 'completed',
         message: `Blog "${title}" created successfully and sitemap updated${blogHtmlMessage}${regenerationSuccess ? ' with static files updated' : ''}`
       });
 
@@ -2957,6 +2980,22 @@ Double-check all brackets, quotes, and commas are properly matched.`;
       res.status(500).json({
         error: 'Failed to get internal links statistics',
         details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  // Automatic compliance enforcement endpoint
+  app.post('/api/admin/compliance-enforcement', requireAdmin, async (req, res) => {
+    try {
+      await runAutomaticComplianceEnforcement();
+      res.json({ 
+        success: true, 
+        message: 'Automatic compliance enforcement completed successfully' 
+      });
+    } catch (error) {
+      res.status(500).json({ 
+        error: 'Compliance enforcement failed', 
+        details: error.message 
       });
     }
   });

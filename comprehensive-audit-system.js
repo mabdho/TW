@@ -133,7 +133,8 @@ class ComprehensiveAuditSystem {
       }
     }
 
-    this.results.hydration.totalChecks = pages.length * 3; // Title, description, H1
+    // Don't set totalChecks here - let compareHydrationData count them
+    this.results.hydration.totalChecks = 0;
 
     for (const page of pages) {
       await this.auditPageHydration(page);
@@ -515,7 +516,11 @@ class ComprehensiveAuditSystem {
     for (const check of checks) {
       this.results.hydration.totalChecks++;
       
-      if (check.tsx === check.html) {
+      // Handle null/undefined values - if both are null/undefined, consider it a match
+      const tsxValue = check.tsx || '';
+      const htmlValue = check.html || '';
+      
+      if (tsxValue === htmlValue) {
         this.results.hydration.passedChecks++;
       } else {
         this.results.hydration.failedChecks++;
