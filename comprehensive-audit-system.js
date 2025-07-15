@@ -352,9 +352,9 @@ class ComprehensiveAuditSystem {
     const imageMatch = content.match(/imageUrl=\{?"([^"]+)"\}?/);
     data.imageUrl = imageMatch ? imageMatch[1] : null;
     
-    // Extract H1 (city name)
-    const cityMatch = content.match(/cityName="([^"]+)"/);
-    data.h1 = cityMatch ? cityMatch[1] : null;
+    // Extract H1 (should be the title prop since CityPageTemplate uses title for H1)
+    // The H1 in the React component is actually rendered using the title prop
+    data.h1 = data.title;
     
     return data;
   }

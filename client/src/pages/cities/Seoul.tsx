@@ -7,7 +7,7 @@ export const Seoul: React.FC = () => {
       cityName="Seoul"
       country="South Korea"
       title={"15 Best Things to Do in Seoul, South Korea (2025 Guide)"}
-      description={`Planning a trip to Seoul? You're in for a treat! This guide highlights the best things to do in Seoul, from exploring ancient palaces to indulging in the vib...`}
+      description={`Planning a trip to Seoul? You're in for a treat! This guide highlights the best things to do in Seoul, from exploring ancient palaces to indulging in the`}
       imageUrl={"https://images.unsplash.com/photo-1595817986621-2b7d9ffd3f25?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
       ]}

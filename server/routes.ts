@@ -1145,6 +1145,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Function to extract HTML data as source of truth
+  function extractHtmlSourceOfTruth(htmlFilePath: string): any {
+    try {
+      const { JSDOM } = require('jsdom');
+      const htmlContent = require('fs').readFileSync(htmlFilePath, 'utf-8');
+      const dom = new JSDOM(htmlContent);
+      const document = dom.window.document;
+      
+      // Extract basic SEO data
+      const title = document.querySelector('title')?.textContent || '';
+      const description = document.querySelector('meta[name="description"]')?.getAttribute('content') || '';
+      const h1 = document.querySelector('h1')?.textContent?.trim() || '';
+      const imageUrl = document.querySelector('meta[property="og:image"]')?.getAttribute('content') || '';
+      
+      // Extract structured data
+      const structuredDataScript = document.querySelector('script[type="application/ld+json"]');
+      let structuredData = {};
+      if (structuredDataScript) {
+        try {
+          structuredData = JSON.parse(structuredDataScript.textContent || '{}');
+        } catch (e) {
+          console.warn('Failed to parse structured data from HTML');
+        }
+      }
+      
+      return {
+        title,
+        description,
+        h1,
+        imageUrl,
+        structuredData
+      };
+    } catch (error) {
+      console.warn('Failed to extract HTML data:', error);
+      return null;
+    }
+  }
+
   // Admin route to generate city pages (now protected)
   app.post('/api/admin/generate-city-page', requireAdmin, async (req, res) => {
     try {
@@ -1172,6 +1210,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       } else {
 
+      // STEP 1: Check if HTML file exists as source of truth
+      const htmlDirPath = path.join(process.cwd(), 'dist', 'public', `best-things-to-do-in-${city.toLowerCase()}`);
+      const htmlFilePath = path.join(htmlDirPath, 'index.html');
+      let htmlSourceData = null;
+      
+      if (existsSync(htmlFilePath)) {
+        console.log(`📄 Found existing HTML file for ${city}, using as source of truth`);
+        htmlSourceData = extractHtmlSourceOfTruth(htmlFilePath);
+      } else {
+        console.log(`📄 No existing HTML file found for ${city}, generating new content`);
+      }
+
       // Generate content using Gemini with fallback
         let model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
         let modelName = "gemini-2.0-flash-exp";
@@ -1180,7 +1230,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
 Generate content for: ${city}, ${country}${continent ? ` (${continent})` : ''}
 
-Create a comprehensive travel guide with the title: "Best Things to Do in ${city}, ${country} (2025 Guide)"
+${htmlSourceData ? `CRITICAL: An existing HTML file exists for this city as the SOURCE OF TRUTH. You MUST align your TSX generation with this HTML content:
+
+HTML Source of Truth:
+- Title: "${htmlSourceData.title}"
+- Description: "${htmlSourceData.description}"
+- H1: "${htmlSourceData.h1}"
+- Image URL: "${htmlSourceData.imageUrl}"
+
+MANDATORY REQUIREMENTS:
+1. Use the EXACT title from HTML: "${htmlSourceData.title}"
+2. Use the EXACT description from HTML: "${htmlSourceData.description}"
+3. The H1 should match the HTML H1: "${htmlSourceData.h1}"
+4. Use the same image URL: "${htmlSourceData.imageUrl}"
+5. Generate TSX content that aligns with the HTML structure and metadata
+
+Your TSX generation must create content that will hydrate perfectly with the existing HTML.` : `Create a comprehensive travel guide with the title: "Best Things to Do in ${city}, ${country} (2025 Guide)"`}
 
 The primary keyword is: "Best Things to Do in ${city}"
 The secondary keyword is: "Things to do in ${city}"
@@ -1229,10 +1294,10 @@ CONTENT FORMATTING REQUIREMENTS:
 Generate content with this EXACT structure in valid JSON format:
 
 {
-  "metaTitle": "Best Things to Do in ${city}, ${country} (2025 Guide)",
-  "metaDescription": "Discover the best things to do in ${city} — top attractions, hidden gems, and food spots. Complete ${city} travel guide. (MUST naturally include 'best things to do in ${city}' AND 'things to do in ${city}', MAXIMUM 155 characters - count carefully and ensure it never exceeds this limit)",
+  "metaTitle": "${htmlSourceData ? `"${htmlSourceData.title}"` : `"Best Things to Do in ${city}, ${country} (2025 Guide)"`}",
+  "metaDescription": "${htmlSourceData ? `"${htmlSourceData.description}"` : `"Discover the best things to do in ${city} — top attractions, hidden gems, and food spots. Complete ${city} travel guide. (MUST naturally include 'best things to do in ${city}' AND 'things to do in ${city}', MAXIMUM 155 characters - count carefully and ensure it never exceeds this limit)"`}",
   "slug": "things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}",
-  "description": "A meta-style introduction (150–200 words) that uses the exact phrase 'Best Things to Do in ${city}' and 'Things to do in ${city}' naturally in the first 1–2 sentences. Write in a human, engaging tone with varied sentence structure and subtle imperfections that feel authentic.",
+  "description": "${htmlSourceData ? `"A meta-style introduction (150–200 words) that aligns with the HTML description: '${htmlSourceData.description}'. Write in a human, engaging tone with varied sentence structure and subtle imperfections that feel authentic."` : `"A meta-style introduction (150–200 words) that uses the exact phrase 'Best Things to Do in ${city}' and 'Things to do in ${city}' naturally in the first 1–2 sentences. Write in a human, engaging tone with varied sentence structure and subtle imperfections that feel authentic."`}",
   "highlights": ["5–6 one-line must-see places"],
   "attractions": [
     {
@@ -1545,10 +1610,22 @@ VERIFY your JSON is complete before responding. The response MUST be parseable b
 
       // Generate the React component file
       const cityFileName = city.replace(/\s+/g, '');
+      
+      // Override contentData with HTML source data if available
+      if (htmlSourceData) {
+        console.log('🔄 Overriding AI content with HTML source of truth data');
+        contentData.metaTitle = htmlSourceData.title;
+        contentData.metaDescription = htmlSourceData.description;
+        // Ensure hero image URL matches HTML
+        if (htmlSourceData.imageUrl) {
+          contentData.imageUrl = htmlSourceData.imageUrl;
+        }
+      }
+      
       const componentCode = generateReactComponent(
         cityFileName,
         contentData,
-        heroImageUrl || '', // Use provided hero image URL
+        htmlSourceData?.imageUrl || heroImageUrl || '', // Use HTML image URL first, then provided hero image URL
         [], // galleryImages - empty for simplified form
         country
       );
@@ -2830,7 +2907,8 @@ function generateReactComponent(
   galleryImages: any[],
   country: string
 ): string {
-  const title = `15 Best Things to Do in ${cityName.replace(/([A-Z])/g, ' $1').trim()}, ${country} (2025 Guide)`;
+  // Use the metaTitle from contentData (which contains HTML source truth) instead of generating it
+  const title = contentData.metaTitle || `15 Best Things to Do in ${cityName.replace(/([A-Z])/g, ' $1').trim()}, ${country} (2025 Guide)`;
   
   // Format gallery images
   const formattedGalleryImages = galleryImages.map(img => `
@@ -2923,7 +3001,7 @@ export const ${cityName}: React.FC = () => {
       cityName="${cityName.replace(/([A-Z])/g, ' $1').trim()}"
       country="${country}"
       title={"${title}"}
-      description={\`${contentData.description.replace(/`/g, '\\`')}\`}${heroImageUrl ? `\n      imageUrl={"${heroImageUrl}"}` : ''}
+      description={\`${(contentData.metaDescription || contentData.description).replace(/`/g, '\\`')}\`}${heroImageUrl ? `\n      imageUrl={"${heroImageUrl}"}` : ''}
       galleryImages={[${formattedGalleryImages}
       ]}
       highlights={[${formattedHighlights}]}

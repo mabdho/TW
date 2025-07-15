@@ -1,99 +1,9 @@
 {
   "htmlTsxSync": {
     "totalPages": 6,
-    "syncedPages": 0,
-    "mismatches": [
-      {
-        "type": "CONTENT_MISMATCH",
-        "cityName": "edinburgh",
-        "tsxFile": "/home/runner/workspace/client/src/pages/cities/Edinburgh.tsx",
-        "htmlFile": "/home/runner/workspace/dist/public/best-things-to-do-in-edinburgh/index.html",
-        "mismatches": [
-          {
-            "field": "description",
-            "tsx": "Planning a trip to Edinburgh? Wondering about the best things to do in Edinburgh? You're in the right place! This guide is packed with must-see attractions, ...",
-            "html": "Planning a trip to Edinburgh? Wondering about the best things to do in Edinburgh? You're in the right place! This guide is packed with must-see"
-          },
-          {
-            "field": "h1",
-            "tsx": "Edinburgh",
-            "html": "15 Best Things to Do in Edinburgh, United Kingdom (2025 Guide)"
-          }
-        ]
-      },
-      {
-        "type": "CONTENT_MISMATCH",
-        "cityName": "london",
-        "tsxFile": "/home/runner/workspace/client/src/pages/cities/London.tsx",
-        "htmlFile": "/home/runner/workspace/dist/public/best-things-to-do-in-london/index.html",
-        "mismatches": [
-          {
-            "field": "h1",
-            "tsx": "London",
-            "html": "15 Best Things to Do in London, United Kingdom (2025 Guide)"
-          }
-        ]
-      },
-      {
-        "type": "CONTENT_MISMATCH",
-        "cityName": "rome",
-        "tsxFile": "/home/runner/workspace/client/src/pages/cities/Rome.tsx",
-        "htmlFile": "/home/runner/workspace/dist/public/best-things-to-do-in-rome/index.html",
-        "mismatches": [
-          {
-            "field": "h1",
-            "tsx": "Rome",
-            "html": "15 Best Things to Do in Rome, Italy (2025 Guide)"
-          }
-        ]
-      },
-      {
-        "type": "CONTENT_MISMATCH",
-        "cityName": "seoul",
-        "tsxFile": "/home/runner/workspace/client/src/pages/cities/Seoul.tsx",
-        "htmlFile": "/home/runner/workspace/dist/public/best-things-to-do-in-seoul/index.html",
-        "mismatches": [
-          {
-            "field": "description",
-            "tsx": "Planning a trip to Seoul? You're in for a treat! This guide highlights the best things to do in Seoul, from exploring ancient palaces to indulging in the vib...",
-            "html": "Planning a trip to Seoul? You're in for a treat! This guide highlights the best things to do in Seoul, from exploring ancient palaces to indulging in the"
-          },
-          {
-            "field": "h1",
-            "tsx": "Seoul",
-            "html": "15 Best Things to Do in Seoul, South Korea (2025 Guide)"
-          }
-        ]
-      },
-      {
-        "type": "CONTENT_MISMATCH",
-        "cityName": "tokyo",
-        "tsxFile": "/home/runner/workspace/client/src/pages/cities/Tokyo.tsx",
-        "htmlFile": "/home/runner/workspace/dist/public/best-things-to-do-in-tokyo.html",
-        "mismatches": [
-          {
-            "field": "h1",
-            "tsx": "Tokyo",
-            "html": "15 Best Things to Do in Tokyo, Japan (2025 Guide)"
-          }
-        ]
-      },
-      {
-        "type": "CONTENT_MISMATCH",
-        "cityName": "kyoto",
-        "tsxFile": "/home/runner/workspace/client/src/pages/cities/kyoto.tsx",
-        "htmlFile": "/home/runner/workspace/dist/public/best-things-to-do-in-kyoto.html",
-        "mismatches": [
-          {
-            "field": "h1",
-            "tsx": "kyoto",
-            "html": "15 Best Things to Do in kyoto, Japan (2025 Guide)"
-          }
-        ]
-      }
-    ],
-    "passed": [],
-    "failed": [
+    "syncedPages": 6,
+    "mismatches": [],
+    "passed": [
       "edinburgh",
       "london",
       "rome",
@@ -101,12 +11,13 @@
       "tokyo",
       "kyoto"
     ],
-    "score": 0
+    "failed": [],
+    "score": 100
   },
   "hydration": {
     "totalChecks": 72,
-    "passedChecks": 10,
-    "failedChecks": 26,
+    "passedChecks": 18,
+    "failedChecks": 18,
     "warnings": [],
     "errors": [
       {
@@ -252,73 +163,9 @@
         "tsx": null,
         "html": "Terms of Service",
         "message": "Hydration mismatch in h1: TSX=\"null\" vs HTML=\"Terms of Service\""
-      },
-      {
-        "page": "City: edinburgh",
-        "type": "HYDRATION_MISMATCH",
-        "field": "description",
-        "tsx": "Planning a trip to Edinburgh? Wondering about the best things to do in Edinburgh? You're in the right place! This guide is packed with must-see attractions, ...",
-        "html": "Planning a trip to Edinburgh? Wondering about the best things to do in Edinburgh? You're in the right place! This guide is packed with must-see",
-        "message": "Hydration mismatch in description: TSX=\"Planning a trip to Edinburgh? Wondering about the best things to do in Edinburgh? You're in the right place! This guide is packed with must-see attractions, ...\" vs HTML=\"Planning a trip to Edinburgh? Wondering about the best things to do in Edinburgh? You're in the right place! This guide is packed with must-see\""
-      },
-      {
-        "page": "City: edinburgh",
-        "type": "HYDRATION_MISMATCH",
-        "field": "h1",
-        "tsx": "Edinburgh",
-        "html": "15 Best Things to Do in Edinburgh, United Kingdom (2025 Guide)",
-        "message": "Hydration mismatch in h1: TSX=\"Edinburgh\" vs HTML=\"15 Best Things to Do in Edinburgh, United Kingdom (2025 Guide)\""
-      },
-      {
-        "page": "City: london",
-        "type": "HYDRATION_MISMATCH",
-        "field": "h1",
-        "tsx": "London",
-        "html": "15 Best Things to Do in London, United Kingdom (2025 Guide)",
-        "message": "Hydration mismatch in h1: TSX=\"London\" vs HTML=\"15 Best Things to Do in London, United Kingdom (2025 Guide)\""
-      },
-      {
-        "page": "City: rome",
-        "type": "HYDRATION_MISMATCH",
-        "field": "h1",
-        "tsx": "Rome",
-        "html": "15 Best Things to Do in Rome, Italy (2025 Guide)",
-        "message": "Hydration mismatch in h1: TSX=\"Rome\" vs HTML=\"15 Best Things to Do in Rome, Italy (2025 Guide)\""
-      },
-      {
-        "page": "City: seoul",
-        "type": "HYDRATION_MISMATCH",
-        "field": "description",
-        "tsx": "Planning a trip to Seoul? You're in for a treat! This guide highlights the best things to do in Seoul, from exploring ancient palaces to indulging in the vib...",
-        "html": "Planning a trip to Seoul? You're in for a treat! This guide highlights the best things to do in Seoul, from exploring ancient palaces to indulging in the",
-        "message": "Hydration mismatch in description: TSX=\"Planning a trip to Seoul? You're in for a treat! This guide highlights the best things to do in Seoul, from exploring ancient palaces to indulging in the vib...\" vs HTML=\"Planning a trip to Seoul? You're in for a treat! This guide highlights the best things to do in Seoul, from exploring ancient palaces to indulging in the\""
-      },
-      {
-        "page": "City: seoul",
-        "type": "HYDRATION_MISMATCH",
-        "field": "h1",
-        "tsx": "Seoul",
-        "html": "15 Best Things to Do in Seoul, South Korea (2025 Guide)",
-        "message": "Hydration mismatch in h1: TSX=\"Seoul\" vs HTML=\"15 Best Things to Do in Seoul, South Korea (2025 Guide)\""
-      },
-      {
-        "page": "City: tokyo",
-        "type": "HYDRATION_MISMATCH",
-        "field": "h1",
-        "tsx": "Tokyo",
-        "html": "15 Best Things to Do in Tokyo, Japan (2025 Guide)",
-        "message": "Hydration mismatch in h1: TSX=\"Tokyo\" vs HTML=\"15 Best Things to Do in Tokyo, Japan (2025 Guide)\""
-      },
-      {
-        "page": "City: kyoto",
-        "type": "HYDRATION_MISMATCH",
-        "field": "h1",
-        "tsx": "kyoto",
-        "html": "15 Best Things to Do in kyoto, Japan (2025 Guide)",
-        "message": "Hydration mismatch in h1: TSX=\"kyoto\" vs HTML=\"15 Best Things to Do in kyoto, Japan (2025 Guide)\""
       }
     ],
-    "score": 14
+    "score": 25
   },
   "cloaking": {
     "totalRoutes": 14,
