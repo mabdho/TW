@@ -1073,7 +1073,7 @@ const pageStyles = `
   .smart-internal-links {
     margin: 3rem 0;
     padding: 0;
-    background: transparent;
+    background: white;
   }
 
   .smart-links-container {
@@ -1083,7 +1083,7 @@ const pageStyles = `
   .smart-links-title {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #1f2937;
+    color: #111827 !important;
     margin-bottom: 2rem;
     text-align: left;
     border-bottom: 2px solid #e5e7eb;
