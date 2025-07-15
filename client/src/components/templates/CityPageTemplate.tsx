@@ -36,6 +36,11 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
   // Generate SEO data for city page
   const seoData = generateCitySEOData(cityData, baseUrl);
   
+  // Override title if provided (to match HTML exactly)
+  if (title) {
+    seoData.title = title;
+  }
+  
   // Generate structured data for city page
   const structuredData = generateCityStructuredData(cityData, seoData);
   

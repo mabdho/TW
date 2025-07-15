@@ -14,7 +14,7 @@ export const London: React.FC = () => {
       cityName="London"
       country="United Kingdom"
       title={"15 Best Things to Do in London, United Kingdom (2025 Guide)"}
-      description={`Discover the best things to do in London with this comprehensive 2025 guide. From iconic Tower of London to hidden gems, explore top attractions and insider ...`}
+      description={`Discover the best things to do in London with this comprehensive 2025 guide. From iconic Tower of London to hidden gems, explore top attractions and insider tips for an unforgettable experience.`}
       imageUrl={"https://images.unsplash.com/photo-1737649766441-a334350d6015?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
       ]}

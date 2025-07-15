@@ -3,8 +3,18 @@ import { Footer } from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { FileTextIcon, UsersIcon, ShieldIcon, AlertTriangleIcon, ScaleIcon, MailIcon } from '@/components/icons/LightweightIcons';
+import { useEffect } from 'react';
 
 export default function TermsOfService() {
+  useEffect(() => {
+    // Update title and meta description to match HTML
+    document.title = "Terms of Service & User Agreement - TravelWanders";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.');
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
@@ -23,7 +33,7 @@ export default function TermsOfService() {
               Terms of Service
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Please read these Terms of Service carefully before using our website and services.
+              Read our terms of service to understand the rules and guidelines for using TravelWanders.
             </p>
             <p className="text-sm text-gray-500 mt-2">
               Last updated: January 11, 2025

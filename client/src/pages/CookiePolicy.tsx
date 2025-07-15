@@ -3,8 +3,18 @@ import { Footer } from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CookieIcon, SettingsIcon, EyeIcon, ShieldIcon, MailIcon } from '@/components/icons/LightweightIcons';
+import { useEffect } from 'react';
 
 export default function CookiePolicy() {
+  useEffect(() => {
+    // Update title and meta description to match HTML
+    document.title = "Cookie Policy | TravelWanders Travel Guide Platform";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Cookie Policy for TravelWanders - Learn about how we use cookies and similar technologies to enhance your travel guide experience.');
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />

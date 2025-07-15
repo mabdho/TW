@@ -3,8 +3,18 @@ import { Footer } from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ShieldIcon, EyeIcon, CookieIcon, DatabaseIcon, MailIcon, PhoneIcon } from '@/components/icons/LightweightIcons';
+import { useEffect } from 'react';
 
 export default function PrivacyPolicy() {
+  useEffect(() => {
+    // Update title and meta description to match HTML
+    document.title = "Privacy Policy - TravelWanders";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.');
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
@@ -20,10 +30,10 @@ export default function PrivacyPolicy() {
               </Badge>
             </div>
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Your Privacy Matters
+              Privacy Policy
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              We are committed to protecting your privacy and being transparent about how we collect, use, and protect your information.
+              Learn about how we collect, use, and protect your personal information when you use TravelWanders.
             </p>
             <p className="text-sm text-gray-500 mt-2">
               Last updated: January 11, 2025
