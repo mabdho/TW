@@ -19,6 +19,7 @@ const cityMap = {
 
   'london': London,
   'rome': Rome,
+  'edinburgh': createCityImport('Edinburgh', '../pages/cities/Edinburgh'),
 };
 
 interface DynamicCityRouteProps {
