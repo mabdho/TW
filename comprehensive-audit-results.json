@@ -1,9 +1,10 @@
 {
   "htmlTsxSync": {
-    "totalPages": 10,
-    "syncedPages": 10,
+    "totalPages": 11,
+    "syncedPages": 11,
     "mismatches": [],
     "passed": [
+      "bali",
       "berlin",
       "edinburgh",
       "london",
@@ -19,16 +20,16 @@
     "score": 100
   },
   "hydration": {
-    "totalChecks": 48,
-    "passedChecks": 48,
+    "totalChecks": 51,
+    "passedChecks": 51,
     "failedChecks": 0,
     "warnings": [],
     "errors": [],
     "score": 100
   },
   "cloaking": {
-    "totalRoutes": 18,
-    "cloakedRoutes": 18,
+    "totalRoutes": 19,
+    "cloakedRoutes": 19,
     "nonCloakedRoutes": 0,
     "issues": [],
     "passed": [
@@ -41,6 +42,7 @@
       "Cookie Policy has proper SEO content",
       "Privacy Policy has proper SEO content",
       "Terms of Service has proper SEO content",
+      "City: bali has proper SEO content",
       "City: berlin has proper SEO content",
       "City: edinburgh has proper SEO content",
       "City: edinburgh has proper SEO content",

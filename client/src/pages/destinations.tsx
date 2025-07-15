@@ -37,7 +37,8 @@ const cities = [
   { "name": "kyoto", "country": "Japan", "path": "/best-things-to-do-in-kyoto", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { "name": "San Francisco", "country": "USA", "path": "/best-things-to-do-in-san-francisco", "continent": "North America", "imageUrl": "https://plus.unsplash.com/premium_photo-1673002094239-c78228fbb426?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8U2FuJTIwRnJhbmNpc2NvfGVufDB8MHwwfHx8MA%3D%3D" },
   { "name": "São Paulo", "country": "Brazil", "path": "/best-things-to-do-in-são-paulo", "continent": "South America", "imageUrl": "https://images.unsplash.com/photo-1554168848-228452c09d60?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { "name": "San Diego", "country": "USA", "path": "/best-things-to-do-in-san-diego", "continent": "North America", "imageUrl": "https://plus.unsplash.com/premium_photo-1697730053017-3110659431c7?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
+  { "name": "San Diego", "country": "USA", "path": "/best-things-to-do-in-san-diego", "continent": "North America", "imageUrl": "https://plus.unsplash.com/premium_photo-1697730053017-3110659431c7?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { "name": "Bali", "country": "Indonesia", "path": "/best-things-to-do-in-bali", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1595817986621-2b7d9ffd3f25?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
 ];
 
 const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America", "South America"];
