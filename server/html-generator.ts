@@ -1539,9 +1539,19 @@ export function generateCompleteHTML(cityData: CityData): string {
   // Fix meta description - ensure under 155 characters without truncation ellipsis
   let seoDescription = cityData.description || `Discover the best things to do in ${cityData.cityName}, ${cityData.country}. Complete travel guide with top attractions, insider tips, and essential information for your perfect ${cityData.cityName} adventure.`;
   if (seoDescription.length > 155) {
-    // Find the last complete sentence or phrase that fits within 155 characters
+    // Find the last complete sentence or phrase that fits within 155 characters - NO ellipsis
     const lastSpace = seoDescription.lastIndexOf(' ', 155);
-    seoDescription = seoDescription.substring(0, lastSpace > 100 ? lastSpace : 155);
+    seoDescription = seoDescription.substring(0, lastSpace > 100 ? lastSpace : 155).trim();
+    // Ensure it doesn't end with punctuation that might look like truncation
+    if (seoDescription.endsWith('.') || seoDescription.endsWith(',') || seoDescription.endsWith(';')) {
+      // Keep natural ending
+    } else {
+      // Find last complete sentence or phrase
+      const lastSentence = seoDescription.lastIndexOf('.');
+      if (lastSentence > 100) {
+        seoDescription = seoDescription.substring(0, lastSentence + 1);
+      }
+    }
   }
   
   const heroStyle = `background-image: url('${cityData.imageUrl || ''}');`;
@@ -2972,7 +2982,7 @@ function generateLatestBlogsHTML(): string {
     const blogCardsHTML = latestBlogs.map(blog => `
       <div style="background: white; border: 1px solid #e5e7eb; border-radius: 0.75rem; overflow: hidden; transition: all 0.3s ease; margin-bottom: 1.5rem;">
         <div style="height: 12rem; background: linear-gradient(135deg, #059669 0%, #3b82f6 100%); position: relative;">
-          ${blog.imageUrl ? `<img src="${blog.imageUrl}" alt="${blog.title}" width="400" height="200" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;">` : ''}
+          ${blog.imageUrl ? `<img src="${blog.imageUrl}" alt="Featured travel blog: ${blog.title} - Travel guide and destination insights for wanderers" width="400" height="200" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;" loading="lazy" decoding="async">` : ''}
           ${blog.featured ? '<div style="position: absolute; top: 1rem; left: 1rem; background: #ea580c; color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 500;">Featured</div>' : ''}
         </div>
         <div style="padding: 1.5rem;">
@@ -3788,7 +3798,7 @@ export function generateIndividualBlogHTML(blogData: any): string {
       <h1 class="blog-title">${blogData.title}</h1>
       <p class="blog-excerpt">${blogData.excerpt}</p>
       
-      ${blogData.imageUrl ? `<img src="${blogData.imageUrl}" alt="${blogData.title}" class="blog-hero-image">` : ''}
+      ${blogData.imageUrl ? `<img src="${blogData.imageUrl}" alt="Travel blog header: ${blogData.title} - Expert travel insights and destination guide" class="blog-hero-image" loading="eager" width="1200" height="400" decoding="async">` : ''}
     </header>
     
     <div class="blog-body">
