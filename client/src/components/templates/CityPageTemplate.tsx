@@ -21,6 +21,7 @@ interface CityPageTemplateProps {
   baseUrl?: string;
   imageUrl?: string;
   faqs?: Array<{question: string; answer: string}>;
+  title?: string; // Add title prop to override default
 }
 
 export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
@@ -29,7 +30,8 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
   className = '',
   baseUrl,
   imageUrl,
-  faqs
+  faqs,
+  title
 }) => {
   // Generate SEO data for city page
   const seoData = generateCitySEOData(cityData, baseUrl);
@@ -132,8 +134,7 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
               <div className="max-w-4xl">
                 {/* H1 with main keyword - Mobile First Typography */}
                 <h1 className="text-2xl leading-tight sm:text-3xl sm:leading-tight md:text-4xl md:leading-tight lg:text-5xl lg:leading-tight xl:text-6xl font-bold mb-3 sm:mb-4 drop-shadow-lg">
-                  <span className="block sm:inline">Best Things to Do</span>{' '}
-                  <span className="block sm:inline">in {cityData.name}</span>
+                  {title || `Best Things to Do in ${cityData.name}`}
                 </h1>
                 
                 {/* Subtitle with keyword variations - Mobile Optimized */}

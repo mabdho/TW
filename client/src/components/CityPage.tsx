@@ -220,7 +220,7 @@ export const CityPage: React.FC<CityPageProps> = ({
       heroImage={imageUrl}
       criticalImages={galleryImageUrls.slice(0, 3)}
     >
-      <CityPageTemplate cityData={finalCityData} imageUrl={imageUrl}>
+      <CityPageTemplate cityData={finalCityData} imageUrl={imageUrl} title={title}>
         <div className="min-h-screen bg-gray-50">
           <Navigation />
       
