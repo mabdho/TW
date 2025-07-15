@@ -274,17 +274,17 @@ export async function saveHtmlFileToSubdirectory(subdirectory: string, fileName:
   return filePath;
 }
 
-// Helper function to read city data from React components
+// Helper function to read city data from destinations page (source of truth)
 function readCityDataFromComponents(): Array<{ name: string; country: string; route: string; continent?: string; imageUrl?: string }> {
   try {
-    // Read CityDirectory.tsx to get the main city list
-    const cityDirectoryPath = path.join(process.cwd(), 'client', 'src', 'components', 'CityDirectory.tsx');
-    const cityDirectoryContent = readFileSync(cityDirectoryPath, 'utf-8');
+    // Read destinations.tsx to get the actual city list displayed on the page
+    const destinationsPath = path.join(process.cwd(), 'client', 'src', 'pages', 'destinations.tsx');
+    const destinationsContent = readFileSync(destinationsPath, 'utf-8');
     
     // Extract the cities array from the file
-    const citiesMatch = cityDirectoryContent.match(/const cities = \[([\s\S]*?)\];/);
+    const citiesMatch = destinationsContent.match(/const cities = \[([\s\S]*?)\];/);
     if (!citiesMatch) {
-      console.warn('Could not find cities array in CityDirectory.tsx, falling back to default cities');
+      console.warn('Could not find cities array in destinations.tsx, falling back to default cities');
       return getDefaultCities();
     }
     
@@ -2620,6 +2620,8 @@ export function generateHomePageHTML(): string {
 
 export function generateDestinationsPageHTML(): string {
   const cities = readCityDataFromComponents();
+  const continents = ["Europe", "Asia", "Oceania", "Africa", "North America", "South America"];
+  const continentCount = continents.length;
   
   return `<!DOCTYPE html>
 <html lang="en">
@@ -2686,7 +2688,7 @@ export function generateDestinationsPageHTML(): string {
   <section class="py-16 bg-gradient-to-br from-green-50 to-blue-50">
     <div class="container mx-auto px-4 text-center">
       <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">All Destinations</h1>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Explore our comprehensive collection of travel guides for amazing destinations worldwide.</p>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Explore our complete collection of ${cities.length} travel guides spanning ${continentCount} continents. Find insider tips, must-see attractions, and local insights for every destination.</p>
     </div>
   </section>
   
