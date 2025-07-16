@@ -1304,6 +1304,54 @@ const pageStyles = `
     border-bottom: none;
   }
 
+  .internal-links-section {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+  }
+
+  .internal-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .internal-link-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+  }
+
+  .internal-link-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .internal-link-card h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+  }
+
+  .internal-link {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .internal-link:hover {
+    text-decoration: underline;
+  }
+
+  .link-description {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
   @media (max-width: 768px) {
     .hero-title {
       font-size: 2rem;
@@ -1404,8 +1452,35 @@ function generateDiscoveryTagsHTML(discoveryTags: any): string {
   `;
 }
 
-// Internal links removed per user request to avoid SEO penalties
-// This functionality is now disabled to maintain compliance
+// Smart interlinking system for enhanced SEO and user experience
+import { interlinkingSystem } from './utils/interlinking';
+
+function generateInternalLinksHTML(cityData: any): string {
+  try {
+    // Generate contextual internal links for the city page
+    const pageUrl = `/best-things-to-do-in-${cityData.slug || cityData.cityName.toLowerCase()}`;
+    const links = interlinkingSystem.generateInternalLinks(pageUrl, 'city');
+    
+    if (links.length === 0) return '';
+    
+    return `
+      <section class="section internal-links-section">
+        <h2 class="section-title">🔗 Related Destinations</h2>
+        <div class="internal-links-grid">
+          ${links.map(link => `
+            <div class="internal-link-card">
+              <h3><a href="${link.url}" class="internal-link">${link.title}</a></h3>
+              <p class="link-description">${link.description || `Explore ${link.title} and discover amazing attractions and experiences.`}</p>
+            </div>
+          `).join('')}
+        </div>
+      </section>
+    `;
+  } catch (error) {
+    console.warn('Error generating internal links:', error.message);
+    return '';
+  }
+}
 
 export async function generateCompleteHTML(cityData: CityData): Promise<string> {
   // Pre-generation hydration validation
@@ -1775,7 +1850,7 @@ export async function generateCompleteHTML(cityData: CityData): Promise<string> 
         </section>
         ` : ''}
         
-        <!-- Internal links removed to avoid SEO penalties -->
+        ${generateInternalLinksHTML(cityData)}
       </div>
     </div>
   `;
