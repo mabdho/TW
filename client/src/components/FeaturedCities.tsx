@@ -45,7 +45,7 @@ const FeaturedCities = () => {
                   {city.imageUrl ? (
                     <ImageOptimized
                       src={city.imageUrl}
-                      alt={`Best things to do in ${city.name}, ${city.country} - Featured destination`}
+                      alt={`${city.name} travel guide`}
                       width={300}
                       height={225}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"

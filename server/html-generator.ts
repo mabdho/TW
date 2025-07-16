@@ -2690,6 +2690,13 @@ export function generateHomePageHTML(): string {
       height: 200px;
       background: linear-gradient(135deg, #059669 0%, #3b82f6 100%);
       position: relative;
+      overflow: hidden;
+    }
+    
+    .destination-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     
     .destination-content {
@@ -3016,7 +3023,12 @@ export function generateBlogsPageHTML(): string {
           ${blogs.map(blog => `
             <a href="/blog/${blog.id}" class="blog-card">
               ${blog.featured ? '<div class="featured-badge">Featured</div>' : ''}
-              <div class="blog-image" style="${blog.imageUrl ? `background-image: url(${blog.imageUrl});` : 'background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);'}"></div>
+              <div class="blog-image">
+                ${blog.imageUrl ? 
+                  `<img src="${blog.imageUrl}" alt="${blog.title}" class="w-full h-full object-cover" loading="lazy">` : 
+                  '<div class="w-full h-full" style="background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);"></div>'
+                }
+              </div>
               <div class="blog-content">
                 <div class="blog-category">${blog.category}</div>
                 <h2 class="blog-title">${blog.title}</h2>
@@ -3053,10 +3065,10 @@ function generateFeaturedDestinationsCards(): string {
     <a href="${city.route}" class="group">
       <div class="bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-all duration-300 overflow-hidden">
         <div class="relative aspect-4/3 overflow-hidden">
-          <div class="w-full h-full ${city.imageUrl ? 
-            `bg-gray-900" style="background-image: url(${city.imageUrl}); background-size: cover; background-position: center;"` : 
-            'bg-gradient-to-br from-green-500 to-blue-500"'
-          }></div>
+          ${city.imageUrl ? 
+            `<img src="${city.imageUrl}" alt="${city.name} travel guide" class="w-full h-full object-cover" loading="lazy">` : 
+            '<div class="w-full h-full bg-gradient-to-br from-green-500 to-blue-500"></div>'
+          }
         </div>
         <div class="p-6">
           <h3 class="font-semibold text-gray-900 text-lg group-hover:text-green-600 transition-colors mb-2">${city.name}</h3>
@@ -3152,7 +3164,12 @@ function generateAllDestinationsCards(): string {
   
   return cities.map(city => `
     <a href="${city.route}" class="destination-card">
-      <div class="destination-image" style="${city.imageUrl ? `background-image: url(${city.imageUrl}); background-size: cover; background-position: center;` : 'background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);'}"></div>
+      <div class="destination-image">
+        ${city.imageUrl ? 
+          `<img src="${city.imageUrl}" alt="${city.name} destinations" class="w-full h-full object-cover" loading="lazy">` : 
+          '<div class="w-full h-full" style="background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);"></div>'
+        }
+      </div>
       <div class="destination-content">
         <h3 class="destination-title">${city.name}</h3>
         <p class="destination-country">${city.country}</p>

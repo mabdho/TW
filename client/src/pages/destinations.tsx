@@ -165,13 +165,15 @@ export default function DestinationsPage() {
                 <a href={city.path} className="block">
                   <div 
                     className={`relative h-48 overflow-hidden rounded-t-lg ${!city.imageUrl ? 'bg-gradient-to-br from-green-400 to-blue-500' : 'bg-gray-900'}`}
-                    style={city.imageUrl ? {
-                      backgroundImage: `url(${city.imageUrl})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                      backgroundRepeat: 'no-repeat'
-                    } : {}}
                   >
+                    {city.imageUrl ? (
+                      <img 
+                        src={city.imageUrl}
+                        alt={`${city.name} destinations`}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    ) : null}
                     <div className="absolute inset-0 bg-black/20"></div>
                     <div className="absolute top-3 left-3">
                       <Badge variant="secondary" className="bg-white/90 text-gray-900 text-xs">
