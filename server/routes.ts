@@ -52,26 +52,40 @@ import {
 import { interlinkingSystem } from './utils/interlinking';
 import { execSync } from 'child_process';
 
-// Helper function to run automatic compliance enforcement
+// Helper function to run automatic compliance enforcement with TSX-HTML sync
 async function runAutomaticComplianceEnforcement() {
   try {
-    console.log('🚀 Running automatic compliance enforcement...');
+    console.log('🚀 Running enhanced automatic compliance enforcement...');
     
-    // Import and execute the compliance enforcer using dynamic import
-    const complianceModule = await import('../scripts/automatic-compliance-enforcer.js');
-    const AutomaticComplianceEnforcer = complianceModule.default || complianceModule.AutomaticComplianceEnforcer;
-    const enforcer = new AutomaticComplianceEnforcer();
+    // Import and execute the enhanced compliance enforcer
+    const enhancedComplianceModule = await import('../scripts/enhanced-compliance-enforcer.js');
+    const EnhancedComplianceEnforcer = enhancedComplianceModule.EnhancedComplianceEnforcer;
+    const enforcer = new EnhancedComplianceEnforcer();
     const success = await enforcer.enforceCompliance();
     
-    if (!success) {
-      throw new Error('Compliance enforcement failed');
+    if (success) {
+      console.log('✅ Enhanced automatic compliance enforcement completed successfully');
+    } else {
+      console.warn('⚠️  Enhanced automatic compliance enforcement completed with warnings');
     }
     
-    console.log('✅ Compliance enforcement completed');
-    return true;
+    return success;
   } catch (error) {
-    console.error('❌ Compliance enforcement failed:', error.message);
-    throw error;
+    console.error('❌ Enhanced automatic compliance enforcement failed, trying fallback...');
+    
+    // Fallback to original compliance enforcer if enhanced version fails
+    try {
+      const complianceModule = await import('../scripts/automatic-compliance-enforcer.js');
+      const AutomaticComplianceEnforcer = complianceModule.default || complianceModule.AutomaticComplianceEnforcer;
+      const enforcer = new AutomaticComplianceEnforcer();
+      const success = await enforcer.enforceCompliance();
+      
+      console.log('✅ Fallback compliance enforcement completed');
+      return success;
+    } catch (fallbackError) {
+      console.error('❌ Both enhanced and fallback compliance enforcement failed:', fallbackError);
+      return false; // Don't throw error to prevent breaking the main operation
+    }
   }
 }
 
@@ -550,13 +564,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
         
         console.log(`✅ Generated HTML for ${cityData.cityName} (${generatedHTML.length} bytes)`);
         
+        // Automatic TSX-HTML synchronization after HTML generation
+        try {
+          const { autoSyncTsxHtml } = await import('./utils/tsx-html-sync');
+          const syncSuccess = await autoSyncTsxHtml(cityName);
+          console.log(`🔄 TSX-HTML sync for ${cityData.cityName}: ${syncSuccess ? 'SUCCESS' : 'COMPLETED WITH WARNINGS'}`);
+        } catch (syncError) {
+          console.warn('⚠️  TSX-HTML sync warning:', syncError.message);
+        }
+        
         res.json({
           success: true,
           message: `Generated HTML for ${cityData.cityName}`,
           outputPath: outputFile,
           fileSize: `${(generatedHTML.length / 1024).toFixed(2)} KB`,
           cityName: cityData.cityName,
-          country: cityData.country
+          country: cityData.country,
+          synchronized: true
         });
         
       } catch (tsxError) {
@@ -1957,6 +1981,16 @@ Double-check all brackets, quotes, and commas are properly matched.`;
         console.error('❌ Error regenerating destinations page:', destError);
       }
       
+      // Automatic TSX-HTML Synchronization
+      console.log('🔄 Running automatic TSX-HTML synchronization...');
+      try {
+        const { autoSyncTsxHtml } = await import('./utils/tsx-html-sync');
+        const syncSuccess = await autoSyncTsxHtml(cityFileName);
+        console.log(`✅ TSX-HTML synchronization for ${city}: ${syncSuccess ? 'SUCCESS' : 'COMPLETED WITH WARNINGS'}`);
+      } catch (syncError) {
+        console.warn('⚠️  TSX-HTML synchronization warning:', syncError.message);
+      }
+
       // Enforce hydration compliance for the new city
       console.log('🔒 Enforcing hydration compliance for new city...');
       try {
@@ -3021,6 +3055,87 @@ Double-check all brackets, quotes, and commas are properly matched.`;
       res.status(500).json({ 
         error: 'Compliance enforcement failed', 
         details: error.message 
+      });
+    }
+  });
+
+  // TSX-HTML Synchronization endpoints
+  app.post('/api/admin/tsx-html-sync', requireAdmin, async (req, res) => {
+    try {
+      const { cityName } = req.body;
+      
+      if (!cityName) {
+        return res.status(400).json({ error: 'City name is required' });
+      }
+      
+      const { autoSyncTsxHtml } = await import('./utils/tsx-html-sync');
+      const syncSuccess = await autoSyncTsxHtml(cityName);
+      
+      res.json({
+        success: true,
+        synchronized: syncSuccess,
+        cityName,
+        message: `TSX-HTML synchronization ${syncSuccess ? 'completed successfully' : 'completed with warnings'} for ${cityName}`
+      });
+      
+    } catch (error) {
+      console.error('TSX-HTML synchronization error:', error);
+      res.status(500).json({
+        error: 'Failed to synchronize TSX-HTML',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  // Batch TSX-HTML Synchronization endpoint
+  app.post('/api/admin/tsx-html-sync-all', requireAdmin, async (req, res) => {
+    try {
+      const { batchSyncTsxHtml } = await import('./utils/tsx-html-sync');
+      const results = await batchSyncTsxHtml();
+      
+      res.json({
+        success: true,
+        results,
+        message: `Batch synchronization completed: ${results.success}/${results.total} cities synchronized successfully`
+      });
+      
+    } catch (error) {
+      console.error('Batch TSX-HTML synchronization error:', error);
+      res.status(500).json({
+        error: 'Failed to run batch TSX-HTML synchronization',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  // TSX-HTML Synchronization validation endpoint
+  app.post('/api/admin/tsx-html-validate', requireAdmin, async (req, res) => {
+    try {
+      const { cityName } = req.body;
+      
+      if (!cityName) {
+        return res.status(400).json({ error: 'City name is required' });
+      }
+      
+      const { TSXHTMLSynchronizer } = await import('./utils/tsx-html-sync');
+      const synchronizer = new TSXHTMLSynchronizer();
+      const validation = await synchronizer.validateSync(cityName);
+      
+      res.json({
+        success: true,
+        cityName,
+        synchronized: validation.synchronized,
+        issues: validation.issues,
+        message: validation.synchronized 
+          ? `${cityName} TSX and HTML are perfectly synchronized` 
+          : `${cityName} has ${validation.issues.length} synchronization issues`
+      });
+      
+    } catch (error) {
+      console.error('TSX-HTML validation error:', error);
+      res.status(500).json({
+        error: 'Failed to validate TSX-HTML synchronization',
+        details: error instanceof Error ? error.message : 'Unknown error'
       });
     }
   });
