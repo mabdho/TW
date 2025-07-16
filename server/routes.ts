@@ -2813,7 +2813,7 @@ Double-check all brackets, quotes, and commas are properly matched.`;
           error: 'Page type and data are required',
           example: {
             pageType: 'city',
-            pageData: { cityName: 'London', country: 'United Kingdom' }
+            pageData: { cityName: 'CityName', country: 'Country' }
           }
         });
       }
@@ -2850,7 +2850,7 @@ Double-check all brackets, quotes, and commas are properly matched.`;
       const enforcer = new HydrationEnforcer();
       
       // Enforce hydration for all existing city pages
-      const cityPages = ['London', 'Rome', 'Edinburgh'];
+      const cityPages = []; // Cities cleared - ready for fresh production content
       const results = [];
       
       for (const cityName of cityPages) {

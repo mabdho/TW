@@ -11,42 +11,7 @@ interface CityLink {
 }
 
 export const CITY_LINKS: CityLink[] = [
-  {
-    name: 'Milan',
-    url: '/best-things-to-do-in-milan',
-    country: 'Italy',
-    keywords: ['fashion', 'design', 'cathedral', 'opera', 'italy', 'duomo', 'scala', 'gothic', 'architecture']
-  },
-  {
-    name: 'Porto',
-    url: '/best-things-to-do-in-porto', 
-    country: 'Portugal',
-    keywords: ['port wine', 'douro', 'portugal', 'azulejo', 'tiles', 'river', 'unesco', 'historic']
-  },
-  {
-    name: 'Paris',
-    url: '/best-things-to-do-in-paris',
-    country: 'France', 
-    keywords: ['eiffel tower', 'louvre', 'france', 'art', 'museums', 'romance', 'culture', 'fashion']
-  },
-  {
-    name: 'Barcelona',
-    url: '/best-things-to-do-in-barcelona',
-    country: 'Spain',
-    keywords: ['gaudi', 'sagrada familia', 'spain', 'architecture', 'beach', 'catalonia', 'art', 'tapas']
-  },
-  {
-    name: 'Bologna',
-    url: '/best-things-to-do-in-bologna',
-    country: 'Italy',
-    keywords: ['food', 'university', 'italy', 'towers', 'cuisine', 'medieval', 'pasta', 'emilia-romagna']
-  },
-  {
-    name: 'Tokyo',
-    url: '/best-things-to-do-in-tokyo',
-    country: 'Japan',
-    keywords: ['temples', 'modern', 'japan', 'culture', 'sushi', 'technology', 'shibuya', 'tradition']
-  }
+  // City links cleared - ready for fresh production content via admin panel
 ];
 
 /**

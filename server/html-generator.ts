@@ -285,7 +285,7 @@ function readCityDataFromComponents(): Array<{ name: string; country: string; ro
     const citiesMatch = destinationsContent.match(/const cities = \[([\s\S]*?)\];/);
     if (!citiesMatch) {
       console.warn('Could not find cities array in destinations.tsx, falling back to default cities');
-      return getDefaultCities();
+      return [];
     }
     
     const citiesArrayContent = citiesMatch[1];
@@ -309,10 +309,10 @@ function readCityDataFromComponents(): Array<{ name: string; country: string; ro
       });
     }
     
-    return cities.length > 0 ? cities : getDefaultCities();
+    return cities.length > 0 ? cities : [];
   } catch (error) {
     console.error('Error reading city data from components:', error);
-    return getDefaultCities();
+    return [];
   }
 }
 
@@ -351,24 +351,16 @@ function readFeaturedCitiesFromComponents(): Array<{ name: string; country: stri
       });
     }
     
-    return cities.length > 0 ? cities : readCityDataFromComponents().slice(0, 6);
+    return cities.length > 0 ? cities : [];
   } catch (error) {
     console.error('Error reading featured cities from components:', error);
     return readCityDataFromComponents().slice(0, 6);
   }
 }
 
-// Fallback default cities
+// Fallback default cities - cleared for fresh content
 function getDefaultCities() {
-  return [
-    { name: 'Austin', country: 'USA', route: '/best-things-to-do-in-austin', continent: 'North America' },
-    { name: 'Berlin', country: 'Germany', route: '/best-things-to-do-in-berlin', continent: 'Europe' },
-    { name: 'Miami', country: 'USA', route: '/best-things-to-do-in-miami', continent: 'North America' },
-    { name: 'Milan', country: 'Italy', route: '/best-things-to-do-in-milan', continent: 'Europe' },
-    { name: 'Porto', country: 'Portugal', route: '/best-things-to-do-in-porto', continent: 'Europe' },
-    { name: 'Venice', country: 'Italy', route: '/best-things-to-do-in-venice', continent: 'Europe' },
-    { name: 'Zurich', country: 'Switzerland', route: '/best-things-to-do-in-zurich', continent: 'Europe' }
-  ];
+  return [];
 }
 
 // Helper function to read blog data from file system
