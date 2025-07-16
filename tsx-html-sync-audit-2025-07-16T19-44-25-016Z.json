@@ -1,0 +1,38 @@
+{
+  "cities": [
+    {
+      "fileName": "Zurich",
+      "score": 0,
+      "totalChecks": 3,
+      "passedChecks": 0,
+      "issues": [
+        {
+          "type": "title_missing_tsx",
+          "html": "Best Things to Do in Zurich, Switzerland (2025 Guide)",
+          "severity": "medium"
+        },
+        {
+          "type": "description_mismatch",
+          "tsx": "## Overview\nThe Altstadt, or Old Town, is the heart of Zurich. It",
+          "html": "Discover the best things to do in Zurich — top attractions, hidden gems, and food spots. Complete Zurich travel guide.",
+          "severity": "high"
+        },
+        {
+          "type": "h1_missing_tsx",
+          "html": "Best Things to Do in Zurich, Switzerland (2025 Guide)",
+          "severity": "low"
+        }
+      ],
+      "isSync": false
+    }
+  ],
+  "blogs": [],
+  "staticPages": [],
+  "summary": {
+    "totalChecked": 1,
+    "synchronized": 0,
+    "needsSync": 1,
+    "missing": 6,
+    "issues": []
+  }
+}
