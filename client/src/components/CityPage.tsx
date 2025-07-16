@@ -601,7 +601,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                         </div>
                         <h3 className="text-base sm:text-lg font-semibold text-gray-900">Getting Around</h3>
                       </div>
-                      <p className="text-gray-700 leading-relaxed text-xs sm:text-sm">{logistics.gettingAround}</p>
+                      <div className="text-gray-700 leading-relaxed text-xs sm:text-sm">{renderMarkdown(logistics.gettingAround)}</div>
                     </div>
                   )}
                   
@@ -613,7 +613,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                         </div>
                         <h3 className="text-base sm:text-lg font-semibold text-gray-900">Where to Stay</h3>
                       </div>
-                      <p className="text-gray-700 leading-relaxed text-xs sm:text-sm">{logistics.whereToStay}</p>
+                      <div className="text-gray-700 leading-relaxed text-xs sm:text-sm">{renderMarkdown(logistics.whereToStay)}</div>
                     </div>
                   )}
                   
@@ -625,7 +625,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                         </div>
                         <h3 className="text-base sm:text-lg font-semibold text-gray-900">Best Time to Visit</h3>
                       </div>
-                      <p className="text-gray-700 leading-relaxed text-xs sm:text-sm">{logistics.bestTimeToVisit}</p>
+                      <div className="text-gray-700 leading-relaxed text-xs sm:text-sm">{renderMarkdown(logistics.bestTimeToVisit)}</div>
                     </div>
                   )}
                   
@@ -637,7 +637,7 @@ export const CityPage: React.FC<CityPageProps> = ({
                         </div>
                         <h3 className="text-base sm:text-lg font-semibold text-gray-900">Suggested Itinerary</h3>
                       </div>
-                      <p className="text-gray-700 leading-relaxed text-xs sm:text-sm whitespace-pre-line">{logistics.suggestedItinerary}</p>
+                      <div className="text-gray-700 leading-relaxed text-xs sm:text-sm">{renderMarkdown(logistics.suggestedItinerary)}</div>
                     </div>
                   )}
                 </div>

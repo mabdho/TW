@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { renderMarkdown } from '../utils/markdownRenderer';
 // Optimized imports - using lightweight alternatives
 import { 
   MapPinIcon, 
@@ -366,9 +367,9 @@ export const InteractiveAttractionExplorer: React.FC<InteractiveAttractionExplor
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-3">
-                  {attraction.description.split('.')[0]}.
-                </p>
+                <div className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-3">
+                  {renderMarkdown(attraction.description.split('.')[0] + '.')}
+                </div>
                 
                 {interests.length > 0 && (
                   <div className="mb-3">
