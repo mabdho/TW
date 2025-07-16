@@ -8,7 +8,7 @@ export const Stockholm: React.FC = () => {
       country="Sweden"
       title={"Best Things to Do in Stockholm, Sweden (2025 Guide)"}
       description={`Discover the best things to do in Stockholm — top attractions, hidden gems, and food spots. Complete Stockholm travel guide.`}
-      imageUrl={"https://images.unsplash.com/photo-1509356843151-3e7d96241e11?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+      imageUrl={"https://images.unsplash.com/photo-1509356843151-3e7d96241e11?w=800&auto=format&fit=crop&q=75&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
       ]}
       highlights={["Explore Gamla Stan, Stockholm's Old Town.",

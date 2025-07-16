@@ -8,7 +8,7 @@ export const Milan: React.FC = () => {
       country="Italy"
       title={"Best Things to Do in Milan, Italy (2025 Guide)"}
       description={`Discover the best things to do in Milan — top attractions, hidden gems, and food spots. Complete Milan travel guide.`}
-      imageUrl={"https://images.unsplash.com/photo-1610016302534-6f67f1c968d8?q=80&w=1375&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+      imageUrl={"https://images.unsplash.com/photo-1610016302534-6f67f1c968d8?w=800&auto=format&fit=crop&q=75&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
       ]}
       highlights={["Visit the Duomo di Milano, a magnificent cathedral.",
