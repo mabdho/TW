@@ -1459,9 +1459,15 @@ function generateInternalLinksHTML(cityData: any): string {
   try {
     // Generate contextual internal links for the city page
     const pageUrl = `/best-things-to-do-in-${cityData.slug || cityData.cityName.toLowerCase()}`;
+    console.log(`🔗 Generating internal links for: ${pageUrl}`);
     const links = interlinkingSystem.generateInternalLinks(pageUrl, 'city');
     
-    if (links.length === 0) return '';
+    console.log(`🔗 Generated ${links.length} internal links for ${cityData.cityName}`);
+    
+    if (links.length === 0) {
+      console.warn(`⚠️  No internal links generated for ${cityData.cityName}`);
+      return '';
+    }
     
     return `
       <section class="section internal-links-section">
@@ -1470,14 +1476,14 @@ function generateInternalLinksHTML(cityData: any): string {
           ${links.map(link => `
             <div class="internal-link-card">
               <h3><a href="${link.url}" class="internal-link">${link.title}</a></h3>
-              <p class="link-description">${link.description || `Explore ${link.title} and discover amazing attractions and experiences.`}</p>
+              <p class="link-description">Explore ${link.title} and discover amazing attractions and experiences.</p>
             </div>
           `).join('')}
         </div>
       </section>
     `;
   } catch (error) {
-    console.warn('Error generating internal links:', error.message);
+    console.error('❌ Error generating internal links:', error);
     return '';
   }
 }

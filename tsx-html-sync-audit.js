@@ -94,6 +94,13 @@ class TSXHTMLSyncAuditor {
       const ogTitleMatch = content.match(/<meta[^>]*property=["\']og:title["\'][^>]*content=["\']([^"']+)["\'][^>]*>/);
       const ogDescMatch = content.match(/<meta[^>]*property=["\']og:description["\'][^>]*content=["\']([^"']+)["\'][^>]*>/);
       
+      // Extract interlinks
+      const interlinkMatches = content.match(/<a[^>]*href=["\']\/best-things-to-do-in-[^"']+["\'][^>]*>/g);
+      const interlinks = interlinkMatches ? interlinkMatches.length : 0;
+      
+      // Check for Related Destinations section
+      const hasRelatedSection = content.includes('🔗 Related Destinations');
+      
       return {
         title,
         description,
@@ -101,7 +108,9 @@ class TSXHTMLSyncAuditor {
         structuredData,
         ogTitle: ogTitleMatch ? ogTitleMatch[1].trim() : '',
         ogDescription: ogDescMatch ? ogDescMatch[1].trim() : '',
-        fileSize: fs.statSync(htmlPath).size
+        fileSize: fs.statSync(htmlPath).size,
+        interlinks,
+        hasRelatedSection
       };
     } catch (error) {
       console.warn(`Error extracting HTML data from ${htmlPath}:`, error.message);
@@ -183,6 +192,31 @@ class TSXHTMLSyncAuditor {
         type: 'h1_missing_tsx',
         html: htmlData.h1,
         severity: 'low'
+      });
+    }
+
+    // Check interlinks (HTML should have interlinks for city pages)
+    totalChecks++;
+    if (htmlData.interlinks && htmlData.interlinks >= 2) {
+      score++;
+    } else {
+      issues.push({
+        type: 'missing_interlinks',
+        html: htmlData.interlinks || 0,
+        severity: 'high',
+        message: 'City pages should have at least 2 interlinks to other cities/content'
+      });
+    }
+
+    // Check for Related Destinations section
+    totalChecks++;
+    if (htmlData.hasRelatedSection) {
+      score++;
+    } else {
+      issues.push({
+        type: 'missing_related_section',
+        severity: 'high',
+        message: 'Missing "🔗 Related Destinations" section'
       });
     }
 
