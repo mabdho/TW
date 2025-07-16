@@ -47,41 +47,66 @@ class ComprehensiveAuditSystem {
     console.log('\n📋 AUDIT 1: HTML/TSX SYNCHRONIZATION');
     console.log('=====================================');
     
-    const tsxFiles = this.findCityTsxFiles();
-    const htmlFiles = this.findCityHtmlFiles();
+    // Define all pages to check for HTML/TSX synchronization
+    const pagesToAudit = [
+      { name: 'home', htmlPath: 'dist/public/index.html', tsxPath: 'client/src/pages/home.tsx' },
+      { name: 'destinations', htmlPath: 'dist/public/destinations.html', tsxPath: 'client/src/pages/destinations.tsx' },
+      { name: 'blogs', htmlPath: 'dist/public/blogs.html', tsxPath: 'client/src/pages/blogs.tsx' },
+      { name: 'privacy-policy', htmlPath: 'dist/public/privacy-policy.html', tsxPath: 'client/src/pages/PrivacyPolicy.tsx' },
+      { name: 'terms-of-service', htmlPath: 'dist/public/terms-of-service.html', tsxPath: 'client/src/pages/TermsOfService.tsx' },
+      { name: 'cookie-policy', htmlPath: 'dist/public/cookie-policy.html', tsxPath: 'client/src/pages/CookiePolicy.tsx' }
+    ];
     
-    console.log(`Found ${tsxFiles.length} TSX files and ${htmlFiles.length} HTML files`);
-    
-    for (const tsxFile of tsxFiles) {
+    // Add city pages
+    const cityTsxFiles = this.findCityTsxFiles();
+    for (const tsxFile of cityTsxFiles) {
       const cityName = this.extractCityNameFromTsx(tsxFile);
-      const correspondingHtmlFile = this.findCorrespondingHtmlFile(cityName, htmlFiles);
+      const htmlPath = `dist/public/best-things-to-do-in-${cityName.toLowerCase().replace(/\s+/g, '-')}.html`;
       
-      if (correspondingHtmlFile) {
-        const syncResult = await this.compareTsxAndHtml(tsxFile, correspondingHtmlFile, cityName);
-        
-        if (syncResult.synchronized) {
-          this.results.htmlTsxSync.synchronizedCities++;
-        } else {
-          this.results.htmlTsxSync.mismatches.push({
-            cityName,
-            tsxFile,
-            htmlFile: correspondingHtmlFile,
-            issues: syncResult.issues
-          });
-        }
+      if (fs.existsSync(htmlPath)) {
+        pagesToAudit.push({
+          name: `city-${cityName}`,
+          htmlPath,
+          tsxPath: tsxFile
+        });
+      }
+    }
+    
+    // Add blog pages
+    const blogFiles = this.findBlogFiles();
+    for (const blogFile of blogFiles) {
+      const blogId = this.extractBlogId(blogFile);
+      const htmlPath = `dist/public/blog/${blogId}.html`;
+      
+      if (fs.existsSync(htmlPath)) {
+        pagesToAudit.push({
+          name: `blog-${blogId}`,
+          htmlPath,
+          tsxPath: blogFile
+        });
+      }
+    }
+    
+    console.log(`Auditing ${pagesToAudit.length} pages for HTML/TSX synchronization...`);
+    
+    for (const page of pagesToAudit) {
+      const syncResult = await this.auditPageHtmlTsxSync(page);
+      
+      if (syncResult.synchronized) {
+        this.results.htmlTsxSync.synchronizedCities++;
       } else {
         this.results.htmlTsxSync.mismatches.push({
-          cityName,
-          tsxFile,
-          htmlFile: null,
-          issues: ['No corresponding HTML file found']
+          pageName: page.name,
+          tsxFile: page.tsxPath,
+          htmlFile: page.htmlPath,
+          issues: syncResult.issues
         });
       }
       
       this.results.htmlTsxSync.totalCities++;
     }
     
-    console.log(`✅ HTML/TSX sync audit completed: ${this.results.htmlTsxSync.synchronizedCities}/${this.results.htmlTsxSync.totalCities} cities synchronized`);
+    console.log(`✅ HTML/TSX sync audit completed: ${this.results.htmlTsxSync.synchronizedCities}/${this.results.htmlTsxSync.totalCities} pages synchronized`);
   }
 
   /**
@@ -553,6 +578,61 @@ class ComprehensiveAuditSystem {
         issues: [`Error auditing page: ${error.message}`]
       };
     }
+  }
+
+  /**
+   * Audit HTML/TSX synchronization for a single page
+   */
+  async auditPageHtmlTsxSync(page) {
+    try {
+      // Read file contents
+      const tsxContent = fs.readFileSync(page.tsxPath, 'utf-8');
+      const htmlContent = fs.readFileSync(page.htmlPath, 'utf-8');
+      
+      // Extract data from both TSX and HTML
+      const tsxData = this.extractTsxData(tsxContent);
+      const htmlData = this.extractHtmlData(htmlContent);
+      
+      // Compare the data
+      const comparison = this.compareHtmlTsxData(page.name, tsxData, htmlData);
+      
+      return {
+        synchronized: comparison.matches,
+        issues: comparison.issues
+      };
+    } catch (error) {
+      return {
+        synchronized: false,
+        issues: [`Error auditing page: ${error.message}`]
+      };
+    }
+  }
+
+  /**
+   * Compare HTML/TSX synchronization data
+   */
+  compareHtmlTsxData(pageName, tsxData, htmlData) {
+    const issues = [];
+    
+    // Check title consistency
+    if (!this.compareValues(tsxData.title, htmlData.title)) {
+      issues.push(`Title sync mismatch: TSX="${tsxData.title}" vs HTML="${htmlData.title}"`);
+    }
+    
+    // Check description consistency
+    if (!this.compareValues(tsxData.description, htmlData.description)) {
+      issues.push(`Description sync mismatch: TSX="${tsxData.description}" vs HTML="${htmlData.description}"`);
+    }
+    
+    // Check H1 consistency
+    if (!this.compareValues(tsxData.h1, htmlData.h1)) {
+      issues.push(`H1 sync mismatch: TSX="${tsxData.h1}" vs HTML="${htmlData.h1}"`);
+    }
+    
+    return {
+      matches: issues.length === 0,
+      issues
+    };
   }
 
   /**
