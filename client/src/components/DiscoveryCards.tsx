@@ -452,6 +452,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
   const diningOptions = extractDiningOptions(attractions);
 
   const discoveryCards = [
+    // 1. Local Insider Tips
     {
       title: "Local Insider Tips",
       icon: <LightbulbIcon className="w-5 h-5 text-yellow-500" />,
@@ -468,149 +469,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
         </div>
       ))
     },
-    {
-      title: "Photo Spots",
-      icon: <CameraIcon className="w-5 h-5 text-blue-500" />,
-      color: "blue", 
-      summary: `${photoOps.length} photo opportunities`,
-      content: photoOps.slice(0, 4).map((op, index) => (
-        <div key={index} className="mb-3 p-3 bg-gradient-to-r from-sky-50/80 to-blue-50/80 dark:from-sky-900/20 dark:to-blue-900/20 rounded-xl border-l-4 border-sky-400 shadow-sm">
-          <div className="flex items-start gap-3">
-            <div className="p-1 bg-sky-100 dark:bg-sky-800/30 rounded-lg">
-              <CameraIcon className="w-4 h-4 text-sky-600 dark:text-sky-400 flex-shrink-0" />
-            </div>
-            <div className="flex-1">
-              <h4 className="font-semibold text-sky-700 dark:text-sky-300 text-sm mb-1">{op.spot}</h4>
-              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-                {renderInlineMarkdown(op.description)}
-              </p>
-            </div>
-          </div>
-        </div>
-      ))
-    },
-    {
-      title: "Experience Levels",
-      icon: <TargetIcon className="w-5 h-5 text-green-500" />,
-      color: "green",
-      summary: `${categories.easyAccess.length + categories.moderateAdventure.length + categories.localExpert.length} attractions categorized`,
-      content: (
-        <div className="space-y-2">
-          {categories.easyAccess.length > 0 && (
-            <div className="flex items-center gap-2">
-              <Badge variant="outline" className="bg-green-100 text-green-700 border-green-300 text-xs">
-                Easy Access
-              </Badge>
-              <span className="text-xs text-gray-600">{categories.easyAccess.length}</span>
-            </div>
-          )}
-          {categories.moderateAdventure.length > 0 && (
-            <div className="flex items-center gap-2">
-              <Badge variant="outline" className="bg-orange-100 text-orange-700 border-orange-300 text-xs">
-                Moderate
-              </Badge>
-              <span className="text-xs text-gray-600">{categories.moderateAdventure.length}</span>
-            </div>
-          )}
-          {categories.localExpert.length > 0 && (
-            <div className="flex items-center gap-2">
-              <Badge variant="outline" className="bg-purple-100 text-purple-700 border-purple-300 text-xs">
-                Expert
-              </Badge>
-              <span className="text-xs text-gray-600">{categories.localExpert.length}</span>
-            </div>
-          )}
-        </div>
-      )
-    },
-    {
-      title: "Time & Budget",
-      icon: <ClockIcon className="w-5 h-5 text-indigo-500" />,
-      color: "indigo",
-      summary: `Planning guide for ${attractions.length} attractions`,
-      content: (
-        <div className="space-y-3">
-          {attractions.slice(0, 4).map((attr, index) => (
-            <div key={index} className="p-3 bg-gradient-to-r from-violet-50/80 to-purple-50/80 dark:from-violet-900/20 dark:to-purple-900/20 rounded-xl border-l-4 border-violet-400 shadow-sm">
-              <div className="flex items-start gap-3">
-                <div className="p-1 bg-violet-100 dark:bg-violet-800/30 rounded-lg">
-                  <ClockIcon className="w-4 h-4 text-violet-600 dark:text-violet-400 flex-shrink-0" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-violet-700 dark:text-violet-300 mb-2 text-sm">
-                    {attr.name}
-                  </h4>
-                  <div className="flex gap-2 flex-wrap">
-                    <Badge variant="outline" className="text-xs bg-white/80 border-violet-200">
-                      <ClockIcon className="w-3 h-3 mr-1" />
-                      {getTimeEstimate(attr)}
-                    </Badge>
-                    <Badge variant="outline" className="text-xs bg-white/80 border-violet-200">
-                      <DollarSignIcon className="w-3 h-3 mr-1" />
-                      {getCostLevel(attr)}
-                    </Badge>
-                    <Badge variant="outline" className="text-xs bg-white/80 border-violet-200">
-                      <CalendarIcon className="w-3 h-3 mr-1" />
-                      {getSeasonalInfo(attr)}
-                    </Badge>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )
-    },
-    {
-      title: "Hidden Gems",
-      icon: <EyeIcon className="w-5 h-5 text-pink-500" />,
-      color: "pink",
-      summary: `${attractions.filter(attr => 
-        attr.description.toLowerCase().includes('hidden') || 
-        attr.description.toLowerCase().includes('secret') ||
-        attr.description.toLowerCase().includes('local') ||
-        !highlights.includes(attr.name)
-      ).length} hidden gems`,
-      content: (
-        <div className="space-y-3">
-          {attractions.filter(attr => 
-            attr.description.toLowerCase().includes('hidden') || 
-            attr.description.toLowerCase().includes('secret') ||
-            attr.description.toLowerCase().includes('local') ||
-            !highlights.includes(attr.name)
-          ).slice(0, 3).map((attr, index) => (
-            <div key={index} className="p-3 bg-gradient-to-r from-rose-50/80 to-pink-50/80 dark:from-rose-900/20 dark:to-pink-900/20 rounded-xl border-l-4 border-rose-400 shadow-sm">
-              <div className="flex items-start gap-3">
-                <div className="p-1 bg-rose-100 dark:bg-rose-800/30 rounded-lg">
-                  <EyeIcon className="w-4 h-4 text-rose-600 dark:text-rose-400 flex-shrink-0" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-rose-700 dark:text-rose-300 mb-1 text-sm">
-                    {attr.name}
-                  </h4>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-                    {renderInlineMarkdown(attr.description.split('.')[0])}.
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-          {attractions.filter(attr => 
-            attr.description.toLowerCase().includes('hidden') || 
-            attr.description.toLowerCase().includes('secret') ||
-            attr.description.toLowerCase().includes('local') ||
-            !highlights.includes(attr.name)
-          ).length === 0 && (
-            <div className="text-center p-4">
-              <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg inline-block">
-                <EyeIcon className="w-6 h-6 text-gray-400 mx-auto mb-2" />
-              </div>
-              <p className="text-xs text-gray-500 italic">Explore beyond the highlights!</p>
-            </div>
-          )}
-        </div>
-      )
-    },
+    // 2. Dining
     {
       title: "Dining",
       icon: <CoffeeIcon className="w-5 h-5 text-orange-600" />,
@@ -672,6 +531,119 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
         </div>
       )
     },
+    // 3. Photo Spots
+    {
+      title: "Photo Spots",
+      icon: <CameraIcon className="w-5 h-5 text-blue-500" />,
+      color: "blue", 
+      summary: `${photoOps.length} photo opportunities`,
+      content: photoOps.slice(0, 4).map((op, index) => (
+        <div key={index} className="mb-3 p-3 bg-gradient-to-r from-sky-50/80 to-blue-50/80 dark:from-sky-900/20 dark:to-blue-900/20 rounded-xl border-l-4 border-sky-400 shadow-sm">
+          <div className="flex items-start gap-3">
+            <div className="p-1 bg-sky-100 dark:bg-sky-800/30 rounded-lg">
+              <CameraIcon className="w-4 h-4 text-sky-600 dark:text-sky-400 flex-shrink-0" />
+            </div>
+            <div className="flex-1">
+              <h4 className="font-semibold text-sky-700 dark:text-sky-300 text-sm mb-1">{op.spot}</h4>
+              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                {renderInlineMarkdown(op.description)}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))
+    },
+    // 4. Hidden Gems
+    {
+      title: "Hidden Gems",
+      icon: <EyeIcon className="w-5 h-5 text-pink-500" />,
+      color: "pink",
+      summary: `${attractions.filter(attr => 
+        attr.description.toLowerCase().includes('hidden') || 
+        attr.description.toLowerCase().includes('secret') ||
+        attr.description.toLowerCase().includes('local') ||
+        !highlights.includes(attr.name)
+      ).length} hidden gems`,
+      content: (
+        <div className="space-y-3">
+          {attractions.filter(attr => 
+            attr.description.toLowerCase().includes('hidden') || 
+            attr.description.toLowerCase().includes('secret') ||
+            attr.description.toLowerCase().includes('local') ||
+            !highlights.includes(attr.name)
+          ).slice(0, 3).map((attr, index) => (
+            <div key={index} className="p-3 bg-gradient-to-r from-rose-50/80 to-pink-50/80 dark:from-rose-900/20 dark:to-pink-900/20 rounded-xl border-l-4 border-rose-400 shadow-sm">
+              <div className="flex items-start gap-3">
+                <div className="p-1 bg-rose-100 dark:bg-rose-800/30 rounded-lg">
+                  <EyeIcon className="w-4 h-4 text-rose-600 dark:text-rose-400 flex-shrink-0" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-rose-700 dark:text-rose-300 mb-1 text-sm">
+                    {attr.name}
+                  </h4>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                    {renderInlineMarkdown(attr.description.split('.')[0])}.
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+          {attractions.filter(attr => 
+            attr.description.toLowerCase().includes('hidden') || 
+            attr.description.toLowerCase().includes('secret') ||
+            attr.description.toLowerCase().includes('local') ||
+            !highlights.includes(attr.name)
+          ).length === 0 && (
+            <div className="text-center p-4">
+              <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg inline-block">
+                <EyeIcon className="w-6 h-6 text-gray-400 mx-auto mb-2" />
+              </div>
+              <p className="text-xs text-gray-500 italic">Explore beyond the highlights!</p>
+            </div>
+          )}
+        </div>
+      )
+    },
+    // 5. Time & Budget
+    {
+      title: "Time & Budget",
+      icon: <ClockIcon className="w-5 h-5 text-indigo-500" />,
+      color: "indigo",
+      summary: `Planning guide for ${attractions.length} attractions`,
+      content: (
+        <div className="space-y-3">
+          {attractions.slice(0, 4).map((attr, index) => (
+            <div key={index} className="p-3 bg-gradient-to-r from-violet-50/80 to-purple-50/80 dark:from-violet-900/20 dark:to-purple-900/20 rounded-xl border-l-4 border-violet-400 shadow-sm">
+              <div className="flex items-start gap-3">
+                <div className="p-1 bg-violet-100 dark:bg-violet-800/30 rounded-lg">
+                  <ClockIcon className="w-4 h-4 text-violet-600 dark:text-violet-400 flex-shrink-0" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-violet-700 dark:text-violet-300 mb-2 text-sm">
+                    {attr.name}
+                  </h4>
+                  <div className="flex gap-2 flex-wrap">
+                    <Badge variant="outline" className="text-xs bg-white/80 border-violet-200">
+                      <ClockIcon className="w-3 h-3 mr-1" />
+                      {getTimeEstimate(attr)}
+                    </Badge>
+                    <Badge variant="outline" className="text-xs bg-white/80 border-violet-200">
+                      <DollarSignIcon className="w-3 h-3 mr-1" />
+                      {getCostLevel(attr)}
+                    </Badge>
+                    <Badge variant="outline" className="text-xs bg-white/80 border-violet-200">
+                      <CalendarIcon className="w-3 h-3 mr-1" />
+                      {getSeasonalInfo(attr)}
+                    </Badge>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )
+    },
+    // 6. Quick Facts
     {
       title: "Quick Facts",
       icon: <ZapIcon className="w-5 h-5 text-amber-500" />,
@@ -715,6 +687,41 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
                 </div>
                 <div className="text-xs text-gray-600 dark:text-gray-400">Public Transport</div>
               </div>
+            </div>
+          )}
+        </div>
+      )
+    },
+    // 7. Experience Levels
+    {
+      title: "Experience Levels",
+      icon: <TargetIcon className="w-5 h-5 text-green-500" />,
+      color: "green",
+      summary: `${categories.easyAccess.length + categories.moderateAdventure.length + categories.localExpert.length} attractions categorized`,
+      content: (
+        <div className="space-y-2">
+          {categories.easyAccess.length > 0 && (
+            <div className="flex items-center gap-2">
+              <Badge variant="outline" className="bg-green-100 text-green-700 border-green-300 text-xs">
+                Easy Access
+              </Badge>
+              <span className="text-xs text-gray-600">{categories.easyAccess.length}</span>
+            </div>
+          )}
+          {categories.moderateAdventure.length > 0 && (
+            <div className="flex items-center gap-2">
+              <Badge variant="outline" className="bg-orange-100 text-orange-700 border-orange-300 text-xs">
+                Moderate
+              </Badge>
+              <span className="text-xs text-gray-600">{categories.moderateAdventure.length}</span>
+            </div>
+          )}
+          {categories.localExpert.length > 0 && (
+            <div className="flex items-center gap-2">
+              <Badge variant="outline" className="bg-purple-100 text-purple-700 border-purple-300 text-xs">
+                Expert
+              </Badge>
+              <span className="text-xs text-gray-600">{categories.localExpert.length}</span>
             </div>
           )}
         </div>
