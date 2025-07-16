@@ -55,3 +55,21 @@ export function formatCoordinatesForSchema(cityName: string): string | null {
   
   return `${coords.latitude},${coords.longitude}`;
 }
+
+/**
+ * Generate Place schema.org structured data for a city
+ */
+export function generatePlaceSchema(cityName: string, country: string) {
+  const coords = getCityCoordinates(cityName);
+  
+  return {
+    "@type": "Place",
+    "name": cityName,
+    "addressCountry": country,
+    "geo": coords ? {
+      "@type": "GeoCoordinates",
+      "latitude": coords.latitude,
+      "longitude": coords.longitude
+    } : undefined
+  };
+}
