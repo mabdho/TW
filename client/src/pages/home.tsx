@@ -9,8 +9,8 @@ import * as structuredDataSchemas from '@/utils/structuredData';
 
 export default function Home() {
   const seoData = {
-    title: "Best Travel Guides & Destinations - TravelWanders",
-    description: "Discover the best travel destinations with TravelWanders. Complete travel guides, attractions, and insider tips for your perfect adventure.",
+    title: "TravelWanders - Discover Your Next Adventure",
+    description: "Discover breathtaking destinations and plan your next adventure with TravelWanders. Explore curated travel guides, experiences, and hidden gems worldwide.",
     keywords: "travel, adventure, destinations, travel guide, vacation, explore, wanderlust, tourism, travel planning, city guides",
     canonicalUrl: "https://travelwanders.com/",
     slug: "",
