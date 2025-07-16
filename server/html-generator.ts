@@ -263,6 +263,21 @@ function extractSEODataFromHTML(htmlContent: string): { title: string; descripti
   };
 }
 
+// Utility function to save city HTML files with correct directory structure
+export async function saveCityHtmlFile(cityName: string, content: string): Promise<string> {
+  const outputDir = getHtmlOutputDirectory();
+  const cityDir = path.join(outputDir, `best-things-to-do-in-${cityName.toLowerCase().replace(/\s+/g, '-')}`);
+  await ensureDirectoryExists(cityDir);
+  
+  const filePath = path.join(cityDir, 'index.html');
+  await fs.writeFile(filePath, content, 'utf-8');
+  
+  // Auto-validate hydration compliance after HTML generation
+  await validateHydrationCompliance(`best-things-to-do-in-${cityName}/index.html`, content);
+  
+  return filePath;
+}
+
 // Utility function to save HTML files to specific subdirectories (like city pages)
 export async function saveHtmlFileToSubdirectory(subdirectory: string, fileName: string, content: string): Promise<string> {
   const outputDir = getHtmlOutputDirectory();

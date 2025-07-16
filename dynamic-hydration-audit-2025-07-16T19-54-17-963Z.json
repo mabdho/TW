@@ -1,0 +1,347 @@
+{
+  "timestamp": "2025-07-16T19:54:17.963Z",
+  "summary": {
+    "totalPages": 11,
+    "passedPages": 10,
+    "failedPages": 1,
+    "passRate": 90.9,
+    "totalChecks": 33,
+    "passedChecks": 32,
+    "checkPassRate": 97
+  },
+  "passed": [
+    {
+      "page": "Home Page",
+      "htmlPath": "/home/runner/workspace/dist/public/home-seo.html",
+      "pageType": "static",
+      "checks": [
+        {
+          "field": "Title",
+          "expected": "Best Travel Guides & Destinations - TravelWanders",
+          "actual": "Best Travel Guides & Destinations - TravelWanders",
+          "matches": true,
+          "page": "Home Page"
+        },
+        {
+          "field": "Meta Description",
+          "expected": "Discover amazing travel destinations with TravelWanders. Find comprehensive city guides, hidden gems, and travel tips for your next adventure.",
+          "actual": "Discover amazing travel destinations with TravelWanders. Find comprehensive city guides, hidden gems, and travel tips for your next adventure.",
+          "matches": true,
+          "page": "Home Page"
+        },
+        {
+          "field": "H1",
+          "expected": "Explore the world with confidence",
+          "actual": "Explore the world with confidence",
+          "matches": true,
+          "page": "Home Page"
+        }
+      ],
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "page": "Blogs Page",
+      "htmlPath": "/home/runner/workspace/dist/public/blogs-seo.html",
+      "pageType": "static",
+      "checks": [
+        {
+          "field": "Title",
+          "expected": "Travel Blog Stories & Destination Guides - TravelWanders",
+          "actual": "Travel Blog Stories & Destination Guides - TravelWanders",
+          "matches": true,
+          "page": "Blogs Page"
+        },
+        {
+          "field": "Meta Description",
+          "expected": "Get inspired with our travel stories, tips, and destination guides from expert travelers around the world. Discover hidden gems and travel inspiration.",
+          "actual": "Get inspired with our travel stories, tips, and destination guides from expert travelers around the world. Discover hidden gems and travel inspiration.",
+          "matches": true,
+          "page": "Blogs Page"
+        },
+        {
+          "field": "H1",
+          "expected": "Travel Blog",
+          "actual": "Travel Blog",
+          "matches": true,
+          "page": "Blogs Page"
+        }
+      ],
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "page": "Destinations Page",
+      "htmlPath": "/home/runner/workspace/dist/public/destinations-seo.html",
+      "pageType": "static",
+      "checks": [
+        {
+          "field": "Title",
+          "expected": "All Destinations - TravelWanders",
+          "actual": "All Destinations - TravelWanders",
+          "matches": true,
+          "page": "Destinations Page"
+        },
+        {
+          "field": "Meta Description",
+          "expected": "Browse our complete collection of travel destinations with detailed guides, attractions, and insider tips for amazing cities worldwide.",
+          "actual": "Browse our complete collection of travel destinations with detailed guides, attractions, and insider tips for amazing cities worldwide.",
+          "matches": true,
+          "page": "Destinations Page"
+        },
+        {
+          "field": "H1",
+          "expected": "All Destinations",
+          "actual": "All Destinations",
+          "matches": true,
+          "page": "Destinations Page"
+        }
+      ],
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "page": "Cookie Policy",
+      "htmlPath": "/home/runner/workspace/dist/public/cookie-policy.html",
+      "pageType": "static",
+      "checks": [
+        {
+          "field": "Title",
+          "expected": "Cookie Policy | TravelWanders Travel Guide Platform",
+          "actual": "Cookie Policy | TravelWanders Travel Guide Platform",
+          "matches": true,
+          "page": "Cookie Policy"
+        },
+        {
+          "field": "Meta Description",
+          "expected": "Cookie Policy for TravelWanders - Learn about how we use cookies and similar technologies to enhance your travel guide experience.",
+          "actual": "Cookie Policy for TravelWanders - Learn about how we use cookies and similar technologies to enhance your travel guide experience.",
+          "matches": true,
+          "page": "Cookie Policy"
+        },
+        {
+          "field": "H1",
+          "expected": "Cookie Policy",
+          "actual": "Cookie Policy",
+          "matches": true,
+          "page": "Cookie Policy"
+        }
+      ],
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "page": "Privacy Policy",
+      "htmlPath": "/home/runner/workspace/dist/public/privacy-policy.html",
+      "pageType": "static",
+      "checks": [
+        {
+          "field": "Title",
+          "expected": "Privacy Policy - TravelWanders",
+          "actual": "Privacy Policy - TravelWanders",
+          "matches": true,
+          "page": "Privacy Policy"
+        },
+        {
+          "field": "Meta Description",
+          "expected": "Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.",
+          "actual": "Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.",
+          "matches": true,
+          "page": "Privacy Policy"
+        },
+        {
+          "field": "H1",
+          "expected": "Privacy Policy",
+          "actual": "Privacy Policy",
+          "matches": true,
+          "page": "Privacy Policy"
+        }
+      ],
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "page": "Terms of Service",
+      "htmlPath": "/home/runner/workspace/dist/public/terms-of-service.html",
+      "pageType": "static",
+      "checks": [
+        {
+          "field": "Title",
+          "expected": "Terms of Service & User Agreement - TravelWanders",
+          "actual": "Terms of Service & User Agreement - TravelWanders",
+          "matches": true,
+          "page": "Terms of Service"
+        },
+        {
+          "field": "Meta Description",
+          "expected": "Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.",
+          "actual": "Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.",
+          "matches": true,
+          "page": "Terms of Service"
+        },
+        {
+          "field": "H1",
+          "expected": "Terms of Service",
+          "actual": "Terms of Service",
+          "matches": true,
+          "page": "Terms of Service"
+        }
+      ],
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "page": "Austin City Page",
+      "htmlPath": "/home/runner/workspace/dist/public/best-things-to-do-in-austin/index.html",
+      "pageType": "city",
+      "checks": [
+        {
+          "field": "Title",
+          "expected": "Best Things to Do in Austin, USA (2025 Guide)",
+          "actual": "Best Things to Do in Austin, USA (2025 Guide)",
+          "matches": true,
+          "page": "Austin City Page"
+        },
+        {
+          "field": "Meta Description",
+          "expected": "Discover the best things to do in Austin — top attractions, hidden gems, and food spots. Complete Austin travel guide.",
+          "actual": "Discover the best things to do in Austin — top attractions, hidden gems, and food spots. Complete Austin travel guide.",
+          "matches": true,
+          "page": "Austin City Page"
+        },
+        {
+          "field": "H1",
+          "expected": "Best Things to Do in Austin, USA (2025 Guide)",
+          "actual": "Best Things to Do in Austin, USA (2025 Guide)",
+          "matches": true,
+          "page": "Austin City Page"
+        }
+      ],
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "page": "London City Page",
+      "htmlPath": "/home/runner/workspace/dist/public/best-things-to-do-in-london/index.html",
+      "pageType": "city",
+      "checks": [
+        {
+          "field": "Title",
+          "expected": "Best Things to Do in London, United Kingdom (2025 Guide)",
+          "actual": "Best Things to Do in London, United Kingdom (2025 Guide)",
+          "matches": true,
+          "page": "London City Page"
+        },
+        {
+          "field": "Meta Description",
+          "expected": "Discover the best things to do in London — top attractions, hidden gems, and food spots. Complete London travel guide.",
+          "actual": "Discover the best things to do in London — top attractions, hidden gems, and food spots. Complete London travel guide.",
+          "matches": true,
+          "page": "London City Page"
+        },
+        {
+          "field": "H1",
+          "expected": "Best Things to Do in London, United Kingdom (2025 Guide)",
+          "actual": "Best Things to Do in London, United Kingdom (2025 Guide)",
+          "matches": true,
+          "page": "London City Page"
+        }
+      ],
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "page": "New York City Page",
+      "htmlPath": "/home/runner/workspace/dist/public/best-things-to-do-in-new-york/index.html",
+      "pageType": "city",
+      "checks": [
+        {
+          "field": "Title",
+          "expected": "Best Things to Do in New York, USA (2025 Guide)",
+          "actual": "Best Things to Do in New York, USA (2025 Guide)",
+          "matches": true,
+          "page": "New York City Page"
+        },
+        {
+          "field": "Meta Description",
+          "expected": "Discover the best things to do in New York — top attractions, hidden gems, and food spots. Complete New York travel guide.",
+          "actual": "Discover the best things to do in New York — top attractions, hidden gems, and food spots. Complete New York travel guide.",
+          "matches": true,
+          "page": "New York City Page"
+        },
+        {
+          "field": "H1",
+          "expected": "Best Things to Do in New York, USA (2025 Guide)",
+          "actual": "Best Things to Do in New York, USA (2025 Guide)",
+          "matches": true,
+          "page": "New York City Page"
+        }
+      ],
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "page": "Zurich City Page",
+      "htmlPath": "/home/runner/workspace/dist/public/best-things-to-do-in-zurich/index.html",
+      "pageType": "city",
+      "checks": [
+        {
+          "field": "Title",
+          "expected": "Best Things to Do in Zurich, Switzerland (2025 Guide)",
+          "actual": "Best Things to Do in Zurich, Switzerland (2025 Guide)",
+          "matches": true,
+          "page": "Zurich City Page"
+        },
+        {
+          "field": "Meta Description",
+          "expected": "Discover the best things to do in Zurich — top attractions, hidden gems, and food spots. Complete Zurich travel guide.",
+          "actual": "Discover the best things to do in Zurich — top attractions, hidden gems, and food spots. Complete Zurich travel guide.",
+          "matches": true,
+          "page": "Zurich City Page"
+        },
+        {
+          "field": "H1",
+          "expected": "Best Things to Do in Zurich, Switzerland (2025 Guide)",
+          "actual": "Best Things to Do in Zurich, Switzerland (2025 Guide)",
+          "matches": true,
+          "page": "Zurich City Page"
+        }
+      ],
+      "passed": 3,
+      "failed": 0
+    }
+  ],
+  "failed": [
+    {
+      "page": "Paris A Stroll Through The City Of Lights Blog Post",
+      "htmlPath": "/home/runner/workspace/dist/public/blog/paris-a-stroll-through-the-city-of-lights.html",
+      "pageType": "blog",
+      "checks": [
+        {
+          "field": "Title",
+          "expected": "Paris: A Stroll Through the City of Lights - TravelWanders",
+          "actual": "Paris: A Stroll Through the City of Lights - TravelWanders",
+          "matches": true,
+          "page": "Paris A Stroll Through The City Of Lights Blog Post"
+        },
+        {
+          "field": "Meta Description",
+          "expected": "Read about paris: a stroll through the city of lights on TravelWanders. Discover travel tips, insights, and inspiration for your next adventure.",
+          "actual": "Just the name itself seems to conjure images of sidewalk cafes, the scent of fresh croissants wafting through the air, and perhaps, just perhaps, a sense of timeless romance. I’ve always been drawn to cities that feel alive, that have a pulse, and Paris, well, it positively thrums with energy, history, and an undeniable charm. It’s a place that, even after multiple visits, still manages to surprise and delight.",
+          "matches": false,
+          "page": "Paris A Stroll Through The City Of Lights Blog Post"
+        },
+        {
+          "field": "H1",
+          "expected": "Paris: A Stroll Through the City of Lights",
+          "actual": "Paris: A Stroll Through the City of Lights",
+          "matches": true,
+          "page": "Paris A Stroll Through The City Of Lights Blog Post"
+        }
+      ],
+      "passed": 2,
+      "failed": 1
+    }
+  ],
+  "warnings": []
+}

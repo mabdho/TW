@@ -31,23 +31,28 @@ class TSXHTMLSyncAuditor {
     try {
       const content = fs.readFileSync(tsxPath, 'utf8');
       
-      // Extract title
-      const titleMatch = content.match(/title:\s*[`"']([^`"']+)[`"']/);
+      // Extract title (handles both prop syntax title={"..."} and colon syntax title: "...")
+      const titleMatch = content.match(/title=\{?[`"']([^`"']+)[`"']\}?/) ||
+                        content.match(/title:\s*[`"']([^`"']+)[`"']/);
       const title = titleMatch ? titleMatch[1] : '';
       
-      // Extract description
-      const descMatch = content.match(/description:\s*[`"']([^`"']+)[`"']/);
+      // Extract description (handles both prop syntax and colon syntax)
+      const descMatch = content.match(/description=\{?`([^`]+)`\}?/) ||
+                       content.match(/description=\{?[`"']([^`"']+)[`"']\}?/) ||
+                       content.match(/description:\s*[`"']([^`"']+)[`"']/);
       const description = descMatch ? descMatch[1] : '';
       
-      // Extract H1 (usually in the first h1 tag or hero section)
+      // Extract H1 (usually same as title for city pages)
       const h1Match = content.match(/<h1[^>]*>([^<]+)<\/h1>/) || 
                      content.match(/h1:\s*[`"']([^`"']+)[`"']/) ||
                      content.match(/headline:\s*[`"']([^`"']+)[`"']/);
-      const h1 = h1Match ? h1Match[1] : '';
+      const h1 = h1Match ? h1Match[1] : title; // Fallback to title if no explicit H1
       
       // Extract city name and country for city components
-      const cityMatch = content.match(/cityName:\s*[`"']([^`"']+)[`"']/);
-      const countryMatch = content.match(/country:\s*[`"']([^`"']+)[`"']/);
+      const cityMatch = content.match(/cityName=\{?[`"']([^`"']+)[`"']\}?/) ||
+                       content.match(/cityName:\s*[`"']([^`"']+)[`"']/);
+      const countryMatch = content.match(/country=\{?[`"']([^`"']+)[`"']\}?/) ||
+                          content.match(/country:\s*[`"']([^`"']+)[`"']/);
       
       return {
         title: title.trim(),
@@ -212,18 +217,22 @@ class TSXHTMLSyncAuditor {
       const cityName = cityFile.replace('.tsx', '');
       const tsxPath = path.join(cityDir, cityFile);
       
-      // Find corresponding HTML file
-      const htmlFiles = fs.readdirSync(htmlDir).filter(file => 
-        file.includes(cityName.toLowerCase()) && file.endsWith('.html')
-      );
+      // Find corresponding HTML file in directory structure
+      // Handle special city name mappings
+      let cityDirName;
+      if (cityName.toLowerCase() === 'newyork') {
+        cityDirName = 'best-things-to-do-in-new-york';
+      } else {
+        cityDirName = `best-things-to-do-in-${cityName.toLowerCase()}`;
+      }
+      const cityHtmlDir = path.join(htmlDir, cityDirName);
+      const htmlPath = path.join(cityHtmlDir, 'index.html');
 
-      if (htmlFiles.length === 0) {
-        console.log(`🔍 ${cityName}: ❌ No matching HTML file found`);
+      if (!fs.existsSync(htmlPath)) {
+        console.log(`🔍 ${cityName}: ❌ No matching HTML file found at ${cityDirName}/index.html`);
         this.results.summary.missing++;
         continue;
       }
-
-      const htmlPath = path.join(htmlDir, htmlFiles[0]);
       const tsxData = this.extractTSXSEOData(tsxPath);
       const htmlData = this.extractHTMLSEOData(htmlPath);
 

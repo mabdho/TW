@@ -1,0 +1,12 @@
+{
+  "cities": [],
+  "blogs": [],
+  "staticPages": [],
+  "summary": {
+    "totalChecked": 0,
+    "synchronized": 0,
+    "needsSync": 0,
+    "missing": 7,
+    "issues": []
+  }
+}

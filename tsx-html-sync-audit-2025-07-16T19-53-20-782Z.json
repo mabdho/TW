@@ -1,0 +1,113 @@
+{
+  "cities": [
+    {
+      "fileName": "Austin",
+      "score": 0,
+      "totalChecks": 3,
+      "passedChecks": 0,
+      "issues": [
+        {
+          "type": "title_missing_tsx",
+          "html": "Best Things to Do in Austin, USA (2025 Guide)",
+          "severity": "medium"
+        },
+        {
+          "type": "description_mismatch",
+          "tsx": "## Overview\nZilker Park is Austin",
+          "html": "Discover the best things to do in Austin — top attractions, hidden gems, and food spots. Complete Austin travel guide.",
+          "severity": "high"
+        },
+        {
+          "type": "h1_missing_tsx",
+          "html": "Best Things to Do in Austin, USA (2025 Guide)",
+          "severity": "low"
+        }
+      ],
+      "isSync": false
+    },
+    {
+      "fileName": "London",
+      "score": 0,
+      "totalChecks": 3,
+      "passedChecks": 0,
+      "issues": [
+        {
+          "type": "title_missing_tsx",
+          "html": "Best Things to Do in London, United Kingdom (2025 Guide)",
+          "severity": "medium"
+        },
+        {
+          "type": "description_mismatch",
+          "tsx": "## Overview\nThe Tower of London is a historic castle located on the north bank of the River Thames. It has served as a royal palace, prison, armoury, and treasury. Exploring the Tower offers a glimpse into British history.\n\n### Best Photo Spots\nThe best photo spot is from Tower Bridge, capturing the Tower with the bridge in the background. Another great spot is on the riverbank facing the Tower",
+          "html": "Discover the best things to do in London — top attractions, hidden gems, and food spots. Complete London travel guide.",
+          "severity": "high"
+        },
+        {
+          "type": "h1_missing_tsx",
+          "html": "Best Things to Do in London, United Kingdom (2025 Guide)",
+          "severity": "low"
+        }
+      ],
+      "isSync": false
+    },
+    {
+      "fileName": "NewYork",
+      "score": 0,
+      "totalChecks": 3,
+      "passedChecks": 0,
+      "issues": [
+        {
+          "type": "title_missing_tsx",
+          "html": "Best Things to Do in New York, USA (2025 Guide)",
+          "severity": "medium"
+        },
+        {
+          "type": "description_mismatch",
+          "tsx": "## Overview\nNo trip to New York is complete without visiting Lady Liberty and Ellis Island. These iconic landmarks offer a powerful glimpse into American history and immigration. It’s a deeply moving experience, I think, and one that provides valuable perspective.\n\n### Best Photo Spots\nThe ferry ride offers stunning panoramic views of the Manhattan skyline and the Statue of Liberty. Be sure to capture the iconic pose with Lady Liberty against the city backdrop.\n\n### Insider Tips\nTip: Book your ferry tickets well in advance, especially during peak season, to avoid long lines. Consider the early morning departures for fewer crowds. Don",
+          "html": "Discover the best things to do in New York — top attractions, hidden gems, and food spots. Complete New York travel guide.",
+          "severity": "high"
+        },
+        {
+          "type": "h1_missing_tsx",
+          "html": "Best Things to Do in New York, USA (2025 Guide)",
+          "severity": "low"
+        }
+      ],
+      "isSync": false
+    },
+    {
+      "fileName": "Zurich",
+      "score": 0,
+      "totalChecks": 3,
+      "passedChecks": 0,
+      "issues": [
+        {
+          "type": "title_missing_tsx",
+          "html": "Best Things to Do in Zurich, Switzerland (2025 Guide)",
+          "severity": "medium"
+        },
+        {
+          "type": "description_mismatch",
+          "tsx": "## Overview\nThe Altstadt, or Old Town, is the heart of Zurich. It",
+          "html": "Discover the best things to do in Zurich — top attractions, hidden gems, and food spots. Complete Zurich travel guide.",
+          "severity": "high"
+        },
+        {
+          "type": "h1_missing_tsx",
+          "html": "Best Things to Do in Zurich, Switzerland (2025 Guide)",
+          "severity": "low"
+        }
+      ],
+      "isSync": false
+    }
+  ],
+  "blogs": [],
+  "staticPages": [],
+  "summary": {
+    "totalChecked": 4,
+    "synchronized": 0,
+    "needsSync": 4,
+    "missing": 3,
+    "issues": []
+  }
+}

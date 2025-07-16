@@ -1,0 +1,45 @@
+{
+  "cities": [
+    {
+      "fileName": "Austin",
+      "score": 100,
+      "totalChecks": 3,
+      "passedChecks": 3,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "London",
+      "score": 100,
+      "totalChecks": 3,
+      "passedChecks": 3,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "NewYork",
+      "score": 100,
+      "totalChecks": 3,
+      "passedChecks": 3,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Zurich",
+      "score": 100,
+      "totalChecks": 3,
+      "passedChecks": 3,
+      "issues": [],
+      "isSync": true
+    }
+  ],
+  "blogs": [],
+  "staticPages": [],
+  "summary": {
+    "totalChecked": 4,
+    "synchronized": 4,
+    "needsSync": 0,
+    "missing": 3,
+    "issues": []
+  }
+}

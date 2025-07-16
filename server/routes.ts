@@ -93,7 +93,7 @@ async function regenerateStaticFiles() {
     console.log('🔄 Regenerating static HTML files...');
     
     // Import the save functions
-    const { saveHtmlFile, saveHtmlFileToSubdirectory } = await import('./html-generator');
+    const { saveHtmlFile, saveHtmlFileToSubdirectory, saveCityHtmlFile } = await import('./html-generator');
     
     // Regenerate home page (save as SEO version, don't overwrite React app)
     console.log('  → Regenerating home page...');
@@ -2190,9 +2190,8 @@ Double-check all brackets, quotes, and commas are properly matched.`;
           const completeHTML = generateCompleteHTML(cityData);
           
           // Save the HTML file to correct deployment directory using standardized naming
-          const htmlFileName = `best-things-to-do-in-${cityMapping.html}.html`;
-          const { saveHtmlFile } = await import('./html-generator');
-          const htmlFilePath = await saveHtmlFile(htmlFileName, completeHTML);
+          const { saveCityHtmlFile } = await import('./html-generator');
+          const htmlFilePath = await saveCityHtmlFile(city, completeHTML);
           htmlGenerated = true;
           htmlMessage = ` with complete HTML generated at /${htmlFileName}`;
           
@@ -2343,9 +2342,8 @@ Double-check all brackets, quotes, and commas are properly matched.`;
       const completeHTML = generateCompleteHTML(cityData);
       
       // Save the HTML file to correct deployment directory
-      const htmlFileName = `best-things-to-do-in-${cityName.toLowerCase().replace(/\s+/g, '-')}.html`;
-      const { saveHtmlFile } = await import('./html-generator');
-      const htmlFilePath = await saveHtmlFile(htmlFileName, completeHTML);
+      const { saveCityHtmlFile } = await import('./html-generator');
+      const htmlFilePath = await saveCityHtmlFile(cityName, completeHTML);
       
       res.json({
         success: true,
@@ -2392,11 +2390,9 @@ Double-check all brackets, quotes, and commas are properly matched.`;
           if (cityData) {
             const completeHTML = generateCompleteHTML(cityData);
             
-            // Generate HTML filename from city name
-            const cityName = cityData.cityName.toLowerCase().replace(/\s+/g, '-');
-            const htmlFileName = `best-things-to-do-in-${cityName}.html`;
-            const { saveHtmlFile } = await import('./html-generator');
-            const htmlFilePath = await saveHtmlFile(htmlFileName, completeHTML);
+            // Save the HTML file using proper directory structure
+            const { saveCityHtmlFile } = await import('./html-generator');
+            const htmlFilePath = await saveCityHtmlFile(cityData.cityName, completeHTML);
             
             results.push({
               success: true,
