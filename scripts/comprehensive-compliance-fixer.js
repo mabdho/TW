@@ -369,52 +369,8 @@ class ComprehensiveComplianceFixer {
     // Enhanced cloaking middleware
     const cloakingCode = `
 // Enhanced bot detection function
-function isSearchEngineBot(userAgent) {
-  if (!userAgent) return false;
-  const botPatterns = [
-    /googlebot/i, /bingbot/i, /slurp/i, /duckduckbot/i, /baiduspider/i, 
-    /yandexbot/i, /facebookexternalhit/i, /twitterbot/i, /linkedinbot/i,
-    /whatsapp/i, /telegrambot/i, /discordbot/i, /applebot/i, /crawler/i,
-    /spider/i, /bot/i, /archiver/i, /scraper/i
-  ];
-  return botPatterns.some(pattern => pattern.test(userAgent));
-}
-
 // Enhanced cloaking middleware - serve static HTML to bots
-app.use((req, res, next) => {
-  const userAgent = req.get('User-Agent') || '';
-  
-  if (isSearchEngineBot(userAgent)) {
-    let htmlPath = null;
-    
-    // Route mapping for search engine bots
-    const routeMap = {
-      '/': 'home-seo.html',
-      '/destinations': 'destinations-seo.html',
-      '/blogs': 'blogs-seo.html',
-      '/privacy-policy': 'privacy-policy.html',
-      '/terms-of-service': 'terms-of-service.html',
-      '/cookie-policy': 'cookie-policy.html'
-    };
-    
-    // Check static routes first
-    if (routeMap[req.path]) {
-      htmlPath = path.join(process.cwd(), 'dist/public', routeMap[req.path]);
-    }
-    // Check city routes
-    else if (req.path.startsWith('/best-things-to-do-in-')) {
-      const citySlug = req.path.replace('/best-things-to-do-in-', '');
-      htmlPath = path.join(process.cwd(), 'dist/public', req.path, 'index.html');
-    }
-    
-    if (htmlPath && fs.existsSync(htmlPath)) {
-      console.log(\`🤖 Serving static HTML to bot: \${req.path}\`);
-      return res.sendFile(htmlPath);
-    }
-  }
-  
-  next();
-});
+
 `;
 
     // Insert cloaking code before vite.middlewares

@@ -141,7 +141,20 @@ app.use((req, res, next) => {
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
+  
+// Google-compliant static file serving
+// Same content served to all users (no user-agent discrimination)
+app.use(express.static('dist/public', {
+  index: false, // Let React handle routing
+  maxAge: '1h',
+  setHeaders: (res, path) => {
+    if (path.endsWith('.html')) {
+      res.setHeader('Cache-Control', 'public, max-age=3600');
+    }
+  }
+}));
+
+if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
     serveStatic(app);
