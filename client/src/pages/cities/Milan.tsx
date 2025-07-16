@@ -19,13 +19,13 @@ export const Milan: React.FC = () => {
       attractions={[
         {
         name: "Duomo di Milano",
-        description: `## Overview
+        description: `# Overview
 The Duomo di Milano is, without a doubt, one of the most impressive cathedrals in the world. Its Gothic architecture, intricate details, and stunning rooftop views make it a must-see. Construction began in 1386 and took nearly six centuries to complete, resulting in a fascinating blend of architectural styles.
 
-### Best Photo Spots
+## Best Photo Spots
 For the best photo opportunities, head to the rooftop. From there, you'll have panoramic views of the city and can capture the Duomo's spires against the skyline. Sunset is a particularly beautiful time to visit for photos. Also, the Piazza del Duomo provides a great vantage point for capturing the entire facade.
 
-### Insider Tips
+## Insider Tips
 Tip: Consider booking your rooftop access tickets online in advance to avoid long queues. The lines can be quite long, especially during peak season. Also, be aware of the dress code: shoulders and knees must be covered to enter the Duomo.`,
         practicalInfo: {
         howToGetThere: "Metro lines M1 and M3, Duomo station",
@@ -48,13 +48,13 @@ Tip: Consider booking your rooftop access tickets online in advance to avoid lon
       },
         {
         name: "Galleria Vittorio Emanuele II",
-        description: `## Overview
+        description: `# Overview
 Located next to the Duomo, the Galleria Vittorio Emanuele II is a stunning 19th-century shopping arcade. Its impressive glass dome, intricate mosaics, and high-end boutiques make it a feast for the eyes, even if you're not planning to shop. It's a popular spot for both locals and tourists, and you can't help but be impressed by the sheer grandeur of the place.
 
-### Best Photo Spots
+## Best Photo Spots
 The central octagon, beneath the glass dome, is the most popular spot for photos. Be sure to look up to capture the dome's intricate details. The mosaics on the floor are also worth photographing. At night, the Galleria is beautifully illuminated.
 
-### Insider Tips
+## Insider Tips
 Tip: Spin around on the bull mosaic under the central dome for good luck, some say. Also, consider visiting during off-peak hours (early morning or late evening) to avoid the crowds. Many of the cafes offer outdoor seating, which is a great way to soak in the atmosphere.`,
         practicalInfo: {
         howToGetThere: "Metro lines M1 and M3, Duomo station",
@@ -77,13 +77,13 @@ Tip: Spin around on the bull mosaic under the central dome for good luck, some s
       },
         {
         name: "Teatro alla Scala",
-        description: `## Overview
+        description: `# Overview
 Teatro alla Scala is one of the world's most famous opera houses. If you're a fan of opera or ballet, seeing a performance here is an unforgettable experience. Even if you're not, a tour of the theater is a fascinating way to learn about its history and architecture. The acoustics are said to be unparalleled.
 
-### Best Photo Spots
+## Best Photo Spots
 The opulent interior of the theater is the main photo opportunity. If you're taking a tour, you'll have a chance to capture the grandeur of the auditorium and stage. Check for tours that allow photography.
 
-### Insider Tips
+## Insider Tips
 Tip: Book your tickets well in advance, especially for popular performances. If you can't get tickets to a show, consider a guided tour of the theater. The tours are usually available in multiple languages.`,
         practicalInfo: {
         howToGetThere: "Metro lines M1 and M3, Duomo station",
@@ -106,13 +106,13 @@ Tip: Book your tickets well in advance, especially for popular performances. If 
       },
         {
         name: "Santa Maria delle Grazie & The Last Supper",
-        description: `## Overview
+        description: `# Overview
 Home to Leonardo da Vinci's masterpiece, 'The Last Supper,' Santa Maria delle Grazie is a must-see for art lovers. The church itself is a beautiful example of Gothic architecture, but the main draw is undoubtedly the world-famous fresco. Seeing it in person is a truly moving experience. Be prepared for timed entry and strict rules.
 
-### Best Photo Spots
+## Best Photo Spots
 Photography of 'The Last Supper' itself is strictly prohibited, but you can take photos of the church's exterior and the surrounding area. The cloister is a peaceful spot for reflection and picture-taking.
 
-### Insider Tips
+## Insider Tips
 Tip: Book your tickets to see 'The Last Supper' months in advance, as they sell out very quickly. You'll only have a limited time (usually 15 minutes) to view the fresco. Also, note that the temperature inside the refectory is carefully controlled to preserve the artwork.`,
         practicalInfo: {
         howToGetThere: "Metro line M1, Conciliazione station; Tram lines 16",
@@ -135,13 +135,13 @@ Tip: Book your tickets to see 'The Last Supper' months in advance, as they sell 
       },
         {
         name: "Brera District",
-        description: `## Overview
+        description: `# Overview
 Brera is a charming and bohemian district known for its art galleries, boutiques, and cafes. It's a great place to wander, browse, and soak up the atmosphere. The Pinacoteca di Brera, a major art museum, is located here, as well as many smaller galleries showcasing contemporary art. The area has a relaxed and artistic vibe.
 
-### Best Photo Spots
+## Best Photo Spots
 The narrow, cobbled streets of Brera are perfect for capturing the district's atmosphere. Look for colorful doorways, flower-filled balconies, and charming cafes. The Pinacoteca di Brera also has a beautiful courtyard that's worth photographing.
 
-### Insider Tips
+## Insider Tips
 Tip: Visit Brera in the evening, when the streets come alive with people enjoying aperitivo. Many bars offer free snacks with drinks during aperitivo hour (usually from 6:00 PM to 8:00 PM).`,
         practicalInfo: {
         howToGetThere: "Metro line M2, Lanza station; Tram lines 1, 4, 12, 14",
@@ -164,13 +164,13 @@ Tip: Visit Brera in the evening, when the streets come alive with people enjoyin
       },
         {
         name: "Navigli District",
-        description: `## Overview
+        description: `# Overview
 The Navigli district is known for its canals, vibrant nightlife, and trendy bars and restaurants. It's a popular spot for aperitivo and evening strolls. The canals were originally built for transportation and irrigation, but today they add a unique charm to the area. You'll find everything from traditional trattorias to modern cocktail bars here.
 
-### Best Photo Spots
+## Best Photo Spots
 The best photo opportunities are along the canals, especially at sunset. Capture the reflections of the buildings in the water. The Vicolo dei Lavandai, a historic laundry area, is also a picturesque spot.
 
-### Insider Tips
+## Insider Tips
 Tip: Take a canal cruise for a different perspective of the Navigli district. Many cruises are available, ranging from short trips to longer excursions.`,
         practicalInfo: {
         howToGetThere: "Metro line M2, Porta Genova station; Tram lines 2, 9, 10",
@@ -193,13 +193,13 @@ Tip: Take a canal cruise for a different perspective of the Navigli district. Ma
       },
         {
         name: "Pasticceria Marchesi",
-        description: `## Overview
+        description: `# Overview
 Pasticceria Marchesi is a historic cafe known for its elegant atmosphere and delicious pastries. It's a perfect spot for a coffee break or a sweet treat. Founded in 1824, it's one of Milan's oldest and most renowned pastry shops. They offer a wide variety of cakes, pastries, chocolates, and traditional Italian sweets.
 
-### What to Expect
+## What to Expect
 Expect a refined and sophisticated atmosphere, with impeccable service and beautifully presented treats. It's a popular spot, so it can get crowded, especially during peak hours. They have multiple locations now, but the original on Via Santa Maria alla Porta is arguably the most charming.
 
-### Insider Tips
+## Insider Tips
 Tip: Try their signature Panettone, a traditional Milanese sweet bread, especially during the Christmas season. Their coffee is also excellent. Also, consider purchasing a box of chocolates as a souvenir.`,
         practicalInfo: {
         howToGetThere: "Multiple locations; check website for details",
@@ -222,13 +222,13 @@ Tip: Try their signature Panettone, a traditional Milanese sweet bread, especial
       },
         {
         name: "Trattoria Torre di Pisa",
-        description: `## Overview
+        description: `# Overview
 Trattoria Torre di Pisa is a traditional Tuscan restaurant in the heart of Milan. Known for its authentic cuisine and cozy atmosphere, it's a favorite among locals and tourists. The restaurant prides itself on using fresh, seasonal ingredients to create classic Tuscan dishes.
 
-### Culinary Experience
+## Culinary Experience
 Expect hearty portions of pasta, grilled meats, and seafood. Their Florentine steak is a must-try for meat lovers. The restaurant also has an extensive wine list featuring Tuscan wines. The atmosphere is warm and inviting, making it a perfect spot for a relaxed dinner.
 
-### Insider Tips
+## Insider Tips
 Tip: Make a reservation in advance, especially on weekends, as it's a popular spot. Ask for a table in the main dining room for the best atmosphere. Their homemade pasta dishes are highly recommended. Don't miss their desserts, which are amazing.`,
         practicalInfo: {
         howToGetThere: "Via Fiori Chiari, 21/23",
@@ -251,13 +251,13 @@ Tip: Make a reservation in advance, especially on weekends, as it's a popular sp
       },
         {
         name: "Mercato Centrale Milano",
-        description: `## Overview
+        description: `# Overview
 Mercato Centrale Milano is a vibrant food hall located inside the Central Station. It is a culinary hub where you can find a wide variety of Italian specialties, from pizza and pasta to artisanal cheeses and gelato. The atmosphere is lively and bustling, making it a great place to experience Milan's food scene.
 
-### Culinary Experience
+## Culinary Experience
 Explore a variety of food vendors offering regional specialties. Sample different dishes and enjoy the communal seating areas. It's a great place to try new things and discover local flavors. You can find something for every taste and budget.
 
-### Insider Tips
+## Insider Tips
 Tip: Visit during lunchtime for a quick and affordable meal, or in the evening for a more relaxed dining experience. It's a great spot for people-watching.`,
         practicalInfo: {
         howToGetThere: "Piazza Duca d'Aosta, Inside Central Station",
@@ -280,13 +280,13 @@ Tip: Visit during lunchtime for a quick and affordable meal, or in the evening f
       },
         {
         name: "Pinacoteca di Brera",
-        description: `## Overview
+        description: `# Overview
 The Pinacoteca di Brera is Milan's premier art gallery, housed in a beautiful palazzo in the Brera district. It boasts an impressive collection of Italian art, particularly Venetian and Lombard paintings. Masterpieces by Raphael, Caravaggio, and Titian are among the highlights. It's an essential stop for art enthusiasts.
 
-### What to Expect
+## What to Expect
 The gallery is well-organized and easy to navigate. Allow at least 2-3 hours to see the main highlights. Audio guides are available to enhance your experience. The courtyard is a peaceful oasis where you can relax and reflect on the art.
 
-### Insider Tips
+## Insider Tips
 Tip: Visit on a Sunday, when admission is often reduced or even free. Check the museum's website for current promotions. Also, don't miss the 'Supper at Emmaus' by Caravaggio, one of the gallery's most famous works.`,
         practicalInfo: {
         howToGetThere: "Via Brera, 28",
@@ -313,49 +313,49 @@ Tip: Visit on a Sunday, when admission is often reduced or even free. Check the 
 
 Milan boasts an efficient public transportation system, making it easy to get around the city. Walking is also a great option for exploring the city center, especially the Brera and Navigli districts.
 
-### Public Transport
+## Public Transport
 The Milan Metro is a fast and reliable way to travel to major attractions. The ATM (Azienda Trasporti Milanesi) manages the metro, trams, and buses. Consider purchasing a daily or multi-day travel pass if you plan to use public transport frequently. Download the ATM app for real-time information and route planning.
 
-### Taxis & Rideshare
+## Taxis & Rideshare
 Taxis are readily available in Milan, but they can be more expensive than public transport. Rideshare services like Uber are also available. Make sure the taxi is licensed and the meter is running. Hail directly or use an app to book.
 
-### Walking & Cycling
+## Walking & Cycling
 Central Milan is very walkable. Cycling is also a great way to see the city, with bike-sharing programs available. Many streets have designated bike lanes.`,
         whereToStay: `## Where to Stay in Milan
 
 Milan offers a wide range of accommodation options, from luxury hotels to budget-friendly hostels. The best area to stay depends on your interests and budget.
 
-### Best Areas
+## Best Areas
 For a central location close to major attractions, consider staying near the Duomo or in the Brera district. The Navigli district is a good choice for nightlife and a more bohemian atmosphere. Porta Venezia offers a more residential feel with good transport links.
 
-### Luxury Options
+## Luxury Options
 Luxury hotels can be found near the Duomo and in the Quadrilatero della Moda (fashion district). Expect high-end amenities and impeccable service.
 
-### Budget-Friendly
+## Budget-Friendly
 Budget-friendly options include hostels and smaller hotels located further from the city center, but still well-connected by public transport.`,
         bestTimeToVisit: `## Best Time to Visit Milan
 
 The best time to visit Milan depends on your preferences. Spring and fall offer pleasant weather and fewer crowds, while summer can be hot and crowded. Winter can be cold and rainy, but it's also a festive time with Christmas markets.
 
-### Peak Season
+## Peak Season
 Peak season is generally from May to September, when the weather is warm and sunny. Expect higher prices and more tourists during this time. Book your accommodation and tours in advance.
 
-### Weather Overview
+## Weather Overview
 Spring (April-May) and Fall (September-October) offer mild temperatures and fewer rainy days. Summer (June-August) can be hot and humid, with temperatures reaching up to 30°C (86°F). Winter (November-March) is cold and often rainy, with occasional snowfall.
 
-### Local Events
+## Local Events
 Milan hosts several major events throughout the year, including Milan Fashion Week (February and September) and the Salone del Mobile (furniture fair) in April. Be aware that prices can increase during these events.`,
         suggestedItinerary: `## Suggested Milan Itinerary
 
 Here's a suggested 3-day itinerary for exploring Milan:
 
-### Day 1
+## Day 1
 Start your day with a visit to the Duomo di Milano. Climb to the rooftop for panoramic views of the city. Afterward, explore the Galleria Vittorio Emanuele II and have lunch at a nearby cafe. In the afternoon, visit Teatro alla Scala. In the evening, enjoy aperitivo in the Brera district.
 
-### Day 2
+## Day 2
 Visit Santa Maria delle Grazie to see 'The Last Supper' (book well in advance!). Afterwards, explore the Sforza Castle. In the afternoon, visit the Pinacoteca di Brera. In the evening, have dinner in the Navigli district.
 
-### Day 3
+## Day 3
 Take a day trip to Lake Como, located about an hour from Milan. Explore the charming towns along the lake and enjoy the stunning scenery. Alternatively, spend the day shopping in the Quadrilatero della Moda or exploring other museums in Milan.`
       }}
       faqs={[

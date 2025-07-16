@@ -20,13 +20,13 @@ export const Venice: React.FC = () => {
       attractions={[
         {
         name: "St. Mark's Square (Piazza San Marco)",
-        description: `## Overview
+        description: `# Overview
 St. Mark's Square, the heart of Venice, is a must-see. Surrounded by stunning architecture, including St. Mark's Basilica and the Doge's Palace, it's a vibrant hub of activity. Be prepared for crowds, especially during peak season. I found the atmosphere quite enchanting, especially in the early morning before the rush.
 
-### Best Photo Spots
+## Best Photo Spots
 The best photo opportunities are from the Campanile (bell tower), offering a panoramic view of the square and the lagoon. Also, capture the square at sunrise or sunset for stunning lighting. Some say pigeons are annoying, but they can also make a photo more vibrant!
 
-### Insider Tips
+## Insider Tips
 Tip: Visit early in the morning (before 9 AM) to avoid the crowds and enjoy a more peaceful experience. Consider buying tickets online in advance to skip the long queues for the Basilica and Campanile.`,
         practicalInfo: {
         howToGetThere: "Vaporetto (water bus) lines 1, 2, 4.1, 4.2, 5.1, 5.2 to San Marco stop.",
@@ -49,13 +49,13 @@ Tip: Visit early in the morning (before 9 AM) to avoid the crowds and enjoy a mo
       },
         {
         name: "Rialto Bridge (Ponte di Rialto)",
-        description: `## Overview
+        description: `# Overview
 The Rialto Bridge, one of Venice's most iconic landmarks, is a beautiful stone bridge spanning the Grand Canal. It's a bustling area with shops and stunning views. Be prepared for a crowded experience, but the views are worth it, I think.
 
-### Best Photo Spots
+## Best Photo Spots
 Capture the bridge from a gondola or vaporetto for a classic Venetian photo. Early morning light is ideal. Consider taking photos from the nearby Fondamenta del Vin for a wider perspective.
 
-### Insider Tips
+## Insider Tips
 Tip: Visit early in the morning (before 9 AM) or late in the evening (after 9 PM) to avoid the crowds. Walk slightly away from the main bridge area to discover some hidden local eateries.`,
         practicalInfo: {
         howToGetThere: "Vaporetto lines 1, 2 to Rialto stop.",
@@ -78,13 +78,13 @@ Tip: Visit early in the morning (before 9 AM) or late in the evening (after 9 PM
       },
         {
         name: "Doge's Palace (Palazzo Ducale)",
-        description: `## Overview
+        description: `# Overview
 The Doge's Palace, a masterpiece of Venetian Gothic architecture, was the former residence of the Doge, the supreme authority of the Republic of Venice. Explore opulent rooms, impressive artwork, and learn about Venetian history. It's a truly fascinating place. I found the Bridge of Sighs particularly moving.
 
-### Best Photo Spots
+## Best Photo Spots
 Capture the palace's façade from St. Mark's Square or from a gondola. Inside, the courtyard and the Golden Staircase offer stunning photo opportunities.
 
-### Insider Tips
+## Insider Tips
 Tip: Book tickets online in advance to skip the long queues. Consider a guided tour to learn more about the palace's history and art. Don't miss the Bridge of Sighs.`,
         practicalInfo: {
         howToGetThere: "Vaporetto lines 1, 2, 4.1, 4.2, 5.1, 5.2 to San Marco stop.",
@@ -107,13 +107,13 @@ Tip: Book tickets online in advance to skip the long queues. Consider a guided t
       },
         {
         name: "Burano",
-        description: `## Overview
+        description: `# Overview
 Burano is a small island in the Venetian Lagoon known for its brightly colored houses. It's a photographer's dream! The vibrant hues are truly captivating. Take a stroll through the charming streets, admire the colorful buildings, and enjoy the laid-back atmosphere. It's the kind of place you might linger longer than expected.
 
-### Best Photo Spots
+## Best Photo Spots
 Every corner of Burano is a photo opportunity! Capture the colorful houses reflected in the canals. The best light is usually in the morning or late afternoon.
 
-### Insider Tips
+## Insider Tips
 Tip: Take vaporetto line 12 from Venice (Fondamente Nove). Explore the less-crowded back streets for unique photo opportunities. Burano is also famous for its lace making, so consider buying a souvenir.`,
         practicalInfo: {
         howToGetThere: "Vaporetto line 12 from Fondamente Nove (Venice).",
@@ -136,13 +136,13 @@ Tip: Take vaporetto line 12 from Venice (Fondamente Nove). Explore the less-crow
       },
         {
         name: "Gondola Ride",
-        description: `## Overview
+        description: `# Overview
 A gondola ride is a quintessential Venetian experience. Glide along the canals, admire the city's architecture from a unique perspective, and enjoy the romantic atmosphere. Yes, it's touristy, but it's also unforgettable. The gondoliers often sing, adding to the charm.
 
-### Best Photo Spots
+## Best Photo Spots
 Capture the canals and bridges from the gondola. The Rialto Bridge and the Bridge of Sighs are particularly photogenic. Consider a sunset gondola ride for stunning lighting.
 
-### Insider Tips
+## Insider Tips
 Tip: Negotiate the price before you start your ride. Consider sharing a gondola with other travelers to split the cost. The standard route is usually about 30 minutes.`,
         practicalInfo: {
         howToGetThere: "Gondola stands are located throughout Venice.",
@@ -165,13 +165,13 @@ Tip: Negotiate the price before you start your ride. Consider sharing a gondola 
       },
         {
         name: "Cicchetti Tour",
-        description: `## Overview
+        description: `# Overview
 A cicchetti tour is a Venetian culinary experience where you hop from bacaro (wine bar) to bacaro, sampling cicchetti (small snacks) and local wine. It's a great way to taste Venetian cuisine and experience the local culture. Think of it as Venetian tapas! I recommend trying the fried mozzarella and the sardines.
 
-### What to Expect
+## What to Expect
 Expect a casual and lively atmosphere. Bacari are usually small and crowded, so be prepared to stand and mingle. Cicchetti are typically small plates, so you can try a variety of flavors.
 
-### Insider Tips
+## Insider Tips
 Tip: Ask the locals for recommendations on the best bacari. Don't be afraid to try new things! Order a 'ombra' (glass of wine) to complete the experience.`,
         practicalInfo: {
         howToGetThere: "Bacari are located throughout Venice, especially in the Rialto and Cannaregio areas.",
@@ -194,16 +194,16 @@ Tip: Ask the locals for recommendations on the best bacari. Don't be afraid to t
       },
         {
         name: "Caffè Florian",
-        description: `## Overview
+        description: `# Overview
 Caffè Florian, located in St. Mark's Square, is the oldest café in Venice and one of the oldest in the world. Established in 1720, it offers a luxurious and historical dining experience. Enjoy coffee, pastries, and light meals in an elegant setting. I found the atmosphere quite charming, even if it's a bit pricey.
 
-### Dining Atmosphere
+## Dining Atmosphere
 The café features beautifully decorated rooms, each with its own unique character. Live music is often played in the square, adding to the ambiance. It's a perfect place to relax and soak in the Venetian atmosphere.
 
-### Signature Dishes & Pricing
+## Signature Dishes & Pricing
 Expect to pay a premium for the experience. Coffee starts around €10, and pastries around €8. They also offer a selection of sandwiches, salads, and cocktails. Signature dishes include the Florian coffee and the Bellini cocktail.
 
-### Insider Tips
+## Insider Tips
 Tip: Be prepared for a cover charge if you sit outside. Consider visiting during off-peak hours to avoid the crowds. The hot chocolate is particularly decadent.`,
         practicalInfo: {
         howToGetThere: "Located in St. Mark's Square.",
@@ -226,13 +226,13 @@ Tip: Be prepared for a cover charge if you sit outside. Consider visiting during
       },
         {
         name: "Rialto Market (Mercato di Rialto)",
-        description: `## Overview
+        description: `# Overview
 The Rialto Market is a bustling marketplace offering fresh produce, seafood, and local products. It's a vibrant and authentic Venetian experience. The market is especially lively in the morning. The sights, sounds, and smells are quite captivating, some say.
 
-### What to Expect
+## What to Expect
 The fish market is located in a separate building and is best visited in the morning. The produce market is open all day. Be prepared for crowds, especially on weekends.
 
-### Insider Tips
+## Insider Tips
 Tip: Visit early in the morning (before 11 AM) for the best selection. Bargain for the best prices, but be respectful. Try some of the local produce, like artichokes and radicchio.`,
         practicalInfo: {
         howToGetThere: "Vaporetto lines 1, 2 to Rialto Mercato stop.",
@@ -255,16 +255,16 @@ Tip: Visit early in the morning (before 11 AM) for the best selection. Bargain f
       },
         {
         name: "Trattoria Al Gatto Nero",
-        description: `## Overview
+        description: `# Overview
 Trattoria Al Gatto Nero, located on the island of Burano, is a renowned seafood restaurant offering authentic Venetian cuisine. It's a bit of a splurge, but the food is exceptional. The atmosphere is cozy and inviting.
 
-### Dining Atmosphere
+## Dining Atmosphere
 The restaurant features a charming dining room with views of the canal. The service is attentive and the staff is knowledgeable about the menu.
 
-### Signature Dishes & Pricing
+## Signature Dishes & Pricing
 Signature dishes include the risotto di gò (fish risotto) and the fresh grilled seafood. Prices are moderate to expensive, with main courses ranging from €25-€40. Reservations are highly recommended.
 
-### Insider Tips
+## Insider Tips
 Tip: Make reservations well in advance, especially during peak season. Ask for a table with a canal view. Try the house wine, which is locally produced.`,
         practicalInfo: {
         howToGetThere: "Vaporetto line 12 to Burano, then a short walk.",
@@ -291,49 +291,49 @@ Tip: Make reservations well in advance, especially during peak season. Ask for a
 
 Venice is a unique city when it comes to transportation. Since it's built on water, there are no cars! The primary modes of transport are walking, water buses (vaporetti), and water taxis. Getting around can be a bit confusing at first, but you'll quickly get the hang of it.
 
-### Public Transport
+## Public Transport
 The vaporetto is the main form of public transportation in Venice. It's a network of water buses that connect the different parts of the city and the surrounding islands. You can purchase single tickets or multi-day passes. Consider a multi-day pass if you plan to use the vaporetto frequently.
 
-### Taxis & Rideshare
+## Taxis & Rideshare
 Water taxis are a more expensive but faster way to get around. They can be convenient if you have a lot of luggage or are in a hurry. Ridesharing services like Uber don't operate in Venice, so water taxis are your only option. Be prepared to pay a premium.
 
-### Walking & Cycling
+## Walking & Cycling
 Walking is the best way to explore the narrow streets and hidden corners of Venice. However, be prepared to do a lot of walking! Cycling is not allowed in the main tourist areas.`,
         whereToStay: `## Where to Stay in Venice
 
 Choosing the right neighborhood is key to a great Venice experience. Each area has its own unique charm and atmosphere. Consider your budget and interests when making your decision.
 
-### Best Areas
+## Best Areas
 St. Mark's Square is the heart of Venice and a convenient base for exploring the main attractions. However, it can be crowded and expensive. Cannaregio is a more residential area with a local feel and more affordable prices. Dorsoduro is a lively area with a mix of students, artists, and tourists. San Polo is a bustling area with the Rialto Market and many restaurants.
 
-### Luxury Options
+## Luxury Options
 For a luxurious stay, consider hotels near St. Mark's Square or the Grand Canal. These hotels often offer stunning views and top-notch amenities.
 
-### Budget-Friendly
+## Budget-Friendly
 For budget-friendly options, look for hotels or guesthouses in Cannaregio or Castello. These areas offer more affordable accommodation without sacrificing convenience.`,
         bestTimeToVisit: `## Best Time to Visit Venice
 
 The best time to visit Venice depends on your preferences. Each season offers a different experience.
 
-### Peak Season
+## Peak Season
 The peak season is during the summer months (June-August). The weather is warm and sunny, but the city is crowded and expensive. Be prepared for long queues and high prices.
 
-### Weather Overview
+## Weather Overview
 Spring (April-May) and fall (September-October) are shoulder seasons with pleasant weather and fewer crowds. Winter (November-March) can be cold and damp, but the city is less crowded and more affordable. It also offers a unique atmosphere, especially during Carnival.
 
-### Local Events
+## Local Events
 Carnival (February) is a major event in Venice, with elaborate costumes, masks, and celebrations. The Venice Film Festival (September) attracts celebrities and film buffs from around the world.`,
         suggestedItinerary: `## Suggested Venice Itinerary
 
 Here's a suggested itinerary for a 3-day trip to Venice:
 
-### Day 1
+## Day 1
 Start your day with a visit to St. Mark's Square and Basilica. Explore the Doge's Palace and cross the Bridge of Sighs. Take a gondola ride in the afternoon. Enjoy dinner at a traditional Venetian restaurant.
 
-### Day 2
+## Day 2
 Visit the Rialto Market in the morning. Explore the Cannaregio district and try some cicchetti at a local bacaro. Take a vaporetto to the island of Murano, famous for its glassblowing. Return to Venice for dinner and enjoy a gelato.
 
-### Day 3
+## Day 3
 Take a vaporetto to the island of Burano, known for its colorful houses. Visit the Lace Museum. Return to Venice and explore the Dorsoduro district. Visit the Peggy Guggenheim Collection or the Gallerie dell'Accademia. Enjoy a final Venetian dinner.`
       }}
       faqs={[

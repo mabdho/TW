@@ -19,13 +19,13 @@ export const Stockholm: React.FC = () => {
       attractions={[
         {
         name: "Gamla Stan (Old Town)",
-        description: `## Overview
+        description: `# Overview
 Gamla Stan, Stockholm's Old Town, is a captivating maze of cobblestone streets, colorful buildings, and historic landmarks. This is where Stockholm began, and it's a must-see for any visitor. You can easily spend hours wandering through its narrow alleys, discovering hidden courtyards, and soaking up the atmosphere. It's a pretty popular spot, so expect some crowds, especially during peak season.
 
-### Best Photo Spots
+## Best Photo Spots
 The Stortorget (main square) with its colorful buildings is an iconic photo spot. Also, wander down Prästgatan to capture the quintessential Old Town street view.
 
-### Insider Tips
+## Insider Tips
 Tip: Explore Gamla Stan early in the morning (around 8:00 AM) before the crowds arrive. You'll have a more peaceful experience and better photo opportunities.`,
         practicalInfo: {
         howToGetThere: "Take the metro to Gamla Stan station.",
@@ -48,13 +48,13 @@ Tip: Explore Gamla Stan early in the morning (around 8:00 AM) before the crowds 
       },
         {
         name: "Vasa Museum",
-        description: `## Overview
+        description: `# Overview
 The Vasa Museum houses the remarkably well-preserved 17th-century warship Vasa. The ship sank on its maiden voyage in 1628 and was salvaged over 300 years later. Seeing the Vasa up close is truly impressive, and the museum provides fascinating insights into its history and the lives of the people who sailed on it. It's one of the most popular places to visit in Stockholm, and for good reason.
 
-### Best Photo Spots
+## Best Photo Spots
 The best photos are taken from the upper levels, giving you a panoramic view of the ship. Try to capture the intricate details of the ship's carvings.
 
-### Insider Tips
+## Insider Tips
 Recommend: Purchase tickets online in advance to avoid long queues, especially during the summer. The museum gets very busy between 11:00 AM and 3:00 PM, so consider visiting earlier or later in the day.`,
         practicalInfo: {
         howToGetThere: "Take tram 7 or bus 67 to the Vasa Museum.",
@@ -77,13 +77,13 @@ Recommend: Purchase tickets online in advance to avoid long queues, especially d
       },
         {
         name: "Stockholm Archipelago Boat Tour",
-        description: `## Overview
+        description: `# Overview
 No trip to Stockholm is complete without exploring the Stockholm archipelago, a vast network of islands and islets. Taking a boat tour allows you to experience the stunning natural beauty of the archipelago, with its rocky shores, forests, and charming villages. There are various tour options available, from short excursions to full-day adventures. I found the view surprisingly calming.
 
-### Best Photo Spots
+## Best Photo Spots
 Every island offers stunning photo opportunities. Try to capture the reflection of the sunset on the water.
 
-### Insider Tips
+## Insider Tips
 Consider taking a tour that includes a stop on one of the outer islands for a more authentic experience. Some tours offer the chance to swim or kayak.`,
         practicalInfo: {
         howToGetThere: "Tours depart from various locations, including Strömkajen.",
@@ -106,13 +106,13 @@ Consider taking a tour that includes a stop on one of the outer islands for a mo
       },
         {
         name: "Moderna Museet (Museum of Modern Art)",
-        description: `## Overview
+        description: `# Overview
 Moderna Museet is home to an impressive collection of modern and contemporary art, including works by Picasso, Dalí, and Warhol. The museum's location on the island of Skeppsholmen offers stunning views of the city. Even if you're not a huge art buff, it's worth a visit for the architecture and the atmosphere.
 
-### Best Photo Spots
+## Best Photo Spots
 The outdoor sculpture park offers unique photo opportunities. Also, capture the views of the city from the museum's windows.
 
-### Insider Tips
+## Insider Tips
 Admission is free to the permanent collection. Check the museum's website for temporary exhibitions and events.`,
         practicalInfo: {
         howToGetThere: "Walk from Kungsträdgården or take bus 65.",
@@ -135,13 +135,13 @@ Admission is free to the permanent collection. Check the museum's website for te
       },
         {
         name: "Östermalm Saluhall (Food Market)",
-        description: `## Overview
+        description: `# Overview
 Östermalm Saluhall is a historic food market offering a wide variety of Swedish and international delicacies. You can sample local cheeses, seafood, pastries, and more. It's a great place to experience the Swedish culinary scene and enjoy a delicious meal. Some say it's the best place to grab lunch.
 
-### What to Expect
+## What to Expect
 Expect a bustling atmosphere, especially during lunchtime. The market offers a mix of sit-down restaurants and food stalls.
 
-### Insider Tips
+## Insider Tips
 Consider trying the classic Swedish 'smörgåsbord' at one of the restaurants. Be sure to sample some local cheeses and seafood.`,
         practicalInfo: {
         howToGetThere: "Take the metro to Östermalmstorg station.",
@@ -164,13 +164,13 @@ Consider trying the classic Swedish 'smörgåsbord' at one of the restaurants. B
       },
         {
         name: "Fotografiska (Photography Museum)",
-        description: `## Overview
+        description: `# Overview
 Fotografiska is a world-renowned photography museum showcasing contemporary photography from around the globe. The museum is located in a former industrial building with stunning waterfront views. In addition to the exhibitions, there's a restaurant and bar with panoramic city views. It's the kind of place you might linger longer than expected.
 
-### Best Photo Spots
+## Best Photo Spots
 The restaurant and bar offer stunning panoramic views of the city.
 
-### Insider Tips
+## Insider Tips
 Visit during the late afternoon or early evening to enjoy the sunset views from the restaurant.`,
         practicalInfo: {
         howToGetThere: "Walk from Slussen metro station.",
@@ -193,13 +193,13 @@ Visit during the late afternoon or early evening to enjoy the sunset views from 
       },
         {
         name: "Skansen Open-Air Museum",
-        description: `## Overview
+        description: `# Overview
 Skansen is an open-air museum showcasing Swedish history and culture. It features historic buildings, farms, and workshops, offering a glimpse into life in Sweden throughout the centuries. It's a great place to learn about Swedish traditions and see how people lived in the past. You can easily spend a whole day here. I think this is one of the best things to do in Stockholm with the entire family.
 
-### What to Expect
+## What to Expect
 Expect to walk around a large area with various buildings and exhibits. There are also animals to see, including reindeer and bears.
 
-### Insider Tips
+## Insider Tips
 Check the museum's schedule for demonstrations and events, such as traditional crafts and folk dancing.`,
         practicalInfo: {
         howToGetThere: "Take tram 7 or bus 67 to Skansen.",
@@ -222,13 +222,13 @@ Check the museum's schedule for demonstrations and events, such as traditional c
       },
         {
         name: "Café Pascal",
-        description: `## Overview
+        description: `# Overview
 Café Pascal is a popular cafe known for its excellent coffee and delicious pastries. It's a great spot for a Swedish 'fika' (coffee break) or a light lunch. The atmosphere is cozy and inviting, making it a perfect place to relax and recharge. You'll find several locations around the city. A visit to this cafe is a MUST for any coffee lover!
 
-### What to Expect
+## What to Expect
 Expect a bustling atmosphere, especially during peak hours. They offer a variety of coffee drinks, pastries, sandwiches, and salads.
 
-### Insider Tips
+## Insider Tips
 Try their signature cardamom bun ('kardemummabullar'). They also have a great selection of gluten-free options.`,
         practicalInfo: {
         howToGetThere: "Various locations, check website.",
@@ -251,13 +251,13 @@ Try their signature cardamom bun ('kardemummabullar'). They also have a great se
       },
         {
         name: "Meatballs for the People",
-        description: `## Overview
+        description: `# Overview
 Meatballs for the People (or *Köttbullar för folket* in Swedish) is a restaurant dedicated to Sweden's most iconic dish: meatballs! This eatery serves a variety of meatball variations, from traditional beef to more exotic options like moose and reindeer. The focus is on high-quality ingredients and authentic Swedish flavors. It's a must-try for anyone wanting a truly local culinary experience.
 
-### Signature Dishes
+## Signature Dishes
 Don't miss their classic Swedish meatballs with mashed potatoes, gravy, and lingonberry jam. They also offer vegetarian and vegan options.
 
-### Dining Culture
+## Dining Culture
 Meatballs are a staple of Swedish cuisine, often enjoyed with family and friends. Expect a casual and friendly atmosphere.`,
         practicalInfo: {
         howToGetThere: "Take the metro to Södermalm.",
@@ -280,13 +280,13 @@ Meatballs are a staple of Swedish cuisine, often enjoyed with family and friends
       },
         {
         name: "Hötorgshallen Market",
-        description: `## Overview
+        description: `# Overview
 Hötorgshallen is an indoor food market near Hötorget Square, offering a wide range of culinary delights. From fresh produce and seafood to international cuisines, this is a great place to sample Stockholm's diverse food scene. Locals come here to shop for groceries and enjoy lunch at one of the many food stalls.
 
-### What to Expect
+## What to Expect
 Expect a bustling and lively atmosphere. The market is filled with vendors selling everything from Swedish cheeses to Middle Eastern spices.
 
-### Dining Tips
+## Dining Tips
 Don't be afraid to try something new! The market offers a variety of cuisines, so there's something for everyone.`,
         practicalInfo: {
         howToGetThere: "Take the metro to Hötorget station.",
@@ -309,13 +309,13 @@ Don't be afraid to try something new! The market offers a variety of cuisines, s
       },
         {
         name: "Junibacken",
-        description: `## Overview
+        description: `# Overview
 Junibacken is a children's museum dedicated to the stories of Astrid Lindgren, the author of Pippi Longstocking. Kids can explore the world of Pippi and other beloved characters through interactive exhibits and play areas. This is a fantastic destination for families with young children. It is definitely a must-see place to visit in Stockholm for families.
 
-### What to Expect
+## What to Expect
 Expect a fun and engaging environment for kids. The museum features a story train, play areas, and live performances.
 
-### Insider Tips
+## Insider Tips
 Purchase tickets online in advance to avoid queues. Plan to spend at least 3 hours at the museum.`,
         practicalInfo: {
         howToGetThere: "Take tram 7 or bus 67 to Junibacken.",
@@ -342,49 +342,49 @@ Purchase tickets online in advance to avoid queues. Plan to spend at least 3 hou
 
 Stockholm has an excellent public transport system, making it easy to get around the city. Options include the metro, buses, trams, and ferries. Walking and cycling are also popular choices, especially in the city center.
 
-### Public Transport
+## Public Transport
 The metro (Tunnelbana) is the fastest and most convenient way to travel long distances. Buses and trams are useful for reaching areas not served by the metro. A travel card can save you money if you plan to use public transport frequently.
 
-### Taxis & Rideshare
+## Taxis & Rideshare
 Taxis and rideshare services like Uber are available, but they can be more expensive than public transport. They may be a good option for late-night travel or when you have a lot of luggage.
 
-### Walking & Cycling
+## Walking & Cycling
 Stockholm is a very walkable city, and cycling is also a popular option. There are many bike paths, and you can rent a bike from various locations throughout the city.`,
         whereToStay: `## Where to Stay in Stockholm
 
 Stockholm offers a wide range of accommodation options, from luxury hotels to budget-friendly hostels. The best area to stay depends on your preferences and budget. It is one of the important things to do in Stockholm, choose the best accomodation based on your needs.
 
-### Best Areas
+## Best Areas
 Gamla Stan (Old Town) is a good choice if you want to be in the heart of the historical center. Södermalm is a trendy area with a vibrant nightlife and a creative atmosphere. Norrmalm is a central location with easy access to shopping, restaurants, and attractions.
 
-### Luxury Options
+## Luxury Options
 For a luxurious stay, consider the Grand Hôtel or the Hotel Diplomat. These hotels offer stunning views, excellent service, and top-notch amenities.
 
-### Budget-Friendly
+## Budget-Friendly
 For budget-friendly options, check out Generator Stockholm or City Backpackers Hostel. These accommodations offer comfortable rooms and a social atmosphere.`,
         bestTimeToVisit: `## Best Time to Visit Stockholm
 
 The best time to visit Stockholm depends on your preferences. Summer offers warm weather and long daylight hours, while winter provides a magical atmosphere with snow and Christmas markets. Spring and fall offer milder temperatures and fewer crowds.
 
-### Peak Season
+## Peak Season
 Summer (June-August) is the peak season, with warm weather and numerous outdoor events. However, expect higher prices and larger crowds.
 
-### Weather Overview
+## Weather Overview
 Spring (April-May) and fall (September-October) offer pleasant temperatures and fewer crowds. Winter (November-March) is cold, with snow and shorter daylight hours.
 
-### Local Events
+## Local Events
 Midsummer (June) is a major Swedish holiday celebrated with traditional festivities. Stockholm Music & Arts (July) is a popular music festival.`,
         suggestedItinerary: `## Suggested Stockholm Itinerary
 
 Here's a suggested itinerary for a 3-day trip to Stockholm:
 
-### Day 1
+## Day 1
 Start your day by exploring Gamla Stan (Old Town). Visit the Royal Palace, Stortorget, and the Nobel Museum. In the afternoon, take a boat tour of the Stockholm archipelago. Enjoy dinner at a traditional Swedish restaurant.
 
-### Day 2
+## Day 2
 Visit the Vasa Museum in the morning. In the afternoon, explore Skansen Open-Air Museum. In the evening, enjoy a concert or performance.
 
-### Day 3
+## Day 3
 Visit Moderna Museet (Museum of Modern Art) in the morning. In the afternoon, explore Södermalm, a trendy neighborhood with shops, cafes, and restaurants. Enjoy dinner with a view.`
       }}
       faqs={[

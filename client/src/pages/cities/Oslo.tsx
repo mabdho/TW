@@ -19,15 +19,15 @@ export const Oslo: React.FC = () => {
       attractions={[
         {
         name: "Vigeland Sculpture Park",
-        description: `## Overview
+        description: `# Overview
 
 Vigeland Sculpture Park is perhaps the most famous of Oslo's attractions. It's a truly unique space showcasing over 200 sculptures created by Gustav Vigeland. The park is open year-round and offers a thought-provoking experience with its representations of the human form and life cycle. Seriously, you could spend hours just wandering and contemplating.
 
-### Best Photo Spots
+## Best Photo Spots
 
 Capture the iconic 'Monolith' at sunset for a stunning backdrop. I found the view surprisingly calming, even with the crowds. Also, don't miss the 'Angry Boy' statue – a classic photo op.
 
-### Insider Tips
+## Insider Tips
 
 Tip: Visit early in the morning (before 10 AM) or later in the evening to avoid the largest crowds. The park is free to enter, so you can come and go as you please!`,
         practicalInfo: {
@@ -51,15 +51,15 @@ Tip: Visit early in the morning (before 10 AM) or later in the evening to avoid 
       },
         {
         name: "Viking Ship Museum",
-        description: `## Overview
+        description: `# Overview
 
 The Viking Ship Museum houses an incredible collection of Viking ships and artifacts, offering a fascinating glimpse into Norway's maritime past. Here, you'll see the Gokstad, Oseberg, and Tune ships, remarkably preserved remnants of Viking seafaring prowess. These ships are truly impressive, and the museum provides detailed information about their construction, use, and significance.
 
-### What to Expect
+## What to Expect
 
 Expect crowds, especially during peak season. The museum is relatively small, so it can feel a bit cramped. Still, the artifacts are well worth seeing.
 
-### Insider Tips
+## Insider Tips
 
 Consider purchasing the Oslo Pass for free entry and unlimited public transport. Tip: The museum is currently closed for renovations (reopening expected in 2026), so be sure to check the website for the latest updates and alternative locations displaying Viking artifacts.`,
         practicalInfo: {
@@ -83,15 +83,15 @@ Consider purchasing the Oslo Pass for free entry and unlimited public transport.
       },
         {
         name: "Akershus Fortress",
-        description: `## Overview
+        description: `# Overview
 
 Akershus Fortress is a medieval castle that has played a central role in Norway's history. Offering stunning views of the Oslofjord, the fortress is a great place to explore. Over the centuries, it has served as a royal residence, a military base, and a prison. The grounds are free to explore, and guided tours are available for a fee. It's the kind of place you might linger longer than expected.
 
-### Best Photo Spots
+## Best Photo Spots
 
 Head to the ramparts for panoramic views of the Oslofjord and the city skyline. The best time for photos is during golden hour (sunset).
 
-### Insider Tips
+## Insider Tips
 
 Tip: Check the schedule for the changing of the guard ceremony, a colorful spectacle. Also, consider visiting the Norwegian Resistance Museum located within the fortress.`,
         practicalInfo: {
@@ -115,15 +115,15 @@ Tip: Check the schedule for the changing of the guard ceremony, a colorful spect
       },
         {
         name: "Holmenkollen Ski Jump",
-        description: `## Overview
+        description: `# Overview
 
 Holmenkollen Ski Jump is not just a ski jump; it's a symbol of Norway's sporting heritage. Offering breathtaking panoramic views of Oslo and the surrounding fjord, it's a must-visit for any traveler. You can take an elevator to the top of the jump for an exhilarating experience. It is quite a climb, but I think it's worth it for the views. 
 
-### Insider Tips
+## Insider Tips
 
 Try the ski simulator for a virtual experience of jumping! It's a fun and thrilling way to experience the sport.
 
-### Don't Miss
+## Don't Miss
 
 Don't miss the Ski Museum at the base of the jump, which tells the history of skiing in Norway.`,
         practicalInfo: {
@@ -147,15 +147,15 @@ Don't miss the Ski Museum at the base of the jump, which tells the history of sk
       },
         {
         name: "Oslo Opera House",
-        description: `## Overview
+        description: `# Overview
 
 The Oslo Opera House is a stunning architectural marvel situated on the waterfront. Its distinctive design, resembling a glacier rising from the sea, makes it a landmark in Oslo. You can walk on the sloping roof of the building for free, offering unique perspectives of the city and the fjord. Even if you're not an opera fan, the building itself is worth exploring. 
 
-### Best Photo Spots
+## Best Photo Spots
 
 Capture the Opera House from the fjord for a striking composition. Sunset and sunrise are particularly beautiful times for photography.
 
-### Insider Tips
+## Insider Tips
 
 Check the Opera's schedule for performances. Even if opera isn't your thing, experiencing a show in this iconic venue is something special. Be sure to book tickets in advance, as popular performances sell out quickly.`,
         practicalInfo: {
@@ -179,15 +179,15 @@ Check the Opera's schedule for performances. Even if opera isn't your thing, exp
       },
         {
         name: "Mathallen Oslo",
-        description: `## Overview
+        description: `# Overview
 
 Mathallen Oslo is a vibrant food hall offering a wide array of culinary delights. From local Norwegian specialties to international cuisine, you'll find something to satisfy every craving. It's a great place to sample local produce, try different dishes, and experience the city's food culture. I think it's a must-visit for food lovers!
 
-### Culinary Experiences
+## Culinary Experiences
 
 Sample traditional Norwegian cheeses, cured meats, and fresh seafood. You can also find gourmet burgers, artisanal pizzas, and exotic spices.
 
-### Insider Tips
+## Insider Tips
 
 Visit during lunchtime for a bustling atmosphere. Many locals come here for a quick and tasty meal.`,
         practicalInfo: {
@@ -211,15 +211,15 @@ Visit during lunchtime for a bustling atmosphere. Many locals come here for a qu
       },
         {
         name: "Tim Wendelboe",
-        description: `## Overview
+        description: `# Overview
 
 Tim Wendelboe is a renowned coffee shop and roastery in Oslo, celebrated for its exceptional coffee quality and minimalist design. It's a haven for coffee aficionados, offering a curated selection of single-origin beans and expertly brewed beverages. The atmosphere is calm and focused, perfect for savoring a cup of coffee. Some say it's the best coffee in Oslo, and I wouldn't disagree.
 
-### Coffee Culture
+## Coffee Culture
 
 Expect a no-frills approach to coffee. The focus is on the quality of the beans and the brewing process.
 
-### Insider Tips
+## Insider Tips
 
 Try the espresso or the V60 pour-over. These are the shop's specialties. Tip: Be sure to ask about the current single-origin offerings. The staff are very knowledgeable and happy to share their expertise.`,
         practicalInfo: {
@@ -243,15 +243,15 @@ Try the espresso or the V60 pour-over. These are the shop's specialties. Tip: Be
       },
         {
         name: "Restaurant Maaemo",
-        description: `## Overview
+        description: `# Overview
 
 Maaemo (currently closed, relocating to countryside in 2024/25) was Oslo's only three-Michelin-starred restaurant, offering a unique and innovative dining experience focused on Norwegian ingredients. The restaurant showcases the best of Norwegian cuisine, using locally sourced and seasonal produce. This is a culinary experience unlike any other.
 
-### Dining Experience
+## Dining Experience
 
 Expect a tasting menu that highlights the flavors of Norway's natural landscape.
 
-### Important Note
+## Important Note
 
 Currently, Maaemo is relocating to the countryside. Check their website for updates and reopening information before planning your visit.`,
         practicalInfo: {
@@ -275,15 +275,15 @@ Currently, Maaemo is relocating to the countryside. Check their website for upda
       },
         {
         name: "Aker Brygge",
-        description: `## Overview
+        description: `# Overview
 
 Aker Brygge is a vibrant waterfront area offering a mix of restaurants, shops, and entertainment venues. It's a popular spot for locals and tourists alike, especially during the summer months. The area boasts stunning views of the Oslofjord and a lively atmosphere. It's a great place to stroll, grab a bite to eat, and soak up the city's energy.
 
-### Things to Do
+## Things to Do
 
 Enjoy a meal with a view at one of the many waterfront restaurants, browse the shops, or take a boat tour of the Oslofjord.
 
-### Insider Tips
+## Insider Tips
 
 Visit during the summer for outdoor concerts and events. Also, consider taking a walk along the harbor to explore the nearby Tjuvholmen sculpture park.`,
         practicalInfo: {
@@ -307,15 +307,15 @@ Visit during the summer for outdoor concerts and events. Also, consider taking a
       },
         {
         name: "Emanuel Vigeland Museum",
-        description: `## Overview
+        description: `# Overview
 
 The Emanuel Vigeland Museum, also known as Mausoleum, is a unique and somewhat bizarre art experience. It houses a single, dimly lit room completely covered in frescoes depicting scenes of human life, death, and sexuality. The room has remarkable acoustics, creating an eerie and immersive atmosphere. It's definitely an experience you won't forget, but perhaps not for the faint of heart. 
 
-### What to Expect
+## What to Expect
 
 Be prepared for a dark and intimate setting. The frescoes are quite explicit, so it may not be suitable for children or those easily offended. It's a very small room so you will be in close proximity to other visitors.
 
-### Insider Tips
+## Insider Tips
 
 Reservations are required as only a limited number of visitors are allowed in at a time. The low lighting is part of the atmosphere but may make it difficult to see the frescoes in detail. A flashlight isn't permitted, so just take your time and let your eyes adjust.`,
         practicalInfo: {
@@ -343,48 +343,48 @@ Reservations are required as only a limited number of visitors are allowed in at
 
 Oslo boasts an efficient and user-friendly public transportation system, making it easy to explore the city without a car. From trams and buses to metros and ferries, there are plenty of options to choose from. Whether you're hopping between museums, heading to the fjord, or venturing into the surrounding hills, you'll find a convenient way to get there.
 
-### Public Transport
+## Public Transport
 
 The public transport network is operated by Ruter. You can purchase tickets through the Ruter app, at ticket machines, or at convenience stores. Consider purchasing a day pass or a multi-day pass for unlimited travel within the city. The metro system is particularly useful for reaching attractions outside the city center, such as Holmenkollen Ski Jump.
 
-### Taxis & Rideshare
+## Taxis & Rideshare
 
 Taxis are readily available in Oslo, but they can be quite expensive. Rideshare services like Uber are also an option. However, keep in mind that surge pricing may apply during peak hours.`,
         whereToStay: `## Where to Stay in Oslo
 
 Oslo offers a wide range of accommodation options to suit every budget and preference. From luxury hotels to budget-friendly hostels, you'll find something to fit your needs. The location of your accommodation can significantly impact your experience, so consider what you want to be close to when making your choice.
 
-### Best Areas
+## Best Areas
 
 For a central location, consider staying in the city center, near Karl Johans gate. This area is close to many attractions, restaurants, and shops. Aker Brygge is a great option if you want to be near the waterfront and enjoy a lively atmosphere. Grünerløkka is a trendy neighborhood with a bohemian vibe, offering a mix of cafes, bars, and independent shops.
 
-### Budget-Friendly
+## Budget-Friendly
 
 If you're on a budget, consider staying in a hostel or guesthouse. These options often offer shared facilities and a more social atmosphere.`,
         bestTimeToVisit: `## Best Time to Visit Oslo
 
 The best time to visit Oslo depends on your interests and preferences. Each season offers a unique experience, from the vibrant summer months to the cozy winter days.
 
-### Weather Overview
+## Weather Overview
 
 Summer (June-August) is the warmest time of year, with average temperatures around 20°C (68°F). This is a popular time to visit, as the days are long and sunny. Winter (December-February) is cold, with average temperatures around -5°C (23°F). However, the city is often covered in snow, creating a magical atmosphere.
 
-### Local Events
+## Local Events
 
 Consider visiting during a local festival or event. The Oslo Jazz Festival takes place in August, while the Christmas markets are a popular attraction in December.`,
         suggestedItinerary: `## Suggested Oslo Itinerary
 
 Here's a suggested itinerary for exploring Oslo in three days:
 
-### Day 1
+## Day 1
 
 Start your day with a visit to the Viking Ship Museum (check for re-opening). In the afternoon, explore the Bygdøy peninsula and visit the Kon-Tiki Museum or the Fram Museum. End the day with a stroll along Aker Brygge and dinner at a waterfront restaurant.
 
-### Day 2
+## Day 2
 
 Visit the Vigeland Sculpture Park in the morning. In the afternoon, explore the city center, including Karl Johans gate and the Royal Palace. Take a guided tour of the Akershus Fortress. 
 
-### Day 3
+## Day 3
 
 Take a trip to Holmenkollen Ski Jump for panoramic views of the city. In the afternoon, explore the trendy Grünerløkka neighborhood and visit Mathallen Oslo for a culinary experience.`
       }}
