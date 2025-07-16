@@ -243,8 +243,8 @@ Tip: Don't leave without taking a picture in front of the mural. Try the Belgian
         interests: ["food", "coffee", "relaxation", "photography"],
         costLevel: "Budget-friendly",
         seasonalBest: "Year-round",
-        photoOpportunity: "The "I love you so much" mural, colorful coffee cups.",
-        insiderTip: "Visit during off-peak hours (before 9 AM or after 3 PM) to avoid long lines; snap a photo in front of the iconic "I love you so much" mural.",
+        photoOpportunity: "The 'I love you so much' mural, colorful coffee cups.",
+        insiderTip: "Visit during off-peak hours (before 9 AM or after 3 PM) to avoid long lines; snap a photo in front of the iconic 'I love you so much' mural.",
         hiddenGem: false,
         familyFriendly: true,
         accessibilityNotes: "Wheelchair accessible."
