@@ -278,7 +278,7 @@ Tip: The best time to visit is at sunset. Bring a blanket and some snacks to enj
         familyFriendly: true,
         accessibilityNotes: "Not wheelchair accessible; stairs to the top."
       }
-      }
+      },
       ]}
       logistics={{
         gettingAround: `## Getting Around Austin
@@ -349,7 +349,7 @@ Take a scenic drive to Mount Bonnell for panoramic views. In the afternoon, visi
         localSecrets: ["Avoid the long lines at Franklin Barbecue by arriving before 7:30 AM on a Tuesday or Wednesday. Locals suggest bringing a folding chair and drinks to make the wait more comfortable. You can also pre-order a whole brisket for pickup.", "Use the CapMetro app to purchase a day pass for $2.50 and navigate the city like a local. Download the app on your phone. Check real-time bus schedules and plan your route in advance to avoid waiting.", "A realistic budget for 3 days in Austin is approximately $300-450. This includes $50-75 per day for meals, $10-20 for transportation, $20-30 for attractions, and $20-30 for miscellaneous expenses.", "Visit the HOPE Farmers Market (400 Comal St) on Sundays to find local and authentic goods. Bargaining isn't typical, but you can often get discounts on bulk purchases or ask for 'market specials' on produce and handmade crafts.", "Avoid the tourist trap restaurants on 6th Street with inflated prices and mediocre food. Instead, explore the food trucks on South Congress for more authentic and affordable dining options. Check out Veracruz All Natural (food truck chain) for amazing tacos.", "During South by Southwest (SXSW) in March, expect significant crowds and higher prices. Alternatively, attending Austin City Limits Music Festival in October offers a fantastic experience with less of the overwhelming chaos."],
         diningHighlights: {
           mustTryDishes: "Texas BBQ Brisket,Tex-Mex Tacos,Migas,Chicken Fried Steak",
-          bestCafes: "Jo's Coffee: Iconic Austin cafe known for its "I love you so much" mural.,Houndstooth Coffee: Stylish coffee shop with multiple locations serving high-quality coffee.,Caffe Medici: Another favorite coffee shop with a few locations",
+          bestCafes: "Jo's Coffee: Iconic Austin cafe known for its 'I love you so much' mural.,Houndstooth Coffee: Stylish coffee shop with multiple locations serving high-quality coffee.,Caffe Medici: Another favorite coffee shop with a few locations",
           topRestaurants: "Franklin Barbecue: Legendary barbecue joint with a multi-hour wait.,Josephine House: Charming bistro serving seasonal American cuisine.,Odd Duck: Farm-to-table restaurant with a focus on small plates.",
           foodMarkets: "HOPE Farmers Market (Sundays),SFC Farmers' Market (various locations)",
           diningTips: "Tipping is customary in Austin restaurants (15-20%). Reservations are recommended for popular restaurants, especially on weekends."

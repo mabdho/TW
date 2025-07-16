@@ -78,3 +78,11 @@ export function getAllGradients(): Record<string, CityGradient> {
 export function getDefaultGradients(): CityGradient[] {
   return defaultGradients;
 }
+
+/**
+ * Get gradient class for a city (simplified version)
+ */
+export function getCityGradientClass(cityName: string): string {
+  const cityGradient = getCityGradient(cityName);
+  return cityGradient.gradient;
+}

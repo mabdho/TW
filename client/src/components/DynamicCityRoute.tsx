@@ -6,7 +6,7 @@ const CityLoadingFallback = () => null;
 
 // Helper function to create city imports
 const createCityImport = (cityName: string, modulePath: string) => {
-  return lazy(() => import(modulePath + '.tsx').then(module => ({ default: module[cityName] })));
+  return lazy(() => import(modulePath + '.tsx').then((module: any) => ({ default: module[cityName] })));
 };
 
 // City mapping for dynamic imports
