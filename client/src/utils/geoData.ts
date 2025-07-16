@@ -59,12 +59,13 @@ export function formatCoordinatesForSchema(cityName: string): string | null {
 /**
  * Generate Place schema.org structured data for a city
  */
-export function generatePlaceSchema(cityName: string, country: string) {
+export function generatePlaceSchema(cityName: string, country: string, description?: string) {
   const coords = getCityCoordinates(cityName);
   
   return {
     "@type": "Place",
     "name": cityName,
+    "description": description,
     "addressCountry": country,
     "geo": coords ? {
       "@type": "GeoCoordinates",
