@@ -81,6 +81,7 @@ import { DiscoveryCards } from './DiscoveryCards';
 import { InteractiveAttractionExplorer } from './InteractiveAttractionExplorer';
 import { ContextualLinks } from './ContextualLinks';
 import { generateEnhancedAltText } from '../utils/seoOptimization';
+import { renderMarkdown } from '../utils/markdownRenderer';
 
 interface Attraction {
   name: string;
@@ -412,9 +413,9 @@ export const CityPage: React.FC<CityPageProps> = ({
                     </AccordionTrigger>
                     <AccordionContent className="px-3 pb-3 sm:px-4 sm:pb-4">
                       <div className="space-y-3 sm:space-y-4">
-                        <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
-                          {attraction.description}
-                        </p>
+                        <div className="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                          {renderMarkdown(attraction.description)}
+                        </div>
                         
                         {attraction.practicalInfo && (
                           <div className="bg-gray-50 rounded-lg p-3 sm:p-4 space-y-2 sm:space-y-3">
@@ -505,7 +506,9 @@ export const CityPage: React.FC<CityPageProps> = ({
                             <span className="text-xs sm:text-sm font-medium text-gray-700">4.{Math.floor(Math.random() * 5) + 3}</span>
                           </div>
                         </div>
-                        <p className="text-gray-600 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">{attraction.description}</p>
+                        <div className="text-gray-600 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">
+                          {renderMarkdown(attraction.description)}
+                        </div>
                         
                         {attraction.practicalInfo && (
                           <div className="bg-gray-50 rounded-lg p-3 sm:p-4">
