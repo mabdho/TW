@@ -1,5 +1,6 @@
 // File-based blog system - this file will export all available blogs
 import { Blog } from '@shared/schema';
+import { parisastrollthroughthecityoflightsBlog } from './paris-a-stroll-through-the-city-of-lights';
 // Blog imports will be automatically added when new blogs are generated
 
 
@@ -7,6 +8,7 @@ import { Blog } from '@shared/schema';
 // This file will be automatically updated when new blogs are generated
 export const allBlogs: Blog[] = [
   // Blogs cleared - ready for fresh production content via admin panel
+  parisastrollthroughthecityoflightsBlog,
 ];
 
 export function getAllBlogs(): Blog[] {
