@@ -37,9 +37,26 @@ const PageFallback = () => (
 function ConditionalNotFound() {
   const [location] = useLocation();
   
-  // Only show 404 for non-city routes to prevent conflicts with dynamic city routing
+  // Show 404 only for truly unmatched routes, not valid city routes
   if (location.startsWith('/best-things-to-do-in-')) {
-    return null;
+    // For city routes, check if it's a valid format but no city exists
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-center max-w-md mx-auto px-4">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">City Guide Coming Soon</h1>
+          <p className="text-gray-600 mb-6">
+            We're working on creating amazing travel guides for this destination. 
+            Check back soon or explore our other featured cities!
+          </p>
+          <a 
+            href="/destinations" 
+            className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
+          >
+            Browse All Destinations
+          </a>
+        </div>
+      </div>
+    );
   }
   
   return <NotFound />;
@@ -105,8 +122,8 @@ function App() {
           {/* Dynamic city routes */}
           <CityRoutes />
           
-          {/* 404 fallback */}
-          <Route>
+          {/* 404 fallback - only for truly unmatched routes */}
+          <Route path="/:rest*">
             <Suspense fallback={<PageFallback />}>
               <ConditionalNotFound />
             </Suspense>
