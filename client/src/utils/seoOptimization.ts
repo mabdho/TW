@@ -111,7 +111,7 @@ export function generateCityMetaTags(config: SEOConfig): MetaTag[] {
 
 /**
  * Generate enhanced alt text for attraction images
- * Updated to use simplified format: "things to do in [city]"
+ * Varied to prevent keyword cannibalization while maintaining SEO focus
  */
 export function generateEnhancedAltText(
   attractionName: string,
@@ -119,8 +119,16 @@ export function generateEnhancedAltText(
   country: string,
   context: 'hero' | 'gallery' | 'card' = 'gallery'
 ): string {
-  // Simplified format for all contexts
-  return `things to do in ${cityName}`;
+  switch (context) {
+    case 'hero':
+      return `things to do in ${cityName}`;
+    case 'gallery':
+      return `${attractionName} - attractions in ${cityName}`;
+    case 'card':
+      return `${attractionName} - places to visit in ${cityName}`;
+    default:
+      return `${attractionName} - best spots in ${cityName}`;
+  }
 }
 
 /**

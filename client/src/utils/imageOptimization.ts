@@ -79,8 +79,22 @@ export function generateImageAltText(
   attractionName?: string,
   context: 'hero' | 'gallery' | 'attraction' = 'gallery'
 ): string {
-  // Simple format: "things to do in [city]" for all images as requested
-  return `things to do in ${cityName}`;
+  // Varied alt text to prevent keyword cannibalization while maintaining SEO focus
+  switch (context) {
+    case 'hero':
+      return `things to do in ${cityName}`;
+    
+    case 'attraction':
+      return attractionName 
+        ? `things to do in ${cityName} - ${attractionName}`
+        : `attractions in ${cityName}`;
+    
+    case 'gallery':
+    default:
+      return attractionName
+        ? `${attractionName} - things to do in ${cityName}`
+        : `best places to visit in ${cityName}`;
+  }
 }
 
 /**
@@ -90,11 +104,19 @@ export function optimizeGalleryImages(
   galleryImages: GalleryImage[],
   cityName: string
 ): OptimizedImage[] {
+  const altVariations = [
+    `best places to visit in ${cityName}`,
+    `top attractions in ${cityName}`,
+    `must-see spots in ${cityName}`,
+    `things to explore in ${cityName}`,
+    `destinations in ${cityName}`
+  ];
+  
   return galleryImages
     .filter(image => image.url) // Only include images with URLs
     .map((image, index) => ({
       url: optimizeImageUrl(image.url!, 400, 'webp', 80),
-      alt: image.alt || `things to do in ${cityName}`,
+      alt: image.alt || altVariations[index % altVariations.length],
       caption: image.caption,
       width: 400,
       height: 400
