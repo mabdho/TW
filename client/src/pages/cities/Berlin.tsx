@@ -19,13 +19,13 @@ export const Berlin: React.FC = () => {
       attractions={[
         {
         name: "Brandenburg Gate",
-        description: `# Overview
+        description: `## Overview
 The Brandenburg Gate is perhaps Berlin's most iconic landmark, a symbol of both division and reunification. This magnificent neoclassical monument has witnessed centuries of history, from Prussian military parades to the fall of the Berlin Wall. It’s a must-see for any visitor to Berlin, and I think you'll find it pretty impressive, actually.
 
-## Best Photo Spots
+### Best Photo Spots
 For the best photo opportunities, visit early in the morning to avoid the crowds. The gate is particularly stunning at sunrise and sunset, when the light casts a warm glow on the sandstone columns.
 
-## Insider Tips
+### Insider Tips
 Tip: Take a stroll through the Tiergarten park, which is right next to the Brandenburg Gate. It's a beautiful green space perfect for a relaxing walk or a picnic. Be sure to look for the Victory Column!`,
         practicalInfo: {
         howToGetThere: "U-Bahn: U5 to Brandenburg Tor; S-Bahn: S1, S2, S25 to Brandenburg Tor; Bus: 100 to Brandenburger Tor",
@@ -48,13 +48,13 @@ Tip: Take a stroll through the Tiergarten park, which is right next to the Brand
       },
         {
         name: "East Side Gallery",
-        description: `# Overview
+        description: `## Overview
 The East Side Gallery is the longest remaining section of the Berlin Wall, transformed into an open-air art gallery. Over a hundred artists from around the world have painted murals on the wall, expressing themes of peace, freedom, and hope. It's a powerful reminder of Berlin's divided past and a testament to the city's artistic spirit. You really *should* see it.
 
-## Best Photo Spots
+### Best Photo Spots
 Take photos of the iconic murals, such as the "Fraternal Kiss" between Soviet leader Leonid Brezhnev and East German leader Erich Honecker. The best light is usually in the afternoon.
 
-## Insider Tips
+### Insider Tips
 Local favorite: rent a bike and cycle along the East Side Gallery for a different perspective. It's also worth visiting at night, when some of the murals are illuminated.`,
         practicalInfo: {
         howToGetThere: "S-Bahn: S3, S5, S7, S9 to Warschauer Straße; U-Bahn: U1 to Warschauer Straße",
@@ -77,13 +77,13 @@ Local favorite: rent a bike and cycle along the East Side Gallery for a differen
       },
         {
         name: "Memorial to the Murdered Jews of Europe",
-        description: `# Overview
+        description: `## Overview
 The Memorial to the Murdered Jews of Europe, also known as the Holocaust Memorial, is a poignant and thought-provoking monument consisting of 2,711 concrete slabs of varying heights. It's a place for reflection and remembrance, designed to evoke a sense of unease and disorientation. Walking through the memorial can be a deeply moving experience.
 
-## Best Photo Spots
+### Best Photo Spots
 Consider the sensitivity of the site when taking photos. Wide shots that capture the scale of the memorial are powerful, but avoid posing or taking selfies that could be considered disrespectful.
 
-## Insider Tips
+### Insider Tips
 Don't miss the underground Information Center, which provides historical context and personal stories of victims of the Holocaust. It's an essential part of the memorial experience.`,
         practicalInfo: {
         howToGetThere: "U-Bahn: U2 to Potsdamer Platz; S-Bahn: S1, S2, S25 to Potsdamer Platz; Bus: M41, M48, M85 to Behrenstr./Wilhelmstr.",
@@ -106,13 +106,13 @@ Don't miss the underground Information Center, which provides historical context
       },
         {
         name: "Museum Island",
-        description: `# Overview
+        description: `## Overview
 Museum Island is a UNESCO World Heritage site comprising five world-renowned museums: the Pergamon Museum, the Neues Museum, the Alte Nationalgalerie, the Bode Museum, and the Altes Museum. Each museum houses an impressive collection of art and artifacts from various periods and cultures. You could easily spend several days exploring all that Museum Island has to offer.
 
-## Best Photo Spots
+### Best Photo Spots
 The Bode Museum offers stunning photo opportunities from its bridge over the Spree River, especially at sunset. The Pergamon Museum's Ishtar Gate is also a popular photo spot.
 
-## Insider Tips
+### Insider Tips
 Recommend: Purchase a Museum Pass Berlin for access to multiple museums over three days. This can save you money and time. The Pergamon Museum is incredibly popular; book your tickets online in advance to avoid long queues.`,
         practicalInfo: {
         howToGetThere: "S-Bahn: S3, S5, S7, S9 to Hackescher Markt; U-Bahn: U6 to Friedrichstraße",
@@ -135,13 +135,13 @@ Recommend: Purchase a Museum Pass Berlin for access to multiple museums over thr
       },
         {
         name: "Reichstag Building",
-        description: `# Overview
+        description: `## Overview
 The Reichstag Building is the seat of the German Parliament and a symbol of German democracy. Visitors can explore the building's glass dome, designed by Norman Foster, which offers panoramic views of Berlin. It's a fascinating experience that provides insight into the workings of German government.
 
-## Best Photo Spots
+### Best Photo Spots
 The glass dome offers stunning panoramic views of the city. The rooftop terrace also provides excellent photo opportunities.
 
-## Insider Tips
+### Insider Tips
 Be sure to book your visit to the Reichstag dome online well in advance, as it's required and free. Security is tight, so allow plenty of time for entry.`,
         practicalInfo: {
         howToGetThere: "U-Bahn: U5 to Bundestag; S-Bahn: S1, S2, S25 to Brandenburger Tor; Bus: 100 to Reichstag/Bundestag",
@@ -164,13 +164,13 @@ Be sure to book your visit to the Reichstag dome online well in advance, as it's
       },
         {
         name: "Gendarmenmarkt",
-        description: `# Overview
+        description: `## Overview
 Gendarmenmarkt is considered by some to be Berlin's most beautiful square. It's home to three stunning buildings: the Konzerthaus Berlin, the French Cathedral (Französischer Dom), and the German Cathedral (Deutscher Dom). The harmonious architecture and elegant atmosphere make it a must-see for any visitor.
 
-## Best Photo Spots
+### Best Photo Spots
 Capture the symmetry of the square by standing in the center and framing the two cathedrals with the Konzerthaus in the background. It's particularly beautiful at night when the buildings are illuminated.
 
-## Insider Tips
+### Insider Tips
 Consider attending a classical music concert at the Konzerthaus Berlin for a truly memorable experience. During the Christmas season, Gendarmenmarkt hosts one of Berlin's most charming Christmas markets.`,
         practicalInfo: {
         howToGetThere: "U-Bahn: U2, U6 to Stadtmitte",
@@ -193,13 +193,13 @@ Consider attending a classical music concert at the Konzerthaus Berlin for a tru
       },
         {
         name: "Café Einstein Stammhaus",
-        description: `# Overview
+        description: `## Overview
 Café Einstein Stammhaus is a legendary Viennese-style coffeehouse in Berlin, housed in a beautiful historic villa. It's a place to soak up the atmosphere, enjoy a delicious cup of coffee, and perhaps indulge in a slice of their famous cake. It's the kind of cafe where you feel like you can linger for hours. 
 
-## What to Expect
+### What to Expect
 Expect a traditional Viennese coffeehouse atmosphere, with wood paneling, chandeliers, and comfortable seating. The menu features a variety of coffees, teas, pastries, and light meals.
 
-## Insider Tips
+### Insider Tips
 This *cafe* can get busy, especially on weekends, so be prepared to wait for a table, or maybe try to make a reservation in advance.`,
         practicalInfo: {
         howToGetThere: "U-Bahn: U3 to Uhlandstraße",
@@ -222,13 +222,13 @@ This *cafe* can get busy, especially on weekends, so be prepared to wait for a t
       },
         {
         name: "Mustafa's Gemüse Kebap",
-        description: `# Overview
+        description: `## Overview
 Mustafa's Gemüse Kebap is arguably the most famous *kebab* stand in Berlin, known for its delicious and flavorful döner kebabs. This *food* stand is a local favorite and a must-try for any visitor looking for an authentic Berlin *culinary* experience. Expect a queue – it's almost always there – but most say it's worth the wait.
 
-## What to Expect
+### What to Expect
 Prepare for a long line, but the reward is a flavorful kebab packed with grilled vegetables, chicken, herbs, and sauces. It's a messy but incredibly satisfying *meal*.
 
-## Insider Tips
+### Insider Tips
 The line moves faster than you might think. The secret is the constant turnover and efficiency of the staff.`,
         practicalInfo: {
         howToGetThere: "U-Bahn: U1, U3 to Mehringdamm",
@@ -251,13 +251,13 @@ The line moves faster than you might think. The secret is the constant turnover 
       },
         {
         name: "Markthalle Neun",
-        description: `# Overview
+        description: `## Overview
 Markthalle Neun is a historic *food market* in Berlin's Kreuzberg neighborhood, offering a wide variety of *culinary* delights. From street *food* to gourmet cheeses, craft beers to artisanal breads, you'll find something to tempt your taste buds. It's a great place to *explore* Berlin's vibrant *food* scene and sample local specialties.
 
-## What to Expect
+### What to Expect
 A bustling atmosphere with vendors selling a diverse range of *food* and drinks. There are communal tables where you can sit and enjoy your *meal*.
 
-## Insider Tips
+### Insider Tips
 Street Food Thursday is a popular event at Markthalle Neun, featuring food stalls from around the world. It's a great way to *taste* a variety of different cuisines.`,
         practicalInfo: {
         howToGetThere: "U-Bahn: U1, U8 to Kottbusser Tor",
@@ -284,40 +284,40 @@ Street Food Thursday is a popular event at Markthalle Neun, featuring food stall
 
 Berlin has a comprehensive and efficient public transport system, making it easy to get around the city. From U-Bahn and S-Bahn trains to buses and trams, there are plenty of options to choose from. Consider purchasing a day ticket or a multi-day pass for unlimited travel.
 
-## Public Transport
+### Public Transport
 The U-Bahn (underground) and S-Bahn (suburban) trains are the fastest and most convenient ways to travel around Berlin. Buses and trams are also readily available and can be useful for reaching destinations not directly served by the trains.
 
-## Taxis & Rideshare
+### Taxis & Rideshare
 Taxis are available throughout Berlin, but they can be more expensive than public transport. Rideshare services like Uber are also available.`,
         whereToStay: `## Where to Stay in Berlin
 
 Berlin offers a wide range of accommodation options to suit every budget and preference. From luxury hotels to budget-friendly hostels, you'll find something to meet your needs. Consider staying in a central neighborhood like Mitte or Prenzlauer Berg for easy access to attractions.
 
-## Best Areas
+### Best Areas
 Mitte is a central and convenient location with many attractions within walking distance. Prenzlauer Berg is a trendy neighborhood with a vibrant nightlife and plenty of cafes and restaurants. Kreuzberg is a more alternative neighborhood with a diverse cultural scene.
 
-## Luxury Options
+### Luxury Options
 The Hotel de Rome and The Ritz-Carlton, Berlin are two popular luxury hotels in Berlin.`,
         bestTimeToVisit: `## Best Time to Visit Berlin
 
 The best time to visit Berlin depends on your preferences. Summer offers warm weather and long days, but it can also be crowded. Spring and fall offer milder weather and fewer crowds. Winter can be cold and snowy, but it's also a magical time to visit, with Christmas markets and festive events.
 
-## Peak Season
+### Peak Season
 Summer (June-August) is the peak tourist season in Berlin.
 
-## Weather Overview
+### Weather Overview
 Berlin has a temperate climate with four distinct seasons. Summers are warm and sunny, with average temperatures in the low 20s Celsius. Winters are cold and snowy, with average temperatures around freezing.`,
         suggestedItinerary: `## Suggested Berlin Itinerary
 
 Here's a suggested 3-day itinerary for exploring Berlin:
 
-## Day 1
+### Day 1
 Start your day with a visit to the Brandenburg Gate and the Reichstag Building. In the afternoon, explore Museum Island and visit the Pergamon Museum. In the evening, enjoy a traditional German dinner at a local restaurant.
 
-## Day 2
+### Day 2
 Visit the East Side Gallery and learn about the Berlin Wall. In the afternoon, explore the trendy neighborhood of Prenzlauer Berg. In the evening, enjoy a concert at the Konzerthaus Berlin.
 
-## Day 3
+### Day 3
 Visit the Memorial to the Murdered Jews of Europe and reflect on the city's history. In the afternoon, explore the alternative neighborhood of Kreuzberg. In the evening, enjoy a final Berlin kebab at Mustafa's Gemüse Kebap.`
       }}
       faqs={[

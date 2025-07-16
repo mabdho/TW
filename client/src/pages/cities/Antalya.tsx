@@ -19,13 +19,13 @@ export const Antalya: React.FC = () => {
       attractions={[
         {
         name: "Kaleiçi (Old Town)",
-        description: `# Overview
+        description: `## Overview
 Kaleiçi, Antalya's historic Old Town, is a maze of narrow, winding streets filled with charming Ottoman-era houses, boutique hotels, art galleries, and lively cafes. This walled city offers a glimpse into Antalya's rich past. I found the atmosphere to be incredibly enchanting, especially in the evenings when the streets are illuminated.
 
-## Best Photo Spots
+### Best Photo Spots
 The iconic Hadrian's Gate, a Roman triumphal arch, is a must-photograph. Also, capture the panoramic views of the harbor from the Hıdırlık Tower.
 
-## Insider Tips
+### Insider Tips
 Tip: Explore Kaleiçi in the early morning or late afternoon to avoid the midday heat and crowds. Be sure to wander off the main streets to discover hidden courtyards and local artisan shops.`,
         practicalInfo: {
         howToGetThere: "Easily accessible by tram (stop: Kale Kapısı) or bus. Walking is the best way to explore within Kaleiçi.",
@@ -48,13 +48,13 @@ Tip: Explore Kaleiçi in the early morning or late afternoon to avoid the midday
       },
         {
         name: "Perge Ancient City",
-        description: `# Overview
+        description: `## Overview
 Perge is one of the best-preserved ancient cities in Turkey, offering a fascinating look at Roman and Hellenistic history. Once the capital of Pamphylia, Perge boasts impressive ruins, including a well-preserved stadium, agora, and Roman baths. I think you should allow plenty of time to wander, imagining what life was like back then.
 
-## Best Photo Spots
+### Best Photo Spots
 Capture the grandeur of the stadium's massive seating and the colonnaded street leading to the agora. The Roman baths also offer interesting photo opportunities.
 
-## Insider Tips
+### Insider Tips
 Tip: Hire a local guide at the entrance for a more in-depth understanding of Perge's history and significance. Wear comfortable shoes as you'll be doing a lot of walking.`,
         practicalInfo: {
         howToGetThere: "Take the AntRay tram to Aksu, then a dolmuş (local minibus) to Perge.",
@@ -77,13 +77,13 @@ Tip: Hire a local guide at the entrance for a more in-depth understanding of Per
       },
         {
         name: "Konyaaltı Beach",
-        description: `# Overview
+        description: `## Overview
 Konyaaltı Beach is a popular stretch of coastline with stunning views of the Taurus Mountains. The pebbly beach offers clear waters perfect for swimming and sunbathing. There are also numerous cafes, restaurants, and beach clubs along the promenade.
 
-## Best Photo Spots
+### Best Photo Spots
 Capture the panoramic view of the mountains and the coastline, especially at sunset. The colorful beach umbrellas also make for great photos.
 
-## Insider Tips
+### Insider Tips
 Tip: Rent a sunbed and umbrella for a comfortable beach experience. Consider visiting during the shoulder seasons (spring or fall) for fewer crowds and milder weather.`,
         practicalInfo: {
         howToGetThere: "Easily accessible by tram (stop: Müze or Konyaaltı Plajı) or bus.",
@@ -106,13 +106,13 @@ Tip: Rent a sunbed and umbrella for a comfortable beach experience. Consider vis
       },
         {
         name: "Düden Waterfalls",
-        description: `# Overview
+        description: `## Overview
 The Düden Waterfalls are a series of waterfalls formed by the Düden River. The Lower Düden Waterfall cascades directly into the Mediterranean Sea, while the Upper Düden Waterfall is located in a park with picnic areas and walking trails. Both are worth a visit, I think!
 
-## Best Photo Spots
+### Best Photo Spots
 At the Lower Düden Waterfall, take photos from the viewing platforms for the best perspective. At the Upper Düden Waterfall, explore the caves behind the waterfall for unique shots.
 
-## Insider Tips
+### Insider Tips
 Tip: Visit the Upper Düden Waterfall on a weekday to avoid weekend crowds. Wear waterproof shoes if you plan to explore the caves behind the waterfall.`,
         practicalInfo: {
         howToGetThere: "Lower Düden Waterfall: Bus number VF66 or KL08. Upper Düden Waterfall: Bus number VC30 or VL13.",
@@ -135,13 +135,13 @@ Tip: Visit the Upper Düden Waterfall on a weekday to avoid weekend crowds. Wear
       },
         {
         name: "Tünektepe Cable Car",
-        description: `# Overview
+        description: `## Overview
 Take a scenic cable car ride to the summit of Tünektepe Hill for breathtaking panoramic views of Antalya and the surrounding coastline. At the top, you'll find a rotating restaurant, cafe, and viewing platforms.
 
-## Best Photo Spots
+### Best Photo Spots
 Capture the 360-degree views of Antalya from the summit. The sunset views are particularly stunning.
 
-## Insider Tips
+### Insider Tips
 Tip: Visit during sunset for the most spectacular views, but be prepared for crowds. The rotating restaurant offers a unique dining experience, but reservations are recommended.`,
         practicalInfo: {
         howToGetThere: "Take the bus number KL08 to Sarısu, then walk to the cable car station.",
@@ -164,13 +164,13 @@ Tip: Visit during sunset for the most spectacular views, but be prepared for cro
       },
         {
         name: "Antalya Archaeological Museum",
-        description: `# Overview
+        description: `## Overview
 The Antalya Archaeological Museum houses a vast collection of artifacts from the region's rich history, spanning from the Paleolithic era to the Ottoman period. The museum's exhibits include sculptures, ceramics, coins, and sarcophagi.
 
-## Best Photo Spots
+### Best Photo Spots
 Capture the impressive collection of Roman sculptures and sarcophagi. The museum's gardens also offer pleasant photo opportunities.
 
-## Insider Tips
+### Insider Tips
 Tip: Allocate at least 2-3 hours to fully explore the museum's exhibits. The museum is air-conditioned, providing a welcome respite from the summer heat.`,
         practicalInfo: {
         howToGetThere: "Easily accessible by tram (stop: Müze).",
@@ -193,13 +193,13 @@ Tip: Allocate at least 2-3 hours to fully explore the museum's exhibits. The mus
       },
         {
         name: "Seraser Fine Dining Restaurant",
-        description: `# Overview
+        description: `## Overview
 Seraser Fine Dining Restaurant is located in a beautifully restored Ottoman mansion in Kaleiçi. It offers a sophisticated dining experience with a menu featuring modern interpretations of Turkish and international cuisine. Some say it's one of the most romantic restaurants in Antalya.
 
-## What to Expect
+### What to Expect
 The restaurant features a charming courtyard setting with elegant decor. Signature dishes include slow-cooked lamb shank and seafood risotto. Expect to pay a premium for the exceptional food and service.
 
-## Insider Tips
+### Insider Tips
 Tip: Make reservations well in advance, especially during peak season. Request a table in the courtyard for a romantic ambiance.`,
         practicalInfo: {
         howToGetThere: "Located in Kaleiçi (Old Town); easily accessible by tram or on foot.",
@@ -222,13 +222,13 @@ Tip: Make reservations well in advance, especially during peak season. Request a
       },
         {
         name: "Vanilla Lounge",
-        description: `# Overview
+        description: `## Overview
 Vanilla Lounge is a trendy cafe and restaurant in Kaleiçi known for its stylish decor, delicious coffee, and international cuisine. It's a great place to relax and people-watch.
 
-## What to Expect
+### What to Expect
 The atmosphere is vibrant and modern, with a mix of indoor and outdoor seating. The menu features a range of options, from breakfast items to salads, sandwiches, and pasta dishes. Their coffee selection is excellent.
 
-## Insider Tips
+### Insider Tips
 Tip: Try their Turkish coffee served with traditional sweets. It’s a nice treat. The outdoor seating is perfect for enjoying the lively atmosphere of Kaleiçi.`,
         practicalInfo: {
         howToGetThere: "Located in Kaleiçi (Old Town); easily accessible by tram or on foot.",
@@ -251,13 +251,13 @@ Tip: Try their Turkish coffee served with traditional sweets. It’s a nice trea
       },
         {
         name: "7 Mehmet Restaurant",
-        description: `# Overview
+        description: `## Overview
 7 Mehmet Restaurant is a long-standing culinary institution in Antalya, known for its authentic Turkish cuisine and stunning views of the Mediterranean Sea. It's a popular spot for both locals and tourists.
 
-## What to Expect
+### What to Expect
 The restaurant offers a traditional Turkish dining experience with a focus on fresh, local ingredients. Signature dishes include kebabs, seafood, and mezes. The panoramic views from the terrace are exceptional.
 
-## Insider Tips
+### Insider Tips
 Tip: Try the '7 Mehmet Special' kebab, a house specialty. Make reservations in advance, especially if you want a table on the terrace with a view.`,
         practicalInfo: {
         howToGetThere: "Taxi or bus are the best options.",
@@ -280,13 +280,13 @@ Tip: Try the '7 Mehmet Special' kebab, a house specialty. Make reservations in a
       },
         {
         name: "Antalya Bazaar (Local Market)",
-        description: `# Overview
+        description: `## Overview
 Experience the vibrant atmosphere of a traditional Turkish bazaar in Antalya. This bustling market offers a wide array of goods, including spices, textiles, souvenirs, and fresh produce. It's a great place to immerse yourself in local culture and sample some authentic Turkish flavors.
 
-## What to Expect
+### What to Expect
 Expect a sensory overload of sights, sounds, and smells. Bargaining is common, so be prepared to negotiate prices. Sample local delicacies like Turkish delight and baklava.
 
-## Insider Tips
+### Insider Tips
 Tip: Visit the bazaar in the morning for the freshest produce and fewer crowds. Learn a few basic Turkish phrases to help with bargaining.`,
         practicalInfo: {
         howToGetThere: "Located near Kaleiçi; easily accessible by tram or on foot.",
@@ -313,10 +313,10 @@ Tip: Visit the bazaar in the morning for the freshest produce and fewer crowds. 
 
 Antalya offers a variety of transportation options to explore the city and its surroundings. You can choose from public transport, taxis, or rental cars, depending on your budget and preferences.
 
-## Public Transport
+### Public Transport
 Antalya's public transport system includes trams and buses. The AntRay tram is a convenient way to travel between the airport, city center, and some popular attractions. Buses cover a wider area, but can be slower due to traffic. AntalyaKart is a rechargeable card that can be used on both trams and buses, making it a cost-effective option for frequent travelers.
 
-## Taxis & Rideshare
+### Taxis & Rideshare
 Taxis are readily available throughout Antalya, but it's always a good idea to negotiate the fare beforehand or ensure the meter is running. Uber is not widely available, but some local ride-hailing apps may operate. Consider using these apps for convenience and transparency.
 
 ## Walking & Cycling
@@ -325,10 +325,10 @@ Kaleiçi (Old Town) is best explored on foot, as its narrow, winding streets are
 
 Antalya offers a range of accommodation options to suit every budget and preference. From luxury hotels to budget-friendly hostels, you'll find something to suit your needs.
 
-## Best Areas
+### Best Areas
 Kaleiçi (Old Town) is a popular choice for its charming atmosphere and proximity to historical attractions. Lara Beach is known for its luxury resorts and sandy beaches. Konyaaltı is another popular beach area with a mix of hotels and apartments.
 
-## Luxury Options
+### Luxury Options
 For a luxurious stay, consider hotels in Lara Beach or along the coastline. These hotels offer stunning sea views, private beaches, and a range of amenities.
 
 ## Budget-Friendly
@@ -337,10 +337,10 @@ Budget-friendly options can be found in Kaleiçi and some of the residential are
 
 The best time to visit Antalya depends on your preferences for weather and crowds. The city enjoys a Mediterranean climate with hot summers and mild winters.
 
-## Peak Season
+### Peak Season
 The peak season is from June to August, when the weather is hot and sunny. This is the best time for swimming and sunbathing, but expect higher prices and larger crowds. 
 
-## Weather Overview
+### Weather Overview
 Spring (April-May) and fall (September-October) offer pleasant weather with fewer crowds. The temperatures are warm enough for swimming, and the scenery is beautiful. Winter (November-March) is mild but can be rainy. Some attractions may have limited hours.
 
 ## Local Events
@@ -349,13 +349,13 @@ Antalya hosts several festivals and events throughout the year. The Antalya Film
 
 Here's a suggested itinerary for a 3-day trip to Antalya:
 
-## Day 1
+### Day 1
 Start your day by exploring Kaleiçi (Old Town). Visit Hadrian's Gate, the Hıdırlık Tower, and the Antalya Archaeological Museum. In the afternoon, relax on Konyaaltı Beach and enjoy the sunset. Have dinner at a traditional Turkish restaurant in Kaleiçi.
 
-## Day 2
+### Day 2
 Take a day trip to Perge Ancient City. Explore the well-preserved ruins, including the stadium, agora, and Roman baths. In the afternoon, visit the Upper Düden Waterfall and enjoy a picnic in the park. In the evening, dine at 7 Mehmet Restaurant for stunning views and authentic cuisine.
 
-## Day 3
+### Day 3
 Take a cable car to Tünektepe Hill for panoramic views of Antalya. Spend the afternoon shopping at the local bazaar. Relax and sip coffee at Vanilla Lounge in Kaleiçi.`
       }}
       faqs={[

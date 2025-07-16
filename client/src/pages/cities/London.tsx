@@ -20,13 +20,13 @@ export const London: React.FC = () => {
       attractions={[
         {
         name: "Tower of London",
-        description: `# Overview
+        description: `## Overview
 The Tower of London is a historic castle located on the north bank of the River Thames. It has served as a royal palace, prison, armoury, and treasury. Exploring the Tower offers a glimpse into British history.
 
-## Best Photo Spots
+### Best Photo Spots
 The best photo spot is from Tower Bridge, capturing the Tower with the bridge in the background. Another great spot is on the riverbank facing the Tower's main entrance. 
 
-## Insider Tips
+### Insider Tips
 Tip: Arrive early (around 9:00 AM) to avoid the largest crowds, especially during peak season. Purchase tickets online in advance to skip the ticket queues. Don't miss the Crown Jewels, but be prepared for a wait. There are often costumed interpreters that can provide an interesting perspective.`,
         practicalInfo: {
         howToGetThere: "Take the tube to Tower Hill station (Circle or District line).",
@@ -49,13 +49,13 @@ Tip: Arrive early (around 9:00 AM) to avoid the largest crowds, especially durin
       },
         {
         name: "British Museum",
-        description: `# Overview
+        description: `## Overview
 The British Museum is one of the world's largest and most comprehensive museums, showcasing human history, art, and culture. From the Rosetta Stone to Egyptian mummies, there's something for everyone.
 
-## Best Photo Spots
+### Best Photo Spots
 The Great Court offers a stunning architectural photo opportunity. The Rosetta Stone and Egyptian mummies are popular subjects.
 
-## Insider Tips
+### Insider Tips
 Tip: The British Museum is HUGE. Focus on specific collections you're interested in to avoid feeling overwhelmed. Consider taking a guided tour or downloading the museum's app for a self-guided experience. I found the Egyptian exhibit particularly interesting.`,
         practicalInfo: {
         howToGetThere: "Take the tube to Tottenham Court Road, Holborn, or Russell Square station.",
@@ -78,13 +78,13 @@ Tip: The British Museum is HUGE. Focus on specific collections you're interested
       },
         {
         name: "Buckingham Palace",
-        description: `# Overview
+        description: `## Overview
 Buckingham Palace is the official residence and administrative headquarters of the monarch of the United Kingdom. Witness the Changing of the Guard ceremony or tour the State Rooms during the summer opening.
 
-## Best Photo Spots
+### Best Photo Spots
 The iconic front gates and the palace facade are classic photo opportunities. Capture the Changing of the Guard ceremony for a memorable shot.
 
-## Insider Tips
+### Insider Tips
 Tip: The Changing of the Guard is very popular, so arrive at least an hour early to secure a good viewing spot. Check the schedule online, as it doesn't happen every day. The State Rooms are only open to the public during the summer months (usually July to September).`,
         practicalInfo: {
         howToGetThere: "Take the tube to Victoria, Green Park, or St. James's Park station.",
@@ -107,13 +107,13 @@ Tip: The Changing of the Guard is very popular, so arrive at least an hour early
       },
         {
         name: "Borough Market",
-        description: `# Overview
+        description: `## Overview
 Borough Market is a historic food market in Southwark, offering a wide array of produce, artisanal cheeses, meats, baked goods, and street food. It's a culinary paradise.
 
-## What to Expect
+### What to Expect
 Prepare for crowds, especially on weekends. The market can get very busy, but the atmosphere is lively and the food is worth it. There are plenty of options for lunch or a snack.
 
-## Insider Tips
+### Insider Tips
 Tip: Visit on a weekday morning for a less crowded experience. Bring cash, as some vendors may not accept card payments. Sample as much as possible! It's a great way to discover new flavors.`,
         practicalInfo: {
         howToGetThere: "Take the tube to London Bridge station.",
@@ -136,13 +136,13 @@ Tip: Visit on a weekday morning for a less crowded experience. Bring cash, as so
       },
         {
         name: "Sky Garden",
-        description: `# Overview
+        description: `## Overview
 The Sky Garden offers panoramic views of London from a unique vantage point. Located on the top floors of 20 Fenchurch Street (the 'Walkie Talkie' building), it's a public garden with restaurants and bars.
 
-## Best Photo Spots
+### Best Photo Spots
 The observation decks offer 360-degree views of London landmarks. Capture the Shard, Tower Bridge, and the River Thames from above.
 
-## Insider Tips
+### Insider Tips
 Tip: Admission is free, but you need to book tickets online in advance. Book several weeks ahead, especially if you're visiting during peak season. The restaurants and bars offer a more relaxed experience with guaranteed entry.`,
         practicalInfo: {
         howToGetThere: "Take the tube to Monument or Bank station.",
@@ -165,13 +165,13 @@ Tip: Admission is free, but you need to book tickets online in advance. Book sev
       },
         {
         name: "Tate Modern",
-        description: `# Overview
+        description: `## Overview
 Tate Modern is Britain's national museum of modern and contemporary art. Housed in a former power station, it features works by renowned artists from around the world.
 
-## Best Photo Spots
+### Best Photo Spots
 The Turbine Hall is an impressive space for photos. The viewing platform on the upper floors offers panoramic views of the city.
 
-## Insider Tips
+### Insider Tips
 Tip: Admission to the permanent collection is free. Special exhibitions require a ticket. Consider taking a free guided tour to learn more about the art on display.`,
         practicalInfo: {
         howToGetThere: "Take the tube to Southwark or Blackfriars station.",
@@ -194,13 +194,13 @@ Tip: Admission to the permanent collection is free. Special exhibitions require 
       },
         {
         name: "Dishoom Covent Garden",
-        description: `# Overview
+        description: `## Overview
 Dishoom Covent Garden is a popular restaurant serving Bombay-style Indian cuisine in a vibrant and bustling atmosphere. It's known for its delicious food and lively ambiance.
 
 ## Dining Experience
 The restaurant is designed to resemble a Bombay café, with vintage decor and a lively atmosphere. It's a great place for a casual meal or a special occasion. Expect a wait, especially during peak hours. The cuisine is flavorful and authentic, showcasing the diverse culinary traditions of India. Be sure to try the Black Daal, it's a staple on their menu.
 
-## Insider Tips
+### Insider Tips
 Tip: Expect a queue, especially during peak dining hours. They do not take reservations for smaller groups, so be prepared to wait. Consider visiting during off-peak hours (e.g., mid-afternoon) to avoid the crowds. It is well worth a visit!`,
         practicalInfo: {
         howToGetThere: "Take the tube to Covent Garden station.",
@@ -223,13 +223,13 @@ Tip: Expect a queue, especially during peak dining hours. They do not take reser
       },
         {
         name: "Regent's Park",
-        description: `# Overview
+        description: `## Overview
 Regent's Park is one of London's Royal Parks, offering beautiful gardens, open spaces, and recreational activities. It's home to the London Zoo, an open-air theatre, and stunning rose gardens. Whether you are looking for something to do in London on a nice day, or just want to spend some time outdoors, this is a great option. It's the kind of place you might linger longer than expected.
 
-## Best Photo Spots
+### Best Photo Spots
 The rose gardens are particularly beautiful during the summer months. Primrose Hill, located on the northern edge of the park, offers panoramic views of London.
 
-## Insider Tips
+### Insider Tips
 Tip: Rent a rowboat on the boating lake for a relaxing afternoon. Pack a picnic and enjoy it in one of the park's many green spaces.`,
         practicalInfo: {
         howToGetThere: "Take the tube to Regent's Park, Baker Street, or Great Portland Street station.",
@@ -252,13 +252,13 @@ Tip: Rent a rowboat on the boating lake for a relaxing afternoon. Pack a picnic 
       },
         {
         name: "The Churchill Arms",
-        description: `# Overview
+        description: `## Overview
 The Churchill Arms is a charming and historic pub in Kensington, renowned for its extravagant floral displays and traditional Thai cuisine. It’s a delightful blend of classic British pub culture and exotic culinary flavors.
 
 ## Dining Experience
 The pub's exterior is adorned with an abundance of flowers, creating a picturesque and inviting atmosphere. Inside, the traditional pub decor is complemented by a Thai restaurant serving authentic dishes. Enjoy classic pub fare alongside flavorful curries and stir-fries. Be sure to try the green curry or the pad Thai. It offers a uniquely satisfying culinary meal.
 
-## Insider Tips
+### Insider Tips
 Tip: The Churchill Arms is extremely popular, especially during peak hours, so arrive early to secure a table. During the winter months, they'll have Christmas decorations. You will not be disappointed with a visit here.`,
         practicalInfo: {
         howToGetThere: "Take the tube to Notting Hill Gate or High Street Kensington station.",
@@ -281,13 +281,13 @@ Tip: The Churchill Arms is extremely popular, especially during peak hours, so a
       },
         {
         name: "Shakespeare's Globe",
-        description: `# Overview
+        description: `## Overview
 Shakespeare's Globe is a reconstruction of the original Globe Theatre, where many of William Shakespeare's plays were first performed. Attend a performance or take a tour to learn about the history of the theatre.
 
-## What to Expect
+### What to Expect
 Standing tickets are available for a more immersive experience. Be prepared to stand for the duration of the performance. Tours offer a behind-the-scenes look at the theatre and its history.
 
-## Insider Tips
+### Insider Tips
 Tip: Book tickets in advance, especially for popular plays. Consider attending a matinee performance for a less crowded experience. Check the weather forecast, as the theatre is open-air.`,
         practicalInfo: {
         howToGetThere: "Take the tube to Mansion House or Southwark station.",
@@ -314,16 +314,16 @@ Tip: Book tickets in advance, especially for popular plays. Consider attending a
 
 London has an extensive public transport network, making it easy to get around the city. The tube is the quickest way to travel long distances, while buses are a good option for shorter journeys and scenic routes. Walking is a great way to explore central London, but be prepared for long distances.
 
-## Public Transport
+### Public Transport
 The London Underground (tube) is the most efficient way to travel across the city. Purchase an Oyster card or use contactless payment for travel. Buses are another option, but they can be slower due to traffic. Consider downloading the Citymapper app for real-time travel information. It's a real life saver! 
 
-## Taxis & Rideshare
+### Taxis & Rideshare
 Taxis are readily available in London, but they can be expensive. Rideshare services like Uber are also available. Be aware of surge pricing during peak hours.`,
         whereToStay: `## Where to Stay in London
 
 London offers a wide range of accommodation options, from budget-friendly hostels to luxury hotels. The best area to stay depends on your interests and budget. 
 
-## Best Areas
+### Best Areas
 Central London (e.g., Westminster, Covent Garden) is ideal for sightseeing, but it can be expensive. Kensington and Chelsea are upscale residential areas with good transport links. Shoreditch is a trendy area with a vibrant nightlife. I'd recommend staying somewhere near a tube station for ease of access.
 
 ## Budget-Friendly
@@ -332,22 +332,22 @@ Consider staying in areas like Earls Court or Bayswater for more affordable acco
 
 The best time to visit London depends on your preferences. Summer offers warm weather and long daylight hours, but it's also the busiest and most expensive time to visit. Spring and fall offer milder weather and fewer crowds.
 
-## Peak Season
+### Peak Season
 Summer (June to August) is peak season in London. Expect higher prices and larger crowds. Book accommodation and attractions well in advance. 
 
-## Weather Overview
+### Weather Overview
 London has a temperate climate with mild winters and cool summers. Rain is common throughout the year, so be prepared for all types of weather. Pack layers to adjust to changing temperatures.`,
         suggestedItinerary: `## Suggested London Itinerary
 
 This is just a suggested itinerary for London, of course, feel free to change it! 
 
-## Day 1
+### Day 1
 Start your day with a visit to the Tower of London. Afterwards, walk across Tower Bridge and explore the South Bank. In the afternoon, visit the British Museum. In the evening, see a show in the West End.
 
-## Day 2
+### Day 2
 Visit Buckingham Palace and witness the Changing of the Guard ceremony. Afterwards, explore Westminster Abbey and the Houses of Parliament. In the afternoon, take a ride on the London Eye. In the evening, enjoy dinner in Covent Garden.
 
-## Day 3
+### Day 3
 Visit the Tate Modern and explore the South Bank. Afterwards, visit Borough Market for lunch. In the afternoon, explore Regent's Park and visit the London Zoo. In the evening, enjoy a meal at one of London's many restaurants.`
       }}
       faqs={[

@@ -20,13 +20,13 @@ export const NewYork: React.FC = () => {
       attractions={[
         {
         name: "Statue of Liberty & Ellis Island",
-        description: `# Overview
+        description: `## Overview
 No trip to New York is complete without visiting Lady Liberty and Ellis Island. These iconic landmarks offer a powerful glimpse into American history and immigration. It’s a deeply moving experience, I think, and one that provides valuable perspective.
 
-## Best Photo Spots
+### Best Photo Spots
 The ferry ride offers stunning panoramic views of the Manhattan skyline and the Statue of Liberty. Be sure to capture the iconic pose with Lady Liberty against the city backdrop.
 
-## Insider Tips
+### Insider Tips
 Tip: Book your ferry tickets well in advance, especially during peak season, to avoid long lines. Consider the early morning departures for fewer crowds. Don't miss the museum on Ellis Island for a moving look at immigration history.`,
         practicalInfo: {
         howToGetThere: "Take the ferry from Battery Park in Manhattan or Liberty State Park in New Jersey.",
@@ -49,13 +49,13 @@ Tip: Book your ferry tickets well in advance, especially during peak season, to 
       },
         {
         name: "Central Park",
-        description: `# Overview
+        description: `## Overview
 Escape the urban jungle and immerse yourself in the tranquility of Central Park. This sprawling green oasis offers something for everyone, from leisurely strolls to boat rides on The Lake. I found the view surprisingly calming, away from the city's hustle.
 
-## Best Photo Spots
+### Best Photo Spots
 The Bow Bridge, Bethesda Terrace, and Belvedere Castle are among the most picturesque locations in the park. The Conservatory Garden is also a beauty.
 
-## Insider Tips
+### Insider Tips
 Tip: Rent a bike and explore the park's many trails. Consider visiting Strawberry Fields, a memorial to John Lennon. Check the park's event calendar for concerts and performances.`,
         practicalInfo: {
         howToGetThere: "Accessible from multiple subway stations along the park's perimeter.",
@@ -78,13 +78,13 @@ Tip: Rent a bike and explore the park's many trails. Consider visiting Strawberr
       },
         {
         name: "Times Square",
-        description: `# Overview
+        description: `## Overview
 Immerse yourself in the dazzling lights and bustling energy of Times Square. This iconic intersection is a sensory overload, with giant billboards, street performers, and throngs of tourists. It's definitely an experience!
 
-## Best Photo Spots
+### Best Photo Spots
 Capture the iconic view from the red steps of the TKTS booth. Nighttime offers the most vibrant and photogenic scenes.
 
-## Insider Tips
+### Insider Tips
 Tip: Avoid eating at restaurants directly on Times Square, as they tend to be overpriced and touristy. Explore side streets for better dining options.`,
         practicalInfo: {
         howToGetThere: "Subway lines 1, 2, 3, 7, N, Q, R, W, and S stop at Times Square–42nd Street.",
@@ -107,13 +107,13 @@ Tip: Avoid eating at restaurants directly on Times Square, as they tend to be ov
       },
         {
         name: "Metropolitan Museum of Art",
-        description: `# Overview
+        description: `## Overview
 Delve into art history at the Metropolitan Museum of Art, one of the world's largest and finest art museums. Its vast collection spans over 5,000 years of art from around the globe. It's the kind of place you might linger longer than expected. Be sure to look up the roof garden for some nice views.
 
-## Best Photo Spots
+### Best Photo Spots
 The Temple of Dendur and the European Paintings galleries offer stunning backdrops for photos. 
 
-## Insider Tips
+### Insider Tips
 Tip: Plan your visit in advance and focus on specific collections to avoid feeling overwhelmed. Consider joining a guided tour for a deeper understanding.`,
         practicalInfo: {
         howToGetThere: "Take the 4, 5, or 6 subway line to 86th Street and Lexington Avenue.",
@@ -136,13 +136,13 @@ Tip: Plan your visit in advance and focus on specific collections to avoid feeli
       },
         {
         name: "Brooklyn Bridge",
-        description: `# Overview
+        description: `## Overview
 Walk, bike, or drive across the iconic Brooklyn Bridge, offering breathtaking views of the Manhattan skyline. This architectural marvel is a symbol of New York City. Honestly, it's a must-do, especially if you like a good view.
 
-## Best Photo Spots
+### Best Photo Spots
 Capture the panoramic views of the Manhattan skyline from the bridge's pedestrian walkway. The bridge's gothic arches also provide excellent photo opportunities.
 
-## Insider Tips
+### Insider Tips
 Tip: Walk the bridge from Brooklyn to Manhattan for the best views. Go early in the morning to avoid crowds and enjoy a more peaceful experience.`,
         practicalInfo: {
         howToGetThere: "Accessible from multiple subway stations in both Brooklyn and Manhattan.",
@@ -165,10 +165,10 @@ Tip: Walk the bridge from Brooklyn to Manhattan for the best views. Go early in 
       },
         {
         name: "Joe's Pizza",
-        description: `# Overview
+        description: `## Overview
 Experience a true New York slice at Joe's Pizza, a West Village institution known for its classic, no-frills pizzas. It's a simple, delicious taste of the city.
 
-## What to Expect
+### What to Expect
 Expect a bustling atmosphere, especially during lunch and dinner. The line moves quickly, and it's worth the wait.
 
 ## Signature Dishes
@@ -197,10 +197,10 @@ Price Range: $3-5 per slice.`,
       },
         {
         name: "Chelsea Market",
-        description: `# Overview
+        description: `## Overview
 Indulge your culinary senses at Chelsea Market, a vibrant indoor food hall offering a diverse range of cuisines and artisanal products. I mean, if you can't find something you like here, I don't know what to tell you.
 
-## What to Expect
+### What to Expect
 A bustling atmosphere with a wide array of food vendors, from tacos to seafood to pastries.
 
 ## Signature Dishes
@@ -229,13 +229,13 @@ Price Range: $5-$20 per item.`,
       },
         {
         name: "The High Line",
-        description: `# Overview
+        description: `## Overview
 Stroll along The High Line, an elevated park built on a former railway line, offering unique city views and lush landscaping. It's a peaceful escape from the city streets.
 
-## Best Photo Spots
+### Best Photo Spots
 Capture the city views from various viewpoints along the park. The 10th Avenue Square & Overlook is particularly scenic.
 
-## Insider Tips
+### Insider Tips
 Tip: Visit during the spring or fall for the best weather and foliage. Check the High Line's website for events and art installations.`,
         practicalInfo: {
         howToGetThere: "Accessible from multiple entrances along the West Side, including stairways and elevators.",
@@ -258,10 +258,10 @@ Tip: Visit during the spring or fall for the best weather and foliage. Check the
       },
         {
         name: "Russ & Daughters Cafe",
-        description: `# Overview
+        description: `## Overview
 Experience the classic Jewish appetizing tradition at Russ & Daughters Cafe. This Lower East Side institution offers a modern take on traditional dishes.
 
-## What to Expect
+### What to Expect
 A cozy and bustling cafe with a focus on smoked fish, bagels, and other Jewish specialties. It's the kind of place that feels authentic and real.
 
 ## Signature Dishes
@@ -290,13 +290,13 @@ Price Range: $15-$30 per person.`,
       },
         {
         name: "Greenwich Village",
-        description: `# Overview
+        description: `## Overview
 Explore the charming streets and bohemian spirit of Greenwich Village, a historic neighborhood known for its artistic legacy and vibrant culture.
 
-## Best Photo Spots
+### Best Photo Spots
 Washington Square Park, with its iconic arch, is a must-photograph spot. The neighborhood's brownstone-lined streets also offer charming photo opportunities.
 
-## Insider Tips
+### Insider Tips
 Tip: Wander through the neighborhood's side streets to discover hidden cafes, bookstores, and music venues. Catch a show at the Blue Note for a classic jazz experience.`,
         practicalInfo: {
         howToGetThere: "Accessible from multiple subway stations in Greenwich Village.",
@@ -319,10 +319,10 @@ Tip: Wander through the neighborhood's side streets to discover hidden cafes, bo
       },
         {
         name: "Katz's Delicatessen",
-        description: `# Overview
+        description: `## Overview
 Step into a New York institution at Katz's Delicatessen, famous for its towering pastrami sandwiches and classic deli fare. This iconic eatery has been serving up delicious food since 1888!
 
-## What to Expect
+### What to Expect
 A bustling, old-school deli with a lively atmosphere. Expect to receive a ticket upon entry, which you must present when paying.
 
 ## Signature Dishes
@@ -355,10 +355,10 @@ Price Range: $20-$35 per sandwich.`,
 
 New York City boasts a comprehensive public transportation system, making it easy to navigate the five boroughs. The subway is the most efficient way to travel, with trains running 24/7 on some lines.
 
-## Public Transport
+### Public Transport
 The subway system is extensive and affordable. Purchase a MetroCard for easy access. Buses also serve the city, but they can be slower due to traffic.
 
-## Taxis & Rideshare
+### Taxis & Rideshare
 Taxis are readily available, but they can be expensive. Rideshare services like Uber and Lyft are also popular options.
 
 ## Walking & Cycling
@@ -367,10 +367,10 @@ Many neighborhoods are pedestrian-friendly, making walking a great way to explor
 
 New York City offers a wide range of accommodation options, from luxury hotels to budget-friendly hostels. The best area to stay depends on your interests and budget.
 
-## Best Areas
+### Best Areas
 Midtown is a central location with easy access to many attractions. The Lower East Side offers a vibrant nightlife and trendy restaurants. Greenwich Village is a charming neighborhood with a bohemian vibe.
 
-## Luxury Options
+### Luxury Options
 The Plaza Hotel and The Ritz-Carlton New York are iconic luxury hotels.
 
 ## Budget-Friendly
@@ -379,10 +379,10 @@ Hostels and budget hotels can be found in areas like Long Island City and Brookl
 
 The best time to visit New York depends on your preferences and tolerance for crowds and weather.
 
-## Peak Season
+### Peak Season
 The summer months (June-August) and the holiday season (November-December) are peak seasons, with higher prices and larger crowds.
 
-## Weather Overview
+### Weather Overview
 Spring (April-May) and fall (September-October) offer pleasant weather and fewer crowds. Winter (December-February) can be cold and snowy.
 
 ## Local Events
@@ -391,13 +391,13 @@ Consider visiting during events like the Macy's Thanksgiving Day Parade or the N
 
 Here's a suggested itinerary for a 3-day trip to New York City, covering the must-see attractions and hidden gems.
 
-## Day 1
+### Day 1
 Start your day with a visit to the Statue of Liberty and Ellis Island. In the afternoon, explore the Financial District and visit the 9/11 Memorial & Museum. End the day with a walk across the Brooklyn Bridge.
 
-## Day 2
+### Day 2
 Explore Central Park in the morning. In the afternoon, visit the Metropolitan Museum of Art. In the evening, experience the lights and energy of Times Square.
 
-## Day 3
+### Day 3
 Explore Greenwich Village and Washington Square Park. Visit Chelsea Market for lunch. Stroll along the High Line in the afternoon. Enjoy a Broadway show in the evening.`
       }}
       faqs={[

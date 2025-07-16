@@ -20,13 +20,13 @@ export const Accra: React.FC = () => {
       attractions={[
         {
         name: "Kwame Nkrumah Mausoleum",
-        description: `# Overview
+        description: `## Overview
 The Kwame Nkrumah Mausoleum is a national monument dedicated to Ghana's first president, Kwame Nkrumah. It’s a place of immense historical significance, representing Ghana's independence and Pan-Africanism. The mausoleum houses Nkrumah's remains and a museum showcasing his life and achievements. Expect to see a respectful and solemn atmosphere.
 
-## Best Photo Spots
+### Best Photo Spots
 The best photo opportunity is from the entrance, capturing the full structure against the sky. Consider the early morning light for a softer glow.
 
-## Insider Tips
+### Insider Tips
 Tip: Visit during the weekdays to avoid larger crowds. The best time is before noon. Don't miss the statue of Nkrumah outside the mausoleum; it's quite impressive.`,
         practicalInfo: {
         howToGetThere: "Take a taxi or a tro tro (shared minibus) heading towards the city center. Ask for 'Nkrumah Mausoleum'.",
@@ -49,13 +49,13 @@ Tip: Visit during the weekdays to avoid larger crowds. The best time is before n
       },
         {
         name: "Jamestown",
-        description: `# Overview
+        description: `## Overview
 Jamestown is one of Accra's oldest districts, brimming with history and culture. Once a bustling port, it's now known for its vibrant fishing community, colonial architecture, and boxing gyms. Explore the streets and discover its hidden stories. You might encounter local artists, fishermen mending their nets, or children playing in the streets. Don't miss the Jamestown Lighthouse for panoramic views of the city.
 
-## Best Photo Spots
+### Best Photo Spots
 The Jamestown Lighthouse offers stunning panoramic views. Also, the brightly colored fishing boats along the shore provide excellent photo opportunities. Consider a sunset photoshoot.
 
-## Insider Tips
+### Insider Tips
 Tip: Hire a local guide to navigate the neighborhood and learn about its history. They can lead you to hidden gems and introduce you to the community.`,
         practicalInfo: {
         howToGetThere: "Take a taxi or tro tro towards Jamestown. Specify your destination within Jamestown to the driver.",
@@ -78,13 +78,13 @@ Tip: Hire a local guide to navigate the neighborhood and learn about its history
       },
         {
         name: "Labadi Beach",
-        description: `# Overview
+        description: `## Overview
 Labadi Beach, also known as La Pleasure Beach, is one of Accra's most popular beaches. It’s a lively spot where you can relax, swim, and enjoy the vibrant atmosphere. Expect music, food vendors, and plenty of people. It's the kind of place you might linger longer than expected, perhaps while enjoying a cold drink or watching the sunset.
 
-## Best Photo Spots
+### Best Photo Spots
 The sunset over the ocean is a must-capture moment. The colorful beach umbrellas and people enjoying the water also make for great photos.
 
-## Insider Tips
+### Insider Tips
 Tip: Weekends are the busiest. For a quieter experience, visit during the weekdays. Negotiate the entrance fee before entering.`,
         practicalInfo: {
         howToGetThere: "Take a taxi or tro tro towards Labadi. Specify 'Labadi Beach' to the driver.",
@@ -107,13 +107,13 @@ Tip: Weekends are the busiest. For a quieter experience, visit during the weekda
       },
         {
         name: "Makola Market",
-        description: `# Overview
+        description: `## Overview
 Makola Market is a bustling market in the heart of Accra. It's a sensory overload of sights, sounds, and smells. Here, you can find everything from textiles and jewelry to food and electronics. Expect a crowded and chaotic environment. This is a great place to experience local life and test your bargaining skills. It’s the kind of place where you should be prepared to haggle.
 
-## Best Photo Spots
+### Best Photo Spots
 Capture the vibrant chaos of the market from a slightly elevated position, perhaps from a nearby building or a stall. The colorful textiles and produce make for great photos.
 
-## Insider Tips
+### Insider Tips
 Tip: Keep your belongings secure and be aware of your surroundings. Bargaining is expected, so don't be afraid to negotiate the price.`,
         practicalInfo: {
         howToGetThere: "Located in central Accra. Take a taxi or tro tro to Makola Market.",
@@ -136,13 +136,13 @@ Tip: Keep your belongings secure and be aware of your surroundings. Bargaining i
       },
         {
         name: "National Museum of Ghana",
-        description: `# Overview
+        description: `## Overview
 The National Museum of Ghana offers a comprehensive overview of Ghanaian history and culture. It houses a diverse collection of artifacts, including archaeological finds, traditional crafts, and contemporary art. It’s a good place to learn more about Ghana's rich heritage. Expect a quiet and educational environment. It provides insight into the evolution of Ghana's cultural identity.
 
-## Best Photo Spots
+### Best Photo Spots
 Photograph the traditional Asante stools and the early historical artifacts.
 
-## Insider Tips
+### Insider Tips
 Tip: Allocate at least 2-3 hours to fully explore the museum's exhibits. The air conditioning can be a welcome relief from the Accra heat.`,
         practicalInfo: {
         howToGetThere: "Take a taxi or tro tro to the National Museum of Ghana.",
@@ -165,13 +165,13 @@ Tip: Allocate at least 2-3 hours to fully explore the museum's exhibits. The air
       },
         {
         name: "Buka Restaurant",
-        description: `# Overview
+        description: `## Overview
 Buka Restaurant is a popular eatery serving authentic Ghanaian and West African cuisine. With a warm and inviting atmosphere, Buka is known for its flavorful dishes and traditional recipes. I think this is where you might want to really get a feel for the food scene in Accra, so it's a solid choice for a meal.
 
-## What to Expect
+### What to Expect
 Expect a lively atmosphere, especially during peak hours. The menu includes a variety of dishes like jollof rice, banku with tilapia, and groundnut soup. Consider trying the palm nut soup – it's a local favorite.
 
-## Insider Tips
+### Insider Tips
 Reservations are recommended, especially for dinner. Be sure to try the local juices like bissap (hibiscus) or ginger drink.`,
         practicalInfo: {
         howToGetThere: "Located in Osu, Accra. Take a taxi or tro tro to Osu and ask for Buka Restaurant.",
@@ -194,13 +194,13 @@ Reservations are recommended, especially for dinner. Be sure to try the local ju
       },
         {
         name: "Republic Bar & Grill",
-        description: `# Overview
+        description: `## Overview
 Republic Bar & Grill is a trendy spot known for its creative cocktails, grilled dishes, and vibrant nightlife. It's a popular hangout for locals and tourists alike. Expect a lively atmosphere with music and a diverse crowd. The food is pretty good, and the drinks are definitely a draw, or so some say. It’s a great place to unwind after a day of exploring Accra.
 
-## What to Expect
+### What to Expect
 Republic Bar & Grill offers a range of grilled meats, seafood, and vegetarian options. The cocktail menu features both classic and innovative concoctions, often using local ingredients. Consider trying their signature 'Republic Cocktail'.
 
-## Insider Tips
+### Insider Tips
 Visit during happy hour for discounted drinks. The rooftop terrace offers great views of the city.`,
         practicalInfo: {
         howToGetThere: "Located in Osu, Accra. Take a taxi or tro tro to Osu and ask for Republic Bar & Grill.",
@@ -223,13 +223,13 @@ Visit during happy hour for discounted drinks. The rooftop terrace offers great 
       },
         {
         name: "Mövenpick Ambassador Hotel Accra - Sankofa Restaurant",
-        description: `# Overview
+        description: `## Overview
 The Sankofa Restaurant at the Mövenpick Ambassador Hotel offers a fine dining experience with a focus on international cuisine and Ghanaian specialties. Expect an elegant and sophisticated atmosphere. It’s a worthwhile experience if you’re looking for a luxurious meal. The service is impeccable, and the food is beautifully presented. The decor is modern and refined.
 
-## What to Expect
+### What to Expect
 The menu features a wide selection of dishes, from continental classics to local favorites. The breakfast buffet is particularly impressive. You can try kontomire stew, grilled fish, and more.
 
-## Insider Tips
+### Insider Tips
 Consider making a reservation for Sunday brunch. Dress code is smart casual.`,
         practicalInfo: {
         howToGetThere: "Located within the Mövenpick Ambassador Hotel in Accra.",
@@ -252,13 +252,13 @@ Consider making a reservation for Sunday brunch. Dress code is smart casual.`,
       },
         {
         name: "W.E.B. Du Bois Memorial Centre for Pan African Culture",
-        description: `# Overview
+        description: `## Overview
 The W.E.B. Du Bois Memorial Centre for Pan African Culture is a research facility and museum dedicated to the life and work of the prominent African American intellectual and activist, W.E.B. Du Bois. He spent his final years and is buried here. It's a place of reflection and learning about Pan-Africanism. It’s a place you might like to visit if you're seeking something intellectual.
 
-## What to Expect
+### What to Expect
 You can visit Du Bois's home, library, and mausoleum. The center hosts lectures, workshops, and cultural events promoting Pan-African ideals.
 
-## Insider Tips
+### Insider Tips
 Check the schedule for upcoming events. The center is a quiet and peaceful place, ideal for reflection.`,
         practicalInfo: {
         howToGetThere: "Located in Cantonments, Accra. Take a taxi to the W.E.B. Du Bois Memorial Centre.",
@@ -281,13 +281,13 @@ Check the schedule for upcoming events. The center is a quiet and peaceful place
       },
         {
         name: "Wild Gecko Handicrafts",
-        description: `# Overview
+        description: `## Overview
 Wild Gecko Handicrafts is a popular shop for authentic Ghanaian crafts and souvenirs. Find a wide range of items, from wood carvings and textiles to jewelry and ceramics. 
 
-## Best Photo Spots
+### Best Photo Spots
 The colorful displays of handicrafts make for visually appealing photos. Capture the intricate details of the wood carvings and the vibrant patterns of the textiles.
 
-## Insider Tips
+### Insider Tips
 Tip: Bargaining is possible, especially if you are buying multiple items. This place is a great spot to get gifts for loved ones back home.`,
         practicalInfo: {
         howToGetThere: "Located on the Spintex Road, Accra. Take a taxi or tro tro towards Spintex Road.",
@@ -310,13 +310,13 @@ Tip: Bargaining is possible, especially if you are buying multiple items. This p
       },
         {
         name: "Osu Night Market",
-        description: `# Overview
+        description: `## Overview
 The Osu Night Market is a bustling street food market that comes alive in the evenings. Sample various Ghanaian dishes and snacks from local vendors. Expect a lively atmosphere with music and plenty of people. This is an excellent spot to experience Accra's food culture.
 
-## What to Expect
+### What to Expect
 You can find grilled meats, kelewele (fried plantains), waakye (rice and beans), and various other local delicacies. Be sure to try the spicy pepper sauce, but be warned, it can be quite hot!
 
-## Insider Tips
+### Insider Tips
 Arrive early (around 6:00 PM) to avoid the biggest crowds. Be prepared to bargain on prices.`,
         practicalInfo: {
         howToGetThere: "Located in Osu, Accra. Take a taxi or tro tro to Osu and ask for the night market.",
@@ -343,40 +343,40 @@ Arrive early (around 6:00 PM) to avoid the biggest crowds. Be prepared to bargai
 
 Accra offers a variety of transportation options, each with its own advantages and disadvantages. It's worth doing a little research beforehand. Knowing your options makes all the difference.
 
-## Public Transport
+### Public Transport
 Tro tros (shared minibuses) are the most common form of public transport. They are cheap but can be crowded and confusing for first-time visitors. Taxis are readily available but be sure to negotiate the fare before getting in.
 
-## Taxis & Rideshare
+### Taxis & Rideshare
 Rideshare apps like Uber and Bolt are also available in Accra. They are generally more convenient and reliable than taxis, and the prices are usually fixed.`,
         whereToStay: `## Where to Stay in Accra
 
 Accra offers a range of accommodation options to suit all budgets and preferences. From luxury hotels to budget-friendly guesthouses, you'll find something that fits your needs. However, it's best to book in advance, especially during peak season.
 
-## Best Areas
+### Best Areas
 Osu is a popular choice for tourists, with its lively nightlife, restaurants, and shops. Airport Residential Area is a more upscale neighborhood with luxury hotels and quieter surroundings.
 
-## Luxury Options
+### Luxury Options
 The Mövenpick Ambassador Hotel and the Kempinski Hotel Gold Coast City Accra are two of the most luxurious hotels in the city.`,
         bestTimeToVisit: `## Best Time to Visit Accra
 
 The best time to visit Accra is during the dry season, which runs from November to March. The weather is warm and sunny, with low humidity. However, keep in mind that this is also the peak tourist season, so expect higher prices and larger crowds.
 
-## Peak Season
+### Peak Season
 November to March is the peak tourist season.
 
-## Weather Overview
+### Weather Overview
 The average temperature in Accra ranges from 24°C to 32°C (75°F to 90°F) throughout the year.`,
         suggestedItinerary: `## Suggested Accra Itinerary
 
 This itinerary balances historical sights, cultural experiences, and relaxation. Adapt it to your interests and time.
 
-## Day 1
+### Day 1
 Start your day with a visit to the Kwame Nkrumah Mausoleum, followed by a stroll through Independence Square. In the afternoon, explore the National Museum of Ghana. In the evening, enjoy dinner at Buka Restaurant.
 
-## Day 2
+### Day 2
 Visit Jamestown and climb the Jamestown Lighthouse for panoramic views. Then, explore the Makola Market. In the afternoon, relax on Labadi Beach. In the evening, enjoy drinks at Republic Bar & Grill.
 
-## Day 3
+### Day 3
 Visit the W.E.B. Du Bois Memorial Centre for Pan African Culture. In the afternoon, shop for souvenirs at Wild Gecko Handicrafts. In the evening, experience the Osu Night Market.`
       }}
       faqs={[

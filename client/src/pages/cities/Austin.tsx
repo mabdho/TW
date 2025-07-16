@@ -20,13 +20,13 @@ export const Austin: React.FC = () => {
       attractions={[
         {
         name: "Zilker Park",
-        description: `# Overview
+        description: `## Overview
 Zilker Park is Austin's beloved green heart, a sprawling 351-acre oasis offering everything from botanical gardens to Barton Springs Pool. It’s really the perfect place to escape the city bustle without actually leaving the city. You could easily spend an entire day exploring its various attractions. It's a must-see place in Austin for any visitor.
 
-## Best Photo Spots
+### Best Photo Spots
 Capture the cityscape from Zilker Hill, or get a vibrant shot of the flowers in the botanical garden. The sun setting over the park is especially beautiful, creating golden hour magic.
 
-## Insider Tips
+### Insider Tips
 Tip: Consider renting a kayak or canoe on Lady Bird Lake for a unique perspective of the park and the Austin skyline. Avoid visiting on major holidays as parking becomes a nightmare. I think it's worth going early in the morning to snag a good spot.`,
         practicalInfo: {
         howToGetThere: "Take the MetroRail to the Zilker Park station, or use CapMetro bus routes.",
@@ -49,13 +49,13 @@ Tip: Consider renting a kayak or canoe on Lady Bird Lake for a unique perspectiv
       },
         {
         name: "Barton Springs Pool",
-        description: `# Overview
+        description: `## Overview
 A natural, spring-fed pool within Zilker Park, Barton Springs Pool maintains a refreshing 68-70 degrees Fahrenheit year-round. It's a popular spot for swimming, sunbathing, and just generally escaping the Texas heat. It’s one of the most iconic things to do in Austin, and I found the water surprisingly calming.
 
-## What to Expect
+### What to Expect
 Be prepared for a brisk swim, even in the summer. The pool is large enough to accommodate serious swimmers and casual floaters alike. There are grassy areas for sunbathing, and restrooms/changing facilities are available.
 
-## Insider Tips
+### Insider Tips
 Tip: Weekday mornings are the least crowded. Avoid peak hours on weekends and holidays. Don't forget to bring a towel and sunscreen!`,
         practicalInfo: {
         howToGetThere: "Located within Zilker Park. Follow signs for Barton Springs Pool.",
@@ -78,13 +78,13 @@ Tip: Weekday mornings are the least crowded. Avoid peak hours on weekends and ho
       },
         {
         name: "Texas State Capitol",
-        description: `# Overview
+        description: `## Overview
 A visit to the Texas State Capitol is a must for anyone interested in history and architecture. This impressive building, even taller than the U.S. Capitol, offers free tours and stunning views. It's definitely one of the top attractions in Austin.
 
-## Best Photo Spots
+### Best Photo Spots
 The rotunda inside the Capitol is architecturally amazing. Outside, the south steps offer a classic photo op with the entire building as a backdrop.
 
-## Insider Tips
+### Insider Tips
 Tip: Free tours are available daily, but it's best to book in advance online. Security is tight, so be sure to check the list of prohibited items before you go.`,
         practicalInfo: {
         howToGetThere: "Located in downtown Austin. Easily accessible by bus or car. Parking is limited.",
@@ -107,13 +107,13 @@ Tip: Free tours are available daily, but it's best to book in advance online. Se
       },
         {
         name: "6th Street",
-        description: `# Overview
+        description: `## Overview
 Known as "Dirty Sixth," East 6th Street is the heart of Austin's live music scene. Bars and clubs line the street, offering a diverse range of music genres, from rock and blues to country and hip-hop. It’s certainly one of the most fun things to do in Austin, especially at night.
 
-## What to Expect
+### What to Expect
 Expect crowds, especially on weekends. The atmosphere is lively and energetic, though it can get a bit rowdy. Be prepared for loud music and plenty of people.
 
-## Insider Tips
+### Insider Tips
 Tip: The best time to visit is after 9 PM. Avoid driving, as parking is limited. Rideshares are your best bet.`,
         practicalInfo: {
         howToGetThere: "Located in downtown Austin. Easily accessible by bus or rideshare.",
@@ -136,13 +136,13 @@ Tip: The best time to visit is after 9 PM. Avoid driving, as parking is limited.
       },
         {
         name: "Congress Avenue Bridge Bats",
-        description: `# Overview
+        description: `## Overview
 Every evening from late spring to early fall, thousands of bats emerge from under the Congress Avenue Bridge, creating a truly spectacular sight. It's the largest urban bat colony in North America, and seeing them fly out is one of the most unique things to do in Austin. Many consider it one of the must-see places in Austin.
 
 ## Best Viewing Spots
 The best viewing spots are on the bridge itself or along the hike-and-bike trail on either side of Lady Bird Lake.
 
-## Insider Tips
+### Insider Tips
 Tip: Arrive about an hour before sunset to secure a good viewing spot. The exact time of emergence varies depending on the season and weather. Don't miss this.`,
         practicalInfo: {
         howToGetThere: "Located on Congress Avenue Bridge, downtown Austin.",
@@ -165,13 +165,13 @@ Tip: Arrive about an hour before sunset to secure a good viewing spot. The exact
       },
         {
         name: "Franklin Barbecue",
-        description: `# Overview
+        description: `## Overview
 Franklin Barbecue is legendary, and for good reason. Considered by many to be the best barbecue in Texas, or even the world, it draws crowds from all over. Prepare to wait in line for hours, but most people agree that it's worth it for the melt-in-your-mouth brisket. It's a key part of Austin's culinary scene.
 
 ## Signature Dishes
 The brisket is the star of the show, but the pulled pork and ribs are also fantastic. Don't forget to try the sides, like the coleslaw and potato salad.
 
-## Insider Tips
+### Insider Tips
 Tip: Get there before 8 AM if you want to have a chance of getting barbecue before they sell out. Bring a chair, drinks, and snacks to make the wait more bearable. Alternatively, order a whole brisket in advance for a special occasion.`,
         practicalInfo: {
         howToGetThere: "Located at 900 E 11th St, Austin, TX 78702.",
@@ -194,13 +194,13 @@ Tip: Get there before 8 AM if you want to have a chance of getting barbecue befo
       },
         {
         name: "Josephine House",
-        description: `# Overview
+        description: `## Overview
 Josephine House is a charming bistro located in a quaint Clarksville bungalow. This is a place where the dining room feels like a good friend's stylish living space. It's a favorite spot for brunch, lunch, or a special dinner, serving seasonal American cuisine with a touch of Southern flair. Consider it one of the best restaurants in Austin for a relaxed yet refined dining experience.
 
 ## Ambiance and Cuisine
 The atmosphere is relaxed and inviting, with a beautiful patio for outdoor dining. The menu features fresh, locally sourced ingredients, with dishes like the grilled asparagus salad and the seafood stew being local favorites.
 
-## Insider Tips
+### Insider Tips
 Tip: Reservations are highly recommended, especially for brunch on weekends. Ask for a table on the patio for the best atmosphere. I think you'll find the service impeccable.`,
         practicalInfo: {
         howToGetThere: "Located at 1601 Waterston Ave, Austin, TX 78703.",
@@ -223,13 +223,13 @@ Tip: Reservations are highly recommended, especially for brunch on weekends. Ask
       },
         {
         name: "Jo's Coffee",
-        description: `# Overview
+        description: `## Overview
 Jo's Coffee is an Austin institution, known for its iconic "I love you so much" mural and its delicious coffee. It's the perfect place to grab a caffeine fix and soak up the city's unique vibe. It is a quintessential Austin cafe.
 
-## What to Expect
+### What to Expect
 Expect a line, especially on weekends. The coffee is strong and flavorful, and the atmosphere is relaxed and friendly. It's a great spot for people-watching.
 
-## Insider Tips
+### Insider Tips
 Tip: Don't leave without taking a picture in front of the mural. Try the Belgian Bomber, a local favorite. There are two locations; the one on South Congress is the original.`,
         practicalInfo: {
         howToGetThere: "Located at 1300 S Congress Ave, Austin, TX 78704.",
@@ -252,13 +252,13 @@ Tip: Don't leave without taking a picture in front of the mural. Try the Belgian
       },
         {
         name: "Mount Bonnell",
-        description: `# Overview
+        description: `## Overview
 For panoramic views of Austin and the surrounding hill country, head to Mount Bonnell. The short climb to the top is well worth it for the stunning scenery. You'll find it listed as one of the most popular places to visit in Austin. It's the kind of place you might linger longer than expected.
 
-## Best Photo Spots
+### Best Photo Spots
 The summit offers 360-degree views, making it an ideal spot for sunset photography.
 
-## Insider Tips
+### Insider Tips
 Tip: The best time to visit is at sunset. Bring a blanket and some snacks to enjoy the view. Parking can be limited, especially on weekends, so consider arriving early.`,
         practicalInfo: {
         howToGetThere: "Located at 3800 Mount Bonnell Rd, Austin, TX 78731.",
@@ -285,16 +285,16 @@ Tip: The best time to visit is at sunset. Bring a blanket and some snacks to enj
 
 Austin offers several transportation options, but getting around efficiently requires some planning. Traffic can be heavy, especially during peak hours, so consider alternative modes of transport.
 
-## Public Transport
+### Public Transport
 CapMetro provides bus and rail services. The MetroRail is useful for traveling north-south, while the bus network covers a wider area. Consider purchasing a day pass for unlimited rides.
 
-## Taxis & Rideshare
+### Taxis & Rideshare
 Rideshare services like Uber and Lyft are readily available. Taxis are also an option, but they may be less convenient.`,
         whereToStay: `## Where to Stay in Austin
 
 Austin offers a variety of accommodation options, from luxury hotels to budget-friendly hostels. The best area to stay depends on your interests and budget.
 
-## Best Areas
+### Best Areas
 Downtown Austin is ideal for those who want to be close to the action, with easy access to restaurants, bars, and live music venues. South Congress (SoCo) is a trendy area with boutique hotels and quirky shops.
 
 ## Budget-Friendly
@@ -303,22 +303,22 @@ For budget-conscious travelers, consider staying in East Austin or near the Univ
 
 The best time to visit Austin is during the spring or fall when the weather is mild and pleasant. Summer can be hot and humid, while winter can be cool and unpredictable.
 
-## Peak Season
+### Peak Season
 Spring (March-May) and Fall (September-November) are peak seasons, with comfortable temperatures and numerous outdoor events. Expect higher prices and larger crowds.
 
-## Weather Overview
+### Weather Overview
 Austin has a subtropical climate with hot summers and mild winters. Average temperatures range from the 50s in winter to the 80s in summer.`,
         suggestedItinerary: `## Suggested Austin Itinerary
 
 Here's a possible itinerary for a 3-day trip to Austin. Adapt it to your interests and pace.
 
-## Day 1
+### Day 1
 Start your day with a visit to the Texas State Capitol. In the afternoon, explore Zilker Park and take a dip in Barton Springs Pool. In the evening, catch a live music show on 6th Street.
 
-## Day 2
+### Day 2
 Head to South Congress (SoCo) for shopping and lunch. In the afternoon, visit the Blanton Museum of Art. In the evening, watch the bats emerge from the Congress Avenue Bridge.
 
-## Day 3
+### Day 3
 Take a scenic drive to Mount Bonnell for panoramic views. In the afternoon, visit the Bullock Texas State History Museum. In the evening, enjoy a delicious meal at one of Austin's many restaurants.`
       }}
       faqs={[
