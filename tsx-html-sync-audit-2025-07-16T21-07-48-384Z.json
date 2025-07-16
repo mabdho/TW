@@ -1,0 +1,74 @@
+{
+  "cities": [
+    {
+      "fileName": "Accra",
+      "score": 33.33333333333333,
+      "totalChecks": 3,
+      "passedChecks": 1,
+      "issues": [
+        {
+          "type": "title_mismatch",
+          "tsx": "Best Things to Do in Accra, Ghana (2025 Guide)",
+          "html": "Best Things to Do in Accra, Ghana (2025 Guide) - TravelWanders",
+          "severity": "high"
+        },
+        {
+          "type": "h1_mismatch",
+          "tsx": "Best Things to Do in Accra, Ghana (2025 Guide)",
+          "html": "Best Things to Do in Accra",
+          "severity": "medium"
+        }
+      ],
+      "isSync": false
+    },
+    {
+      "fileName": "Antalya",
+      "score": 100,
+      "totalChecks": 3,
+      "passedChecks": 3,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Austin",
+      "score": 100,
+      "totalChecks": 3,
+      "passedChecks": 3,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Como",
+      "score": 100,
+      "totalChecks": 3,
+      "passedChecks": 3,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "London",
+      "score": 100,
+      "totalChecks": 3,
+      "passedChecks": 3,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Zurich",
+      "score": 100,
+      "totalChecks": 3,
+      "passedChecks": 3,
+      "issues": [],
+      "isSync": true
+    }
+  ],
+  "blogs": [],
+  "staticPages": [],
+  "summary": {
+    "totalChecked": 6,
+    "synchronized": 5,
+    "needsSync": 1,
+    "missing": 4,
+    "issues": []
+  }
+}
