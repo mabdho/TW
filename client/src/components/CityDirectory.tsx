@@ -19,7 +19,8 @@ const cities = [
   { "name": "San Diego", "country": "USA", "path": "/best-things-to-do-in-san-diego", "continent": "North America", "imageUrl": "https://plus.unsplash.com/premium_photo-1697730053017-3110659431c7?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { "name": "Bali", "country": "Indonesia", "path": "/best-things-to-do-in-bali", "continent": "Asia", "imageUrl": "https://images.unsplash.com/photo-1595817986621-2b7d9ffd3f25?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { "name": "Melbourne", "country": "Australia", "path": "/best-things-to-do-in-melbourne", "continent": "Australia", "imageUrl": "https://plus.unsplash.com/premium_photo-1733317293766-5606f74b765b?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8TWVsYm91cm5lfGVufDB8MHwwfHx8MA%3D%3D" },
-  { "name": "Perth", "country": "Australia", "path": "/best-things-to-do-in-perth", "continent": "Australia", "imageUrl": "https://images.unsplash.com/photo-1524586410818-196d249560e4?q=80&w=1952&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
+  { "name": "Perth", "country": "Australia", "path": "/best-things-to-do-in-perth", "continent": "Australia", "imageUrl": "https://images.unsplash.com/photo-1524586410818-196d249560e4?q=80&w=1952&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { "name": "Montreal", "country": "Canada", "path": "/best-things-to-do-in-montreal", "continent": "North America", "imageUrl": "https://plus.unsplash.com/premium_photo-1697730100119-1f40e797f395?q=80&w=1746&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
 ];
 
 const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America", "South America"];

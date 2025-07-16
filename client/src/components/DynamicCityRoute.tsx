@@ -40,6 +40,8 @@ const cityMap = {
   'melbourne': createCityImport('Melbourne', '../pages/cities/Melbourne'),
 
   'perth': createCityImport('Perth', '../pages/cities/Perth'),
+
+  'montreal': createCityImport('Montreal', '../pages/cities/Montreal'),
 };
 
 interface DynamicCityRouteProps {
