@@ -121,13 +121,6 @@ function App() {
           
           {/* Dynamic city routes */}
           <CityRoutes />
-          
-          {/* 404 fallback - only for truly unmatched routes */}
-          <Route path="/:rest*">
-            <Suspense fallback={<PageFallback />}>
-              <ConditionalNotFound />
-            </Suspense>
-          </Route>
         </Suspense>
       </Router>
     </div>
