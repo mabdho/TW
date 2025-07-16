@@ -351,14 +351,34 @@ class ComprehensiveAuditSystem {
    * Extract data from TSX file
    */
   extractTsxData(content) {
-    const titleMatch = content.match(/title=\{?["']([^"']+)["']\}?/);
-    const descriptionMatch = content.match(/description=\{?["']([^"']+)["']\}?/);
-    const h1Match = content.match(/<h1[^>]*>([^<]+)<\/h1>/);
+    // Handle multiple TSX prop formats:
+    // title="string", title={"string"}, title={`string`}
+    const titleMatch = content.match(/title=\{?["'`]([^"'`]+)["'`]\}?/) || 
+                      content.match(/title=\{["']([^"']+)["']\}/) ||
+                      content.match(/title=\{`([^`]+)`\}/);
+    
+    const descriptionMatch = content.match(/description=\{?["'`]([^"'`]+)["'`]\}?/) || 
+                            content.match(/description=\{["']([^"']+)["']\}/) ||
+                            content.match(/description=\{`([^`]+)`\}/);
+    
+    // Look for H1 in the content, but also check common patterns
+    const h1Match = content.match(/<h1[^>]*>([^<]+)<\/h1>/) ||
+                    content.match(/h1.*?[>"]([^<"]+)["<]/);
+    
+    // For city pages, the H1 is often the same as the title
+    const extractedTitle = titleMatch ? titleMatch[1] : '';
+    const extractedDescription = descriptionMatch ? descriptionMatch[1] : '';
+    const extractedH1 = h1Match ? h1Match[1] : extractedTitle; // fallback to title
+    
+    console.log(`TSX Extraction Debug:
+      Title: "${extractedTitle}"
+      Description: "${extractedDescription}"
+      H1: "${extractedH1}"`);
     
     return {
-      title: titleMatch ? titleMatch[1] : '',
-      description: descriptionMatch ? descriptionMatch[1] : '',
-      h1: h1Match ? h1Match[1] : ''
+      title: extractedTitle,
+      description: extractedDescription,
+      h1: extractedH1
     };
   }
 
