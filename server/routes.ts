@@ -2173,47 +2173,24 @@ Double-check all brackets, quotes, and commas are properly matched.`;
         }
       }
 
-      // Auto-generate Firebase Functions HTML for the new city
+      // Auto-generate Firebase Functions HTML for the new city using improved system
       let htmlGenerated = false;
       let htmlMessage = '';
       
       try {
-        // First try the Firebase Functions HTML generator
-        const { generateCompleteHTML, extractCityDataFromTSX } = await import('./html-generator');
-        const tsxFilePath = path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityFileName}.tsx`);
+        // Use the new automatic HTML generation system
+        const { ensureCityHasHTML } = await import('./utils/auto-html-generator');
+        htmlGenerated = await ensureCityHasHTML(cityFileName);
         
-        // Extract city data from the newly created TSX file
-        const cityData = await extractCityDataFromTSX(tsxFilePath);
-        
-        if (cityData) {
-          // Generate complete HTML using Firebase Functions system
-          const completeHTML = generateCompleteHTML(cityData);
-          
-          // Save the HTML file to correct deployment directory using standardized naming
-          const { saveCityHtmlFile } = await import('./html-generator');
-          const htmlFilePath = await saveCityHtmlFile(city, completeHTML);
-          htmlGenerated = true;
-          htmlMessage = ` with complete HTML generated at /${htmlFileName}`;
-          
-          console.log(`Generated complete HTML for ${city} using Firebase Functions system`);
+        if (htmlGenerated) {
+          htmlMessage = ` with complete HTML generated using Firebase HTML rendering system`;
+          console.log(`✅ Generated complete HTML for ${city} using Firebase HTML rendering system`);
         } else {
-          console.warn('Could not extract city data from TSX file for HTML generation');
+          console.warn(`⚠️  HTML generation failed for ${city}`);
         }
       } catch (htmlError) {
-        console.warn('Firebase Functions HTML generation failed, trying fallback static generation:', htmlError.message);
-        
-        // Fallback to old static generation system
-        try {
-          const { generateSingleCityStatic } = await import('../scripts/generate-single-city-static.js');
-          const staticGenerated = await generateSingleCityStatic(routePath, city);
-          
-          if (staticGenerated) {
-            htmlGenerated = true;
-            htmlMessage = ' with static HTML generated';
-          }
-        } catch (staticError) {
-          console.warn('Both HTML generation methods failed:', staticError.message);
-        }
+        console.warn('HTML generation failed:', htmlError.message);
+        htmlGenerated = false;
       }
       
       // Automatically regenerate static HTML files to reflect the new city

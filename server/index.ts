@@ -216,10 +216,19 @@ if (app.get("env") === "development") {
     port,
     host: "0.0.0.0",
     reusePort: true,
-  }, () => {
+  }, async () => {
     log(`serving on port ${port}`);
     
     // Initialize sitemap indexing automation
     initializeSitemapIndexing();
+    
+    // Auto-generate missing HTML files using Firebase HTML rendering system
+    console.log('🔧 Checking for missing city HTML files...');
+    try {
+      const { autoGenerateMissingHTML } = await import('./utils/auto-html-generator');
+      await autoGenerateMissingHTML();
+    } catch (error) {
+      console.warn('⚠️  Auto HTML generation warning:', error);
+    }
   });
 })();

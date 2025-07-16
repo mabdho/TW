@@ -3284,6 +3284,12 @@ function generateCommonStyles(): string {
 
 export async function extractCityDataFromTSX(tsxFilePath: string): Promise<CityData | null> {
   try {
+    // Ensure the file path exists
+    if (!existsSync(tsxFilePath)) {
+      console.error(`TSX file not found: ${tsxFilePath}`);
+      return null;
+    }
+    
     const tsxContent = readFileSync(tsxFilePath, 'utf-8');
     
     // Extract basic city information using enhanced extraction
