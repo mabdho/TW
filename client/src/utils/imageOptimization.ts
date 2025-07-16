@@ -79,21 +79,8 @@ export function generateImageAltText(
   attractionName?: string,
   context: 'hero' | 'gallery' | 'attraction' = 'gallery'
 ): string {
-  switch (context) {
-    case 'hero':
-      return `Best things to do in ${cityName} - travel guide hero image featuring top attractions and city overview`;
-    
-    case 'attraction':
-      return attractionName 
-        ? `${attractionName} in ${cityName} - travel guide photo showing this popular attraction`
-        : `Popular attraction in ${cityName} - travel guide photo`;
-    
-    case 'gallery':
-    default:
-      return attractionName
-        ? `${attractionName}, ${cityName} - travel photo showing this amazing destination`
-        : `Beautiful view of ${cityName} - travel photography from our destination guide`;
-  }
+  // Simple format: "things to do in [city]" for all images as requested
+  return `things to do in ${cityName}`;
 }
 
 /**
@@ -107,7 +94,7 @@ export function optimizeGalleryImages(
     .filter(image => image.url) // Only include images with URLs
     .map((image, index) => ({
       url: optimizeImageUrl(image.url!, 400, 'webp', 80),
-      alt: image.alt || generateImageAltText(cityName, undefined, 'gallery'),
+      alt: image.alt || `things to do in ${cityName}`,
       caption: image.caption,
       width: 400,
       height: 400

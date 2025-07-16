@@ -1537,7 +1537,7 @@ export async function generateCompleteHTML(cityData: CityData): Promise<string> 
           <source srcset="${cityData.imageUrl}&fm=avif&w=1920&fit=crop&auto=format" type="image/avif">
           <source srcset="${cityData.imageUrl}&fm=webp&w=1920&fit=crop&auto=format" type="image/webp">
           <img src="${cityData.imageUrl}&w=1920&fit=crop&auto=format&fm=jpg" 
-               alt="Best things to do in ${cityData.cityName}, ${cityData.country} - Panoramic view showcasing iconic landmarks and top attractions for travelers in 2025"
+               alt="things to do in ${cityData.cityName}"
                class="hero-image"
                loading="eager"
                width="1920" 

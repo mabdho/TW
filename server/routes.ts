@@ -3451,9 +3451,10 @@ function generateReactComponent(
   // Use the metaTitle from contentData (which contains HTML source truth) instead of generating it
   const title = contentData.metaTitle || `15 Best Things to Do in ${cityName.replace(/([A-Z])/g, ' $1').trim()}, ${country} (2025 Guide)`;
   
-  // Format gallery images
+  // Format gallery images with auto alt text generation
+  const cityNameForAlt = cityName.replace(/([A-Z])/g, ' $1').trim();
   const formattedGalleryImages = galleryImages.map(img => `
-        { url: "${img.url || ''}", alt: "${img.alt || ''}", caption: "${img.caption || ''}" }`).join(',');
+        { url: "${img.url || ''}", alt: "${img.alt || `things to do in ${cityNameForAlt}`}", caption: "${img.caption || ''}" }`).join(',');
 
   // Format highlights
   const formattedHighlights = contentData.highlights.map((h: string) => `"${h}"`).join(',\n        ');

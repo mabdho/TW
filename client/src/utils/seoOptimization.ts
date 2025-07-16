@@ -111,7 +111,7 @@ export function generateCityMetaTags(config: SEOConfig): MetaTag[] {
 
 /**
  * Generate enhanced alt text for attraction images
- * Updated to match HTML source of truth implementation
+ * Updated to use simplified format: "things to do in [city]"
  */
 export function generateEnhancedAltText(
   attractionName: string,
@@ -119,23 +119,15 @@ export function generateEnhancedAltText(
   country: string,
   context: 'hero' | 'gallery' | 'card' = 'gallery'
 ): string {
-  switch (context) {
-    case 'hero':
-      return `Best things to do in ${cityName}, ${country} - Panoramic view showcasing iconic landmarks and top attractions for travelers in 2025`;
-    case 'gallery':
-      return `${attractionName} in ${cityName}, ${country} - Must-visit attraction with architectural beauty and cultural significance for travelers`;
-    case 'card':
-      return `${attractionName} in ${cityName}, ${country} - Popular tourist destination and top-rated attraction with visitor reviews and photos`;
-    default:
-      return `${attractionName} in ${cityName}, ${country} - Travel photography showcasing destination highlights and cultural landmarks`;
-  }
+  // Simplified format for all contexts
+  return `things to do in ${cityName}`;
 }
 
 /**
  * Generate city-specific enhanced alt text for hero images
  */
 export function generateCityHeroAltText(cityName: string, country: string): string {
-  return `Best things to do in ${cityName}, ${country} - Panoramic view showcasing iconic landmarks and top attractions for travelers in 2025`;
+  return `things to do in ${cityName}`;
 }
 
 /**
