@@ -80,14 +80,14 @@ export const ImageOptimized: React.FC<ImageOptimizedProps> = ({
   // This completely eliminates duplicate requests caused by preloading
 
   // Generate optimized URLs with enterprise service
-  const avifUrl = imageService.generateOptimizedUrl(src, width || 1200, 'avif', quality);
-  const webpUrl = imageService.generateOptimizedUrl(src, width || 1200, 'webp', quality);
-  const jpegUrl = imageService.generateOptimizedUrl(src, width || 1200, 'jpeg', quality);
+  const avifUrl = imageService.generateOptimizedUrl(src, width || 500, 'avif', quality);
+  const webpUrl = imageService.generateOptimizedUrl(src, width || 500, 'webp', quality);
+  const jpegUrl = imageService.generateOptimizedUrl(src, width || 500, 'jpeg', quality);
 
   // Generate responsive srcSets
-  const avifSrcSet = imageService.generateResponsiveSrcSet(src, 'avif', width || 1920);
-  const webpSrcSet = imageService.generateResponsiveSrcSet(src, 'webp', width || 1920);
-  const jpegSrcSet = imageService.generateResponsiveSrcSet(src, 'jpeg', width || 1920);
+  const avifSrcSet = imageService.generateResponsiveSrcSet(src, 'avif', width || 500);
+  const webpSrcSet = imageService.generateResponsiveSrcSet(src, 'webp', width || 500);
+  const jpegSrcSet = imageService.generateResponsiveSrcSet(src, 'jpeg', width || 500);
 
   // Generate appropriate sizes attribute
   const responsiveSizes = sizes || imageService.generateSizesAttribute(context);

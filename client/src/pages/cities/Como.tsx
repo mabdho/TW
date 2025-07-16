@@ -8,7 +8,7 @@ export const Como: React.FC = () => {
       country="Italy"
       title={"Best Things to Do in Como, Italy (2025 Guide)"}
       description={`Discover the best things to do in Como — top attractions, hidden gems, and food spots. Complete Como travel guide.`}
-      imageUrl={"https://images.unsplash.com/photo-1606745463199-d7623eee5f8a?w=800&auto=format&fit=crop&q=75&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+      imageUrl={"https://images.unsplash.com/photo-1606745463199-d7623eee5f8a?w=500&auto=format&fit=crop&q=75&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
       ]}
       highlights={["Visit the Duomo di Como, a stunning cathedral.",

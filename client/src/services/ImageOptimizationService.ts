@@ -93,7 +93,7 @@ class ImageOptimizationService {
    */
   public generateOptimizedUrl(
     originalUrl: string,
-    width: number,
+    width: number = 500,
     format: 'avif' | 'webp' | 'jpeg' = 'webp',
     quality?: number
   ): string {

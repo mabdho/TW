@@ -8,7 +8,7 @@ export const Oslo: React.FC = () => {
       country="Norway"
       title={"Best Things to Do in Oslo, Norway (2025 Guide)"}
       description={`Discover the best things to do in Oslo — top attractions, hidden gems, and food spots. Complete Oslo travel guide.`}
-      imageUrl={"https://images.unsplash.com/photo-1712009509758-dff926710413?w=800&auto=format&fit=crop&q=75&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+      imageUrl={"https://images.unsplash.com/photo-1712009509758-dff926710413?w=500&auto=format&fit=crop&q=75&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
       ]}
       highlights={["Explore the Viking Ship Museum and delve into Norway's maritime history.",
