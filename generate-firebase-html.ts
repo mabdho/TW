@@ -141,7 +141,10 @@ async function generateAllPages() {
           
           if (cityData) {
             const cityHTML = generateCompleteHTML(cityData);
-            const cityOutputDir = path.join(outputDir, `best-things-to-do-in-${cityData.cityName.toLowerCase()}`);
+            // Use proper city name mapping to ensure consistent directory naming
+            const { cityNameToHtmlFormat } = await import('./server/utils/city-name-mapping.js');
+            const citySlug = cityNameToHtmlFormat(cityData.cityName);
+            const cityOutputDir = path.join(outputDir, `best-things-to-do-in-${citySlug}`);
             await fs.mkdir(cityOutputDir, { recursive: true });
             
             const cityOutputPath = path.join(cityOutputDir, 'index.html');

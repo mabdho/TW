@@ -74,6 +74,12 @@ export function cityNameToHtmlFormat(cityName: string): string {
     return mapping.htmlName;
   }
   
+  // Check for exact match on display name
+  const exactMapping = Object.values(CITY_NAME_MAPPINGS).find(m => m.displayName === cityName);
+  if (exactMapping) {
+    return exactMapping.htmlName;
+  }
+  
   // Default conversion for cities not in mapping
   return cityName
     .toLowerCase()
