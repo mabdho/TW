@@ -28,6 +28,8 @@ const cityMap = {
   'accra': createCityImport('Accra', '../pages/cities/Accra'),
 
   'oslo': createCityImport('Oslo', '../pages/cities/Oslo'),
+
+  'stockholm': createCityImport('Stockholm', '../pages/cities/Stockholm'),
 };
 
 interface DynamicCityRouteProps {
