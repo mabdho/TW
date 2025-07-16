@@ -37,18 +37,18 @@ const FeaturedCities = () => {
         </div>
 
         {/* Featured Cities Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
           {featuredCities.filter(city => city).map((city, index) => (
             <a key={city.path} href={city.path}>
               <Card className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-300 overflow-hidden">
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
                   {city.imageUrl ? (
                     <ImageOptimized
                       src={city.imageUrl}
                       alt={`${city.name} travel guide`}
-                      width={300}
-                      height={225}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      width={400}
+                      height={300}
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       context="card"
                       priority={index < 2}
                       placeholder="shimmer"
