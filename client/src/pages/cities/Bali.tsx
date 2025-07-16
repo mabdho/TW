@@ -6,8 +6,8 @@ export const Bali: React.FC = () => {
     <CityPage
       cityName="Bali"
       country="Indonesia"
-      title={"Best Things to Do in Bali, Indonesia (2025 Guide)"}
-      description={`Discover the best things to do in Bali — top attractions, hidden gems, and food spots. Complete Bali travel guide.`}
+      title={"Best Things to Do in Bali - TravelWanders"}
+      description={`Discover the best things to do in Bali. Complete travel guide with attractions, activities, and insider tips for your perfect Bali adventure.`}
       imageUrl={"https://images.unsplash.com/photo-1595817986621-2b7d9ffd3f25?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
       ]}

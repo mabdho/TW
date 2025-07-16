@@ -6,8 +6,8 @@ export const SãoPaulo: React.FC = () => {
     <CityPage
       cityName="São Paulo"
       country="Brazil"
-      title={"Best Things to Do in São Paulo, Brazil (2025 Guide)"}
-      description={`Discover the best things to do in São Paulo — top attractions, hidden gems, and food spots. Complete São Paulo travel guide.`}
+      title={"Best Things to Do in São Paulo - TravelWanders"}
+      description={`Discover the best things to do in São Paulo. Complete travel guide with attractions, activities, and insider tips for your perfect São Paulo adventure.`}
       imageUrl={"https://images.unsplash.com/photo-1554168848-228452c09d60?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
       ]}

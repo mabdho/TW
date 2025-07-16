@@ -38,6 +38,8 @@ const cityMap = {
   'bali': createCityImport('Bali', '../pages/cities/Bali'),
 
   'melbourne': createCityImport('Melbourne', '../pages/cities/Melbourne'),
+
+  'perth': createCityImport('Perth', '../pages/cities/Perth'),
 };
 
 interface DynamicCityRouteProps {

@@ -6,8 +6,8 @@ export const SanFrancisco: React.FC = () => {
     <CityPage
       cityName="San Francisco"
       country="USA"
-      title={"Best Things to Do in San Francisco, USA (2025 Guide)"}
-      description={`Discover the best things to do in San Francisco — top attractions, hidden gems, and food spots. Complete San Francisco travel guide.`}
+      title={"Best Things to Do in San Francisco - TravelWanders"}
+      description={`Discover the best things to do in San Francisco. Complete travel guide with attractions, activities, and insider tips for your perfect San Francisco adventure.`}
       imageUrl={"https://plus.unsplash.com/premium_photo-1673002094239-c78228fbb426?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8U2FuJTIwRnJhbmNpc2NvfGVufDB8MHwwfHx8MA%3D%3D"}
       galleryImages={[
       ]}

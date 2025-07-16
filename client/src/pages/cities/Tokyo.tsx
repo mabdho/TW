@@ -6,8 +6,8 @@ export const Tokyo: React.FC = () => {
     <CityPage
       cityName="Tokyo"
       country="Japan"
-      title={"15 Best Things to Do in Tokyo, Japan (2025 Guide)"}
-      description={`Planning a trip to Tokyo? You're in for a treat! Discovering the best things to do in Tokyo can be a bit overwhelming, given the city's sheer size and`}
+      title={"Best Things to Do in Tokyo - TravelWanders"}
+      description={`Discover the best things to do in Tokyo. Complete travel guide with attractions, activities, and insider tips for your perfect Tokyo adventure.`}
       imageUrl={"https://plus.unsplash.com/premium_photo-1661914240950-b0124f20a5c1?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8VG9reW98ZW58MHx8MHx8fDA%3D"}
       galleryImages={[
       ]}

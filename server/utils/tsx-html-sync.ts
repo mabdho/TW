@@ -102,7 +102,20 @@ export class TSXHTMLSynchronizer {
    */
   private getHtmlPath(cityName: string): string {
     const slugName = this.cityNameToSlug(cityName);
-    return path.join(this.htmlDir, `best-things-to-do-in-${slugName}`, 'index.html');
+    
+    // Try both directory structure and direct file approaches
+    const directoryPath = path.join(this.htmlDir, `best-things-to-do-in-${slugName}`, 'index.html');
+    const filePath = path.join(this.htmlDir, `best-things-to-do-in-${slugName}.html`);
+    
+    // Return the path that exists
+    if (existsSync(directoryPath)) {
+      return directoryPath;
+    } else if (existsSync(filePath)) {
+      return filePath;
+    }
+    
+    // Default to directory path if neither exists
+    return directoryPath;
   }
 
   /**
@@ -157,16 +170,17 @@ export class TSXHTMLSynchronizer {
     const content = await fs.readFile(tsxPath, 'utf-8');
     
     // Extract SEO data from TSX component
-    const titleMatch = content.match(/title:\s*["']([^"']+)["']/);
-    const descriptionMatch = content.match(/description:\s*["']([^"']+)["']/);
+    const titleMatch = content.match(/title=\{["']([^"']+)["']\}/) || content.match(/title:\s*["']([^"']+)["']/);
+    const descriptionMatch = content.match(/description=\{`([^`]+)`\}/) || content.match(/description:\s*["']([^"']+)["']/);
     const h1Match = content.match(/<h1[^>]*>([^<]+)<\/h1>/);
-    const imageMatch = content.match(/imageUrl:\s*["']([^"']+)["']/);
+    const imageMatch = content.match(/imageUrl=\{["']([^"']+)["']\}/) || content.match(/imageUrl:\s*["']([^"']+)["']/);
 
     return {
       title: titleMatch ? titleMatch[1].trim() : '',
       description: descriptionMatch ? descriptionMatch[1].trim() : '',
-      h1: h1Match ? h1Match[1].trim() : '',
-      imageUrl: imageMatch ? imageMatch[1].trim() : undefined
+      h1: h1Match ? h1Match[1].trim() : (titleMatch ? titleMatch[1].trim() : ''), // Use title as H1 if no H1 found
+      imageUrl: imageMatch ? imageMatch[1].trim() : undefined,
+      keywords: undefined
     };
   }
 
@@ -191,6 +205,9 @@ export class TSXHTMLSynchronizer {
     // Update title
     if (htmlData.title) {
       content = content.replace(
+        /title=\{["']([^"']+)["']\}/,
+        `title={"${htmlData.title.replace(/"/g, '\\"')}"}`
+      ) || content.replace(
         /title:\s*["']([^"']+)["']/,
         `title: "${htmlData.title.replace(/"/g, '\\"')}"`
       );
@@ -199,6 +216,9 @@ export class TSXHTMLSynchronizer {
     // Update description
     if (htmlData.description) {
       content = content.replace(
+        /description=\{`([^`]+)`\}/,
+        `description={\`${htmlData.description.replace(/`/g, '\\`')}\`}`
+      ) || content.replace(
         /description:\s*["']([^"']+)["']/,
         `description: "${htmlData.description.replace(/"/g, '\\"')}"`
       );
@@ -215,6 +235,9 @@ export class TSXHTMLSynchronizer {
     // Update image URL if present
     if (htmlData.imageUrl) {
       content = content.replace(
+        /imageUrl=\{["']([^"']+)["']\}/,
+        `imageUrl={"${htmlData.imageUrl}"}`
+      ) || content.replace(
         /imageUrl:\s*["']([^"']+)["']/,
         `imageUrl: "${htmlData.imageUrl}"`
       );

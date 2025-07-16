@@ -13,8 +13,8 @@ export const Rome: React.FC = () => {
       <CityPage
       cityName="Rome"
       country="Italy"
-      title={"15 Best Things to Do in Rome, Italy (2025 Guide)"}
-      description={`Discover the best things to do in Rome with this comprehensive 2025 guide. From the Colosseum to Vatican City, explore top attractions and insider tips for`}
+      title={"Best Things to Do in Rome - TravelWanders"}
+      description={`Discover the best things to do in Rome. Complete travel guide with attractions, activities, and insider tips for your perfect Rome adventure.`}
       imageUrl={"https://plus.unsplash.com/premium_photo-1661964123160-8d049fa07f0c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
       ]}

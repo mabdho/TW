@@ -6,8 +6,8 @@ export const Edinburgh: React.FC = () => {
     <CityPage
       cityName="Edinburgh"
       country="United Kingdom"
-      title={"15 Best Things to Do in Edinburgh, United Kingdom (2025 Guide)"}
-      description={`Planning a trip to Edinburgh? Wondering about the best things to do in Edinburgh? You're in the right place! This guide is packed with must-see`}
+      title={"Best Things to Do in Edinburgh - TravelWanders"}
+      description={`Discover the best things to do in Edinburgh. Complete travel guide with attractions, activities, and insider tips for your perfect Edinburgh adventure.`}
       imageUrl={"https://plus.unsplash.com/premium_photo-1699566448247-1627bee256d0?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
       ]}

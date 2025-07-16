@@ -6,8 +6,8 @@ export const Berlin: React.FC = () => {
     <CityPage
       cityName="Berlin"
       country="Germany"
-      title={"Best Things to Do in Berlin, Germany (2025 Guide)"}
-      description={`Discover the best things to do in Berlin — top attractions, hidden gems, and food spots. Complete Berlin travel guide.`}
+      title={"Best Things to Do in Berlin - TravelWanders"}
+      description={`Discover the best things to do in Berlin. Complete travel guide with attractions, activities, and insider tips for your perfect Berlin adventure.`}
       imageUrl={"https://plus.unsplash.com/premium_photo-1697730037237-cf245340b170?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Qm9zdG9ufGVufDB8MHwwfHx8MA%3D%3D"}
       galleryImages={[
       ]}

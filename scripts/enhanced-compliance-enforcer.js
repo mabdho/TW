@@ -186,6 +186,7 @@ class EnhancedComplianceEnforcer {
       'SanFrancisco': 'san-francisco',
       'SanDiego': 'san-diego',
       'Melbourne': 'melbourne',
+      'Perth': 'perth',
       'Edinburgh': 'edinburgh',
       'London': 'london',
       'Rome': 'rome',
