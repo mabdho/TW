@@ -101,7 +101,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({ seoData, structuredData, artic
     
     // Structured Data
     if (structuredData) {
-      let structuredScript = document.getElementById('structured-data');
+      let structuredScript = document.getElementById('structured-data') as HTMLScriptElement;
       if (!structuredScript) {
         structuredScript = document.createElement('script');
         structuredScript.id = 'structured-data';
@@ -113,7 +113,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({ seoData, structuredData, artic
     
     // Breadcrumb Structured Data
     if (breadcrumbData) {
-      let breadcrumbScript = document.getElementById('breadcrumb-data');
+      let breadcrumbScript = document.getElementById('breadcrumb-data') as HTMLScriptElement;
       if (!breadcrumbScript) {
         breadcrumbScript = document.createElement('script');
         breadcrumbScript.id = 'breadcrumb-data';
@@ -125,7 +125,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({ seoData, structuredData, artic
     
     // FAQ Structured Data
     if (faqData) {
-      let faqScript = document.getElementById('faq-data');
+      let faqScript = document.getElementById('faq-data') as HTMLScriptElement;
       if (!faqScript) {
         faqScript = document.createElement('script');
         faqScript.id = 'faq-data';
@@ -137,7 +137,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({ seoData, structuredData, artic
     
     // Article Schema (matches HTML source of truth)
     if (articleSchema) {
-      let articleScript = document.getElementById('article-schema');
+      let articleScript = document.getElementById('article-schema') as HTMLScriptElement;
       if (!articleScript) {
         articleScript = document.createElement('script');
         articleScript.id = 'article-schema';

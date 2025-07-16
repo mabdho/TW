@@ -49,11 +49,8 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
     name: cityData.name,
     country: cityData.country,
     description: seoData.description,
-    imageUrl: imageUrl || cityData.imageUrl || '',
+    imageUrl: imageUrl || '',
     canonicalUrl: seoData.canonicalUrl,
-    author: cityData.author,
-    publishedDate: cityData.publishedDate,
-    lastUpdated: cityData.lastUpdated,
     attractions: cityData.attractions
   });
   
@@ -126,7 +123,7 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
         </nav>
 
         {/* City page hero section with optimized image or gradient */}
-        <div className={`city-hero-section relative text-white h-64 sm:h-80 md:h-96 lg:h-[28rem] ${!imageUrl ? getCityGradientClass(cityData.name, cityData.country) : 'bg-gray-900'}`}>
+        <div className={`city-hero-section relative text-white h-64 sm:h-80 md:h-96 lg:h-[28rem] ${!imageUrl ? getCityGradientClass(cityData.name) : 'bg-gray-900'}`}>
           {imageUrl && (
             <picture className="absolute inset-0 w-full h-full">
               <source 
@@ -187,12 +184,13 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(generateCityTravelGuideSchema(
-              cityData,
-              seoData.title,
-              seoData.description,
-              seoData.canonicalUrl
-            ))
+            __html: JSON.stringify(generateCityTravelGuideSchema({
+              name: cityData.name,
+              country: cityData.country,
+              title: seoData.title,
+              description: seoData.description,
+              attractions: cityData.attractions
+            }))
           }}
         />
         
@@ -232,7 +230,7 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
               "articleSection": "Travel Guide",
               "keywords": [`best things to do in ${cityData.name}`, `${cityData.name} travel guide`, `${cityData.name} attractions`, `visit ${cityData.name}`, `${cityData.name} ${cityData.country}`],
               "url": seoData.canonicalUrl,
-              "wordCount": cityData.attractions?.length ? cityData.attractions.length * 150 : 1500,
+
               "about": {
                 "@type": "Place",
                 "name": cityData.name,
@@ -249,8 +247,8 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(generatePlaceSchema(
-              cityData.name,
-              cityData.country,
+              cityData.name, 
+              cityData.country, 
               `Complete travel guide for ${cityData.name}, ${cityData.country}. Discover the best attractions, activities, and experiences.`
             ))
           }}
@@ -262,20 +260,17 @@ export const CityPageTemplate: React.FC<CityPageTemplateProps> = ({
             key={index}
             type="application/ld+json"
             dangerouslySetInnerHTML={{
-              __html: JSON.stringify(generateTouristAttractionSchema(attraction, cityData.name, cityData.country))
+              __html: JSON.stringify(generateTouristAttractionSchema({
+                name: attraction.name,
+                description: attraction.description,
+                city: cityData.name,
+                country: cityData.country
+              }))
             }}
           />
         ))}
         
-        {/* FAQ structured data if available */}
-        {faqs && faqs.length > 0 && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(generateFAQStructuredData(faqs, seoData.canonicalUrl))
-            }}
-          />
-        )}
+        {/* FAQ structured data is handled by BasePageTemplate/SEOHead */}
       </div>
     </BasePageTemplate>
   );

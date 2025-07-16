@@ -65,7 +65,7 @@ export default function BlogsPage() {
   const criticalImages = blogPosts
     .filter(post => post.imageUrl)
     .slice(0, 4)
-    .map(post => post.imageUrl);
+    .map(post => post.imageUrl) as string[];
 
   return (
     <CriticalResourceLoader criticalImages={criticalImages}>
@@ -127,7 +127,7 @@ export default function BlogsPage() {
                     {post.imageUrl ? (
                       <img 
                         src={post.imageUrl} 
-                        alt={post.title}
+                        alt={`${post.title} - Featured travel blog post image`}
                         className="absolute inset-0 w-full h-full object-cover"
                         loading="lazy"
                       />
@@ -177,7 +177,7 @@ export default function BlogsPage() {
                     {post.imageUrl ? (
                       <img 
                         src={post.imageUrl} 
-                        alt={post.title}
+                        alt={`${post.title} - Travel blog post image`}
                         className="absolute inset-0 w-full h-full object-cover"
                         loading="lazy"
                       />

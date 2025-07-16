@@ -253,7 +253,7 @@ function generateBlogStructuredData({
     "dateModified": modifiedDate,
     "articleSection": category,
     "keywords": tags?.join(', '),
-    "wordCount": content.split(' ').length,
+
     "timeRequired": readingTime,
     "mainEntityOfPage": {
       "@type": "WebPage",

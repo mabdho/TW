@@ -219,7 +219,7 @@ export const generateBlogSchema = (blogData: {
     "name": blogData.category
   },
   "keywords": [blogData.category, "travel", "travel tips", "destinations", "travel guide"],
-  "wordCount": blogData.content.split(' ').length,
+
   "timeRequired": blogData.readTime || "PT5M"
 });
 

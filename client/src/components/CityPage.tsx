@@ -194,7 +194,7 @@ export const CityPage: React.FC<CityPageProps> = ({
   } : null;
   
   // 🔧 SEO IMPROVEMENT: Prepare gallery images for critical loading
-  const galleryImageUrls = galleryImages?.map(img => img.url).filter(Boolean) || [];
+  const galleryImageUrls = galleryImages?.map(img => img.url).filter(Boolean) as string[] || [];
   
   // 🔧 SEO IMPROVEMENT: Generate internal linking content
   const internalLinkingContent = generateInternalLinkingContent(extractedCityName);
@@ -693,7 +693,7 @@ export const CityPage: React.FC<CityPageProps> = ({
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-5xl mx-auto">
             <SmartInternalLinks 
-              currentPageUrl={`/best-things-to-do-in-${cityName.toLowerCase().replace(/\s+/g, '-')}`}
+              currentPageUrl={`/best-things-to-do-in-${extractedCityName.toLowerCase().replace(/\s+/g, '-')}`}
               pageType="city"
               className=""
             />
