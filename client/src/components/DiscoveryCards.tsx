@@ -75,6 +75,14 @@ const ZapIcon = ({ className = "" }: { className?: string }) => (
   </svg>
 );
 
+// X icon for close functionality
+const X = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M18 6L6 18"/>
+    <path d="M6 6l12 12"/>
+  </svg>
+);
+
 // Use lightweight arrow icons for navigation
 const ChevronLeftIcon = ArrowLeftIcon;
 const ChevronRightIcon = ArrowRightIcon;
