@@ -1788,16 +1788,18 @@ export async function generateCompleteHTML(cityData: CityData): Promise<string> 
           </div>
         </section>
         
-        ${discoveryCardsHTML}
+        <section class="section discovery-section">
+          ${discoveryCardsHTML}
+        </section>
         
-        <section class="section">
+        <section class="section attractions-section">
           <h2 class="section-title">🏆 Top ${cityData.cityName} Attractions You Must Visit</h2>
           <div class="attractions-grid">
             ${topAttractionsHTML}
           </div>
         </section>
         
-        <section class="section">
+        <section class="section attractions-section">
           <h2 class="section-title">🎯 Complete Guide to ${cityData.cityName} Attractions</h2>
           <div class="attractions-grid">
             ${allAttractionsHTML}
@@ -1805,7 +1807,7 @@ export async function generateCompleteHTML(cityData: CityData): Promise<string> 
         </section>
         
         ${cityData.logistics ? `
-        <section class="section">
+        <section class="section logistics-section">
           <h2 class="section-title">📋 Plan Your Trip</h2>
           <div class="logistics-grid">
             ${cityData.logistics.gettingAround ? `
