@@ -1,0 +1,105 @@
+{
+  "cities": [
+    {
+      "fileName": "Accra",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Antalya",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Austin",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Como",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "London",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Milan",
+      "score": 60,
+      "totalChecks": 5,
+      "passedChecks": 3,
+      "issues": [
+        {
+          "type": "missing_interlinks",
+          "html": 0,
+          "severity": "high",
+          "message": "City pages should have at least 2 interlinks to other cities/content"
+        },
+        {
+          "type": "missing_related_section",
+          "severity": "high",
+          "message": "Missing \"🔗 Related Destinations\" section"
+        }
+      ],
+      "isSync": false
+    },
+    {
+      "fileName": "Oslo",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Rome",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Stockholm",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Zurich",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    }
+  ],
+  "blogs": [],
+  "staticPages": [],
+  "summary": {
+    "totalChecked": 10,
+    "synchronized": 9,
+    "needsSync": 1,
+    "missing": 4,
+    "issues": []
+  }
+}

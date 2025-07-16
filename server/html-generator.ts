@@ -454,7 +454,7 @@ export function readBlogDataFromFileSystem(): Array<{ id: string; title: string;
               const id = blogData.match(/id:\s*["']([^"']+)["']/)?.[1];
               const title = blogData.match(/title:\s*["']([^"']+)["']/)?.[1];
               const excerpt = blogData.match(/excerpt:\s*["']([^"']+)["']/)?.[1];
-              const content = blogData.match(/content:\s*`([^`]*)`/s)?.[1] || '';
+              const content = blogData.match(/content:\s*`([^`]*)`/)?.[1] || '';
               const category = blogData.match(/category:\s*["']([^"']+)["']/)?.[1];
               const imageUrl = blogData.match(/imageUrl:\s*["']([^"']*?)["']/)?.[1] || '';
               const featured = blogData.match(/featured:\s*(true|false)/)?.[1] === 'true';

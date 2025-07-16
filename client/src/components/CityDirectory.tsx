@@ -16,7 +16,8 @@ const cities = [
   { "name": "Accra", "country": "Ghana", "path": "/best-things-to-do-in-accra", "continent": "Africa", "imageUrl": "https://images.unsplash.com/photo-1589104602532-9cee07f8f62c?q=80&w=1328&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { "name": "Oslo", "country": "Norway", "path": "/best-things-to-do-in-oslo", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1712009509758-dff926710413?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { "name": "Stockholm", "country": "Sweden", "path": "/best-things-to-do-in-stockholm", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1509356843151-3e7d96241e11?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { "name": "Rome", "country": "Italy", "path": "/best-things-to-do-in-rome", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1529154036614-a60975f5c760?q=80&w=1752&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
+  { "name": "Rome", "country": "Italy", "path": "/best-things-to-do-in-rome", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1529154036614-a60975f5c760?q=80&w=1752&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { "name": "Milan", "country": "Italy", "path": "/best-things-to-do-in-milan", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1610016302534-6f67f1c968d8?q=80&w=1375&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
 ];
 
 const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America", "South America"];

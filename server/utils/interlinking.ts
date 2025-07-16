@@ -170,11 +170,11 @@ export class EnterpriseInterlinking {
       const country = countryMatch ? countryMatch[1] : '';
       
       // Extract highlights
-      const highlightsMatch = content.match(/highlights=\{(\[[^\]]+\])\}/s);
+      const highlightsMatch = content.match(/highlights=\{(\[[^\]]+\])\}/);
       const highlights = highlightsMatch ? highlightsMatch[1] : '';
       
       // Extract attractions
-      const attractionsMatch = content.match(/attractions=\{(\[[^\]]+\])\}/s);
+      const attractionsMatch = content.match(/attractions=\{(\[[^\]]+\])\}/);
       const attractions = attractionsMatch ? attractionsMatch[1] : '';
       
       return {
