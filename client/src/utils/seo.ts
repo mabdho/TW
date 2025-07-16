@@ -71,12 +71,12 @@ export function createCanonical(type: 'city' | 'blog', slug: string, baseUrl: st
 }
 
 /**
- * Generate optimized meta description targeting "Best things to do in [city]"
+ * Generate optimized meta description targeting "Things to do in [city]"
  * Strictly limited to 160 characters for optimal SERP display
  */
 export function generateMetaDescription(cityData: CityData): string {
   const { name, country, attractions = [] } = cityData;
-  const mainKeyword = `Best things to do in ${name}`;
+  const mainKeyword = `Things to do in ${name}`;
   
   // Create concise description under 160 characters
   let description = `${mainKeyword}: Visit top attractions, hidden gems & local experiences in ${name}, ${country}. Complete travel guide.`;
@@ -96,11 +96,11 @@ export function generateMetaDescription(cityData: CityData): string {
 }
 
 /**
- * Generate relevant keywords with primary focus on "best things to do in [city]"
+ * Generate relevant keywords with primary focus on "things to do in [city]"
  */
 export function generateKeywords(cityData: CityData): string {
   const { name, country, attractions = [] } = cityData;
-  const mainKeyword = `best things to do in ${name}`;
+  const mainKeyword = `things to do in ${name}`;
   
   const keywords = [
     mainKeyword,
@@ -364,7 +364,7 @@ export function generateBlogStructuredData(blogData: BlogData, seoData: SEOData)
  */
 export function generateCitySEOData(cityData: CityData, baseUrl?: string): SEOData {
   const { name, country, content } = cityData;
-  const mainKeyword = `best things to do in ${name}`;
+  const mainKeyword = `things to do in ${name}`;
   const slug = generateSlug(name);
   
   const seoData: SEOData = {

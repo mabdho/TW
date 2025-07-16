@@ -100,7 +100,7 @@ export function generateCityMetaTags(config: SEOConfig): MetaTag[] {
       { property: 'og:image', content: imageUrl },
       { property: 'og:image:width', content: '1200' },
       { property: 'og:image:height', content: '630' },
-      { property: 'og:image:alt', content: `Best things to do in ${cityName} - travel guide hero image` },
+      { property: 'og:image:alt', content: `Things to do in ${cityName} - travel guide hero image` },
       { name: 'twitter:image', content: imageUrl },
       { name: 'twitter:image:alt', content: `${cityName} travel guide and attractions` }
     );

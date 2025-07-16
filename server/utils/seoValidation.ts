@@ -475,7 +475,7 @@ function generateSuggestions(errors: ValidationError[], warnings: ValidationWarn
   if (errors.some(e => e.field === 'content')) {
     if (contentType === 'city') {
       suggestions.push('City pages should have at least 2000 words covering attractions, activities, and travel tips');
-      suggestions.push('Include main keyword "best things to do in [city]" in the first paragraph');
+      suggestions.push('Include main keyword "things to do in [city]" in the first paragraph');
     } else {
       suggestions.push('Blog posts should have at least 800 words of valuable content');
     }

@@ -1,7 +1,7 @@
 /**
  * City Page Template for TravelWanders
  * Extends BasePageTemplate with city-specific SEO optimization
- * Focuses on "Best things to do in [city]" keyword targeting
+ * Focuses on "Things to do in [city]" keyword targeting
  */
 
 import React from 'react';

@@ -1627,8 +1627,8 @@ MANDATORY REQUIREMENTS:
 
 Your TSX generation must create content that will hydrate perfectly with the existing HTML.` : `Create a comprehensive travel guide with the title: "Best Things to Do in ${city}, ${country} (2025 Guide)"`}
 
-The primary keyword is: "Best Things to Do in ${city}"
-The secondary keyword is: "Things to do in ${city}"
+The primary keyword is: "Things to do in ${city}"
+The secondary keyword is: "Best things to do in ${city}"
 
 Use both naturally throughout the content. Prioritize placing the primary keyword in the title, description, and within the first 1–2 sentences of content. Use the secondary keyword 4–5 times naturally in different sections.
 
@@ -1675,9 +1675,9 @@ Generate content with this EXACT structure in valid JSON format:
 
 {
   "metaTitle": "${htmlSourceData ? `"${htmlSourceData.title}"` : `"Best Things to Do in ${city}, ${country} (2025 Guide)"`}",
-  "metaDescription": "${htmlSourceData ? `"${htmlSourceData.description}"` : `"Discover the best things to do in ${city} — top attractions, hidden gems, and food spots. Complete ${city} travel guide. (MUST naturally include 'best things to do in ${city}' AND 'things to do in ${city}', MAXIMUM 155 characters - count carefully and ensure it never exceeds this limit)"`}",
+  "metaDescription": "${htmlSourceData ? `"${htmlSourceData.description}"` : `"Discover things to do in ${city} — top attractions, hidden gems, and food spots. Complete ${city} travel guide. (MUST naturally include 'things to do in ${city}' AND 'best things to do in ${city}', MAXIMUM 155 characters - count carefully and ensure it never exceeds this limit)"`}",
   "slug": "things-to-do-in-${city.toLowerCase().replace(/\s+/g, '-')}",
-  "description": "${htmlSourceData ? `"A meta-style introduction (150–200 words) that aligns with the HTML description: '${htmlSourceData.description}'. Write in a human, engaging tone with varied sentence structure and subtle imperfections that feel authentic."` : `"A meta-style introduction (150–200 words) that uses the exact phrase 'Best Things to Do in ${city}' and 'Things to do in ${city}' naturally in the first 1–2 sentences. Write in a human, engaging tone with varied sentence structure and subtle imperfections that feel authentic."`}",
+  "description": "${htmlSourceData ? `"A meta-style introduction (150–200 words) that aligns with the HTML description: '${htmlSourceData.description}'. Write in a human, engaging tone with varied sentence structure and subtle imperfections that feel authentic."` : `"A meta-style introduction (150–200 words) that uses the exact phrase 'Things to do in ${city}' and 'Best things to do in ${city}' naturally in the first 1–2 sentences. Write in a human, engaging tone with varied sentence structure and subtle imperfections that feel authentic."`}",
   "highlights": ["5–6 one-line must-see places"],
   "attractions": [
     {
@@ -1711,7 +1711,7 @@ Generate content with this EXACT structure in valid JSON format:
   },
   "faqs": [
     {
-      "question": "What are the best things to do in ${city}?",
+      "question": "What are some things to do in ${city}?",
       "answer": "Comprehensive answer mentioning top attractions"
     },
     {

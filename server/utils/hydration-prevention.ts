@@ -453,7 +453,7 @@ export class HydrationPreventionSystem {
     const h1 = `Best Things to Do in ${cityName}, ${country} (2025 Guide)`;
     
     // Generate description with same truncation logic as server
-    let metaDescription = `Discover the best things to do in ${cityName} — top attractions, hidden gems, and food spots. Complete ${cityName} travel guide.`;
+    let metaDescription = `Discover things to do in ${cityName} — top attractions, hidden gems, and food spots. Complete ${cityName} travel guide.`;
     
     if (metaDescription.length > 160) {
       metaDescription = `Discover amazing experiences in ${cityName}, ${country}. Complete travel guide with insider tips and must-visit attractions.`;
