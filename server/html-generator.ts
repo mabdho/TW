@@ -1457,6 +1457,9 @@ import { interlinkingSystem } from './utils/interlinking';
 
 function generateInternalLinksHTML(cityData: any): string {
   try {
+    // Refresh the interlinking system to include any newly created pages
+    interlinkingSystem.refresh();
+    
     // Generate contextual internal links for the city page
     const pageUrl = `/best-things-to-do-in-${cityData.slug || cityData.cityName.toLowerCase()}`;
     console.log(`🔗 Generating internal links for: ${pageUrl}`);

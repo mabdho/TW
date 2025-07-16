@@ -1,0 +1,85 @@
+{
+  "cities": [
+    {
+      "fileName": "Accra",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Antalya",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Austin",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Como",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "London",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Oslo",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Rome",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Stockholm",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    },
+    {
+      "fileName": "Zurich",
+      "score": 100,
+      "totalChecks": 5,
+      "passedChecks": 5,
+      "issues": [],
+      "isSync": true
+    }
+  ],
+  "blogs": [],
+  "staticPages": [],
+  "summary": {
+    "totalChecked": 9,
+    "synchronized": 9,
+    "needsSync": 0,
+    "missing": 4,
+    "issues": []
+  }
+}

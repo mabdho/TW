@@ -2074,6 +2074,12 @@ Double-check all brackets, quotes, and commas are properly matched.`;
 
       console.log(`Generated city page: ${cityFileName}.tsx`);
 
+      // CRITICAL: Refresh the interlinking system after TSX file creation
+      // This ensures the new city will be included in internal links for all future HTML generation
+      console.log('🔗 Refreshing interlinking system to include new city...');
+      interlinkingSystem.refresh();
+      console.log('✅ Interlinking system refreshed successfully');
+
       // Update DynamicCityRoute.tsx with new city mapping
       const dynamicRoutePath = path.join(process.cwd(), 'client', 'src', 'components', 'DynamicCityRoute.tsx');
       const dynamicContent = await fs.readFile(dynamicRoutePath, 'utf-8');
