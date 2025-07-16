@@ -48,7 +48,7 @@ export const Hero = () => {
     }
   };
   return (
-    <section className="relative bg-white min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <section className="relative bg-white min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 bg-gradient-to-br from-orange-50/30 via-white to-green-50/30" />
       
