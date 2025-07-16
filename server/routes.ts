@@ -2414,10 +2414,10 @@ Double-check all brackets, quotes, and commas are properly matched.`;
       let updatedContent = indexContent;
       if (!updatedContent.includes(importStatement)) {
         // Add import after existing imports - look for the end of the import section
-        const importSectionEnd = updatedContent.search(/\n\s*\/\/ This file will be automatically updated/);
+        const importSectionEnd = updatedContent.search(/\n\s*\/\/ Blog imports will be automatically added/);
         if (importSectionEnd !== -1) {
           // Insert before the comment line
-          updatedContent = updatedContent.slice(0, importSectionEnd) + importStatement + '\n' + updatedContent.slice(importSectionEnd);
+          updatedContent = updatedContent.slice(0, importSectionEnd) + '\n' + importStatement + updatedContent.slice(importSectionEnd);
         } else {
           // Fallback: add after last import statement
           const lastImportIndex = updatedContent.lastIndexOf("import");
