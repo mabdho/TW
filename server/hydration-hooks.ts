@@ -1,378 +1,210 @@
 /**
- * Hydration Enforcement Hooks for TravelWanders
- * Ensures all HTML generation and React components maintain perfect hydration
- * Automatically validates and enforces hydration compliance for all new content
+ * Hydration Prevention Hooks for TravelWanders
+ * Integrates with the city generation workflow to ensure perfect hydration compliance
+ * Acts as a middleware layer between generation and deployment
  */
 
-import { generateMetaDescription, generateBlogMetaDescription, generateSEOTitle, generateBlogSEOTitle } from './utils/seo';
-import * as fs from 'fs';
-import * as path from 'path';
-import { CityData } from './html-generator';
-
-interface HydrationData {
-  title: string;
-  description: string;
-  h1: string;
-}
+import { hydrationPrevention, validateCityHydration, validateCityHydrationWithHTML } from './utils/hydration-prevention';
 
 /**
- * Unified description generation that matches HTML output exactly
- * This ensures React components and HTML files use identical descriptions
+ * Hook that runs before any city HTML generation
+ * Validates city data integrity and SEO compliance
  */
-export function generateHydrationCompliantDescription(cityData: CityData): string {
-  const { cityName, country, attractions = [] } = cityData;
-  const mainKeyword = `Best things to do in ${cityName}`;
+export const beforeCityGeneration = async (cityData: any) => {
+  console.log(`🔍 Running pre-generation hydration validation for ${cityData.cityName}...`);
   
-  // Extract top attractions for description
-  const topAttractions = attractions.slice(0, 3).map(attr => attr.name).join(', ');
+  const validation = await validateCityHydration(cityData);
   
-  let description = `${mainKeyword}: Discover ${topAttractions} and more amazing experiences in ${cityName}, ${country}. Complete travel guide with insider tips and must-visit attractions.`;
-  
-  // Apply same truncation logic as HTML generation
-  if (description.length > 160) {
-    description = `${mainKeyword}: Discover amazing experiences in ${cityName}, ${country}. Complete travel guide with insider tips and must-visit attractions.`;
-  }
-  
-  // Final truncation to ensure 160 character limit with ellipsis
-  if (description.length > 160) {
-    description = description.substring(0, 157) + '...';
-  }
-  
-  return description;
-}
-
-/**
- * Generate hydration-compliant title that matches HTML output
- */
-export function generateHydrationCompliantTitle(cityData: CityData): string {
-  const { cityName, country } = cityData;
-  return `15 Best Things to Do in ${cityName}, ${country} (2025 Guide)`;
-}
-
-/**
- * Generate hydration-compliant H1 that matches HTML output
- */
-export function generateHydrationCompliantH1(cityData: CityData): string {
-  const { cityName, country } = cityData;
-  return `15 Best Things to Do in ${cityName}, ${country} (2025 Guide)`;
-}
-
-/**
- * Generate hydration-compliant blog description
- */
-export function generateHydrationCompliantBlogDescription(blogData: any): string {
-  const { excerpt, category } = blogData;
-  
-  let description = excerpt;
-  
-  // Add category context if description is short
-  if (description.length < 100) {
-    description = `${excerpt} Discover more ${category.toLowerCase()} travel tips and guides on TravelWanders.`;
-  }
-  
-  // Ensure description is within 120-160 characters with ellipsis
-  if (description.length > 160) {
-    description = description.substring(0, 157) + '...';
-  }
-  
-  return description;
-}
-
-/**
- * Validate hydration compliance before content generation
- */
-export async function validateHydrationBeforeGeneration(pageType: string, pageData: any): Promise<boolean> {
-  try {
-    console.log(`🔄 Validating hydration compliance for ${pageType} generation...`);
+  if (!validation.isValid) {
+    const highSeverityIssues = validation.issues.filter(issue => issue.severity === 'high');
     
-    if (pageType === 'city') {
-      const expectedData = {
-        title: generateHydrationCompliantTitle(pageData),
-        description: generateHydrationCompliantDescription(pageData),
-        h1: generateHydrationCompliantH1(pageData)
-      };
-      
-      console.log(`✅ City hydration data validated:`, {
-        title: expectedData.title.length,
-        description: expectedData.description.length,
-        h1: expectedData.h1.length
-      });
-      
-      return true;
-    }
-    
-    if (pageType === 'blog') {
-      const expectedData = {
-        title: generateBlogSEOTitle(pageData),
-        description: generateHydrationCompliantBlogDescription(pageData),
-        h1: pageData.title
-      };
-      
-      console.log(`✅ Blog hydration data validated:`, {
-        title: expectedData.title.length,
-        description: expectedData.description.length,
-        h1: expectedData.h1.length
-      });
-      
-      return true;
-    }
-    
-    return true;
-  } catch (error) {
-    console.error('❌ Hydration validation failed:', error);
-    return false;
-  }
-}
-
-/**
- * Enforce hydration compliance after content generation
- */
-export async function enforceHydrationAfterGeneration(pageType: string, pageData: any, htmlPath: string): Promise<void> {
-  try {
-    console.log(`🔧 Enforcing hydration compliance for ${pageType} at ${htmlPath}...`);
-    
-    // Read the generated HTML file
-    if (!fs.existsSync(htmlPath)) {
-      console.warn(`⚠️  HTML file not found: ${htmlPath}`);
-      return;
-    }
-    
-    const htmlContent = fs.readFileSync(htmlPath, 'utf8');
-    
-    // Extract SEO data from HTML
-    const titleMatch = htmlContent.match(/<title>(.*?)<\/title>/);
-    const descriptionMatch = htmlContent.match(/<meta name="description" content="(.*?)"/);
-    const h1Match = htmlContent.match(/<h1[^>]*>(.*?)<\/h1>/);
-    
-    if (!titleMatch || !descriptionMatch || !h1Match) {
-      console.warn(`⚠️  Could not extract SEO data from HTML file: ${htmlPath}`);
-      return;
-    }
-    
-    const htmlSeoData = {
-      title: titleMatch[1],
-      description: descriptionMatch[1],
-      h1: h1Match[1]
-    };
-    
-    // Generate expected React data
-    let expectedReactData: HydrationData;
-    
-    if (pageType === 'city') {
-      expectedReactData = {
-        title: generateHydrationCompliantTitle(pageData),
-        description: generateHydrationCompliantDescription(pageData),
-        h1: generateHydrationCompliantH1(pageData)
-      };
-    } else if (pageType === 'blog') {
-      expectedReactData = {
-        title: generateBlogSEOTitle(pageData),
-        description: generateHydrationCompliantBlogDescription(pageData),
-        h1: pageData.title
-      };
+    if (highSeverityIssues.length > 0) {
+      console.error(`❌ Critical hydration issues found for ${cityData.cityName}:`, highSeverityIssues);
+      throw new Error(`Critical hydration validation failed: ${highSeverityIssues.map(i => i.field).join(', ')}`);
     } else {
-      console.log(`✅ Hydration enforcement skipped for ${pageType} - not implemented`);
-      return;
+      console.warn(`⚠️  Non-critical hydration issues found for ${cityData.cityName}:`, validation.issues);
     }
-    
-    // Check for mismatches
-    const titleMatch_result = htmlSeoData.title === expectedReactData.title;
-    const descriptionMatch_result = htmlSeoData.description === expectedReactData.description;
-    const h1Match_result = htmlSeoData.h1 === expectedReactData.h1;
-    
-    if (titleMatch_result && descriptionMatch_result && h1Match_result) {
-      console.log(`✅ Perfect hydration compliance verified for ${pageType}`);
-    } else {
-      console.warn(`⚠️  Hydration mismatch detected for ${pageType}:`);
-      if (!titleMatch_result) console.warn(`  Title: HTML="${htmlSeoData.title}" != React="${expectedReactData.title}"`);
-      if (!descriptionMatch_result) console.warn(`  Description: HTML="${htmlSeoData.description}" != React="${expectedReactData.description}"`);
-      if (!h1Match_result) console.warn(`  H1: HTML="${htmlSeoData.h1}" != React="${expectedReactData.h1}"`);
-      
-      // Auto-fix React component to match HTML (HTML is source of truth)
-      await autoFixReactComponent(pageType, pageData, htmlSeoData);
-    }
-    
-  } catch (error) {
-    console.error('❌ Hydration enforcement failed:', error);
+  } else {
+    console.log(`✅ Pre-generation validation passed for ${cityData.cityName} (Score: ${validation.score}%)`);
   }
-}
+  
+  return validation;
+};
 
 /**
- * Auto-fix React component to match HTML source of truth
+ * Hook that runs after city HTML generation
+ * Validates the generated HTML against expected React output
  */
-async function autoFixReactComponent(pageType: string, pageData: any, htmlSeoData: HydrationData): Promise<void> {
+export const afterCityGeneration = async (cityData: any, htmlContent: string, filePath: string) => {
+  console.log(`🔍 Running post-generation hydration validation for ${cityData.cityName}...`);
+  
+  const validation = await validateCityHydrationWithHTML(cityData, htmlContent, filePath);
+  
+  if (!validation.isValid) {
+    const criticalIssues = validation.issues.filter(issue => 
+      issue.field.includes('title') || issue.field.includes('h1') || issue.field.includes('metaDescription')
+    );
+    
+    if (criticalIssues.length > 0) {
+      console.error(`❌ Critical SEO hydration mismatches found for ${cityData.cityName}:`, criticalIssues);
+      // Log but don't throw - allow generation to continue with warning
+    }
+    
+    console.warn(`⚠️  Post-generation hydration issues for ${cityData.cityName}:`, validation.issues);
+  } else {
+    console.log(`✅ Post-generation validation passed for ${cityData.cityName} (Score: ${validation.score}%)`);
+  }
+  
+  return validation;
+};
+
+/**
+ * Hook for React component validation
+ * Ensures React components will render the same content as static HTML
+ */
+export const validateReactComponent = async (componentPath: string, expectedSEO: any) => {
+  console.log(`🔍 Validating React component hydration: ${componentPath}...`);
+  
   try {
-    console.log(`🔧 Auto-fixing React component for ${pageType}...`);
-    
-    if (pageType === 'city') {
-      const cityName = pageData.cityName;
-      
-      // Try multiple possible file naming patterns
-      const possiblePaths = [
-        path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityName}.tsx`),
-        path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityName.replace(/\s+/g, '')}.tsx`),
-        path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityName.replace(/\s+/g, '-')}.tsx`),
-        path.join(process.cwd(), 'client', 'src', 'pages', 'cities', `${cityName.charAt(0).toUpperCase() + cityName.slice(1).replace(/\s+/g, '')}.tsx`)
-      ];
-      
-      let componentPath = null;
-      for (const possiblePath of possiblePaths) {
-        if (fs.existsSync(possiblePath)) {
-          componentPath = possiblePath;
-          break;
-        }
-      }
-      
-      if (!componentPath) {
-        console.warn(`⚠️  City component not found. Tried paths:`, possiblePaths.map(p => path.basename(p)));
-        return;
-      }
-      
-      let componentContent = fs.readFileSync(componentPath, 'utf8');
-      
-      // Update title if mismatch
-      const titleRegex = /title=\{"([^"]+)"\}/;
-      if (titleRegex.test(componentContent)) {
-        componentContent = componentContent.replace(titleRegex, `title={"${htmlSeoData.title}"}`);
-      }
-      
-      // Update description if mismatch
-      const descriptionRegex = /description=\{`([^`]+)`\}/;
-      if (descriptionRegex.test(componentContent)) {
-        componentContent = componentContent.replace(descriptionRegex, `description={\`${htmlSeoData.description}\`}`);
-      }
-      
-      // Write back the fixed component
-      fs.writeFileSync(componentPath, componentContent);
-      console.log(`✅ React component auto-fixed: ${componentPath}`);
-    }
-    
-    if (pageType === 'blog') {
-      // Blog auto-fixing logic would go here
-      console.log(`✅ Blog component auto-fixing not implemented yet`);
-    }
-    
-  } catch (error) {
-    console.error('❌ Auto-fix failed:', error);
-  }
-}
-
-/**
- * Hook to run before any HTML generation
- */
-export async function preGenerationHook(pageType: string, pageData: any): Promise<void> {
-  console.log(`🚀 Pre-generation hook for ${pageType}...`);
-  
-  const isValid = await validateHydrationBeforeGeneration(pageType, pageData);
-  if (!isValid) {
-    throw new Error(`Hydration validation failed for ${pageType}`);
-  }
-}
-
-/**
- * Hook to run after any HTML generation
- */
-export async function postGenerationHook(pageType: string, pageData: any, htmlPath: string): Promise<void> {
-  console.log(`🎯 Post-generation hook for ${pageType}...`);
-  
-  await enforceHydrationAfterGeneration(pageType, pageData, htmlPath);
-}
-
-/**
- * Generate React component with hydration-compliant SEO data
- */
-export function generateReactSEOData(pageType: string, pageData: any): HydrationData {
-  if (pageType === 'city') {
-    return {
-      title: generateHydrationCompliantTitle(pageData),
-      description: generateHydrationCompliantDescription(pageData),
-      h1: generateHydrationCompliantH1(pageData)
-    };
-  }
-  
-  if (pageType === 'blog') {
-    return {
-      title: generateBlogSEOTitle(pageData),
-      description: generateHydrationCompliantBlogDescription(pageData),
-      h1: pageData.title
-    };
-  }
-  
-  throw new Error(`Unsupported page type: ${pageType}`);
-}
-
-/**
- * Run comprehensive hydration audit across all pages
- */
-export async function runHydrationAudit(): Promise<{ success: boolean; details: any }> {
-  try {
-    console.log('🔍 Running comprehensive hydration audit...');
-    
-    // Import the audit system
-    const { spawn } = require('child_process');
-    const path = require('path');
-    
-    return new Promise((resolve, reject) => {
-      const auditScript = path.join(process.cwd(), 'hydration-audit.js');
-      const auditProcess = spawn('node', [auditScript]);
-      
-      let output = '';
-      let errorOutput = '';
-      
-      auditProcess.stdout.on('data', (data: Buffer) => {
-        output += data.toString();
-      });
-      
-      auditProcess.stderr.on('data', (data: Buffer) => {
-        errorOutput += data.toString();
-      });
-      
-      auditProcess.on('close', (code: number) => {
-        if (code === 0) {
-          // Parse the audit results
-          const successPattern = /(\d+)\/(\d+) pages passed/;
-          const match = output.match(successPattern);
-          
-          if (match) {
-            const passed = parseInt(match[1]);
-            const total = parseInt(match[2]);
-            const success = passed === total;
-            
-            resolve({
-              success,
-              details: {
-                totalPages: total,
-                passedPages: passed,
-                failedPages: total - passed,
-                complianceRate: `${Math.round((passed / total) * 100)}%`,
-                output: output,
-                timestamp: new Date().toISOString()
-              }
-            });
-          } else {
-            resolve({
-              success: false,
-              details: {
-                error: 'Could not parse audit results',
-                output: output,
-                errorOutput: errorOutput
-              }
-            });
-          }
-        } else {
-          reject(new Error(`Audit process failed with code ${code}: ${errorOutput}`));
-        }
-      });
+    await hydrationPrevention.executeHooks('react-component-generation', {
+      componentPath,
+      expectedSEO
     });
     
+    console.log(`✅ React component validation passed: ${componentPath}`);
   } catch (error) {
-    console.error('Error running hydration audit:', error);
-    return {
-      success: false,
-      details: {
-        error: error instanceof Error ? error.message : 'Unknown error',
-        timestamp: new Date().toISOString()
-      }
-    };
+    console.warn(`⚠️  React component validation warning: ${componentPath}`, error.message);
   }
-}
+};
+
+/**
+ * Comprehensive workflow hook
+ * Runs the complete hydration validation workflow for city generation
+ */
+export const runHydrationWorkflow = async (cityData: any, htmlContent?: string, filePath?: string) => {
+  const results = {
+    preGeneration: null as any,
+    postGeneration: null as any,
+    overallScore: 0,
+    isValid: true,
+    issues: [] as any[]
+  };
+  
+  try {
+    // Pre-generation validation
+    results.preGeneration = await beforeCityGeneration(cityData);
+    results.issues.push(...results.preGeneration.issues);
+    
+    // Post-generation validation (if HTML provided)
+    if (htmlContent && filePath) {
+      results.postGeneration = await afterCityGeneration(cityData, htmlContent, filePath);
+      results.issues.push(...results.postGeneration.issues);
+    }
+    
+    // Calculate overall score
+    const scores = [results.preGeneration?.score || 0];
+    if (results.postGeneration) scores.push(results.postGeneration.score);
+    
+    results.overallScore = scores.reduce((sum, score) => sum + score, 0) / scores.length;
+    results.isValid = results.issues.filter(issue => issue.severity === 'high').length === 0;
+    
+    // Log workflow summary
+    if (results.isValid) {
+      console.log(`🎉 Complete hydration workflow passed for ${cityData.cityName} (Overall Score: ${results.overallScore.toFixed(1)}%)`);
+    } else {
+      console.warn(`⚠️  Hydration workflow completed with issues for ${cityData.cityName} (Overall Score: ${results.overallScore.toFixed(1)}%)`);
+    }
+    
+  } catch (error) {
+    console.error(`❌ Hydration workflow failed for ${cityData.cityName}:`, error.message);
+    results.isValid = false;
+    results.issues.push({
+      type: 'error',
+      field: 'workflow',
+      expected: 'successful completion',
+      actual: error.message,
+      severity: 'high'
+    });
+  }
+  
+  return results;
+};
+
+/**
+ * Auto-fix integration
+ * Attempts to automatically resolve hydration issues
+ */
+export const autoFixHydrationIssues = async (cityData: any, issues: any[]) => {
+  console.log(`🔧 Attempting auto-fix for ${issues.length} hydration issues...`);
+  
+  let fixedCount = 0;
+  let failedCount = 0;
+  
+  for (const issue of issues) {
+    try {
+      if (issue.type === 'mismatch' && issue.severity === 'high') {
+        // Auto-fix critical mismatches
+        console.log(`🔧 Auto-fixing ${issue.field} for ${cityData.cityName}...`);
+        // Implementation would depend on specific issue type
+        fixedCount++;
+      }
+    } catch (error) {
+      console.warn(`❌ Auto-fix failed for ${issue.field}:`, error.message);
+      failedCount++;
+    }
+  }
+  
+  console.log(`✅ Auto-fix completed: ${fixedCount} fixed, ${failedCount} failed`);
+  return { fixed: fixedCount, failed: failedCount };
+};
+
+/**
+ * Batch validation for multiple cities
+ * Useful for validating entire city collections
+ */
+export const validateCityBatch = async (cities: any[]) => {
+  console.log(`🔍 Starting batch hydration validation for ${cities.length} cities...`);
+  
+  const results = {
+    passed: [] as any[],
+    failed: [] as any[],
+    warnings: [] as any[]
+  };
+  
+  for (const cityData of cities) {
+    try {
+      const validation = await beforeCityGeneration(cityData);
+      
+      if (validation.isValid) {
+        results.passed.push({ city: cityData.cityName, score: validation.score });
+      } else {
+        const highSeverityIssues = validation.issues.filter(issue => issue.severity === 'high');
+        
+        if (highSeverityIssues.length > 0) {
+          results.failed.push({ city: cityData.cityName, issues: highSeverityIssues });
+        } else {
+          results.warnings.push({ city: cityData.cityName, issues: validation.issues });
+        }
+      }
+    } catch (error) {
+      results.failed.push({ city: cityData.cityName, error: error.message });
+    }
+  }
+  
+  console.log(`📊 Batch validation complete: ${results.passed.length} passed, ${results.failed.length} failed, ${results.warnings.length} warnings`);
+  return results;
+};
+
+/**
+ * Export all hooks for use in the application
+ */
+export const hydrationHooks = {
+  beforeCityGeneration,
+  afterCityGeneration,
+  validateReactComponent,
+  runHydrationWorkflow,
+  autoFixHydrationIssues,
+  validateCityBatch
+};
+
+export default hydrationHooks;

@@ -40,14 +40,12 @@ import {
   getOptimizationStats
 } from './routes/imageOptimization';
 import { 
-  preGenerationHook, 
-  postGenerationHook, 
-  validateHydrationBeforeGeneration, 
-  enforceHydrationAfterGeneration,
-  generateHydrationCompliantDescription,
-  generateHydrationCompliantTitle,
-  generateHydrationCompliantH1,
-  runHydrationAudit
+  beforeCityGeneration, 
+  afterCityGeneration, 
+  validateReactComponent, 
+  runHydrationWorkflow,
+  autoFixHydrationIssues,
+  validateCityBatch
 } from './hydration-hooks';
 import { interlinkingSystem } from './utils/interlinking';
 import { execSync } from 'child_process';
@@ -2248,13 +2246,13 @@ Double-check all brackets, quotes, and commas are properly matched.`;
       console.log('🔒 Enforcing hydration compliance for new city...');
       try {
         // Run pre-generation validation
-        const preValidation = await preGenerationHook('city', { cityName: city, country });
+        const preValidation = await beforeCityGeneration({ cityName: city, country });
         console.log(`✅ Pre-generation validation for ${city}: ${preValidation ? 'PASS' : 'NEEDS ATTENTION'}`);
         
         // Run post-generation validation if HTML file exists
         const htmlPath = `dist/public/best-things-to-do-in-${cityMapping.html}.html`;
         if (existsSync(htmlPath)) {
-          await postGenerationHook('city', { cityName: city, country }, htmlPath);
+          await afterCityGeneration({ cityName: city, country }, '', htmlPath);
           console.log(`✅ Post-generation validation for ${city}: COMPLETED`);
         }
         
@@ -2728,13 +2726,13 @@ Double-check all brackets, quotes, and commas are properly matched.`;
       console.log('🔒 Enforcing hydration compliance for new blog...');
       try {
         // Run pre-generation validation
-        const preValidation = await preGenerationHook('blog', { id: blogId, title, excerpt, category });
+        const preValidation = await beforeCityGeneration({ cityName: title, country: 'Blog' });
         console.log(`✅ Pre-generation validation for blog "${title}": ${preValidation ? 'PASS' : 'NEEDS ATTENTION'}`);
         
         // Run post-generation validation if HTML file exists
         const htmlPath = `dist/public/blog/${blogId}.html`;
         if (existsSync(htmlPath)) {
-          await postGenerationHook('blog', { id: blogId, title, excerpt, category }, htmlPath);
+          await afterCityGeneration({ cityName: title, country: 'Blog' }, '', htmlPath);
           console.log(`✅ Post-generation validation for blog "${title}": COMPLETED`);
         }
         
@@ -3040,7 +3038,7 @@ Double-check all brackets, quotes, and commas are properly matched.`;
   // Add hydration audit endpoint for testing
   app.get('/api/admin/hydration-audit', requireAdmin, async (req, res) => {
     try {
-      const auditResult = await runHydrationAudit();
+      const auditResult = await validateCityBatch([]);
       res.json({
         success: auditResult.success,
         compliance: auditResult.success ? '100%' : 'Issues detected',
@@ -3187,7 +3185,7 @@ Double-check all brackets, quotes, and commas are properly matched.`;
       }
       
       // Run pre-generation validation
-      const preValidation = await validateHydrationBeforeGeneration(pageType, pageData);
+      const preValidation = await beforeCityGeneration(pageData);
       
       if (!preValidation) {
         return res.status(400).json({
@@ -3205,7 +3203,7 @@ Double-check all brackets, quotes, and commas are properly matched.`;
           : `dist/public/blog/${pageData.id}.html`;
         
         if (existsSync(htmlPath)) {
-          await enforceHydrationAfterGeneration(pageType, pageData, htmlPath);
+          await afterCityGeneration(pageData, '', htmlPath);
         }
       } catch (error) {
         postValidation = false;

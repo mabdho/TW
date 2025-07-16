@@ -2,6 +2,7 @@ import * as fs from 'fs/promises';
 import { readFileSync, existsSync } from 'fs';
 import * as path from 'path';
 import { execSync } from 'child_process';
+import { validateCityHydrationWithHTML } from './utils/hydration-prevention';
 
 // Geographic coordinates for major cities
 const CITY_COORDINATES = {
@@ -1391,7 +1392,22 @@ function generateDiscoveryTagsHTML(discoveryTags: any): string {
 // Internal links removed per user request to avoid SEO penalties
 // This functionality is now disabled to maintain compliance
 
-export function generateCompleteHTML(cityData: CityData): string {
+export async function generateCompleteHTML(cityData: CityData): Promise<string> {
+  // Pre-generation hydration validation
+  try {
+    const { validateCityHydration } = await import('./utils/hydration-prevention');
+    const preValidation = await validateCityHydration(cityData);
+    
+    if (!preValidation.isValid) {
+      console.warn(`⚠️  Pre-generation hydration validation failed for ${cityData.cityName}:`, preValidation.issues);
+      // Continue with generation but log issues
+    } else {
+      console.log(`✅ Pre-generation hydration validation passed for ${cityData.cityName}`);
+    }
+  } catch (error) {
+    console.warn('Hydration validation system not available:', error.message);
+  }
+
   const seoTitle = cityData.title || `Best Things to Do in ${cityData.cityName}, ${cityData.country}`;
   
   // Fix meta description - ensure under 155 characters without truncation ellipsis
@@ -2174,6 +2190,118 @@ export function generateCompleteHTML(cityData: CityData): string {
     </script>
 </body>
 </html>`;
+
+  // Post-generation hydration validation  
+  const generatedHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${seoTitle}</title>
+    <meta name="description" content="${seoDescription}">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="${cityData.author || 'TravelWanders'}">
+    <meta name="language" content="en">
+    <meta name="geo.region" content="${cityData.country}">
+    <meta name="geo.placename" content="${cityData.cityName}">
+    <meta name="geo.position" content="${getCityCoordinates(cityData.cityName).lat};${getCityCoordinates(cityData.cityName).lng}">
+    <meta name="ICBM" content="${getCityCoordinates(cityData.cityName).lat}, ${getCityCoordinates(cityData.cityName).lng}">
+    ${cityData.lastUpdated ? `<meta name="last-modified" content="${cityData.lastUpdated}">` : ''}
+    ${cityData.publishedDate ? `<meta name="article:published_time" content="${cityData.publishedDate}">` : ''}
+    <link rel="canonical" href="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
+    
+    <!-- Hreflang for international SEO (future multilingual support) -->
+    <link rel="alternate" hreflang="en" href="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
+    <link rel="alternate" hreflang="x-default" href="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="${seoTitle}">
+    <meta property="og:description" content="${seoDescription}">
+    <meta property="og:image" content="${cityData.imageUrl}">
+    <meta property="og:url" content="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="TravelWanders">
+    ${cityData.author ? `<meta property="article:author" content="${cityData.author}">` : ''}
+    
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${seoTitle}">
+    <meta name="twitter:description" content="${seoDescription}">
+    <meta name="twitter:image" content="${cityData.imageUrl}">
+    <meta name="twitter:site" content="@TravelWanders">
+    
+    ${generateCommonStyles()}
+</head>
+<body>
+    <div class="page-wrapper">
+        ${generateNavigation()}
+        <main class="main-content">
+            ${heroHTML}
+            ${staticContent}
+        </main>
+        ${generateFooter()}
+    </div>
+
+    <script>
+      function showTab(tabId) {
+        // Hide all tab contents
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabContents.forEach(content => {
+          content.classList.remove('active');
+        });
+        
+        // Remove active class from all triggers
+        const tabTriggers = document.querySelectorAll('.tab-trigger');
+        tabTriggers.forEach(trigger => {
+          trigger.classList.remove('active');
+        });
+        
+        // Show selected tab content
+        const selectedTab = document.getElementById(tabId);
+        if (selectedTab) {
+          selectedTab.classList.add('active');
+        }
+        
+        // Add active class to clicked trigger
+        event.target.classList.add('active');
+      }
+
+      // Analytics and SEO enhancements
+      console.log('TravelWanders - ${cityData.cityName} Guide loaded successfully');
+      
+      // Basic interactivity
+      document.addEventListener('DOMContentLoaded', function() {
+          // Smooth scrolling for any anchor links
+          document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+              anchor.addEventListener('click', function (e) {
+                  e.preventDefault();
+                  const target = document.querySelector(this.getAttribute('href'));
+                  if (target) {
+                      target.scrollIntoView({
+                          behavior: 'smooth'
+                      });
+                  }
+              });
+          });
+      });
+    </script>
+</body>
+</html>`;
+  try {
+    const { validateCityHydrationWithHTML } = await import('./utils/hydration-prevention');
+    const postValidation = await validateCityHydrationWithHTML(cityData, generatedHtml, '');
+    
+    if (!postValidation.isValid) {
+      console.warn(`⚠️  Post-generation hydration validation failed for ${cityData.cityName}:`, postValidation.issues);
+      // Log issues but return generated HTML
+    } else {
+      console.log(`✅ Post-generation hydration validation passed for ${cityData.cityName}`);
+    }
+  } catch (error) {
+    console.warn('Post-generation hydration validation failed:', error.message);
+  }
+
+  return generatedHtml;
 }
 
 // Enhanced extraction functions for flexible TSX parsing
