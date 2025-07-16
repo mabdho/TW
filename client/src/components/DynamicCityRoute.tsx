@@ -26,6 +26,8 @@ const cityMap = {
   'como': createCityImport('Como', '../pages/cities/Como'),
 
   'accra': createCityImport('Accra', '../pages/cities/Accra'),
+
+  'oslo': createCityImport('Oslo', '../pages/cities/Oslo'),
 };
 
 interface DynamicCityRouteProps {
