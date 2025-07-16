@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ImageOptimized } from './ImageOptimized';
+import { renderInlineMarkdown } from '../utils/markdownRenderer';
 // Optimized icon imports - using lightweight alternatives
 import { 
   CameraIcon, 
@@ -481,7 +482,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
             <div className="flex-1">
               <h4 className="font-semibold text-sky-700 dark:text-sky-300 text-sm mb-1">{op.spot}</h4>
               <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-                {op.description}
+                {renderInlineMarkdown(op.description)}
               </p>
             </div>
           </div>
@@ -588,7 +589,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
                     {attr.name}
                   </h4>
                   <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-                    {attr.description.split('.')[0]}.
+                    {renderInlineMarkdown(attr.description.split('.')[0])}.
                   </p>
                 </div>
               </div>
@@ -635,7 +636,7 @@ export const DiscoveryCards: React.FC<DiscoveryCardsProps> = ({
                         </Badge>
                       </div>
                       <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-                        {option.description}
+                        {renderInlineMarkdown(option.description)}
                       </p>
                     </div>
                   </div>
