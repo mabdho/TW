@@ -24,6 +24,8 @@ const cityMap = {
   'antalya': createCityImport('Antalya', '../pages/cities/Antalya'),
 
   'como': createCityImport('Como', '../pages/cities/Como'),
+
+  'accra': createCityImport('Accra', '../pages/cities/Accra'),
 };
 
 interface DynamicCityRouteProps {
