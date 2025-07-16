@@ -9,39 +9,9 @@ const createCityImport = (cityName: string, modulePath: string) => {
   return lazy(() => import(modulePath + '.tsx').then(module => ({ default: module[cityName] })));
 };
 
-// Direct imports for city components
-const London = lazy(() => import('../pages/cities/London.tsx').then(module => ({ default: module.London })));
-const Rome = createCityImport('Rome', '../pages/cities/Rome');
-
 // City mapping for dynamic imports
 const cityMap = {
   // Empty - ready for fresh city additions via admin panel
-
-  'london': London,
-  'rome': Rome,
-  'edinburgh': createCityImport('Edinburgh', '../pages/cities/Edinburgh'),
-
-  'seoul': createCityImport('Seoul', '../pages/cities/Seoul'),
-
-  'tokyo': createCityImport('Tokyo', '../pages/cities/Tokyo'),
-
-  'kyoto': createCityImport('kyoto', '../pages/cities/kyoto'),
-
-  'berlin': createCityImport('Berlin', '../pages/cities/Berlin'),
-
-  'san-francisco': createCityImport('SanFrancisco', '../pages/cities/SanFrancisco'),
-
-  'são-paulo': createCityImport('SãoPaulo', '../pages/cities/SãoPaulo'),
-
-  'san-diego': createCityImport('SanDiego', '../pages/cities/SanDiego'),
-
-  'bali': createCityImport('Bali', '../pages/cities/Bali'),
-
-  'melbourne': createCityImport('Melbourne', '../pages/cities/Melbourne'),
-
-  'perth': createCityImport('Perth', '../pages/cities/Perth'),
-
-  'montreal': createCityImport('Montreal', '../pages/cities/Montreal'),
 };
 
 interface DynamicCityRouteProps {
