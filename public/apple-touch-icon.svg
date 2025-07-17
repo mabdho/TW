@@ -1,0 +1,28 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with travel-inspired gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="letterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f0fdf4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Rounded square background matching your brand -->
+  <rect width="180" height="180" rx="32" ry="32" fill="url(#bgGradient)" />
+  
+  <!-- Subtle travel elements -->
+  <circle cx="145" cy="35" r="8" fill="rgba(255,255,255,0.3)" />
+  <circle cx="35" cy="145" r="5" fill="rgba(255,255,255,0.2)" />
+  <circle cx="150" cy="150" r="3" fill="rgba(255,255,255,0.15)" />
+  
+  <!-- Main "T" letter - bold and centered -->
+  <text x="90" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="110" font-weight="700" text-anchor="middle" fill="url(#letterGradient)">T</text>
+  
+  <!-- Subtle travel path accent -->
+  <path d="M40 60 Q90 45 140 60" stroke="rgba(255,255,255,0.15)" stroke-width="2" fill="none" />
+  <path d="M40 120 Q90 135 140 120" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" fill="none" />
+</svg>

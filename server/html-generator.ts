@@ -1958,6 +1958,16 @@ export async function generateCompleteHTML(cityData: CityData): Promise<string> 
     ${cityData.publishedDate ? `<meta name="article:published_time" content="${cityData.publishedDate}">` : ''}
     <link rel="canonical" href="https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}">
     
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+    <link rel="mask-icon" href="/favicon.svg" color="#059669">
+    <meta name="theme-color" content="#059669">
+    <meta name="msapplication-TileColor" content="#059669">
+    <meta name="msapplication-TileImage" content="/apple-touch-icon.svg">
+    <link rel="manifest" href="/manifest.json">
+    
     <!-- Hreflang for international SEO (future multilingual support) -->
     <link rel="alternate" hreflang="en" href="https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}">
     <link rel="alternate" hreflang="x-default" href="https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}">
@@ -2311,6 +2321,16 @@ export async function generateCompleteHTML(cityData: CityData): Promise<string> 
     ${cityData.publishedDate ? `<meta name="article:published_time" content="${cityData.publishedDate}">` : ''}
     <link rel="canonical" href="https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}">
     
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+    <link rel="mask-icon" href="/favicon.svg" color="#059669">
+    <meta name="theme-color" content="#059669">
+    <meta name="msapplication-TileColor" content="#059669">
+    <meta name="msapplication-TileImage" content="/apple-touch-icon.svg">
+    <link rel="manifest" href="/manifest.json">
+    
     <!-- Hreflang for international SEO (future multilingual support) -->
     <link rel="alternate" hreflang="en" href="https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}">
     <link rel="alternate" hreflang="x-default" href="https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}">
@@ -2488,7 +2508,15 @@ export function generateHomePageHTML(): string {
   <meta name="twitter:description" content="Discover amazing travel destinations with TravelWanders. Find comprehensive city guides, hidden gems, and travel tips for your next adventure.">
   
   <link rel="canonical" href="https://travelwanders.com/">
+  
+  <!-- Favicon and App Icons -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+  <link rel="mask-icon" href="/favicon.svg" color="#059669">
+  <meta name="theme-color" content="#059669">
+  <meta name="msapplication-TileColor" content="#059669">
+  <meta name="msapplication-TileImage" content="/apple-touch-icon.svg">
   
   <!-- Performance optimization tags -->
   <link rel="preconnect" href="https://images.unsplash.com">
@@ -4082,7 +4110,15 @@ export function generatePrivacyPolicyHTML(): string {
   <meta name="twitter:description" content="Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.">
   
   <link rel="canonical" href="https://travelwanders.com/privacy-policy">
+  
+  <!-- Favicon and App Icons -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+  <link rel="mask-icon" href="/favicon.svg" color="#059669">
+  <meta name="theme-color" content="#059669">
+  <meta name="msapplication-TileColor" content="#059669">
+  <meta name="msapplication-TileImage" content="/apple-touch-icon.svg">
   
   <!-- Performance optimization tags -->
   <link rel="preconnect" href="https://images.unsplash.com">
@@ -4309,7 +4345,15 @@ export function generateTermsOfServiceHTML(): string {
   <meta name="twitter:description" content="Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.">
   
   <link rel="canonical" href="https://travelwanders.com/terms-of-service">
+  
+  <!-- Favicon and App Icons -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+  <link rel="mask-icon" href="/favicon.svg" color="#059669">
+  <meta name="theme-color" content="#059669">
+  <meta name="msapplication-TileColor" content="#059669">
+  <meta name="msapplication-TileImage" content="/apple-touch-icon.svg">
   
   <!-- Performance optimization tags -->
   <link rel="preconnect" href="https://images.unsplash.com">
@@ -4550,7 +4594,15 @@ export function generateCookiePolicyHTML(): string {
   <meta name="twitter:description" content="Cookie Policy for TravelWanders - Learn about how we use cookies and similar technologies to enhance your travel guide experience.">
   
   <link rel="canonical" href="https://travelwanders.com/cookie-policy">
+  
+  <!-- Favicon and App Icons -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+  <link rel="mask-icon" href="/favicon.svg" color="#059669">
+  <meta name="theme-color" content="#059669">
+  <meta name="msapplication-TileColor" content="#059669">
+  <meta name="msapplication-TileImage" content="/apple-touch-icon.svg">
   
   <!-- Performance Optimization Tags -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
