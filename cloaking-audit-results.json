@@ -1,0 +1,186 @@
+{
+  "summary": {
+    "overallScore": 65,
+    "riskLevel": "HIGH",
+    "totalIssues": 12,
+    "criticalIssues": 5,
+    "warningIssues": 7
+  },
+  "cloakingDetection": {
+    "score": 0,
+    "issues": [
+      {
+        "file": "server/index.ts",
+        "pattern": "googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot",
+        "matches": 6,
+        "severity": "HIGH",
+        "samples": [
+          "googlebot",
+          "bingbot",
+          "slurp"
+        ]
+      },
+      {
+        "file": "server/index.ts",
+        "pattern": "if\\s*\\(\\s*isSearchEngine",
+        "matches": 1,
+        "severity": "CRITICAL",
+        "samples": [
+          "if (isSearchEngine"
+        ]
+      },
+      {
+        "file": "server/index.ts",
+        "pattern": "\\.html.*bot",
+        "matches": 1,
+        "severity": "MEDIUM",
+        "samples": [
+          ".html so our route handlers can detect bot"
+        ]
+      },
+      {
+        "file": "server/index.ts",
+        "pattern": "route.*bot",
+        "matches": 1,
+        "severity": "MEDIUM",
+        "samples": [
+          "route handlers can detect bot"
+        ]
+      },
+      {
+        "file": "server/routes.ts",
+        "pattern": "isSearchEngineBot",
+        "matches": 3,
+        "severity": "CRITICAL",
+        "samples": [
+          "isSearchEngineBot",
+          "isSearchEngineBot",
+          "isSearchEngineBot"
+        ]
+      },
+      {
+        "file": "server/routes.ts",
+        "pattern": "isBot\\s*=\\s*isSearchEngineBot",
+        "matches": 2,
+        "severity": "CRITICAL",
+        "samples": [
+          "isBot = isSearchEngineBot",
+          "isBot = isSearchEngineBot"
+        ]
+      },
+      {
+        "file": "server/routes.ts",
+        "pattern": "googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot",
+        "matches": 6,
+        "severity": "HIGH",
+        "samples": [
+          "googlebot",
+          "bingbot",
+          "slurp"
+        ]
+      },
+      {
+        "file": "server/routes.ts",
+        "pattern": "if\\s*\\(\\s*isBot",
+        "matches": 2,
+        "severity": "CRITICAL",
+        "samples": [
+          "if (isBot",
+          "if (isBot"
+        ]
+      },
+      {
+        "file": "server/firebase-server.ts",
+        "pattern": "isSearchEngineBot",
+        "matches": 1,
+        "severity": "CRITICAL",
+        "samples": [
+          "isSearchEngineBot"
+        ]
+      }
+    ],
+    "findings": [
+      "❌ Found 23 cloaking violations (9 critical)"
+    ]
+  },
+  "contentConsistency": {
+    "score": 100,
+    "issues": [],
+    "findings": [
+      "✅ No suspicious HTML files detected"
+    ]
+  },
+  "userAgentAnalysis": {
+    "score": 80,
+    "issues": [
+      {
+        "file": "server/index.ts",
+        "type": "USER_AGENT_ACCESS",
+        "severity": "MEDIUM",
+        "description": "User-agent header access detected",
+        "count": 1
+      },
+      {
+        "file": "server/routes.ts",
+        "type": "USER_AGENT_ACCESS",
+        "severity": "MEDIUM",
+        "description": "User-agent header access detected",
+        "count": 2
+      }
+    ],
+    "findings": [
+      "❌ Found 2 user-agent handling issues"
+    ]
+  },
+  "routingAnalysis": {
+    "score": 80,
+    "issues": [
+      {
+        "type": "BOT_SPECIFIC_ROUTES",
+        "severity": "HIGH",
+        "description": "Bot-specific route handlers detected",
+        "count": 1
+      }
+    ],
+    "findings": [
+      "❌ Found 1 routing issues"
+    ]
+  },
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "category": "Cloaking Detection",
+      "title": "Remove User-Agent Based Content Serving",
+      "description": "Remove all code that serves different content based on user-agent detection. This includes bot detection functions and conditional serving logic.",
+      "impact": "Critical for Google compliance"
+    },
+    {
+      "priority": "MEDIUM",
+      "category": "User-Agent Handling",
+      "title": "Minimize User-Agent Dependencies",
+      "description": "Reduce or eliminate user-agent based logic in your server code. Use feature detection instead of user-agent sniffing where possible.",
+      "impact": "Reduces risk of accidental cloaking"
+    },
+    {
+      "priority": "HIGH",
+      "category": "Routing",
+      "title": "Implement Consistent Routing",
+      "description": "Ensure all routes serve the same content to all users. Remove any bot-specific or search engine-specific routing logic.",
+      "impact": "Ensures fair content distribution"
+    },
+    {
+      "priority": "MEDIUM",
+      "category": "General",
+      "title": "Implement Progressive Enhancement",
+      "description": "Use progressive enhancement techniques to serve basic HTML to all users and enhance with JavaScript for interactive features.",
+      "impact": "Google-compliant way to optimize for search engines"
+    },
+    {
+      "priority": "LOW",
+      "category": "Monitoring",
+      "title": "Regular Compliance Monitoring",
+      "description": "Run this audit regularly to ensure continued compliance with Google's guidelines.",
+      "impact": "Maintains long-term compliance"
+    }
+  ]
+}
