@@ -38,7 +38,7 @@ function ConditionalNotFound() {
   const [location] = useLocation();
   
   // Show 404 only for truly unmatched routes, not valid city routes
-  if (location.startsWith('/best-things-to-do-in-')) {
+  if (location.startsWith('/things-to-do-in-')) {
     // For city routes, check if it's a valid format but no city exists
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">

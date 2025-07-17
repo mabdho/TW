@@ -80,7 +80,7 @@ function generateCityStructuredData({
       "addressCountry": country
     },
     "image": images || [],
-    "url": `https://travelwanders.com/best-things-to-do-in-${cityName.toLowerCase().replace(/\s+/g, '-')}`,
+    "url": `https://travelwanders.com/things-to-do-in-${cityName.toLowerCase().replace(/\s+/g, '-')}`,
     "sameAs": [
       `https://en.wikipedia.org/wiki/${cityName.replace(/\s+/g, '_')}`,
       `https://www.google.com/search?q=${encodeURIComponent(cityName + ' ' + country)}`

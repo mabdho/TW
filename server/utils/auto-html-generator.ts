@@ -48,7 +48,7 @@ export class AutoHTMLGenerator {
       for (const file of files) {
         const cityName = file.replace('.tsx', '');
         const tsxPath = path.join(citiesDir, file);
-        const htmlPath = path.join(process.cwd(), 'dist', 'public', `best-things-to-do-in-${cityName.toLowerCase()}`, 'index.html');
+        const htmlPath = path.join(process.cwd(), 'dist', 'public', `things-to-do-in-${cityName.toLowerCase()}`, 'index.html');
         
         // Extract country from TSX file
         try {

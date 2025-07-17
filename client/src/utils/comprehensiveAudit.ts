@@ -240,7 +240,7 @@ class ComprehensiveAuditor {
     }
     
     // Check for contextual links
-    const cityLinks = document.querySelectorAll('a[href*="best-things-to-do-in"]');
+    const cityLinks = document.querySelectorAll('a[href*="things-to-do-in"]');
     const blogLinks = document.querySelectorAll('a[href*="/blog/"]');
     
     if (cityLinks.length > 3) {

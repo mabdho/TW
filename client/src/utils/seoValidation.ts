@@ -348,10 +348,10 @@ function validateURL(canonicalUrl: string, slug: string, contentType: 'city' | '
 
   // URL structure validation for city pages
   if (contentType === 'city') {
-    if (!canonicalUrl.includes('/best-things-to-do-in-')) {
+    if (!canonicalUrl.includes('/things-to-do-in-')) {
       errors.push({
         field: 'url',
-        message: 'City page URLs should follow format: /best-things-to-do-in-[city-slug]',
+        message: 'City page URLs should follow format: /things-to-do-in-[city-slug]',
         severity: 'error',
         points: 0
       });

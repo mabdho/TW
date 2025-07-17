@@ -62,7 +62,7 @@ export function createCanonical(type: 'city' | 'blog', slug: string, baseUrl: st
   
   switch (type) {
     case 'city':
-      return `${base}/best-things-to-do-in-${slug}`;
+      return `${base}/things-to-do-in-${slug}`;
     case 'blog':
       return `${base}/blog/${slug}`;
     default:

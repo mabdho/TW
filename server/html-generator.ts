@@ -266,14 +266,14 @@ function extractSEODataFromHTML(htmlContent: string): { title: string; descripti
 // Utility function to save city HTML files with correct directory structure
 export async function saveCityHtmlFile(cityName: string, content: string): Promise<string> {
   const outputDir = getHtmlOutputDirectory();
-  const cityDir = path.join(outputDir, `best-things-to-do-in-${cityName.toLowerCase().replace(/\s+/g, '-')}`);
+  const cityDir = path.join(outputDir, `things-to-do-in-${cityName.toLowerCase().replace(/\s+/g, '-')}`);
   await ensureDirectoryExists(cityDir);
   
   const filePath = path.join(cityDir, 'index.html');
   await fs.writeFile(filePath, content, 'utf-8');
   
   // Auto-validate hydration compliance after HTML generation
-  await validateHydrationCompliance(`best-things-to-do-in-${cityName}/index.html`, content);
+  await validateHydrationCompliance(`things-to-do-in-${cityName}/index.html`, content);
   
   return filePath;
 }
@@ -1461,7 +1461,7 @@ function generateInternalLinksHTML(cityData: any): string {
     interlinkingSystem.refresh();
     
     // Generate contextual internal links for the city page
-    const pageUrl = `/best-things-to-do-in-${cityData.slug || cityData.cityName.toLowerCase()}`;
+    const pageUrl = `/things-to-do-in-${cityData.slug || cityData.cityName.toLowerCase()}`;
     console.log(`🔗 Generating internal links for: ${pageUrl}`);
     const links = interlinkingSystem.generateInternalLinks(pageUrl, 'city');
     
@@ -1956,17 +1956,17 @@ export async function generateCompleteHTML(cityData: CityData): Promise<string> 
     <meta name="ICBM" content="${getCityCoordinates(cityData.cityName).lat}, ${getCityCoordinates(cityData.cityName).lng}">
     ${cityData.lastUpdated ? `<meta name="last-modified" content="${cityData.lastUpdated}">` : ''}
     ${cityData.publishedDate ? `<meta name="article:published_time" content="${cityData.publishedDate}">` : ''}
-    <link rel="canonical" href="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
+    <link rel="canonical" href="https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}">
     
     <!-- Hreflang for international SEO (future multilingual support) -->
-    <link rel="alternate" hreflang="en" href="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
-    <link rel="alternate" hreflang="x-default" href="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
+    <link rel="alternate" hreflang="en" href="https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}">
+    <link rel="alternate" hreflang="x-default" href="https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}">
     
     <!-- Open Graph tags -->
     <meta property="og:title" content="${seoTitle}">
     <meta property="og:description" content="${seoDescription}">
     <meta property="og:image" content="${cityData.imageUrl}">
-    <meta property="og:url" content="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
+    <meta property="og:url" content="https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="TravelWanders">
     ${cityData.author ? `<meta property="article:author" content="${cityData.author}">` : ''}
@@ -1985,7 +1985,7 @@ export async function generateCompleteHTML(cityData: CityData): Promise<string> 
       "@type": "Article",
       "headline": "${seoTitle}",
       "description": "${seoDescription}",
-      "url": "https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}",
+      "url": "https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}",
       "image": {
         "@type": "ImageObject",
         "url": "${cityData.imageUrl}",
@@ -2013,7 +2013,7 @@ export async function generateCompleteHTML(cityData: CityData): Promise<string> 
       "wordCount": ${cityData.attractions?.length ? cityData.attractions.length * 150 : 1500},
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}"
+        "@id": "https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}"
       },
       "about": {
         "@type": "TravelDestination",
@@ -2052,7 +2052,7 @@ export async function generateCompleteHTML(cityData: CityData): Promise<string> 
             "@type": "ListItem",
             "position": 3,
             "name": "${cityData.cityName}",
-            "item": "https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}"
+            "item": "https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}"
           }
         ]
       }
@@ -2109,7 +2109,7 @@ export async function generateCompleteHTML(cityData: CityData): Promise<string> 
           "position": 3,
           "item": {
             "@type": "WebPage",
-            "@id": "https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}",
+            "@id": "https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}",
             "name": "${cityData.cityName}, ${cityData.country}"
           }
         }
@@ -2309,17 +2309,17 @@ export async function generateCompleteHTML(cityData: CityData): Promise<string> 
     <meta name="ICBM" content="${getCityCoordinates(cityData.cityName).lat}, ${getCityCoordinates(cityData.cityName).lng}">
     ${cityData.lastUpdated ? `<meta name="last-modified" content="${cityData.lastUpdated}">` : ''}
     ${cityData.publishedDate ? `<meta name="article:published_time" content="${cityData.publishedDate}">` : ''}
-    <link rel="canonical" href="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
+    <link rel="canonical" href="https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}">
     
     <!-- Hreflang for international SEO (future multilingual support) -->
-    <link rel="alternate" hreflang="en" href="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
-    <link rel="alternate" hreflang="x-default" href="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
+    <link rel="alternate" hreflang="en" href="https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}">
+    <link rel="alternate" hreflang="x-default" href="https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}">
     
     <!-- Open Graph tags -->
     <meta property="og:title" content="${seoTitle}">
     <meta property="og:description" content="${seoDescription}">
     <meta property="og:image" content="${cityData.imageUrl}">
-    <meta property="og:url" content="https://travelwanders.com/best-things-to-do-in-${cityData.cityName.toLowerCase()}">
+    <meta property="og:url" content="https://travelwanders.com/things-to-do-in-${cityData.cityName.toLowerCase()}">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="TravelWanders">
     ${cityData.author ? `<meta property="article:author" content="${cityData.author}">` : ''}

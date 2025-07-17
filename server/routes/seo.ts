@@ -50,7 +50,7 @@ export async function getSitemap(req: Request, res: Response) {
       .map(file => {
         const cityName = file.replace('.tsx', '');
         // Convert PascalCase to kebab-case properly
-        const cityPath = `/best-things-to-do-in-${cityName.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '')}`;
+        const cityPath = `/things-to-do-in-${cityName.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '')}`;
         return {
           name: cityName,
           path: cityPath
@@ -300,7 +300,7 @@ Disallow: /api/
 Allow: /
 Allow: /destinations
 Allow: /blog
-Allow: /best-things-to-do-in-*
+Allow: /things-to-do-in-*
 
 # Cache directives
 Cache-Control: public, max-age=86400

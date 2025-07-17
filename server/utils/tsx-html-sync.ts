@@ -104,8 +104,8 @@ export class TSXHTMLSynchronizer {
     const slugName = this.cityNameToSlug(cityName);
     
     // Try both directory structure and direct file approaches
-    const directoryPath = path.join(this.htmlDir, `best-things-to-do-in-${slugName}`, 'index.html');
-    const filePath = path.join(this.htmlDir, `best-things-to-do-in-${slugName}.html`);
+    const directoryPath = path.join(this.htmlDir, `things-to-do-in-${slugName}`, 'index.html');
+    const filePath = path.join(this.htmlDir, `things-to-do-in-${slugName}.html`);
     
     // Return the path that exists
     if (existsSync(directoryPath)) {

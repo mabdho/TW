@@ -696,7 +696,7 @@ export const CityPage: React.FC<CityPageProps> = ({
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-5xl mx-auto">
             <SmartInternalLinks 
-              currentPageUrl={`/best-things-to-do-in-${extractedCityName.toLowerCase().replace(/\s+/g, '-')}`}
+              currentPageUrl={`/things-to-do-in-${extractedCityName.toLowerCase().replace(/\s+/g, '-')}`}
               pageType="city"
               className=""
             />

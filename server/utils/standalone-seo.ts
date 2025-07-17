@@ -16,7 +16,7 @@ export async function generateSitemap(): Promise<string> {
       .map(file => {
         const cityName = file.replace('.tsx', '');
         // Convert PascalCase to kebab-case properly
-        const cityPath = `/best-things-to-do-in-${cityName.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '')}`;
+        const cityPath = `/things-to-do-in-${cityName.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '')}`;
         return {
           name: cityName,
           path: cityPath

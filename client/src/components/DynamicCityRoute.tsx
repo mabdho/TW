@@ -84,7 +84,7 @@ export const CityRoutes: React.FC = () => {
       {Object.keys(cityMap).map((cityKey) => (
         <DynamicCityRoute
           key={cityKey}
-          path={`/best-things-to-do-in-${cityKey}`}
+          path={`/things-to-do-in-${cityKey}`}
           cityKey={cityKey}
         />
       ))}

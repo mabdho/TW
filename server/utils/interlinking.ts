@@ -81,7 +81,7 @@ export class EnterpriseInterlinking {
         if (cityData) {
           this.allLinks.push({
             title: cityData.title,
-            url: `/best-things-to-do-in-${cityName.toLowerCase()}`,
+            url: `/things-to-do-in-${cityName.toLowerCase()}`,
             type: 'city',
             keywords: this.generateCityKeywords(cityData),
             country: cityData.country,

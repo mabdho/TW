@@ -550,10 +550,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
         
         // Generate complete HTML using Firebase Functions HTML generator
-        const generatedHTML = generateCompleteHTML(cityData);
+        const generatedHTML = await generateCompleteHTML(cityData);
         
         // Ensure output directory exists
-        const outputDir = path.join(process.cwd(), 'dist', 'public', `best-things-to-do-in-${cityData.cityName.toLowerCase()}`);
+        const outputDir = path.join(process.cwd(), 'dist', 'public', `things-to-do-in-${cityData.cityName.toLowerCase()}`);
         await fs.mkdir(outputDir, { recursive: true });
         
         // Write HTML file
@@ -617,10 +617,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
             
             if (cityData) {
               // Generate complete HTML using Firebase Functions HTML generator
-              const generatedHTML = generateCompleteHTML(cityData);
+              const generatedHTML = await generateCompleteHTML(cityData);
               
               // Ensure output directory exists
-              const outputDir = path.join(process.cwd(), 'dist', 'public', `best-things-to-do-in-${cityData.cityName.toLowerCase()}`);
+              const outputDir = path.join(process.cwd(), 'dist', 'public', `things-to-do-in-${cityData.cityName.toLowerCase()}`);
               await fs.mkdir(outputDir, { recursive: true });
               
               // Write HTML file
@@ -891,8 +891,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
               const cityData = await extractCityDataFromTSXHtmlGen(tsxFilePath);
               
               if (cityData) {
-                const cityHTML = generateCompleteHTML(cityData);
-                const cityOutputDir = path.join(outputDir, `best-things-to-do-in-${cityData.cityName.toLowerCase()}`);
+                const cityHTML = await generateCompleteHTML(cityData);
+                const cityOutputDir = path.join(outputDir, `things-to-do-in-${cityData.cityName.toLowerCase()}`);
                 await fs.mkdir(cityOutputDir, { recursive: true });
                 
                 const cityOutputPath = path.join(cityOutputDir, 'index.html');
@@ -1407,7 +1407,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Serve city page HTML for search engines
-  app.get('/best-things-to-do-in-:cityName', async (req, res, next) => {
+  app.get('/things-to-do-in-:cityName', async (req, res, next) => {
     const userAgent = req.get('User-Agent') || '';
     const isBot = isSearchEngineBot(userAgent);
     
@@ -1425,7 +1425,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const cityData = await extractCityDataFromTSXHtmlGen(tsxFilePath);
           
           if (cityData) {
-            const htmlContent = generateCompleteHTML(cityData);
+            const htmlContent = await generateCompleteHTML(cityData);
             res.set('Content-Type', 'text/html');
             res.send(htmlContent);
             return;
@@ -1575,7 +1575,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       let contentData;
       
       // STEP 1: Check if HTML file exists as source of truth (for all modes)
-      const htmlDirPath = path.join(process.cwd(), 'dist', 'public', `best-things-to-do-in-${city.toLowerCase()}`);
+      const htmlDirPath = path.join(process.cwd(), 'dist', 'public', `things-to-do-in-${city.toLowerCase()}`);
       const htmlFilePath = path.join(htmlDirPath, 'index.html');
       let htmlSourceData = null;
 
@@ -2106,7 +2106,7 @@ Double-check all brackets, quotes, and commas are properly matched.`;
       const cityDirectoryContent = await fs.readFile(cityDirectoryPath, 'utf-8');
       
       // Create city entry with correct SEO-friendly URL format and imageUrl using standardized naming
-      const cityEntry = `  { "name": "${city}", "country": "${country}", "path": "/best-things-to-do-in-${cityMapping.html}", "continent": "${continent}"${heroImageUrl ? `, "imageUrl": "${heroImageUrl}"` : ''} }`;
+      const cityEntry = `  { "name": "${city}", "country": "${country}", "path": "/things-to-do-in-${cityMapping.html}", "continent": "${continent}"${heroImageUrl ? `, "imageUrl": "${heroImageUrl}"` : ''} }`;
       
       // Check if city already exists
       if (!cityDirectoryContent.includes(`"name": "${city}"`)) {
@@ -2162,7 +2162,7 @@ Double-check all brackets, quotes, and commas are properly matched.`;
         const featuredCitiesMatch = featuredCitiesContent.match(/const featuredCities = \[([\s\S]*?)\];/);
         if (featuredCitiesMatch) {
           const currentFeaturedCities = featuredCitiesMatch[1];
-          const newCityEntry = `  { "name": "${city}", "country": "${country}", "path": "/best-things-to-do-in-${cityMapping.html}", "continent": "${continent}", "imageUrl": "${heroImageUrl || ''}" }`;
+          const newCityEntry = `  { "name": "${city}", "country": "${country}", "path": "/things-to-do-in-${cityMapping.html}", "continent": "${continent}", "imageUrl": "${heroImageUrl || ''}" }`;
           
           // Add new city to the beginning and keep only 8 cities
           const lines = currentFeaturedCities.split('\n').filter(line => line.trim().startsWith('{ "name"'));
@@ -2232,7 +2232,7 @@ Double-check all brackets, quotes, and commas are properly matched.`;
         console.log(`✅ Pre-generation validation for ${city}: ${preValidation ? 'PASS' : 'NEEDS ATTENTION'}`);
         
         // Run post-generation validation if HTML file exists
-        const htmlPath = `dist/public/best-things-to-do-in-${cityMapping.html}.html`;
+        const htmlPath = `dist/public/things-to-do-in-${cityMapping.html}.html`;
         if (existsSync(htmlPath)) {
           await afterCityGeneration({ cityName: city, country }, '', htmlPath);
           console.log(`✅ Post-generation validation for ${city}: COMPLETED`);
@@ -2322,7 +2322,7 @@ Double-check all brackets, quotes, and commas are properly matched.`;
         return res.status(500).json({ error: 'Failed to extract city data from TSX file' });
       }
       
-      const completeHTML = generateCompleteHTML(cityData);
+      const completeHTML = await generateCompleteHTML(cityData);
       
       // Save the HTML file to correct deployment directory
       const { saveCityHtmlFile } = await import('./html-generator');
@@ -2371,7 +2371,7 @@ Double-check all brackets, quotes, and commas are properly matched.`;
           const cityData = await extractCityDataFromTSX(tsxFilePath);
           
           if (cityData) {
-            const completeHTML = generateCompleteHTML(cityData);
+            const completeHTML = await generateCompleteHTML(cityData);
             
             // Save the HTML file using proper directory structure
             const { saveCityHtmlFile } = await import('./html-generator');
@@ -3178,7 +3178,7 @@ Double-check all brackets, quotes, and commas are properly matched.`;
       let postValidation = true;
       try {
         const htmlPath = pageType === 'city' 
-          ? `dist/public/best-things-to-do-in-${pageData.cityName.toLowerCase()}.html`
+          ? `dist/public/things-to-do-in-${pageData.cityName.toLowerCase()}.html`
           : `dist/public/blog/${pageData.id}.html`;
         
         if (existsSync(htmlPath)) {

@@ -208,7 +208,7 @@ function extractCityDataFromFile(content: string, cityKey: string): any | null {
       name: nameMatch[1],
       country: countryMatch ? countryMatch[1] : '',
       slug: cityKey,
-      url: `/best-things-to-do-in-${cityKey}`
+      url: `/things-to-do-in-${cityKey}`
     };
   } catch (error) {
     console.error('Error extracting city data:', error);
@@ -293,7 +293,7 @@ function generateSitemapXML(cities: any[], blogs: any[]): string {
   cities.forEach(city => {
     const slug = city.slug || city.name.toLowerCase().replace(/\s+/g, '-');
     xml += `  <url>
-    <loc>${baseUrl}/best-things-to-do-in-${slug}</loc>
+    <loc>${baseUrl}/things-to-do-in-${slug}</loc>
     <lastmod>${city.lastUpdated || today}</lastmod>
     <priority>0.9</priority>
   </url>
