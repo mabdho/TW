@@ -6,8 +6,8 @@ export const Zurich: React.FC = () => {
     <CityPage
       cityName="Zurich"
       country="Switzerland"
-      title={"Best Things to Do in Zurich, Switzerland (2025 Guide)"}
-      description={`Discover the best things to do in Zurich — top attractions, hidden gems, and food spots. Complete Zurich travel guide.`}
+      title={"Things to Do in Zurich, Switzerland (2025 Guide)"}
+      description={`Discover things to do in Zurich — top attractions, hidden gems, and food spots. Complete Zurich travel guide.`}
       imageUrl={"https://images.unsplash.com/photo-1620563092215-0fbc6b55cfc5?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
       ]}

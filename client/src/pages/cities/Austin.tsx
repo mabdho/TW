@@ -6,8 +6,8 @@ export const Austin: React.FC = () => {
     <CityPage
       cityName="Austin"
       country="USA"
-      title={"Best Things to Do in Austin, USA (2025 Guide)"}
-      description={`Discover the best things to do in Austin — top attractions, hidden gems, and food spots. Complete Austin travel guide.`}
+      title={"Things to Do in Austin, USA (2025 Guide)"}
+      description={`Discover things to do in Austin — top attractions, hidden gems, and food spots. Complete Austin travel guide.`}
       imageUrl={"https://images.unsplash.com/photo-1557335200-a65f7f032602?q=80&w=1758&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
       ]}

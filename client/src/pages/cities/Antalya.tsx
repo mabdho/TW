@@ -6,8 +6,8 @@ export const Antalya: React.FC = () => {
     <CityPage
       cityName="Antalya"
       country="Turkey"
-      title={"Best Things to Do in Antalya, Turkey (2025 Guide)"}
-      description={`Discover the best things to do in Antalya — top attractions, hidden gems, and food spots. Complete Antalya travel guide.`}
+      title={"Things to Do in Antalya, Turkey (2025 Guide)"}
+      description={`Discover things to do in Antalya — top attractions, hidden gems, and food spots. Complete Antalya travel guide.`}
       imageUrl={"https://images.unsplash.com/photo-1593238739364-18cfde30e522?q=80&w=1940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
       galleryImages={[
       ]}
