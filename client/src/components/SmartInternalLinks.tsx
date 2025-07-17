@@ -65,7 +65,7 @@ export const SmartInternalLinks: React.FC<SmartInternalLinksProps> = ({
   }, [currentPageUrl, pageType]);
 
   const getTypeIcon = (type: string): string => {
-    const icons = {
+    const icons: Record<string, string> = {
       'city': '🌆',
       'blog': '📖',
       'destination': '🌍',
@@ -75,7 +75,7 @@ export const SmartInternalLinks: React.FC<SmartInternalLinksProps> = ({
   };
 
   const getTypeLabel = (type: string): string => {
-    const labels = {
+    const labels: Record<string, string> = {
       'city': 'City Guide',
       'blog': 'Travel Story',
       'destination': 'Destination',

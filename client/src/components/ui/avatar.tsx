@@ -33,11 +33,11 @@ const AvatarImage = React.forwardRef<
       <ImageOptimized
         src={src}
         alt={alt}
-        width={80}
-        height={80}
+        width="80"
+        height="80"
         className={cn("aspect-square h-full w-full rounded-full", className)}
         priority={false}
-        context="avatar"
+        context="hero"
         objectFit="cover"
         {...props}
       />

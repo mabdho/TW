@@ -74,7 +74,7 @@ export const EnterpriseInternalLinks: React.FC<EnterpriseInternalLinksProps> = (
   }, [currentPageUrl, pageType, maxLinks]);
 
   const getTypeLabel = (type: string): string => {
-    const labels = {
+    const labels: Record<string, string> = {
       'city': 'City Guide',
       'blog': 'Blog Post',
       'destination': 'Destinations',
@@ -84,7 +84,7 @@ export const EnterpriseInternalLinks: React.FC<EnterpriseInternalLinksProps> = (
   };
 
   const getTypeIcon = (type: string): string => {
-    const icons = {
+    const icons: Record<string, string> = {
       'city': '🏙️',
       'blog': '📝',
       'destination': '🌍',
