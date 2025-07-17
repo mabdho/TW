@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircleIcon } from '@/components/icons/LightweightIcons';
+import { AlertCircleIcon } from '@/components/icons/SimpleIcons';
 
 export default function NotFound() {
   return (

@@ -2,7 +2,7 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileTextIcon, UsersIcon, ShieldIcon, AlertTriangleIcon, ScaleIcon, MailIcon } from '@/components/icons/LightweightIcons';
+import { FileTextIcon, UsersIcon, ShieldIcon, AlertTriangleIcon, ScaleIcon, MailIcon } from '@/components/icons/SimpleIcons';
 import { useEffect } from 'react';
 
 export default function TermsOfService() {

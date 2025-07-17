@@ -38,7 +38,7 @@ const AccordionSkeleton = () => (
   </div>
 );
 // Optimized lucide-react imports - essential icons only
-import { MapPinIcon, ClockIcon, DollarSignIcon, GlobeIcon, StarIcon, CameraIcon, UsersIcon, InfoIcon } from '@/components/icons/LightweightIcons';
+import { MapPinIcon, ClockIcon, DollarSignIcon, GlobeIcon, StarIcon, CameraIcon, UsersIcon, InfoIcon } from '@/components/icons/SimpleIcons';
 
 // Lightweight SVG alternatives for UI controls
 const UIIcons = {

@@ -1,4 +1,4 @@
-import { ClockIcon, ArrowRightIcon } from '@/components/icons/LightweightIcons';
+import { ClockIcon, ArrowRightIcon } from '@/components/icons/SimpleIcons';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { getLatestBlogsForHomePage } from '../blogs/index';

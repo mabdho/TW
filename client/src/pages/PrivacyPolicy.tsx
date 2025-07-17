@@ -2,7 +2,7 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ShieldIcon, EyeIcon, CookieIcon, DatabaseIcon, MailIcon, PhoneIcon } from '@/components/icons/LightweightIcons';
+import { ShieldIcon, EyeIcon, CookieIcon, DatabaseIcon, MailIcon, PhoneIcon } from '@/components/icons/SimpleIcons';
 import { useEffect } from 'react';
 
 export default function PrivacyPolicy() {

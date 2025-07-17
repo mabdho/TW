@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { SEOHead } from '@/components/SEOHead';
-import { MapPinIcon, SearchIcon, GlobeIcon, ArrowRightIcon } from '@/components/icons/LightweightIcons';
+import { MapPinIcon, SearchIcon, GlobeIcon, ArrowRightIcon } from '@/components/icons/SimpleIcons';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';

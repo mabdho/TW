@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MenuIcon, XIcon } from '@/components/icons/LightweightIcons';
+import { MenuIcon, XIcon } from '@/components/icons/SimpleIcons';
 import { Button } from '@/components/ui/button';
 
 const scrollToSection = (sectionId: string) => {

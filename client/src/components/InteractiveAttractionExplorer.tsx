@@ -20,7 +20,7 @@ import {
   BookOpenIcon,
   CoffeeIcon,
   FilterIcon
-} from '@/components/icons/LightweightIcons';
+} from '@/components/icons/SimpleIcons';
 
 // Lightweight SVG alternatives for category icons
 const CategoryIcons = {

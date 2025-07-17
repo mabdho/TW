@@ -12,7 +12,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Loader2Icon, FileTextIcon, BookOpenIcon, Trash2Icon, AlertTriangleIcon, LogOutIcon, ImageIcon } from '@/components/icons/LightweightIcons';
+import { Loader2Icon, FileTextIcon, BookOpenIcon, Trash2Icon, AlertTriangleIcon, LogOutIcon, ImageIcon } from '@/components/icons/SimpleIcons';
 import { useToast } from '@/hooks/use-toast';
 import { ImageOptimizer } from '@/components/ImageOptimizer';
 

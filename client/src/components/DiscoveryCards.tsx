@@ -16,7 +16,7 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
   CalendarIcon
-} from '@/components/icons/LightweightIcons';
+} from '@/components/icons/SimpleIcons';
 
 // Simple SVG icons for less critical elements
 const SimpleIcon = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (

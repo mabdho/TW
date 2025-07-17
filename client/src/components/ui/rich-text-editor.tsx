@@ -10,7 +10,7 @@ import {
   ListIcon,
   ListOrderedIcon,
   TypeIcon
-} from '@/components/icons/LightweightIcons';
+} from '@/components/icons/SimpleIcons';
 
 interface RichTextEditorProps {
   value: string;

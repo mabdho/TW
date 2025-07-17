@@ -2,7 +2,7 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CookieIcon, SettingsIcon, EyeIcon, ShieldIcon, MailIcon } from '@/components/icons/LightweightIcons';
+import { CookieIcon, SettingsIcon, EyeIcon, ShieldIcon, MailIcon } from '@/components/icons/SimpleIcons';
 import { useEffect } from 'react';
 
 export default function CookiePolicy() {

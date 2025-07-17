@@ -1,4 +1,4 @@
-import { FacebookIcon, TwitterIcon, InstagramIcon, YoutubeIcon } from '@/components/icons/LightweightIcons';
+import { FacebookIcon, TwitterIcon, InstagramIcon, YoutubeIcon } from '@/components/icons/SimpleIcons';
 import { Button } from '@/components/ui/button';
 
 const Footer = () => {

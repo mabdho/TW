@@ -2,7 +2,7 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { CalendarIcon, ClockIcon, ArrowRightIcon } from '@/components/icons/LightweightIcons';
+import { CalendarIcon, ClockIcon, ArrowRightIcon } from '@/components/icons/SimpleIcons';
 import { getAllBlogs, getFeaturedBlogs } from '../blogs';
 import { SEOHead } from '@/components/SEOHead';
 import { generateBlogListSEOData, generateBreadcrumbStructuredData } from '@/utils/seo';

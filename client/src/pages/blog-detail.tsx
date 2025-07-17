@@ -2,7 +2,7 @@ import { useParams } from 'wouter';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeftIcon } from '@/components/icons/LightweightIcons';
+import { ArrowLeftIcon } from '@/components/icons/SimpleIcons';
 import { getBlogById } from '../blogs';
 import { BlogPageTemplate } from '@/components/templates/BlogPageTemplate';
 import { BlogData } from '@/utils/seo';
