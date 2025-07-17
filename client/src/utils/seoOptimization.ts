@@ -193,14 +193,8 @@ export function generateContextualInternalLinks(
  * Get coordinates for major cities (for geo meta tags)
  */
 function getCoordinates(cityName: string): string {
-  const coordinates: Record<string, string> = {
-    'Milan': '45.4642,9.1900',
-    'Porto': '41.1579,-8.6291', 
-    'Paris': '48.8566,2.3522',
-    'Tokyo': '35.6762,139.6503',
-    'Barcelona': '41.3851,2.1734',
-    'Bologna': '44.4949,11.3426'
-  };
+  // No coordinates - add cities via admin panel
+  const coordinates: Record<string, string> = {};
   
   return coordinates[cityName] || '0.0000,0.0000';
 }

@@ -394,7 +394,7 @@ export default function AdminPage() {
                           <FormItem>
                             <FormLabel>City Name *</FormLabel>
                             <FormControl>
-                              <Input placeholder="e.g., Austin" {...field} />
+                              <Input placeholder="e.g., Your City" {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -563,7 +563,7 @@ export default function AdminPage() {
                       <h3 className="text-lg font-semibold mb-3">Generate Single City HTML</h3>
                       <div className="flex gap-2">
                         <Input
-                          placeholder="Enter city name (e.g., Milan, Porto)"
+                          placeholder="Enter city name (e.g., Your City)"
                           value={singleCityName}
                           onChange={(e) => setSingleCityName(e.target.value)}
                           className="flex-1"
