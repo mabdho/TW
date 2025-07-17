@@ -12,6 +12,8 @@ const createCityImport = (cityName: string, modulePath: string) => {
 // City mapping for dynamic imports
 const cityMap = {
   // No city routes - add cities via admin panel
+
+  'berlin': createCityImport('Berlin', '../pages/cities/Berlin'),
 };
 
 interface DynamicCityRouteProps {

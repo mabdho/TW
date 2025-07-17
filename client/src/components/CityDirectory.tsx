@@ -5,7 +5,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 
-// No cities - add cities via admin panel
+// No cities - add cities via admin panel,
+  { "name": "Berlin", "country": "Germany", "path": "/things-to-do-in-berlin", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1599946347371-68eb71b16afc?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
 const cities = [];
 
 const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America", "South America"];
