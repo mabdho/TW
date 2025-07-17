@@ -46,15 +46,13 @@ export const CityRoutes: React.FC = () => {
   // Static list of cities to avoid hydration issues
   const cities = Object.keys(cityMap);
   
-  return (
-    <>
-      {cities.map((cityKey) => (
-        <DynamicCityRoute
-          key={cityKey}
-          path={`/things-to-do-in-${cityKey}`}
-          cityKey={cityKey}
-        />
-      ))}
-    </>
+  return React.createElement(React.Fragment, {}, 
+    cities.map((cityKey) => 
+      React.createElement(DynamicCityRoute, {
+        key: cityKey,
+        path: `/things-to-do-in-${cityKey}`,
+        cityKey: cityKey
+      })
+    )
   );
 };
