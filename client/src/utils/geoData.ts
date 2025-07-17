@@ -12,7 +12,7 @@ export interface CityCoordinates {
 }
 
 export const cityCoordinates: Record<string, CityCoordinates> = {
-  // City coordinates cleared - ready for fresh production content via admin panel
+  // No city coordinates - add cities via admin panel
 };
 
 /**

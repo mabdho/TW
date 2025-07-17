@@ -12,7 +12,7 @@ import { getAllBlogs } from '../blogs';
  */
 export function getAllCitiesData(): CityData[] {
   return [
-    // City data cleared - ready for fresh production content via admin panel
+    // No city data - add cities via admin panel
   ];
 }
 

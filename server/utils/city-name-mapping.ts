@@ -15,36 +15,7 @@ export interface CityNameMapping {
  * Add new cities here to ensure perfect compliance
  */
 export const CITY_NAME_MAPPINGS: Record<string, CityNameMapping> = {
-  'san-francisco': {
-    tsxName: 'SanFrancisco',
-    htmlName: 'san-francisco',
-    displayName: 'San Francisco'
-  },
-  'são-paulo': {
-    tsxName: 'SãoPaulo',
-    htmlName: 'são-paulo',
-    displayName: 'São Paulo'
-  },
-  'new-york': {
-    tsxName: 'NewYork',
-    htmlName: 'new-york',
-    displayName: 'New York'
-  },
-  'los-angeles': {
-    tsxName: 'LosAngeles',
-    htmlName: 'los-angeles',
-    displayName: 'Los Angeles'
-  },
-  'las-vegas': {
-    tsxName: 'LasVegas',
-    htmlName: 'las-vegas',
-    displayName: 'Las Vegas'
-  },
-  'san-diego': {
-    tsxName: 'SanDiego',
-    htmlName: 'san-diego',
-    displayName: 'San Diego'
-  }
+  // No city mappings - add cities via admin panel
 };
 
 /**
