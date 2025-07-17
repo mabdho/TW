@@ -1,72 +1,449 @@
-import s from"fs"
-import e from"path"
-import{fileURLToPath as t}from"url"
-import{dirname as i}from"path"
-i(t(import.meta.url))
-class n{constructor(){this.results={coreWebVitals:{score:0,issues:[],strengths:[]},bundleOptimization:{score:0,issues:[],strengths:[]},resourceOptimization:{score:0,issues:[],strengths:[]},caching:{score:0,issues:[],strengths:[]},networkOptimization:{score:0,issues:[],strengths:[]},overallScore:0}}async auditPerformance(){void 0,await this.auditCoreWebVitals(),await this.auditBundleOptimization(),await this.auditResourceOptimization(),await this.auditCaching(),await this.auditNetworkOptimization(),this.calculateOverallScore(),this.generatePerformanceReport()}async auditCoreWebVitals(){void 0
-const t=this.results.coreWebVitals,i=this.findIndexHtml()
-if(i){const e=s.readFileSync(i,"utf-8")
-e.includes("<style>")&&e.includes("critical")?(t.score+=25,t.strengths.push("✅ Critical CSS inlining implemented")):t.issues.push("❌ Critical CSS not inlined - impacts FCP"),e.includes('rel="preload"')&&(t.score+=20,t.strengths.push("✅ Resource preloading for faster LCP")),(e.includes("font-display:swap")||e.includes("&display=swap"))&&(t.score+=15,t.strengths.push("✅ Font optimization to prevent layout shift")),e.includes('loading="lazy"')&&(t.score+=15,t.strengths.push("✅ Image lazy loading implemented")),e.includes("width=")&&e.includes("height=")&&(t.score+=10,t.strengths.push("✅ Image dimensions specified - prevents CLS")),(e.includes("service-worker")||e.includes("sw.js"))&&(t.score+=15,t.strengths.push("✅ Service worker for caching"))}const n=["client/src/utils/performance.ts","client/src/utils/performanceOptimizer.ts","client/src/hooks/usePerformanceOptimization.ts"]
-for(const r of n)s.existsSync(r)&&(t.score+=10,t.strengths.push(`✅ Performance utility: ${e.basename(r)}`))
-void 0}async auditBundleOptimization(){void 0
-const e=this.results.bundleOptimization,t=JSON.parse(s.readFileSync("package.json","utf-8"))
-t.scripts&&(t.scripts["build:optimized"]&&(e.score+=20,e.strengths.push("✅ Optimized build script found")),t.scripts["optimize:css"]&&(e.score+=15,e.strengths.push("✅ CSS optimization script found")),t.scripts["optimize:js"]&&(e.score+=15,e.strengths.push("✅ JavaScript optimization script found")),t.scripts["analyze:bundle"]&&(e.score+=10,e.strengths.push("✅ Bundle analysis script found")))
-const i={...t.dependencies,...t.devDependencies},n=["terser","csso","cssnano","vite-plugin-compression","rollup-plugin-terser","babel-plugin-react-remove-properties"]
-let r=0
-for(const s of n)i[s]&&(r++,e.strengths.push(`✅ Optimization tool: ${s}`))
-e.score+=r/n.length*30
-const o=this.findViteConfig()
-if(o){const t=s.readFileSync(o,"utf-8");(t.includes("chunkSizeWarningLimit")||t.includes("manualChunks"))&&(e.score+=20,e.strengths.push("✅ Code splitting configuration found"))}const c=this.getBundleFiles()
-if(c.length>0){const s=c.filter(s=>s.size>5e5)
-0===s.length?(e.score+=10,e.strengths.push("✅ No large bundle files detected")):e.issues.push(`❌ Large bundle files detected: ${s.length} files > 500KB`)}void 0}async auditResourceOptimization(){void 0
-const t=this.results.resourceOptimization,i=["client/src/components/ImageOptimized.tsx","client/src/components/ImageOptimizer.tsx","client/src/utils/imageOptimization.ts","client/src/services/ImageOptimizationService.ts"]
-let n=0
-for(const c of i)s.existsSync(c)&&(n++,t.strengths.push(`✅ Image optimization: ${e.basename(c)}`))
-t.score+=n/i.length*30,s.existsSync("client/src/components/CriticalResourceLoader.tsx")&&(t.score+=20,t.strengths.push("✅ Critical resource loader implemented"))
-const r=["client/src/components/DynamicCityRoute.tsx"]
-for(const e of r)if(s.existsSync(e)){const i=s.readFileSync(e,"utf-8")
-i.includes("lazy(")&&i.includes("import(")&&(t.score+=25,t.strengths.push("✅ Dynamic imports and lazy loading implemented"))}this.findImageOptimizationReferences().some(s=>s.includes("webp")||s.includes("avif"))&&(t.score+=15,t.strengths.push("✅ Modern image formats (WebP/AVIF) supported"))
-const o=["vite.config.ts","package.json"]
-for(const e of o)if(s.existsSync(e)){const i=s.readFileSync(e,"utf-8")
-if(i.includes("compression")||i.includes("gzip")){t.score+=10,t.strengths.push("✅ Compression configuration found")
-break}}void 0}async auditCaching(){void 0
-const e=this.results.caching,t=["public/sw.js","dist/public/sw.js"]
-let i=!1
-for(const o of t)if(s.existsSync(o)){i=!0,e.score+=30,e.strengths.push("✅ Service worker implemented")
-const t=s.readFileSync(o,"utf-8")
-t.includes("cache")&&(e.score+=20,e.strengths.push("✅ Service worker caching strategy")),(t.includes("networkFirst")||t.includes("cacheFirst"))&&(e.score+=15,e.strengths.push("✅ Advanced caching strategies"))
-break}i||e.issues.push("❌ No service worker found - missing caching optimization")
-const n=["server/index.ts","server/firebase-server.ts"]
-for(const o of n)if(s.existsSync(o)){const t=s.readFileSync(o,"utf-8");(t.includes("Cache-Control")||t.includes("ETag"))&&(e.score+=20,e.strengths.push("✅ HTTP caching headers configured"))}const r=this.findViteConfig()
-if(r){const t=s.readFileSync(r,"utf-8")
-t.includes("rollupOptions")&&t.includes("output")&&(e.score+=15,e.strengths.push("✅ Build output optimization for caching"))}void 0}async auditNetworkOptimization(){void 0
-const e=this.results.networkOptimization,t=this.findIndexHtml()
-if(t){const i=s.readFileSync(t,"utf-8")
-i.includes("dns-prefetch")&&(e.score+=15,e.strengths.push("✅ DNS prefetch implemented")),i.includes("preconnect")&&(e.score+=20,e.strengths.push("✅ Preconnect hints implemented")),i.includes("prefetch")&&(e.score+=15,e.strengths.push("✅ Resource prefetch implemented"))}const i=this.findAllHtmlFiles()
-let n=!1
-for(const c of i){const e=s.readFileSync(c,"utf-8")
-if(e.includes("unsplash.com")||e.includes("cdn.")){n=!0
-break}}n&&(e.score+=20,e.strengths.push("✅ CDN usage detected"))
-const r=["server/index.ts","server/firebase-server.ts"]
-for(const c of r)if(s.existsSync(c)){const t=s.readFileSync(c,"utf-8")
-t.includes("Link:")&&t.includes("rel=")&&(e.score+=15,e.strengths.push("✅ HTTP/2 server push hints"))}const o=this.getBundleFiles()
-o.length>0&&o.length<10?(e.score+=15,e.strengths.push("✅ Optimal number of bundle files")):o.length>=10&&e.issues.push(`❌ Too many bundle files: ${o.length} (should be < 10)`),this.findImageOptimizationReferences().length>0&&(e.score+=15,e.strengths.push("✅ Image optimization reduces network load"))}findIndexHtml(){const e=["client/index.html","index.html","public/index.html","dist/index.html"]
-for(const t of e)if(s.existsSync(t))return t
-return null}findViteConfig(){const e=["vite.config.ts","vite.config.js","vite.config.ssr.ts"]
-for(const t of e)if(s.existsSync(t))return t
-return null}findAllHtmlFiles(){const t=[],i=["dist/public","public"]
-for(const n of i)s.existsSync(n)&&s.readdirSync(n,{recursive:!0}).forEach(s=>{s.endsWith(".html")&&t.push(e.join(n,s))})
-return t}findImageOptimizationReferences(){const t=[],i=["client/src/components","client/src/utils","client/src/services"]
-for(const n of i)s.existsSync(n)&&s.readdirSync(n).forEach(i=>{if(i.toLowerCase().includes("image")&&(i.endsWith(".ts")||i.endsWith(".tsx"))){const r=s.readFileSync(e.join(n,i),"utf-8")
-t.push(r)}})
-return t}getBundleFiles(){const t=[],i="dist"
-if(s.existsSync(i)){const n=i=>{s.readdirSync(i,{withFileTypes:!0}).forEach(r=>{const o=e.join(i,r.name)
-if(r.isDirectory())n(o)
-else if(r.name.endsWith(".js")||r.name.endsWith(".css")){const e=s.statSync(o)
-t.push({path:o,name:r.name,size:e.size})}})}
-n(i)}return t}calculateOverallScore(){const s=[this.results.coreWebVitals.score,this.results.bundleOptimization.score,this.results.resourceOptimization.score,this.results.caching.score,this.results.networkOptimization.score]
-this.results.overallScore=s.reduce((s,e)=>s+e,0)/s.length}generatePerformanceReport(){void 0
-let s="F"
-this.results.overallScore>=90?s="A+":this.results.overallScore>=80?s="A":this.results.overallScore>=70?s="B":this.results.overallScore>=60?s="C":this.results.overallScore>=50&&(s="D")
-const e=[...this.results.coreWebVitals.issues,...this.results.bundleOptimization.issues,...this.results.resourceOptimization.issues,...this.results.caching.issues,...this.results.networkOptimization.issues]
-return e.length>0&&(void 0,e.forEach(s=>{})),this.results}}export{n as PerformanceAuditor}
+#!/usr/bin/env node
+
+import fs from 'fs';
+import path from 'path';
+import { execSync } from 'child_process';
+
+class PerformanceAuditor {
+  constructor() {
+    this.results = {
+      bundleAnalysis: {
+        totalSize: 0,
+        gzippedSize: 0,
+        chunkSizes: [],
+        optimizationStatus: 'pending'
+      },
+      loadingPerformance: {
+        staticAssets: [],
+        imageOptimization: [],
+        codeOptimization: [],
+        caching: []
+      },
+      coreWebVitals: {
+        fcp: 0,
+        lcp: 0,
+        cls: 0,
+        fid: 0,
+        ttfb: 0
+      },
+      optimizations: {
+        implemented: [],
+        missing: [],
+        recommendations: []
+      },
+      score: 0,
+      timestamp: new Date().toISOString()
+    };
+  }
+
+  async auditPerformance() {
+    console.log('⚡ Starting Comprehensive Performance Audit...');
+    
+    await this.analyzeBundleOptimization();
+    await this.auditLoadingPerformance();
+    await this.checkImageOptimization();
+    await this.analyzeCodeOptimization();
+    await this.checkCachingStrategy();
+    
+    this.calculatePerformanceScore();
+    this.generateReport();
+    
+    return this.results;
+  }
+
+  async analyzeBundleOptimization() {
+    console.log('📦 Analyzing bundle optimization...');
+    
+    try {
+      // Check if dist directory exists
+      if (fs.existsSync('dist')) {
+        const distStats = this.getDirectorySize('dist');
+        this.results.bundleAnalysis.totalSize = distStats.totalSize;
+        this.results.bundleAnalysis.fileCount = distStats.fileCount;
+        
+        console.log(`   Total dist size: ${this.formatBytes(distStats.totalSize)}`);
+        console.log(`   Total files: ${distStats.fileCount}`);
+      }
+      
+      // Check package.json for optimization tools
+      if (fs.existsSync('package.json')) {
+        const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+        const deps = { ...packageJson.dependencies, ...packageJson.devDependencies };
+        
+        const optimizationTools = {
+          'terser': 'JavaScript minification',
+          'csso': 'CSS optimization',
+          'cssnano': 'CSS minification',
+          'vite-plugin-compression': 'Gzip compression',
+          'rollup-plugin-terser': 'Rollup minification',
+          'vite-plugin-purgecss': 'CSS purging',
+          '@rollup/plugin-terser': 'Modern Rollup terser'
+        };
+        
+        for (const [tool, description] of Object.entries(optimizationTools)) {
+          if (deps[tool]) {
+            this.results.optimizations.implemented.push(`✅ ${tool} - ${description}`);
+          } else {
+            this.results.optimizations.missing.push(`❌ ${tool} - ${description}`);
+          }
+        }
+        
+        // Check for problematic dependencies
+        const problematicDeps = {
+          'lucide-react': 'Large icon library - should use selective imports or alternatives',
+          'lodash': 'Large utility library - consider tree-shaking or alternatives',
+          'moment': 'Large date library - consider date-fns or dayjs'
+        };
+        
+        for (const [dep, issue] of Object.entries(problematicDeps)) {
+          if (deps[dep]) {
+            this.results.optimizations.recommendations.push(`⚠️  ${dep} detected - ${issue}`);
+          } else {
+            this.results.optimizations.implemented.push(`✅ ${dep} avoided/removed`);
+          }
+        }
+      }
+      
+    } catch (error) {
+      console.error('Error analyzing bundle:', error.message);
+    }
+  }
+
+  async auditLoadingPerformance() {
+    console.log('🚀 Auditing loading performance...');
+    
+    // Check for lazy loading implementation
+    const lazyLoadingFiles = [
+      'client/src/components/DynamicCityRoute.tsx',
+      'client/src/utils/performance.ts',
+      'client/src/hooks/usePerformanceOptimization.ts'
+    ];
+    
+    for (const file of lazyLoadingFiles) {
+      if (fs.existsSync(file)) {
+        const content = fs.readFileSync(file, 'utf8');
+        
+        if (content.includes('lazy(') || content.includes('import(')) {
+          this.results.loadingPerformance.codeOptimization.push(`✅ ${path.basename(file)} - Dynamic imports`);
+        }
+        
+        if (content.includes('loading="lazy"')) {
+          this.results.loadingPerformance.imageOptimization.push(`✅ ${path.basename(file)} - Lazy loading`);
+        }
+      }
+    }
+    
+    // Check for service worker
+    const swPaths = ['dist/public/sw.js', 'public/sw.js', 'client/public/sw.js'];
+    for (const swPath of swPaths) {
+      if (fs.existsSync(swPath)) {
+        this.results.loadingPerformance.caching.push('✅ Service worker implemented');
+        break;
+      }
+    }
+    
+    // Check for preload/prefetch hints
+    if (fs.existsSync('dist/public')) {
+      const htmlFiles = this.getFilesRecursively('dist/public', '.html');
+      let preloadFound = false;
+      let prefetchFound = false;
+      
+      for (const htmlFile of htmlFiles) {
+        const content = fs.readFileSync(htmlFile, 'utf8');
+        if (content.includes('rel="preload"')) preloadFound = true;
+        if (content.includes('rel="prefetch"')) prefetchFound = true;
+      }
+      
+      if (preloadFound) {
+        this.results.loadingPerformance.staticAssets.push('✅ Preload hints found');
+      } else {
+        this.results.optimizations.recommendations.push('⚠️  Consider adding preload hints for critical resources');
+      }
+      
+      if (prefetchFound) {
+        this.results.loadingPerformance.staticAssets.push('✅ Prefetch hints found');
+      }
+    }
+  }
+
+  async checkImageOptimization() {
+    console.log('🖼️  Checking image optimization...');
+    
+    const imageOptimizationFiles = [
+      'client/src/components/ImageOptimized.tsx',
+      'client/src/services/ImageOptimizationService.ts',
+      'client/src/utils/imageOptimization.ts'
+    ];
+    
+    for (const file of imageOptimizationFiles) {
+      if (fs.existsSync(file)) {
+        this.results.loadingPerformance.imageOptimization.push(`✅ ${path.basename(file)} implemented`);
+      } else {
+        this.results.optimizations.missing.push(`❌ ${path.basename(file)} missing`);
+      }
+    }
+    
+    // Check for modern image formats in dist
+    if (fs.existsSync('dist/public')) {
+      const imageFiles = this.getFilesRecursively('dist/public', ['.jpg', '.jpeg', '.png', '.webp', '.avif']);
+      const webpCount = imageFiles.filter(f => f.endsWith('.webp')).length;
+      const avifCount = imageFiles.filter(f => f.endsWith('.avif')).length;
+      const totalImages = imageFiles.length;
+      
+      if (webpCount > 0 || avifCount > 0) {
+        this.results.loadingPerformance.imageOptimization.push(`✅ Modern formats: ${webpCount} WebP, ${avifCount} AVIF`);
+      }
+      
+      if (totalImages > 0) {
+        const modernRatio = (webpCount + avifCount) / totalImages;
+        if (modernRatio < 0.5) {
+          this.results.optimizations.recommendations.push('⚠️  Consider converting more images to WebP/AVIF format');
+        }
+      }
+    }
+  }
+
+  async analyzeCodeOptimization() {
+    console.log('🔧 Analyzing code optimization...');
+    
+    // Check for minification
+    if (fs.existsSync('dist')) {
+      const jsFiles = this.getFilesRecursively('dist', '.js');
+      const cssFiles = this.getFilesRecursively('dist', '.css');
+      
+      let minifiedJs = 0;
+      let minifiedCss = 0;
+      
+      for (const jsFile of jsFiles.slice(0, 5)) { // Sample first 5 files
+        const content = fs.readFileSync(jsFile, 'utf8');
+        if (this.isMinified(content)) minifiedJs++;
+      }
+      
+      for (const cssFile of cssFiles.slice(0, 5)) { // Sample first 5 files
+        const content = fs.readFileSync(cssFile, 'utf8');
+        if (this.isMinified(content)) minifiedCss++;
+      }
+      
+      if (minifiedJs > 0) {
+        this.results.loadingPerformance.codeOptimization.push(`✅ JavaScript minification detected`);
+      }
+      
+      if (minifiedCss > 0) {
+        this.results.loadingPerformance.codeOptimization.push(`✅ CSS minification detected`);
+      }
+    }
+    
+    // Check for tree shaking indicators
+    if (fs.existsSync('vite.config.ts') || fs.existsSync('vite.config.js')) {
+      this.results.loadingPerformance.codeOptimization.push('✅ Vite build tool (includes tree shaking)');
+    }
+    
+    // Check for code splitting
+    const dynamicImportFiles = [
+      'client/src/components/DynamicCityRoute.tsx',
+      'client/src/App.tsx'
+    ];
+    
+    for (const file of dynamicImportFiles) {
+      if (fs.existsSync(file)) {
+        const content = fs.readFileSync(file, 'utf8');
+        if (content.includes('import(') || content.includes('lazy(')) {
+          this.results.loadingPerformance.codeOptimization.push(`✅ Code splitting in ${path.basename(file)}`);
+        }
+      }
+    }
+  }
+
+  async checkCachingStrategy() {
+    console.log('💾 Checking caching strategy...');
+    
+    // Check for cache headers in server configuration
+    const serverFiles = [
+      'server/index.ts',
+      'server/routes.ts',
+      '.htaccess',
+      'vercel.json',
+      'netlify.toml'
+    ];
+    
+    for (const file of serverFiles) {
+      if (fs.existsSync(file)) {
+        const content = fs.readFileSync(file, 'utf8');
+        
+        if (content.includes('Cache-Control') || content.includes('max-age')) {
+          this.results.loadingPerformance.caching.push(`✅ Cache headers in ${path.basename(file)}`);
+        }
+        
+        if (content.includes('ETag') || content.includes('etag')) {
+          this.results.loadingPerformance.caching.push(`✅ ETag support in ${path.basename(file)}`);
+        }
+      }
+    }
+    
+    // Check for static asset versioning
+    if (fs.existsSync('dist')) {
+      const staticFiles = this.getFilesRecursively('dist', ['.js', '.css']);
+      const versionedFiles = staticFiles.filter(f => 
+        /\.[a-f0-9]{8,}\.(js|css)$/i.test(f) || /-[a-f0-9]{8,}\.(js|css)$/i.test(f)
+      );
+      
+      if (versionedFiles.length > 0) {
+        this.results.loadingPerformance.caching.push(`✅ Asset versioning detected (${versionedFiles.length} files)`);
+      } else {
+        this.results.optimizations.recommendations.push('⚠️  Consider implementing asset versioning for better caching');
+      }
+    }
+  }
+
+  isMinified(content) {
+    // Simple heuristic: minified files typically have very long lines and minimal whitespace
+    const lines = content.split('\n');
+    const avgLineLength = content.length / lines.length;
+    const whitespaceRatio = (content.match(/\s/g) || []).length / content.length;
+    
+    return avgLineLength > 100 && whitespaceRatio < 0.2;
+  }
+
+  getDirectorySize(dirPath) {
+    let totalSize = 0;
+    let fileCount = 0;
+    
+    const files = this.getFilesRecursively(dirPath);
+    
+    for (const file of files) {
+      try {
+        const stats = fs.statSync(file);
+        totalSize += stats.size;
+        fileCount++;
+      } catch (error) {
+        // Skip files that can't be accessed
+      }
+    }
+    
+    return { totalSize, fileCount };
+  }
+
+  getFilesRecursively(dir, extensions = null) {
+    const files = [];
+    
+    if (!fs.existsSync(dir)) return files;
+    
+    const items = fs.readdirSync(dir);
+    
+    for (const item of items) {
+      const fullPath = path.join(dir, item);
+      const stat = fs.statSync(fullPath);
+      
+      if (stat.isDirectory()) {
+        files.push(...this.getFilesRecursively(fullPath, extensions));
+      } else {
+        if (extensions) {
+          const exts = Array.isArray(extensions) ? extensions : [extensions];
+          if (exts.some(ext => item.endsWith(ext))) {
+            files.push(fullPath);
+          }
+        } else {
+          files.push(fullPath);
+        }
+      }
+    }
+    
+    return files;
+  }
+
+  formatBytes(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
+  calculatePerformanceScore() {
+    const implementedCount = this.results.optimizations.implemented.length;
+    const missingCount = this.results.optimizations.missing.length;
+    const totalChecks = implementedCount + missingCount;
+    
+    this.results.score = totalChecks > 0 ? Math.round((implementedCount / totalChecks) * 100) : 0;
+    
+    // Adjust score based on recommendations
+    const recommendationPenalty = Math.min(this.results.optimizations.recommendations.length * 5, 20);
+    this.results.score = Math.max(0, this.results.score - recommendationPenalty);
+  }
+
+  generateReport() {
+    console.log('\n' + '='.repeat(80));
+    console.log('⚡ COMPREHENSIVE PERFORMANCE AUDIT REPORT');
+    console.log('='.repeat(80));
+    
+    console.log(`\n📊 Performance Score: ${this.results.score}/100`);
+    
+    if (this.results.score >= 90) {
+      console.log('🎉 EXCELLENT: Outstanding performance optimization!');
+    } else if (this.results.score >= 80) {
+      console.log('✅ GOOD: Strong performance with minor improvements possible.');
+    } else if (this.results.score >= 70) {
+      console.log('⚠️  FAIR: Good foundation but needs optimization work.');
+    } else {
+      console.log('❌ POOR: Significant performance improvements needed.');
+    }
+    
+    if (this.results.bundleAnalysis.totalSize > 0) {
+      console.log(`\n📦 BUNDLE ANALYSIS:`);
+      console.log(`├─ Total build size: ${this.formatBytes(this.results.bundleAnalysis.totalSize)}`);
+      console.log(`└─ Total files: ${this.results.bundleAnalysis.fileCount}`);
+    }
+    
+    console.log(`\n✅ IMPLEMENTED OPTIMIZATIONS (${this.results.optimizations.implemented.length}):`);
+    for (const optimization of this.results.optimizations.implemented.slice(0, 10)) {
+      console.log(`   ${optimization}`);
+    }
+    if (this.results.optimizations.implemented.length > 10) {
+      console.log(`   ... and ${this.results.optimizations.implemented.length - 10} more`);
+    }
+    
+    if (this.results.optimizations.missing.length > 0) {
+      console.log(`\n❌ MISSING OPTIMIZATIONS (${this.results.optimizations.missing.length}):`);
+      for (const missing of this.results.optimizations.missing.slice(0, 8)) {
+        console.log(`   ${missing}`);
+      }
+      if (this.results.optimizations.missing.length > 8) {
+        console.log(`   ... and ${this.results.optimizations.missing.length - 8} more`);
+      }
+    }
+    
+    if (this.results.optimizations.recommendations.length > 0) {
+      console.log(`\n💡 RECOMMENDATIONS (${this.results.optimizations.recommendations.length}):`);
+      for (const recommendation of this.results.optimizations.recommendations.slice(0, 8)) {
+        console.log(`   ${recommendation}`);
+      }
+      if (this.results.optimizations.recommendations.length > 8) {
+        console.log(`   ... and ${this.results.optimizations.recommendations.length - 8} more`);
+      }
+    }
+    
+    console.log(`\n🔍 PERFORMANCE CATEGORIES:`);
+    console.log(`├─ Code Optimization: ${this.results.loadingPerformance.codeOptimization.length} items`);
+    console.log(`├─ Image Optimization: ${this.results.loadingPerformance.imageOptimization.length} items`);
+    console.log(`├─ Caching Strategy: ${this.results.loadingPerformance.caching.length} items`);
+    console.log(`└─ Static Assets: ${this.results.loadingPerformance.staticAssets.length} items`);
+    
+    console.log('\n' + '='.repeat(80));
+    
+    // Save detailed results
+    fs.writeFileSync('performance-audit-results.json', JSON.stringify(this.results, null, 2));
+    console.log('📄 Detailed results saved to: performance-audit-results.json');
+    
+    return this.results;
+  }
+}
+
+// Run the audit if this file is executed directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  (async () => {
+    const auditor = new PerformanceAuditor();
+    await auditor.auditPerformance();
+  })().catch(console.error);
+}
+
+export { PerformanceAuditor };

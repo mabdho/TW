@@ -1,0 +1,83 @@
+{
+  "orphanLinks": {
+    "status": "issues_found",
+    "totalLinks": 6,
+    "workingLinks": 4,
+    "brokenLinks": [
+      "/privacy",
+      "/terms"
+    ],
+    "orphanPages": [
+      "/blogs-seo",
+      "/cookie-policy",
+      "/destinations-seo",
+      "/home-seo",
+      "/privacy-policy",
+      "/terms-of-service"
+    ],
+    "score": 67
+  },
+  "hydrationCompliance": {
+    "status": "perfect",
+    "totalPages": 3,
+    "compliantPages": 3,
+    "failedPages": [],
+    "complianceRate": 100,
+    "score": 100
+  },
+  "tsxHtmlSync": {
+    "status": "issues_found",
+    "totalFiles": 3,
+    "syncedFiles": 0,
+    "mismatchedFiles": [
+      {
+        "type": "sync_issue",
+        "file": "dist/public/home-seo.html",
+        "issue": "HTML does not contain React hydration markers"
+      },
+      {
+        "type": "sync_issue",
+        "file": "dist/public/destinations-seo.html",
+        "issue": "HTML does not contain React hydration markers"
+      },
+      {
+        "type": "sync_issue",
+        "file": "dist/public/blogs-seo.html",
+        "issue": "HTML does not contain React hydration markers"
+      }
+    ],
+    "syncRate": 0,
+    "score": 0
+  },
+  "seoImplementation": {
+    "status": "perfect",
+    "totalPages": 8,
+    "optimizedPages": 8,
+    "missingElements": [],
+    "seoScore": 100,
+    "score": 100
+  },
+  "performance": {
+    "status": "perfect",
+    "bundleSize": 0,
+    "loadTime": 0,
+    "optimizations": [
+      "✅ terser installed",
+      "✅ csso installed",
+      "✅ cssnano installed",
+      "✅ vite-plugin-compression installed",
+      "✅ lucide-react removed - bundle optimized",
+      "✅ performance.ts implemented",
+      "✅ performanceOptimizer.ts implemented",
+      "✅ usePerformanceOptimization.ts implemented",
+      "✅ bundleOptimizer.ts implemented",
+      "✅ ImageOptimized.tsx implemented",
+      "✅ ImageOptimizationService.ts implemented",
+      "✅ Service worker implemented"
+    ],
+    "issues": [],
+    "score": 100
+  },
+  "overallScore": 73,
+  "timestamp": "2025-07-17T01:39:10.288Z"
+}

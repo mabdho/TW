@@ -1,0 +1,1495 @@
+{
+  "summary": {
+    "totalTsxFiles": 87,
+    "totalHtmlFiles": 8,
+    "syncIssues": [
+      {
+        "tsxFile": "home",
+        "htmlFile": "home-seo",
+        "issues": [
+          "HTML missing React root element",
+          "HTML missing React scripts"
+        ],
+        "severity": "critical",
+        "recommendations": [
+          "Add <div id=\"root\"> container to HTML",
+          "Include React bundle scripts in HTML"
+        ]
+      },
+      {
+        "tsxFile": "home",
+        "htmlFile": "index",
+        "issues": [
+          "HTML missing React scripts"
+        ],
+        "severity": "critical",
+        "recommendations": [
+          "Include React bundle scripts in HTML"
+        ]
+      },
+      {
+        "tsxFile": "destinations",
+        "htmlFile": "destinations-seo",
+        "issues": [
+          "HTML missing React root element",
+          "HTML missing React scripts"
+        ],
+        "severity": "critical",
+        "recommendations": [
+          "Add <div id=\"root\"> container to HTML",
+          "Include React bundle scripts in HTML"
+        ]
+      },
+      {
+        "tsxFile": "destinations",
+        "htmlFile": "destinations",
+        "issues": [
+          "HTML missing React root element",
+          "HTML missing React scripts"
+        ],
+        "severity": "critical",
+        "recommendations": [
+          "Add <div id=\"root\"> container to HTML",
+          "Include React bundle scripts in HTML"
+        ]
+      },
+      {
+        "tsxFile": "blogs",
+        "htmlFile": "blogs-seo",
+        "issues": [
+          "HTML missing React root element",
+          "HTML missing React scripts"
+        ],
+        "severity": "critical",
+        "recommendations": [
+          "Add <div id=\"root\"> container to HTML",
+          "Include React bundle scripts in HTML"
+        ]
+      }
+    ],
+    "recommendations": [
+      "Implement React Hydration Pipeline",
+      "Add Hydration Setup to TSX Components"
+    ],
+    "severity": "critical"
+  },
+  "tsxAnalysis": {
+    "CookiePolicy": {
+      "filePath": "client/src/pages/CookiePolicy.tsx",
+      "fileName": "CookiePolicy",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "CookiePolicy"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "PrivacyPolicy": {
+      "filePath": "client/src/pages/PrivacyPolicy.tsx",
+      "fileName": "PrivacyPolicy",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "PrivacyPolicy"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "TermsOfService": {
+      "filePath": "client/src/pages/TermsOfService.tsx",
+      "fileName": "TermsOfService",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "TermsOfService"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "admin": {
+      "filePath": "client/src/pages/admin.tsx",
+      "fileName": "admin",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "AdminPage"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "blog-detail": {
+      "filePath": "client/src/pages/blog-detail.tsx",
+      "fileName": "blog-detail",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "BlogDetailPage"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "blogs": {
+      "filePath": "client/src/pages/blogs.tsx",
+      "fileName": "blogs",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": true,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "BlogsPage"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {
+        "seoComponent": "SEO component detected"
+      }
+    },
+    "Berlin": {
+      "filePath": "client/src/pages/cities/Berlin.tsx",
+      "fileName": "Berlin",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "Berlin"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "destinations": {
+      "filePath": "client/src/pages/destinations.tsx",
+      "fileName": "destinations",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": true,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "DestinationsPage"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {
+        "seoComponent": "SEO component detected"
+      }
+    },
+    "home": {
+      "filePath": "client/src/pages/home.tsx",
+      "fileName": "home",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": true,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "Home"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {
+        "seoComponent": "SEO component detected"
+      }
+    },
+    "login": {
+      "filePath": "client/src/pages/login.tsx",
+      "fileName": "login",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "LoginPage"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "not-found": {
+      "filePath": "client/src/pages/not-found.tsx",
+      "fileName": "not-found",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "NotFound"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "CityDirectory": {
+      "filePath": "client/src/components/CityDirectory.tsx",
+      "fileName": "CityDirectory",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "CityDirectory"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "CityPage": {
+      "filePath": "client/src/components/CityPage.tsx",
+      "fileName": "CityPage",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "CityPage"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "ContextualLinks": {
+      "filePath": "client/src/components/ContextualLinks.tsx",
+      "fileName": "ContextualLinks",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "ContextualLinks"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "CriticalResourceLoader": {
+      "filePath": "client/src/components/CriticalResourceLoader.tsx",
+      "fileName": "CriticalResourceLoader",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "CriticalResourceLoader"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "DiscoveryCards": {
+      "filePath": "client/src/components/DiscoveryCards.tsx",
+      "fileName": "DiscoveryCards",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "DiscoveryCards"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "DynamicCityRoute": {
+      "filePath": "client/src/components/DynamicCityRoute.tsx",
+      "fileName": "DynamicCityRoute",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "DynamicCityRoute",
+        "CityRoutes"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "EnhancedInternalLinks": {
+      "filePath": "client/src/components/EnhancedInternalLinks.tsx",
+      "fileName": "EnhancedInternalLinks",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "EnhancedInternalLinks"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "EnterpriseInternalLinks": {
+      "filePath": "client/src/components/EnterpriseInternalLinks.tsx",
+      "fileName": "EnterpriseInternalLinks",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "EnterpriseInternalLinks",
+        "enterpriseInternalLinksStyles"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "FeaturedCities": {
+      "filePath": "client/src/components/FeaturedCities.tsx",
+      "fileName": "FeaturedCities",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "Footer": {
+      "filePath": "client/src/components/Footer.tsx",
+      "fileName": "Footer",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "Hero": {
+      "filePath": "client/src/components/Hero.tsx",
+      "fileName": "Hero",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "Hero"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "ImageOptimized": {
+      "filePath": "client/src/components/ImageOptimized.tsx",
+      "fileName": "ImageOptimized",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "ImageOptimized"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "ImageOptimizer": {
+      "filePath": "client/src/components/ImageOptimizer.tsx",
+      "fileName": "ImageOptimizer",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "ImageOptimizer"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "InteractiveAttractionExplorer": {
+      "filePath": "client/src/components/InteractiveAttractionExplorer.tsx",
+      "fileName": "InteractiveAttractionExplorer",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "InteractiveAttractionExplorer"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "InternalLinks": {
+      "filePath": "client/src/components/InternalLinks.tsx",
+      "fileName": "InternalLinks",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "InternalLinks"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "Navigation": {
+      "filePath": "client/src/components/Navigation.tsx",
+      "fileName": "Navigation",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "Navigation"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "RichSnippets": {
+      "filePath": "client/src/components/RichSnippets.tsx",
+      "fileName": "RichSnippets",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "CityRichSnippets",
+        "BlogRichSnippets",
+        "generateReviewStars"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "SEOHead": {
+      "filePath": "client/src/components/SEOHead.tsx",
+      "fileName": "SEOHead",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": true,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "SEOHead"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {
+        "seoComponent": "SEO component detected"
+      }
+    },
+    "SimpleCityList": {
+      "filePath": "client/src/components/SimpleCityList.tsx",
+      "fileName": "SimpleCityList",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "SimpleCityList"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "SmartInternalLinks": {
+      "filePath": "client/src/components/SmartInternalLinks.tsx",
+      "fileName": "SmartInternalLinks",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "SmartInternalLinks"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "TravelCategories": {
+      "filePath": "client/src/components/TravelCategories.tsx",
+      "fileName": "TravelCategories",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "SEOPreview": {
+      "filePath": "client/src/components/admin/SEOPreview.tsx",
+      "fileName": "SEOPreview",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "SEOPreview"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "LightweightIcons": {
+      "filePath": "client/src/components/icons/LightweightIcons.tsx",
+      "fileName": "LightweightIcons",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "MenuIcon",
+        "XIcon",
+        "SearchIcon",
+        "ArrowRightIcon",
+        "ArrowLeftIcon",
+        "MapPinIcon",
+        "GlobeIcon",
+        "PlaneIcon",
+        "CompassIcon",
+        "ClockIcon",
+        "StarIcon",
+        "CalendarIcon",
+        "CameraIcon",
+        "HeartIcon",
+        "EyeIcon",
+        "SparklesIcon",
+        "DollarSignIcon",
+        "UsersIcon",
+        "InfoIcon",
+        "BookOpenIcon",
+        "ImageIcon",
+        "FileTextIcon",
+        "ShieldIcon",
+        "LockIcon",
+        "DatabaseIcon",
+        "CookieIcon",
+        "SettingsIcon",
+        "MailIcon",
+        "PhoneIcon",
+        "FacebookIcon",
+        "TwitterIcon",
+        "InstagramIcon",
+        "YoutubeIcon",
+        "AlertTriangleIcon",
+        "ScaleIcon",
+        "Loader2Icon",
+        "Trash2Icon",
+        "LogOutIcon",
+        "BoldIcon",
+        "ItalicIcon",
+        "UnderlineIcon",
+        "AlignLeftIcon",
+        "AlignCenterIcon",
+        "AlignRightIcon",
+        "ListIcon",
+        "ListOrderedIcon",
+        "TypeIcon",
+        "LeafIcon",
+        "MountainIcon",
+        "WavesIcon",
+        "PaletteIcon",
+        "CoffeeIcon",
+        "AlertCircleIcon",
+        "ChevronDownIcon",
+        "ChevronLeftIcon",
+        "ChevronRightIcon",
+        "CheckIcon",
+        "CircleIcon",
+        "FilterIcon",
+        "IconMap",
+        "LightIcon"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "BasePageTemplate": {
+      "filePath": "client/src/components/templates/BasePageTemplate.tsx",
+      "fileName": "BasePageTemplate",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": true,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "BasePageTemplate"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {
+        "seoComponent": "SEO component detected"
+      }
+    },
+    "BlogPageTemplate": {
+      "filePath": "client/src/components/templates/BlogPageTemplate.tsx",
+      "fileName": "BlogPageTemplate",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "BlogPageTemplate"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "CityPageTemplate": {
+      "filePath": "client/src/components/templates/CityPageTemplate.tsx",
+      "fileName": "CityPageTemplate",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": true,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "CityPageTemplate"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {
+        "seoComponent": "SEO component detected"
+      }
+    },
+    "accordion": {
+      "filePath": "client/src/components/ui/accordion.tsx",
+      "fileName": "accordion",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "alert-dialog": {
+      "filePath": "client/src/components/ui/alert-dialog.tsx",
+      "fileName": "alert-dialog",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "alert": {
+      "filePath": "client/src/components/ui/alert.tsx",
+      "fileName": "alert",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "aspect-ratio": {
+      "filePath": "client/src/components/ui/aspect-ratio.tsx",
+      "fileName": "aspect-ratio",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "avatar": {
+      "filePath": "client/src/components/ui/avatar.tsx",
+      "fileName": "avatar",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "badge": {
+      "filePath": "client/src/components/ui/badge.tsx",
+      "fileName": "badge",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "breadcrumb": {
+      "filePath": "client/src/components/ui/breadcrumb.tsx",
+      "fileName": "breadcrumb",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "button": {
+      "filePath": "client/src/components/ui/button.tsx",
+      "fileName": "button",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "calendar": {
+      "filePath": "client/src/components/ui/calendar.tsx",
+      "fileName": "calendar",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "card": {
+      "filePath": "client/src/components/ui/card.tsx",
+      "fileName": "card",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "carousel": {
+      "filePath": "client/src/components/ui/carousel.tsx",
+      "fileName": "carousel",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "chart": {
+      "filePath": "client/src/components/ui/chart.tsx",
+      "fileName": "chart",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "checkbox": {
+      "filePath": "client/src/components/ui/checkbox.tsx",
+      "fileName": "checkbox",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "collapsible": {
+      "filePath": "client/src/components/ui/collapsible.tsx",
+      "fileName": "collapsible",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "command": {
+      "filePath": "client/src/components/ui/command.tsx",
+      "fileName": "command",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "context-menu": {
+      "filePath": "client/src/components/ui/context-menu.tsx",
+      "fileName": "context-menu",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "dialog": {
+      "filePath": "client/src/components/ui/dialog.tsx",
+      "fileName": "dialog",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "drawer": {
+      "filePath": "client/src/components/ui/drawer.tsx",
+      "fileName": "drawer",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "dropdown-menu": {
+      "filePath": "client/src/components/ui/dropdown-menu.tsx",
+      "fileName": "dropdown-menu",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "form": {
+      "filePath": "client/src/components/ui/form.tsx",
+      "fileName": "form",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "hover-card": {
+      "filePath": "client/src/components/ui/hover-card.tsx",
+      "fileName": "hover-card",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "input-otp": {
+      "filePath": "client/src/components/ui/input-otp.tsx",
+      "fileName": "input-otp",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "input": {
+      "filePath": "client/src/components/ui/input.tsx",
+      "fileName": "input",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "label": {
+      "filePath": "client/src/components/ui/label.tsx",
+      "fileName": "label",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "LazyRadixComponents": {
+      "filePath": "client/src/components/ui/lazy/LazyRadixComponents.tsx",
+      "fileName": "LazyRadixComponents",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "LazyDialog",
+        "LazyDialogContent",
+        "LazyDialogHeader",
+        "LazyDialogTitle",
+        "LazyDialogTrigger",
+        "LazyDropdownMenu",
+        "LazyDropdownMenuContent",
+        "LazyDropdownMenuItem",
+        "LazyDropdownMenuTrigger",
+        "LazySelect",
+        "LazySelectContent",
+        "LazySelectItem",
+        "LazySelectTrigger",
+        "LazySelectValue",
+        "LazyTabs",
+        "LazyTabsContent",
+        "LazyTabsList",
+        "LazyTabsTrigger",
+        "LazyAccordion",
+        "LazyAccordionContent",
+        "LazyAccordionItem",
+        "LazyAccordionTrigger",
+        "LazyScrollArea",
+        "LazyToast",
+        "LazyToaster",
+        "OptimizedDialog",
+        "OptimizedDropdownMenu",
+        "OptimizedSelect",
+        "OptimizedTabs",
+        "OptimizedAccordion",
+        "preloadRadixForRoute",
+        "trackRadixUsage"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "loading-skeleton": {
+      "filePath": "client/src/components/ui/loading-skeleton.tsx",
+      "fileName": "loading-skeleton",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "loadingSkeletonStyles"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "menubar": {
+      "filePath": "client/src/components/ui/menubar.tsx",
+      "fileName": "menubar",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "navigation-menu": {
+      "filePath": "client/src/components/ui/navigation-menu.tsx",
+      "fileName": "navigation-menu",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "pagination": {
+      "filePath": "client/src/components/ui/pagination.tsx",
+      "fileName": "pagination",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "popover": {
+      "filePath": "client/src/components/ui/popover.tsx",
+      "fileName": "popover",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "progress": {
+      "filePath": "client/src/components/ui/progress.tsx",
+      "fileName": "progress",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "radio-group": {
+      "filePath": "client/src/components/ui/radio-group.tsx",
+      "fileName": "radio-group",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "resizable": {
+      "filePath": "client/src/components/ui/resizable.tsx",
+      "fileName": "resizable",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "rich-text-editor": {
+      "filePath": "client/src/components/ui/rich-text-editor.tsx",
+      "fileName": "rich-text-editor",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "RichTextEditor"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "scroll-area": {
+      "filePath": "client/src/components/ui/scroll-area.tsx",
+      "fileName": "scroll-area",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "select": {
+      "filePath": "client/src/components/ui/select.tsx",
+      "fileName": "select",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "separator": {
+      "filePath": "client/src/components/ui/separator.tsx",
+      "fileName": "separator",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "sheet": {
+      "filePath": "client/src/components/ui/sheet.tsx",
+      "fileName": "sheet",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "sidebar": {
+      "filePath": "client/src/components/ui/sidebar.tsx",
+      "fileName": "sidebar",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "skeleton": {
+      "filePath": "client/src/components/ui/skeleton.tsx",
+      "fileName": "skeleton",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "slider": {
+      "filePath": "client/src/components/ui/slider.tsx",
+      "fileName": "slider",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "switch": {
+      "filePath": "client/src/components/ui/switch.tsx",
+      "fileName": "switch",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "table": {
+      "filePath": "client/src/components/ui/table.tsx",
+      "fileName": "table",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "tabs": {
+      "filePath": "client/src/components/ui/tabs.tsx",
+      "fileName": "tabs",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "textarea": {
+      "filePath": "client/src/components/ui/textarea.tsx",
+      "fileName": "textarea",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "toast": {
+      "filePath": "client/src/components/ui/toast.tsx",
+      "fileName": "toast",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "toaster": {
+      "filePath": "client/src/components/ui/toaster.tsx",
+      "fileName": "toaster",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [
+        "Toaster"
+      ],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "toggle-group": {
+      "filePath": "client/src/components/ui/toggle-group.tsx",
+      "fileName": "toggle-group",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "toggle": {
+      "filePath": "client/src/components/ui/toggle.tsx",
+      "fileName": "toggle",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    },
+    "tooltip": {
+      "filePath": "client/src/components/ui/tooltip.tsx",
+      "fileName": "tooltip",
+      "hasHydrationSetup": false,
+      "hasRootElement": false,
+      "hasSEOHead": false,
+      "hasStaticGeneration": false,
+      "exportedComponents": [],
+      "hydrationMarkers": [],
+      "seoElements": {}
+    }
+  },
+  "htmlAnalysis": {
+    "blogs-seo": {
+      "filePath": "dist/public/blogs-seo.html",
+      "fileName": "blogs-seo",
+      "hasRootElement": false,
+      "hasReactScript": false,
+      "hasHydrationMarkers": false,
+      "seoElements": {
+        "title": "Travel Blog Stories & Destination Guides - TravelWanders",
+        "description": "Get inspired with our travel stories, tips, and destination guides from expert travelers around the world. Discover hidden gems and travel inspiration.",
+        "h1": "Travel Blog",
+        "canonical": "https://travelwanders.com/blogs",
+        "ogTitle": "Travel Blog Stories & Destination Guides - TravelWanders",
+        "structuredData": 1
+      },
+      "reactElements": [],
+      "suspectedReactComponents": []
+    },
+    "cookie-policy": {
+      "filePath": "dist/public/cookie-policy.html",
+      "fileName": "cookie-policy",
+      "hasRootElement": false,
+      "hasReactScript": false,
+      "hasHydrationMarkers": false,
+      "seoElements": {
+        "title": "Cookie Policy | TravelWanders Travel Guide Platform",
+        "description": "Cookie Policy for TravelWanders - Learn about how we use cookies and similar technologies to enhance your travel guide experience.",
+        "h1": "Cookie Policy",
+        "canonical": "https://travelwanders.com/cookie-policy",
+        "ogTitle": "Cookie Policy - TravelWanders",
+        "structuredData": 1
+      },
+      "reactElements": [],
+      "suspectedReactComponents": []
+    },
+    "destinations-seo": {
+      "filePath": "dist/public/destinations-seo.html",
+      "fileName": "destinations-seo",
+      "hasRootElement": false,
+      "hasReactScript": false,
+      "hasHydrationMarkers": false,
+      "seoElements": {
+        "title": "All Destinations - TravelWanders",
+        "description": "Browse our complete collection of travel destinations with detailed guides, attractions, and insider tips for amazing cities worldwide.",
+        "h1": "All Destinations",
+        "canonical": "https://travelwanders.com/destinations",
+        "ogTitle": "All Destinations - TravelWanders",
+        "structuredData": 1
+      },
+      "reactElements": [],
+      "suspectedReactComponents": []
+    },
+    "destinations": {
+      "filePath": "dist/public/destinations.html",
+      "fileName": "destinations",
+      "hasRootElement": false,
+      "hasReactScript": false,
+      "hasHydrationMarkers": false,
+      "seoElements": {
+        "title": "All Destinations - TravelWanders",
+        "description": "Browse our complete collection of travel destinations with detailed guides, attractions, and insider tips for amazing cities worldwide.",
+        "h1": "All Destinations",
+        "canonical": "https://travelwanders.com/destinations",
+        "ogTitle": "All Destinations - TravelWanders",
+        "structuredData": 1
+      },
+      "reactElements": [],
+      "suspectedReactComponents": []
+    },
+    "home-seo": {
+      "filePath": "dist/public/home-seo.html",
+      "fileName": "home-seo",
+      "hasRootElement": false,
+      "hasReactScript": false,
+      "hasHydrationMarkers": false,
+      "seoElements": {
+        "title": "Best Travel Guides & Destinations - TravelWanders",
+        "description": "Discover amazing travel destinations with TravelWanders. Find comprehensive city guides, hidden gems, and travel tips for your next adventure.",
+        "h1": "Explore the world with confidence",
+        "canonical": "https://travelwanders.com/",
+        "ogTitle": "Best Travel Guides & Destinations - TravelWanders",
+        "structuredData": 1
+      },
+      "reactElements": [],
+      "suspectedReactComponents": []
+    },
+    "privacy-policy": {
+      "filePath": "dist/public/privacy-policy.html",
+      "fileName": "privacy-policy",
+      "hasRootElement": false,
+      "hasReactScript": false,
+      "hasHydrationMarkers": false,
+      "seoElements": {
+        "title": "Privacy Policy - TravelWanders",
+        "description": "Privacy Policy for TravelWanders - Learn how we collect, use, and protect your personal information when you use our travel guide platform.",
+        "h1": "Privacy Policy",
+        "canonical": "https://travelwanders.com/privacy-policy",
+        "ogTitle": "Privacy Policy & Data Protection - TravelWanders",
+        "structuredData": 1
+      },
+      "reactElements": [],
+      "suspectedReactComponents": []
+    },
+    "terms-of-service": {
+      "filePath": "dist/public/terms-of-service.html",
+      "fileName": "terms-of-service",
+      "hasRootElement": false,
+      "hasReactScript": false,
+      "hasHydrationMarkers": false,
+      "seoElements": {
+        "title": "Terms of Service & User Agreement - TravelWanders",
+        "description": "Terms of Service for TravelWanders - Understand the rules and guidelines for using our travel guide platform and services.",
+        "h1": "Terms of Service",
+        "canonical": "https://travelwanders.com/terms-of-service",
+        "ogTitle": "Terms of Service & User Agreement - TravelWanders",
+        "structuredData": 1
+      },
+      "reactElements": [],
+      "suspectedReactComponents": []
+    },
+    "index": {
+      "filePath": "dist/public/things-to-do-in-berlin/index.html",
+      "fileName": "index",
+      "hasRootElement": true,
+      "hasReactScript": false,
+      "hasHydrationMarkers": false,
+      "seoElements": {
+        "title": "Best Things to Do in Berlin, Germany (2025 Guide)",
+        "description": "Discover things to do in Berlin — top attractions, hidden gems, and food spots. Complete Berlin travel guide.",
+        "h1": "Best Things to Do in Berlin, Germany (2025 Guide)",
+        "canonical": "https://travelwanders.com/things-to-do-in-berlin",
+        "ogTitle": "Best Things to Do in Berlin, Germany (2025 Guide)",
+        "structuredData": 3
+      },
+      "reactElements": [
+        "Root element found"
+      ],
+      "suspectedReactComponents": []
+    }
+  },
+  "syncMappings": {
+    "home-home-seo": {
+      "tsxFile": "home",
+      "htmlFile": "home-seo",
+      "issues": [
+        "HTML missing React root element",
+        "HTML missing React scripts"
+      ],
+      "severity": "critical",
+      "recommendations": [
+        "Add <div id=\"root\"> container to HTML",
+        "Include React bundle scripts in HTML"
+      ]
+    },
+    "home-index": {
+      "tsxFile": "home",
+      "htmlFile": "index",
+      "issues": [
+        "HTML missing React scripts"
+      ],
+      "severity": "critical",
+      "recommendations": [
+        "Include React bundle scripts in HTML"
+      ]
+    },
+    "destinations-destinations-seo": {
+      "tsxFile": "destinations",
+      "htmlFile": "destinations-seo",
+      "issues": [
+        "HTML missing React root element",
+        "HTML missing React scripts"
+      ],
+      "severity": "critical",
+      "recommendations": [
+        "Add <div id=\"root\"> container to HTML",
+        "Include React bundle scripts in HTML"
+      ]
+    },
+    "destinations-destinations": {
+      "tsxFile": "destinations",
+      "htmlFile": "destinations",
+      "issues": [
+        "HTML missing React root element",
+        "HTML missing React scripts"
+      ],
+      "severity": "critical",
+      "recommendations": [
+        "Add <div id=\"root\"> container to HTML",
+        "Include React bundle scripts in HTML"
+      ]
+    },
+    "blogs-blogs-seo": {
+      "tsxFile": "blogs",
+      "htmlFile": "blogs-seo",
+      "issues": [
+        "HTML missing React root element",
+        "HTML missing React scripts"
+      ],
+      "severity": "critical",
+      "recommendations": [
+        "Add <div id=\"root\"> container to HTML",
+        "Include React bundle scripts in HTML"
+      ]
+    }
+  },
+  "fixRecommendations": [
+    {
+      "priority": "CRITICAL",
+      "title": "Implement React Hydration Pipeline",
+      "description": "HTML files are missing React root elements and hydration markers",
+      "actions": [
+        "Add <div id=\"root\"></div> containers to all HTML files",
+        "Include React bundle scripts in HTML files",
+        "Implement proper SSR hydration process",
+        "Test hydration in development environment"
+      ],
+      "files": [
+        "home-seo",
+        "index",
+        "destinations-seo",
+        "destinations",
+        "blogs-seo"
+      ]
+    },
+    {
+      "priority": "MEDIUM",
+      "title": "Add Hydration Setup to TSX Components",
+      "description": "Some TSX components lack proper hydration configuration",
+      "actions": [
+        "Import ReactDOM.hydrateRoot or ReactDOM.hydrate",
+        "Add hydration logic to component entry points",
+        "Ensure components can mount to existing DOM structure",
+        "Add error boundaries for hydration failures"
+      ],
+      "files": [
+        "CookiePolicy",
+        "PrivacyPolicy",
+        "TermsOfService",
+        "admin",
+        "blog-detail",
+        "blogs",
+        "Berlin",
+        "destinations",
+        "home",
+        "login",
+        "not-found",
+        "CityDirectory",
+        "CityPage",
+        "ContextualLinks",
+        "CriticalResourceLoader",
+        "DiscoveryCards",
+        "DynamicCityRoute",
+        "EnhancedInternalLinks",
+        "EnterpriseInternalLinks",
+        "Hero",
+        "ImageOptimized",
+        "ImageOptimizer",
+        "InteractiveAttractionExplorer",
+        "InternalLinks",
+        "Navigation",
+        "RichSnippets",
+        "SEOHead",
+        "SimpleCityList",
+        "SmartInternalLinks",
+        "SEOPreview",
+        "LightweightIcons",
+        "BasePageTemplate",
+        "BlogPageTemplate",
+        "CityPageTemplate",
+        "LazyRadixComponents",
+        "loading-skeleton",
+        "rich-text-editor",
+        "toaster"
+      ]
+    }
+  ],
+  "timestamp": "2025-07-17T01:43:59.812Z"
+}

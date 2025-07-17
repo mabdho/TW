@@ -1,0 +1,59 @@
+{
+  "bundleAnalysis": {
+    "totalSize": 271997,
+    "gzippedSize": 0,
+    "chunkSizes": [],
+    "optimizationStatus": "pending",
+    "fileCount": 16
+  },
+  "loadingPerformance": {
+    "staticAssets": [
+      "✅ Preload hints found",
+      "✅ Prefetch hints found"
+    ],
+    "imageOptimization": [
+      "✅ usePerformanceOptimization.ts - Lazy loading",
+      "✅ ImageOptimized.tsx implemented",
+      "✅ ImageOptimizationService.ts implemented",
+      "✅ imageOptimization.ts implemented"
+    ],
+    "codeOptimization": [
+      "✅ DynamicCityRoute.tsx - Dynamic imports",
+      "✅ JavaScript minification detected",
+      "✅ Vite build tool (includes tree shaking)",
+      "✅ Code splitting in DynamicCityRoute.tsx",
+      "✅ Code splitting in App.tsx"
+    ],
+    "caching": [
+      "✅ Service worker implemented",
+      "✅ Cache headers in index.ts"
+    ]
+  },
+  "coreWebVitals": {
+    "fcp": 0,
+    "lcp": 0,
+    "cls": 0,
+    "fid": 0,
+    "ttfb": 0
+  },
+  "optimizations": {
+    "implemented": [
+      "✅ terser - JavaScript minification",
+      "✅ csso - CSS optimization",
+      "✅ cssnano - CSS minification",
+      "✅ vite-plugin-compression - Gzip compression",
+      "✅ rollup-plugin-terser - Rollup minification",
+      "✅ vite-plugin-purgecss - CSS purging",
+      "✅ @rollup/plugin-terser - Modern Rollup terser",
+      "✅ lucide-react avoided/removed",
+      "✅ lodash avoided/removed",
+      "✅ moment avoided/removed"
+    ],
+    "missing": [],
+    "recommendations": [
+      "⚠️  Consider implementing asset versioning for better caching"
+    ]
+  },
+  "score": 95,
+  "timestamp": "2025-07-17T01:41:52.669Z"
+}

@@ -1,0 +1,481 @@
+{
+  "totalLinks": 128,
+  "internalLinks": 83,
+  "externalLinks": 45,
+  "brokenInternalLinks": [],
+  "workingInternalLinks": [
+    {
+      "url": "/",
+      "sources": [
+        {
+          "page": "dist/public/blogs-seo.html",
+          "text": "Home"
+        },
+        {
+          "page": "dist/public/blogs-seo.html",
+          "text": "Home"
+        },
+        {
+          "page": "dist/public/cookie-policy.html",
+          "text": "Home"
+        },
+        {
+          "page": "dist/public/cookie-policy.html",
+          "text": "Home"
+        },
+        {
+          "page": "dist/public/destinations-seo.html",
+          "text": "Home"
+        },
+        {
+          "page": "dist/public/destinations-seo.html",
+          "text": "Home"
+        },
+        {
+          "page": "dist/public/destinations.html",
+          "text": "Home"
+        },
+        {
+          "page": "dist/public/destinations.html",
+          "text": "Home"
+        },
+        {
+          "page": "dist/public/home-seo.html",
+          "text": "Home"
+        },
+        {
+          "page": "dist/public/home-seo.html",
+          "text": "Home"
+        },
+        {
+          "page": "dist/public/privacy-policy.html",
+          "text": "Home"
+        },
+        {
+          "page": "dist/public/privacy-policy.html",
+          "text": "Home"
+        },
+        {
+          "page": "dist/public/terms-of-service.html",
+          "text": "Home"
+        },
+        {
+          "page": "dist/public/terms-of-service.html",
+          "text": "Home"
+        }
+      ],
+      "sourceCount": 14
+    },
+    {
+      "url": "/destinations",
+      "sources": [
+        {
+          "page": "dist/public/blogs-seo.html",
+          "text": "Destinations"
+        },
+        {
+          "page": "dist/public/blogs-seo.html",
+          "text": "Explore Destinations"
+        },
+        {
+          "page": "dist/public/blogs-seo.html",
+          "text": "Destinations"
+        },
+        {
+          "page": "dist/public/blogs-seo.html",
+          "text": "City Guides"
+        },
+        {
+          "page": "dist/public/blogs-seo.html",
+          "text": "Popular Destinations"
+        },
+        {
+          "page": "dist/public/cookie-policy.html",
+          "text": "Destinations"
+        },
+        {
+          "page": "dist/public/cookie-policy.html",
+          "text": "Destinations"
+        },
+        {
+          "page": "dist/public/cookie-policy.html",
+          "text": "City Guides"
+        },
+        {
+          "page": "dist/public/cookie-policy.html",
+          "text": "Popular Destinations"
+        },
+        {
+          "page": "dist/public/destinations-seo.html",
+          "text": "Destinations"
+        },
+        {
+          "page": "dist/public/destinations-seo.html",
+          "text": "Destinations"
+        },
+        {
+          "page": "dist/public/destinations-seo.html",
+          "text": "City Guides"
+        },
+        {
+          "page": "dist/public/destinations-seo.html",
+          "text": "Popular Destinations"
+        },
+        {
+          "page": "dist/public/destinations.html",
+          "text": "Destinations"
+        },
+        {
+          "page": "dist/public/destinations.html",
+          "text": "Destinations"
+        },
+        {
+          "page": "dist/public/destinations.html",
+          "text": "City Guides"
+        },
+        {
+          "page": "dist/public/destinations.html",
+          "text": "Popular Destinations"
+        },
+        {
+          "page": "dist/public/home-seo.html",
+          "text": "Destinations"
+        },
+        {
+          "page": "dist/public/home-seo.html",
+          "text": "Start Exploring\n          →"
+        },
+        {
+          "page": "dist/public/home-seo.html",
+          "text": "Destinations"
+        },
+        {
+          "page": "dist/public/home-seo.html",
+          "text": "City Guides"
+        },
+        {
+          "page": "dist/public/home-seo.html",
+          "text": "Popular Destinations"
+        },
+        {
+          "page": "dist/public/privacy-policy.html",
+          "text": "Destinations"
+        },
+        {
+          "page": "dist/public/privacy-policy.html",
+          "text": "Destinations"
+        },
+        {
+          "page": "dist/public/privacy-policy.html",
+          "text": "City Guides"
+        },
+        {
+          "page": "dist/public/privacy-policy.html",
+          "text": "Popular Destinations"
+        },
+        {
+          "page": "dist/public/terms-of-service.html",
+          "text": "Destinations"
+        },
+        {
+          "page": "dist/public/terms-of-service.html",
+          "text": "Destinations"
+        },
+        {
+          "page": "dist/public/terms-of-service.html",
+          "text": "City Guides"
+        },
+        {
+          "page": "dist/public/terms-of-service.html",
+          "text": "Popular Destinations"
+        }
+      ],
+      "sourceCount": 30
+    },
+    {
+      "url": "/blogs",
+      "sources": [
+        {
+          "page": "dist/public/blogs-seo.html",
+          "text": "Blogs"
+        },
+        {
+          "page": "dist/public/blogs-seo.html",
+          "text": "Travel Blog"
+        },
+        {
+          "page": "dist/public/blogs-seo.html",
+          "text": "Travel Tips"
+        },
+        {
+          "page": "dist/public/cookie-policy.html",
+          "text": "Blogs"
+        },
+        {
+          "page": "dist/public/cookie-policy.html",
+          "text": "Travel Blog"
+        },
+        {
+          "page": "dist/public/cookie-policy.html",
+          "text": "Travel Tips"
+        },
+        {
+          "page": "dist/public/destinations-seo.html",
+          "text": "Blogs"
+        },
+        {
+          "page": "dist/public/destinations-seo.html",
+          "text": "Travel Blog"
+        },
+        {
+          "page": "dist/public/destinations-seo.html",
+          "text": "Travel Tips"
+        },
+        {
+          "page": "dist/public/destinations.html",
+          "text": "Blogs"
+        },
+        {
+          "page": "dist/public/destinations.html",
+          "text": "Travel Blog"
+        },
+        {
+          "page": "dist/public/destinations.html",
+          "text": "Travel Tips"
+        },
+        {
+          "page": "dist/public/home-seo.html",
+          "text": "Blogs"
+        },
+        {
+          "page": "dist/public/home-seo.html",
+          "text": "Visit Blog Page\n          →"
+        },
+        {
+          "page": "dist/public/home-seo.html",
+          "text": "Travel Blog"
+        },
+        {
+          "page": "dist/public/home-seo.html",
+          "text": "Travel Tips"
+        },
+        {
+          "page": "dist/public/privacy-policy.html",
+          "text": "Blogs"
+        },
+        {
+          "page": "dist/public/privacy-policy.html",
+          "text": "Travel Blog"
+        },
+        {
+          "page": "dist/public/privacy-policy.html",
+          "text": "Travel Tips"
+        },
+        {
+          "page": "dist/public/terms-of-service.html",
+          "text": "Blogs"
+        },
+        {
+          "page": "dist/public/terms-of-service.html",
+          "text": "Travel Blog"
+        },
+        {
+          "page": "dist/public/terms-of-service.html",
+          "text": "Travel Tips"
+        }
+      ],
+      "sourceCount": 22
+    },
+    {
+      "url": "/privacy",
+      "sources": [
+        {
+          "page": "dist/public/blogs-seo.html",
+          "text": "Privacy Policy"
+        },
+        {
+          "page": "dist/public/cookie-policy.html",
+          "text": "Privacy Policy"
+        },
+        {
+          "page": "dist/public/destinations-seo.html",
+          "text": "Privacy Policy"
+        },
+        {
+          "page": "dist/public/destinations.html",
+          "text": "Privacy Policy"
+        },
+        {
+          "page": "dist/public/home-seo.html",
+          "text": "Privacy Policy"
+        },
+        {
+          "page": "dist/public/privacy-policy.html",
+          "text": "Privacy Policy"
+        },
+        {
+          "page": "dist/public/terms-of-service.html",
+          "text": "Privacy Policy"
+        }
+      ],
+      "sourceCount": 7
+    },
+    {
+      "url": "/terms",
+      "sources": [
+        {
+          "page": "dist/public/blogs-seo.html",
+          "text": "Terms of Service"
+        },
+        {
+          "page": "dist/public/cookie-policy.html",
+          "text": "Terms of Service"
+        },
+        {
+          "page": "dist/public/destinations-seo.html",
+          "text": "Terms of Service"
+        },
+        {
+          "page": "dist/public/destinations.html",
+          "text": "Terms of Service"
+        },
+        {
+          "page": "dist/public/home-seo.html",
+          "text": "Terms of Service"
+        },
+        {
+          "page": "dist/public/privacy-policy.html",
+          "text": "Terms of Service"
+        },
+        {
+          "page": "dist/public/terms-of-service.html",
+          "text": "Terms of Service"
+        }
+      ],
+      "sourceCount": 7
+    },
+    {
+      "url": "/things-to-do-in-berlin",
+      "sources": [
+        {
+          "page": "dist/public/destinations-seo.html",
+          "text": "Berlin\n        Germany\n        \n          Explore Destination\n          →"
+        },
+        {
+          "page": "dist/public/destinations.html",
+          "text": "Berlin\n        Germany\n        \n          Explore Destination\n          →"
+        },
+        {
+          "page": "dist/public/home-seo.html",
+          "text": "Berlin\n        Germany\n        \n          Explore Destination\n          →"
+        }
+      ],
+      "sourceCount": 3
+    }
+  ],
+  "orphanPages": [
+    {
+      "file": "dist/public/blogs-seo.html",
+      "possibleUrls": [
+        "/blogs-seo",
+        "/blogs-seo.html"
+      ]
+    },
+    {
+      "file": "dist/public/cookie-policy.html",
+      "possibleUrls": [
+        "/cookie-policy",
+        "/cookie-policy.html"
+      ]
+    },
+    {
+      "file": "dist/public/destinations-seo.html",
+      "possibleUrls": [
+        "/destinations-seo",
+        "/destinations-seo.html"
+      ]
+    },
+    {
+      "file": "dist/public/home-seo.html",
+      "possibleUrls": [
+        "/home-seo",
+        "/home-seo.html"
+      ]
+    },
+    {
+      "file": "dist/public/privacy-policy.html",
+      "possibleUrls": [
+        "/privacy-policy",
+        "/privacy-policy.html"
+      ]
+    },
+    {
+      "file": "dist/public/terms-of-service.html",
+      "possibleUrls": [
+        "/terms-of-service",
+        "/terms-of-service.html"
+      ]
+    }
+  ],
+  "linkMap": {},
+  "navigationStructure": {
+    "totalPages": 8,
+    "averageLinksPerPage": 10,
+    "mostLinkedPages": [
+      {
+        "url": "/destinations",
+        "incomingLinks": 30
+      },
+      {
+        "url": "/blogs",
+        "incomingLinks": 22
+      },
+      {
+        "url": "/",
+        "incomingLinks": 14
+      },
+      {
+        "url": "/privacy",
+        "incomingLinks": 7
+      },
+      {
+        "url": "/terms",
+        "incomingLinks": 7
+      }
+    ],
+    "pagesWithNoOutgoingLinks": [
+      "dist/public/things-to-do-in-berlin/index.html"
+    ],
+    "navigationHubs": [
+      {
+        "page": "dist/public/home-seo.html",
+        "outgoingLinks": 14
+      },
+      {
+        "page": "dist/public/blogs-seo.html",
+        "outgoingLinks": 12
+      },
+      {
+        "page": "dist/public/destinations-seo.html",
+        "outgoingLinks": 12
+      },
+      {
+        "page": "dist/public/destinations.html",
+        "outgoingLinks": 12
+      },
+      {
+        "page": "dist/public/cookie-policy.html",
+        "outgoingLinks": 11
+      },
+      {
+        "page": "dist/public/privacy-policy.html",
+        "outgoingLinks": 11
+      },
+      {
+        "page": "dist/public/terms-of-service.html",
+        "outgoingLinks": 11
+      }
+    ]
+  },
+  "timestamp": "2025-07-17T01:40:27.646Z"
+}
