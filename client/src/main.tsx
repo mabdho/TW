@@ -24,20 +24,14 @@ const AppComponent = (
   </QueryClientProvider>
 );
 
-// Check if we need to hydrate (server-rendered) or render (client-only)
-if (rootElement.hasChildNodes()) {
-  // Server-rendered HTML exists, hydrate it
-  console.log('🔄 Hydrating server-rendered HTML...');
-  hydrateRoot(rootElement, AppComponent);
-} else {
-  // No server-rendered content, render normally
-  console.log('🎨 Rendering client-side React app...');
-  const root = createRoot(rootElement, {
-    // React 18 concurrent features for better performance
-    identifierPrefix: 'tw-'
-  });
-  root.render(AppComponent);
-}
+// Always use createRoot for client-side rendering
+// This ensures React takes over completely from any server-generated HTML
+console.log('🎨 Rendering client-side React app...');
+const root = createRoot(rootElement, {
+  // React 18 concurrent features for better performance
+  identifierPrefix: 'tw-'
+});
+root.render(AppComponent);
 
 // Track performance
 const initTime = performance.now() - perfStart;
