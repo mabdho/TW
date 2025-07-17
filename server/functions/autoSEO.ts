@@ -99,49 +99,17 @@ export async function updateSitemap() {
 }
 
 /**
- * Get cities from file system instead of database
+ * Get cities from city registry for consistency
  */
 async function getFileSystemCities() {
   try {
-    const fs = await import('fs/promises');
-    const path = await import('path');
-    
-    const citiesDir = path.join(process.cwd(), 'client/src/pages/cities');
-    
-    // Check if cities directory exists
-    try {
-      await fs.access(citiesDir);
-    } catch {
-      return [];
-    }
-    
-    // Read all files in the cities directory
-    const files = await fs.readdir(citiesDir);
-    const cityFiles = files.filter(file => file.endsWith('.tsx'));
-    
-    const cities = [];
-    
-    for (const file of cityFiles) {
-      try {
-        const filePath = path.join(citiesDir, file);
-        const content = await fs.readFile(filePath, 'utf-8');
-        
-        // Extract city key from filename
-        const cityKey = file.replace('.tsx', '');
-        
-        // Parse the city data from the file content
-        const cityData = extractCityDataFromFile(content, cityKey);
-        if (cityData) {
-          cities.push(cityData);
-        }
-      } catch (error) {
-        console.error(`Error reading city file ${file}:`, error);
-      }
-    }
-    
-    return cities;
+    const { getAllActiveCities, generateCityUrl } = await import('../../shared/cityRegistry');
+    return getAllActiveCities().map(cityConfig => ({
+      name: cityConfig.name,
+      path: generateCityUrl(cityConfig.slug)
+    }));
   } catch (error) {
-    console.error('Error getting cities from file system:', error);
+    console.log('Error loading city registry:', error);
     return [];
   }
 }

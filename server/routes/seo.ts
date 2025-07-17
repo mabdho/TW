@@ -42,20 +42,12 @@ export async function getSitemap(req: Request, res: Response) {
     const fs = await import('fs/promises');
     const path = await import('path');
     
-    // Get all city files from filesystem
-    const citiesDir = path.join(process.cwd(), 'client/src/pages/cities');
-    const cityFiles = await fs.readdir(citiesDir);
-    const cities = cityFiles
-      .filter(file => file.endsWith('.tsx'))
-      .map(file => {
-        const cityName = file.replace('.tsx', '');
-        // Convert PascalCase to kebab-case properly
-        const cityPath = `/things-to-do-in-${cityName.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '')}`;
-        return {
-          name: cityName,
-          path: cityPath
-        };
-      });
+    // Get all city files from city registry for consistency
+    const { getAllActiveCities, generateCityUrl } = await import('../../shared/cityRegistry');
+    const cities = getAllActiveCities().map(cityConfig => ({
+      name: cityConfig.name,
+      path: generateCityUrl(cityConfig.slug)
+    }));
     
     // Get all blog files from filesystem
     const blogsDir = path.join(process.cwd(), 'client/src/blogs');

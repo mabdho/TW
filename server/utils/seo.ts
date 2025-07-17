@@ -62,7 +62,8 @@ export function createCanonical(type: 'city' | 'blog', slug: string, baseUrl: st
   
   switch (type) {
     case 'city':
-      return `${base}/things-to-do-in-${slug}`;
+      // Use city registry for consistent URL generation
+      return `${base}/things-to-do-in-${slug.toLowerCase()}`;
     case 'blog':
       return `${base}/blog/${slug}`;
     default:
