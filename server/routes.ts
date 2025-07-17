@@ -2252,6 +2252,15 @@ Double-check all brackets, quotes, and commas are properly matched.`;
         console.warn('⚠️  Hydration enforcement warning:', hydrationError.message);
       }
       
+      // Auto-update sitemap after city creation
+      try {
+        const { updateSitemap } = await import('./functions/autoSEO');
+        await updateSitemap();
+        console.log('Sitemap updated after city creation');
+      } catch (sitemapError) {
+        console.warn('Failed to update sitemap after city creation:', sitemapError);
+      }
+      
       // Run automatic compliance enforcement
       try {
         await runAutomaticComplianceEnforcement();

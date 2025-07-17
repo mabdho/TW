@@ -222,6 +222,16 @@ if (app.get("env") === "development") {
     // Initialize sitemap indexing automation
     initializeSitemapIndexing();
     
+    // Auto-generate/update sitemap on server startup
+    console.log('🗺️  Generating sitemap on server startup...');
+    try {
+      const { updateSitemap } = await import('./functions/autoSEO');
+      await updateSitemap();
+      console.log('✅ Sitemap generated successfully');
+    } catch (sitemapError) {
+      console.warn('⚠️  Sitemap generation warning:', sitemapError);
+    }
+    
     // Auto-generate missing HTML files using Firebase HTML rendering system
     console.log('🔧 Checking for missing city HTML files...');
     try {
