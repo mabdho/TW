@@ -2660,7 +2660,7 @@ export function generateHomePageHTML(): string {
     <!-- This will be populated with React components for hydration -->
   </div>
   
-  <script type="module" src="/assets/main.js"></script>
+  <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>`;
 }
@@ -2748,6 +2748,14 @@ export function generateDestinationsPageHTML(): string {
   </section>
   
   ${generateFooter()}
+  
+  <!-- React App Hydration Root -->
+  <!-- Same content for all users - no cloaking -->
+  <div id="root">
+    <!-- This will be populated with React components for hydration -->
+  </div>
+  
+  <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>`;
 }
@@ -2926,6 +2934,14 @@ export function generateBlogsPageHTML(): string {
   </section>
   
   ${generateFooter()}
+  
+  <!-- React App Hydration Root -->
+  <!-- Same content for all users - no cloaking -->
+  <div id="root">
+    <!-- This will be populated with React components for hydration -->
+  </div>
+  
+  <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>`;
 }
