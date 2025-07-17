@@ -125,58 +125,42 @@ app.use((req, res, next) => {
   // This needs to be before Vite middleware to prevent it from intercepting
   // HTML files are handled by middleware above for universal serving
   
-// Universal HTML serving middleware - Intelligent bot/user detection
-// Serves HTML to search engine bots, React app to regular users
-// Google compliant - both receive same content structure, different formats
+// Universal HTML serving with React hydration
+// Serves same HTML to all users, then React takes over for interactivity
 app.use((req, res, next) => {
-  const userAgent = req.get('User-Agent') || '';
+  let htmlPath = null;
   
-  // Debug logging
-  console.log(`🔍 Debug - Request: ${req.path}, User-Agent: ${userAgent.substring(0, 50)}...`);
+  // Route mapping for HTML serving (same for everyone)
+  const routeMap = {
+    '/': 'index.html',
+    '/destinations': 'destinations.html',
+    '/blogs': 'blogs.html',
+    '/privacy-policy': 'privacy-policy.html',
+    '/terms-of-service': 'terms-of-service.html',
+    '/cookie-policy': 'cookie-policy.html'
+  };
   
-  // Detect search engine bots and crawlers
-  const isBot = /bot|crawler|spider|crawling|facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegram|slackbot|google|bing|yahoo|baidu|yandex|duckduckgo/i.test(userAgent);
-  
-  console.log(`🤖 Is Bot: ${isBot}, Path: ${req.path}`);
-  
-  // Only serve HTML to bots, let React handle regular users
-  if (isBot) {
-    let htmlPath = null;
-    
-    // Route mapping for bots (same content as React, just pre-rendered)
-    const routeMap = {
-      '/': 'index.html',
-      '/destinations': 'destinations.html',
-      '/blogs': 'blogs.html',
-      '/privacy-policy': 'privacy-policy.html',
-      '/terms-of-service': 'terms-of-service.html',
-      '/cookie-policy': 'cookie-policy.html'
-    };
-    
-    // Check main routes
-    if (routeMap[req.path]) {
-      htmlPath = path.join(process.cwd(), 'dist/public', routeMap[req.path]);
-    }
-    // Check city routes
-    else if (req.path.startsWith('/best-things-to-do-in-')) {
-      htmlPath = path.join(process.cwd(), 'dist/public', req.path, 'index.html');
-    }
-    // Check blog routes
-    else if (req.path.startsWith('/blog/')) {
-      const blogId = req.path.replace('/blog/', '').replace('.html', '');
-      htmlPath = path.join(process.cwd(), 'dist/public/blog', blogId + '.html');
-    }
-    
-    // Serve HTML to bots if exists
-    if (htmlPath && fs.existsSync(htmlPath)) {
-      console.log(`🤖 Serving pre-rendered HTML to bot: ${req.path}`);
-      return res.sendFile(htmlPath);
-    }
-  } else {
-    console.log(`👤 Regular user - letting React handle: ${req.path}`);
+  // Check main routes
+  if (routeMap[req.path]) {
+    htmlPath = path.join(process.cwd(), 'dist/public', routeMap[req.path]);
+  }
+  // Check city routes
+  else if (req.path.startsWith('/best-things-to-do-in-')) {
+    htmlPath = path.join(process.cwd(), 'dist/public', req.path, 'index.html');
+  }
+  // Check blog routes
+  else if (req.path.startsWith('/blog/')) {
+    const blogId = req.path.replace('/blog/', '').replace('.html', '');
+    htmlPath = path.join(process.cwd(), 'dist/public/blog', blogId + '.html');
   }
   
-  // Continue to React app for regular users or when HTML not available
+  // Serve HTML if exists, otherwise continue to React dev server
+  if (htmlPath && fs.existsSync(htmlPath)) {
+    console.log(`📄 Serving HTML (with React hydration): ${req.path}`);
+    return res.sendFile(htmlPath);
+  }
+  
+  // Continue to Vite/React dev server
   next();
 });
 
