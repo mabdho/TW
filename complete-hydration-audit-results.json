@@ -1,21 +1,21 @@
 {
   "staticAudit": {
-    "totalPages": 10,
-    "pagesPassed": 10,
+    "totalPages": 0,
+    "pagesPassed": 0,
     "pagesFailed": 0,
-    "checksCompliance": 100,
-    "status": "perfect"
+    "checksCompliance": 0,
+    "status": "issues_found"
   },
   "reactMonitoring": {
     "status": "skipped",
     "reason": "Puppeteer not installed - install with: npm install puppeteer"
   },
-  "timestamp": "2025-07-15T14:11:29.604Z",
-  "status": "perfect",
+  "timestamp": "2025-07-17T01:34:24.100Z",
+  "status": "good_with_issues",
   "basicAudit": {
-    "passed": 9,
+    "passed": 0,
     "failed": 0,
-    "compliance": 100,
-    "status": "perfect"
+    "compliance": 0,
+    "status": "issues_found"
   }
 }

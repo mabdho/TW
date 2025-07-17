@@ -1,13 +1,5 @@
 {
   "articleSchema": {
-    "index": {
-      "hasArticleSchema": true,
-      "hasMainEntityOfPage": true,
-      "hasKeywords": true,
-      "hasWordCount": true,
-      "hasArticleSection": true,
-      "schemaScore": 100
-    },
     "home-seo": {
       "hasArticleSchema": false,
       "hasMainEntityOfPage": false,
@@ -34,26 +26,19 @@
     }
   },
   "altTextEnhancement": {
-    "index": {
-      "totalImages": 1,
-      "imagesWithAlt": 1,
-      "descriptiveAlt": 1,
-      "contextualAlt": 1,
-      "altTextScore": 100
-    },
     "home-seo": {
       "totalImages": 1,
       "imagesWithAlt": 1,
-      "descriptiveAlt": 1,
-      "contextualAlt": 0,
+      "descriptiveAlt": 0,
+      "contextualAlt": 1,
       "altTextScore": 70
     },
     "destinations-seo": {
-      "totalImages": 0,
-      "imagesWithAlt": 0,
+      "totalImages": 1,
+      "imagesWithAlt": 1,
       "descriptiveAlt": 0,
-      "contextualAlt": 0,
-      "altTextScore": 100
+      "contextualAlt": 1,
+      "altTextScore": 70
     },
     "blogs-seo": {
       "totalImages": 0,
@@ -64,34 +49,27 @@
     }
   },
   "contextualLinks": {
-    "index": {
-      "totalInternalLinks": 0,
-      "contextualLinks": 13,
-      "relatedDestinations": 0,
-      "travelPlanningLinks": 0,
-      "linksScore": 50
-    },
     "home-seo": {
-      "totalInternalLinks": 32,
-      "contextualLinks": 23,
-      "relatedDestinations": 26,
+      "totalInternalLinks": 12,
+      "contextualLinks": 3,
+      "relatedDestinations": 6,
       "travelPlanningLinks": 2,
-      "linksScore": 100
+      "linksScore": 80
     },
     "destinations-seo": {
-      "totalInternalLinks": 29,
-      "contextualLinks": 20,
-      "relatedDestinations": 24,
+      "totalInternalLinks": 10,
+      "contextualLinks": 1,
+      "relatedDestinations": 5,
       "travelPlanningLinks": 2,
-      "linksScore": 100
+      "linksScore": 60
     },
     "blogs-seo": {
       "totalInternalLinks": 10,
       "contextualLinks": 1,
       "relatedDestinations": 5,
-      "travelPlanningLinks": 3,
+      "travelPlanningLinks": 2,
       "linksScore": 60
     }
   },
-  "overallScore": 65
+  "overallScore": 49
 }
