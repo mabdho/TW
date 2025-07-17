@@ -13,30 +13,32 @@ interface DynamicCityRouteProps {
 }
 
 // Simple fallback component to avoid hydration issues
-const ComingSoonPage = () => (
-  <div className="min-h-screen flex items-center justify-center bg-white">
-    <div className="text-center max-w-md mx-auto px-4">
-      <h1 className="text-3xl font-bold text-gray-900 mb-4">City Guide Coming Soon</h1>
-      <p className="text-gray-600 mb-6">
-        We're working on creating amazing travel guides for this destination. 
-        Check back soon or explore our other featured cities!
-      </p>
-      <a 
-        href="/destinations" 
-        className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
-      >
-        Browse All Destinations
-      </a>
-    </div>
-  </div>
-);
+function ComingSoonPage() {
+  return React.createElement('div', {
+    className: 'min-h-screen flex items-center justify-center bg-white'
+  }, React.createElement('div', {
+    className: 'text-center max-w-md mx-auto px-4'
+  }, [
+    React.createElement('h1', {
+      key: 'title',
+      className: 'text-3xl font-bold text-gray-900 mb-4'
+    }, 'City Guide Coming Soon'),
+    React.createElement('p', {
+      key: 'desc',
+      className: 'text-gray-600 mb-6'
+    }, 'We\'re working on creating amazing travel guides for this destination. Check back soon or explore our other featured cities!'),
+    React.createElement('a', {
+      key: 'link',
+      href: '/destinations',
+      className: 'inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors'
+    }, 'Browse All Destinations')
+  ]));
+}
 
 export const DynamicCityRoute: React.FC<DynamicCityRouteProps> = ({ path, cityKey }) => {
   const CityComponent = cityMap[cityKey] || ComingSoonPage;
   
-  return (
-    <Route path={path} component={CityComponent} />
-  );
+  return React.createElement(Route, { path, component: CityComponent });
 };
 
 // Generate all city routes dynamically with SEO-friendly URLs
