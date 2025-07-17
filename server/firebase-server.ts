@@ -15,10 +15,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Bot detection function
-
-
-  next();
-});
+const isSearchEngineBot = (userAgent: string) => {
+  // Bot detection middleware placeholder
+  return false;
+};
 
 // Initialize routes
 let server: any = null;

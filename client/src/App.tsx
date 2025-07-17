@@ -6,16 +6,18 @@ import { CityRoutes } from './components/DynamicCityRoute';
 // Critical: Load home page immediately for FCP
 import Home from './pages/home';
 
-// Lazy load all other pages for better code splitting
+// Optimized lazy loading with better code splitting
 const NotFound = lazy(() => import('./pages/not-found'));
-const AdminPage = lazy(() => import('./pages/admin'));
-const LoginPage = lazy(() => import('./pages/login'));
 const BlogsPage = lazy(() => import('./pages/blogs'));
-const BlogDetailPage = lazy(() => import('./pages/blog-detail'));
-const DestinationsPage = lazy(() => import('./pages/destinations'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const CookiePolicy = lazy(() => import('./pages/CookiePolicy'));
+
+// Heavy components - load only when needed
+const AdminPage = lazy(() => import('./pages/admin'));
+const LoginPage = lazy(() => import('./pages/login'));
+const BlogDetailPage = lazy(() => import('./pages/blog-detail'));
+const DestinationsPage = lazy(() => import('./pages/destinations'));
 
 // Optimized loading fallback - minimal to prevent layout shift
 const PageFallback = () => (

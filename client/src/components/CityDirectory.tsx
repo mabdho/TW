@@ -5,9 +5,10 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 
-// No cities - add cities via admin panel,
+// No cities - add cities via admin panel
+const cities = [
   { "name": "Berlin", "country": "Germany", "path": "/things-to-do-in-berlin", "continent": "Europe", "imageUrl": "https://images.unsplash.com/photo-1599946347371-68eb71b16afc?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
-const cities = [];
+];
 
 const continents = ["All", "Europe", "Asia", "Oceania", "Africa", "North America", "South America"];
 
@@ -33,7 +34,7 @@ export const CityDirectory = () => {
           {/* Search Bar */}
           <div className="max-w-md mx-auto mb-8">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+              <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <Input 
                 placeholder="Search destinations..." 
                 className="pl-12 border-gray-300 focus:border-green-500 focus:ring-green-500 h-12 rounded-lg"

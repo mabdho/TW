@@ -1,207 +1,194 @@
-/**
- * Advanced image optimization utilities for TravelWanders
- * Handles modern image formats, lazy loading, and SEO-optimized alt text
- */
+// Image optimization utilities for better performance
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 
-interface OptimizedImage {
-  url: string;
+export interface ImageOptimizationConfig {
+  quality?: number;
+  format?: 'webp' | 'avif' | 'jpeg' | 'png';
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+  placeholder?: 'blur' | 'empty';
+}
+
+// Optimized image component with lazy loading
+export const OptimizedImage = ({
+  src,
+  alt,
+  className,
+  quality = 75,
+  loading = 'lazy',
+  placeholder = 'blur',
+  ...props
+}: {
+  src: string;
   alt: string;
-  caption?: string;
-  width?: number;
-  height?: number;
-}
+  className?: string;
+  quality?: number;
+  loading?: 'lazy' | 'eager';
+  placeholder?: 'blur' | 'empty';
+  [key: string]: any;
+}) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
 
-interface GalleryImage {
-  url?: string;
-  alt?: string;
-  caption?: string;
-}
+  // Generate optimized image URL
+  const optimizedSrc = useMemo(() => {
+    if (src.includes('unsplash.com')) {
+      const url = new URL(src);
+      url.searchParams.set('q', quality.toString());
+      url.searchParams.set('auto', 'format');
+      url.searchParams.set('fit', 'crop');
+      return url.toString();
+    }
+    return src;
+  }, [src, quality]);
 
-/**
- * Generate optimized image URLs with modern format support
- */
-export function optimizeImageUrl(
-  originalUrl: string, 
-  width: number = 1400, 
-  format: 'webp' | 'avif' | 'jpg' = 'webp',
-  quality: number = 80
-): string {
-  // Handle Unsplash URLs
-  if (originalUrl.includes('unsplash.com')) {
-    const baseUrl = originalUrl.split('?')[0];
-    return `${baseUrl}?auto=format&fit=crop&w=${width}&fm=${format}&q=${quality}`;
-  }
-  
-  // Return original URL if not from a supported service
-  return originalUrl;
-}
+  // Intersection Observer for lazy loading
+  useEffect(() => {
+    if (loading === 'lazy' && imgRef.current) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const img = entry.target as HTMLImageElement;
+              img.src = optimizedSrc;
+              observer.unobserve(img);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
 
-/**
- * Generate picture element HTML with modern format fallbacks
- */
-export function generatePictureElement(
-  imageUrl: string,
-  alt: string,
-  width: number = 1400,
-  height?: number,
-  loading: 'lazy' | 'eager' = 'lazy',
-  className: string = ''
-): string {
-  const baseUrl = imageUrl.split('?')[0];
-  
-  return `
-    <picture class="${className}">
-      <source 
-        srcset="${baseUrl}?auto=format&fit=crop&w=${width}&fm=avif&q=75"
-        type="image/avif"
-      />
-      <source 
-        srcset="${baseUrl}?auto=format&fit=crop&w=${width}&fm=webp&q=80"
-        type="image/webp"
-      />
-      <img 
-        src="${baseUrl}?auto=format&fit=crop&w=${width}&fm=jpg&q=80"
-        alt="${alt}"
-        loading="${loading}"
-        width="${width}"
-        ${height ? `height="${height}"` : ''}
-        class="w-full h-full object-cover"
-      />
-    </picture>
-  `;
-}
+      observer.observe(imgRef.current);
+      return () => observer.disconnect();
+    }
+  }, [loading, optimizedSrc]);
 
-/**
- * Generate SEO-optimized alt text for city attractions
- */
-export function generateImageAltText(
-  cityName: string,
-  attractionName?: string,
-  context: 'hero' | 'gallery' | 'attraction' = 'gallery'
-): string {
-  // Varied alt text to prevent keyword cannibalization while maintaining SEO focus
-  switch (context) {
-    case 'hero':
-      return `things to do in ${cityName}`;
-    
-    case 'attraction':
-      return attractionName 
-        ? `things to do in ${cityName} - ${attractionName}`
-        : `attractions in ${cityName}`;
-    
-    case 'gallery':
-    default:
-      return attractionName
-        ? `${attractionName} - things to do in ${cityName}`
-        : `best places to visit in ${cityName}`;
-  }
-}
-
-/**
- * Optimize gallery images with modern formats and SEO alt text
- */
-export function optimizeGalleryImages(
-  galleryImages: GalleryImage[],
-  cityName: string
-): OptimizedImage[] {
-  const altVariations = [
-    `best places to visit in ${cityName}`,
-    `top attractions in ${cityName}`,
-    `must-see spots in ${cityName}`,
-    `things to explore in ${cityName}`,
-    `destinations in ${cityName}`
-  ];
-  
-  return galleryImages
-    .filter(image => image.url) // Only include images with URLs
-    .map((image, index) => ({
-      url: optimizeImageUrl(image.url!, 400, 'webp', 80),
-      alt: image.alt || altVariations[index % altVariations.length],
-      caption: image.caption,
-      width: 400,
-      height: 400
-    }));
-}
-
-/**
- * Generate responsive image srcSet for different screen sizes
- */
-export function generateResponsiveSrcSet(baseUrl: string, format: 'webp' | 'avif' | 'jpg' = 'webp'): string {
-  const sizes = [400, 800, 1200, 1600];
-  return sizes
-    .map(size => `${optimizeImageUrl(baseUrl, size, format)} ${size}w`)
-    .join(', ');
-}
-
-/**
- * Generate sizes attribute for responsive images
- */
-export function generateSizesAttribute(context: 'hero' | 'gallery' | 'card' = 'gallery'): string {
-  switch (context) {
-    case 'hero':
-      return '100vw';
-    case 'card':
-      return '(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw';
-    case 'gallery':
-    default:
-      return '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw';
-  }
-}
-
-/**
- * Create optimized image configuration for attractions
- */
-export function createAttractionImageConfig(
-  attractionName: string,
-  cityName: string,
-  imageUrl?: string
-): OptimizedImage | null {
-  if (!imageUrl) return null;
-  
-  return {
-    url: optimizeImageUrl(imageUrl, 800, 'webp', 85),
-    alt: generateImageAltText(cityName, attractionName, 'attraction'),
-    width: 800,
-    height: 600
+  const handleLoad = () => {
+    setIsLoaded(true);
+    setError(false);
   };
-}
 
-/**
- * Generate lazy loading intersection observer configuration
- */
-export function generateLazyLoadConfig(): IntersectionObserverInit {
-  return {
-    root: null,
-    rootMargin: '50px 0px', // Start loading 50px before image enters viewport
-    threshold: 0.1
+  const handleError = () => {
+    setError(true);
+    setIsLoaded(false);
   };
-}
 
-/**
- * Check if image format is supported by browser
- */
-export function supportsImageFormat(format: 'webp' | 'avif'): boolean {
-  if (typeof window === 'undefined') return false;
-  
+  return React.createElement(
+    'div',
+    { className: `relative overflow-hidden ${className}` },
+    // Placeholder
+    !isLoaded && !error && placeholder === 'blur' && 
+      React.createElement('div', { className: 'absolute inset-0 bg-gray-200 animate-pulse' }),
+    // Main image
+    React.createElement('img', {
+      ref: imgRef,
+      src: loading === 'eager' ? optimizedSrc : undefined,
+      alt: alt,
+      className: `transition-opacity duration-300 ${
+        isLoaded ? 'opacity-100' : 'opacity-0'
+      }`,
+      onLoad: handleLoad,
+      onError: handleError,
+      ...props
+    }),
+    // Error fallback
+    error && React.createElement(
+      'div',
+      { className: 'absolute inset-0 flex items-center justify-center bg-gray-100 text-gray-500' },
+      React.createElement('span', { className: 'text-sm' }, 'Image failed to load')
+    )
+  );
+};
+
+// Image preloading utility
+export const preloadImage = (src: string): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve();
+    img.onerror = reject;
+    img.src = src;
+  });
+};
+
+// Batch image preloading
+export const preloadImages = async (srcs: string[]): Promise<void> => {
+  const promises = srcs.map(preloadImage);
+  await Promise.all(promises);
+};
+
+// Generate responsive image sizes
+export const generateResponsiveSizes = (
+  baseWidth: number,
+  breakpoints: number[] = [480, 768, 1024, 1280, 1920]
+): string => {
+  const sizes = breakpoints.map(bp => `(max-width: ${bp}px) ${Math.min(baseWidth, bp)}px`);
+  sizes.push(`${baseWidth}px`);
+  return sizes.join(', ');
+};
+
+// Image format detection
+export const getBestImageFormat = (): 'webp' | 'avif' | 'jpeg' => {
   const canvas = document.createElement('canvas');
   canvas.width = 1;
   canvas.height = 1;
   
-  try {
-    const dataUrl = canvas.toDataURL(`image/${format}`);
-    return dataUrl.indexOf(`data:image/${format}`) === 0;
-  } catch {
-    return false;
+  if (canvas.toDataURL('image/avif').indexOf('data:image/avif') === 0) {
+    return 'avif';
   }
-}
+  if (canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0) {
+    return 'webp';
+  }
+  return 'jpeg';
+};
 
-/**
- * Get optimal image format based on browser support
- */
-export function getOptimalImageFormat(): 'avif' | 'webp' | 'jpg' {
-  if (supportsImageFormat('avif')) return 'avif';
-  if (supportsImageFormat('webp')) return 'webp';
-  return 'jpg';
-}
+// Hook for image optimization
+export const useImageOptimization = (src: string, config?: ImageOptimizationConfig) => {
+  const [optimizedSrc, setOptimizedSrc] = useState(src);
+  const [isOptimized, setIsOptimized] = useState(false);
 
-export type { OptimizedImage, GalleryImage };
+  useEffect(() => {
+    const optimizeImage = async () => {
+      try {
+        // Apply optimizations based on config
+        let optimized = src;
+        
+        if (src.includes('unsplash.com') && config?.quality) {
+          const url = new URL(src);
+          url.searchParams.set('q', config.quality.toString());
+          url.searchParams.set('auto', 'format');
+          optimized = url.toString();
+        }
+        
+        setOptimizedSrc(optimized);
+        setIsOptimized(true);
+      } catch (error) {
+        console.error('Image optimization failed:', error);
+        setOptimizedSrc(src);
+        setIsOptimized(false);
+      }
+    };
+
+    optimizeImage();
+  }, [src, config]);
+
+  return { optimizedSrc, isOptimized };
+};
+
+// Performance monitoring for images
+export const trackImagePerformance = (src: string, startTime: number) => {
+  const loadTime = performance.now() - startTime;
+  
+  // Log performance metrics
+  console.log(`Image loaded: ${src.split('/').pop()} in ${loadTime.toFixed(2)}ms`);
+  
+  // Send to analytics (if implemented)
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'image_load', {
+      event_category: 'performance',
+      event_label: src,
+      value: Math.round(loadTime)
+    });
+  }
+};
+

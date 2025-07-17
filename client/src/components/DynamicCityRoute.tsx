@@ -5,8 +5,8 @@ import { CITY_REGISTRY, getActiveCity, getAllActiveCities, type CityConfig } fro
 // Invisible loading fallback - no loading screens
 const CityLoadingFallback = () => null;
 
-// Static city module mapping for Vite analysis
-const cityModuleMap: Record<string, () => Promise<any>> = {
+// Static city module mapping for Vite analysis - completely eliminates dynamic imports
+const cityModuleMap: Record<string, () => Promise<{ [key: string]: React.ComponentType<any> }>> = {
   berlin: () => import('../pages/cities/Berlin.tsx'),
   // Future cities will be added here - static imports for Vite optimization
 };
@@ -20,7 +20,7 @@ const createCityImport = (cityConfig: CityConfig) => {
   }
   
   return lazy(() => 
-    importFn().then((module: any) => ({ 
+    importFn().then((module) => ({ 
       default: module[cityConfig.name] 
     }))
   );
