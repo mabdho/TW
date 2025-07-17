@@ -1,4 +1,4 @@
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
 import { HelmetProvider } from "react-helmet-async";
@@ -23,14 +23,19 @@ const AppComponent = (
   </QueryClientProvider>
 );
 
-// Always use createRoot for client-side rendering
-// This ensures React takes over completely from any server-generated HTML
-console.log('🎨 Rendering client-side React app...');
-const root = createRoot(rootElement, {
-  // React 18 concurrent features for better performance
-  identifierPrefix: 'tw-'
-});
-root.render(AppComponent);
+// Check if we have server-rendered content to hydrate
+const hasServerContent = rootElement.innerHTML.trim().length > 0;
+
+if (hasServerContent) {
+  console.log('🎨 Hydrating server-rendered content...');
+  hydrateRoot(rootElement, AppComponent);
+} else {
+  console.log('🎨 Rendering fresh React app...');
+  const root = createRoot(rootElement, {
+    identifierPrefix: 'tw-'
+  });
+  root.render(AppComponent);
+}
 
 // Track performance
 const initTime = performance.now() - perfStart;
