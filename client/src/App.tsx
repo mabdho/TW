@@ -1,7 +1,6 @@
 import { Router, Route } from 'wouter';
 import { useLocation } from 'wouter';
 import { lazy, Suspense } from 'react';
-import { CityRoutes } from './components/DynamicCityRoute';
 
 // Critical: Load home page immediately for FCP
 import Home from './pages/home';
@@ -121,8 +120,7 @@ function App() {
             </Suspense>
           </Route>
           
-          {/* Dynamic city routes */}
-          <CityRoutes />
+          {/* City routes handled by ConditionalNotFound */}
         </Suspense>
       </Router>
     </div>
