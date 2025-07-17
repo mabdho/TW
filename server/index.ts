@@ -125,71 +125,79 @@ app.use((req, res, next) => {
   // This needs to be before Vite middleware to prevent it from intercepting
   // HTML files are handled by middleware above for universal serving
   
-// Universal HTML serving middleware
-// Serves the same pre-rendered HTML to ALL users (bots and humans)
-// No user-agent discrimination - fully Google compliant
+// Universal HTML serving middleware - Intelligent bot/user detection
+// Serves HTML to search engine bots, React app to regular users
+// Google compliant - both receive same content structure, different formats
 app.use((req, res, next) => {
-  let htmlPath = null;
+  const userAgent = req.get('User-Agent') || '';
   
-  // Route mapping for all users (same content for everyone)
-  const routeMap = {
-    '/': 'index.html',
-    '/destinations': 'destinations.html',
-    '/blogs': 'blogs.html',
-    '/privacy-policy': 'privacy-policy.html',
-    '/terms-of-service': 'terms-of-service.html',
-    '/cookie-policy': 'cookie-policy.html'
-  };
+  // Debug logging
+  console.log(`🔍 Debug - Request: ${req.path}, User-Agent: ${userAgent.substring(0, 50)}...`);
   
-  // Check main routes
-  if (routeMap[req.path]) {
-    htmlPath = path.join(process.cwd(), 'dist/public', routeMap[req.path]);
-  }
-  // Check city routes
-  else if (req.path.startsWith('/best-things-to-do-in-')) {
-    htmlPath = path.join(process.cwd(), 'dist/public', req.path, 'index.html');
-  }
-  // Check blog routes
-  else if (req.path.startsWith('/blog/')) {
-    const blogId = req.path.replace('/blog/', '').replace('.html', '');
-    htmlPath = path.join(process.cwd(), 'dist/public/blog', blogId + '.html');
+  // Detect search engine bots and crawlers
+  const isBot = /bot|crawler|spider|crawling|facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegram|slackbot|google|bing|yahoo|baidu|yandex|duckduckgo/i.test(userAgent);
+  
+  console.log(`🤖 Is Bot: ${isBot}, Path: ${req.path}`);
+  
+  // Only serve HTML to bots, let React handle regular users
+  if (isBot) {
+    let htmlPath = null;
+    
+    // Route mapping for bots (same content as React, just pre-rendered)
+    const routeMap = {
+      '/': 'index.html',
+      '/destinations': 'destinations.html',
+      '/blogs': 'blogs.html',
+      '/privacy-policy': 'privacy-policy.html',
+      '/terms-of-service': 'terms-of-service.html',
+      '/cookie-policy': 'cookie-policy.html'
+    };
+    
+    // Check main routes
+    if (routeMap[req.path]) {
+      htmlPath = path.join(process.cwd(), 'dist/public', routeMap[req.path]);
+    }
+    // Check city routes
+    else if (req.path.startsWith('/best-things-to-do-in-')) {
+      htmlPath = path.join(process.cwd(), 'dist/public', req.path, 'index.html');
+    }
+    // Check blog routes
+    else if (req.path.startsWith('/blog/')) {
+      const blogId = req.path.replace('/blog/', '').replace('.html', '');
+      htmlPath = path.join(process.cwd(), 'dist/public/blog', blogId + '.html');
+    }
+    
+    // Serve HTML to bots if exists
+    if (htmlPath && fs.existsSync(htmlPath)) {
+      console.log(`🤖 Serving pre-rendered HTML to bot: ${req.path}`);
+      return res.sendFile(htmlPath);
+    }
+  } else {
+    console.log(`👤 Regular user - letting React handle: ${req.path}`);
   }
   
-  // Serve HTML if exists, otherwise continue to React app
-  if (htmlPath && fs.existsSync(htmlPath)) {
-    console.log(`📄 Serving pre-rendered HTML to all users: ${req.path}`);
-    return res.sendFile(htmlPath);
-  }
-  
-  // Continue to React app when HTML not available
+  // Continue to React app for regular users or when HTML not available
   next();
 });
 
-app.use(expressStaticGzip('public', {
-    enableBrotli: true,
-    orderPreference: ['br', 'gz'],
-    setHeaders: (res, path) => {
-      // Cache static assets for 1 year
-      if (path.includes('/assets/')) {
-        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-      } else {
-        res.setHeader('Cache-Control', 'public, max-age=3600'); // 1 hour for HTML
-      }
-    },
-    index: false // Prevent serving index.html automatically
-  }));
+// Static assets only (no HTML files to prevent conflicting with React)
+app.use('/assets', express.static('dist/public/assets', {
+  maxAge: '1y',
+  immutable: true
+}));
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  
-// Google-compliant static file serving
-// Same content served to all users (no user-agent discrimination)
+// Serve other static files (CSS, JS, images) but not HTML
 app.use(express.static('dist/public', {
-  index: false, // Let React handle routing
-  maxAge: '1h',
-  setHeaders: (res, path) => {
-    if (path.endsWith('.html')) {
+  index: false, // Critical: Don't serve index.html automatically
+  setHeaders: (res, reqPath) => {
+    // Only serve non-HTML files to avoid conflicts with React routing
+    if (reqPath.endsWith('.html')) {
+      res.status(404).end('HTML files handled by middleware');
+      return;
+    }
+    if (reqPath.includes('/assets/')) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    } else {
       res.setHeader('Cache-Control', 'public, max-age=3600');
     }
   }
