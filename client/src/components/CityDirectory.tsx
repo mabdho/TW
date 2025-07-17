@@ -85,7 +85,7 @@ export const CityDirectory = () => {
                   
                   <div className="flex items-center justify-between mt-3">
                     <span className="text-xs text-gray-500">{city.continent}</span>
-                    <ArrowRight className="h-3 w-3 text-gray-400 group-hover:text-green-600 group-hover:translate-x-1 transition-all" />
+                    <ArrowRightIcon className="h-3 w-3 text-gray-400 group-hover:text-green-600 group-hover:translate-x-1 transition-all" />
                   </div>
                 </CardContent>
               </Card>

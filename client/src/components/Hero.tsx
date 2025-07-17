@@ -7,7 +7,7 @@ import { CriticalResourceLoader } from './CriticalResourceLoader';
 import { ImageOptimized } from './ImageOptimized';
 
 // List of all cities for search functionality with SEO-friendly URLs
-const cities = [
+const cities: Array<{ name: string; country: string; path: string }> = [
   // Cities cleared - ready for fresh production content
 ];
 

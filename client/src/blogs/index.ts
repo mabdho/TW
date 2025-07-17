@@ -22,11 +22,11 @@ export function getLatestBlogs(limit: number = 2): Blog[] {
   return getAllBlogs().slice(0, limit);
 }
 
-export function getLatestBlogsForHomePage(): Blog[] {
+export function getLatestBlogsForHomePage(limit: number = 2): Blog[] {
   const blogs = getAllBlogs();
-  return blogs.slice(0, 2).map((blog, index) => ({
+  return blogs.slice(0, limit).map((blog, index) => ({
     ...blog,
-    featured: index < 2 // Mark first 2 as featured
+    featured: index < limit // Mark first ones as featured
   }));
 }
 

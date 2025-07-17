@@ -1,7 +1,7 @@
 import { ClockIcon, ArrowRightIcon } from '@/components/icons/LightweightIcons';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { getLatestBlogsForHomePage } from '../blogs';
+import { getLatestBlogsForHomePage } from '../blogs/index';
 
 const TravelCategories = () => {
   // Get latest 2 blogs from file system - always featured on home page

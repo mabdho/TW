@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'wouter';
 
-const cities = [
+const cities: Array<{ name: string; path: string }> = [
   // Cities cleared - ready for fresh production content
 ];
 
