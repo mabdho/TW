@@ -123,52 +123,45 @@ app.use((req, res, next) => {
 
   // Serve static files from public directory with advanced compression
   // This needs to be before Vite middleware to prevent it from intercepting
-  // BUT we need to exclude index.html so our route handlers can detect bots
+  // HTML files are handled by middleware above for universal serving
   
-// SEO-optimized serving middleware
-// Serves pre-rendered HTML to search engines for better indexing
-// Same content structure, different format (HTML vs React hydration)
+// Universal HTML serving middleware
+// Serves the same pre-rendered HTML to ALL users (bots and humans)
+// No user-agent discrimination - fully Google compliant
 app.use((req, res, next) => {
-  const userAgent = req.get('User-Agent') || '';
+  let htmlPath = null;
   
-  // Only serve HTML to legitimate search engine crawlers
-  const isSearchEngine = /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|facebookexternalhit|twitterbot|linkedinbot|applebot/i.test(userAgent);
+  // Route mapping for all users (same content for everyone)
+  const routeMap = {
+    '/': 'index.html',
+    '/destinations': 'destinations.html',
+    '/blogs': 'blogs.html',
+    '/privacy-policy': 'privacy-policy.html',
+    '/terms-of-service': 'terms-of-service.html',
+    '/cookie-policy': 'cookie-policy.html'
+  };
   
-  if (isSearchEngine) {
-    let htmlPath = null;
-    
-    // Route mapping for search engines (same content, HTML format)
-    const routeMap = {
-      '/': 'index.html',
-      '/destinations': 'destinations.html',
-      '/blogs': 'blogs.html',
-      '/privacy-policy': 'privacy-policy.html',
-      '/terms-of-service': 'terms-of-service.html',
-      '/cookie-policy': 'cookie-policy.html'
-    };
-    
-    // Check main routes
-    if (routeMap[req.path]) {
-      htmlPath = path.join(process.cwd(), 'dist/public', routeMap[req.path]);
-    }
-    // Check city routes
-    else if (req.path.startsWith('/best-things-to-do-in-')) {
-      htmlPath = path.join(process.cwd(), 'dist/public', req.path, 'index.html');
-    }
-    // Check blog routes
-    else if (req.path.startsWith('/blog/')) {
-      const blogId = req.path.replace('/blog/', '').replace('.html', '');
-      htmlPath = path.join(process.cwd(), 'dist/public/blog', blogId + '.html');
-    }
-    
-    // Serve HTML if exists, otherwise continue to React app
-    if (htmlPath && fs.existsSync(htmlPath)) {
-      console.log(`🔍 Serving pre-rendered HTML to search engine: ${req.path}`);
-      return res.sendFile(htmlPath);
-    }
+  // Check main routes
+  if (routeMap[req.path]) {
+    htmlPath = path.join(process.cwd(), 'dist/public', routeMap[req.path]);
+  }
+  // Check city routes
+  else if (req.path.startsWith('/best-things-to-do-in-')) {
+    htmlPath = path.join(process.cwd(), 'dist/public', req.path, 'index.html');
+  }
+  // Check blog routes
+  else if (req.path.startsWith('/blog/')) {
+    const blogId = req.path.replace('/blog/', '').replace('.html', '');
+    htmlPath = path.join(process.cwd(), 'dist/public/blog', blogId + '.html');
   }
   
-  // Continue to React app for regular users and when HTML not available
+  // Serve HTML if exists, otherwise continue to React app
+  if (htmlPath && fs.existsSync(htmlPath)) {
+    console.log(`📄 Serving pre-rendered HTML to all users: ${req.path}`);
+    return res.sendFile(htmlPath);
+  }
+  
+  // Continue to React app when HTML not available
   next();
 });
 

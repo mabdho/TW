@@ -14,11 +14,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Bot detection function
-const isSearchEngineBot = (userAgent: string) => {
-  // Bot detection middleware placeholder
-  return false;
-};
+// No bot detection - serve same content to all users
+// Fully Google compliant - no user-agent discrimination
 
 // Initialize routes
 let server: any = null;

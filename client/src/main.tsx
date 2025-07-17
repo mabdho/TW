@@ -1,4 +1,4 @@
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
 import { HelmetProvider } from "react-helmet-async";
@@ -12,13 +12,10 @@ const perfStart = performance.now();
 // Initialize critical performance optimizations IMMEDIATELY
 console.log('🚀 Starting optimized bundle loading...');
 
-// Create root and render immediately - no lazy loading for App
-const root = createRoot(document.getElementById("root")!, {
-  // React 18 concurrent features for better performance
-  identifierPrefix: 'tw-'
-});
+// Get the root element
+const rootElement = document.getElementById("root")!;
 
-// Immediate render for fastest FCP - no StrictMode in production
+// App component wrapper
 const AppComponent = (
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
@@ -27,8 +24,20 @@ const AppComponent = (
   </QueryClientProvider>
 );
 
-// Use createRoot for React 18 optimizations
-root.render(AppComponent);
+// Check if we need to hydrate (server-rendered) or render (client-only)
+if (rootElement.hasChildNodes()) {
+  // Server-rendered HTML exists, hydrate it
+  console.log('🔄 Hydrating server-rendered HTML...');
+  hydrateRoot(rootElement, AppComponent);
+} else {
+  // No server-rendered content, render normally
+  console.log('🎨 Rendering client-side React app...');
+  const root = createRoot(rootElement, {
+    // React 18 concurrent features for better performance
+    identifierPrefix: 'tw-'
+  });
+  root.render(AppComponent);
+}
 
 // Track performance
 const initTime = performance.now() - perfStart;

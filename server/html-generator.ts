@@ -2127,6 +2127,14 @@ export async function generateCompleteHTML(cityData: CityData): Promise<string> 
           });
       });
     </script>
+
+    <!-- React App Hydration Root -->
+    <!-- Same content for all users - no cloaking -->
+    <div id="root">
+      <!-- This will be populated with React components for hydration -->
+    </div>
+    
+    <script type="module" src="/assets/main.js"></script>
 </body>
 </html>`;
 
@@ -2645,6 +2653,14 @@ export function generateHomePageHTML(): string {
   </section>
   
   ${generateFooter()}
+  
+  <!-- React App Hydration Root -->
+  <!-- Same content for all users - no cloaking -->
+  <div id="root">
+    <!-- This will be populated with React components for hydration -->
+  </div>
+  
+  <script type="module" src="/assets/main.js"></script>
 </body>
 </html>`;
 }
